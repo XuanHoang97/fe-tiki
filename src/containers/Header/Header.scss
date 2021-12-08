@@ -1,0 +1,43 @@
+.header-container{
+    .control{
+        .module{
+
+        }
+        .content{
+            .account{
+                .mess{
+                    cursor: pointer;
+                }
+                .mess:hover{
+                }
+                .acc{
+
+                }
+                .acc:hover{
+                    background: orange;
+                    cursor: pointer;
+                }
+                .logout{
+
+                }
+                .logout:hover{
+                    background: orange;
+                }
+            }
+        }
+    }
+}
+
+a {
+    text-decoration: none;
+}
+
+.dashboard_item:hover:not(.active) {
+    background-color: #04AA6D;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a.active {
+    background-color: #04AA6D;
+}
