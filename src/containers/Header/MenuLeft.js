@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {NavLink} from 'react-router-dom';
 
-function MenuLeft(props) {
+const MenuLeft = () => {
+    const [submenu, setSubmenu] = useState(false);
+
     return (
         <div className="p-0 bg-dark text-white" style={{width: '20%'}}>
             <div className="account d-flex p-3 align-items-center" style={{borderBottom: '1px solid rgb(67 69 81)'}}>
@@ -28,7 +30,15 @@ function MenuLeft(props) {
                         <i className=" fas fa-users-cog mr-2"></i>
                         <span>Quản lý người dùng</span> 
                     </div>
-                    <span><i className="fas fa-caret-right small"></i></span>
+                    <span><i className="fas fa-angle-right small"></i></span>
+                </NavLink>
+
+                <NavLink to="/system/product-manage" activeClassName="active" className =" dashboard_item d-flex align-items-center justify-content-between px-3 py-3 text-white" style={{borderBottom: '1px solid rgb(67 69 81)'}} >
+                    <div className="d-flex align-items-center">
+                        <i className=" fas fa-box-open mr-2"></i>
+                        <span>Quản lý sản phẩm </span> 
+                    </div>
+                    <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>
 
                 <NavLink to="/system/news-manage" activeClassName="active" className =" dashboard_item d-flex align-items-center justify-content-between px-3 py-3 text-white"style={{borderBottom: '1px solid rgb(67 69 81)'}} >
@@ -36,16 +46,9 @@ function MenuLeft(props) {
                         <i className="far fa-newspaper mr-2"></i>
                         <span>Quản lý bài viết</span> 
                     </div>
-                    <span><i className="fas fa-caret-right small"></i></span>
+                    <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>
                 
-                <NavLink to="/system/product-manage" activeClassName="active" className =" dashboard_item d-flex align-items-center justify-content-between px-3 py-3 text-white" style={{borderBottom: '1px solid rgb(67 69 81)'}} >
-                    <div className="d-flex align-items-center">
-                        <i className=" fas fa-box-open mr-2"></i>
-                        <span>Quản lý sản phẩm </span> 
-                    </div>
-                    <span><i className="fas fa-caret-right small"></i></span>
-                </NavLink>
 
 
                 <NavLink to="/system/order-manage" activeClassName="active" className =" dashboard_item d-flex align-items-center justify-content-between px-3 py-3 text-white" style={{borderBottom: '1px solid rgb(67 69 81)'}}>
@@ -53,16 +56,7 @@ function MenuLeft(props) {
                         <i className=" fas fa-cart-plus mr-2"></i>
                         <span>Quản lý đơn hàng </span> 
                     </div>
-                    <span><i className="fas fa-caret-right small"></i></span>
-                </NavLink>
-
-
-                <NavLink to="/system/sell-manage" activeClassName="active" className =" dashboard_item d-flex align-items-center justify-content-between px-3 py-3 text-white" style={{borderBottom: '1px solid rgb(67 69 81)'}}>
-                    <div className="d-flex align-items-center">
-                        <i className="fas fa-shopping-cart mr-2"></i>
-                        <span>Quản lý bán hàng </span> 
-                    </div>
-                    <span><i className="fas fa-caret-right small"></i></span>
+                    <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>
 
                 <NavLink to="/system/delivery-manage" activeClassName="active" className =" dashboard_item d-flex align-items-center justify-content-between px-3 py-3 text-white" style={{borderBottom: '1px solid rgb(67 69 81)'}}>
@@ -70,7 +64,15 @@ function MenuLeft(props) {
                         <i className="fas fa-truck mr-2"></i>
                         <span>Quản lý giao hàng </span> 
                     </div>
-                    <span><i className="fas fa-caret-right small"></i></span>
+                    <span><i className="fas fa-angle-right small"></i></span>
+                </NavLink>
+                
+                <NavLink to="/system/sell-manage" activeClassName="active" className =" dashboard_item d-flex align-items-center justify-content-between px-3 py-3 text-white" style={{borderBottom: '1px solid rgb(67 69 81)'}}>
+                    <div className="d-flex align-items-center">
+                        <i className="fas fa-shopping-cart mr-2"></i>
+                        <span>Quản lý bán hàng </span> 
+                    </div>
+                    <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>
 
                 <div className="report small px-3" style={{borderBottom: '1px solid rgb(67 69 81)'}}>
@@ -85,13 +87,20 @@ function MenuLeft(props) {
                     </span>
                 </div>
 
-                <NavLink to="/setting" activeClassName="active" className ="dashboard_item d-flex align-items-center justify-content-between px-3 py-3 text-white" >
+                <NavLink to="/setting" activeClassName="active" className ="dashboard_item d-flex align-items-center justify-content-between px-3 py-3 text-white" 
+                    onClick={() => setSubmenu(!submenu)}
+                >
                     <div className="d-flex align-items-center">
                         <i className="fas fa-cogs mr-2"></i>
                         <span>Setting</span> 
                     </div>
-                    <span><i className="fas fa-caret-right small"></i></span>
+                    <span><i className={submenu ? "fas fa-angle-down" : 'fas fa-angle-right small'}></i></span>
                 </NavLink>
+
+                <div className= {submenu ? 'd-block' : 'd-none'} >
+                    <span>  Dark/Light Theme </span> <br/>
+                    <span>  Multi language </span>
+                </div>
             </div>
         </div>
     );

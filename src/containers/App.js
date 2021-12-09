@@ -16,8 +16,6 @@ import Login from './Auth/Login';
 import Header from './Header/Header';
 import System from '../routes/System';
 
-import { CustomToastCloseButton } from '../components/CustomToast';
-import ConfirmModal from '../components/ConfirmModal';
 import MenuLeft from './Header/MenuLeft';
 import Footer from './Header/Footer';
 
@@ -48,7 +46,6 @@ class App extends Component {
             <Fragment>
                 <Router history={history}>
                     <div className="main-container">
-                        <ConfirmModal />
                         {this.props.isLoggedIn &&
                             <div className="header-container"> 
                                 <Header />
@@ -73,7 +70,6 @@ class App extends Component {
                             className="toast-container" toastClassName="toast-item" bodyClassName="toast-item-body"
                             autoClose={false} hideProgressBar={true} pauseOnHover={false}
                             pauseOnFocusLoss={true} closeOnClick={false} draggable={false}
-                            closeButton={<CustomToastCloseButton />}
                         />
                     </div>
                 </Router>
