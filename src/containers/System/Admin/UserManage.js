@@ -1,94 +1,85 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ModalUser from './ModalUser';
+import TableUser from './TableUser';
+import * as actions from '../../../store/actions';
+import {CRUD_ACTIONS, CommonUtils} from "../../../utils"
+
 class UserManage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            isOpenModalUser: false,
+            action: '',
         }
     }
 
-    componentDidMount() {
+    // Create users (CREATE)
+    handleAddNewUser=()=> {
+        this.setState({
+            isOpenModalUser:  true,
+        })
+    }
 
+    //compare state_old vs state_present
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps.listUsers !== this.props.listUsers){
+            this.setState({
+                users: this.props.listUsers
+            })
+        }
+    }
+
+    toggleUserModal=()=> {
+        this.setState({
+            isOpenModalUser:  !this.state.isOpenModalUser,
+        })
+    }
+
+    //fire redux create user
+    createNewUser=(data)=> {
+        this.props.createNewUser({data });
     }
 
 
+
     render() {
+        const { users } = this.state;
+
         return (
             <div className="mx-2">
+                <ModalUser
+                    isOpen={this.state.isOpenModalUser} 
+                    toggleFromParent={this.toggleUserModal} 
+                    createNewUser={this.createNewUser}
+                />
+                
                 <div className="h5 text-dark mb-4">Quản lý thành viên</div>
 
                 <div className="d-flex mb-3">
-                    <button type="button" className="btn btn-success col-2">
+                    <button onClick ={() => this.handleAddNewUser()}  type="button" className="btn btn-success col-2">
                         <i className="fas fa-plus mr-2"></i> Add new user
                     </button>
 
                     <div className="input-group col-6">
                         <input type="text" className="form-control" placeholder="Search" />
                         <div className="input-group-append">
-                            <button className="btn btn-success px-2" type="submit">Go</button>
+                            <button className="btn btn-success px-2"><i className="fas fa-search"></i></button>
                         </div>
                     </div>
 
-                    <div className="form-group col-4">
-                      <select className="form-control" name="" id="">
-                        <option>All</option>
-                        <option>Low</option>
-                        <option>Hight</option>
-                      </select>
+                    <div className="form-group d-flex col-4 pr-0">
+                        <label className="col-3 p-0">Sắp xếp</label>
+                        <select className="form-control col-9" name="" id="">
+                            <option>All</option>
+                            <option>Low</option>
+                            <option>Hight</option>
+                        </select>
                     </div>
 
                 </div>
 
-                <div className="text-dark">Danh sách thành viên (150)</div>
-                <table className="table table-striped table-bordered table-hover">
-                    <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
-                        <tr>
-                        <th scope="col">STT</th>
-                        <th scope="col">Họ và tên</th>
-                        <th scope="col">Ảnh đại diện</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Số điện thoại</th>
-                        <th scope="col">Địa chỉ</th>
-                        <th scope="col">Tác vụ</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>
-                                <button type="button" className="btn text-primary px-2 mr-2">
-                                    <i className="fas fa-edit"></i>
-                                </button>
-                                <button type="button" className="btn text-danger px-2">
-                                    <i className="fas fa-trash-alt"></i>
-                                </button>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>
-                                <button type="button" className="btn text-primary px-2 mr-2">
-                                    <i className="fas fa-edit"></i>
-                                </button>
-                                <button type="button" className="btn text-danger px-2">
-                                    <i className="fas fa-trash-alt"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <TableUser />
 
                 <nav aria-label="Page navigation">
                   <ul className="pagination justify-content-end">
@@ -118,11 +109,18 @@ class UserManage extends Component {
 
 const mapStateToProps = state => {
     return {
+        genderRedux: state.admin.genders,
+        roleRedux: state.admin.roles,
+        listUsers: state.admin.users
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        createNewUser: (data)=> dispatch(actions.createNewUser(data)),
+        getGenderStart: ()=> dispatch(actions.fetchGenderStart()),
+        getRoleStart: ()=> dispatch(actions.fetchRoleStart()),
+        fetchUserRedux: ()=> dispatch(actions.fetchAllUsersStart()),
     };
 };
 

@@ -1,4 +1,3 @@
-// import React, { Component } from 'react';
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { push } from "connected-react-router";
@@ -112,7 +111,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         navigate: (path) => dispatch(push(path)),
-        userLoginSuccess: (userInfor) => dispatch(actions.userLoginSuccess(userInfor))
+        userLoginSuccess: (userInfo) => dispatch(actions.userLoginSuccess(userInfo))
     };
 };
 

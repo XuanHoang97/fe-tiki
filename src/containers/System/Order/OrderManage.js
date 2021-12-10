@@ -18,10 +18,10 @@ class OrderManage extends Component {
             <div className="mx-2">
                 <div className="h5 text-dark mb-4">Quản lý đơn đặt hàng</div>
 
-                <div class="form-group col-3 p-0">
-                  <label for="">Chọn ngày</label>
+                <div className="form-group col-3 p-0">
+                  <label htmlFor="">Chọn ngày</label>
                   <input type="date"
-                    class="form-control" name="" id="" aria-describedby="helpId" placeholder="" />
+                    className="form-control" name="" id="" aria-describedby="helpId" placeholder="" />
                 </div>
 
 

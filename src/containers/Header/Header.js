@@ -12,7 +12,8 @@ import Notification from '../../containers/Header/Notification';
 class Header extends Component {
 
     render() {
-        const { processLogout } = this.props;
+        const { processLogout, userInfo } = this.props;
+        console.log('chck user infor: ', userInfo);
 
         return (
             <div className="control d-flex text-white">
@@ -28,7 +29,7 @@ class Header extends Component {
                             <img src="https://avatars.githubusercontent.com/u/38268599?v=4" alt="" 
                                 style={{width: '35px'}}
                                 className="rounded-circle mr-2" />
-                            <span>Hoang <i className="fas fa-caret-down small"></i></span>
+                            <span>{userInfo && userInfo.firstName ? userInfo.firstName : 'Hoang'} <i className="fas fa-caret-down small"></i></span>
                         </div>
 
                         {/* logout  */}
@@ -45,7 +46,8 @@ class Header extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        userInfo : state.user.userInfo
     };
 };
 
