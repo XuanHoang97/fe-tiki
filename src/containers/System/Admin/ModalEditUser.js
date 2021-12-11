@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {CRUD_ACTIONS, CommonUtils} from "../../../utils"
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {CRUD_ACTIONS, CommonUtils} from "../../../utils"
+
+import _ from 'lodash';
 import * as actions from '../../../store/actions';
 
-class ModalUser extends Component {
+class ModalEditUser extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
+            id: '',
             genderArr: [],
             roleArr: [],
             previewImgURL: '',
@@ -21,64 +24,59 @@ class ModalUser extends Component {
             address: '',
             phoneNumber: '',
             gender : '',
-            roleId: '',
-            avatar: '',
+            roleId : '',
         }
+
     }
 
-    //fetch data
-    async componentDidMount() {
+    componentDidMount() {
+        let user =this.props.currentUser;
+        if(user && !_.isEmpty(user)){
+            //fix bug buffer
+            let imageBase64='';
+            if(user.image){
+                imageBase64= new Buffer(user.image, 'base64').toString('binary');
+            }
+            // fill info user to edit
+            this.setState({  
+                id: user.id,  
+                email: user.email,
+                password: 'harcode',
+                firstName: user.firstName,
+                lastName:user.lastName,
+                address: user.address,
+                phoneNumber: user.phoneNumber,
+
+                gender: user.gender,
+                roleId: user.roleId,
+                previewImgURL: imageBase64,
+
+            });
+        }
         this.props.getGenderStart();
         this.props.getRoleStart();
-        this.props.fetchUserRedux();
+    }
+
+    // render data when change props
+    componentDidUpdate(prevProps, prevState, snapshot){
+        if(prevProps.genderRedux !== this.props.genderRedux){
+            this.setState({
+                genderArr: this.props.genderRedux,
+            })
+        }
+
+        if(prevProps.roleRedux !== this.props.roleRedux){
+            this.setState({
+                roleArr: this.props.roleRedux,
+            })
+        }
     }
 
     toggle =()=>{
         this.props.toggleFromParent();
     }
 
-    // render data 
-    componentDidUpdate(prevProps, prevState, snapshot){
-        //get data default select option
-        if(prevProps.genderRedux !== this.props.genderRedux){
-            let arrGenders=this.props.genderRedux
-            this.setState({
-                genderArr: arrGenders,
-                gender: arrGenders && arrGenders.length>0 ? arrGenders[0].keyMap : ''
-            })
-        }
-
-        if(prevProps.roleRedux !== this.props.roleRedux){
-            let arrRoles=this.props.roleRedux
-            this.setState({
-                roleArr: arrRoles,
-                role: arrRoles && arrRoles.length>0 ? arrRoles[0].keyMap :''
-            })
-        }
-
-        //reset value after create success a new user
-        if(prevProps.listUsers !== this.props.listUsers){
-            let arrGenders=this.props.genderRedux
-            let arrRoles=this.props.roleRedux
-            
-            this.setState({
-                email: '',
-                firstName: '',
-                lastName: '',
-                phoneNumber: '',
-                address: '',
-                gender: arrGenders && arrGenders.length>0 ? arrGenders[0].keyMap : '',
-                role: arrRoles && arrRoles.length>0 ? arrRoles[0].keyMap :'',
-                avatar: '',
-                action: CRUD_ACTIONS.CREATE,
-                previewImgURL: ''
-            })
-        }
-    }
-
-    //onChange Fields
     onChangeInput=(e, id)=>{
-        //good code
         let copyState={...this.state}
         copyState[id]=e.target.value;
         this.setState({
@@ -86,10 +84,9 @@ class ModalUser extends Component {
         });
     }
 
-    //validate 
     checkValidateInput=()=>{
         let isValid=true;
-        let arrInput=['email', 'phoneNumber', 'firstName', 'lastName', 'address']
+        let arrInput=['email', 'firstName', 'lastName', 'address']
         for(let i=0; i<arrInput.length; i++){
             if(!this.state[arrInput[i]]){
                 isValid=false;
@@ -98,15 +95,6 @@ class ModalUser extends Component {
             }
         }
         return isValid;
-    }
-
-    // add new user
-    handleAddNewUser=()=>{
-        let isValid=this.checkValidateInput();
-        if(isValid===true){
-            this.props.createNewUser(this.state);
-            this.props.toggleFromParent();
-        }        
     }
 
     //upload file
@@ -125,10 +113,19 @@ class ModalUser extends Component {
 
     }
 
+    handleSaveUser=()=>{
+        let isValid=this.checkValidateInput();
+        if(isValid===true){
+            this.props.editUser(this.state);
+            this.props.toggleFromParent();
+            console.log('save info user: ', this.state);
+        }
+    }
+
     render() {
-        let {genderArr, roleArr, email, password, firstName, lastName,
-            phoneNumber, address, gender, roleId, avatar}=this.state;
-        
+        let {genderArr, roleArr, email, firstName, lastName,
+            phoneNumber, address, gender, roleId, previewImgURL}=this.state;
+
         return (
             <Modal 
                 isOpen={this.props.isOpen} 
@@ -137,8 +134,9 @@ class ModalUser extends Component {
                 size="lg"
             >
                 
-                <ModalHeader toggle={()=>this.toggle()}>Thêm mới thành viên</ModalHeader>
+                <ModalHeader toggle={()=>this.toggle()}>Cập nhật thành viên</ModalHeader>
                 <ModalBody>
+                    <div className="form-group">
                         <form>
                             <div className="row">
                                 <div className="form-group col-md-6">
@@ -149,7 +147,7 @@ class ModalUser extends Component {
                                 <div className="form-group col-md-3">
                                     <label>Ảnh đại diện</label>
                                     <input id="previewImg" type="file" hidden 
-                                    onChange={(e)=>this.handleOnchangeImage(e)} 
+                                    onChange={(e)=>this.handleOnchangeImage(e, 'previewImgURL')} 
                                     />
 
                                     <label htmlFor="previewImg" className="btn btn-success w-100"><i className="fas fa-upload"></i> Tải ảnh</label>  
@@ -157,7 +155,7 @@ class ModalUser extends Component {
                                 </div>
 
                                 <div className="preview-image col-md-3 border" 
-                                    style={{backgroundImage: `url(${this.state.previewImgURL})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat'}}
+                                    style={{backgroundImage: `url(${previewImgURL})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat'}}
                                 >Preview
                                 </div>
                             </div>
@@ -222,13 +220,13 @@ class ModalUser extends Component {
                             </div>
 
                         </form>
+                        
+                    </div>
                 </ModalBody>
 
                 <ModalFooter>
-                    <Button onClick={()=>this.handleAddNewUser()} color="primary" className="px-3">
-                        Thêm mới
-                    </Button>
-                    <Button color="secondary" className="px-3" onClick={()=>this.toggle()}>Cancel</Button>
+                    <Button onClick={()=>this.handleSaveUser()} color="primary" className="px-3">Cập nhật</Button>{' '}
+                    <Button color="secondary" className="px-3" onClick={()=>this.toggle()}>Huỷ</Button>
                 </ModalFooter>
             </Modal>
         )
@@ -250,7 +248,8 @@ const mapDispatchToProps = dispatch => {
         getRoleStart: ()=> dispatch(actions.fetchRoleStart()),
         fetchUserRedux: ()=> dispatch(actions.fetchAllUsersStart()),
         createNewUser: (data)=> dispatch(actions.createNewUser(data)),
+        editUserRedux: (user) => dispatch(actions.editUser(user))
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModalUser);
+export default connect(mapStateToProps, mapDispatchToProps)(ModalEditUser);

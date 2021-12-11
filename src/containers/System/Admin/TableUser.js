@@ -31,7 +31,8 @@ class TableUser extends Component {
 
     //edit user
     editUser=(user) =>{
-        // this.props.handleEditUserKey(user)
+        // this.props.editUserRedux(user);
+        // this.props.
     }
 
     render() {
@@ -85,7 +86,7 @@ class TableUser extends Component {
                                             <button type="button" className="btn text-success">
                                                 <i className="fas fa-info-circle"></i>
                                             </button>
-                                            <button type="button" className="btn text-primary mx-3">
+                                            <button onClick={()=> this.editUser(item)} type="button" className="btn text-primary mx-3">
                                                 <i className="fas fa-pencil-alt"></i>
                                             </button>
                                             <button onClick={()=> this.deleteUser(item)} type="button" className="btn text-danger">
@@ -113,7 +114,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchUser: ()=> dispatch(actions.fetchAllUsersStart()),
-        deleteUserRedux: (id) => dispatch(actions.deleteUser(id))
+        deleteUserRedux: (id) => dispatch(actions.deleteUser(id)),
+        editUserRedux: (user) => dispatch(actions.editUser(user))
     };
 };
 
