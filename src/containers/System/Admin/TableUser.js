@@ -26,13 +26,12 @@ class TableUser extends Component {
 
     //delete user 
     deleteUser=(user)=>{
-        this.props.deleteUserRedux(user.id);
+        this.props.deleteUser(user);
     }
 
     //edit user
     editUser=(user) =>{
-        // this.props.editUserRedux(user);
-        // this.props.
+        this.props.handleEditUser(user)
     }
 
     render() {
@@ -114,8 +113,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchUser: ()=> dispatch(actions.fetchAllUsersStart()),
-        deleteUserRedux: (id) => dispatch(actions.deleteUser(id)),
-        editUserRedux: (user) => dispatch(actions.editUser(user))
     };
 };
 

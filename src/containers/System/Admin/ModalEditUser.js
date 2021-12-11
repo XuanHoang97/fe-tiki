@@ -118,7 +118,6 @@ class ModalEditUser extends Component {
         if(isValid===true){
             this.props.editUser(this.state);
             this.props.toggleFromParent();
-            console.log('save info user: ', this.state);
         }
     }
 
