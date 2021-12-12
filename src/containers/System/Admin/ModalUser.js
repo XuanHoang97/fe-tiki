@@ -125,6 +125,14 @@ class ModalUser extends Component {
 
     }
 
+    //remove image
+    removeImg=()=>{
+        this.setState({
+            previewImgURL: '',
+            avatar: ''
+        })
+    }
+
     render() {
         let {genderArr, roleArr, email, password, firstName, lastName,
             phoneNumber, address, gender, roleId, avatar}=this.state;
@@ -156,9 +164,15 @@ class ModalUser extends Component {
                                 
                                 </div>
 
-                                <div className="preview-image col-md-3 border" 
+                                <div className="preview-image col-md-2 border" 
                                     style={{backgroundImage: `url(${this.state.previewImgURL})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat'}}
-                                >Preview
+                                >
+                                    {
+                                    this.state.previewImgURL ?
+                                    <div onClick={() => this.removeImg()} className="col-md-12" style={{textAlign: 'end', position: 'absolute', right: '-1.5rem', top: '-1rem'}}>
+                                        <i className="far fa-times-circle text-danger"></i>
+                                    </div> : <img src="https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png" className="w-100" alt="..." />
+                                    }
                                 </div>
                             </div>
 

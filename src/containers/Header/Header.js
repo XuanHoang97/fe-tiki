@@ -19,7 +19,7 @@ class Header extends Component {
             <div className="control d-flex text-white">
                 <Title />
 
-                <div className="content d-flex justify-content-between align-items-center" style={{width: '80%', background: '#04AA6D'}}>
+                <div className="content d-flex justify-content-between align-items-center" style={{width: '82%', background: '#04AA6D'}}>
                     <Search />
 
                     <div className="account d-flex align-items-center">

@@ -2,15 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ModalUser from './ModalUser';
 import ModalEditUser from './ModalEditUser';
+import InfoUser from './InfoUser';
 import TableUser from './TableUser';
 import * as actions from '../../../store/actions';
+import Search from './Search';
+import Sort from './Sort';
 class UserManage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             isOpenModalUser: false,
             isOpenModalEditUser: false,
-            userEdit: ''
+            isOpenModalInfoUser: false,
+            userEdit: '',
         }
     }
 
@@ -23,6 +27,12 @@ class UserManage extends Component {
     toggleUserEditModal=()=>{
         this.setState({
             isOpenModalEditUser:  !this.state.isOpenModalEditUser,
+        })
+    }
+
+    toggleInfoModal=()=> {
+        this.setState({
+            isOpenModalInfoUser:  !this.state.isOpenModalInfoUser,
         })
     }
     
@@ -61,8 +71,15 @@ class UserManage extends Component {
             phoneNumber: data.phoneNumber,
             gender: data.gender,
             roleId: data.roleId,
-            // previewImgURL: imageBase64
+            avatar: data.avatar,
         });
+    }
+
+    //info user
+    handleInfoUser=(user)=>{
+        this.setState({
+            isOpenModalInfoUser: true,
+        })
     }
 
     render() {
@@ -83,6 +100,11 @@ class UserManage extends Component {
                         editUser={this.editUser}
                     />
                 }
+
+                <InfoUser
+                    isOpen={this.state.isOpenModalInfoUser} 
+                    toggleFromParent={this.toggleInfoModal} 
+                />
                 
                 <div className="h5 text-dark mb-4">Quản lý thành viên</div>
 
@@ -91,24 +113,11 @@ class UserManage extends Component {
                         <i className="fas fa-plus mr-2"></i> Thêm thành viên
                     </button>
 
-                    <div className="input-group col-6">
-                        <input type="text" className="form-control" placeholder="Search..." />
-                        <div className="input-group-append">
-                            <button className="btn btn-success px-2"><i className="fas fa-search"></i></button>
-                        </div>
-                    </div>
-
-                    <div className="form-group d-flex col-4 pr-0">
-                        <label className="col-3 p-0">Sắp xếp</label>
-                        <select className="form-control col-9" name="" id="">
-                            <option>Tất cả</option>
-                            <option>Theo vai trò</option>
-                            <option>Theo tên</option>
-                        </select>
-                    </div>
+                    <Search />
+                    <Sort />
                 </div>
 
-                <TableUser deleteUser ={this.deleteUser} handleEditUser ={this.handleEditUser} />
+                <TableUser deleteUser ={this.deleteUser} handleEditUser ={this.handleEditUser} handleInfoUser ={this.handleInfoUser}  />
 
                 <nav aria-label="Page navigation">
                   <ul className="pagination justify-content-end">

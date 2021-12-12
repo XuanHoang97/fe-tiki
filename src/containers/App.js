@@ -55,7 +55,7 @@ class App extends Component {
                         <span className="content-container">
                             <div className="module d-flex">
                                 {this.props.isLoggedIn && <MenuLeft /> }
-                                <div className="content m-0" style={{width: '80%', boxShadow: 'none', background: 'lightgrey'}}>
+                                <div className="content m-0" style={{width: '82%', boxShadow: 'none', background: 'lightgrey'}}>
                                     <Switch>
                                         <Route path={path.HOME} exact component={(Home)} />
                                         <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />

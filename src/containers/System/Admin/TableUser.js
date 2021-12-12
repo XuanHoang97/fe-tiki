@@ -34,6 +34,11 @@ class TableUser extends Component {
         this.props.handleEditUser(user)
     }
 
+    //info user
+    infoUser=(user)=>{
+        this.props.handleInfoUser(user)
+    }
+
     render() {
         const { users } = this.state;
 
@@ -46,13 +51,15 @@ class TableUser extends Component {
                         <tr>
                             <th scope="col">Tick</th>
                             <th scope="col">STT</th>
-                            <th scope="col">Ảnh đại diện</th>
-                            <th scope="col">Họ và tên</th>
+                            <th scope="col">Avatar</th>
+                            <th scope="col">Họ tên</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Số điện thoại</th>
+                            <th scope="col">Số ĐT</th>
                             <th scope="col">Địa chỉ</th>
                             <th scope="col">Giới tính</th>
-                            <th scope="col">Vai trò</th>
+                            <th scope="col">TuổI</th>
+                            <th scope="col">Nghề nghiệp</th>
+                            <th scope="col">Chức danh</th>
                             <th scope="col">Tác vụ</th>
                         </tr>
                     </thead>
@@ -80,12 +87,14 @@ class TableUser extends Component {
                                         <td>{item.phoneNumber}</td>
                                         <td>{item.address}</td>
                                         <td>{item.gender}</td>
+                                        <td>24</td>
                                         <td>{item.roleId}</td>
+                                        <td>Updating...</td>
                                         <td>
-                                            <button type="button" className="btn text-success">
+                                            <button onClick={()=> this.infoUser(item)} type="button" className="btn text-success">
                                                 <i className="fas fa-info-circle"></i>
                                             </button>
-                                            <button onClick={()=> this.editUser(item)} type="button" className="btn text-primary mx-3">
+                                            <button onClick={()=> this.editUser(item)} type="button" className="btn text-primary mx-2">
                                                 <i className="fas fa-pencil-alt"></i>
                                             </button>
                                             <button onClick={()=> this.deleteUser(item)} type="button" className="btn text-danger">

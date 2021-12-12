@@ -5,7 +5,7 @@ const MenuLeft = () => {
     const [submenu, setSubmenu] = useState(false);
 
     return (
-        <div className="p-0 bg-dark text-white" style={{width: '20%'}}>
+        <div className="p-0 bg-dark text-white" style={{width: '18%'}}>
             <div className="account d-flex p-3 align-items-center" style={{borderBottom: '1px solid rgb(67 69 81)'}}>
                 <img src="https://avatars.githubusercontent.com/u/38268599?v=4" alt="" style={{width: '50px'}}
                     className="rounded-circle" />
