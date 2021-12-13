@@ -33,6 +33,11 @@ const getAllCodeService = (inputType) => {
     return axios.get(`http://localhost:8081/api/allcode?type=${inputType}`)
 }
 
+//detail user
+const getDetailUser = (userId) => {
+    return axios.get(`http://localhost:8081/api/detail-user?id=${userId}`)
+}
+
 export { 
     handleLoginApi,
     getAllUsers,
@@ -40,5 +45,6 @@ export {
     deleteUserService,
     editUserService,
     getAllCodeService,
+    getDetailUser
 
 };

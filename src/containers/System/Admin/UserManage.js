@@ -15,6 +15,7 @@ class UserManage extends Component {
             isOpenModalEditUser: false,
             isOpenModalInfoUser: false,
             userEdit: '',
+            selectInfoUser: []
         }
     }
 
@@ -78,8 +79,10 @@ class UserManage extends Component {
     //info user
     handleInfoUser=(user)=>{
         this.setState({
+            selectInfoUser: user,
             isOpenModalInfoUser: true,
         })
+        console.log('detail user from parent: ', user);
     }
 
     render() {
@@ -104,6 +107,7 @@ class UserManage extends Component {
                 <InfoUser
                     isOpen={this.state.isOpenModalInfoUser} 
                     toggleFromParent={this.toggleInfoModal} 
+                    details={this.state.selectInfoUser}
                 />
                 
                 <div className="h5 text-dark mb-4">Quản lý thành viên</div>
