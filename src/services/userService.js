@@ -38,6 +38,12 @@ const getDetailUser = (userId) => {
     return axios.get(`http://localhost:8081/api/detail-user?id=${userId}`)
 }
 
+//search user
+const searchUser= (keyword) => {
+    return axios.post(`http://localhost:8081/api/search?keyword=${keyword}`)
+}
+
+
 export { 
     handleLoginApi,
     getAllUsers,
@@ -45,6 +51,7 @@ export {
     deleteUserService,
     editUserService,
     getAllCodeService,
-    getDetailUser
+    getDetailUser,
+    searchUser
 
 };

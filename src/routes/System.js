@@ -4,7 +4,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import UserManage from '../containers/System/Admin/UserManage';
 import ProductManage from '../containers/System/Product/ProductManage';
 import Dashboard from '../containers/System/Dashboard/Dashboard';
-import OrderManage from '../containers/System/Order/OrderManage';
+import OrderManage from '../containers/System/News/Order/OrderManage';
 import NewsManage from '../containers/System/News/NewsManage';
 import SellManage from '../containers/System/Sell/SellManage';
 import DeliveryManage from '../containers/System/Delivery/DeliveryManage';

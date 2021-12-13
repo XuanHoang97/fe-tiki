@@ -32,6 +32,12 @@ const actionTypes = Object.freeze({
     //edit user 
     EDIT_USER_SUCCESS: 'EDIT_USER_SUCCESS',
     EDIT_USER_FAILED: 'EDIT_USER_FAILED',
+
+    //SEARCH USER
+    SEARCH_USER_SUCCESS: 'SEARCH_USER_SUCCESS',
+    SEARCH_USER_FAILED: 'SEARCH_USER_FAILED',
+    
+    
 })
 
 export default actionTypes;

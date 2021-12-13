@@ -5,6 +5,7 @@ import {
     createNewUserService,
     deleteUserService,
     editUserService,
+    searchUser
 } from "../../services/userService"
 import { toast } from "react-toastify"
 
@@ -176,3 +177,32 @@ export const editUserSuccess = () => ({
 export const editUserFailed = () => ({
     type: actionTypes.EDIT_USER_FAILED
 })
+
+//SEARCH USER
+export const searchUserInfo = (keyword) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await searchUser(keyword);
+            if (res && res.data.errCode === 0) {
+                dispatch(searchUserSuccess(res.data.users))
+            } else {
+                toast.error('search user error !')
+                dispatch(searchUserFailed());
+            }
+        } catch (e) {
+            toast.error('search user error !')
+            dispatch(searchUserFailed());
+            console.log('searchUserFailed error', e)
+        }
+    }
+}
+
+export const searchUserSuccess = (data) => ({
+    type: actionTypes.SEARCH_USER_SUCCESS,
+    listUser: data
+})
+
+export const searchUserFailed = () => ({
+    type: actionTypes.SEARCH_USER_FAILED,
+})
+

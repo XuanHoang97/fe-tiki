@@ -1,28 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-
-import _ from 'lodash';
-import * as actions from '../../../store/actions';
-
 class InfoUser extends Component {
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-        }
-
-    }
-
-    toggle =()=>{
-        this.props.toggleFromParent();
-    }
-
-
     render() {
-        const {details} = this.props;
+        const {details, toggleFromParent} = this.props;
         
+        //decode image
         let imageBase64='';
         if(details.image){
             imageBase64=new Buffer(details.image, 'base64').toString('binary')
@@ -30,13 +13,10 @@ class InfoUser extends Component {
         return (
             <Modal 
                 isOpen={this.props.isOpen} 
-                toggle={()=>this.toggle()} 
-                className={'modal-user-container'}
+                toggle = {this.props.toggleFromParent}
                 size="md"
             >
-                
                 <ModalHeader toggle={()=>this.toggle()}>Thông tin thành viên</ModalHeader>
-                
                 <ModalBody>
 
                     <div className="text-center py-2" style={{background: `url("https://wallpaperaccess.com/full/1732235.jpg")`, backgroundPosition: 'center', backgroundSize: 'cover'}}>                        
@@ -45,10 +25,10 @@ class InfoUser extends Component {
                         
                         <div className="mt-2 h4 font-weight-bold">{details.firstName} {details.lastName}</div>
                         <div className="d-flex justify-content-center text-white" style={{gap : '20px'}}>
-                            <span className=""><i className="fas fa-circle mr-1 small text-danger"></i>{details.gender}</span>
-                            <span className=""><i className="fas fa-circle mr-1 small text-info"></i>24 Tuổi</span>
-                            <span className=""><i className="fas fa-circle mr-1 small text-success"></i>{details.roleId}</span>
-                            <span className=""><i className="fas fa-circle mr-1 small text-warning"></i>100 P</span>
+                            <span><i className="fas fa-circle mr-1 small text-danger"></i>{details.gender}</span>
+                            <span><i className="fas fa-circle mr-1 small text-info"></i>24 Tuổi</span>
+                            <span><i className="fas fa-circle mr-1 small text-success"></i>{details.roleId}</span>
+                            <span><i className="fas fa-circle mr-1 small text-warning"></i>100 P</span>
                         </div>
                     </div>
 
@@ -62,7 +42,6 @@ class InfoUser extends Component {
                 
                 </ModalBody>
                         
-
                 <ModalFooter className="d-flex justify-content-between">
                     <Button color="info " className="px-3 btn-sm" onClick={()=>this.toggle()}><i className="fas fa-print mr-2"></i>In profile</Button>
                     <Button color="secondary" className="px-3 btn-sm" onClick={()=>this.toggle()}>Đóng</Button>
@@ -70,7 +49,6 @@ class InfoUser extends Component {
             </Modal>
         )
     }
-
 }
 
 const mapStateToProps = state => {

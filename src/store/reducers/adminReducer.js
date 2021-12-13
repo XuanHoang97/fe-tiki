@@ -54,6 +54,19 @@ const adminReducer = (state = initialState, action) => {
                 ...state,
             }
 
+            //search user
+        case actionTypes.SEARCH_USER_SUCCESS:
+            state.users = action.listUser;
+            return {
+                ...state,
+            }
+
+        case actionTypes.SEARCH_USER_FAILED:
+            state.users = [];
+            return {
+                ...state,
+            }
+            
         default:
             return state;
     }
