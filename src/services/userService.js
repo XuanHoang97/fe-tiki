@@ -43,6 +43,16 @@ const searchUser= (keyword) => {
     return axios.post(`http://localhost:8081/api/search?keyword=${keyword}`)
 }
 
+//get all product
+const getAllProduct = (inputId) => {
+    return axios.get(`http://localhost:8081/api/get-all-products?id=${inputId}`)
+}
+
+// get all category
+const getAllCategory = (categoryId) => {
+    return axios.get(`http://localhost:8081/api/get-all-category?id=${categoryId}`)
+}
+
 
 export { 
     handleLoginApi,
@@ -52,6 +62,8 @@ export {
     editUserService,
     getAllCodeService,
     getDetailUser,
-    searchUser
+    searchUser,
+    getAllProduct,
+    getAllCategory
 
 };

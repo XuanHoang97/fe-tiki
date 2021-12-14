@@ -1,122 +1,98 @@
-import React, { Component } from 'react';
+import React,{useState, useEffect} from 'react';
 import { connect } from 'react-redux';
-class ProductManage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
+import * as actions from '../../../store/actions';
+import Sort from './Sort';
 
-        }
-    }
+const ProductManage = (props) => {
+    const [products, setProducts] = useState([]);
 
-    componentDidMount() {
+    useEffect(() => {
+        props.fetchProducts();
+        setProducts(props.listProducts);
+    }, [products]);
 
-    }
+    return (        
+        <div className="mx-2">
+            <div className="h5 text-dark mb-4">Quản lý sản phẩm</div>
 
+            <div className="d-flex mb-3 justify-content-between">
+                <button type="button" className="btn btn-success col-2">
+                    <i className="fas fa-plus"></i> Thêm sản phẩm
+                </button>
 
-    render() {
-        return (
-            <div className="mx-2">
-                <div className="h5 text-dark mb-4">Quản lý sản phẩm</div>
-
-                <div className="d-flex mb-3">
-                    <button type="button" className="btn btn-success col-2">
-                        <i className="fas fa-plus mr-2"></i> Add new product
-                    </button>
-
-                    <div className="input-group col-6">
-                        <input type="text" className="form-control" placeholder="Search" />
-                        <div className="input-group-append">
-                            <button className="btn btn-success px-2" type="submit">Go</button>
-                        </div>
-                    </div>
-
-                    <div className="form-group col-4">
-                      <select className="form-control" name="" id="">
-                        <option>All</option>
-                        <option>Low</option>
-                        <option>Hight</option>
-                      </select>
-                    </div>
-
-                </div>
-
-                <div className="text-dark">Danh sách sản phẩm (150)</div>
-                <table className="table table-striped table-bordered table-hover">
-                    <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
-                        <tr>
-                        <th scope="col">STT</th>
-                        <th scope="col">Tên sản phẩm</th>
-                        <th scope="col">Ảnh sản phẩm</th>
-                        <th scope="col">Xuất xứ</th>
-                        <th scope="col">Tác vụ</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>
-                                <button type="button" className="btn text-primary px-2 mr-2">
-                                    <i className="fas fa-edit"></i>
-                                </button>
-                                <button type="button" className="btn text-danger px-2">
-                                    <i className="fas fa-trash-alt"></i>
-                                </button>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>Otto</td>
-                            <td>
-                                <button type="button" className="btn text-primary px-2 mr-2">
-                                    <i className="fas fa-edit"></i>
-                                </button>
-                                <button type="button" className="btn text-danger px-2">
-                                    <i className="fas fa-trash-alt"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <nav aria-label="Page navigation">
-                  <ul className="pagination justify-content-end">
-                    <li className="page-item disabled">
-                      <a className="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                        <span className="sr-only">Previous</span>
-                      </a>
-                    </li>
-                    <li className="page-item active"><a className="page-link" href="#">1</a></li>
-                    <li className="page-item"><a className="page-link" href="#">2</a></li>
-                    <li className="page-item"><a className="page-link" href="#">3</a></li>
-                    <li className="page-item"><a className="page-link" href="#">4</a></li>
-                    <li className="page-item">
-                      <a className="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                        <span className="sr-only">Next</span>
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
+                <Sort />
             </div>
-        );
-    }
 
+            <div className="text-dark">Danh sách sản phẩm (<b>{props.listProducts.length}</b>)</div>
+            <table className="table table-striped table-bordered table-hover">
+                <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
+                    <tr>
+                        <td scope="col">Tick</td>
+                        <td scope="col">STT</td>
+                        <td scope="col">Ảnh</td>
+                        <td scope="col">Tên SP</td>
+                        <td scope="col">Số lượng</td>
+                        <td scope="col">Bảo hành</td>
+                        <td scope="col">Giá (VND)</td>
+                        <td scope="col">Sale (VND)</td>
+                        <td scope="col">Danh mục</td>
+                        <td scope="col">Trạng thái</td>
+                        <td scope="col">Xuất xứ</td>
+                        <td scope="col">Tác vụ</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {   
+                        props.listProducts && props.listProducts.length>0 ?
+                        props.listProducts.map((item, index) => {
+                            return(
+                                <tr key={index}>
+                                    <td>
+                                        <div className="form-group">
+                                            <input type="checkbox" className="w-100" />
+                                        </div>
+                                    </td>
+                                    <td>{index + 1}</td>
+                                    <td style={{backgroundImage: `url(https://cdnimg.vietnamplus.vn/uploaded/xtsqr/2021_09_15/iphone13promax1.jpeg)`, backgroundPosition: 'center', backgroundSize: 'cover'}}></td>
+                                    <td>{item.name}</td>
+                                    <td>{item.number}</td>
+                                    <td>{item.warranty}</td>
+                                    <td>{item.price}</td>
+                                    <td>{item.sale}</td>
+                                    <td>{item.category_id}</td>
+                                    <td>{item.status}</td>
+                                    <td>{item.supplier_id}</td>
+                                    <td>
+                                        <button type="button" className="btn text-primary px-2">
+                                            <i className="fas fa-edit"></i>
+                                        </button>
+                                        <button type="button" className="btn text-danger">
+                                            <i className="fas fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            )
+                        })
+                        : 
+                        <tr>
+                            <td colSpan="10" className="text-center">Không có sản phẩm nào</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    );
 }
 
 const mapStateToProps = state => {
     return {
+        listProducts: state.admin.products
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        fetchProducts: () => dispatch(actions.fetchProducts())
     };
 };
 

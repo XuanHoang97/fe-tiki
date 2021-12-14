@@ -13,7 +13,6 @@ class Header extends Component {
 
     render() {
         const { processLogout, userInfo } = this.props;
-        console.log('chck user infor: ', userInfo);
 
         return (
             <div className="control d-flex text-white">

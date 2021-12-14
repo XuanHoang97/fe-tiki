@@ -137,6 +137,7 @@ class UserManage extends Component {
 
     render() {
         const {users, searchUser, sortUser} = this.state;
+        const filterUser =users.filter((item) => `${item.firstName} ${item.lastName} ${item.address}`.toLowerCase().includes(searchUser.toLowerCase()));
 
         return (
             <div className="mx-2">
@@ -175,7 +176,7 @@ class UserManage extends Component {
                 
                 {/* list user  */}
                 <div className="text-dark">Danh sách thành viên 
-                    (<b>{users.filter((item) => `${item.firstName} ${item.lastName}`.toUpperCase().includes(searchUser.toUpperCase())).length}</b>)
+                    (<b>{filterUser.length}</b>)
                 </div>
 
                 <table className="table table-striped table-bordered table-hover">
@@ -197,8 +198,7 @@ class UserManage extends Component {
                     </thead>
                     {
                         users && users.length >0 &&
-                        users.filter((item) => `${item.firstName} ${item.lastName}`.toUpperCase().includes(searchUser.toUpperCase()))
-                        .map((item, index) => {
+                        filterUser.map((item, index) => {
                             //endCode image
                             let imageBase64='';
                             if(item.image){
@@ -206,8 +206,8 @@ class UserManage extends Component {
                             }
 
                             return (
-                                <tbody>
-                                    <tr key={index}>
+                                <tbody key={index}>
+                                    <tr>
                                         <td>
                                             <div className="form-group">
                                                 <input type="checkbox" className="w-100" />

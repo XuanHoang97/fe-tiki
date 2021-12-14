@@ -3,7 +3,9 @@ import actionTypes from '../actions/actionTypes';
 const initialState = {
     genders: [],
     roles: [],
-    users: []
+    users: [],
+    products: [],
+    categories: []
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -67,6 +69,33 @@ const adminReducer = (state = initialState, action) => {
                 ...state,
             }
             
+            //fetch all product
+        case actionTypes.FETCH_ALL_PRODUCTS_SUCCESS:
+            state.products = action.listProduct;
+            return {
+                ...state,
+            }
+
+        case actionTypes.FETCH_ALL_PRODUCTS_FAILED:
+            state.products = [];
+            return {
+                ...state,
+            }
+            
+            //fetch all category
+        case actionTypes.FETCH_ALL_CATEGORIES_SUCCESS:
+            state.categories = action.listCategory;
+            return {
+                ...state,
+            }
+
+        case actionTypes.FETCH_ALL_CATEGORIES_FAILED:
+            state.categories = [];
+            return {
+                ...state,
+            }
+
+
         default:
             return state;
     }

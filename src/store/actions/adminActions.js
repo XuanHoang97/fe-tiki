@@ -5,7 +5,9 @@ import {
     createNewUserService,
     deleteUserService,
     editUserService,
-    searchUser
+    searchUser,
+    getAllProduct,
+    getAllCategory
 } from "../../services/userService"
 import { toast } from "react-toastify"
 
@@ -205,4 +207,64 @@ export const searchUserSuccess = (data) => ({
 export const searchUserFailed = () => ({
     type: actionTypes.SEARCH_USER_FAILED,
 })
+
+//fetch all product
+export const fetchProducts = () => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await getAllProduct('ALL');
+
+            if (res && res.data.errCode === 0) {
+                dispatch(fetchAllProductsSuccess(res.data.products))
+            } else {
+                toast.error('fetch all product error !')
+                dispatch(fetchAllProductsFailed());
+            }
+        } catch (e) {
+            toast.error('fetch all product error !')
+            dispatch(fetchAllProductsFailed());
+            console.log('fetchAllProductsFailed error', e)
+        }
+    }
+}
+
+export const fetchAllProductsSuccess = (data) => ({
+    type: actionTypes.FETCH_ALL_PRODUCTS_SUCCESS,
+    listProduct: data
+})
+
+export const fetchAllProductsFailed = () => ({
+    type: actionTypes.FETCH_ALL_PRODUCTS_FAILED,
+})
+
+//fetch all category
+export const fetchAllCategory = () => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await getAllCategory('ALL');
+
+            if (res && res.data.errCode === 0) {
+                dispatch(fetchAllCategorySuccess(res.data.category))
+            } else {
+                toast.error('fetch all category error !')
+                dispatch(fetchAllCategoryFailed());
+            }
+        } catch (e) {
+            toast.error('fetch all category error !')
+            dispatch(fetchAllCategoryFailed());
+            console.log('fetchAllCategoryFailed error', e)
+        }
+    }
+}
+
+export const fetchAllCategorySuccess = (data) => ({
+    type: actionTypes.FETCH_ALL_CATEGORIES_SUCCESS,
+    listCategory: data
+})
+
+export const fetchAllCategoryFailed = () => ({
+    type: actionTypes.FETCH_ALL_CATEGORIES_FAILED,
+})
+
+
 

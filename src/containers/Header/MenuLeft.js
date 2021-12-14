@@ -33,12 +33,14 @@ const MenuLeft = () => {
                     <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>
 
-                <NavLink to="/system/product-manage" activeClassName="active" className =" dashboard_item d-flex align-items-center justify-content-between px-3 py-3 text-white" style={{borderBottom: '1px solid rgb(67 69 81)'}} >
-                    <div className="d-flex align-items-center">
+                <NavLink to="/system/product-manage" activeClassName="active" className =" dashboard_item d-flex align-items-center justify-content-between px-3 py-3 text-white" style={{borderBottom: '1px solid rgb(67 69 81)'}} 
+                >
+                    <div className="d-flex align-items-center" >
                         <i className=" fas fa-box-open mr-2"></i>
                         <span>Quản lý sản phẩm </span> 
+
                     </div>
-                    <span><i className="fas fa-angle-right small"></i></span>
+                    <span><i className='fas fa-angle-right'></i></span>
                 </NavLink>
 
                 <NavLink to="/system/news-manage" activeClassName="active" className =" dashboard_item d-flex align-items-center justify-content-between px-3 py-3 text-white"style={{borderBottom: '1px solid rgb(67 69 81)'}} >
