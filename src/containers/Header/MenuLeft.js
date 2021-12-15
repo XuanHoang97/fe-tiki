@@ -43,15 +43,21 @@ const MenuLeft = () => {
                     <span><i className='fas fa-angle-right'></i></span>
                 </NavLink>
 
-                <NavLink to="/system/news-manage" activeClassName="active" className =" dashboard_item d-flex align-items-center justify-content-between px-3 py-3 text-white"style={{borderBottom: '1px solid rgb(67 69 81)'}} >
+                <NavLink to="/system/article-manage" activeClassName="active" className =" dashboard_item d-flex align-items-center justify-content-between px-3 py-3 text-white"style={{borderBottom: '1px solid rgb(67 69 81)'}} >
                     <div className="d-flex align-items-center">
                         <i className="far fa-newspaper mr-2"></i>
                         <span>Quản lý bài viết</span> 
                     </div>
                     <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>
-                
 
+                <NavLink to="/system/news-manage" activeClassName="active" className =" dashboard_item d-flex align-items-center justify-content-between px-3 py-3 text-white"style={{borderBottom: '1px solid rgb(67 69 81)'}} >
+                    <div className="d-flex align-items-center">
+                        <i className="far fa-calendar-check mr-2"></i>
+                        <span>Quản lý tin tức - sự kiện</span> 
+                    </div>
+                    <span><i className="fas fa-angle-right small"></i></span>
+                </NavLink>
 
                 <NavLink to="/system/order-manage" activeClassName="active" className =" dashboard_item d-flex align-items-center justify-content-between px-3 py-3 text-white" style={{borderBottom: '1px solid rgb(67 69 81)'}}>
                     <div className="d-flex align-items-center">
@@ -77,32 +83,13 @@ const MenuLeft = () => {
                     <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>
 
-                <div className="report small px-3" style={{borderBottom: '1px solid rgb(67 69 81)'}}>
-                    <span>
-                        <li>Báo cáo doanh thu</li>
-                    </span>
-                    <span>
-                        <li>Báo cáo lượng người mua</li>
-                    </span>
-                    <span>
-                        <li>Sản phẩm bán chạy</li>
-                    </span>
-                </div>
-
-                <NavLink to="/setting" activeClassName="active" className ="dashboard_item d-flex align-items-center justify-content-between px-3 py-3 text-white" 
-                    onClick={() => setSubmenu(!submenu)}
-                >
+                <NavLink to="/system/report-statiscal" activeClassName="active" className =" dashboard_item d-flex align-items-center justify-content-between px-3 py-3 text-white" style={{borderBottom: '1px solid rgb(67 69 81)'}}>
                     <div className="d-flex align-items-center">
-                        <i className="fas fa-cogs mr-2"></i>
-                        <span>Setting</span> 
+                        <i className="far fa-flag mr-2"></i>
+                        <span>Báo cáo, thống kê</span> 
                     </div>
-                    <span><i className={submenu ? "fas fa-angle-down" : 'fas fa-angle-right small'}></i></span>
+                    <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>
-
-                <div className= {submenu ? 'd-block' : 'd-none'} >
-                    <span>  Dark/Light Theme </span> <br/>
-                    <span>  Multi language </span>
-                </div>
             </div>
         </div>
     );

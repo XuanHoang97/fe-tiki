@@ -5,7 +5,8 @@ const initialState = {
     roles: [],
     users: [],
     products: [],
-    categories: []
+    categories: [],
+    news: []
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -91,6 +92,19 @@ const adminReducer = (state = initialState, action) => {
 
         case actionTypes.FETCH_ALL_CATEGORIES_FAILED:
             state.categories = [];
+            return {
+                ...state,
+            }
+
+            //fetch all news and event
+        case actionTypes.FETCH_ALL_NEWS_SUCCESS:
+            state.news = action.listNews;
+            return {
+                ...state,
+            }
+
+        case actionTypes.FETCH_ALL_NEWS_FAILED:
+            state.news = [];
             return {
                 ...state,
             }

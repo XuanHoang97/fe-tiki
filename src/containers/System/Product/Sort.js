@@ -25,7 +25,7 @@ const Sort = (props) => {
                         props.listCategory && props.listCategory.length >0 ?
                         props.listCategory.map((item, index) => {
                             return (
-                                <option className='' key={index} value={item.name}>{item.name}</option>
+                                <option key={index} value={item.name}>{item.name}</option>
                             )
                         })
                         : null

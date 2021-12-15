@@ -4,8 +4,9 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import UserManage from '../containers/System/Admin/UserManage';
 import ProductManage from '../containers/System/Product/ProductManage';
 import Dashboard from '../containers/System/Dashboard/Dashboard';
-import OrderManage from '../containers/System/News/Order/OrderManage';
+import OrderManage from '../containers/System/Order/OrderManage';
 import NewsManage from '../containers/System/News/NewsManage';
+import ArticleManage from '../containers/System/Article/ArticleManage';
 import SellManage from '../containers/System/Sell/SellManage';
 import DeliveryManage from '../containers/System/Delivery/DeliveryManage';
 class System extends Component {
@@ -19,9 +20,11 @@ class System extends Component {
                         <Route path="/system/user-manage" component={UserManage} />
                         <Route path="/system/product-manage" component={ProductManage} />
                         <Route path="/system/order-manage" component={OrderManage} />
+                        <Route path="/system/article-manage" component={ArticleManage} />
                         <Route path="/system/news-manage" component={NewsManage} />
                         <Route path="/system/sell-manage" component={SellManage} />
                         <Route path="/system/delivery-manage" component={DeliveryManage} />
+                        <Route path="/system/report-statiscal" component={Dashboard} />
                         <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />
                     </Switch>
                 </div>

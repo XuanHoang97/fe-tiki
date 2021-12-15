@@ -44,6 +44,10 @@ const actionTypes = Object.freeze({
     //get all category
     FETCH_ALL_CATEGORIES_SUCCESS: 'FETCH_ALL_CATEGORIES_SUCCESS',
     FETCH_ALL_CATEGORIES_FAILED: 'FETCH_ALL_CATEGORIES_FAILED',
+
+    //get all news and event
+    FETCH_ALL_NEWS_SUCCESS: 'FETCH_ALL_NEWS_SUCCESS',
+    FETCH_ALL_NEWS_FAILED: 'FETCH_ALL_NEWS_FAILED',
     
 })
 

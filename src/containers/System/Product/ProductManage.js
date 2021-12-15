@@ -53,7 +53,7 @@ const ProductManage = (props) => {
                                         </div>
                                     </td>
                                     <td>{index + 1}</td>
-                                    <td style={{backgroundImage: `url(https://cdnimg.vietnamplus.vn/uploaded/xtsqr/2021_09_15/iphone13promax1.jpeg)`, backgroundPosition: 'center', backgroundSize: 'cover'}}></td>
+                                    <td style={{backgroundImage: `url(https://cdnimg.vietnamplus.vn/uploaded/xtsqr/2021_09_15/iphone13promax1.jpeg)`, backgroundPosition: 'center', backgroundSize: 'cover'}} className='rounded-circle'></td>
                                     <td>{item.name}</td>
                                     <td>{item.number}</td>
                                     <td>{item.warranty}</td>

@@ -7,7 +7,8 @@ import {
     editUserService,
     searchUser,
     getAllProduct,
-    getAllCategory
+    getAllCategory,
+    getAllNewsAndEvent
 } from "../../services/userService"
 import { toast } from "react-toastify"
 
@@ -264,6 +265,35 @@ export const fetchAllCategorySuccess = (data) => ({
 
 export const fetchAllCategoryFailed = () => ({
     type: actionTypes.FETCH_ALL_CATEGORIES_FAILED,
+})
+
+//fetch all news and event
+export const fetchAllNews = () => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await getAllNewsAndEvent('ALL');
+
+            if (res && res.data.errCode === 0) {
+                dispatch(fetchAllNewsSuccess(res.data.news))
+            } else {
+                toast.error('fetch all news and event error !')
+                dispatch(fetchAllNewsFailed());
+            }
+        } catch (e) {
+            toast.error('fetch all news and event error !')
+            dispatch(fetchAllNewsFailed());
+            console.log('fetchAllNewsFailed error', e)
+        }
+    }
+}
+
+export const fetchAllNewsSuccess = (data) => ({
+    type: actionTypes.FETCH_ALL_NEWS_SUCCESS,
+    listNews: data
+})
+
+export const fetchAllNewsFailed = () => ({
+    type: actionTypes.FETCH_ALL_NEWS_FAILED,
 })
 
 

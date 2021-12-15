@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom';
-
-
 import * as actions from "../../store/actions";
 import './Header.scss';
 import Title from '../../containers/Header/Title';
@@ -24,7 +21,7 @@ class Header extends Component {
                     <div className="account d-flex align-items-center">
                         <Notification />
 
-                        <div className="acc py-1 px-3" style={{borderRight: '1px solid rgb(211 211 211)', borderLeft: '1px solid rgb(211 211 211)'}}>
+                        <div className="acc py-1 px-3 mx-3">
                             <img src="https://avatars.githubusercontent.com/u/38268599?v=4" alt="" 
                                 style={{width: '35px'}}
                                 className="rounded-circle mr-2" />
@@ -32,9 +29,10 @@ class Header extends Component {
                         </div>
 
                         {/* logout  */}
-                        <div className="logout btn btn-default px-3 text-white" onClick={processLogout}>
-                            Logout <i className="fas fa-sign-out-alt"></i>
+                        <div className="logout btn btn-default pr-3 text-white font-weight-normal" onClick={processLogout}>
+                            Đăng xuất <i className="fas fa-sign-out-alt"></i>
                         </div>
+
                     </div>
                 </div>
             </div>
