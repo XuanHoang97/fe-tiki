@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import { ConnectedRouter as Router } from 'connected-react-router';
 import { history } from '../redux'
@@ -18,6 +18,7 @@ import System from '../routes/System';
 import MenuLeft from './Header/MenuLeft';
 import Footer from './Header/Footer';
 
+console.warn = () => { };
 class App extends Component {
 
     handlePersistorState = () => {

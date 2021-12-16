@@ -9,7 +9,7 @@ const ArticleManage = (props) => {
             <div className="h5 text-dark mb-4">Quản lý bài viết</div>
 
             <div className='d-flex col-9 p-0'>
-                <label className='mr-3'>Lọc sản phẩm</label>
+                <label className='mr-3'>Chọn sản phẩm</label>
                 <div className="form-group d-flex col-3 p-0">
                     <select className="form-control" style={{height:'30px'}}>
                         <option>Danh mục sản phẩm</option>

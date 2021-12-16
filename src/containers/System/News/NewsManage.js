@@ -29,8 +29,8 @@ const NewsManage = (props) => {
                     <tr>
                         <th scope="col">Tick</th>
                         <th scope="col">STT</th>
-                        <th scope="col">Ảnh bài viết</th>
-                        <th scope="col">Tên bài viết</th>
+                        <th scope="col">Ảnh</th>
+                        <th scope="col">Tiêu đề</th>
                         <th scope="col">Tác giả</th>
                         <th scope="col">Trạng thái</th>
                         <th scope="col">Danh mục</th>

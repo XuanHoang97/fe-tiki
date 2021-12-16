@@ -1,22 +1,43 @@
 import React,{useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions';
+import ModalProduct from './ModalProduct';
 import Sort from './Sort';
 
 const ProductManage = (props) => {
     const [products, setProducts] = useState([]);
+    const [modalProduct, setModalProduct] = useState(false);
+    const [modalEditProduct, setModalEditProduct] = useState(false);
+    const [productEdit, setProductEdit] = useState({});
 
+    //fetch product
     useEffect(() => {
         props.fetchProducts();
         setProducts(props.listProducts);
     }, [products]);
 
+    //OPEN MODAL Create, Edit Product
+    const toggleUserModal=()=> {
+        setModalProduct(!modalProduct);
+    }
+
+    //create product
+    const handleAddNewProduct = () => {
+        setModalProduct(!modalProduct);
+    }
+
     return (        
         <div className="mx-2">
+            <ModalProduct
+                    isOpen={modalProduct}
+                    toggleFromParent={toggleUserModal} 
+                    // createNewUser={this.createNewUser}
+            />
+
             <div className="h5 text-dark mb-4">Quản lý sản phẩm</div>
 
             <div className="d-flex mb-3 justify-content-between">
-                <button type="button" className="btn btn-success col-2">
+                <button onClick={() => handleAddNewProduct()} type="button" className="btn btn-success col-2">
                     <i className="fas fa-plus"></i> Thêm sản phẩm
                 </button>
 

@@ -8,7 +8,8 @@ import {
     searchUser,
     getAllProduct,
     getAllCategory,
-    getAllNewsAndEvent
+    getAllNewsAndEvent,
+    createNewProduct
 } from "../../services/userService"
 import { toast } from "react-toastify"
 
@@ -237,6 +238,90 @@ export const fetchAllProductsSuccess = (data) => ({
 export const fetchAllProductsFailed = () => ({
     type: actionTypes.FETCH_ALL_PRODUCTS_FAILED,
 })
+
+//create a new product
+export const CreateNewProduct = (data) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await createNewProduct(data);
+            if (res && res.data.errCode === 0) {
+                dispatch(saveProductSuccess());
+                dispatch(fetchProducts());
+                toast.success('Thêm mới sản phẩm thành công !')
+            } else {
+                dispatch(saveProductFailed());
+            }
+        } catch (e) {
+            dispatch(saveProductFailed());
+            console.log('saveProductFailed error', e)
+        }
+    }
+}
+
+export const saveProductSuccess = () => ({
+    type: actionTypes.CREATE_PRODUCT_SUCCESS,
+})
+
+export const saveProductFailed = () => ({
+    type: actionTypes.CREATE_PRODUCT_FAILED,
+})
+
+//fetch status product
+export const fetchStatusProduct = () => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await getAllCodeService('STATUS_PRODUCT');
+            if(res && res.data.errCode === 0){
+                dispatch(fetchStatusProductSuccess(res.data.data))
+            }else{
+                toast.error('fetch status product error !')
+                dispatch(fetchStatusProductFailed());
+            }
+        } catch (e) {
+            toast.error('fetch status product error !')
+            dispatch(fetchStatusProductFailed());
+            console.log('fetchStatusProductFailed error', e)
+        }
+    }
+}
+
+export const fetchStatusProductSuccess = (data) => ({
+    type: actionTypes.FETCH_STATUS_PRODUCT_SUCCESS,
+    listStatus: data
+})
+
+export const fetchStatusProductFailed = () => ({
+    type: actionTypes.FETCH_STATUS_PRODUCT_FAILED,
+})   
+
+//fetch supplier product
+export const fetchSupplierProduct = () => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await getAllCodeService('PROVINCE');
+            if(res && res.data.errCode === 0){
+                dispatch(fetchSupplierProductSuccess(res.data.data))
+            }else{
+                toast.error('fetch supplier product error !')
+                dispatch(fetchSupplierProductFailed());
+            }
+        } catch (e) {
+            toast.error('fetch supplier product error !')
+            dispatch(fetchSupplierProductFailed());
+            console.log('fetchSupplierProductFailed error', e)
+        }
+    }
+}
+
+export const fetchSupplierProductSuccess = (data) => ({
+    type: actionTypes.FETCH_SUPPLIER_PRODUCT_SUCCESS,
+    listSupplier: data
+})
+
+export const fetchSupplierProductFailed = () => ({
+    type: actionTypes.FETCH_SUPPLIER_PRODUCT_FAILED,
+}) 
+
 
 //fetch all category
 export const fetchAllCategory = () => {

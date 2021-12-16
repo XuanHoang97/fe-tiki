@@ -6,7 +6,9 @@ const initialState = {
     users: [],
     products: [],
     categories: [],
-    news: []
+    news: [],
+    status: [],
+    supplier: []
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -79,6 +81,33 @@ const adminReducer = (state = initialState, action) => {
 
         case actionTypes.FETCH_ALL_PRODUCTS_FAILED:
             state.products = [];
+            return {
+                ...state,
+            }
+
+            //fetch status product
+        case actionTypes.FETCH_STATUS_PRODUCT_SUCCESS:
+            state.status = action.listStatus;
+            return {
+                ...state,
+            }
+
+            //fetch supplier product
+        case actionTypes.FETCH_SUPPLIER_PRODUCT_SUCCESS:
+            state.supplier = action.listSupplier;
+            return {
+                ...state,
+            }
+
+            case actionTypes.FETCH_SUPPLIER_PRODUCT_FAILED:
+            state.supplier = [];
+            return {
+                ...state,
+            }
+
+
+        case actionTypes.FETCH_STATUS_PRODUCT_FAILED:
+            state.status = [];
             return {
                 ...state,
             }
