@@ -122,7 +122,6 @@ class ModalUser extends Component {
                 avatar: base64
             })
         }
-
     }
 
     //remove image

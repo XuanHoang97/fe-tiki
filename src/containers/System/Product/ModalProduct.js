@@ -6,14 +6,15 @@ import * as actions from '../../../store/actions';
 
 const ModalProduct = (props) => {
     const [name, setName] = useState('');
-    const [previewImgURL, setPreviewImgURL] = useState('');
+    const [image, setImage] = useState('');
+    const [previewImg, setPreviewImg] = useState('');
     const [price, setPrice] = useState('');
     const [sale, setSale] = useState('');
-    const [quantity, setQuantity] = useState(10);
-    const [warranty, setWarranty] = useState(3);
+    const [number, setNumber] = useState('');
+    const [warranty, setWarranty] = useState('');
     const [status, setStatus] = useState('');
-    const [category, setCategory] = useState('');
-    const [supplier, setSupplier] = useState('');
+    const [category_id, setCategory_id] = useState('');
+    const [supplier_id, setSupplier_id] = useState('');
 
     const [statusArr, setStatusArr] = useState([]);
     const [categoryArr, setCategoryArr] = useState([]);
@@ -26,32 +27,68 @@ const ModalProduct = (props) => {
         setStatusArr(arrStatus);
         setStatus(arrStatus[0]);
 
-        console.log('check data list status:', arrStatus);
-        console.log('check data arr:', statusArr);
-        console.log('check status: ', status);
-
         let arrCategory = props.listCategory;
         props.fetchCategories();
         setCategoryArr(arrCategory);
-        setCategory(arrCategory[0]);
+        setCategory_id(arrCategory[0]);
 
         let arrSupplier = props.listSupplier;
         props.fetchSupplierProduct();
         setSupplierArr(arrSupplier);
-        setSupplier(arrSupplier[0]);
-
+        setSupplier_id(arrSupplier[0]);
     }, [statusArr, categoryArr , supplierArr]);
-    
+
+    //reset form
+    useEffect(() => {
+        setName('');
+        setImage('');
+        setPreviewImg('');
+        setPrice('');
+        setSale('');
+        setNumber('');
+        setWarranty('');
+        setStatus('');
+        setCategory_id('');
+        setSupplier_id('');
+    }, [props.listProducts]);
 
     const toggle =()=>{
-        props.toggleFromParent();
+        props.toggleParent();
     }
 
     // add new product
     const handleAddNewProduct=()=>{
-            // props.createNewUser(state);
-            // props.toggleFromParent();
-            console.log('check data state: ', name, previewImgURL, price, sale, quantity, status, warranty, category, supplier);
+        props.createProduct({
+            name: name,
+            image: image,
+            previewImg: previewImg,
+
+            price: price,
+            sale: sale,
+            number: number,
+            warranty: warranty,
+            status: status,
+            category_id: category_id,
+            supplier_id: supplier_id,
+        });
+        toggle();
+    }
+
+    //onChange image
+    const changeImage = async(e) => {
+        let data=e.target.files;
+        let file=data[0];
+        if(file){
+            let base64=await CommonUtils.getBase64(file);
+            let objectUrl=URL.createObjectURL(file)
+            setPreviewImg(objectUrl);
+            setImage(base64);
+        }
+    }
+    //remove image
+    const removeImg=()=>{
+        setPreviewImg('');
+        setImage('');
     }
     
     return (
@@ -76,17 +113,22 @@ const ModalProduct = (props) => {
                         <div className="form-group col-md-3">
                             <label>Ảnh</label>
                             <input id="previewImg" type="file" hidden 
-                                // onChange={(e)=>setPreviewImgURL(e.target.files[0])}
+                                onChange={(e)=>changeImage(e)}
                             />
 
                             <label htmlFor="previewImg" className="btn btn-success w-100"><i className="fas fa-upload"></i> Tải ảnh</label>  
                         
                         </div>
 
-                        <div className="preview-image col-md-2 border">
-                            <div className="col-md-12" style={{textAlign: 'end', position: 'absolute', right: '-1.5rem', top: '-1rem'}}>
+                        <div className="preview-image col-md-2 border" 
+                            style={{backgroundImage: `url(${previewImg})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat'}}
+                        >
+                            {
+                            previewImg ?
+                            <div onClick={() =>removeImg()} className="col-md-12" style={{textAlign: 'end', position: 'absolute', right: '-1.5rem', top: '-1rem'}}>
                                 <i className="far fa-times-circle text-danger"></i>
-                            </div>
+                            </div> : <img src="https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png" className="w-100" alt="..." />
+                            }
                         </div>
                     </div>
                     
@@ -121,19 +163,15 @@ const ModalProduct = (props) => {
                                 }    
                             </select>
                         </div>
-                         
-                         
-                        <>
-                            <div className="form-group col-md-4">
-                                <label>Số lượng</label>
-                                <input value={quantity} onChange={(e)=>setQuantity(e.target.value)}  type="text" className="form-control" />
-                            </div>
-                            <div className="form-group col-md-4">
-                                <label>Bảo hành</label>
-                                <input value={warranty} onChange={(e)=>setWarranty(e.target.value)}  type="text" className="form-control" />
-                            </div>
-                        </>
-                          
+
+                        <div className="form-group col-md-4">
+                            <label>Số lượng</label>
+                            <input value={number} onChange={(e)=>setNumber(e.target.value)}  type="text" className="form-control" />
+                        </div>
+                        <div className="form-group col-md-4">
+                            <label>Bảo hành</label>
+                            <input value={warranty} onChange={(e)=>setWarranty(e.target.value)}  type="text" className="form-control" />
+                        </div>                             
                     </div>
                     
 
@@ -141,8 +179,8 @@ const ModalProduct = (props) => {
                         <div className="form-group col-md-4">
                             <label>Danh mục</label>
                             <select className="form-control"
-                                onChange={(e) => setCategory(e.target.value)}
-                                defaultValue={category}
+                                onChange={(e) => setCategory_id(e.target.value)}
+                                defaultValue={category_id}
                             >
                                 {   
                                     props.listCategory && props.listCategory.length >0 ?
@@ -161,8 +199,8 @@ const ModalProduct = (props) => {
                         <div className="form-group col-md-4">
                             <label>Xuất xứ</label>
                             <select className="form-control"
-                                onChange={(e) => setSupplier(e.target.value)}
-                                defaultValue={supplier}
+                                onChange={(e) => setSupplier_id(e.target.value)}
+                                defaultValue={supplier_id}
                             >
                                 {
                                     props.listSupplier && props.listSupplier.length >0 ?
@@ -195,7 +233,8 @@ const mapStateToProps = state => {
     return {
         listStatus: state.admin.status,
         listCategory: state.admin.categories,
-        listSupplier: state.admin.supplier
+        listSupplier: state.admin.supplier,
+        listProducts: state.admin.products
     };
 };
 

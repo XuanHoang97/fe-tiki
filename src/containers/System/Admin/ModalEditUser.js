@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import {CRUD_ACTIONS, CommonUtils} from "../../../utils"
+import {CommonUtils} from "../../../utils"
 
 import _ from 'lodash';
 import * as actions from '../../../store/actions';

@@ -7,9 +7,11 @@ import {
     editUserService,
     searchUser,
     getAllProduct,
+    createNewProduct,
+    editProduct,
+    deleteProduct,
     getAllCategory,
     getAllNewsAndEvent,
-    createNewProduct
 } from "../../services/userService"
 import { toast } from "react-toastify"
 
@@ -217,7 +219,7 @@ export const fetchProducts = () => {
             let res = await getAllProduct('ALL');
 
             if (res && res.data.errCode === 0) {
-                dispatch(fetchAllProductsSuccess(res.data.products))
+                dispatch(fetchAllProductsSuccess(res.data.products.reverse()))
             } else {
                 toast.error('fetch all product error !')
                 dispatch(fetchAllProductsFailed());
@@ -265,6 +267,61 @@ export const saveProductSuccess = () => ({
 export const saveProductFailed = () => ({
     type: actionTypes.CREATE_PRODUCT_FAILED,
 })
+
+//edit product
+export const EditProduct = (data) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await editProduct(data);
+            if (res && res.data.errCode === 0) {
+                dispatch(editProductSuccess());
+                dispatch(fetchProducts());
+                toast.success('Cập nhật sản phẩm thành công !')
+            } else {
+                dispatch(editProductFailed());
+            }
+        } catch (e) {
+            dispatch(editProductFailed());
+            console.log('editProductFailed error', e)
+        }
+    }
+}
+
+export const editProductSuccess = () => ({
+    type: actionTypes.EDIT_PRODUCT_SUCCESS,
+})
+
+export const editProductFailed = () => ({
+    type: actionTypes.EDIT_PRODUCT_FAILED,
+})
+
+//delete product
+export const DeleteProduct = (productId) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await deleteProduct(productId);
+            if (res && res.data.errCode === 0) {
+                dispatch(deleteProductSuccess());
+                dispatch(fetchProducts());
+                toast.success('Xoá sản phẩm thành công !')
+            } else {
+                dispatch(deleteProductFailed());
+            }
+        } catch (e) {
+            dispatch(deleteProductFailed());
+            console.log('deleteProductFailed error', e)
+        }
+    }
+}
+
+export const deleteProductSuccess = () => ({
+    type: actionTypes.DELETE_PRODUCT_SUCCESS,
+})
+
+export const deleteProductFailed = () => ({
+    type: actionTypes.DELETE_PRODUCT_FAILED,
+})
+
 
 //fetch status product
 export const fetchStatusProduct = () => {

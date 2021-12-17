@@ -53,6 +53,21 @@ const createNewProduct = (data) => {
     return axios.post(`http://localhost:8085/api/create-new-product`, data)
 }
 
+// edit product
+const editProduct = (inputData) => {
+    return axios.put(`http://localhost:8085/api/edit-product`, inputData)
+}
+
+//delete product
+const deleteProduct = (productId) => {
+    return axios.delete(`http://localhost:8085/api/delete-product`, {
+        data: {
+            id: productId
+        }
+    })
+}
+
+
 // get all category
 const getAllCategory = (categoryId) => {
     return axios.get(`http://localhost:8085/api/get-all-category?id=${categoryId}`)
@@ -76,5 +91,7 @@ export {
     getAllProduct,
     getAllCategory,
     getAllNewsAndEvent,
-    createNewProduct
+    createNewProduct,
+    editProduct,
+    deleteProduct,
 };
