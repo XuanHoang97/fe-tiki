@@ -78,6 +78,26 @@ const getAllNewsAndEvent = (newId) => {
     return axios.get(`http://localhost:8085/api/get-all-news?id=${newId}`)
 }
 
+//create new news and event
+const createNews = (data) => {
+    return axios.post(`http://localhost:8085/api/create-news`, data)
+}
+
+//edit news and event
+const editNews = (inputData) => {
+    return axios.put(`http://localhost:8085/api/edit-news`, inputData)
+}
+
+//delete news and event
+const deleteNews = (newsId) => {
+    return axios.delete(`http://localhost:8085/api/delete-news`, {
+        data: {
+            id: newsId
+        }
+    })
+}
+
+
 
 export { 
     handleLoginApi,
@@ -94,4 +114,7 @@ export {
     createNewProduct,
     editProduct,
     deleteProduct,
+    createNews,
+    editNews,
+    deleteNews
 };

@@ -69,7 +69,22 @@ const actionTypes = Object.freeze({
     //get all news and event
     FETCH_ALL_NEWS_SUCCESS: 'FETCH_ALL_NEWS_SUCCESS',
     FETCH_ALL_NEWS_FAILED: 'FETCH_ALL_NEWS_FAILED',
-    
+
+    //get allcode news and event
+    FETCH_ALLCODE_NEWS_SUCCESS: 'FETCH_ALLCODE_NEWS_SUCCESS',
+    FETCH_ALLCODE_NEWS_FAILED: 'FETCH_ALLCODE_NEWS_FAILED',
+
+    //create news and event
+    CREATE_NEWS_SUCCESS: 'CREATE_NEWS_SUCCESS',
+    CREATE_NEWS_FAILED: 'CREATE_NEWS_FAILED',
+
+    //edit news and event
+    EDIT_NEWS_SUCCESS: 'EDIT_NEWS_SUCCESS',
+    EDIT_NEWS_FAILED: 'EDIT_NEWS_FAILED',
+
+    //delete news and event
+    DELETE_NEWS_SUCCESS: 'DELETE_NEWS_SUCCESS',
+    DELETE_NEWS_FAILED: 'DELETE_NEWS_FAILED',
 })
 
 export default actionTypes;

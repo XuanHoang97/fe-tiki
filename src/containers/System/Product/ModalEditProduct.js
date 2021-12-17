@@ -41,7 +41,6 @@ const ModalEditProduct  = (props) => {
             setCategory_id(product.category_id);
             setSupplier_id(product.supplier_id);
             setStatus(product.status);            
-            // setImage(imageBase64);
             setPreviewImg(imageBase64);
         } 
         props.fetchStatusProduct();

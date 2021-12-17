@@ -7,6 +7,7 @@ const initialState = {
     products: [],
     categories: [],
     news: [],
+    status_news: [],
     status: [],
     supplier: []
 }
@@ -137,6 +138,20 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
             }
+
+            //fetch allCode news and event
+        case actionTypes.FETCH_ALLCODE_NEWS_SUCCESS:
+            state.status_news = action.statusCodeNews;
+            return {
+                ...state,
+            }
+
+        case actionTypes.FETCH_ALLCODE_NEWS_FAILED:
+            state.status_news = [];
+            return {
+                ...state,
+            }
+            
 
 
         default:
