@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import {CommonUtils} from "../../../utils"
+import {CommonUtils} from "../../../utils";
+
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import * as actions from '../../../store/actions';
 
@@ -184,7 +185,7 @@ const ModalProduct = (props) => {
                                     props.listCategory && props.listCategory.length >0 ?
                                     props.listCategory.map((item, index) => {
                                         return (
-                                            <option key={index} value={item.name}>{item.name}</option>
+                                            <option key={index} value={item.keyMap}>{item.name}</option>
                                         )
                                     })
                                     : 

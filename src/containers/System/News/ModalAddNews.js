@@ -146,10 +146,10 @@ const ModalAddNews = (props) => {
                             <input value={content} onChange={(e)=>setContent(e.target.value)}  type="text" className="form-control" />
                         </div>
 
-                        <div className="form-group col-4">
+                        {/* <div className="form-group col-4">
                             <label>Hot</label>
                             <input value={hot} onChange={(e)=>setHot(e.target.value)}  type="text" className="form-control" />
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className="row">

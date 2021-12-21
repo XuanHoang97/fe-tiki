@@ -85,7 +85,10 @@
       .modal-header {
         padding: 0 10px;
         height: 35px;
-        background-color: $colormain;
+        // background-color: $colormain;
+        background-position: center;
+        background-size: cover;
+        background-image: url('https://png.pngtree.com/background/20210715/original/pngtree-fashion-blue-gradient-background-picture-image_1278728.jpg');
         color: $common-text-color;
         .modal-title {
           line-height: 35px;
@@ -99,6 +102,9 @@
             line-height: 35px;
             font-size: $base-size + 2px;
           }
+        }
+        .close{
+          padding: 1.5rem 1rem;
         }
       }
     }

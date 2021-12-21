@@ -67,11 +67,47 @@ const deleteProduct = (productId) => {
     })
 }
 
+//save info product
+const saveInfoProduct = (data) => {
+    return axios.post(`http://localhost:8085/api/save-info-product`, data)
+}
+
+//get some product
+const getSomeProduct = (productId) => {
+    return axios.get(`http://localhost:8085/api/get-some-product?id=${productId}`)
+}
+
+//get all article
+const getAllArticle = (articleId) => {
+    return axios.get(`http://localhost:8085/api/get-article-product?id=${articleId}`)
+}
+
+
 
 // get all category
 const getAllCategory = (categoryId) => {
     return axios.get(`http://localhost:8085/api/get-all-category?id=${categoryId}`)
 }
+
+//create new category
+const createCategory = (data) => {
+    return axios.post(`http://localhost:8085/api/create-new-category`, data)
+}
+
+//edit category
+const editCategory = (inputData) => {
+    return axios.put(`http://localhost:8085/api/edit-category`, inputData)
+}
+
+//delete category
+const deleteCategory = (categoryId) => {
+    return axios.delete(`http://localhost:8085/api/delete-category`, {
+        data: {
+            id: categoryId
+        }
+    })
+}
+
 
 //get all news and event
 const getAllNewsAndEvent = (newId) => {
@@ -110,11 +146,17 @@ export {
     searchUser,
     getAllProduct,
     getAllCategory,
+    createCategory,
     getAllNewsAndEvent,
     createNewProduct,
     editProduct,
     deleteProduct,
+    getSomeProduct,
     createNews,
     editNews,
-    deleteNews
+    deleteNews,
+    saveInfoProduct,
+    deleteCategory,
+    editCategory,
+    getAllArticle
 };

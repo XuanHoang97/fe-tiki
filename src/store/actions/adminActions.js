@@ -15,6 +15,12 @@ import {
     createNews,
     editNews,
     deleteNews,
+    saveInfoProduct,
+    createCategory,
+    deleteCategory,
+    editCategory,
+    getSomeProduct,
+    getAllArticle
 } from "../../services/userService"
 import { toast } from "react-toastify"
 
@@ -382,6 +388,90 @@ export const fetchSupplierProductFailed = () => ({
     type: actionTypes.FETCH_SUPPLIER_PRODUCT_FAILED,
 }) 
 
+//save info product
+export const SaveInfoProduct = (data) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await saveInfoProduct(data);
+            if (res && res.data.errCode === 0) {
+                dispatch(saveInfoProductSuccess());
+                toast.success('Thêm mô tả thông tin sản phẩm thành công !')
+            } else {
+                dispatch(saveInfoProductFailed());
+            }
+        } catch (e) {
+            dispatch(saveInfoProductFailed());
+            console.log('saveInfoProductFailed error', e)
+        }
+    }
+}
+export const saveInfoProductSuccess = () => ({
+    type: actionTypes.SAVE_INFO_DETAIL_PRODUCT_SUCCESS,
+})
+
+export const saveInfoProductFailed = () => ({
+    type: actionTypes.SAVE_INFO_DETAIL_PRODUCT_FAILED,
+})
+
+//get some product
+export const GetSomeProduct = (productId) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await getSomeProduct(productId);
+            if (res && res.data.errCode === 0) {
+                dispatch(GetSomeProductSuccess(res.data.data))
+            } else {
+                dispatch(GetSomeProductFailed());
+            }
+        } catch (e) {
+            dispatch(GetSomeProductFailed());
+            console.log('GetSomeProductFailed error', e)
+        }
+    }
+}
+
+export const GetSomeProductSuccess = (data) => ({
+    type: actionTypes.FETCH_SOME_PRODUCT_SUCCESS,
+    someProduct: data
+})
+
+export const GetSomeProductFailed = () => ({
+    type: actionTypes.FETCH_SOME_PRODUCT_SUCCESS,
+})
+
+//get all article
+export const GetAllArticle = () => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await getAllArticle('ALL')
+            if (res && res.data.errCode === 0) {
+                dispatch(GetAllArticleSuccess(res.data.articles.reverse()))
+            } else {
+                dispatch(GetAllArticleFailed());
+            }
+        } catch (e) {
+            dispatch(GetAllArticleFailed());
+            console.log('GetAllArticleFailed error', e)
+        }
+    }
+}
+
+export const GetAllArticleSuccess = (data) => ({
+    type: actionTypes.FETCH_ALL_ARTICLE_SUCCESS,
+    allArticle: data
+})
+
+export const GetAllArticleFailed = () => ({
+    type: actionTypes.FETCH_ALL_ARTICLE_FAILED,
+})
+
+
+
+
+
+
+
+
 
 //fetch all category
 export const fetchAllCategory = () => {
@@ -390,7 +480,7 @@ export const fetchAllCategory = () => {
             let res = await getAllCategory('ALL');
 
             if (res && res.data.errCode === 0) {
-                dispatch(fetchAllCategorySuccess(res.data.category))
+                dispatch(fetchAllCategorySuccess(res.data.category.reverse()))
             } else {
                 toast.error('fetch all category error !')
                 dispatch(fetchAllCategoryFailed());
@@ -411,6 +501,89 @@ export const fetchAllCategorySuccess = (data) => ({
 export const fetchAllCategoryFailed = () => ({
     type: actionTypes.FETCH_ALL_CATEGORIES_FAILED,
 })
+
+//create category
+export const CreateCategory = (data) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await createCategory(data);
+            if (res && res.data.errCode === 0) {
+                dispatch(createCategorySuccess());
+                dispatch(fetchAllCategory());
+                toast.success('Thêm danh mục thành công !')
+            } else {
+                dispatch(createCategoryFailed());
+            }
+        } catch (e) {
+            dispatch(createCategoryFailed());
+            console.log('createCategoryFailed error', e)
+        }
+    }
+}
+
+export const createCategorySuccess = () => ({
+    type: actionTypes.CREATE_CATEGORY_SUCCESS,
+})
+
+export const createCategoryFailed = () => ({
+    type: actionTypes.CREATE_CATEGORY_FAILED,
+})
+
+//edit category
+export const EditCategory = (data) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await editCategory(data);
+            if (res && res.data.errCode === 0) {
+                dispatch(editCategorySuccess());
+                dispatch(fetchAllCategory());
+                toast.success('Sửa danh mục thành công !')
+            } else {
+                dispatch(editCategoryFailed());
+            }
+        } catch (e) {
+            dispatch(editCategoryFailed());
+            console.log('editCategoryFailed error', e)
+        }
+    }
+}
+
+export const editCategorySuccess = () => ({
+    type: actionTypes.EDIT_CATEGORY_SUCCESS,
+})
+
+export const editCategoryFailed = () => ({
+    type: actionTypes.EDIT_CATEGORY_FAILED,
+})
+
+
+//delete category
+export const DeleteCategory = (id) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await deleteCategory(id);
+            if (res && res.data.errCode === 0) {
+                dispatch(deleteCategorySuccess());
+                dispatch(fetchAllCategory());
+                toast.success('Xóa danh mục thành công !')
+            } else {
+                dispatch(deleteCategoryFailed());
+            }
+        } catch (e) {
+            dispatch(deleteCategoryFailed());
+            console.log('deleteCategoryFailed error', e)
+        }
+    }
+}
+
+export const deleteCategorySuccess = () => ({
+    type: actionTypes.DELETE_CATEGORY_SUCCESS,
+})
+
+export const deleteCategoryFailed = () => ({
+    type: actionTypes.DELETE_CATEGORY_FAILED,
+})
+
 
 //fetch all news and event
 export const fetchAllNews = () => {

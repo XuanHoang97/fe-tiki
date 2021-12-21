@@ -141,8 +141,11 @@ const NewsManage = (props) => {
                                     <td>{item.name}</td>
                                     <td>{item.description}</td>
                                     <td>{item.author_id}</td>
-                                    <td><Moment format="DD/MM/YYYY hh:mm">{item.date}</Moment></td>
-                                    <td><span className ="text-success">{item.status}</span>: <Moment fromNow>{item.date}</Moment></td>
+                                    <td>
+                                        <Moment format="DD/MM/YYYY" className='mr-2'>{item.date}</Moment>
+                                        <small><Moment format="hh:mm">{item.date}</Moment></small>
+                                    </td>
+                                    <td><span className ="text-success">{item.status}</span>: <Moment fromNow className ="small">{item.date}</Moment></td>
                                     <td>{item.category_id}</td>
                                     <td>
                                         <button onClick={() => editNews(item) } type="button" className="btn text-primary pr-2">

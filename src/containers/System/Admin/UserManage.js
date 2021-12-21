@@ -208,11 +208,11 @@ class UserManage extends Component {
                             return (
                                 <tbody key={index}>
                                     <tr>
-                                        <td>
+                                        <th scope='row'>
                                             <div className="form-group">
                                                 <input type="checkbox" className="w-100" />
                                             </div>
-                                        </td>
+                                        </th>
                                         <td>{index + 1}</td>
                                         <td style={{backgroundImage: `url(${imageBase64})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat', height: '45px',
                                         width: '45px', borderRadius: '50%', display: 'flex', margin: '0 auto'}}></td>

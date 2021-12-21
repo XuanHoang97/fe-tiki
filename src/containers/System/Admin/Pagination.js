@@ -4,11 +4,11 @@ function Pagination(props) {
     return (
         <div className='d-flex justify-content-between'>
             <div className='file'>
-                <button className='btn btn-outline-success border px-3'>
+                <button className='btn btn-outline-success border px-3 font-weight-normal'>
                     <i className="fas fa-download"></i> Nhập file
                 </button>
 
-                <button className='btn btn-outline-primary border px-3'>
+                <button className='btn btn-outline-primary border px-3 font-weight-normal'>
                     <i className="fas fa-upload"></i> Xuất file
                 </button>            
             </div>    

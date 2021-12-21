@@ -4,6 +4,7 @@ import * as actions from '../../../store/actions';
 import ModalProduct from './ModalProduct';
 import ModalEditProduct from './ModalEditProduct';
 import Sort from './Sort';
+import { numberFormat } from '../../../components/Formating/FormatNumber';
 
 const ProductManage = (props) => {
     const [products, setProducts] = useState([]);
@@ -110,7 +111,6 @@ const ProductManage = (props) => {
                         <td scope="col">Bảo hành</td>
                         <td scope="col">Giá (VND)</td>
                         <td scope="col">Sale (VND)</td>
-                        <td scope="col">Danh mục</td>
                         <td scope="col">Trạng thái</td>
                         <td scope="col">Xuất xứ</td>
                         <td scope="col">Tác vụ</td>
@@ -139,9 +139,8 @@ const ProductManage = (props) => {
                                     <td>{item.name}</td>
                                     <td>{item.number}</td>
                                     <td>{item.warranty}</td>
-                                    <td>{item.price}</td>
-                                    <td>{item.sale}</td>
-                                    <td>{item.category_id}</td>
+                                    <td>{numberFormat(item.price)}</td>
+                                    <td>{numberFormat(item.sale)}</td>
                                     <td>{item.status}</td>
                                     <td>{item.supplier_id}</td>
                                     <td>
