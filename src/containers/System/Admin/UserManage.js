@@ -90,6 +90,7 @@ class UserManage extends Component {
             phoneNumber: data.phoneNumber,
             gender: data.gender,
             roleId: data.roleId,
+            positionId: data.positionId,
             avatar: data.avatar,
         });
     }
@@ -223,7 +224,7 @@ class UserManage extends Component {
                                         <td>{item.gender}</td>
                                         <td>24</td>
                                         <td>{item.roleId}</td>
-                                        <td>Updating...</td>
+                                        <td>{item.positionId}</td>
                                         <td>
                                             <button onClick={()=> this.handleInfoUser(item)} type="button" className="btn text-success">
                                                 <i className="fas fa-info-circle"></i>

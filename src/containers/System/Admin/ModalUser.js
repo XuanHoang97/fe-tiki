@@ -12,6 +12,7 @@ class ModalUser extends Component {
         this.state = {
             genderArr: [],
             roleArr: [],
+            positionArr: [],
             previewImgURL: '',
 
             email: '',
@@ -22,6 +23,7 @@ class ModalUser extends Component {
             phoneNumber: '',
             gender : '',
             roleId: '',
+            positionId: '',
             avatar: '',
         }
     }
@@ -30,6 +32,7 @@ class ModalUser extends Component {
     async componentDidMount() {
         this.props.getGenderStart();
         this.props.getRoleStart();
+        this.props.fetchPosition();
         this.props.fetchUserRedux();
     }
 
@@ -56,10 +59,20 @@ class ModalUser extends Component {
             })
         }
 
+        if(prevProps.positionRedux !== this.props.positionRedux){
+            let arrPositions=this.props.positionRedux
+            this.setState({
+                positionArr: arrPositions,
+                position: arrPositions && arrPositions.length>0 ? arrPositions[0].keyMap :''
+            })
+        }
+
+
         //reset value after create success a new user
         if(prevProps.listUsers !== this.props.listUsers){
             let arrGenders=this.props.genderRedux
             let arrRoles=this.props.roleRedux
+            let arrPositions=this.props.positionRedux
             
             this.setState({
                 email: '',
@@ -69,6 +82,7 @@ class ModalUser extends Component {
                 address: '',
                 gender: arrGenders && arrGenders.length>0 ? arrGenders[0].keyMap : '',
                 role: arrRoles && arrRoles.length>0 ? arrRoles[0].keyMap :'',
+                position: arrPositions && arrPositions.length >0 ? arrPositions[0].keyMap :'',
                 avatar: '',
                 action: CRUD_ACTIONS.CREATE,
                 previewImgURL: ''
@@ -133,8 +147,8 @@ class ModalUser extends Component {
     }
 
     render() {
-        let {genderArr, roleArr, email, password, firstName, lastName,
-            phoneNumber, address, gender, roleId, avatar}=this.state;
+        let {genderArr, roleArr, positionArr, email, password, firstName, lastName,
+            phoneNumber, address, gender, roleId, positionId, avatar}=this.state;
         
         return (
             <Modal 
@@ -232,6 +246,23 @@ class ModalUser extends Component {
                                         }           
                                     </select>
                                 </div>
+
+                                <div className="form-group col-md-6">
+                                    <label>Chức danh</label>
+                                    <select className="form-control"
+                                        onChange={(e) => this.onChangeInput(e, 'positionId')}
+                                        value={positionId}
+                                    >
+                                        {
+                                            positionArr && positionArr.length >0 &&
+                                            positionArr.map((item, index) => {
+                                                return (
+                                                    <option key={index} value={item.valueVi}>{item.valueVi}</option>
+                                                )
+                                            })
+                                        }           
+                                    </select>
+                                </div>
                             </div>
 
                         </form>
@@ -253,7 +284,8 @@ const mapStateToProps = state => {
     return {
         genderRedux: state.admin.genders,
         roleRedux: state.admin.roles,
-        listUsers: state.admin.users
+        positionRedux: state.admin.positions,
+        listUsers: state.admin.users,
     };
 };
 
@@ -261,6 +293,7 @@ const mapDispatchToProps = dispatch => {
     return {
         getGenderStart: ()=> dispatch(actions.fetchGenderStart()),
         getRoleStart: ()=> dispatch(actions.fetchRoleStart()),
+        fetchPosition: ()=> dispatch(actions.fetchPositionStart()),
         fetchUserRedux: ()=> dispatch(actions.fetchAllUsersStart()),
         createNewUser: (data)=> dispatch(actions.createNewUser(data)),
     };

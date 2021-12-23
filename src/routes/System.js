@@ -8,6 +8,7 @@ import OrderManage from '../containers/System/Order/OrderManage';
 import NewsManage from '../containers/System/News/NewsManage';
 import ArticleManage from '../containers/System/Article/ArticleManage';
 import CategoryManage from '../containers/System/Category/CategoryManage';
+import Statiscal from '../containers/System/Statiscal/Statiscal';
 class System extends Component {
     render() {
         const { systemMenuPath } = this.props;
@@ -22,7 +23,7 @@ class System extends Component {
                         <Route path="/system/article-manage" component={ArticleManage} />
                         <Route path="/system/news-manage" component={NewsManage} />
                         <Route path="/system/category-manage" component={CategoryManage} />
-                        <Route path="/system/report-statiscal" component={Dashboard} />
+                        <Route path="/system/report-statiscal" component={Statiscal} />
                         <Route path="/system/setting" component={Dashboard} />
                         <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />
                     </Switch>

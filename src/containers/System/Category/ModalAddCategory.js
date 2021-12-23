@@ -13,7 +13,7 @@ const ModalAddCategory = (props) => {
     const [image, setImage] = useState('');
     const [name, setName] = useState('');
     const [keyMap, setKeyMap] = useState('');
-    const [type, setType] = useState('');
+    const [type, setType] = useState('CATEGORY');
     const [value, setValue] = useState('');
     
 

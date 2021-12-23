@@ -2,34 +2,31 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import {CommonUtils} from "../../../utils"
-import _ from 'lodash';
 
 const ModalEditCategory  = (props) => {
-    const [previewImg, setPreviewImg] = useState('');
+    const [id, setId] = useState('');
     const [image, setImage] = useState('');
     const [name, setName] = useState('');
-    const [id, setId] = useState('');
     const [keyMap, setKeyMap] = useState('');
     const [type, setType] = useState('');
     const [value, setValue] = useState('');
-
+    const [previewImg, setPreviewImg] = useState('');
+    
 
     useEffect (() => {
         let category = props.currentCategory;
-        if(category && _.isEmpty(category)){
-            //fix bug buffer
-            let imageBase64='';
-            if(category.image){
-                imageBase64= new Buffer(category.image, 'base64').toString('binary');
-            }
-            //fill info category
-            setId(category.id);
-            setPreviewImg(imageBase64);
-            setName(category.name);
-            setKeyMap(category.keyMap);
-            setType(category.type);
-            setValue(category.value);
-       }
+        //fix bug buffer
+        let imageBase64='';
+        if(category.image){
+            imageBase64= new Buffer(category.image, 'base64').toString('binary');
+        }
+        //fill info category
+        setId(category.id);
+        setPreviewImg(imageBase64);
+        setName(category.name);
+        setKeyMap(category.keyMap);
+        setType(category.type);
+        setValue(category.value);
     }, [props.currentCategory]);
 
 
@@ -62,6 +59,7 @@ const ModalEditCategory  = (props) => {
             keyMap : keyMap,
             type : type,
             value : value,
+            previewImg: previewImg,
         });
         toggle();
     }
@@ -91,9 +89,7 @@ const ModalEditCategory  = (props) => {
                             <input id="previewImg" type="file" hidden 
                                 onChange={(e)=>changeImage(e)}
                             />
-
                             <label htmlFor="previewImg" className="btn btn-success w-100"><i className="fas fa-upload"></i> Tải ảnh</label>  
-                        
                         </div>
 
                         <div className="preview-image col-md-2 border" 
@@ -105,9 +101,7 @@ const ModalEditCategory  = (props) => {
                                 <i className="far fa-times-circle text-danger"></i>
                             </div> : <img src="https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png" className="w-100" alt="..." />
                             }
-                        </div>
-
-                        
+                        </div>                  
                     </div>
 
                     <div className="form-group col-md-6">

@@ -79,6 +79,34 @@ export const fetchRoleFailed = () => ({
     type: actionTypes.FETCH_ROLE_FAILED
 })
 
+//fetch position
+export const fetchPositionStart = () => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await getAllCodeService('POSITION');
+            if (res && res.data.errCode === 0) {
+                dispatch(fetchPositionSuccess(res.data.data))
+            } else {
+                dispatch(fetchPositionFailed());
+            }
+        } catch (e) {
+            dispatch(fetchPositionFailed());
+            console.log('fetchPositionStart error', e)
+        }
+    }
+}
+
+export const fetchPositionSuccess = (positionData) => ({
+    type: actionTypes.FETCH_POSITION_SUCCESS,
+    listPosition: positionData,
+})
+
+export const fetchPositionFailed = () => ({
+    type: actionTypes.FETCH_POSITION_FAILED
+})
+
+
+
 //create a new user
 export const createNewUser = (data) => {
     return async(dispatch, getState) => {
@@ -438,6 +466,37 @@ export const GetSomeProductSuccess = (data) => ({
 export const GetSomeProductFailed = () => ({
     type: actionTypes.FETCH_SOME_PRODUCT_SUCCESS,
 })
+
+
+//select option product
+export const SelectOptionProduct = (data) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await getAllCodeService('OPTION_PRODUCT');
+            if(res && res.data.errCode === 0){
+                dispatch(SelectOptionProductSuccess(res.data.data))
+            }else{
+                toast.error('fetch option product error !')
+                dispatch(SelectOptionProductFailed());
+            }
+        } catch (e) {
+            toast.error('fetch option product error !')
+            dispatch(SelectOptionProductFailed());
+            console.log('SelectOptionProductFailed error', e)
+        }
+    }
+}
+
+export const SelectOptionProductSuccess = (data) => ({
+    type: actionTypes.SELECT_OPTION_PRODUCT_SUCCESS,
+    listOption: data
+})
+
+export const SelectOptionProductFailed = () => ({
+    type: actionTypes.SELECT_OPTION_PRODUCT_FAILED,
+})
+
+
 
 //get all article
 export const GetAllArticle = () => {

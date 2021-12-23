@@ -15,6 +15,7 @@ class ModalEditUser extends Component {
             id: '',
             genderArr: [],
             roleArr: [],
+            positionArr: [],
             previewImgURL: '',
 
             email: '',
@@ -25,6 +26,7 @@ class ModalEditUser extends Component {
             phoneNumber: '',
             gender : '',
             roleId : '',
+            positionId: ''
         }
 
     }
@@ -49,12 +51,14 @@ class ModalEditUser extends Component {
 
                 gender: user.gender,
                 roleId: user.roleId,
+                positionId: user.positionId,
                 previewImgURL: imageBase64,
 
             });
         }
         this.props.getGenderStart();
         this.props.getRoleStart();
+        this.props.fetchPosition();
     }
 
     // render data when change props
@@ -70,6 +74,13 @@ class ModalEditUser extends Component {
                 roleArr: this.props.roleRedux,
             })
         }
+
+        if(prevProps.positionRedux !== this.props.positionRedux){
+            this.setState({
+                positionArr: this.props.positionRedux,
+            })
+        }
+
     }
 
     toggle =()=>{
@@ -122,8 +133,8 @@ class ModalEditUser extends Component {
     }
 
     render() {
-        let {genderArr, roleArr, email, firstName, lastName,
-            phoneNumber, address, gender, roleId, previewImgURL}=this.state;
+        let {genderArr, roleArr, positionArr, email, firstName, lastName,
+            phoneNumber, address, gender, roleId, positionId, previewImgURL}=this.state;
 
         return (
             <Modal 
@@ -223,6 +234,23 @@ class ModalEditUser extends Component {
                                         }           
                                     </select>
                                 </div>
+
+                                <div className="form-group col-md-6">
+                                    <label>Chức danh</label>
+                                    <select className="form-control"
+                                        onChange={(e) => this.onChangeInput(e, 'positionId')}
+                                        value={positionId}
+                                    >
+                                        {
+                                            positionArr && positionArr.length >0 &&
+                                            positionArr.map((item, index) => {
+                                                return (
+                                                    <option key={index} value={item.valueVi}>{item.valueVi}</option>
+                                                )
+                                            })
+                                        }           
+                                    </select>
+                                </div>
                             </div>
 
                         </form>
@@ -244,7 +272,9 @@ const mapStateToProps = state => {
     return {
         genderRedux: state.admin.genders,
         roleRedux: state.admin.roles,
-        listUsers: state.admin.users
+        listUsers: state.admin.users,
+        positionRedux: state.admin.positions,
+
     };
 };
 
@@ -252,6 +282,8 @@ const mapDispatchToProps = dispatch => {
     return {
         getGenderStart: ()=> dispatch(actions.fetchGenderStart()),
         getRoleStart: ()=> dispatch(actions.fetchRoleStart()),
+        fetchPosition: ()=> dispatch(actions.fetchPositionStart()),
+
         fetchUserRedux: ()=> dispatch(actions.fetchAllUsersStart()),
         createNewUser: (data)=> dispatch(actions.createNewUser(data)),
         editUserRedux: (user) => dispatch(actions.editUser(user))

@@ -6,13 +6,31 @@ import ModalArticle from './ModalArticle';
 const ArticleManage = (props) => {
     const [article, setArticle] = useState([]);
     const [modalAddArticle, setModalAddArticle] = useState(false);
-    const [modalEditArticle, setModalEditArticle] = useState(false);
-    const [articleEdit, setArticleEdit] = useState('');
+
+    const [option, setOption] = useState('');
+    const [productId, setProductId] = useState('');
+    const [productArr, setProductArr] = useState([]);
+
 
     useEffect(() => {
+        //get all article
         props.fetchArticle();
         setArticle(props.listArticle);
-    }, [article]);
+
+        //get some product
+        props.fetchSomeProduct();
+        setProductArr(props.someProduct);
+        setProductId(props.someProduct[0]);
+
+        //get option product
+        let data = props.optionProduct;
+        if(data && data.length > 0){
+            data = data.map(item => ({...item, isSelected: false}))
+        }
+        props.fetchOptionProduct();
+        setOption(data);
+        
+    }, [props.listArticle]);
 
     //OPEN MODAL Create, Edit artical
     const toggleArticleModal=()=> {
@@ -26,16 +44,28 @@ const ArticleManage = (props) => {
 
     const SaveInfoProduct=(data)=> {
         props.SaveInfoProduct({
-            contentHTML: data.contentHTML,
-            contentMarkdown: data.contentMarkdown,
-            description: data.description,
-            character: data.character,
-            specification: data.specification,
-            accessories: data.accessories,
+            characterHTML: data.characterHTML,
+            characterMarkdown: data.characterMarkdown,
+            accessoryHTML: data.accessoryHTML,
+            accessoryMarkdown: data.accessoryMarkdown,
+            specificationHTML: data.specificationHTML,
+            specificationMarkdown: data.specificationMarkdown,
+            descriptionHTML: data.descriptionHTML,
+            descriptionMarkdown: data.descriptionMarkdown,
             productId: data.productId,
-            categoryId: data.categoryId,
-        })
+        });
     }
+
+    // const SelectOptionProduct = (product) => {
+    //     if(option && option.length > 0){
+    //         option.map(item => {
+    //             if(item.id === product.id) item.isSelected = !item.isSelected;
+    //             return item;
+    //         })
+    //         setOption(option);
+    //     }
+    //     console.log('check option product: ', option);
+    // }
 
 
     return (
@@ -59,8 +89,6 @@ const ArticleManage = (props) => {
                         <td scope="col">Tick</td>
                         <td scope="col">ID SP</td>
                         <td scope="col">Tên SP</td>
-                        <td scope="col">contentMarkdown</td>
-                        <td scope="col">contentHTML</td>
                         <td scope="col">Tác vụ</td>
                     </tr>
                 </thead>
@@ -77,8 +105,6 @@ const ArticleManage = (props) => {
                                     </td>
                                     <td>{item.productId}</td>
                                     <td>{item.productId}</td>
-                                    <td>{item.contentHTML}</td>
-                                    <td>{item.contentMarkdown}</td>
                                     <td>
                                         <button type="button" className="btn text-primary px-2">
                                             <i className="fas fa-edit"></i>
@@ -97,6 +123,49 @@ const ArticleManage = (props) => {
                         
                 </tbody>
             </table>
+
+            <div className='d-flex col-12 p-0'>
+                <div className='d-flex'>
+                    <label className='mr-3'>Chọn sản phẩm</label>
+
+                    <div className="form-group d-flex col-6 p-0">
+                        <select className="form-control" style={{height:'30px'}}
+                            defaultValue={productId}
+                            onChange={(e)=>setProductId(e.target.value)}
+                        >
+                            {   
+                                props.someProduct && props.someProduct.length >0 &&
+                                props.someProduct.map((item, index) => {
+                                    return(
+                                        <option key={index} value={item.id}> {item.name} </option>
+                                    ) 
+                                })
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div className='d-flex'>    
+                    <label className='ml-4'>Loại sản phẩm</label>
+                    {
+                        props.optionProduct && props.optionProduct.length >0 &&
+                        props.optionProduct.map((item, index) => {
+                            return(
+                                <div className="d-flex" key={index}>
+                                    <button 
+                                    // <button onClick={()=> SelectOptionProduct(item)} type="button" 
+                                        className="btn btn-light px-2 font-weight-normal">
+                                        {/* className={item.isSelected === true ? "btn btn-primary px-2" : "btn btn-light px-2 font-weight-normal"}> */}
+                                        {item.valueVi}
+                                    </button>
+                                </div>
+                            ) 
+                        })
+                    }
+                </div>
+            </div>
+            
+
         </div>
     );
 
@@ -105,6 +174,9 @@ const ArticleManage = (props) => {
 const mapStateToProps = state => {
     return {
         listArticle: state.admin.articles,
+        optionProduct: state.admin.optionProduct,
+        someProduct: state.admin.someProduct,
+
     };
 };
 
@@ -112,6 +184,10 @@ const mapDispatchToProps = dispatch => {
     return {
         SaveInfoProduct: (data) => dispatch(actions.SaveInfoProduct(data)),
         fetchArticle: () => dispatch(actions.GetAllArticle()),
+        fetchOptionProduct: () => dispatch(actions.SelectOptionProduct()),
+        fetchSomeProduct: () => dispatch(actions.GetSomeProduct()),
+
+
     };
 };
 

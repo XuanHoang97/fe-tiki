@@ -3,6 +3,7 @@ import actionTypes from '../actions/actionTypes';
 const initialState = {
     genders: [],
     roles: [],
+    positions: [],
     users: [],
     products: [],
     categories: [],
@@ -11,7 +12,8 @@ const initialState = {
     status: [],
     supplier: [],
     someProduct: [],
-    articles: []
+    articles: [],
+    optionProduct: []
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -48,6 +50,20 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
             }
+
+            //fetch position
+        case actionTypes.FETCH_POSITION_SUCCESS:
+            state.positions = action.listPosition;
+            return {
+                ...state,
+            }
+
+        case actionTypes.FETCH_POSITION_FAILED:
+            state.positions = [];
+            return {
+                ...state,
+            }
+
 
             //fetch all user
         case actionTypes.FETCH_ALL_USERS_SUCCESS:
@@ -122,11 +138,27 @@ const adminReducer = (state = initialState, action) => {
                 ...state,
             }
 
-        case actionTypes.FETCH_SOME_PRODUCT_SUCCESS:
+        case actionTypes.FETCH_SOME_PRODUCT_FAILED:
             state.someProduct = [];
             return {
                 ...state,
             }
+
+            //SELECT option product
+        case actionTypes.SELECT_OPTION_PRODUCT_SUCCESS:
+            state.optionProduct = action.listOption;
+            return {
+                ...state,
+            }
+
+        case actionTypes.SELECT_OPTION_PRODUCT_FAILED:
+            state.optionProduct = [];
+            return {
+                ...state,
+            }
+            
+
+
 
 
             //fetch all article

@@ -33,11 +33,11 @@ a {
 }
 
 .dashboard_item:hover:not(.active) {
-    background-color: #3e70ff;
+    background-color: rgb(76, 117, 235);
     cursor: pointer;
     text-decoration: none;
 }
 
 a.active {
-    background-color: #3e70ff;
+    background-color: rgb(76, 117, 235);
 }
