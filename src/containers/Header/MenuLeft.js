@@ -1,11 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {NavLink} from 'react-router-dom';
+import './MenuLeft.scss'
 
-const MenuLeft = () => {
-    const [submenu, setSubmenu] = useState(false);
-
+const MenuLeft = ({widthMenuLeft, effect}) => {
     return (
-        <div className="p-0 bg-dark text-white" style={{width: '18%'}}>
+        <div className='p-0 bg-dark text-white' style={{width: widthMenuLeft}}>
             <div className="account d-flex p-3 align-items-center" style={{borderBottom: '1px solid rgb(67 69 81)'}}>
                 <img src="https://avatars.githubusercontent.com/u/38268599?v=4" alt="" style={{width: '50px'}}
                     className="rounded-circle" />
@@ -20,12 +19,11 @@ const MenuLeft = () => {
             </div>
 
             <div className="dashboard">
-                <NavLink to="/system/dashboard" activeClassName="active" className =" dashboard_item d-flex align-items-center px-3 py-3 text-white" exact style={{borderBottom: '1px solid rgb(67 69 81)'}}>
-                    <i className="fas fa-tachometer-alt mr-2"></i>
-                    Bảng điều khiển
+                <NavLink to="/system/dashboard" activeClassName="active" className ="menu-left" exact>
+                    <span><i className="fas fa-tachometer-alt mr-2"></i>Bảng điều khiển</span>
                 </NavLink>
 
-                <NavLink to="/system/user-manage" activeClassName="active" className =" dashboard_item d-flex align-items-center justify-content-between px-3 py-3 text-white" style={{borderBottom: '1px solid rgb(67 69 81)'}}>
+                <NavLink to="/system/user-manage" activeClassName="active" className ="menu-left">
                     <div className="d-flex align-items-center">
                         <i className=" fas fa-users-cog mr-2"></i>
                         <span>Quản lý người dùng</span> 
@@ -33,8 +31,7 @@ const MenuLeft = () => {
                     <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>
 
-                <NavLink to="/system/category-manage" activeClassName="active" className =" dashboard_item d-flex align-items-center justify-content-between px-3 py-3 text-white" style={{borderBottom: '1px solid rgb(67 69 81)'}} 
-                >
+                <NavLink to="/system/category-manage" activeClassName="active" className ="menu-left" >
                     <div className="d-flex align-items-center" >
                         <i className=" fas fa-box-open mr-2"></i>
                         <span>Quản lý danh mục</span> 
@@ -43,10 +40,9 @@ const MenuLeft = () => {
                     <span><i className='fas fa-angle-right small'></i></span>
                 </NavLink>
 
-                <NavLink to="/system/product-manage" activeClassName="active" className =" dashboard_item d-flex align-items-center justify-content-between px-3 py-3 text-white" style={{borderBottom: '1px solid rgb(67 69 81)'}} 
-                >
+                <NavLink to="/system/product-manage" activeClassName="active" className ="menu-left">
                     <div className="d-flex align-items-center" >
-                        <i className=" fas fa-box-open mr-2"></i>
+                        <i className="fab fa-product-hunt mr-2"></i>
                         <span>Quản lý sản phẩm </span> 
 
                     </div>
@@ -54,7 +50,7 @@ const MenuLeft = () => {
                 </NavLink>
 
 
-                <NavLink to="/system/news-manage" activeClassName="active" className =" dashboard_item d-flex align-items-center justify-content-between px-3 py-3 text-white"style={{borderBottom: '1px solid rgb(67 69 81)'}} >
+                <NavLink to="/system/news-manage" activeClassName="active" className ="menu-left">
                     <div className="d-flex align-items-center">
                         <i className="far fa-newspaper mr-2"></i>
                         <span>Quản lý tin tức - sự kiện</span> 
@@ -62,15 +58,15 @@ const MenuLeft = () => {
                     <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>
                 
-                <NavLink to="/system/article-manage" activeClassName="active" className =" dashboard_item d-flex align-items-center justify-content-between px-3 py-3 text-white"style={{borderBottom: '1px solid rgb(67 69 81)'}} >
+                <NavLink to="/system/article-manage" activeClassName="active" className ="menu-left">
                     <div className="d-flex align-items-center">
-                        <i className="far fa-newspaper mr-2"></i>
+                        <i className="fas fa-book mr-2"></i>
                         <span>Quản lý bài viết</span> 
                     </div>
                     <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>
 
-                <NavLink to="/system/order-manage" activeClassName="active" className =" dashboard_item d-flex align-items-center justify-content-between px-3 py-3 text-white" style={{borderBottom: '1px solid rgb(67 69 81)'}}>
+                <NavLink to="/system/order-manage" activeClassName="active" className ="menu-left">
                     <div className="d-flex align-items-center">
                         <i className=" fas fa-cart-plus mr-2"></i>
                         <span>Quản lý đơn hàng </span> 
@@ -78,7 +74,7 @@ const MenuLeft = () => {
                     <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>
 
-                <NavLink to="/system/report-statiscal" activeClassName="active" className =" dashboard_item d-flex align-items-center justify-content-between px-3 py-3 text-white" style={{borderBottom: '1px solid rgb(67 69 81)'}}>
+                <NavLink to="/system/report-statiscal" activeClassName="active" className ="menu-left">
                     <div className="d-flex align-items-center">
                         <i className="far fa-flag mr-2"></i>
                         <span>Báo cáo, thống kê</span> 
@@ -86,7 +82,7 @@ const MenuLeft = () => {
                     <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>
 
-                <NavLink to="/system/setting" activeClassName="active" className =" dashboard_item d-flex align-items-center justify-content-between px-3 py-3 text-white" style={{borderBottom: '1px solid rgb(67 69 81)'}}>
+                <NavLink to="/system/setting" activeClassName="active" className ="menu-left">
                     <div className="d-flex align-items-center">
                         <i className="fas fa-cog mr-2"></i>
                         <span>Cài đặt</span> 

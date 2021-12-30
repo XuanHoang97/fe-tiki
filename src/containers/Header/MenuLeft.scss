@@ -1,0 +1,14 @@
+.dashboard{
+    height: 90vh;
+    .menu-left{
+        display: flex;
+        padding: 1rem;
+        align-items: center;
+        justify-content: space-between;
+        color: white;
+        border-bottom: 1px solid #4d4a4a;
+    }
+    .menu-left:hover{
+        background: #4c75eb;
+    }
+}

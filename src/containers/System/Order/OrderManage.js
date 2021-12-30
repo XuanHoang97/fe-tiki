@@ -8,7 +8,7 @@ const OrderManage = (props) => {
 
     return (
         <div className="mx-2">
-            <div className="h5 text-dark mb-4">Quản lý đơn đặt hàng</div>
+            <div className="h5 text-dark mb-4">Quản lý đơn hàng</div>
 
             <Nav tabs>
                 <NavItem>
@@ -54,6 +54,7 @@ const OrderManage = (props) => {
                 </NavItem>
                 
             </Nav>
+            
             <TabContent activeTab={activeTab} className='py-4 px-3 bg-light border'>
                 <TabPane tabId="1">
                     <div className='filter d-flex'>
@@ -66,7 +67,7 @@ const OrderManage = (props) => {
 
                         <div className="form-group d-flex col-2 p-0">
                             <select className="form-control" name="" id=""  style={{height:'30px'}}>
-                                <option>Ngày đặt hàng</option>
+                                <option>Ngày đặt</option>
                                 <option>Mới nhất</option>
                                 <option>Muộn nhất</option>
                             </select>
@@ -83,7 +84,7 @@ const OrderManage = (props) => {
 
                     <div className='list-order mt-4'>
                         <div className="text-dark">Danh sách đơn đặt hàng (<b>150</b>)</div>
-                        <table className="table table-striped table-bordered table-hover table-responsive">
+                        <table className="table table-striped table-bordered table-hover w-100">
                             <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
                                 <tr>
                                     <td>Tick</td>
