@@ -16,6 +16,7 @@ import {
     editNews,
     deleteNews,
     saveInfoProduct,
+    editInfoProduct,
     createCategory,
     deleteCategory,
     editCategory,
@@ -439,6 +440,32 @@ export const saveInfoProductSuccess = () => ({
 
 export const saveInfoProductFailed = () => ({
     type: actionTypes.SAVE_INFO_DETAIL_PRODUCT_FAILED,
+})
+
+//edit info product
+export const EditInfoProduct = (data) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await editInfoProduct(data);
+            if (res && res.data.errCode === 0) {
+                dispatch(editInfoProductSuccess());
+                toast.success('Cập nhật mô tả thông tin sản phẩm thành công !')
+            } else {
+                dispatch(editInfoProductFailed());
+            }
+        } catch (e) {
+            dispatch(editInfoProductFailed());
+            console.log('editInfoProductFailed error', e)
+        }
+    }
+}
+
+export const editInfoProductSuccess = () => ({
+    type: actionTypes.EDIT_INFO_DETAIL_PRODUCT_SUCCESS,
+})
+
+export const editInfoProductFailed = () => ({
+    type: actionTypes.EDIT_INFO_DETAIL_PRODUCT_FAILED,
 })
 
 //get some product

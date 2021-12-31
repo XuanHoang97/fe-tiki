@@ -72,6 +72,11 @@ const saveInfoProduct = (data) => {
     return axios.post(`http://localhost:8080/api/save-info-product`, data)
 }
 
+//edit info product
+const editInfoProduct = (inputData) => {
+    return axios.put(`http://localhost:8080/api/edit-info-product`, inputData)
+}
+
 //get some product
 const getSomeProduct = (productId) => {
     return axios.get(`http://localhost:8080/api/get-some-product?id=${productId}`)
@@ -156,6 +161,7 @@ export {
     editNews,
     deleteNews,
     saveInfoProduct,
+    editInfoProduct,
     deleteCategory,
     editCategory,
     getAllArticle

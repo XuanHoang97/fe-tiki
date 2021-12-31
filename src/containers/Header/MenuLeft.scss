@@ -1,5 +1,4 @@
 .dashboard{
-    height: 90vh;
     .menu-left{
         display: flex;
         padding: 1rem;
@@ -11,4 +10,8 @@
     .menu-left:hover{
         background: #4c75eb;
     }
+}
+
+.menuleftCollapse{
+    height: 90vh;
 }

@@ -2,27 +2,32 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions';
 import ModalArticle from './ModalArticle';
+import ModalEditArticle from './ModalEditArticle';
 
 const ArticleManage = (props) => {
     const [article, setArticle] = useState([]);
     const [modalAddArticle, setModalAddArticle] = useState(false);
+    const [modalEditArticle, setModalEditArticle] = useState(false);
+    const [articleEdit, setArticleEdit] = useState('');
+
 
     const [option, setOption] = useState('');
     const [productId, setProductId] = useState('');
     const [productArr, setProductArr] = useState([]);
 
 
+    //get all article
     useEffect(() => {
-        //get all article
         props.fetchArticle();
         setArticle(props.listArticle);
 
         //get some product
-        props.fetchSomeProduct();
-        setProductArr(props.someProduct);
-        setProductId(props.someProduct[0]);
+        // props.fetchSomeProduct();
+        // setProductArr(props.someProduct);
+        // setProductId(props.someProduct[0]);
 
-    }, [props.listArticle]);
+    }, [article]);
+// }, [props.listArticle]);
 
 
     useEffect(() => {
@@ -34,14 +39,19 @@ const ArticleManage = (props) => {
         props.fetchOptionProduct();
         setOption(data);
         
-        console.log(option);
+        // console.log(option);
     }, []);
 
 
-    //OPEN MODAL Create, Edit artical
+    //OPEN MODAL Create, Edit article
     const toggleArticleModal=()=> {
         setModalAddArticle(!modalAddArticle);
     }
+
+    const toggleArticleEditModal=()=>{
+        setModalEditArticle(!modalEditArticle);
+    }
+
 
     //create article
     const handleAddNewArticle = () => {
@@ -62,6 +72,7 @@ const ArticleManage = (props) => {
         });
     }
 
+    //select option product
     const SelectOptionProduct = (product) => {
         if(props.optionProduct && props.optionProduct.length > 0){
             props.optionProduct.map(item => {
@@ -77,6 +88,28 @@ const ArticleManage = (props) => {
         console.log('save choose: ', productArr, option);
     }
 
+    //edit article
+    const editArticle = (article) => {
+        setModalEditArticle(!modalEditArticle);
+        setArticleEdit(article);
+        // console.log('edit article: ', article);
+
+    }
+
+    const editInfoProduct=(data)=> {
+        props.editInfoProduct({
+            id: data.id,
+            characterHTML: data.characterHTML,
+            characterMarkdown: data.characterMarkdown,
+            accessoryHTML: data.accessoryHTML,
+            accessoryMarkdown: data.accessoryMarkdown,
+            specificationHTML: data.specificationHTML,
+            specificationMarkdown: data.specificationMarkdown,
+            descriptionHTML: data.descriptionHTML,
+            descriptionMarkdown: data.descriptionMarkdown,
+            productId: data.productId,
+        });
+    }
 
     return (
         
@@ -87,6 +120,13 @@ const ArticleManage = (props) => {
                     isOpen={modalAddArticle}
                     toggleParent={toggleArticleModal}
                     SaveInfoProduct={SaveInfoProduct}
+                />
+                
+                <ModalEditArticle
+                    isOpen={modalEditArticle}
+                    toggleParent={toggleArticleEditModal}
+                    currentArticle={articleEdit}
+                    editInfoProduct={editInfoProduct}
                 />
 
                 <button onClick={() => handleAddNewArticle()} type="button" className="btn btn-success px-3">
@@ -115,9 +155,9 @@ const ArticleManage = (props) => {
                                             </div>
                                         </td>
                                         <td>{item.productId}</td>
-                                        <td>{item.productId}</td>
+                                        <td>loading...</td>
                                         <td>
-                                            <button type="button" className="btn text-primary px-2">
+                                            <button onClick={()=> editArticle(item)} type="button" className="btn text-primary px-2">
                                                 <i className="fas fa-edit"></i>
                                             </button>
                                             <button type="button" className="btn text-danger">
@@ -207,7 +247,6 @@ const mapStateToProps = state => {
         listArticle: state.admin.articles,
         optionProduct: state.admin.optionProduct,
         someProduct: state.admin.someProduct,
-
     };
 };
 
@@ -217,8 +256,7 @@ const mapDispatchToProps = dispatch => {
         fetchArticle: () => dispatch(actions.GetAllArticle()),
         fetchOptionProduct: () => dispatch(actions.SelectOptionProduct()),
         fetchSomeProduct: () => dispatch(actions.GetSomeProduct()),
-
-
+        editInfoProduct: (data) => dispatch(actions.EditInfoProduct(data)),
     };
 };
 

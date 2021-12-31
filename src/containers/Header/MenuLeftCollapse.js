@@ -5,7 +5,7 @@ import './MenuLeft.scss'
 function MenuLeftCollapse(props) {
     return (
         <div>
-            <div className="dashboard bg-dark">
+            <div className="dashboard bg-dark menuleftCollapse">
                 <NavLink to="/system/dashboard" activeClassName="active" className ="menu-left" exact>
                     <i className="fas fa-tachometer-alt"></i>
                 </NavLink>

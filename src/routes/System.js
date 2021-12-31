@@ -13,7 +13,7 @@ class System extends Component {
     render() {
         const { systemMenuPath } = this.props;
         return (
-            <div className="system-container bg-white py-3 px-2" style={{minHeight: '90vh', overflowY: 'scroll'}}>
+            <div className="system-container bg-white py-3 px-2" style={{height: '90vh', overflowY: 'scroll'}}>
                 <div className="system-list">
                     <Switch>
                         <Route path="/system/dashboard" component={Dashboard} />

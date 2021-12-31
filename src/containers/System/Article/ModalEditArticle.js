@@ -2,16 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import * as actions from '../../../store/actions';
+import _ from 'lodash';
+
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 const mdParser = new MarkdownIt();
 
-const ModalArticle = (props) => {
+const ModalEditArticle = (props) => {
     const [productId, setProductId] = useState('');
     const [productArr, setProductArr] = useState([]);
+    const [id, setId] = useState('');
 
-    //save to markdouwn to table
+    //save to markdown to table
     const [characterHTML, setCharacterHTML] = useState('');
     const [characterMarkdown, setCharacterMarkdown] = useState('');
     const [accessoryHTML, setAccessoryHTML] = useState('');
@@ -24,34 +27,42 @@ const ModalArticle = (props) => {
 
     //fetch product
     useEffect(() => {
+        let article = props.currentArticle;
+        console.log(article);
+        if(article && !_.isEmpty(article)){
+            setId(article.id);
+            setProductId(article.productId);
+            setCharacterHTML(article.characterHTML);
+            setCharacterMarkdown(article.characterMarkdown);
+            setAccessoryHTML(article.accessoryHTML);
+            setAccessoryMarkdown(article.accessoryMarkdown);
+            setDescriptionHTML(article.descriptionHTML);
+            setDescriptionMarkdown(article.descriptionMarkdown);
+            setSpecificationHTML(article.specificationHTML);
+            setSpecificationMarkdown(article.specificationMarkdown);
+        }
         props.fetchSomeProduct();
         setProductArr(props.someProduct);
-        setProductId(props.someProduct[0]);
-
-        console.log('check date :', props.someProduct);
-
-
-    }, [productArr]);
+    }, [props.currentArticle]);
 
     const toggle =()=>{
         props.toggleParent();
     }
 
-    // add new product
-    const handleAddNewArticle=()=>{
-        props.SaveInfoProduct({
+    // edit info product
+    const editInfoProduct=()=>{
+        props.editInfoProduct({
+            id: id,
+            productId: productId,
             characterHTML: characterHTML,
             characterMarkdown: characterMarkdown,
             accessoryHTML: accessoryHTML,
             accessoryMarkdown: accessoryMarkdown,
-            descriptionHTML: descriptionHTML,   
+            descriptionHTML: descriptionHTML,
             descriptionMarkdown: descriptionMarkdown,
             specificationHTML: specificationHTML,
             specificationMarkdown: specificationMarkdown,
-
-            productId: productId,
         });
-
         toggle();
     }
 
@@ -84,7 +95,7 @@ const ModalArticle = (props) => {
                 toggle={()=>toggle()} 
                 size="lg"
             >
-                <ModalHeader toggle={()=>toggle()}>Thêm mới bài viết - chi tiết sản phẩm</ModalHeader>
+                <ModalHeader toggle={()=>toggle()}>Cập nhật bài viết - chi tiết sản phẩm</ModalHeader>
                 <ModalBody style={{height: '80vh', overflowY: 'scroll'}}>
                 
                 <div className='d-flex col-12 p-0'>
@@ -92,27 +103,21 @@ const ModalArticle = (props) => {
 
                     <div className="form-group d-flex col-4 p-0">
                         <select className="form-control" style={{height:'30px'}}
-                            value={productId}
+                            defaultValue={productId}
                             onChange={(e)=>setProductId(e.target.value)}
+                            disabled={productArr.length !== 0 ? true : false}
                         >
                             {   
                                 props.someProduct && props.someProduct.length >0 &&
                                 props.someProduct.map((item, index) => {
                                     return(
                                         <option key={index} value={item.id}> {item.name} </option>
-                                    ) 
+                                        ) 
                                         
                                 })
                             }
 
                         </select>
-                        
-                        {
-                            productId &&
-                            
-                            <span className='text-success'> da chon san pham {productId} </span>
-                            
-                        }
                     </div>
                 </div>
 
@@ -160,8 +165,8 @@ const ModalArticle = (props) => {
                 </ModalBody>
 
                 <ModalFooter>
-                    <Button color="primary" className="px-3" onClick={() => {handleAddNewArticle()}}>
-                        Thêm mới
+                    <Button color="primary" className="px-3" onClick={() => {editInfoProduct()}}>
+                        Cập nhật
                     </Button>
                     <Button color="secondary" className="px-3">Cancel</Button>
                 </ModalFooter>
@@ -181,4 +186,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModalArticle);
+export default connect(mapStateToProps, mapDispatchToProps)(ModalEditArticle);
