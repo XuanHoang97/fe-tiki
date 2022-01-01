@@ -12,13 +12,16 @@ import { path } from '../utils';
 import Home from '../routes/Home';
 import Login from './Auth/Login';
 import System from '../routes/System';
+import './App.scss';
+
 import MenuLeft from './Header/MenuLeft';
 import Footer from './Header/Footer';
 import Notification from './Header/Notification';
-import './App.scss';
 import Search from './Header/Search';
 import MenuLeftCollapse from './Header/MenuLeftCollapse';
-
+import axios from 'axios';
+import Index from './System/Search/Index';
+import NotFound from './System/Search/NotFound';
 
 console.warn = () => { };
 function App(props) {
@@ -27,8 +30,55 @@ function App(props) {
     const [menuLeft, setMenuLeft] = useState(true);
     const [widthMenuRight, setWidthMenuRight] = useState('82%');
     const [widthMenuLeft, setWidthMenuLeft] = useState('18%');
+    const [dataSearch, setDataSearch] = useState([]);
+    const [query, setQuery] = useState('');
 
+    //toggle menu left
+    const toggleMenu = () => {
+        setMenuLeft(!menuLeft);
+        setWidthMenuRight(menuLeft ? '100%' : '82%');
+    }
 
+    //search
+    const handleSearch = async() => {
+        let res = await axios({
+            method: 'GET',
+            'url': 'http://localhost:8080/api/search',
+            "params": {
+                'keyword': query
+            }
+        });
+
+        if(res && res.data && res.data.info) {
+            let raw = res.data.info;
+            let result = [];
+
+            if(raw && raw.length > 0) {
+                raw.map((item, index) => {
+                    let object = {};
+                    object.firstName = item.firstName;
+                    object.lastName = item.lastName;
+                    object.email = item.email;
+                    object.phoneNumber = item.phoneNumber;
+                    object.address = item.address;
+                    object.image = item.image;
+                    result.push(object);
+                });
+            }
+            setDataSearch(result);
+            setQuery('');
+            history.push(`/search/keyword=${query}`);
+        }
+    }
+
+    //press enter search
+    const handleKeyDown=(e)=>{
+        if(e.key=== 'Enter' || e.keyCode=== 13){     
+            handleSearch();
+        }
+    }
+
+    //login-logout
     const handlePersistorState = () => {
         const { persistor } = props;
         let { bootstrapped } = persistor.getState();
@@ -45,19 +95,13 @@ function App(props) {
         handlePersistorState();
     }, []);
 
-
-    const toggleMenu = () => {
-        setMenuLeft(!menuLeft);
-        setWidthMenuRight(menuLeft ? '100%' : '82%');
-    }
-
     return (
-        <>
-            <Router history={history}>
-                <div className="main-container">
-                    {props.isLoggedIn &&
-                        <div className="header-container"> 
-                            <div className="control d-flex text-white">
+        <Router history={history}>
+            <div className="main-container">
+                {   
+                    props.isLoggedIn &&
+                    <div className="header-container"> 
+                        <div className="control d-flex text-white">
                             {
                                 menuLeft && 
                                 <div className="module py-1 px-3 d-flex align-items-center" style={{width: widthMenuLeft, background: 'rgb(76, 117, 235)'}}>
@@ -72,7 +116,13 @@ function App(props) {
                                         onClick={() => toggleMenu()}  
                                         style={{cursor: 'pointer'}}><i className="fas fa-bars"></i>
                                     </span>  
-                                    <Search />
+                                    <Search 
+                                        handleSearch={handleSearch}
+                                        handleKeyDown={handleKeyDown}
+                                        query={query}
+                                        setQuery={setQuery}
+                                        dataSearch={dataSearch}
+                                    />
                                 </div>
 
                                 <div className="account d-flex align-items-center">
@@ -87,35 +137,39 @@ function App(props) {
 
                                     {/* logout  */}
                                     <div className="logout btn btn-default pr-3 text-white font-weight-normal" onClick={processLogout}>
-                                        Đăng xuất <i className="fas fa-sign-out-alt"></i>
+                                        Đăng xuất
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>    
-                    }
+                }
 
-                    <span className="content-container">
-                        <div className="module d-flex">
-                            {props.isLoggedIn && menuLeft && <MenuLeft widthMenuLeft = {widthMenuLeft} /> }
+                <span className="content-container">
+                    <div className="module d-flex">
+                        {props.isLoggedIn && menuLeft && <MenuLeft widthMenuLeft = {widthMenuLeft} /> }
+                        {!menuLeft ? <MenuLeftCollapse /> : ''}
 
-                            {!menuLeft ? <MenuLeftCollapse /> : ''}
+                        <div className="content m-0" style={{width: widthMenuRight, boxShadow: 'none'}}>
+                            {
+                                dataSearch && dataSearch.length > 0 ?
+                                <Switch><Route path={path.SEARCH} exact><Index dataSearch={dataSearch}/></Route></Switch>
+                                : 
+                                <Switch><Route path={path.SEARCH} exact><NotFound/></Route></Switch>  
+                            }
 
-                            <div className="content m-0" style={{width: widthMenuRight, boxShadow: 'none', background: 'lightgrey'}}>
-                                <Switch>
-                                    <Route path={path.HOME} exact component={(Home)} />
-                                    <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
-                                    <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
-                                </Switch>
-                            </div>
+                            <Switch>
+                                <Route path={path.HOME} exact component={(Home)} />
+                                <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
+                                <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
+                            </Switch>
                         </div>
-                        <Footer />
-                    </span>
-
-                    <ToastContainer autoClose={5000} />
-                </div>
-            </Router>
-        </>
+                    </div>
+                    <Footer />
+                </span>
+                <ToastContainer autoClose={5000} />
+            </div>
+        </Router>
     )
 }
 
@@ -132,5 +186,4 @@ const mapDispatchToProps = dispatch => {
         processLogout: () => dispatch(actions.processLogout()),
     };
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(App);

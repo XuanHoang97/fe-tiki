@@ -2,12 +2,9 @@ export const path = {
     HOME: '/',
     LOGIN: '/login',
     LOG_OUT: '/logout',
-    SYSTEM: '/system'
-};
-
-export const languages = {
-    VI: 'vi',
-    EN: 'en'
+    SYSTEM: '/system',
+    SEARCH: '/search/:keyword',
+    NOTFOUND: '/404'
 };
 
 export const CRUD_ACTIONS = {

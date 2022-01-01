@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from 'react-router-dom';
 import UserManage from '../containers/System/Admin/UserManage';
@@ -9,28 +9,29 @@ import NewsManage from '../containers/System/News/NewsManage';
 import ArticleManage from '../containers/System/Article/ArticleManage';
 import CategoryManage from '../containers/System/Category/CategoryManage';
 import Statiscal from '../containers/System/Statiscal/Statiscal';
-class System extends Component {
-    render() {
-        const { systemMenuPath } = this.props;
-        return (
-            <div className="system-container bg-white py-3 px-2" style={{height: '90vh', overflowY: 'scroll'}}>
-                <div className="system-list">
-                    <Switch>
-                        <Route path="/system/dashboard" component={Dashboard} />
-                        <Route path="/system/user-manage" component={UserManage} />
-                        <Route path="/system/product-manage" component={ProductManage} />
-                        <Route path="/system/order-manage" component={OrderManage} />
-                        <Route path="/system/article-manage" component={ArticleManage} />
-                        <Route path="/system/news-manage" component={NewsManage} />
-                        <Route path="/system/category-manage" component={CategoryManage} />
-                        <Route path="/system/report-statiscal" component={Statiscal} />
-                        <Route path="/system/setting" component={Dashboard} />
-                        <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />
-                    </Switch>
-                </div>
+import Index from '../containers/System/Slide/Index';
+
+const System = ({ systemMenuPath }) => {
+    return (
+        <div className="system-container bg-white py-3 px-2" style={{height: '90vh', overflowY: 'scroll'}}>
+            <div className="system-list">
+                <Switch>
+                    <Route path="/system/dashboard" component={Dashboard} />
+                    <Route path="/system/user-manage" component={UserManage} />
+                    <Route path="/system/product-manage" component={ProductManage} />
+                    <Route path="/system/order-manage" component={OrderManage} />
+                    <Route path="/system/article-manage" component={ArticleManage} />
+                    <Route path="/system/news-manage" component={NewsManage} />
+                    <Route path="/system/category-manage" component={CategoryManage} />
+                    <Route path="/system/slide-manage" component={Index} />
+                    <Route path="/system/report-statiscal" component={Statiscal} />
+                    <Route path="/system/setting" component={Dashboard} />
+
+                    <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />
+                </Switch>
             </div>
-        );
-    }
+        </div>
+    );
 }
 
 const mapStateToProps = state => {

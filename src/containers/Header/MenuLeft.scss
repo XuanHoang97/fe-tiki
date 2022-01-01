@@ -6,6 +6,11 @@
         justify-content: space-between;
         color: white;
         border-bottom: 1px solid #4d4a4a;
+        .module{
+            i{
+                width: 15px;
+            }
+        }
     }
     .menu-left:hover{
         background: #4c75eb;

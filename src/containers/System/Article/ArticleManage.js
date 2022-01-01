@@ -22,11 +22,11 @@ const ArticleManage = (props) => {
         setArticle(props.listArticle);
 
         //get some product
-        // props.fetchSomeProduct();
-        // setProductArr(props.someProduct);
-        // setProductId(props.someProduct[0]);
+        props.fetchSomeProduct();
+        setProductArr(props.someProduct);
+        setProductId(props.someProduct[0]);
 
-    }, [article]);
+    }, []);
 // }, [props.listArticle]);
 
 
@@ -41,6 +41,23 @@ const ArticleManage = (props) => {
         
         // console.log(option);
     }, []);
+
+    //select option product
+    const SelectOptionProduct = (product) => {
+        let data = props.optionProduct;
+        if(data && data.length > 0){
+            data.map(item => {
+                if(item.id === product.id) item.isSelected = !item.isSelected;
+                return item;
+            })
+            setOption(data);
+        }
+        console.log('check option product: ', data);
+    }
+
+    const handleSaveChoose = () => {
+        console.log('save choose: ', productArr, option);
+    }
 
 
     //OPEN MODAL Create, Edit article
@@ -72,28 +89,12 @@ const ArticleManage = (props) => {
         });
     }
 
-    //select option product
-    const SelectOptionProduct = (product) => {
-        if(props.optionProduct && props.optionProduct.length > 0){
-            props.optionProduct.map(item => {
-                if(item.id === product.id) item.isSelected = !item.isSelected;
-                return item;
-            })
-            setOption(props.optionProduct);
-        }
-        // console.log('check option product: ', props.optionProduct);
-    }
-
-    const handleSaveChoose = () => {
-        console.log('save choose: ', productArr, option);
-    }
+    
 
     //edit article
     const editArticle = (article) => {
         setModalEditArticle(!modalEditArticle);
         setArticleEdit(article);
-        // console.log('edit article: ', article);
-
     }
 
     const editInfoProduct=(data)=> {

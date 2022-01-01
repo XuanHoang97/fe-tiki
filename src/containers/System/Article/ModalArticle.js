@@ -27,10 +27,6 @@ const ModalArticle = (props) => {
         props.fetchSomeProduct();
         setProductArr(props.someProduct);
         setProductId(props.someProduct[0]);
-
-        console.log('check date :', props.someProduct);
-
-
     }, [productArr]);
 
     const toggle =()=>{
@@ -106,13 +102,6 @@ const ModalArticle = (props) => {
                             }
 
                         </select>
-                        
-                        {
-                            productId &&
-                            
-                            <span className='text-success'> da chon san pham {productId} </span>
-                            
-                        }
                     </div>
                 </div>
 

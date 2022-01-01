@@ -41,6 +41,12 @@ function MenuLeftCollapse(props) {
                     </div>
                 </NavLink>
 
+                <NavLink to="/system/slide-manage" activeClassName="active" className ="menu-left">
+                    <div className="d-flex align-items-center">
+                        <i className="fas fa-camera mr-2"></i>
+                    </div>
+                </NavLink>
+
                 <NavLink to="/system/order-manage" activeClassName="active" className ="menu-left">
                     <div className="d-flex align-items-center">
                         <i className=" fas fa-cart-plus"></i>
