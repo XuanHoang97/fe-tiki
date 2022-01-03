@@ -432,6 +432,7 @@ export const SaveInfoProduct = (data) => {
             let res = await saveInfoProduct(data);
             if (res && res.data.errCode === 0) {
                 dispatch(saveInfoProductSuccess());
+                dispatch(GetAllArticle());
                 toast.success('Thêm mô tả thông tin sản phẩm thành công !')
             } else {
                 dispatch(saveInfoProductFailed());

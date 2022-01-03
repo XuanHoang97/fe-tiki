@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import * as actions from '../../../store/actions';
 import _ from 'lodash';
-
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
@@ -11,8 +10,10 @@ const mdParser = new MarkdownIt();
 
 const ModalEditArticle = (props) => {
     const [productId, setProductId] = useState('');
-    const [productArr, setProductArr] = useState([]);
     const [id, setId] = useState('');
+
+    const dispatch = useDispatch();
+    const someProduct = useSelector(state => state.admin.someProduct);
 
     //save to markdown to table
     const [characterHTML, setCharacterHTML] = useState('');
@@ -24,11 +25,9 @@ const ModalEditArticle = (props) => {
     const [specificationHTML, setSpecificationHTML] = useState('');
     const [specificationMarkdown, setSpecificationMarkdown] = useState('');
     
-
     //fetch product
     useEffect(() => {
         let article = props.currentArticle;
-        console.log(article);
         if(article && !_.isEmpty(article)){
             setId(article.id);
             setProductId(article.productId);
@@ -41,8 +40,7 @@ const ModalEditArticle = (props) => {
             setSpecificationHTML(article.specificationHTML);
             setSpecificationMarkdown(article.specificationMarkdown);
         }
-        props.fetchSomeProduct();
-        setProductArr(props.someProduct);
+        dispatch(actions.GetSomeProduct());
     }, [props.currentArticle]);
 
     const toggle =()=>{
@@ -86,104 +84,85 @@ const ModalEditArticle = (props) => {
         setSpecificationHTML(html);
         setSpecificationMarkdown(text);
     }
-
     
     return (
+        <Modal 
+            isOpen={props.isOpen} 
+            toggle={()=>toggle()} 
+            size="lg"
+        >
+            <ModalHeader toggle={()=>toggle()}>Cập nhật bài viết - chi tiết sản phẩm</ModalHeader>
+            <ModalBody style={{height: '80vh', overflowY: 'scroll'}}>
+            
+            <div className='d-flex col-12 p-0'>
+                <label className='mr-3'>Chọn sản phẩm</label>
 
-            <Modal 
-                isOpen={props.isOpen} 
-                toggle={()=>toggle()} 
-                size="lg"
-            >
-                <ModalHeader toggle={()=>toggle()}>Cập nhật bài viết - chi tiết sản phẩm</ModalHeader>
-                <ModalBody style={{height: '80vh', overflowY: 'scroll'}}>
-                
-                <div className='d-flex col-12 p-0'>
-                    <label className='mr-3'>Chọn sản phẩm</label>
-
-                    <div className="form-group d-flex col-4 p-0">
-                        <select className="form-control" style={{height:'30px'}}
-                            defaultValue={productId}
-                            onChange={(e)=>setProductId(e.target.value)}
-                            disabled={productArr.length !== 0 ? true : false}
-                        >
-                            {   
-                                props.someProduct && props.someProduct.length >0 &&
-                                props.someProduct.map((item, index) => {
-                                    return(
-                                        <option key={index} value={item.id}> {item.name} </option>
-                                        ) 
-                                        
-                                })
-                            }
-
-                        </select>
-                    </div>
+                <div className="form-group d-flex col-4 p-0">
+                    <select className="form-control" style={{height:'30px'}}
+                        defaultValue={productId}
+                        onChange={(e)=>setProductId(e.target.value)}
+                        disabled={someProduct.length !== 0 ? true : false}
+                    >
+                        {   
+                            someProduct && someProduct.length >0 &&
+                            someProduct.map((item, index) => {
+                                return(
+                                    <option key={index} value={item.id}> {item.name} </option>
+                                )   
+                            })
+                        }
+                    </select>
                 </div>
+            </div>
 
-                <div className="input-group p-0">
-                    <div className="form-group col-12 p-0">
-                        <label>Đặc điểm nổi bật</label>
-                        <MdEditor style={{ height: '200px' }} renderHTML={text => mdParser.render(text)}
-                            onChange={editorCharacter}
-                            value={characterMarkdown}
-                        />
-                    </div>
+            <div className="input-group p-0">
+                <div className="form-group col-12 p-0">
+                    <label>Đặc điểm nổi bật</label>
+                    <MdEditor style={{ height: '200px' }} renderHTML={text => mdParser.render(text)}
+                        onChange={editorCharacter}
+                        value={characterMarkdown}
+                    />
                 </div>
+            </div>
 
-                <div className="input-group p-0">
-                    <div className="form-group col-12 p-0">
-                        <label>Phụ kiện</label>
-                        <MdEditor style={{ height: '200px' }} renderHTML={text => mdParser.render(text)}
-                            onChange={editorAccessory}
-                            value={accessoryMarkdown}
-                        />
-                    </div>
+            <div className="input-group p-0">
+                <div className="form-group col-12 p-0">
+                    <label>Phụ kiện</label>
+                    <MdEditor style={{ height: '200px' }} renderHTML={text => mdParser.render(text)}
+                        onChange={editorAccessory}
+                        value={accessoryMarkdown}
+                    />
                 </div>
+            </div>
 
-                <div className="input-group p-0">
-                    <div className="form-group col-12 p-0">
-                        <label>Thông số kỹ thuật</label>
-                        <MdEditor style={{ height: '200px' }} renderHTML={text => mdParser.render(text)}
-                            onChange={editorSpecification}
-                            value={specificationMarkdown}
-                        />
-                    </div>
+            <div className="input-group p-0">
+                <div className="form-group col-12 p-0">
+                    <label>Thông số kỹ thuật</label>
+                    <MdEditor style={{ height: '200px' }} renderHTML={text => mdParser.render(text)}
+                        onChange={editorSpecification}
+                        value={specificationMarkdown}
+                    />
                 </div>
+            </div>
 
-                <div className="input-group p-0">
-                    <div className="form-group col-12 p-0">
-                        <label>Mô tả sản phẩm</label>
-                        <MdEditor style={{ height: '200px' }} renderHTML={text => mdParser.render(text)}
-                            onChange={editorDescription}
-                            value={descriptionMarkdown}
-                        />
-                    </div>
+            <div className="input-group p-0">
+                <div className="form-group col-12 p-0">
+                    <label>Mô tả sản phẩm</label>
+                    <MdEditor style={{ height: '200px' }} renderHTML={text => mdParser.render(text)}
+                        onChange={editorDescription}
+                        value={descriptionMarkdown}
+                    />
                 </div>
+            </div>   
+            </ModalBody>
 
-                
-                </ModalBody>
-
-                <ModalFooter>
-                    <Button color="primary" className="px-3" onClick={() => {editInfoProduct()}}>
-                        Cập nhật
-                    </Button>
-                    <Button color="secondary" className="px-3">Cancel</Button>
-                </ModalFooter>
-            </Modal>
-        )
+            <ModalFooter>
+                <Button color="primary" className="px-3" onClick={() => {editInfoProduct()}}>
+                    Cập nhật
+                </Button>
+                <Button color="secondary" className="px-3">Cancel</Button>
+            </ModalFooter>
+        </Modal>
+    )
 }
-
-const mapStateToProps = state => {
-    return {
-        someProduct: state.admin.someProduct,
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchSomeProduct: () => dispatch(actions.GetSomeProduct()),
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ModalEditArticle);
+export default ModalEditArticle;

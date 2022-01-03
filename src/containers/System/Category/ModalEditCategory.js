@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import {CommonUtils} from "../../../utils"
 
@@ -11,7 +10,6 @@ const ModalEditCategory  = (props) => {
     const [type, setType] = useState('');
     const [value, setValue] = useState('');
     const [previewImg, setPreviewImg] = useState('');
-    
 
     useEffect (() => {
         let category = props.currentCategory;
@@ -28,7 +26,6 @@ const ModalEditCategory  = (props) => {
         setType(category.type);
         setValue(category.value);
     }, [props.currentCategory]);
-
 
     const toggle =()=>{
         props.toggleParent();
@@ -64,14 +61,12 @@ const ModalEditCategory  = (props) => {
         toggle();
     }
 
-
     return (
         <Modal 
             isOpen={props.isOpen} 
             toggle={()=>toggle()} 
             size="lg"
-        >
-            
+        >   
             <ModalHeader toggle={()=>toggle()}>Cập nhật danh mục</ModalHeader>
             <ModalBody>
                 <form>
@@ -138,19 +133,5 @@ const ModalEditCategory  = (props) => {
             </ModalFooter>
         </Modal>
     )
-
 }
-
-const mapStateToProps = state => {
-    return {
-   
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-       
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ModalEditCategory);
+export default ModalEditCategory;

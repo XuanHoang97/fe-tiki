@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../../store/actions';
 import ModalProduct from './ModalProduct';
 import ModalEditProduct from './ModalEditProduct';
@@ -7,16 +7,17 @@ import Sort from './Sort';
 import { numberFormat } from '../../../components/Formating/FormatNumber';
 
 const ProductManage = (props) => {
-    const [products, setProducts] = useState([]);
     const [modalProduct, setModalProduct] = useState(false);
     const [modalEditProduct, setModalEditProduct] = useState(false);
     const [productEdit, setProductEdit] = useState('');
 
     //fetch product
+    const dispatch = useDispatch();
+    const listProducts = useSelector(state => state.admin.products);
+
     useEffect(() => {
-        props.fetchProducts();
-        setProducts(props.listProducts);
-    }, [products]);
+        dispatch(actions.fetchProducts());
+    }, [dispatch]);
 
     //OPEN MODAL Create, Edit Product
     const toggleProductModal=()=> {
@@ -33,23 +34,12 @@ const ProductManage = (props) => {
     }
 
     const CreateNewProduct=(data)=> {
-        props.CreateNewProduct({
-            name: data.name,
-            price: data.price,
-            sale: data.sale,
-            warranty: data.warranty,
-            number: data.number,
-            category_id: data.category_id,
-            supplier_id: data.supplier_id,
-            image: data.image,
-            previewImg: data.previewImg,
-            status: data.status,
-        });
+        dispatch(actions.CreateNewProduct(data));
     }
 
     //delete product
     const deleteProduct = (product) => {
-        props.deleteProduct(product.id);
+        dispatch(actions.DeleteProduct(product.id));
     }
 
     //edit product
@@ -59,19 +49,7 @@ const ProductManage = (props) => {
     }
 
     const handleEditProduct = (data) => {
-        props.editProduct({
-            id: data.id,
-            name: data.name,
-            price: data.price,
-            sale: data.sale,
-            warranty: data.warranty,
-            number: data.number,
-            category_id: data.category_id,
-            supplier_id: data.supplier_id,
-            image: data.image,
-            status: data.status,
-        });
-
+        dispatch(actions.EditProduct(data));
     }
 
     return (        
@@ -99,7 +77,7 @@ const ProductManage = (props) => {
                 <Sort />
             </div>
 
-            <div className="text-dark">Danh sách sản phẩm (<b>{props.listProducts.length}</b>)</div>
+            <div className="text-dark">Danh sách sản phẩm (<b>{listProducts.length}</b>)</div>
             <table className="table table-striped table-bordered table-hover">
                 <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
                     <tr>
@@ -118,8 +96,8 @@ const ProductManage = (props) => {
                 </thead>
                 <tbody>
                     {   
-                        props.listProducts && props.listProducts.length>0 ?
-                        props.listProducts.map((item, index) => {
+                        listProducts && listProducts.length>0 ?
+                        listProducts.map((item, index) => {
                             //endCode image
                             let imageBase64='';
                             if(item.image){
@@ -164,20 +142,4 @@ const ProductManage = (props) => {
         </div>
     );
 }
-
-const mapStateToProps = state => {
-    return {
-        listProducts: state.admin.products
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchProducts: () => dispatch(actions.fetchProducts()),
-        CreateNewProduct: (data) => dispatch(actions.CreateNewProduct(data)),
-        deleteProduct: (id) => dispatch(actions.DeleteProduct(id)),
-        editProduct: (data) => dispatch(actions.EditProduct(data)),
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProductManage);
+export default ProductManage;

@@ -1,45 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../../store/actions';
 import ModalArticle from './ModalArticle';
 import ModalEditArticle from './ModalEditArticle';
 
 const ArticleManage = (props) => {
-    const [article, setArticle] = useState([]);
+    //fetch data
+    const dispatch = useDispatch();
+    const listArticle = useSelector(state => state.admin.articles);
+    const optionProduct = useSelector(state => state.admin.optionProduct);
+    const someProduct = useSelector(state => state.admin.someProduct);
+    
+    useEffect(() => {
+        dispatch(actions.GetAllArticle());
+        dispatch(actions.fetchProducts());
+    }, [dispatch]);
+
     const [modalAddArticle, setModalAddArticle] = useState(false);
     const [modalEditArticle, setModalEditArticle] = useState(false);
     const [articleEdit, setArticleEdit] = useState('');
 
-
     const [option, setOption] = useState('');
     const [productId, setProductId] = useState('');
-    const [productArr, setProductArr] = useState([]);
 
-
-    //get all article
+    //get option product
     useEffect(() => {
-        props.fetchArticle();
-        setArticle(props.listArticle);
-
-        //get some product
-        props.fetchSomeProduct();
-        setProductArr(props.someProduct);
-        setProductId(props.someProduct[0]);
-
-    }, []);
-// }, [props.listArticle]);
-
-
-    useEffect(() => {
-        //get option product
         let data = props.optionProduct;
         if(data && data.length > 0){
             data = data.map(item => ({...item, isSelected: false}))
         }
-        props.fetchOptionProduct();
-        setOption(data);
-        
-        // console.log(option);
+        dispatch(actions.SelectOptionProduct());
+        setOption(data);        
     }, []);
 
     //select option product
@@ -56,9 +47,8 @@ const ArticleManage = (props) => {
     }
 
     const handleSaveChoose = () => {
-        console.log('save choose: ', productArr, option);
+        console.log('save choose: ', option);
     }
-
 
     //OPEN MODAL Create, Edit article
     const toggleArticleModal=()=> {
@@ -69,14 +59,13 @@ const ArticleManage = (props) => {
         setModalEditArticle(!modalEditArticle);
     }
 
-
     //create article
     const handleAddNewArticle = () => {
         setModalAddArticle(!modalAddArticle);
     }
 
     const SaveInfoProduct=(data)=> {
-        props.SaveInfoProduct({
+        dispatch(actions.SaveInfoProduct({
             characterHTML: data.characterHTML,
             characterMarkdown: data.characterMarkdown,
             accessoryHTML: data.accessoryHTML,
@@ -86,10 +75,8 @@ const ArticleManage = (props) => {
             descriptionHTML: data.descriptionHTML,
             descriptionMarkdown: data.descriptionMarkdown,
             productId: data.productId,
-        });
+        }));
     }
-
-    
 
     //edit article
     const editArticle = (article) => {
@@ -98,7 +85,7 @@ const ArticleManage = (props) => {
     }
 
     const editInfoProduct=(data)=> {
-        props.editInfoProduct({
+        dispatch(actions.EditInfoProduct({
             id: data.id,
             characterHTML: data.characterHTML,
             characterMarkdown: data.characterMarkdown,
@@ -109,11 +96,10 @@ const ArticleManage = (props) => {
             descriptionHTML: data.descriptionHTML,
             descriptionMarkdown: data.descriptionMarkdown,
             productId: data.productId,
-        });
+        }));
     }
 
-    return (
-        
+    return ( 
         <div className="mx-2">
             <div className="h5 text-dark">Quản lý bài viết - chi tiết sản phẩm</div>
             <div className='bg-light p-3'>
@@ -134,7 +120,7 @@ const ArticleManage = (props) => {
                     <i className="fas fa-plus"></i> Thêm bài viết
                 </button>
 
-                <div className="text-dark mt-4">Danh sách bài viết (<b>{props.listArticle.length}</b>)</div>
+                <div className="text-dark mt-4">Danh sách bài viết (<b>{listArticle.length}</b>)</div>
                 <table className="table table-striped table-bordered table-hover">
                     <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
                         <tr>
@@ -146,8 +132,8 @@ const ArticleManage = (props) => {
                     </thead>
                     <tbody>
                         {   
-                            props.listArticle && props.listArticle.length >0 ?
-                            props.listArticle.map((item, index) => {
+                            listArticle && listArticle.length >0 ?
+                            listArticle.map((item, index) => {
                                 return (
                                     <tr key={index}>
                                         <td>
@@ -190,8 +176,8 @@ const ArticleManage = (props) => {
                                 onChange={(e)=>setProductId(e.target.value)}
                             >
                                 {   
-                                    props.someProduct && props.someProduct.length >0 &&
-                                    props.someProduct.map((item, index) => {
+                                    someProduct && someProduct.length >0 &&
+                                    someProduct.map((item, index) => {
                                         return(
                                             <option key={index} value={item.productArr}> {item.name} </option>
                                         ) 
@@ -204,8 +190,8 @@ const ArticleManage = (props) => {
                     <div className='d-flex'>    
                         <label className=''>Mẫu mã</label>
                         {
-                            props.optionProduct && props.optionProduct.length >0 &&
-                            props.optionProduct.map((item, index) => {
+                            optionProduct && optionProduct.length >0 &&
+                            optionProduct.map((item, index) => {
                                 return(
                                     <div className="d-flex" key={index}>
                                         <button onClick={()=> SelectOptionProduct(item)} type="button" 
@@ -230,35 +216,10 @@ const ArticleManage = (props) => {
                             </div> 
                         </div>
                     </div>
-
-
-
                 </div>
                 <button onClick={() => handleSaveChoose()} type="button" className="btn btn-success px-3">Lưu thông tin</button>
             </div>
-            
-
         </div>
     );
-
 }
-
-const mapStateToProps = state => {
-    return {
-        listArticle: state.admin.articles,
-        optionProduct: state.admin.optionProduct,
-        someProduct: state.admin.someProduct,
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        SaveInfoProduct: (data) => dispatch(actions.SaveInfoProduct(data)),
-        fetchArticle: () => dispatch(actions.GetAllArticle()),
-        fetchOptionProduct: () => dispatch(actions.SelectOptionProduct()),
-        fetchSomeProduct: () => dispatch(actions.GetSomeProduct()),
-        editInfoProduct: (data) => dispatch(actions.EditInfoProduct(data)),
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleManage);
+export default ArticleManage;

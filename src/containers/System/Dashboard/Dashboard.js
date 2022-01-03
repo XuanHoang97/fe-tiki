@@ -1,50 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../../store/actions';
 import {NavLink} from 'react-router-dom';
 import { numberFormat } from '../../../components/Formating/FormatNumber';
 import AnimatedNumber from "animated-number-react";
 
-
 const  Dashboard = (props) => {
-    const [listUsers, setListUsers] = useState([]);
-    const [listProducts, setListProducts] = useState([]);
-    const [listNews, setListNews] = useState([]);
-    const [listCategory, setListCategory] = useState([]);
-    const [listArticle, setListArticle] = useState([]);
+    //fetch data
+    const dispatch = useDispatch();
+    const listUsers = useSelector(state => state.admin.users);
+    const listProducts = useSelector(state => state.admin.products);
+    const listNews = useSelector(state => state.admin.news);
+    const listCategory = useSelector(state => state.admin.categories);
+    const listArticle = useSelector(state => state.admin.articles);
 
-    const [duration, setDuration] = useState(10000);
+    useEffect(() => {
+        dispatch(actions.fetchAllUsersStart());
+        dispatch(actions.fetchProducts());
+        dispatch(actions.fetchAllNews());
+        dispatch(actions.fetchAllCategory());
+        dispatch(actions.GetAllArticle());
+    }, [dispatch]);
+
     //format number
+    const [duration, setDuration] = useState(10000);
     const formatValue = (value) => `${numberFormat(value)}`;
 
-    //user number
-    useEffect(() => {
-        props.fetchUser();
-        setListUsers(props.listUsers);
-    }, [listUsers]);
-
-    //product number
-    useEffect(() => {
-        props.fetchProducts();
-        setListProducts(props.listProducts);
-        
-        props.fetchCategories();
-        setListCategory(props.listCategory);
-
-        props.fetchArticle();
-        setListArticle(props.listArticle);
-    }, [listProducts, listCategory, listArticle]);
-
-    //news number
-    useEffect(() => {
-        props.fetchNews();
-        setListNews(props.listNews);
-    }, [listNews]);
-
-    
-
     return (
-
         <div className="mx-2 my-3">
             <h5 className="text-dark">Trang chủ</h5>
             
@@ -53,9 +35,7 @@ const  Dashboard = (props) => {
                     <img className="card-img-top" src="https://png.pngtree.com/thumb_back/fh260/back_our/20190622/ourmid/pngtree-climbing-the-peak-of-success-silhouette-background-image_213493.jpg" alt="Card image" />
                     <div className="card-img-overlay d-flex justify-content-between" style ={{flexDirection: 'column'}} >
                         <div className="stat">
-                            <h3 className="card-text font-weight-bold">
-                                {props.listUsers.length}
-                            </h3>
+                            <h3 className="card-text font-weight-bold"> {listUsers.length} </h3>
                             <h6 className="card-title">THÀNH VIÊN</h6>
                         </div>
                         <NavLink to="/system/user-manage" className="btn btn-warning">Xem</NavLink>
@@ -66,9 +46,7 @@ const  Dashboard = (props) => {
                     <img src="https://avf.asso.fr/cosne-sur-loire/wp-content/uploads/sites/99/2021/03/close-up-of-calendar-and-clock-on-green-background-planning-for-or-picture-id1013355986.jpg" className="card-img-top" alt="Card image" />
                     <div className="card-img-overlay d-flex justify-content-between" style ={{flexDirection: 'column'}} >
                         <div className="stat">
-                            <h3 className="card-text font-weight-bold">
-                                {props.listCategory.length}
-                            </h3>
+                            <h3 className="card-text font-weight-bold"> {listCategory.length} </h3>
                             <h6 className="card-title">DANH MỤC </h6>
                         </div>
                         <NavLink to="/system/category-manage"  className="btn btn-warning">Xem</NavLink>
@@ -80,9 +58,7 @@ const  Dashboard = (props) => {
                     <div className="card-img-overlay d-flex justify-content-between" style ={{flexDirection: 'column'}} >
                         <div className="stat d-flex justify-content-between">
                             <div>    
-                                <h3 className="card-text font-weight-bold">
-                                    {props.listProducts.length}
-                                </h3>
+                                <h3 className="card-text font-weight-bold"> {listProducts.length} </h3>
                                 <h6 className="card-title">SẢN PHẨM</h6>
                             </div>
                         </div>
@@ -94,15 +70,12 @@ const  Dashboard = (props) => {
                     <img className="card-img-top" src="https://events.linuxfoundation.org/wp-content/uploads/2020/10/OSS_ELC_EU20_ZoomBackgrounds-01.jpg" alt="Card image" />
                     <div className="card-img-overlay d-flex justify-content-between" style ={{flexDirection: 'column'}} >
                         <div className="stat">
-                            <h3 className="card-text font-weight-bold">
-                                {props.listNews.length}
-                            </h3>
+                            <h3 className="card-text font-weight-bold"> {listNews.length} </h3>
                             <h6 className="card-title">TIN TỨC - SỰ KIỆN</h6>
                         </div>
                         <NavLink to="/system/news-manage"  className="btn btn-warning">Xem</NavLink>
                     </div>
                 </div>
-
             </div>
 
             <div className="d-flex text-white">
@@ -110,9 +83,7 @@ const  Dashboard = (props) => {
                     <img className="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrXLwvkyFzRrLwD7cF0s3gt2WdFWbBai38XVLad5Fsgi3Fq-guu55u9sqEjMVzKXMBQUo&usqp=CAU" alt="Card image" />
                     <div className="card-img-overlay d-flex justify-content-between" style ={{flexDirection: 'column'}} >
                         <div className="stat">
-                            <h3 className="card-text font-weight-bold">
-                                {props.listArticle.length}
-                            </h3>
+                            <h3 className="card-text font-weight-bold"> {listArticle.length} </h3>
                             <h6 className="card-title">BÀI VIẾT</h6>
                         </div>
                         <NavLink to="/system/article-manage" className="btn btn-warning">Xem</NavLink>
@@ -151,26 +122,4 @@ const  Dashboard = (props) => {
         </div>
     )
 }
-
-const mapStateToProps = state => {
-    return {
-        listUsers: state.admin.users,
-        listProducts: state.admin.products,
-        listNews: state.admin.news,
-        listCategory: state.admin.categories,
-        listArticle: state.admin.articles,
-
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchUser: ()=> dispatch(actions.fetchAllUsersStart()),
-        fetchProducts: () => dispatch(actions.fetchProducts()),
-        fetchNews: () => dispatch(actions.fetchAllNews()),
-        fetchCategories: () => dispatch(actions.fetchAllCategory()),
-        fetchArticle: () => dispatch(actions.GetAllArticle()),
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default Dashboard;

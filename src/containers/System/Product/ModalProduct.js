@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {CommonUtils} from "../../../utils";
 
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
@@ -17,25 +17,18 @@ const ModalProduct = (props) => {
     const [status, setStatus] = useState('');
     const [category_id, setCategory_id] = useState('');
     const [supplier_id, setSupplier_id] = useState('');
-
-    const [statusArr, setStatusArr] = useState([]);
-    const [categoryArr, setCategoryArr] = useState([]);
-    const [supplierArr, setSupplierArr] = useState([]);
     
     //fetch data
+    const dispatch = useDispatch();
+    const listStatus = useSelector(state => state.admin.status);
+    const listCategory = useSelector(state => state.admin.categories);
+    const listSupplier = useSelector(state => state.admin.supplier);
+
     useEffect(() => {
-        props.fetchStatusProduct();
-        setStatusArr(props.listStatus);
-        setStatus(props.listStatus[0]);
-
-        props.fetchCategories();
-        setCategoryArr(props.listCategory);
-        setCategory_id(props.listCategory[0]);
-
-        props.fetchSupplierProduct();
-        setSupplierArr(props.listSupplier);
-        setSupplier_id(props.listSupplier[0]);
-    }, [statusArr, categoryArr , supplierArr]);
+        dispatch(actions.fetchStatusProduct());
+        dispatch(actions.fetchAllCategory());
+        dispatch(actions.fetchSupplierProduct());
+    }, [dispatch]);
 
     //reset form
     useEffect(() => {
@@ -49,7 +42,7 @@ const ModalProduct = (props) => {
         setStatus('');
         setCategory_id('');
         setSupplier_id('');
-    }, [props.listProducts]);
+    }, [dispatch]);
 
     const toggle =()=>{
         props.toggleParent();
@@ -91,158 +84,139 @@ const ModalProduct = (props) => {
     }
     
     return (
-            <Modal 
-                isOpen={props.isOpen} 
-                toggle={()=>toggle()} 
-                size="lg"
-            >
+        <Modal 
+            isOpen={props.isOpen} 
+            toggle={()=>toggle()} 
+            size="lg"
+        >
+            <ModalHeader toggle={()=>toggle()}>Thêm mới sản phẩm</ModalHeader>
+            <ModalBody>
+            <form>
+                <div className="row">
+                    <div className="form-group col-md-6">
+                        <label>Tên </label>
+                        <input type="input" className="form-control" 
+                            onChange= {(e)=>setName(e.target.value)}
+                            value={name}
+                        />
+                    </div>
+
+                    <div className="form-group col-md-3">
+                        <label>Ảnh</label>
+                        <input id="previewImg" type="file" hidden 
+                            onChange={(e)=>changeImage(e)}
+                        />
+
+                        <label htmlFor="previewImg" className="btn btn-success w-100"><i className="fas fa-upload"></i> Tải ảnh</label>  
+                    
+                    </div>
+
+                    <div className="preview-image col-md-2 border" 
+                        style={{backgroundImage: `url(${previewImg})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat'}}
+                    >
+                        {
+                        previewImg ?
+                        <div onClick={() =>removeImg()} className="col-md-12" style={{textAlign: 'end', position: 'absolute', right: '-1.5rem', top: '-1rem'}}>
+                            <i className="far fa-times-circle text-danger"></i>
+                        </div> : <img src="https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png" className="w-100" alt="..." />
+                        }
+                    </div>
+                </div>
                 
-                <ModalHeader toggle={()=>toggle()}>Thêm mới sản phẩm</ModalHeader>
-                <ModalBody>
-                <form>
-                    <div className="row">
-                        <div className="form-group col-md-6">
-                            <label>Tên </label>
-                            <input type="input" className="form-control" 
-                                onChange= {(e)=>setName(e.target.value)}
-                                value={name}
-                            />
-                        </div>
+                <div className="row">    
+                    <div className="form-group col-6">
+                        <label>Giá</label>
+                        <input value={price} onChange={(e)=>setPrice(e.target.value)} type="text" className="form-control" />
+                    </div>
 
-                        <div className="form-group col-md-3">
-                            <label>Ảnh</label>
-                            <input id="previewImg" type="file" hidden 
-                                onChange={(e)=>changeImage(e)}
-                            />
+                    <div className="form-group col-6">
+                        <label>Sale</label>
+                        <input value={sale} onChange={(e)=>setSale(e.target.value)}  type="text" className="form-control" />
+                    </div>
+                </div>
 
-                            <label htmlFor="previewImg" className="btn btn-success w-100"><i className="fas fa-upload"></i> Tải ảnh</label>  
-                        
-                        </div>
+                <div className="row">
+                    <div className="form-group col-md-4">
+                        <label>Trạng thái</label>
+                        <select className="form-control"
+                            onChange={(e) => setStatus(e.target.value)}
+                            defaultValue={status}
+                        >   
+                            {
+                                listStatus && listStatus.length >0 ?
+                                listStatus.map((item, index)=>{
+                                    return(
+                                        <option key={index} value={item.valueVi}>{item.valueVi}</option>                                                 
+                                    )
+                                })
+                                :
+                                <option>Không có dữ liệu</option>
+                            }    
+                        </select>
+                    </div>
 
-                        <div className="preview-image col-md-2 border" 
-                            style={{backgroundImage: `url(${previewImg})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat'}}
+                    <div className="form-group col-md-4">
+                        <label>Số lượng</label>
+                        <input value={number} onChange={(e)=>setNumber(e.target.value)}  type="text" className="form-control" />
+                    </div>
+                    <div className="form-group col-md-4">
+                        <label>Bảo hành</label>
+                        <input value={warranty} onChange={(e)=>setWarranty(e.target.value)}  type="text" className="form-control" />
+                    </div>                             
+                </div>
+                
+
+                <div className="row">
+                    <div className="form-group col-md-4">
+                        <label>Danh mục</label>
+                        <select className="form-control"
+                            onChange={(e) => setCategory_id(e.target.value)}
+                            defaultValue={category_id}
+                        >
+                            {   
+                                listCategory && listCategory.length >0 ?
+                                listCategory.map((item, index) => {
+                                    return (
+                                        <option key={index} value={item.keyMap}>{item.name}</option>
+                                    )
+                                })
+                                : 
+                                <option>Không có dữ liệu</option>
+                            }                                                           
+                                    
+                        </select>
+                    </div>
+
+                    <div className="form-group col-md-4">
+                        <label>Xuất xứ</label>
+                        <select className="form-control"
+                            onChange={(e) => setSupplier_id(e.target.value)}
+                            defaultValue={supplier_id}
                         >
                             {
-                            previewImg ?
-                            <div onClick={() =>removeImg()} className="col-md-12" style={{textAlign: 'end', position: 'absolute', right: '-1.5rem', top: '-1rem'}}>
-                                <i className="far fa-times-circle text-danger"></i>
-                            </div> : <img src="https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png" className="w-100" alt="..." />
+                                listSupplier && listSupplier.length >0 ?
+                                listSupplier.map((item, index)=>{
+                                    return(
+                                        <option key={index} value={item.valueVi}>{item.valueVi}</option>
+                                    )
+                                })
+                                :
+                                <option>Không có dữ liệu</option>
                             }
-                        </div>
-                    </div>
-                    
-                    <div className="row">    
-                        <div className="form-group col-6">
-                            <label>Giá</label>
-                            <input value={price} onChange={(e)=>setPrice(e.target.value)} type="text" className="form-control" />
-                        </div>
-
-                        <div className="form-group col-6">
-                            <label>Sale</label>
-                            <input value={sale} onChange={(e)=>setSale(e.target.value)}  type="text" className="form-control" />
-                        </div>
+                        </select>
                     </div>
 
-                    <div className="row">
-                        <div className="form-group col-md-4">
-                            <label>Trạng thái</label>
-                            <select className="form-control"
-                                onChange={(e) => setStatus(e.target.value)}
-                                defaultValue={status}
-                            >   
-                                {
-                                    props.listStatus && props.listStatus.length >0 ?
-                                        props.listStatus.map((item, index)=>{
-                                            return(
-                                                <option key={index} value={item.valueVi}>{item.valueVi}</option>                                                 
-                                            )
-                                        })
-                                        :
-                                        <option>Không có dữ liệu</option>
-                                }    
-                            </select>
-                        </div>
+                </div>
+            </form>
+            </ModalBody>
 
-                        <div className="form-group col-md-4">
-                            <label>Số lượng</label>
-                            <input value={number} onChange={(e)=>setNumber(e.target.value)}  type="text" className="form-control" />
-                        </div>
-                        <div className="form-group col-md-4">
-                            <label>Bảo hành</label>
-                            <input value={warranty} onChange={(e)=>setWarranty(e.target.value)}  type="text" className="form-control" />
-                        </div>                             
-                    </div>
-                    
-
-                    <div className="row">
-                        <div className="form-group col-md-4">
-                            <label>Danh mục</label>
-                            <select className="form-control"
-                                onChange={(e) => setCategory_id(e.target.value)}
-                                defaultValue={category_id}
-                            >
-                                {   
-                                    props.listCategory && props.listCategory.length >0 ?
-                                    props.listCategory.map((item, index) => {
-                                        return (
-                                            <option key={index} value={item.keyMap}>{item.name}</option>
-                                        )
-                                    })
-                                    : 
-                                    <option>Không có dữ liệu</option>
-                                }                                                           
-                                        
-                            </select>
-                        </div>
-
-                        <div className="form-group col-md-4">
-                            <label>Xuất xứ</label>
-                            <select className="form-control"
-                                onChange={(e) => setSupplier_id(e.target.value)}
-                                defaultValue={supplier_id}
-                            >
-                                {
-                                    props.listSupplier && props.listSupplier.length >0 ?
-                                        props.listSupplier.map((item, index)=>{
-                                            return(
-                                                <option key={index} value={item.valueVi}>{item.valueVi}</option>
-                                            )
-                                        })
-                                        :
-                                        <option>Không có dữ liệu</option>
-                                }
-                            </select>
-                        </div>
-
-                    </div>
-                </form>
-                </ModalBody>
-
-                <ModalFooter>
-                    <Button color="primary" className="px-3" onClick={() => {handleAddNewProduct()}}>
-                        Thêm mới
-                    </Button>
-                    <Button color="secondary" className="px-3">Cancel</Button>
-                </ModalFooter>
-            </Modal>
-        )
+            <ModalFooter>
+                <Button color="primary" className="px-3" onClick={() => {handleAddNewProduct()}}>
+                    Thêm mới
+                </Button>
+                <Button color="secondary" className="px-3">Cancel</Button>
+            </ModalFooter>
+        </Modal>
+    )
 }
-
-const mapStateToProps = state => {
-    return {
-        listStatus: state.admin.status,
-        listCategory: state.admin.categories,
-        listSupplier: state.admin.supplier,
-        listProducts: state.admin.products
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchStatusProduct: ()=> dispatch(actions.fetchStatusProduct()),
-        fetchCategories: () => dispatch(actions.fetchAllCategory()),
-        fetchSupplierProduct: () => dispatch(actions.fetchSupplierProduct()),
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ModalProduct);
+export default ModalProduct;

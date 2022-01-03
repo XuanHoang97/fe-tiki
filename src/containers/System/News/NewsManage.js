@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../../store/actions';
 import ModalAddNews from './ModalAddNews';
+import ModalEditNews from './ModalEditNews';
 import Sort from './Sort';
 import Moment from 'react-moment';
-import ModalEditNews from './ModalEditNews';
 
 const NewsManage = (props) => {
-    const [news, setnews] = useState([]);
     const [modalAddNews, setModalAddNews] = useState(false);
     const [modalEditNews, setModalEditNews] = useState(false);
     const [newsEdit, setNewsEdit] = useState('');
 
+    const dispatch = useDispatch();
+    const listNews = useSelector(state => state.admin.news);
+
     //fetch data News
     useEffect(() => {
-        props.fetchNews();
-        setnews(props.listNews);
-    }, [news]);
+        dispatch(actions.fetchAllNews());
+    }, [dispatch]);
 
     //OPEN MODAL Create, Edit News
     const toggleNewsModal=()=> {
@@ -33,24 +34,12 @@ const NewsManage = (props) => {
     }
 
     const CreateNews=(data)=> {
-        props.CreateNews({
-            name: data.name,
-            image: data.image,
-            description: data.description,
-            content: data.content,
-            status: data.status,
-            category_id: data.category_id,
-            author_id: data.author_id,
-            date: data.date,
-            view: data.view,
-            hot: data.hot,
-        });
-
+        dispatch(actions.CreateNews(data));
     }
 
     //delete news
     const deleteNews = (news) => {
-        props.deleteNews(news.id);
+        dispatch(actions.DeleteNews(news.id));
     }
 
     //edit news
@@ -60,21 +49,8 @@ const NewsManage = (props) => {
     }
 
     const handleEditNews = (data) => {
-        props.editNews({
-            id: data.id,
-            name: data.name,
-            image: data.image,
-            description: data.description,
-            content: data.content,
-            status: data.status,
-            category_id: data.category_id,
-            author_id: data.author_id,
-            date: data.date,
-            view: data.view,
-            hot: data.hot,
-        });
+        dispatch(actions.EditNews(data));
     }
-
 
     return (
         <div className="mx-2">
@@ -101,7 +77,7 @@ const NewsManage = (props) => {
                 <Sort />
             </div>
 
-            <div className="text-dark">Danh sách bài viết (<b>{props.listNews.length}</b>)</div>
+            <div className="text-dark">Danh sách bài viết (<b>{listNews.length}</b>)</div>
             <table className="table table-striped table-bordered table-hover">
                 <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
                     <tr>
@@ -119,8 +95,8 @@ const NewsManage = (props) => {
                 </thead>
                 <tbody>
                     {   
-                        props.listNews && props.listNews.length>0 ?
-                        props.listNews.map((item, index) => {
+                        listNews && listNews.length>0 ?
+                        listNews.map((item, index) => {
                             //endCode image
                             let imageBase64='';
                             if(item.image){
@@ -167,23 +143,5 @@ const NewsManage = (props) => {
             </table>
         </div>
     );
-
 }
-
-const mapStateToProps = state => {
-    return {
-        listNews: state.admin.news
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchNews: () => dispatch(actions.fetchAllNews()),
-        CreateNews : (data) => dispatch(actions.CreateNews(data)),
-        deleteNews: (id) => dispatch(actions.DeleteNews(id)),
-        editNews: (data) => dispatch(actions.EditNews(data)),
-
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(NewsManage);
+export default NewsManage;

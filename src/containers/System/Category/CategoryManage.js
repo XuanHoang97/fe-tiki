@@ -1,20 +1,21 @@
 import React,{useState, useEffect} from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../../store/actions';
 import ModalAddCategory from './ModalAddCategory';
 import ModalEditCategory from './ModalEditCategory';
 
 const CategoryManage = (props) => {
-    const [listCategory, setListCategory] = useState([]);
     const [modalCategory, setModalCategory] = useState(false);
     const [modalEditCategory, setModalEditCategory] = useState(false);
     const [categoryEdit, setCategoryEdit] = useState('');
 
+    const dispatch = useDispatch();
+    const listCategory = useSelector(state => state.admin.categories);
+
    //fetch product category
      useEffect(() => {        
-        props.fetchCategories();
-        setListCategory(props.listCategory);
-    }, [listCategory]);
+        dispatch(actions.fetchAllCategory());
+    }, [dispatch]);
 
     //OPEN MODAL Create, Edit category
     const toggleCategoryModal=()=> {
@@ -31,15 +32,7 @@ const CategoryManage = (props) => {
     }
 
     const CreateCategory = (data) => {
-        props.CreateCategory({
-            image: data.image,
-            name: data.name,
-            keyMap: data.keyMap,
-            type: data.type,
-            value: data.value,
-            statusId: data.statusId,
-            categoryId: data.categoryId,
-        });
+        dispatch(actions.CreateCategory(data));
     }
 
     //edit category
@@ -49,25 +42,16 @@ const CategoryManage = (props) => {
     }
 
     const handleEditCategory = (data) => {
-        props.editCategory({
-            id: data.id,
-            image : data.image,
-            name : data.name,
-            keyMap : data.keyMap,
-            type : data.type,
-            value : data.value,
-        });
+        dispatch(actions.EditCategory(data));
     }
 
     //delete category
     const DeleteCategory = (category) => {
-        props.DeleteCategory(category.id);
-    }
-      
+        dispatch(actions.DeleteCategory(category.id));
+    }      
 
     return (        
         <div className="mx-2">
-           
             <ModalAddCategory
                 isOpen={modalCategory}
                 toggleParent={toggleCategoryModal}
@@ -89,7 +73,7 @@ const CategoryManage = (props) => {
                 </button>
             </div>
 
-            <div className="text-dark">Danh mục sản phẩm (<b>{props.listCategory.length}</b>)</div>
+            <div className="text-dark">Danh mục sản phẩm (<b>{listCategory.length}</b>)</div>
             <table className="table table-striped table-bordered table-hover">
                 <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
                     <tr>
@@ -102,8 +86,8 @@ const CategoryManage = (props) => {
                 </thead>
                 <tbody>
                 {
-                    props.listCategory && props.listCategory.length > 0 ?
-                    props.listCategory.map((item, index) => {
+                    listCategory && listCategory.length > 0 ?
+                    listCategory.map((item, index) => {
                         //endCode image
                         let imageBase64='';
                         if(item.image){
@@ -144,20 +128,4 @@ const CategoryManage = (props) => {
         </div>
     );
 }
-
-const mapStateToProps = state => {
-    return {
-        listCategory: state.admin.categories
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchCategories: () => dispatch(actions.fetchAllCategory()),
-        CreateCategory: (data) => dispatch(actions.CreateCategory(data)),
-        editCategory: (data) => dispatch(actions.EditCategory(data)),
-        DeleteCategory: (id) => dispatch(actions.DeleteCategory(id)),
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CategoryManage);
+export default CategoryManage;

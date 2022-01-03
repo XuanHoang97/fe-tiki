@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import {CommonUtils} from "../../../utils"
 
@@ -17,11 +17,12 @@ const ModalEditProduct  = (props) => {
     const [category_id, setCategory_id] = useState('');
     const [supplier_id, setSupplier_id] = useState('');
     const [image, setImage] = useState('');
-    
     const [previewImg, setPreviewImg] = useState('');
-    const [statusArr, setStatusArr] = useState([]);
-    const [categoryArr, setCategoryArr] = useState([]);
-    const [supplierArr, setSupplierArr] = useState([]);
+
+    const dispatch = useDispatch();
+    const listStatus = useSelector(state => state.admin.status);
+    const listCategory = useSelector(state => state.admin.categories);
+    const listSupplier = useSelector(state => state.admin.supplier);
 
     useEffect (() => {
         let product = props.currentProduct;
@@ -43,12 +44,9 @@ const ModalEditProduct  = (props) => {
             setStatus(product.status);            
             setPreviewImg(imageBase64);
         } 
-        props.fetchStatusProduct();
-        props.fetchCategories();
-        props.fetchSupplierProduct(); 
-        setStatusArr(props.listStatus);
-        setCategoryArr(props.listCategory);
-        setSupplierArr(props.listSupplier);
+        dispatch(actions.fetchStatusProduct());
+        dispatch(actions.fetchAllCategory());
+        dispatch(actions.fetchSupplierProduct());
     }, [props.currentProduct]);
 
 
@@ -89,7 +87,6 @@ const ModalEditProduct  = (props) => {
         });
         toggle();
     }
-
 
     return (
         <Modal 
@@ -152,8 +149,8 @@ const ModalEditProduct  = (props) => {
                             defaultValue={status}
                         >   
                             {
-                                props.listStatus && props.listStatus.length >0 ?
-                                    props.listStatus.map((item, index)=>{
+                                listStatus && listStatus.length >0 ?
+                                    listStatus.map((item, index)=>{
                                         return(
                                             <option key={index} value={item.valueVi}>{item.valueVi}</option>                                                 
                                         )
@@ -183,16 +180,15 @@ const ModalEditProduct  = (props) => {
                             defaultValue={category_id}
                         >
                             {   
-                                props.listCategory && props.listCategory.length >0 ?
-                                props.listCategory.map((item, index) => {
+                                listCategory && listCategory.length >0 ?
+                                listCategory.map((item, index) => {
                                     return (
                                         <option key={index} value={item.keyMap}>{item.name}</option>
                                     )
                                 })
                                 : 
                                 <option>Không có dữ liệu</option>
-                            }                                                           
-                                    
+                            }                                                                       
                         </select>
                     </div>
 
@@ -203,14 +199,14 @@ const ModalEditProduct  = (props) => {
                             defaultValue={supplier_id}
                         >
                             {
-                                props.listSupplier && props.listSupplier.length >0 ?
-                                    props.listSupplier.map((item, index)=>{
-                                        return(
-                                            <option key={index} value={item.valueVi}>{item.valueVi}</option>
-                                        )
-                                    })
-                                    :
-                                    <option>Không có dữ liệu</option>
+                                listSupplier && listSupplier.length >0 ?
+                                listSupplier.map((item, index)=>{
+                                    return(
+                                        <option key={index} value={item.valueVi}>{item.valueVi}</option>
+                                    )
+                                })
+                                :
+                                <option>Không có dữ liệu</option>
                             }
                         </select>
                     </div>
@@ -227,23 +223,5 @@ const ModalEditProduct  = (props) => {
             </ModalFooter>
         </Modal>
     )
-
 }
-
-const mapStateToProps = state => {
-    return {
-        listStatus: state.admin.status,
-        listCategory: state.admin.categories,
-        listSupplier: state.admin.supplier
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchStatusProduct: ()=> dispatch(actions.fetchStatusProduct()),
-        fetchCategories: () => dispatch(actions.fetchAllCategory()),
-        fetchSupplierProduct: () => dispatch(actions.fetchSupplierProduct()),
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ModalEditProduct);
+export default ModalEditProduct;

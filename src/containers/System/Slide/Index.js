@@ -155,7 +155,7 @@ const Index = (props) => {
 
                 <NavItem>
                     <NavLink className={activeTab == '3' ? 'active' : ''} onClick={() => setActiveTab('3')}>
-                        <div className='font-weight-bold'>Quản lý Hình ảnh và video</div>
+                        <div className='font-weight-bold'>Quản lý hình ảnh và video</div>
                     </NavLink>
                 </NavItem>
                 <NavItem>

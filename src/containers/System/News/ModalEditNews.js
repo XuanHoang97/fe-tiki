@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import {CommonUtils} from "../../../utils"
 
@@ -20,8 +20,8 @@ const ModalEditNews  = (props) => {
     const [hot, setHot] = useState('');
     
     const [previewImg, setPreviewImg] = useState('');
-    const [statusArr, setStatusArr] = useState([]);
-    const [categoryArr, setCategoryArr] = useState([]);
+    const dispatch = useDispatch();
+    const listCategory = useSelector(state => state.admin.categories);
 
     useEffect (() => {
         let news = props.currentNews;
@@ -45,14 +45,8 @@ const ModalEditNews  = (props) => {
             setHot(news.hot);
             setPreviewImg(imageBase64);
         } 
-        props.fetchCategories();
-        props.fetchStatusNews();
-
-        setStatusArr(props.listStatus);
-        setCategoryArr(props.listCategory);
-
-    }, [props.currentNews]);
-
+        dispatch(actions.fetchAllCategory());
+    }, [dispatch, props.currentNews]);
 
     const toggle =()=>{
         props.toggleParent();
@@ -91,7 +85,6 @@ const ModalEditNews  = (props) => {
         });
         toggle();
     }
-
 
     return (
         <Modal 
@@ -169,14 +162,14 @@ const ModalEditNews  = (props) => {
                                 value={status}
                             >   
                                 {
-                                    props.listStatus && props.listStatus.length >0 ?
-                                        props.listStatus.map((item, index)=>{
-                                            return(
-                                                <option key={index} value={item.valueVi}>{item.valueVi}</option>                                                 
-                                            )
-                                        })
-                                        :
-                                        <option>Không có dữ liệu</option>
+                                    listCategory && listCategory.length >0 ?
+                                    listCategory.map((item, index)=>{
+                                        return(
+                                            <option key={index} value={item.valueVi}>{item.valueVi}</option>                                                 
+                                        )
+                                    })
+                                    :
+                                    <option>Không có dữ liệu</option>
                                 }    
                             </select>
                         </div> 
@@ -196,15 +189,13 @@ const ModalEditNews  = (props) => {
                                     })
                                     : 
                                     <option>Không có dữ liệu</option>
-                                }                                                           
-                                        
+                                }                                                                  
                             </select>
                         </div>
                     </div>
                 </form>
             </ModalBody>
-
-
+            
             <ModalFooter>
                 <Button color="primary" className="px-3" onClick={() => {EditNews()}}>
                     Cập nhật
@@ -213,21 +204,5 @@ const ModalEditNews  = (props) => {
             </ModalFooter>
         </Modal>
     )
-
 }
-
-const mapStateToProps = state => {
-    return {
-        listCategory: state.admin.categories,
-        listStatus: state.admin.status_news,
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchCategories: () => dispatch(actions.fetchAllCategory()),
-        fetchStatusNews: () => dispatch(actions.fetchStatusNews()),
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ModalEditNews);
+export default ModalEditNews;
