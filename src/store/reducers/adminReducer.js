@@ -13,7 +13,9 @@ const initialState = {
     supplier: [],
     someProduct: [],
     articles: [],
-    optionProduct: []
+    optionProduct: [],
+    slides: [],
+    specialCategories: [],
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -156,9 +158,6 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
             }
-            
-
-
 
 
             //fetch all article
@@ -216,7 +215,33 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
             }
+
+        // get all slide
+        case actionTypes.FETCH_ALL_SLIDE_SUCCESS:
+            state.slides = action.listSlide;
+            return {
+                ...state,
+            }
+
+        case actionTypes.FETCH_ALL_SLIDE_FAILED:
+            state.slides = [];
+            return {
+                ...state,
+            }
             
+        //get all special category
+        case actionTypes.FETCH_ALL_SPECIAL_CATEGORY_SUCCESS:
+            state.specialCategories = action.listSpecialCategory;
+            return {
+                ...state,
+            }
+
+        case actionTypes.FETCH_ALL_SPECIAL_CATEGORY_FAILED:
+            state.specialCategories = [];
+            return {
+                ...state,
+            }
+
 
 
         default:
