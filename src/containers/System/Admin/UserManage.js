@@ -1,119 +1,82 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import ModalUser from './ModalUser';
 import ModalEditUser from './ModalEditUser';
 import InfoUser from './InfoUser';
 import * as actions from '../../../store/actions';
 import Sort from './Sort';
 import Pagination from './Pagination';
-class UserManage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isOpenModalUser: false,
-            isOpenModalEditUser: false,
-            isOpenModalInfoUser: false,
-            userEdit: '',
-            selectInfoUser: [],
 
-            users: [],
-            searchUser: '',
-            sortUser: '',
-        }
-    }
+const UserManage = (props) => {
+    const [searchUser, setSearchUser] = useState('');
+    const [sortUser, setSortUser] = useState('');
+    const [selectInfoUser, setSelectInfoUser] = useState([]);
+    const [isOpenModalUser, setIsOpenModalUser] = useState(false);
+    const [isOpenModalEditUser, setIsOpenModalEditUser] = useState(false);
+    const [isOpenModalInfoUser, setIsOpenModalInfoUser] = useState(false);
+    const [userEdit, setUserEdit] = useState('');
 
-    // fetch all user  
-    componentDidMount() {
-        this.props.fetchUser()
-    }
+    //fetch data
+    const dispatch = useDispatch();
+    const listUsers = useSelector(state => state.admin.users);
 
-    //compare state_old vs state_present
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if(prevProps.listUsers !== this.props.listUsers){
-            this.setState({
-                users: this.props.listUsers
-            })
-        }
-    }
+    useEffect(() => {
+        dispatch(actions.fetchAllUser());
+    }, [dispatch]);
 
     //OPEN MODAL View, Create, Edit User
-    toggleUserModal=()=> {
-        this.setState({
-            isOpenModalUser:  !this.state.isOpenModalUser,
-        })
+    const toggleUserModal=()=> {
+        setIsOpenModalUser(!isOpenModalUser);
     }
 
-    toggleUserEditModal=()=>{
-        this.setState({
-            isOpenModalEditUser:  !this.state.isOpenModalEditUser,
-        })
+    const toggleUserEditModal=()=>{
+        setIsOpenModalEditUser(!isOpenModalEditUser);
     }
 
-    toggleInfoModal=()=> {
-        this.setState({
-            isOpenModalInfoUser:  !this.state.isOpenModalInfoUser,
-        })
+    const toggleInfoModal=()=> {
+        setIsOpenModalInfoUser(!isOpenModalInfoUser);
     }
     
     // Create users
-    handleAddNewUser=()=> {
-        this.setState({
-            isOpenModalUser:  true,
-        })
+    const handleAddNewUser=()=> {
+        setIsOpenModalUser(true);
     }
 
-    createNewUser=(data)=> {
-        this.props.createNewUser({data});
+    const AddNewUser=(data)=> {
+        dispatch(actions.createNewUser(data));
     }
 
     //delete user 
-    deleteUser=(user)=>{
-        this.props.deleteUserRedux(user.id);
+    const deleteUser=(user)=>{
+        dispatch(actions.deleteUser(user.id));
     }
 
     //edit user
-    handleEditUser=(user)=>{
-        this.setState({
-            isOpenModalEditUser: true,
-            userEdit: user,
-        })
+    const handleEditUser=(user)=>{
+        setUserEdit(user);
+        setIsOpenModalEditUser(true);
     }
 
-    editUser=(data)=>{
-        this.props.editUserRedux({
-            id: data.id,
-            email: data.email,
-            password: data.password,
-            firstName: data.firstName,
-            lastName: data.lastName,
-            address: data.address,
-            phoneNumber: data.phoneNumber,
-            gender: data.gender,
-            roleId: data.roleId,
-            positionId: data.positionId,
-            avatar: data.avatar,
-        });
+    const editUser=(data)=>{
+        dispatch(actions.editUser(data));
     }
 
     //info user
-    handleInfoUser=(user)=>{
-        this.setState({
-            selectInfoUser: user,
-            isOpenModalInfoUser: true,
-        })
+    const handleInfoUser=(user)=>{
+        setSelectInfoUser(user);
+        setIsOpenModalInfoUser(true);
     }
 
     //search user
-    onSearch = (searchUser) => {
-        this.setState({ searchUser });
+    const onSearch = (searchUser) => {
+        setSearchUser(searchUser);
     };
 
     //sorting user
-    sorting = (e) => {
+    const sorting = (e) => {
         const sorting = e.target.value;
-        const { users } = this.state;
 
-        const sortRes = users.sort((a, b) => {
+        const sortRes = listUsers.sort((a, b) => {
             if (sorting === "role") {
                 return a.id > b.id ? 1 : -1;
             }
@@ -130,143 +93,120 @@ class UserManage extends Component {
                 return a.roleId > b.roleId ? 1 : -1;
             }
         });
-        this.setState({
-            sortUser: sorting,
-            users: sortRes
-        });
+        setSortUser(sorting);
+
     };
+    const filterUser =listUsers.filter((item) => `${item.firstName} ${item.lastName} ${item.address}`.toLowerCase().includes(searchUser.toLowerCase()));
 
-    render() {
-        const {users, searchUser, sortUser} = this.state;
-        const filterUser =users.filter((item) => `${item.firstName} ${item.lastName} ${item.address}`.toLowerCase().includes(searchUser.toLowerCase()));
+    return (
+        <div className="mx-2">
+            <ModalUser
+                isOpen={isOpenModalUser} 
+                toggleFromParent={toggleUserModal} 
+                AddNewUser={AddNewUser}
+            />
 
-        return (
-            <div className="mx-2">
-                <ModalUser
-                    isOpen={this.state.isOpenModalUser} 
-                    toggleFromParent={this.toggleUserModal} 
-                    createNewUser={this.createNewUser}
+            {
+                isOpenModalEditUser &&
+                <ModalEditUser
+                    isOpen={isOpenModalEditUser} 
+                    toggleFromParent={toggleUserEditModal} 
+                    currentUser={userEdit}
+                    editUser={editUser}
                 />
+            }
 
+            <InfoUser
+                isOpen={isOpenModalInfoUser} 
+                toggleFromParent={toggleInfoModal} 
+                details={selectInfoUser}
+            />
+            
+            <div className="h5 text-dark mb-4">Quản lý thành viên</div>
+
+            <div className="d-flex mb-3 justify-content-between">
+                <button onClick ={() => handleAddNewUser()}  type="button" className="btn btn-success col-2">
+                    <i className="fas fa-plus mr-2"></i> Thêm thành viên
+                </button>
+
+                <Sort searchUser={searchUser} onSearch={onSearch} sorting={sorting}
+                sorts={sortUser} />
+            </div>
+            
+            {/* list user  */}
+            <div className="text-dark">Danh sách thành viên  (<b>{filterUser.length}</b>) </div>
+
+            <table className="table table-striped table-bordered table-hover">
+                <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
+                    <tr>
+                        <th scope="col">Tick</th>
+                        <th scope="col">STT</th>
+                        <th scope="col">Avatar</th>
+                        <th scope="col">Họ tên</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Số ĐT</th>
+                        <th scope="col">Địa chỉ</th>
+                        <th scope="col">Giới tính</th>
+                        <th scope="col">TuổI</th>
+                        <th scope="col">Nghề nghiệp</th>
+                        <th scope="col">Chức danh</th>
+                        <th scope="col">Tác vụ</th>
+                    </tr>
+                </thead>
                 {
-                    this.state.isOpenModalEditUser &&
-                    <ModalEditUser
-                        isOpen={this.state.isOpenModalEditUser} 
-                        toggleFromParent={this.toggleUserEditModal} 
-                        currentUser={this.state.userEdit}
-                        editUser={this.editUser}
-                    />
+                    listUsers && listUsers.length >0 &&
+                    filterUser.map((item, index) => {
+                        //endCode image
+                        let imageBase64='';
+                        if(item.image){
+                            imageBase64=new Buffer(item.image, 'base64').toString('binary')
+                        }
+
+                        return (
+                            <tbody key={index}>
+                                <tr>
+                                    <th scope='row'>
+                                        <div className="form-group">
+                                            <input type="checkbox" className="w-100" />
+                                        </div>
+                                    </th>
+                                    <td>{index + 1}</td>
+                                    <td style={{backgroundImage: `url(${imageBase64})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat', height: '45px',
+                                    width: '45px', borderRadius: '50%', display: 'flex', margin: '0 auto'}}></td>
+                                    <td>{item.firstName} {item.lastName}</td>
+                                    <td>{item.email}</td>
+                                    <td>{item.phoneNumber}</td>
+                                    <td>{item.address}</td>
+                                    <td>{item.gender}</td>
+                                    <td>24</td>
+                                    <td>{item.roleId}</td>
+                                    <td>{item.positionId}</td>
+                                    <td>
+                                        <button onClick={()=> handleInfoUser(item)} type="button" className="btn text-success">
+                                            <i className="fas fa-info-circle"></i>
+                                        </button>
+                                        <button onClick={()=> handleEditUser(item)} type="button" className="btn text-primary mx-2">
+                                            <i className="fas fa-pencil-alt"></i>
+                                        </button>
+                                        <button onClick={()=> deleteUser(item)} type="button" className="btn text-danger">
+                                            <i className="fas fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        )
+                    })
                 }
 
-                <InfoUser
-                    isOpen={this.state.isOpenModalInfoUser} 
-                    toggleFromParent={this.toggleInfoModal} 
-                    details={this.state.selectInfoUser}
-                />
-                
-                <div className="h5 text-dark mb-4">Quản lý thành viên</div>
-
-                <div className="d-flex mb-3 justify-content-between">
-                    <button onClick ={() => this.handleAddNewUser()}  type="button" className="btn btn-success col-2">
-                        <i className="fas fa-plus mr-2"></i> Thêm thành viên
-                    </button>
-
-                    <Sort searchUser={searchUser} onSearch={this.onSearch} sorting={this.sorting}
-                    sorts={sortUser} />
-                </div>
-                
-                {/* list user  */}
-                <div className="text-dark">Danh sách thành viên 
-                    (<b>{filterUser.length}</b>)
-                </div>
-
-                <table className="table table-striped table-bordered table-hover">
-                    <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
-                        <tr>
-                            <th scope="col">Tick</th>
-                            <th scope="col">STT</th>
-                            <th scope="col">Avatar</th>
-                            <th scope="col">Họ tên</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Số ĐT</th>
-                            <th scope="col">Địa chỉ</th>
-                            <th scope="col">Giới tính</th>
-                            <th scope="col">TuổI</th>
-                            <th scope="col">Nghề nghiệp</th>
-                            <th scope="col">Chức danh</th>
-                            <th scope="col">Tác vụ</th>
-                        </tr>
-                    </thead>
-                    {
-                        users && users.length >0 &&
-                        filterUser.map((item, index) => {
-                            //endCode image
-                            let imageBase64='';
-                            if(item.image){
-                                imageBase64=new Buffer(item.image, 'base64').toString('binary')
-                            }
-
-                            return (
-                                <tbody key={index}>
-                                    <tr>
-                                        <th scope='row'>
-                                            <div className="form-group">
-                                                <input type="checkbox" className="w-100" />
-                                            </div>
-                                        </th>
-                                        <td>{index + 1}</td>
-                                        <td style={{backgroundImage: `url(${imageBase64})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat', height: '45px',
-                                        width: '45px', borderRadius: '50%', display: 'flex', margin: '0 auto'}}></td>
-                                        <td>{item.firstName} {item.lastName}</td>
-                                        <td>{item.email}</td>
-                                        <td>{item.phoneNumber}</td>
-                                        <td>{item.address}</td>
-                                        <td>{item.gender}</td>
-                                        <td>24</td>
-                                        <td>{item.roleId}</td>
-                                        <td>{item.positionId}</td>
-                                        <td>
-                                            <button onClick={()=> this.handleInfoUser(item)} type="button" className="btn text-success">
-                                                <i className="fas fa-info-circle"></i>
-                                            </button>
-                                            <button onClick={()=> this.handleEditUser(item)} type="button" className="btn text-primary mx-2">
-                                                <i className="fas fa-pencil-alt"></i>
-                                            </button>
-                                            <button onClick={()=> this.deleteUser(item)} type="button" className="btn text-danger">
-                                                <i className="fas fa-trash-alt"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            )
-                        })
-                    }
-
-                    {   
-                        users && users.length ===0 &&
-                        <tbody>
-                            <tr><td className="">Không có dữ liệu</td></tr> 
-                        </tbody> 
-                    }
-                </table>
-
-                <Pagination />
-            </div>
-        );
-    }
+                {   
+                    listUsers && listUsers.length ===0 &&
+                    <tbody>
+                        <tr><td className="">Không có dữ liệu</td></tr> 
+                    </tbody> 
+                }
+            </table>
+            <Pagination />
+        </div>
+    );
 }
-
-const mapStateToProps = state => {
-    return {
-        listUsers: state.admin.users
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchUser: ()=> dispatch(actions.fetchAllUsersStart()),
-        deleteUserRedux: (id) => dispatch(actions.deleteUser(id)),
-        editUserRedux: (data) => dispatch(actions.editUser(data)),
-    };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(UserManage);
+export default UserManage;

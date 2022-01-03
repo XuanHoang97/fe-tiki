@@ -12,7 +12,7 @@ const getAllUsers = (inputId) => {
 }
 
 // create new user
-const createNewUserService = (data) => {
+const createUser = (data) => {
     return axios.post(`http://localhost:8082/api/create-new-user`, data)
 }
 
@@ -194,7 +194,7 @@ const deleteSpecialCategory = (specialCategoryId) => {
 export { 
     handleLoginApi,
     getAllUsers,
-    createNewUserService,
+    createUser,
     deleteUserService,
     editUserService,
     getAllCodeService,

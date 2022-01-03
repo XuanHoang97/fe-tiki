@@ -15,7 +15,7 @@ const  Dashboard = (props) => {
     const listArticle = useSelector(state => state.admin.articles);
 
     useEffect(() => {
-        dispatch(actions.fetchAllUsersStart());
+        dispatch(actions.fetchAllUser());
         dispatch(actions.fetchProducts());
         dispatch(actions.fetchAllNews());
         dispatch(actions.fetchAllCategory());

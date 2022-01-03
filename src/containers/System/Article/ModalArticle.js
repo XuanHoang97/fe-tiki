@@ -16,7 +16,7 @@ const ModalArticle = (props) => {
         dispatch(actions.GetSomeProduct());
     }, [dispatch]);
     
-    //save to markdouwn to table
+    //save to markdown to table
     const [productId, setProductId] = useState('');
     const [characterHTML, setCharacterHTML] = useState('');
     const [characterMarkdown, setCharacterMarkdown] = useState('');

@@ -95,19 +95,6 @@ class ModalEditUser extends Component {
         });
     }
 
-    checkValidateInput=()=>{
-        let isValid=true;
-        let arrInput=['email', 'firstName', 'lastName', 'address']
-        for(let i=0; i<arrInput.length; i++){
-            if(!this.state[arrInput[i]]){
-                isValid=false;
-                alert('Missing parameter: '+ arrInput[i]);
-                break;
-            }
-        }
-        return isValid;
-    }
-
     //upload file
     handleOnchangeImage=async(e)=>{
         let data=e.target.files;
@@ -125,11 +112,8 @@ class ModalEditUser extends Component {
     }
 
     handleSaveUser=()=>{
-        let isValid=this.checkValidateInput();
-        if(isValid===true){
-            this.props.editUser(this.state);
-            this.props.toggleFromParent();
-        }
+        this.props.editUser(this.state);
+        this.props.toggleFromParent();
     }
 
     render() {
@@ -284,7 +268,7 @@ const mapDispatchToProps = dispatch => {
         getRoleStart: ()=> dispatch(actions.fetchRoleStart()),
         fetchPosition: ()=> dispatch(actions.fetchPositionStart()),
 
-        fetchUserRedux: ()=> dispatch(actions.fetchAllUsersStart()),
+        fetchUserRedux: ()=> dispatch(actions.fetchAllUser()),
         createNewUser: (data)=> dispatch(actions.createNewUser(data)),
         editUserRedux: (user) => dispatch(actions.editUser(user))
     };

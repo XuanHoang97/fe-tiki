@@ -100,27 +100,10 @@ class ModalUser extends Component {
         });
     }
 
-    //validate 
-    checkValidateInput=()=>{
-        let isValid=true;
-        let arrInput=['email', 'phoneNumber', 'firstName', 'lastName', 'address']
-        for(let i=0; i<arrInput.length; i++){
-            if(!this.state[arrInput[i]]){
-                isValid=false;
-                alert('Missing parameter: '+ arrInput[i]);
-                break;
-            }
-        }
-        return isValid;
-    }
-
     // add new user
     handleAddNewUser=()=>{
-        let isValid=this.checkValidateInput();
-        if(isValid===true){
-            this.props.createNewUser(this.state);
-            this.props.toggleFromParent();
-        }        
+        this.props.createNewUser(this.state);
+        this.props.toggleFromParent();
     }
 
     //upload file
@@ -294,7 +277,7 @@ const mapDispatchToProps = dispatch => {
         getGenderStart: ()=> dispatch(actions.fetchGenderStart()),
         getRoleStart: ()=> dispatch(actions.fetchRoleStart()),
         fetchPosition: ()=> dispatch(actions.fetchPositionStart()),
-        fetchUserRedux: ()=> dispatch(actions.fetchAllUsersStart()),
+        fetchUserRedux: ()=> dispatch(actions.fetchAllUser()),
         createNewUser: (data)=> dispatch(actions.createNewUser(data)),
     };
 };
