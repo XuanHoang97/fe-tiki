@@ -52,6 +52,11 @@ const ProductManage = (props) => {
         dispatch(actions.EditProduct(data));
     }
 
+    //filter product
+    const filterProduct = (categoryId) => {
+        dispatch(actions.GetAllProductByCategory(categoryId));
+    }
+
     return (        
         <div className="mx-2">
             <ModalProduct
@@ -68,13 +73,15 @@ const ProductManage = (props) => {
             />
 
             <div className="h5 text-dark mb-4">Quản lý sản phẩm</div>
-
             <div className="d-flex mb-3 justify-content-between">
                 <button onClick={() => handleAddNewProduct()} type="button" className="btn btn-success col-2">
                     <i className="fas fa-plus"></i> Thêm sản phẩm
                 </button>
 
-                <Sort />
+                <Sort  
+                    filterProduct={filterProduct}
+
+                />
             </div>
 
             <div className="text-dark">Danh sách sản phẩm (<b>{listProducts.length}</b>)</div>

@@ -43,10 +43,8 @@ function App(props) {
     const handleSearch = async() => {
         let res = await axios({
             method: 'GET',
-            'url': 'http://localhost:8080/api/search',
-            "params": {
-                'keyword': query
-            }
+            'url': 'http://localhost:8082/api/search',
+            "params": { 'keyword': query }
         });
 
         if(res && res.data && res.data.info) {

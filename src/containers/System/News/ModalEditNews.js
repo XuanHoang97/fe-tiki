@@ -86,6 +86,11 @@ const ModalEditNews  = (props) => {
         toggle();
     }
 
+    //update post
+    const updatePost = () => {
+        setDate(new Date());
+    }
+
     return (
         <Modal 
             isOpen={props.isOpen} 
@@ -153,7 +158,9 @@ const ModalEditNews  = (props) => {
                         <div className="form-group col-4">
                             <label>Ngày đăng</label>
                             <input value={date} onChange={(e)=>setDate(e.target.value)} type="text" className="form-control" />
+                            <button onClick={()=> updatePost()} type="button" className="btn btn-primary px-2"><i className="fas fa-sync-alt"></i></button>
                         </div>
+
 
                         <div className="form-group col-md-4">
                             <label>Trạng thái</label>

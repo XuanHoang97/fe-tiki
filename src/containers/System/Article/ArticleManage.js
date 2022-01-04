@@ -25,7 +25,7 @@ const ArticleManage = (props) => {
 
     //get option product
     useEffect(() => {
-        let data = props.optionProduct;
+        let data = optionProduct;
         if(data && data.length > 0){
             data = data.map(item => ({...item, isSelected: false}))
         }
@@ -35,7 +35,7 @@ const ArticleManage = (props) => {
 
     //select option product
     const SelectOptionProduct = (product) => {
-        let data = props.optionProduct;
+        let data = optionProduct;
         if(data && data.length > 0){
             data.map(item => {
                 if(item.id === product.id) item.isSelected = !item.isSelected;
@@ -179,7 +179,7 @@ const ArticleManage = (props) => {
                                     someProduct && someProduct.length >0 &&
                                     someProduct.map((item, index) => {
                                         return(
-                                            <option key={index} value={item.productArr}> {item.name} </option>
+                                            <option key={index} value={item.name}> {item.name} </option>
                                         ) 
                                     })
                                 }

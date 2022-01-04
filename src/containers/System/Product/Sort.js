@@ -1,34 +1,38 @@
 import React, {useState, useEffect} from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../../store/actions';
 
-const Sort = (props) => {
-    const [category, setCategory] = useState([]);
+const Sort = () => {
+    const [sort, setSort] = useState('');
+
+    //fetch data
+    const dispatch = useDispatch();
+    const listCategory = useSelector(state => state.admin.categories);
 
     useEffect(() => {
-        props.fetchCategories();
-        setCategory(props.listCategory);
-    }, [category]);
+        dispatch(actions.fetchAllCategory());
+    }, [dispatch]);
 
     return (
         <div className='justify-content-end d-flex col-9 p-0'>
             <div className="input-group col-5 p-0">
                 <label className="p-0">Tìm kiếm</label>
-                <input type="text" className="form-control ml-2" placeholder="Search..." 
-                    style={{height:'30px'}}
-                />
+                <input type="text" className="form-control ml-2" placeholder="Search..." style={{height:'30px'}}/>
             </div>
 
             <div className="form-group d-flex col-3 p-0">
-                <select className="form-control" name="" id=""  style={{height:'30px'}}>
+                <select className="form-control" name="" id=""  style={{height:'30px'}}
+                    value={sort}
+                    onChange={(e) => setSort(e.target.value)}
+                >
                     {   
-                        props.listCategory && props.listCategory.length >0 ?
-                        props.listCategory.map((item, index) => {
+                        listCategory && listCategory.length >0 ?
+                        listCategory.map((item, index) => {
                             return (
                                 <option key={index} value={item.name}>{item.name}</option>
                             )
                         })
-                        : null
+                        : 'no data'
                     }
                 </select>
             </div>
@@ -51,17 +55,4 @@ const Sort = (props) => {
         </div>
     );
 }
-
-const mapStateToProps = state => {
-    return {
-        listCategory: state.admin.categories
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchCategories: () => dispatch(actions.fetchAllCategory())
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Sort);
+export default Sort;

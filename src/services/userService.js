@@ -69,6 +69,11 @@ const deleteProduct = (productId) => {
     })
 }
 
+//get all product by category
+const getAllProductByCategory = (categoryId) => {
+    return axios.get(`http://localhost:8082/api/get-product-by-category?id=${categoryId}`)
+}
+
 //save info product
 const saveInfoProduct = (data) => {
     return axios.post(`http://localhost:8082/api/save-info-product`, data)
@@ -223,5 +228,6 @@ export {
     getAllSpecialCategory,
     createSpecialCategory,
     editSpecialCategory,
-    deleteSpecialCategory
+    deleteSpecialCategory,
+    getAllProductByCategory
 };

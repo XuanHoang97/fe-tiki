@@ -8,17 +8,20 @@ import Sort from './Sort';
 import Pagination from './Pagination';
 
 const UserManage = (props) => {
+    const [users, setListUsers] = useState([]);
     const [searchUser, setSearchUser] = useState('');
-    const [sortUser, setSortUser] = useState('');
+    const [sortUser, setSortUser] = useState('role');
     const [selectInfoUser, setSelectInfoUser] = useState([]);
     const [isOpenModalUser, setIsOpenModalUser] = useState(false);
     const [isOpenModalEditUser, setIsOpenModalEditUser] = useState(false);
     const [isOpenModalInfoUser, setIsOpenModalInfoUser] = useState(false);
     const [userEdit, setUserEdit] = useState('');
 
+
     //fetch data
     const dispatch = useDispatch();
     const listUsers = useSelector(state => state.admin.users);
+
 
     useEffect(() => {
         dispatch(actions.fetchAllUser());
@@ -73,9 +76,9 @@ const UserManage = (props) => {
     };
 
     //sorting user
+
     const sorting = (e) => {
         const sorting = e.target.value;
-
         const sortRes = listUsers.sort((a, b) => {
             if (sorting === "role") {
                 return a.id > b.id ? 1 : -1;
@@ -94,7 +97,7 @@ const UserManage = (props) => {
             }
         });
         setSortUser(sorting);
-
+        setListUsers(sortRes);
     };
     const filterUser =listUsers.filter((item) => `${item.firstName} ${item.lastName} ${item.address}`.toLowerCase().includes(searchUser.toLowerCase()));
 
@@ -128,9 +131,7 @@ const UserManage = (props) => {
                 <button onClick ={() => handleAddNewUser()}  type="button" className="btn btn-success col-2">
                     <i className="fas fa-plus mr-2"></i> Thêm thành viên
                 </button>
-
-                <Sort searchUser={searchUser} onSearch={onSearch} sorting={sorting}
-                sorts={sortUser} />
+                <Sort searchUser={searchUser} onSearch={onSearch} sorting={sorting} sorts={sortUser} />
             </div>
             
             {/* list user  */}
