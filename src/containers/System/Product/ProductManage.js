@@ -6,6 +6,9 @@ import ModalEditProduct from './ModalEditProduct';
 import Sort from './Sort';
 import { numberFormat } from '../../../components/Formating/FormatNumber';
 
+// test data
+import Filter from './Filter';
+
 const ProductManage = (props) => {
     const [modalProduct, setModalProduct] = useState(false);
     const [modalEditProduct, setModalEditProduct] = useState(false);
@@ -18,6 +21,27 @@ const ProductManage = (props) => {
     useEffect(() => {
         dispatch(actions.fetchProducts());
     }, [dispatch]);
+
+
+    //sorting product
+    const [products, setProducts] = useState([]);
+    const [filter, setFilter] = useState([]);
+    const [sortBy, setSortBy] = useState("");
+    const [selectedTag, setSelectedTag] = useState("");
+
+    useEffect(() => {
+        setProducts(listProducts);
+        setFilter(listProducts);
+    }, [products, listProducts]);
+
+    useEffect(() => {
+        const filtered = selectedTag ? products.filter((item) => item.category_id === selectedTag) : products;
+        setFilter(
+          sortBy
+            ? [...filtered].sort((a, b) => sortBy === "lowest" ? a.price - b.price : b.price - a.price )
+            : [...filtered].sort((a, b) => (a.id > b.id ? 1 : -1))
+        );
+    }, [selectedTag, sortBy, products]);
 
     //OPEN MODAL Create, Edit Product
     const toggleProductModal=()=> {
@@ -52,11 +76,6 @@ const ProductManage = (props) => {
         dispatch(actions.EditProduct(data));
     }
 
-    //filter product
-    const filterProduct = (categoryId) => {
-        dispatch(actions.GetAllProductByCategory(categoryId));
-    }
-
     return (        
         <div className="mx-2">
             <ModalProduct
@@ -79,12 +98,21 @@ const ProductManage = (props) => {
                 </button>
 
                 <Sort  
-                    filterProduct={filterProduct}
-
+                    handleSort={setSortBy}
+                    handleTagChange={setSelectedTag}
+                    selectedTag={selectedTag}
+                    sortBy={sortBy}
                 />
             </div>
 
-            <div className="text-dark">Danh sách sản phẩm (<b>{listProducts.length}</b>)</div>
+            <Filter 
+                handleSort={setSortBy}
+                handleTagChange={setSelectedTag}
+                selectedTag={selectedTag}
+                sortBy={sortBy}
+            />
+
+            <div className="text-dark">Danh sách sản phẩm (<b>{filter.length}</b>)</div>
             <table className="table table-striped table-bordered table-hover">
                 <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
                     <tr>
@@ -96,15 +124,15 @@ const ProductManage = (props) => {
                         <td scope="col">Bảo hành</td>
                         <td scope="col">Giá (VND)</td>
                         <td scope="col">Sale (VND)</td>
-                        <td scope="col">Trạng thái</td>
+                        <td scope="col">Trạng thái kho</td>
                         <td scope="col">Xuất xứ</td>
                         <td scope="col">Tác vụ</td>
                     </tr>
                 </thead>
                 <tbody>
                     {   
-                        listProducts && listProducts.length>0 ?
-                        listProducts.map((item, index) => {
+                        filter && filter.length>0 ?
+                        filter.map((item, index) => {
                             //endCode image
                             let imageBase64='';
                             if(item.image){
@@ -121,12 +149,14 @@ const ProductManage = (props) => {
                                     <td style={{backgroundImage: `url(${imageBase64})`, backgroundPosition: 'center', backgroundSize: 'cover', height: '45px',
                                         width: '45px', borderRadius: '50%', display: 'flex', margin: '0 auto'}}>
                                     </td>
-                                    <td>{item.name}</td>
+                                    <td className='text-primary'>{item.name}</td>
                                     <td>{item.number}</td>
                                     <td>{item.warranty}</td>
                                     <td>{numberFormat(item.price)}</td>
                                     <td>{numberFormat(item.sale)}</td>
-                                    <td>{item.status}</td>
+                                    <td className= {item.status==='Còn hàng' ? 'text-success': 'text-danger'}>  
+                                        {item.status}
+                                    </td>
                                     <td>{item.supplier_id}</td>
                                     <td>
                                         <button onClick={()=> editProduct(item)} type="button" className="btn text-primary px-2">
@@ -141,7 +171,7 @@ const ProductManage = (props) => {
                         })
                         : 
                         <tr>
-                            <td colSpan="10" className="text-center">Không có sản phẩm nào</td>
+                            <td colSpan="10" className="text-center text-danger">Không có sản phẩm nào</td>
                         </tr>
                     }
                 </tbody>

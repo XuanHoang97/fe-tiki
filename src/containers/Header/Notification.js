@@ -5,7 +5,7 @@ function Notification(props) {
         <div className="mess">
             <i className="far fa-bell"></i>
             <span className="badge badge-pill badge-danger"
-                style={{position: 'absolute', right: '16.5rem', top: '0.35rem'}}>1</span>
+                style={{position: 'absolute', right: '16rem', top: '0.35rem'}}>1</span>
         </div>
     );
 }

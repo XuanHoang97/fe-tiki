@@ -22,6 +22,7 @@ const ModalEditNews  = (props) => {
     const [previewImg, setPreviewImg] = useState('');
     const dispatch = useDispatch();
     const listCategory = useSelector(state => state.admin.categories);
+    const listStatus = useSelector(state => state.admin.status_news);
 
     useEffect (() => {
         let news = props.currentNews;
@@ -46,6 +47,7 @@ const ModalEditNews  = (props) => {
             setPreviewImg(imageBase64);
         } 
         dispatch(actions.fetchAllCategory());
+        // dispatch(actions.status());
     }, [dispatch, props.currentNews]);
 
     const toggle =()=>{
@@ -169,8 +171,8 @@ const ModalEditNews  = (props) => {
                                 value={status}
                             >   
                                 {
-                                    listCategory && listCategory.length >0 ?
-                                    listCategory.map((item, index)=>{
+                                    listStatus && listStatus.length >0 ?
+                                    listStatus.map((item, index)=>{
                                         return(
                                             <option key={index} value={item.valueVi}>{item.valueVi}</option>                                                 
                                         )
@@ -188,8 +190,8 @@ const ModalEditNews  = (props) => {
                                 value={category_id}
                             >
                                 {   
-                                    props.listCategory && props.listCategory.length >0 ?
-                                    props.listCategory.map((item, index) => {
+                                    listCategory && listCategory.length >0 ?
+                                    listCategory.map((item, index) => {
                                         return (
                                             <option key={index} value={item.name}>{item.name}</option>
                                         )

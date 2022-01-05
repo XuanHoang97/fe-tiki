@@ -41,3 +41,16 @@ a {
 a.active {
     background-color: rgb(76, 117, 235);
 }
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 4px rgb(197, 197, 197);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(197, 197, 197);
+    border-radius: 15px;
+}

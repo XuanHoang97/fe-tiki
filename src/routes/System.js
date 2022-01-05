@@ -8,8 +8,9 @@ import OrderManage from '../containers/System/Order/OrderManage';
 import NewsManage from '../containers/System/News/NewsManage';
 import ArticleManage from '../containers/System/Article/ArticleManage';
 import CategoryManage from '../containers/System/Category/CategoryManage';
-import Statiscal from '../containers/System/Statiscal/Statiscal';
+import StatisticalManage from '../containers/System/Statistical/Statistical';
 import Index from '../containers/System/Slide/Index';
+import Setting from '../containers/System/Setting/Index';
 
 const System = ({ systemMenuPath }) => {
     return (
@@ -24,8 +25,8 @@ const System = ({ systemMenuPath }) => {
                     <Route path="/system/news-manage" component={NewsManage} />
                     <Route path="/system/category-manage" component={CategoryManage} />
                     <Route path="/system/slide-manage" component={Index} />
-                    <Route path="/system/report-statiscal" component={Statiscal} />
-                    <Route path="/system/setting" component={Dashboard} />
+                    <Route path="/system/report-Statistical" component={StatisticalManage} />
+                    <Route path="/system/setting" component={Setting} />
 
                     <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />
                 </Switch>

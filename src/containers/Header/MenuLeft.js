@@ -69,7 +69,7 @@ const MenuLeft = ({widthMenuLeft, effect}) => {
                 <NavLink to="/system/slide-manage" activeClassName="active" className ="menu-left">
                     <div className="d-flex align-items-center module">
                         <i className="far fa-images mr-2"></i>
-                        <span>Slide - Banner - Image</span> 
+                        <span>Quản lý đa phương tiện</span> 
                     </div>
                     <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>
@@ -82,7 +82,7 @@ const MenuLeft = ({widthMenuLeft, effect}) => {
                     <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>
 
-                <NavLink to="/system/report-statiscal" activeClassName="active" className ="menu-left">
+                <NavLink to="/system/report-Statistical" activeClassName="active" className ="menu-left">
                     <div className="d-flex align-items-center module">
                         <i className="far fa-flag mr-2"></i>
                         <span>Báo cáo, thống kê</span> 

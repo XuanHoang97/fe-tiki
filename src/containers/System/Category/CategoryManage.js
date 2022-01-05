@@ -105,7 +105,7 @@ const CategoryManage = (props) => {
                                 <td style={{backgroundImage: `url(${imageBase64})`, backgroundPosition: 'center', backgroundSize: 'cover', height: '45px',
                                     width: '45px', borderRadius: '50%', display: 'flex', margin: '0 auto'}}>
                                 </td>
-                                <td>{item.name}</td>
+                                <td className='text-primary'>{item.name}</td>
                            
                                 <td>
                                     <button onClick={()=> editCategory(item)} type="button" className="btn text-primary px-2">

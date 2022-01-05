@@ -76,7 +76,6 @@ const UserManage = (props) => {
     };
 
     //sorting user
-
     const sorting = (e) => {
         const sorting = e.target.value;
         const sortRes = listUsers.sort((a, b) => {
@@ -174,7 +173,7 @@ const UserManage = (props) => {
                                     <td>{index + 1}</td>
                                     <td style={{backgroundImage: `url(${imageBase64})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat', height: '45px',
                                     width: '45px', borderRadius: '50%', display: 'flex', margin: '0 auto'}}></td>
-                                    <td>{item.firstName} {item.lastName}</td>
+                                    <td className='text-primary'>{item.firstName} {item.lastName}</td>
                                     <td>{item.email}</td>
                                     <td>{item.phoneNumber}</td>
                                     <td>{item.address}</td>

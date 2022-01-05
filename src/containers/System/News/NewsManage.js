@@ -114,14 +114,14 @@ const NewsManage = (props) => {
                                     <td style={{backgroundImage: `url(${imageBase64})`, backgroundPosition: 'center', backgroundSize: 'cover', height: '45px',
                                         width: '45px', borderRadius: '50%', display: 'flex', margin: '0 auto'}}>
                                     </td>
-                                    <td>{item.name}</td>
+                                    <td className='text-primary'>{item.name}</td>
                                     <td>{item.description}</td>
                                     <td>{item.author_id}</td>
                                     <td>
                                         <Moment format="DD/MM/YYYY" className='mr-2'>{item.date}</Moment>
                                         <small><Moment format="hh:mm">{item.date}</Moment></small>
                                     </td>
-                                    <td><span className ="text-success">{item.status}</span>: <Moment fromNow className ="small">{item.date}</Moment></td>
+                                    <td><span className ={item.status ==='Mới' ? "text-success" : "text-danger"}>{item.status}</span>: <Moment fromNow className ="small">{item.date}</Moment></td>
                                     <td>{item.category_id}</td>
                                     <td>
                                         <button onClick={() => editNews(item) } type="button" className="btn text-primary pr-2">

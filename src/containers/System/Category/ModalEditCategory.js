@@ -5,11 +5,11 @@ import {CommonUtils} from "../../../utils"
 const ModalEditCategory  = (props) => {
     const [id, setId] = useState('');
     const [image, setImage] = useState('');
+    const [previewImg, setPreviewImg] = useState('');
     const [name, setName] = useState('');
     const [keyMap, setKeyMap] = useState('');
     const [type, setType] = useState('');
     const [value, setValue] = useState('');
-    const [previewImg, setPreviewImg] = useState('');
 
     useEffect (() => {
         let category = props.currentCategory;
@@ -21,6 +21,7 @@ const ModalEditCategory  = (props) => {
         //fill info category
         setId(category.id);
         setPreviewImg(imageBase64);
+        setImage(imageBase64);
         setName(category.name);
         setKeyMap(category.keyMap);
         setType(category.type);

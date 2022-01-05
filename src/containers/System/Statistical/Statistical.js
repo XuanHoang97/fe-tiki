@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 
-const StatiscalManage = (props) => {
+const StatisticalManage = (props) => {
     const [activeTab, setActiveTab] = useState('1');
 
     return (
@@ -72,4 +72,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(StatiscalManage);
+export default connect(mapStateToProps, mapDispatchToProps)(StatisticalManage);

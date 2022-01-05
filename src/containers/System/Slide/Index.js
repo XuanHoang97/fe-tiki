@@ -263,7 +263,7 @@ const Index = (props) => {
                                                 <td>{index + 1}</td>
                                                 <td style={{backgroundImage: `url(${imageBase64})`, backgroundPosition: 'center', backgroundSize: 'cover', height: '45px',
                                                     width: '45px', borderRadius: '50%', display: 'flex', margin: '0 auto'}}></td>
-                                                <td>{item.name}</td>
+                                                <td className='text-primary'>{item.name}</td>
                                                 <td>{item.date}</td>
                                                 <td className=''>
                                                     <button onClick={() => editSlide(item)} type="button" className="btn text-primary  mr-3">
@@ -386,7 +386,7 @@ const Index = (props) => {
                                                 <td className='border'
                                                     style={{backgroundImage: `url(${imageBase64})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat', borderRadius: '50%'}}
                                                 ></td>
-                                                <td>{item.name}</td>
+                                                <td className='text-primary'>{item.name}</td>
                                                 <td>{Date()}</td>
                                                 <td className='d-flex'>
                                                     <button type="button" className="btn text-primary  mr-3">
