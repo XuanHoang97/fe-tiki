@@ -37,7 +37,6 @@ const System = ({ systemMenuPath }) => {
 
 const mapStateToProps = state => {
     return {
-        systemMenuPath: state.app.systemMenuPath
     };
 };
 

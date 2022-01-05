@@ -173,7 +173,7 @@ function App(props) {
 
 const mapStateToProps = state => {
     return {
-        started: state.app.started,
+        // started: state.app.started,
         isLoggedIn: state.user.isLoggedIn,
         userInfo : state.user.userInfo
     };

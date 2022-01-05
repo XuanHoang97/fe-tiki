@@ -1,12 +1,18 @@
 import React, {useState} from 'react';
-import Calculator from './Calculator';
+import Calculator from './calculator/Calculator';
+import Game from './game/Game';
 import './Index.scss'
 
 function Setting(props) {
   const [modalCalculator, setModalCalculator] = useState(false);
+  const [modalGame, setModalGame] = useState(false);
   
   const calculator = () => {
     setModalCalculator(!modalCalculator);
+  }
+
+  const game = () => {
+    setModalGame(!modalGame);
   }
 
     return (
@@ -14,6 +20,11 @@ function Setting(props) {
             <Calculator 
               isOpen={modalCalculator}
               toggleParent={calculator}
+            />
+
+            <Game 
+              isOpen={modalGame}
+              toggleParent={game}
             />
 
             <div className='col-2'>
@@ -37,13 +48,13 @@ function Setting(props) {
             </div>
 
             <div className='col-2'>
-              <div className='mb-2'>3. Máy tính</div>
+              <div className='mb-2'>3. Máy tính bỏ túi</div>
               <button onClick={()=> calculator()} type='button' className='btn btn-success px-4'><i className="fas fa-calculator mr-2"></i> Thử ngay</button>
             </div>
 
             <div className='col-2'>
               <div className='mb-2'>4. Play game</div>
-              <button type='button' className='btn btn-success px-4'><i className="fas fa-gamepad mr-2"></i> Chơi</button>
+              <button onClick={()=> game()} type='button' className='btn btn-success px-4'><i className="fas fa-gamepad mr-2"></i> Chơi</button>
             </div>
 
             <div className='col-4'>

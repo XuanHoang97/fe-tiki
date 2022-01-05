@@ -104,7 +104,6 @@ const Login = (props) => {
 
 const mapStateToProps = state => {
     return {
-        language: state.app.language
     };
 };
 
