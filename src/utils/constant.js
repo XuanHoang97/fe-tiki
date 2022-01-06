@@ -1,10 +1,10 @@
 export const path = {
     HOME: '/',
+    HOMEPAGE: '/home',
     LOGIN: '/login',
     LOG_OUT: '/logout',
     SYSTEM: '/system',
     SEARCH: '/search/:keyword',
-    NOTFOUND: '/404'
 };
 
 export const CRUD_ACTIONS = {
