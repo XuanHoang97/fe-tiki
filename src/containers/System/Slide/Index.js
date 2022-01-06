@@ -4,7 +4,7 @@ import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import {CreateSlide, CreateSpecialCategory, DeleteSlide, EditSlide, fetchAllCategory, fetchAllSlide, fetchAllSpecialCategory} from '../../../store/actions';
 import { CommonUtils, CRUD_ACTIONS } from '../../../utils';
 
-const Index = (props) => {
+const Slide = (props) => {
     const [activeTab, setActiveTab] = useState('1');
     const [categoryId, setCategoryId] = useState('');
     //slide
@@ -421,4 +421,4 @@ const Index = (props) => {
     );
 }
 
-export default Index;
+export default Slide;

@@ -22,6 +22,7 @@ import { path } from '../utils';
 import Footer from '../containers/Header/Footer';
 import NotFound from '../containers/System/Search/NotFound';
 import Index from '../containers/System/Search/Index';
+import Slide from '../containers/System/Slide/Index';
 
 const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
     const [menuLeft, setMenuLeft] = useState(true);
@@ -148,7 +149,7 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
                             <Route path="/system/article-manage" component={ArticleManage} />
                             <Route path="/system/news-manage" component={NewsManage} />
                             <Route path="/system/category-manage" component={CategoryManage} />
-                            <Route path="/system/slide-manage" component={Index} />
+                            <Route path="/system/slide-manage" component={Slide} />
                             <Route path="/system/report-Statistical" component={StatisticalManage} />
                             <Route path="/system/setting" component={Setting} />
         

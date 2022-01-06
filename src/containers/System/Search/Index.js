@@ -15,14 +15,14 @@ function Index(props) {
 
                 {
                     dataSearch.map((item, index) => {
-                    //endCode image
-                    let imageBase64='';
+                     //endCode image
+                     let imageBase64='';
                     if(item.image){
                         imageBase64=new Buffer(item.image, 'base64').toString('binary')
                     }
 
                     return (
-                        <div className= "d-flex bg-light border border-secondary p-2 my-3 align-items-center justify-content-between" key={index} >
+                        <div className= "d-flex bg-light border border-secondary p-2 my-3 align-items-center justify-content-between" >
                             <div className="d-flex"> 
                             <span>#{index + 1}</span>
                             <div style={{backgroundImage: `url(${imageBase64})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat', height: '45px',

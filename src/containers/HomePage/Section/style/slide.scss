@@ -1,0 +1,41 @@
+@import "./../../../../assets/css/variable.scss";
+
+img {
+    max-width: 100%;
+}
+
+.slide {
+    #carousel-example-1z {
+        .control {}
+        .list_slide {
+            .carousel-item {
+                @include phone {
+                    height: 150px;
+                }
+            }
+        }
+        .list_slide:hover~.carousel-control-next,
+        .list_slide:hover~.carousel-control-prev {
+            opacity: 1 !important;
+        }
+        .carousel-control-prev {
+            @include phone {
+                top: 55px !important;
+            }
+        }
+        .carousel-control-prev:hover {
+            opacity: 1 !important;
+        }
+        .carousel-control-next {
+            @extend .carousel-control-prev;
+        }
+        .carousel-control-next:hover {
+            opacity: 1 !important;
+        }
+    }
+    .baner {
+        @include phone {
+            display: none;
+        }
+    }
+}

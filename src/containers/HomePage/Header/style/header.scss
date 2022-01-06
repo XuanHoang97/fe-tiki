@@ -1,0 +1,465 @@
+@import "../../../../assets/css/variable.scss";
+
+img {
+    max-width: 100%;
+}
+
+.header {
+    background: rgb(1, 127, 255);
+    position: relative;
+    z-index: 1000;
+    @include phone {
+        padding: 5px 0;
+    }
+    .container {
+        .row {
+            @include phone {
+                margin: 0;
+                padding-right: 0;
+            }
+            .navbar {
+                @include phone {
+                    padding: 0 !important;
+                }
+                .menu_ctg {
+                    @include phone {
+                        width: 100%;
+                    }
+                    .category {
+                        i {
+                        }
+                        small {
+                        }
+                        .menu__item {
+                            display: none;
+                            width: 800px;
+                            position: absolute;
+                            top: 0;
+                            left: 14.5em;
+                            background-color: rgb(235, 247, 255);
+                            padding: 15px;
+                            height: 100%;
+                        }
+                        br {
+                            @include phone {
+                                display: none;
+                            }
+                        }
+                        span {
+                            @include phone {
+                                display: none;
+                            }
+                        }
+                    }
+                    .dropdown-item:hover {
+                        .menu__item {
+                            display: flex;
+                        }
+                    }
+                    .list__product::before {
+                        content: "";
+                        border-bottom: 0.35rem solid #fff;
+                        border-right: 0.35rem solid transparent;
+                        border-left: 0.35rem solid transparent;
+                        position: absolute;
+                        top: -0.3rem;
+                        right: 7rem;
+                        z-index: 10;
+                        .menu__item {
+                        }
+                    }
+                }
+                .menu_ctg:after {
+                    content: "";
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    transition: opacity 0.35s ease-in-out;
+                    opacity: 0;
+                    visibility: hidden;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    pointer-events: none;
+                }
+                .menu_ctg:hover:after {
+                    z-index: 10;
+                    opacity: 1;
+                    visibility: visible;
+                    position: fixed;
+                }
+                .navbar-brand {
+                }
+                .navbar-toggler {
+                    @include phone {
+                        color: white;
+                        border: none;
+                    }
+                }
+                .navbar-collapse {
+                    @include phone {
+                    }
+                    .navbar-nav {
+                        @include phone {
+                            display: flex;
+                            align-items: normal;
+                            position: relative;
+                            flex-direction: column-reverse;
+                            padding: 5px 15px;
+                        }
+                        .login_resg {
+                            .info {
+                            }
+                        }
+                        .search {
+                            input {
+                                @include phone {
+                                    height: 30px;
+                                }
+                            }
+                            .search-form {
+                                position: absolute;
+                                bottom: 0;
+                                .search__info {
+                                    background: white;
+                                    position: absolute;
+                                    z-index: 99;
+                                    height: auto;
+                                    width: 555px;
+                                    box-shadow: rgb(121, 121, 121) 0px 6px 12px 0px;
+                                    .search__items:hover {
+                                        background: rgb(227, 242, 252);
+                                    }
+                                    .search__items {
+                                        cursor: pointer;
+                                        padding: 5px;
+                                    }
+                                    .suggest {
+                                        padding: 10px;
+                                        .coupon {
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: space-between;
+                                            h6 {
+                                                font-size: 13px;
+                                            }
+                                        }
+                                        .history {
+                                            display: grid;
+                                            grid-template-columns: 80% 20%;
+                                            justify-content: space-between;
+                                            align-items: center;
+                                            cursor: pointer;
+                                            .item_log {
+                                                img {
+                                                    width: 7%;
+                                                }
+                                                span {
+                                                    font-size: 13px;
+                                                    font-weight: 500;
+                                                }
+                                            }
+                                            &:hover {
+                                                background: rgba(27, 168, 255, 0.1);
+                                            }
+                                            .close {
+                                                img {
+                                                    width: 20%;
+                                                }
+                                            }
+                                        }
+                                        .viewMore {
+                                            color: rgb(32, 109, 252);
+                                            font-size: 13px;
+                                            justify-content: center;
+                                            cursor: pointer;
+                                            display: flex;
+                                            gap: 5px;
+                                            align-items: center;
+                                        }
+                                    }
+                                    .list__search {
+                                        padding: 0 10px;
+                                        border-top: 1px solid rgb(236, 236, 236);
+                                        border-bottom: 1px solid rgb(236, 236, 236);
+                                        .search__popular {
+                                            margin: 10px 0;
+                                            display: flex;
+                                            gap: 5px;
+                                            img {
+                                                max-width: 4% !important;
+                                            }
+                                            span {
+                                                font-size: 14px;
+                                                font-weight: 500;
+                                            }
+                                        }
+                                        .pop {
+                                            display: grid;
+                                            grid-template-columns: 33% 33% 33%;
+                                            .list__item {
+                                                display: flex;
+                                                gap: 5px;
+                                                margin-bottom: 15px;
+                                                img {
+                                                    width: 20%;
+                                                }
+                                                span {
+                                                    font-size: 11px;
+                                                    background: rgb(250, 250, 250);
+                                                    width: 75%;
+                                                    padding: 3px 7px;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    .special__prod {
+                                        padding: 10px;
+                                        h6 {
+                                            color: rgb(68, 68, 68);
+                                            font-size: 14px;
+                                            margin-bottom: 15px;
+                                            font-weight: 500;
+                                        }
+                                        .list__prod {
+                                            display: grid;
+                                            grid-template-columns: 1fr 1fr 1fr 1fr;
+                                            .item--prod {
+                                                display: grid;
+                                                grid-template-rows: 50% 50%;
+                                                gap: 20px;
+                                                justify-items: center;
+                                                margin-bottom: 10px;
+                                                img {
+                                                    width: 35%;
+                                                    border-radius: 35%;
+                                                }
+                                                span {
+                                                    font-size: 12px;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                .blur {
+                                    position: fixed;
+                                    inset: 0;
+                                    z-index: -1;
+                                    background: rgba(0, 0, 0, 0.53);
+                                    opacity: 0.3;
+                                }
+                            }
+                            .btn_search {
+                                @include phone {
+                                    height: 30px !important;
+                                }
+                                button {
+                                    @include phone {
+                                        display: flex;
+                                        align-items: center;
+                                    }
+                                    small {
+                                        @include phone {
+                                            display: none;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .account {
+                            @include phone {
+                                position: absolute;
+                                top: -2.2rem;
+                                right: 5rem;
+                            }
+                            a {
+                                i {
+                                    @include phone {
+                                        font-size: 15px !important;
+                                        margin-right: 0 !important;
+                                    }
+                                }
+                                span {
+                                    @include phone {
+                                        display: none;
+                                    }
+                                }
+                            }
+                            .dropdown-menu {
+                                .reg__log:hover {
+                                    background: transparent;
+                                }
+                            }
+                            .control::before {
+                                content: "";
+                                border-bottom: 0.35rem solid #fff;
+                                border-right: 0.35rem solid transparent;
+                                border-left: 0.35rem solid transparent;
+                                position: absolute;
+                                top: -0.35rem;
+                                right: 12rem;
+                                z-index: 10;
+                            }
+                        }
+                        .cart:hover {
+                            .cart__info {
+                                animation: zoom 0.3s linear;
+                                transform-origin: calc(100% - 60px) top;
+                            }
+                        }
+                        .cart {
+                            font-size: 14px;
+                            cursor: pointer;
+                            @include phone {
+                                position: absolute;
+                                top: -2.2rem;
+                                right: 2.5rem;
+                            }
+                            @extend .account;
+                            // div::before {
+                            //     content: "";
+                            //     border-bottom: 0.35rem solid #fff;
+                            //     border-right: 0.35rem solid transparent;
+                            //     border-left: 0.35rem solid transparent;
+                            //     position: absolute;
+                            //     top: -0.35rem;
+                            //     right: 5.3rem;
+                            //     z-index: 10;
+                            // }
+                            .cart__info {
+                                // display: block;
+                                box-shadow: 0 2px 10px 1px grey;
+                                width: 25rem;
+                                left: -15rem;
+                                a {
+                                }
+                                .text-left {
+                                    .info {
+                                        .content {
+                                            line-height: 0;
+                                            small {
+                                                font-size: 14px;
+                                                font-weight: 500;
+                                            }
+                                            .small,
+                                            p {
+                                                line-height: 15px;
+                                            }
+                                        }
+                                        .price {
+                                            display: grid;
+                                            text-align: end;
+                                            .price__num {
+                                                display: inline-flex;
+                                                justify-content: flex-end;
+                                                gap: 5px;
+                                                h6 {
+                                                    font-weight: bold;
+                                                }
+                                            }
+                                            .btnDelProd {
+                                                cursor: pointer;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .menu--suggest {
+            @include phone {
+                display: none;
+            }
+        }
+    }
+}
+
+
+.form-login:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
+
+::placeholder {
+    font-size: 12px;
+}
+
+.dropdown-menu .dropdown-item i {
+    color: rgb(194, 194, 194);
+    font-size: 13px;
+    padding: 0;
+}
+
+.dropdown-item:hover {
+    background: #017fff;
+    color: white;
+}
+
+.category:hover ~ .menu__item {
+    display: flex !important;
+}
+
+.menu__item {
+    z-index: 9;
+}
+
+.view--more {
+    cursor: pointer;
+    transition-duration: 0.4s;
+    i {
+        transition: all 0.3s ease-in-out;
+    }
+}
+
+.view--more:hover {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 15px !important;
+    padding: 3px 5px;
+    border-radius: 5px;
+}
+
+.view--more:hover {
+    i {
+        animation: fa-spin 1.5s infinite linear;
+    }
+}
+
+.view--more:after {
+    content: "";
+    background: #0051ff;
+    display: block;
+    position: absolute;
+    padding-top: 3%;
+    padding-left: 9%;
+    margin-left: -5px !important;
+    margin-top: -2.5%;
+    opacity: 0;
+    transition: all 0.6s;
+}
+
+.view--more:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s;
+}
+
+.drop__menu:after {
+    display: none;
+    content: "";
+    border-bottom: 1.1rem solid #017fff;
+    opacity: 0.8;
+    border-right: 1rem solid transparent;
+    border-left: 1rem solid transparent;
+    position: absolute;
+    right: -1.6em;
+    margin-top: -20px;
+    z-index: 10;
+    transform: rotate(90deg);
+}
+
+.dropdown-item:hover:after {
+    display: block;
+}
+
