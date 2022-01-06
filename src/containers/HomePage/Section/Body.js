@@ -2,7 +2,6 @@ import React, { } from "react";
 import Category from "./Category";
 import Mail from "./Mail";
 import Product from "./Product/Index";
-import Preferential from "./Preferential";
 import ProductSuggestion from "./productSuggestion/Index";
 import SearchSpecial from "./searchSpecial/Index";
 import Slide from "./Slide";
@@ -15,7 +14,6 @@ export default function Body() {
       <div className="container">
         <Slide />
         <Category />
-        <Preferential />
         <SearchSpecial />
         <Product />
         <ProductSuggestion />
