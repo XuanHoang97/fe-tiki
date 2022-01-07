@@ -42,7 +42,7 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
     const handleSearch = async() => {
         let res = await axios({
             method: 'GET',
-            'url': 'http://localhost:8082/api/search',
+            'url': 'http://localhost:8080/api/search',
             "params": { 
                 'keyword': query 
             }

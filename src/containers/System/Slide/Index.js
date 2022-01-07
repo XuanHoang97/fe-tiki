@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
-import {CreateSlide, CreateSpecialCategory, DeleteSlide, EditSlide, fetchAllCategory, fetchAllSlide, fetchAllSpecialCategory} from '../../../store/actions';
+import {CreateSlide, CreateSpecialCategory, DeleteSlide, EditSlide, EditSpecialCategory, fetchAllCategory, fetchAllSlide, fetchAllSpecialCategory, getStatusSlide} from '../../../store/actions';
 import { CommonUtils, CRUD_ACTIONS } from '../../../utils';
 
 const Slide = (props) => {
@@ -10,6 +10,7 @@ const Slide = (props) => {
     //slide
     const [name, setName] = useState('');
     const [image, setImage] = useState('');
+    const [status, setStatus] = useState('');
     const [previewImg, setPreviewImg] = useState('');
     const [date, setDate] = useState(Date);
     const [action, setAction] = useState(CRUD_ACTIONS.CREATE);
@@ -20,19 +21,23 @@ const Slide = (props) => {
     const [categoryImage, setCategoryImage] = useState('');
     const [categoryPreviewImg, setCategoryPreviewImg] = useState('');
     const [categoryDate, setCategoryDate] = useState(Date);
-    const [categoryAction, setCategoryAction] = useState();
+    const [categoryAction, setCategoryAction] = useState(CRUD_ACTIONS.CREATE);
     const [categoryEdit, setCategoryEdit] = useState();
     
     //fetch data
     const slide = useSelector(state => state.admin.slides);
     const category = useSelector(state => state.admin.categories);
     const specialCategories = useSelector(state => state.admin.specialCategories);
+    const statusSlide = useSelector(state => state.admin.statusSlide);
     const dispatch = useDispatch();
+
+    console.log('slide', statusSlide);
 
     useEffect(() => {
         dispatch(fetchAllSlide());
         dispatch(fetchAllCategory());
         dispatch(fetchAllSpecialCategory());
+        dispatch(getStatusSlide());
     }, []);
 
 
@@ -74,11 +79,13 @@ const Slide = (props) => {
             dispatch(CreateSlide({
                 name:name,
                 image:image,
+                status:status,
                 date:date,
                 categoryId:categoryId,
             }));
             setName('');
             setImage('');
+            setStatus('');
             setPreviewImg('');
             setCategoryId('');
         }
@@ -87,35 +94,22 @@ const Slide = (props) => {
                 id:slideEdit,
                 name:name,
                 image:image,
+                status:status,
                 previewImg:previewImg,
                 date:date,
                 categoryId:categoryId,
             }));
             setName('');
             setImage('');
+            setStatus('');
             setPreviewImg('');
             setCategoryId('');
             setAction(CRUD_ACTIONS.CREATE);
         }
     }
 
-    //Add and edit Special category
-    const saveCategorySpecial = () => {
-        // if(categoryAction===CRUD_ACTIONS.CREATE){
-            dispatch(CreateSpecialCategory({
-                name:categoryName,
-                image:categoryImage,
-                date:categoryDate,
-                categoryId:categoryId,
-            }));
-            setCategoryName('');
-            setCategoryImage('');
-            setCategoryPreviewImg('');
-            setCategoryId('');
-        // }
-    }
-
-
+    
+    
     //delete slide
     const deleteSlide=(slide)=>{
         dispatch(DeleteSlide(slide.id));
@@ -130,11 +124,57 @@ const Slide = (props) => {
         setName(slide.name);
         setPreviewImg(imageBase64);
         setDate(slide.date);
+        setStatus(slide.status);
         setCategoryId(slide.categoryId);
         setAction(CRUD_ACTIONS.EDIT);
         setSlideEdit(slide.id);
     }
+    
+    //Add and edit Special category
+    const saveCategorySpecial = () => {
+        if(categoryAction===CRUD_ACTIONS.CREATE){
+            dispatch(CreateSpecialCategory({
+                name:categoryName,
+                image:categoryImage,
+                date:categoryDate,
+                categoryId:categoryId,
+            }));
+            setCategoryName('');
+            setCategoryImage('');
+            setCategoryPreviewImg('');
+            setCategoryId('');
+        }
 
+        if(categoryAction===CRUD_ACTIONS.EDIT){
+            dispatch(EditSpecialCategory({
+                id:categoryEdit,
+                name:categoryName,
+                image:categoryImage,
+                previewImg:categoryPreviewImg,
+                date:categoryDate,
+                categoryId:categoryId,
+            }));
+            setCategoryName('');
+            setCategoryImage('');
+            setCategoryPreviewImg('');
+            setCategoryId('');
+            setCategoryAction(CRUD_ACTIONS.CREATE);
+        }
+    }
+
+    //edit category special
+    const editSpecialCategory = (category) => {
+        let imageBase64='';
+        if(category.image){
+            imageBase64= new Buffer(category.image, 'base64').toString('binary');
+        }
+        setCategoryName(category.name);
+        setCategoryPreviewImg(imageBase64);
+        setCategoryDate(category.date);
+        setCategoryId(category.categoryId);
+        setCategoryAction(CRUD_ACTIONS.EDIT);
+        setCategoryEdit(category.id);
+    }
 
     return (
         <div className="mx-2">
@@ -169,7 +209,7 @@ const Slide = (props) => {
                 <TabPane tabId="1">
                     <div className='list-slide'>
                         <div className='d-flex justify-content-between col-12 p-0'>
-                            <div className="form-group col-4 p-0">
+                            <div className="form-group col-3 p-0">
                                 <label htmlFor="">Tiêu đề</label>
                                 <input type="text" className="form-control" 
                                     value={name}
@@ -199,7 +239,24 @@ const Slide = (props) => {
                                 </select>
                             </div>
 
-                            <div className='upload-file d-flex col-4 p-0'>
+                            <div className="form-group col-2">
+                                <label htmlFor="">Trạng thái</label>
+                                <select className="form-control"
+                                    value={status}
+                                    onChange={(e) => setStatus(e.target.value)}
+                                >
+                                    {
+                                        statusSlide && statusSlide.length > 0 && 
+                                        statusSlide.map((item, index) => {
+                                            return(
+                                                <option key={index} value={item.valueVi}>{item.valueVi}</option>
+                                            )
+                                        })
+                                    }
+                                </select>
+                            </div>
+
+                            <div className='upload-file d-flex col-3 p-0'>
                                 <div className="form-group col-4 p-0">
                                     <label>Ảnh</label>
                                     <input id="previewImg" type="file" hidden 
@@ -351,7 +408,10 @@ const Slide = (props) => {
 
                         </div>
 
-                        <button onClick={() => saveCategorySpecial() }  className='btn btn-success px-3 mb-4'> Thêm mục </button>
+                        <button onClick={() => saveCategorySpecial() }  
+                        className={action === CRUD_ACTIONS.EDIT ? "btn btn-warning px-2" : "btn btn-success px-2" }>
+                            { action === CRUD_ACTIONS.EDIT ? 'Cập nhật' : "Thêm mới" } 
+                        </button>
                         <hr/>
 
                         <div className="text-dark">Danh sách danh mục nổi bật (<b>{specialCategories.length}</b>)</div>
@@ -389,7 +449,7 @@ const Slide = (props) => {
                                                 <td className='text-primary'>{item.name}</td>
                                                 <td>{Date()}</td>
                                                 <td className='d-flex'>
-                                                    <button type="button" className="btn text-primary  mr-3">
+                                                    <button onClick={()=> editSpecialCategory(item)} type="button" className="btn text-primary  mr-3">
                                                         <i className="fas fa-edit"></i>
                                                     </button>
 

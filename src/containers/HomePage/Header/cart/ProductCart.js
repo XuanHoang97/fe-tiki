@@ -1,13 +1,11 @@
 import { numberFormat } from 'contants/NumberFormat';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-// import { deleteItemCart } from 'redux/actions/cart';
 
 function ProductCart(props) {
     const dispatch = useDispatch()
 
     const handleDelete = (id) => {
-        // dispatch(deleteItemCart(id))
     }
 
     return (

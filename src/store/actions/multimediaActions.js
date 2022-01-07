@@ -1,5 +1,6 @@
 import actionTypes from './actionTypes';
 import {
+    getAllCodeService,
     getAllSlides,
     createSlides,
     editSlides,
@@ -224,4 +225,30 @@ export const deleteSpecialCategorySuccess = () => ({
 
 export const deleteSpecialCategoryFailed = () => ({
     type: actionTypes.DELETE_SPECIAL_CATEGORY_FAILED,
+})
+
+//get all status slide
+export const getStatusSlide = () => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await getAllCodeService('ACTIVE');
+            if (res && res.data.errCode === 0) {
+                dispatch(getStatusSlideSuccess(res.data.data));
+            } else {
+                dispatch(getStatusSlideFailed());
+            }
+        } catch (e) {
+            dispatch(getStatusSlideFailed());
+            console.log('getStatusSlideFailed error', e)
+        }
+    }
+}
+
+export const getStatusSlideSuccess = (data) => ({
+    type: actionTypes.FETCH_ALL_STATUS_SLIDE_SUCCESS,
+    listStatus: data
+})
+
+export const getStatusSlideFailed = () => ({
+    type: actionTypes.FETCH_ALL_STATUS_SLIDE_FAILED,
 })

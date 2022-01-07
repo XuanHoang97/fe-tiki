@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './style/slide.scss';
-
+import * as actions from "./.../../../../../store/actions/index";
 
 function Slide() {
     const dispatch = useDispatch()
+    const slides = useSelector(state => state.admin.slides)
 
     useEffect(() => {
+        dispatch(actions.fetchAllSlide())
     }, [dispatch])
 
     return (
@@ -21,23 +23,23 @@ function Slide() {
                     <li style={{ width: '10px', height: '10px', borderRadius: '50%' }} data-target="#carousel-example-1z" data-slide-to={5} />
                 </ol>
 
-                {/*Slides*/}
-                <div className="list_slide carousel-inner" role="listbox">
-                    {/* {
-                        slide.map(data => ( */}                            
-                            <div className="carousel-item active">
-                                <img className="d-block w-100" style={{ height: '240px' }} src="https://salt.tikicdn.com/cache/w1080/ts/banner/01/f6/dc/6c6d538c6fdbf69ff449a6bafe57ce0f.png.webp" alt="img slide" />
-                            </div>
+                <div className="list_slide carousel-inner">
+                    {   
+                        slides && slides.length > 0 ?
+                        slides.map((item, index) =>{
+                            let imgBase64 = "";
+                            if (item.image) {
+                                imgBase64=new Buffer(item.image, 'base64').toString('binary');
+                            }
 
-                            <div className="carousel-item">
-                                <img className="d-block w-100" style={{ height: '240px' }} src="https://salt.tikicdn.com/cache/w1080/ts/banner/2f/0f/94/8ef8e9e63dfa1e894bd7535bf142d65e.png.webp" alt="img slide" />
-                            </div>
-
-                            <div className="carousel-item">
-                                <img className="d-block w-100" style={{ height: '240px' }} src="https://salt.tikicdn.com/cache/w1080/ts/banner/d4/f3/10/b86e8b13c24f2b7fae88051489e55c2f.png.webp" alt="img slide" />
-                            </div>
-                        {/* ))
-                    } */}
+                            return (  
+                                <div className={`carousel-item ${item.status}`} key={index}>   
+                                    <img className="w-100" style={{ height: '240px' }} src={imgBase64} alt="img slide" />
+                                </div>
+                            )
+                        })
+                        : 'loading...'
+                    }
                 </div>
 
                 {/*Controls*/}

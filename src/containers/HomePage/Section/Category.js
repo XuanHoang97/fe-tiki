@@ -10,7 +10,6 @@ export default function Category() {
     useEffect(() => {
         dispatch(actions.fetchAllSpecialCategory())
     }, [dispatch])
-
     
     return (
         <div className="category__hightlight mt-3 p-3 bg-white">
@@ -19,18 +18,15 @@ export default function Category() {
                 {
                     listCategory && listCategory.length > 0 ?
                     listCategory.map((item, index) => {
-                        //endcode image
                         let imageBase64='';
                         if(item.image){
                             imageBase64=new Buffer(item.image, 'base64').toString('binary')
                         } 
                         return (
-                            <div className="col-md-2 col-6" key={index}>
-                                <Link to={`/category/${item.slug}`}>
-                                    <div style={{backgroundImage: `url(${imageBase64})`, backgroundPosition: 'center', backgroundSize: 'cover', height: '50px',
-                                        width: '50px', margin: '0 auto'}} >
-                                    </div>
-                                    <p className="text-center">{item.name}</p>
+                            <div className="col-md-1 col-6 p-0 text-center" key={index}>
+                                <Link to="">
+                                    <img src={imageBase64} className="rounded-circle w-50" alt="" />
+                                    <p className="text-center text-dark mt-2 small">{item.name}</p>
                                 </Link>
                             </div>
                         )

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import * as actions from '../../../store/actions';
 import MoreSuggest from './MoreSuggest';
 
 function SearchSuggest({ dataSearch, show, blur, search }) {
@@ -12,6 +14,13 @@ function SearchSuggest({ dataSearch, show, blur, search }) {
             setShowData(false)
         }
     }, [search])
+
+    const dispatch = useDispatch();
+    const specialCategory = useSelector(state => state.admin.specialCategories);
+
+    useEffect(() => {
+        dispatch(actions.fetchAllSpecialCategory())
+    }, [dispatch])
     
     return (
         <div className="search-form" style={{ display: (show ? 'block' : 'none') }}>
@@ -111,46 +120,21 @@ function SearchSuggest({ dataSearch, show, blur, search }) {
                 <div className="special__prod">
                     <h6>Danh Mục Nổi Bật</h6>
                     <div className="list__prod">
-                        <div className="item--prod">
-                            <img src="https://salt.tikicdn.com/cache/280x280/ts/product/12/de/70/1f406e01a8e9eeb625fec5a1a29b2707.jpg" alt="" />
-                            <span>Trái cây nội địa</span>
-                        </div>
+                        {
+                            specialCategory.slice(0,8).map((item, index) => {
+                                let imageBase64='';
+                                if(item.image){
+                                    imageBase64=new Buffer(item.image, 'base64').toString('binary')
+                                } 
 
-                        <div className="item--prod">
-                            <img src="https://salt.tikicdn.com/cache/280x280/ts/product/38/03/27/da8bf5951313326908cd2504c9f4590b.jpg" alt="" />
-                            <span>Sách kỹ năng làm việc</span>
-                        </div>
-
-                        <div className="item--prod">
-                            <img src="https://salt.tikicdn.com/cache/280x280/ts/product/55/54/80/cbc1b257c0051a740492b2427425001e.jpg" alt="" />
-                            <span>Tiểu sử-Hồi ký</span>
-                        </div>
-
-                        <div className="item--prod">
-                            <img src="https://salt.tikicdn.com/cache/280x280/ts/product/54/55/d6/4ceb6ba3bd81614df8ff4c1411b11f59.jpg" alt="" />
-                            <span>Truyện ngắn - Tản văn</span>
-                        </div>
-
-                        <div className="item--prod">
-                            <img src="https://salt.tikicdn.com/cache/280x280/ts/product/d5/53/0e/fc00028419754638dd5b250abbcb0de7.jpg" alt="" />
-                            <span>Sách học tiếng anh</span>
-                        </div>
-
-                        <div className="item--prod">
-                            <img src="https://salt.tikicdn.com/cache/280x280/ts/product/b1/80/77/256a28f588c20782d1eeecb949c0be1a.jpg" alt="" />
-                            <span>How to - Self help</span>
-                        </div>
-
-                        <div className="item--prod">
-                            <img src="https://salt.tikicdn.com/ts/category/ed/20/60/afa9b3b474bf7ad70f10dd6443211d5f.png" alt="" />
-                            <span>Nhà sách Tiki</span>
-                        </div>
-
-                        <div className="item--prod">
-                            <img src="https://salt.tikicdn.com/ts/category/3c/e4/99/eeee1801c838468d94af9997ec2bbe42.png" alt="" />
-                            <span>Hàng quốc tế</span>
-                        </div>
-
+                                return (
+                                    <div className="item--prod" key={index}>
+                                        <img src={imageBase64} alt="" />
+                                        <span>{item.name}</span>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                 </div>
             </div>)

@@ -16,6 +16,7 @@ const initialState = {
     optionProduct: [],
     slides: [],
     specialCategories: [],
+    statusSlide: [],
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -241,6 +242,19 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
             }
+
+        case actionTypes.FETCH_ALL_STATUS_SLIDE_SUCCESS:
+            state.statusSlide = action.listStatus;
+            return {
+                ...state,
+            }
+
+        case actionTypes.FETCH_ALL_STATUS_SLIDE_FAILED:
+            state.statusSlide = [];
+            return {
+                ...state,
+            }
+
 
 
 

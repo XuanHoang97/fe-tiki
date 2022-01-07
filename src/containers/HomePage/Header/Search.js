@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import SearchSuggest from './SearchSuggest';
@@ -11,10 +10,7 @@ export default function Search() {
     const inputSearch = useRef(null)
 
     useEffect(() => {
-        axios
-            .get(`https://api-tiki-clone.herokuapp.com/api/v2/product_mobile/`)
-            .then(res => { setMobile(mobile => [...mobile, ...res.data]); })
-            .catch((err) => { console.log(err); })
+        
     }, []);
 
     useEffect(() => {

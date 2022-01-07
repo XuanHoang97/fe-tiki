@@ -56,18 +56,18 @@ img {
                             display: flex;
                         }
                     }
-                    .list__product::before {
-                        content: "";
-                        border-bottom: 0.35rem solid #fff;
-                        border-right: 0.35rem solid transparent;
-                        border-left: 0.35rem solid transparent;
-                        position: absolute;
-                        top: -0.3rem;
-                        right: 7rem;
-                        z-index: 10;
-                        .menu__item {
-                        }
-                    }
+                }
+                .list__product::before {
+                    content: "";
+                    border-bottom: 0.75rem solid #fff;
+                    border-right: 0.7rem solid transparent;
+                    border-left: 0.7rem solid transparent;
+                    position: absolute;
+                    top: -0.7rem;
+                    left: 3rem;
+                    z-index: 10;
+                    // .menu__item {
+                    // }
                 }
                 .menu_ctg:after {
                     content: "";
@@ -289,23 +289,9 @@ img {
                                     background: transparent;
                                 }
                             }
-                            .control::before {
-                                content: "";
-                                border-bottom: 0.35rem solid #fff;
-                                border-right: 0.35rem solid transparent;
-                                border-left: 0.35rem solid transparent;
-                                position: absolute;
-                                top: -0.35rem;
-                                right: 12rem;
-                                z-index: 10;
-                            }
+                    
                         }
-                        .cart:hover {
-                            .cart__info {
-                                animation: zoom 0.3s linear;
-                                transform-origin: calc(100% - 60px) top;
-                            }
-                        }
+
                         .cart {
                             font-size: 14px;
                             cursor: pointer;
@@ -315,54 +301,55 @@ img {
                                 right: 2.5rem;
                             }
                             @extend .account;
-                            // div::before {
-                            //     content: "";
-                            //     border-bottom: 0.35rem solid #fff;
-                            //     border-right: 0.35rem solid transparent;
-                            //     border-left: 0.35rem solid transparent;
-                            //     position: absolute;
-                            //     top: -0.35rem;
-                            //     right: 5.3rem;
-                            //     z-index: 10;
-                            // }
-                            .cart__info {
-                                // display: block;
-                                box-shadow: 0 2px 10px 1px grey;
-                                width: 25rem;
-                                left: -15rem;
-                                a {
-                                }
-                                .text-left {
-                                    .info {
-                                        .content {
-                                            line-height: 0;
-                                            small {
-                                                font-size: 14px;
-                                                font-weight: 500;
-                                            }
-                                            .small,
-                                            p {
-                                                line-height: 15px;
+               
+                        }
+                        .cart__info {
+                            display: block;
+                            box-shadow: 0 2px 10px 1px grey;
+                            position: absolute;
+                            left: 44rem;
+                            top: 4rem;
+                          
+                            .text-left {
+                                .info {
+                                    .content {
+                                        line-height: 0;
+                                        small {
+                                            font-size: 14px;
+                                            font-weight: 500;
+                                        }
+                                        .small,
+                                        p {
+                                            line-height: 15px;
+                                        }
+                                    }
+                                    .price {
+                                        display: grid;
+                                        text-align: end;
+                                        .price__num {
+                                            display: inline-flex;
+                                            justify-content: flex-end;
+                                            gap: 5px;
+                                            h6 {
+                                                font-weight: bold;
                                             }
                                         }
-                                        .price {
-                                            display: grid;
-                                            text-align: end;
-                                            .price__num {
-                                                display: inline-flex;
-                                                justify-content: flex-end;
-                                                gap: 5px;
-                                                h6 {
-                                                    font-weight: bold;
-                                                }
-                                            }
-                                            .btnDelProd {
-                                                cursor: pointer;
-                                            }
+                                        .btnDelProd {
+                                            cursor: pointer;
                                         }
                                     }
                                 }
                             }
+                        }
+                        .cart__info::before {
+                            content: "";
+                            border-bottom: 2rem solid #fff;
+                            border-right: 0.8rem solid transparent;
+                            border-left: 0.8rem solid transparent;
+                            position: absolute;
+                            top: -1.2rem;
+                            right: 2rem;
+                            z-index: 10;
                         }
                     }
                 }
@@ -386,6 +373,10 @@ img {
     font-size: 12px;
 }
 
+.dropdown-menu{
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 20px;
+}
+
 .dropdown-menu .dropdown-item i {
     color: rgb(194, 194, 194);
     font-size: 13px;
@@ -393,8 +384,9 @@ img {
 }
 
 .dropdown-item:hover {
-    background: #017fff;
+    background: #017fff !important;
     color: white;
+    opacity: 0.8;
 }
 
 .category:hover ~ .menu__item {
@@ -448,13 +440,13 @@ img {
 .drop__menu:after {
     display: none;
     content: "";
-    border-bottom: 1.1rem solid #017fff;
+    border-bottom: 0.9rem solid #017fff;
     opacity: 0.8;
-    border-right: 1rem solid transparent;
+    border-right: 1.2rem solid transparent;
     border-left: 1rem solid transparent;
     position: absolute;
     right: -1.6em;
-    margin-top: -20px;
+    margin-top: 3px;
     z-index: 10;
     transform: rotate(90deg);
 }
