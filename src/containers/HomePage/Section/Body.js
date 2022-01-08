@@ -6,6 +6,7 @@ import ProductSuggestion from "./productSuggestion/Index";
 import SearchSpecial from "./searchSpecial/Index";
 import Slide from "./Slide";
 import './style/body.scss'
+import TeamDev from "./TeamDev";
 
 export default function Body() {
 
@@ -18,6 +19,7 @@ export default function Body() {
         <Product />
         <ProductSuggestion />
         <Mail />
+        <TeamDev />
       </div>
     </div>
   );

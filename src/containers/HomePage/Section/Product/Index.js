@@ -1,25 +1,30 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { numberFormat } from '../../../../components/Formating/FormatNumber';
-
-
+import { useHistory } from "react-router-dom";
+import { numberFormat } from '../../../../components/Formatting/FormatNumber';
 import * as actions from '../../../../store/actions'
 import Rate from "../Rate";
 
 const Product = (mobile) => {
     const dispatch = useDispatch()
     const listProduct = useSelector(state => state.admin.products)
+    const history = useHistory()
 
     useEffect(() => {
         dispatch(actions.fetchProducts())
     }, [dispatch])
 
+    //view detail product
+    const viewDetail = (product) => {
+        history.push(`/products/${product.id}`)
+    }
+
+
     return (
         <div className="product mt-3 ml-0 mr-0 pb-4 p-3 bg-white text-center">
-            <h5 className="text-left d-flex align-items-center">
-                <img src="https://salt.tikicdn.com/ts/upload/c7/ee/c2/d52a63b18732d5a77a9be29e7c3623a2.png" style={{width: '25px'}}  alt="" />
-                <span className="ml-2">Xu Hướng Mua Sắm</span>
+            <h5 className="text-left text-danger d-flex align-items-center">
+                <img src="https://salt.tikicdn.com/ts/upload/c5/0e/02/23066556738e7f5df8b8fde5d0d1dfd6.png" style={{ width: '2%' }} alt="" />
+                <span className="ml-2">Sản Phẩm Nổi Bật</span>
             </h5>
 
             <div className="product__detail row mt-4">
@@ -34,13 +39,9 @@ const Product = (mobile) => {
 
                         return (
                             <div className="product--item col-md-2 col-6 py-4 p-0" key={index} >
-                                <div>
-                                    <Link to="">
-                                        <div style={{backgroundImage: `url(${imageBase64})`, backgroundPosition: 'center', backgroundSize: 'cover', height: '150px',
-                                        width: '150px', margin: '0 auto'}} >
-                                        </div>
-                                        <h6 className="mt-2 mb-1 text-dark">{item.name}</h6>
-                                    </Link>
+                                <div onClick={()=>viewDetail(item)} style={{cursor: 'pointer'}}>
+                                    <img src={imageBase64} className="w-75" alt="" />
+                                    <h6 className="mt-2 mb-1 text-dark">{item.name}</h6>
                                 </div>
                                 <Rate />
 
@@ -53,10 +54,10 @@ const Product = (mobile) => {
                                 </div>
                             </div>
                         );
-                })
-                :
-                'Loading....'
-            }
+                    })
+                    :
+                    'Loading....'
+                }
             </div>
         </div>
     );

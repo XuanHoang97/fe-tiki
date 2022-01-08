@@ -8,6 +8,8 @@ import {
     saveInfoProduct,
     editInfoProduct,
     getSomeProduct,
+    getProductSimilar,
+
     getAllArticle,
     getAllProductByCategory
 } from "../../services/userService"
@@ -287,6 +289,33 @@ export const GetSomeProductSuccess = (data) => ({
 export const GetSomeProductFailed = () => ({
     type: actionTypes.FETCH_SOME_PRODUCT_SUCCESS,
 })
+
+//get product similar
+export const GetProductSimilar = (productId) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await getProductSimilar(productId);
+            if (res && res.data.errCode === 0) {
+                dispatch(GetProductSimilarSuccess(res.data.products))
+            } else {
+                dispatch(GetProductSimilarFailed());
+            }
+        } catch (e) {
+            dispatch(GetProductSimilarFailed());
+            console.log('GetProductSimilarFailed error', e)
+        }
+    }
+}
+
+export const GetProductSimilarSuccess = (data) => ({
+    type: actionTypes.FETCH_PRODUCT_SIMILAR_SUCCESS,
+    listProductSimilar: data
+})
+
+export const GetProductSimilarFailed = () => ({
+    type: actionTypes.FETCH_PRODUCT_SIMILAR_FAILED,
+})
+
 
 
 //select option product

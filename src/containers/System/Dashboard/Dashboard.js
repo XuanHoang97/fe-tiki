@@ -2,7 +2,7 @@ import React, {useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../../store/actions';
 import {NavLink} from 'react-router-dom';
-import { numberFormat } from '../../../components/Formating/FormatNumber';
+import { numberFormat } from '../../../components/Formatting/FormatNumber';
 
 const  Dashboard = (props) => {
     //fetch data

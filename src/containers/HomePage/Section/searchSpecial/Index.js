@@ -13,8 +13,9 @@ function Search_special(props) {
             <div>
                 <div className="mt-3 bg-white m-0 pt-3 pb-1 row justify-content-between pl-3 pr-4 align-items-center">
                     <div className="">
-                        <h5 className="text-danger">
-                            <img src="https://salt.tikicdn.com/ts/upload/c5/0e/02/23066556738e7f5df8b8fde5d0d1dfd6.png" style={{ width: '10%' }} alt="" /> Tìm Kiếm Nổi Bật
+                        <h5 className="text-left d-flex align-items-center">
+                            <img src="https://salt.tikicdn.com/ts/upload/c7/ee/c2/d52a63b18732d5a77a9be29e7c3623a2.png" style={{width: '25px'}}  alt="" />
+                            <span className="ml-2">Xu Hướng Mua Sắm</span>
                         </h5>
                     </div>
 

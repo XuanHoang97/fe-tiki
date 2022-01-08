@@ -14,6 +14,7 @@ import Home from '../routes/Home';
 import Login from './Auth/Login';
 import System from '../routes/System';
 import HomePage from './HomePage/HomePage';
+import ProductDetail from './Client/product/ProductDetail';
 
 console.warn = () => { };
 function App(props) {    
@@ -43,6 +44,7 @@ function App(props) {
 
                 {/* client  */}
                 <Route path={path.HOMEPAGE} component={HomePage} />
+                <Route path="/products/:id" component={ProductDetail} />
             </Switch>
             <ToastContainer autoClose={5000} />
         </Router>

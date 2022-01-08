@@ -4,7 +4,7 @@ import * as actions from '../../../store/actions';
 import ModalProduct from './ModalProduct';
 import ModalEditProduct from './ModalEditProduct';
 import Sort from './Sort';
-import { numberFormat } from '../../../components/Formating/FormatNumber';
+import { numberFormat } from '../../../components/Formatting/FormatNumber';
 
 // test data
 import Filter from './Filter';

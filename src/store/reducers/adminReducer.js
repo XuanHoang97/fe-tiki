@@ -6,6 +6,8 @@ const initialState = {
     positions: [],
     users: [],
     products: [],
+    productSimilar: [],
+
     categories: [],
     news: [],
     status_news: [],
@@ -159,6 +161,20 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
             }
+
+        //get product similar
+        case actionTypes.FETCH_PRODUCT_SIMILAR_SUCCESS:
+            state.productSimilar = action.listProductSimilar;
+            return {
+                ...state,
+            }
+
+        case actionTypes.FETCH_PRODUCT_SIMILAR_FAILED:
+            state.productSimilar = [];
+            return {
+                ...state,
+            }
+
 
 
             //fetch all article

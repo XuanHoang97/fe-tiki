@@ -69,6 +69,16 @@ const deleteProduct = (productId) => {
     })
 }
 
+//detail product
+const getDetailProduct = (productId) => {
+    return axios.get(`http://localhost:8080/api/get-detail-product?id=${productId}`)
+}
+
+// product similar
+const getProductSimilar = (productId) => {
+    return axios.get(`http://localhost:8080/api/similar-product?id=${productId}`)
+}
+
 //get all product by category
 const getAllProductByCategory = (categoryId) => {
     return axios.get(`http://localhost:8080/api/get-product-by-category?id=${categoryId}`)
@@ -212,6 +222,7 @@ export {
     createNewProduct,
     editProduct,
     deleteProduct,
+    getDetailProduct,
     getSomeProduct,
     createNews,
     editNews,
@@ -229,5 +240,6 @@ export {
     createSpecialCategory,
     editSpecialCategory,
     deleteSpecialCategory,
-    getAllProductByCategory
+    getAllProductByCategory,
+    getProductSimilar
 };

@@ -3,7 +3,7 @@ import './style.scss'
 
 const Footer = () => {
     return (
-        <div className="footer container pt-4 pb-3">
+        <div className="footer bg-white container pt-4 pb-3">
             <div className="row ">
             <div className="col-md-3 footer--content ">
                 <p style={{color: 'rgb(51, 51, 51)', fontSize: '13px', fontWeight: 500}} className="mb-3">HỖ TRỢ KHÁCH HÀNG</p>
