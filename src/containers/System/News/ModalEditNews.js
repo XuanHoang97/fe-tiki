@@ -14,6 +14,7 @@ const ModalEditNews  = (props) => {
     const [content, setContent] = useState('');
     const [status, setStatus] = useState('');
     const [category_id, setCategory] = useState('');
+    const [productId, setProductId] = useState('');
     const [author_id, setAuthor] = useState('');
     const [date, setDate] = useState('');
     const [view, setView] = useState('');
@@ -23,6 +24,7 @@ const ModalEditNews  = (props) => {
     const dispatch = useDispatch();
     const listCategory = useSelector(state => state.admin.categories);
     const listStatus = useSelector(state => state.admin.status_news);
+    const listProduct = useSelector(state => state.admin.products);
 
     useEffect (() => {
         let news = props.currentNews;
@@ -40,6 +42,7 @@ const ModalEditNews  = (props) => {
             setContent(news.content);
             setStatus(news.status);
             setCategory(news.category_id);
+            setProductId(news.productId);
             setAuthor(news.author_id);
             setDate(news.date);
             setView(news.view);
@@ -47,7 +50,7 @@ const ModalEditNews  = (props) => {
             setPreviewImg(imageBase64);
         } 
         dispatch(actions.fetchAllCategory());
-        // dispatch(actions.status());
+        dispatch(actions.fetchProducts());
     }, [dispatch, props.currentNews]);
 
     const toggle =()=>{
@@ -80,6 +83,7 @@ const ModalEditNews  = (props) => {
             content: content,
             status: status,
             category_id: category_id,
+            productId: productId,
             author_id: author_id,
             date: date,
             view: view,
@@ -193,7 +197,26 @@ const ModalEditNews  = (props) => {
                                     listCategory && listCategory.length >0 ?
                                     listCategory.map((item, index) => {
                                         return (
-                                            <option key={index} value={item.name}>{item.name}</option>
+                                            <option key={index} value={item.keyMap}>{item.name}</option>
+                                        )
+                                    })
+                                    : 
+                                    <option>Không có dữ liệu</option>
+                                }                                                                  
+                            </select>
+                        </div>
+
+                        <div className="form-group col-md-4">
+                            <label>Sản phẩm</label>
+                            <select className="form-control"
+                                onChange={(e) => setProductId(e.target.value)}
+                                value={productId}
+                            >
+                                {   
+                                    listProduct && listProduct.length >0 ?
+                                    listProduct.map((item, index) => {
+                                        return (
+                                            <option key={index} value={item.id}>{item.name}</option>
                                         )
                                     })
                                     : 

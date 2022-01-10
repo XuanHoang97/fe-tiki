@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { connect } from "react-redux";
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import * as actions from "./../store/actions";
 
 import UserManage from '../containers/System/Admin/UserManage';
@@ -15,7 +15,6 @@ import Setting from '../containers/System/Setting/Index';
 import Notification from '../containers/Header/Notification';
 import Search from '../containers/Header/Search';
 import axios from 'axios';
-import { history } from '../redux';
 import MenuLeft from '../containers/Header/MenuLeft';
 import MenuLeftCollapse from '../containers/Header/MenuLeftCollapse';
 import { path } from '../utils';
@@ -30,8 +29,10 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
     const [widthMenuLeft, setWidthMenuLeft] = useState('18%');
     const [dataSearch, setDataSearch] = useState([]);
     const [query, setQuery] = useState('');
+    const history = useHistory()
 
-    console.log(dataSearch, userInfo);
+    console.log(dataSearch);
+
     //toggle menu left
     const toggleMenu = () => {
         setMenuLeft(!menuLeft);
@@ -42,7 +43,7 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
     const handleSearch = async() => {
         let res = await axios({
             method: 'GET',
-            'url': 'http://localhost:8080/api/search',
+            'url': `${path.PORT}/api/search`,
             "params": { 
                 'keyword': query 
             }
@@ -132,12 +133,11 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
                 {!menuLeft ? <MenuLeftCollapse /> : ''}                
             
                 <div className="system-container bg-white py-3 px-2" style={{height: '90vh', overflowY: 'scroll', width: widthMenuRight, boxShadow: 'none'}}>
-                    {/* search  */}
                     {
                         dataSearch && dataSearch.length > 0 ?
-                        <Switch><Route path={path.SEARCH} exact><Index dataSearch={dataSearch}/></Route></Switch>
+                        <Switch><Route path={path.SEARCH}><Index dataSearch={dataSearch}/></Route></Switch>
                         : 
-                        <Switch><Route path={path.SEARCH} exact><NotFound/></Route></Switch> 
+                        <Switch><Route path={path.SEARCH}><NotFound/></Route></Switch> 
                     }
 
                     <div className="system-list">

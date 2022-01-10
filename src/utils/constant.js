@@ -4,7 +4,8 @@ export const path = {
     LOGIN: '/login',
     LOG_OUT: '/logout',
     SYSTEM: '/system',
-    SEARCH: '/search/:keyword',
+    SEARCH: '/search/keyword',
+    PORT: 'http://localhost:8080'
 };
 
 export const CRUD_ACTIONS = {

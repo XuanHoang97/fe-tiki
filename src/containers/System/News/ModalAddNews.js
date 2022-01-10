@@ -16,17 +16,19 @@ const ModalAddNews = (props) => {
     const [view, setView] = useState('');
     const [hot, setHot] = useState('');
     const [status, setStatus] = useState('');
+    const [productId, setProductId] = useState('');
     const [category_id, setCategory_id] = useState('');
     
     const dispatch = useDispatch();
     const listCategory = useSelector(state => state.admin.categories);
     const listStatus = useSelector(state => state.admin.status_news);
-    const listNews = useSelector(state => state.admin.news);
+    const listProduct = useSelector(state => state.admin.products);
 
     //fetch data
     useEffect(() => {
         dispatch(actions.fetchAllCategory());
         dispatch(actions.fetchStatusNews());
+        dispatch(actions.fetchProducts());
     }, [dispatch]);
 
     //reset form
@@ -40,6 +42,7 @@ const ModalAddNews = (props) => {
         // setView('');
         setHot('');
         setStatus('');
+        setProductId('');
         setCategory_id('');
         setAuthor_id('');
     }, [props.listNews]);
@@ -62,6 +65,7 @@ const ModalAddNews = (props) => {
             // view,
             hot,
             status,
+            productId,
             category_id,
         }
         props.createNews(data);
@@ -166,6 +170,25 @@ const ModalAddNews = (props) => {
                             }    
                         </select>
                     </div> 
+                    
+                    <div className="form-group col-md-4">
+                        <label>Sản phẩm</label>
+                        <select className="form-control"
+                            onChange={(e) => setProductId(e.target.value)}
+                            value={productId}
+                        >
+                            {   
+                                listProduct && listProduct.length >0 ?
+                                listProduct.map((item, index) => {
+                                    return (
+                                        <option key={index} value={item.id}>{item.name}</option>
+                                    )
+                                })
+                                : 
+                                <option>Không có dữ liệu</option>
+                            }                                                                              
+                        </select>
+                    </div>
 
                     <div className="form-group col-md-4">
                         <label>Danh mục</label>
@@ -177,7 +200,7 @@ const ModalAddNews = (props) => {
                                 listCategory && listCategory.length >0 ?
                                 listCategory.map((item, index) => {
                                     return (
-                                        <option key={index} value={item.name}>{item.name}</option>
+                                        <option key={index} value={item.keyMap}>{item.name}</option>
                                     )
                                 })
                                 : 

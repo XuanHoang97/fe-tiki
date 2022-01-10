@@ -16,8 +16,10 @@ function TeamDev(props) {
         <div className='container bg-white pb-4'>
             <h5 className='pt-3'>
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREjoC_fu-_d_VmxAnKT0OgZ2TOr7VnSsdxYbljp3AP_bodev4MY1fWhyZZGGlKFBNDCmQ&usqp=CAU" style={{width: '3%'}} className='mr-2'  alt="" />
-                Nhóm Phát Triển
+                <span>Nhóm Phát Triển</span>
+                <small className="text-danger ml-3">(Start 21.06.2021)</small>
             </h5>
+
             
             <div className="d-flex" style={{gap: '10px'}}>
                 {   
@@ -30,11 +32,13 @@ function TeamDev(props) {
 
                         return(
                             <div className="card bg-light px-2 py-3 text-center" key={index} style={{width: '16.67%'}} >
-                                <img className="card-img-top rounded-circle" src={imgBase64} alt="" style={{margin: '0 auto', width: '80px', height:' 80px'}} />
+                                <div className='py-2' style={{backgroundImage: `url('https://png.pngtree.com/background/20210715/original/pngtree-fashion-blue-gradient-background-picture-image_1278728.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
+                                    <img className="card-img-top rounded-circle" src={imgBase64} alt="" style={{margin: '0 auto', width: '70px', height:' 70px'}} />
+                                </div>
 
                                 <div className="card-body p-0">
                                     <h6 className="card-title mt-2 text-success font-weight-bold">{item.firstName} {item.lastName}</h6>
-                                    <p className="card-text text-secondary">Thông minh, tài giỏi, phong cách.</p>
+                                    <p className="card-text text-secondary">Thông minh, đẳng cấp.</p>
                                     <Link to={path.HOMEPAGE} className="border border-primary btn btn-outline-primary px-3 btn-sm">Profile</Link>
                                 </div>
                             </div>

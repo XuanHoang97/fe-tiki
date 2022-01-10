@@ -12,7 +12,7 @@ import Header from "containers/HomePage/Header/Header";
 import Footer from "containers/HomePage/Footer/Footer";
 import * as actions from "store/actions";
 import Rate from "containers/HomePage/Section/Rate";
-import NewsEvent from "./NewsEvent";
+import Moment from "react-moment";
 
 const ProductDetail = ({ match }) => {
   const [detailProduct, setDetailProduct] = useState({});
@@ -27,7 +27,7 @@ const ProductDetail = ({ match }) => {
     dispatch(actions.GetProductSimilar(match.params.id));
   }, [])
 
-  console.log('data detail:', detailProduct, similarProducts);  
+  console.log('data detail:', detailProduct);  
 
   return (
     <>
@@ -39,8 +39,6 @@ const ProductDetail = ({ match }) => {
           
           <div className="bg-white pt-4 pb-4 p-3 m-0 text-center row">
             <div className="col-md-3 p-0 text-left">
-              
-
               <div>
                 <img className="w-75" src={detailProduct && detailProduct.image ? detailProduct.image :'loading'} alt="loading" />
 
@@ -50,25 +48,26 @@ const ProductDetail = ({ match }) => {
                 </div>
                 <Illustrator />
               </div>
+              <hr/>
 
               {/* character special */}
+              <div className="mt-3 px-2 py-1 text-white bg-info">Đặc Điểm Nổi Bật</div>
               {
                 detailProduct && detailProduct.Markdown && detailProduct.Markdown.characterHTML &&
                 <div className="character__special" dangerouslySetInnerHTML={{ __html: detailProduct.Markdown.characterHTML}} ></div>
               }
             </div>
-
             
             <div className="col-md-6 pl-4 pr-2 text-left">
               <div className="info d-flex align-items-center">
-                <h5 className="mr-5">{detailProduct && detailProduct.name ? detailProduct.name :'loading'}</h5>
+                <h4 className="mr-5 font-weight-bold">{detailProduct && detailProduct.name ? detailProduct.name :'loading'}</h4>
                 <Rate />
               </div>
 
               <div className="price bg-light p-2">
                 <div className="row m-1 align-items-center">
-                  <h4>{numberFormat(detailProduct && detailProduct.price ? detailProduct.price :'loading')}</h4>
-                  <span className="badge badge-pill badge-danger ml-3 mr-4">
+                  <h5 className="text-danger font-weight-bold">{numberFormat(detailProduct && detailProduct.price ? detailProduct.price :'loading')}</h5>
+                  <span className="badge badge-pill badge-warning ml-3 mr-4">
                     -1 %
                   </span>
                   <strike className="small">{numberFormat(detailProduct && detailProduct.sale ? detailProduct.sale :'loading')}</strike>
@@ -106,9 +105,8 @@ const ProductDetail = ({ match }) => {
           </div>
 
           <Specifications />
-  
           <>
-              <h6 className="mt-4 mb-2 m-0">MÔ TẢ SẢN PHẨM</h6>
+              <h6 className="mt-4 mb-2 m-0 px-2">MÔ TẢ SẢN PHẨM</h6>
               <div className="description row bg-white p-3 m-1">
                   <div className="description--product col-md-8 p-0 pr-2">
                       {
@@ -121,14 +119,45 @@ const ProductDetail = ({ match }) => {
                           <button type="button" className="btn btn-primary px-3 mt-3">Đọc thêm <i className="fas fa-caret-down ml-2" /></button>
                       </div>
                   </div>
-                  <NewsEvent />
+
+                  <div className="col-md-4">
+                      <h5 className="mb-4">Tin tức và sự kiện</h5>
+                      <div className="list_news row pl-3">
+                        {
+                          detailProduct && detailProduct.newData && detailProduct.newData ?  
+                          detailProduct.newData.map((item, index) => {
+                            //endCode image
+                            let imageBase64='';
+                            if(item.image){
+                                imageBase64=new Buffer(item.image, 'base64').toString('binary')
+                            }
+
+                            return (
+                              <div className="mb-2 d-flex p-0" key={index}>
+                                  <img className="w-25 mr-2" src={imageBase64} alt="loading" />
+                                  <div className="col-md-8">
+                                    <span className="p-0 text-primary">{item.name}</span>
+                                    <div className="d-flex align-items-center">
+                                      <i className="text-secondary">                                 
+                                        <span className ={item.status ==='Mới' ? "text-success" : "text-danger"}>{item.status}</span><Moment fromNow className ="small">{item.date}</Moment>
+                                      </i>  
+
+                                      <small className="text-secondary ml-2">by <b>{item.author_id}</b></small>     
+                                    </div>
+                                  </div>
+                              </div>
+                            )
+                          })
+                          : 'loading...'
+                        }           
+                      </div>
+                  </div>
               </div>
           </>
 
           <div>
             <h6 className="mt-4 mb-2 m-0">SẢN PHẨM TƯƠNG TỰ</h6>
             <div className="row bg-white pt-4 pb-4 p-3 m-1">
-              
               {
                 similarProducts && similarProducts.length > 0 ?
                 similarProducts.map((item, index) => {
@@ -141,6 +170,15 @@ const ProductDetail = ({ match }) => {
                     <div className="col-md-2 col-6 text-center" key={index} style={{cursor: 'pointer'}}>
                       <img src={imgBase64} className="w-75" alt="" />
                       <h6 className="mt-1 mb-3 text-center text-primary">{item.name}</h6>
+
+                      <Rate />
+                      <div className="price__prod row align-items-center justify-content-center">
+                          <span className="font-weight-bold" style={{ color: 'red', fontSize: '14px' }}>
+                              {numberFormat(item.price)}
+                          </span>
+
+                          <span className="badge badge-pill badge-warning p-1 ml-3 mr-2">-1%</span>
+                      </div>
                     </div>
                   );
                 })

@@ -85,25 +85,7 @@ const Footer = () => {
                 </div>
             </div>
             </div>
-            <div className="row mt-5 ">
-            <div className="author col-md-8 ">
-                <h6 className="font-weight-bold small">© 2021 - <span className="text-success">Website Is Created By LeHoang97, DacLV97.</span> </h6>
-                <p className="text-danger">Start project: 21.06.2021</p>
-                <small>Giấy chứng nhận Đăng ký Kinh doanh số 0309532909 do Sở Kế hoạch và Đầu tư Thành phố Hồ Chí Minh cấp ngày 06/01/2010</small>
-            </div>
-            <div className="authent col-md-4 pr-0 row align-items-center justify-content-end ">
-                <div className="col-md-2 col-2 ">
-                <a href=" ">
-                    <img className="w-100" src="https://frontend.tikicdn.com/_desktop-next/static/img/footer/bo-cong-thuong-2.png " alt=" " />
-                </a>
-                </div>
-                <div className="col-md-4 col-4 ">
-                <a href=" ">
-                    <img className="w-100 " src="https://frontend.tikicdn.com/_desktop-next/static/img/footer/bo-cong-thuong.svg " alt=" " />
-                </a>
-                </div>
-            </div>
-            </div>
+    
         </div>
     );
 }

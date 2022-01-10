@@ -89,7 +89,6 @@ const NewsManage = (props) => {
                         <th scope="col">Tác giả</th>
                         <th scope="col">Ngày đăng</th>
                         <th scope="col">Trạng thái</th>
-                        <th scope="col">Danh mục</th>
                         <th scope="col">Tác vụ</th>
                     </tr>
                 </thead>
@@ -122,7 +121,6 @@ const NewsManage = (props) => {
                                         <small><Moment format="hh:mm">{item.date}</Moment></small>
                                     </td>
                                     <td><span className ={item.status ==='Mới' ? "text-success" : "text-danger"}>{item.status}</span>: <Moment fromNow className ="small">{item.date}</Moment></td>
-                                    <td>{item.category_id}</td>
                                     <td>
                                         <button onClick={() => editNews(item) } type="button" className="btn text-primary pr-2">
                                             <i className="fas fa-edit"></i>
