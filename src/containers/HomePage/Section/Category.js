@@ -18,14 +18,10 @@ export default function Category() {
                 {
                     listCategory && listCategory.length > 0 ?
                     listCategory.map((item, index) => {
-                        let imageBase64='';
-                        if(item.image){
-                            imageBase64=new Buffer(item.image, 'base64').toString('binary')
-                        } 
                         return (
                             <div className="col-md-1 col-6 p-0 text-center" key={index}>
                                 <Link to="">
-                                    <img src={imageBase64} className="rounded-circle w-50" alt="" />
+                                    <img src={item.image} className="rounded-circle w-50" alt="" />
                                     <p className="text-center text-dark mt-2 small">{item.name}</p>
                                 </Link>
                             </div>

@@ -14,6 +14,8 @@ const NewsManage = (props) => {
     const dispatch = useDispatch();
     const listNews = useSelector(state => state.admin.news);
 
+    console.log('danh sach tin tuc: ', listNews);
+
     //fetch data News
     useEffect(() => {
         dispatch(actions.fetchAllNews());
@@ -34,7 +36,19 @@ const NewsManage = (props) => {
     }
 
     const CreateNews=(data)=> {
-        dispatch(actions.CreateNews(data));
+        const dataNews = new FormData();
+        dataNews.append('name', data.name);
+        dataNews.append('content', data.content);
+        dataNews.append('description', data.description);
+        dataNews.append('date', data.date);
+        dataNews.append('author_id', data.author_id);
+        dataNews.append('hot', data.hot);
+        dataNews.append('status', data.status);
+        dataNews.append('productId', data.productId);
+        dataNews.append('category_id', data.category_id);        
+
+        data.image && dataNews.append('image', data.image);
+        dispatch(actions.CreateNews(dataNews));
     }
 
     //delete news
@@ -49,7 +63,21 @@ const NewsManage = (props) => {
     }
 
     const handleEditNews = (data) => {
-        dispatch(actions.EditNews(data));
+        dispatch(actions.EditNews({
+            id: data.id,
+            name: data.name,
+            content: data.content,
+            description: data.description,
+            date: data.date,
+            author_id: data.author_id,
+            hot: data.hot,
+            status: data.status,
+            productId: data.productId,
+            category_id: data.category_id,
+            image: data.previewImg,
+            previewImg: data.previewImg
+
+        }));
     }
 
     return (
@@ -97,11 +125,6 @@ const NewsManage = (props) => {
                         listNews && listNews.length>0 ?
                         listNews.map((item, index) => {
                             //endCode image
-                            let imageBase64='';
-                            if(item.image){
-                                imageBase64=new Buffer(item.image, 'base64').toString('binary')
-                            }
-
                             return(
                                 <tr key={index}>
                                     <td>
@@ -110,9 +133,7 @@ const NewsManage = (props) => {
                                         </div>
                                     </td>
                                     <td>{index + 1}</td>
-                                    <td style={{backgroundImage: `url(${imageBase64})`, backgroundPosition: 'center', backgroundSize: 'cover', height: '45px',
-                                        width: '45px', borderRadius: '50%', display: 'flex', margin: '0 auto'}}>
-                                    </td>
+                                    <td style={{width:'6%'}}><img src={item.image} className='w-100' alt="" /> </td>
                                     <td className='text-primary'>{item.name}</td>
                                     <td>{item.description}</td>
                                     <td>{item.author_id}</td>
@@ -120,7 +141,7 @@ const NewsManage = (props) => {
                                         <Moment format="DD/MM/YYYY" className='mr-2'>{item.date}</Moment>
                                         <small><Moment format="hh:mm">{item.date}</Moment></small>
                                     </td>
-                                    <td><span className ={item.status ==='Mới' ? "text-success" : "text-danger"}>{item.status}</span>: <Moment fromNow className ="small">{item.date}</Moment></td>
+                                    <td><span className ={item.status ==='Mới' ? "text-success" : "text-danger"}>{item.status}</span><Moment fromNow className ="small">{item.date}</Moment></td>
                                     <td>
                                         <button onClick={() => editNews(item) } type="button" className="btn text-primary pr-2">
                                             <i className="fas fa-edit"></i>

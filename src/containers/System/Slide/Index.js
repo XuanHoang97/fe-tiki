@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import {CreateSlide, CreateSpecialCategory, DeleteSlide, EditSlide, EditSpecialCategory, fetchAllCategory, fetchAllSlide, fetchAllSpecialCategory, getStatusSlide} from '../../../store/actions';
-import { CommonUtils, CRUD_ACTIONS } from '../../../utils';
+import { CRUD_ACTIONS } from '../../../utils';
 
 const Slide = (props) => {
     const [activeTab, setActiveTab] = useState('1');
     const [categoryId, setCategoryId] = useState('');
     //slide
     const [name, setName] = useState('');
-    const [image, setImage] = useState('');
     const [status, setStatus] = useState('');
+    const [image, setImage] = useState('');
     const [previewImg, setPreviewImg] = useState('');
     const [date, setDate] = useState(Date);
     const [action, setAction] = useState(CRUD_ACTIONS.CREATE);
@@ -31,8 +31,6 @@ const Slide = (props) => {
     const statusSlide = useSelector(state => state.admin.statusSlide);
     const dispatch = useDispatch();
 
-    console.log('slide', statusSlide);
-
     useEffect(() => {
         dispatch(fetchAllSlide());
         dispatch(fetchAllCategory());
@@ -46,10 +44,9 @@ const Slide = (props) => {
         let data=e.target.files;
         let file=data[0];
         if(file){
-            let base64=await CommonUtils.getBase64(file);
             let objectUrl=URL.createObjectURL(file)
             setPreviewImg(objectUrl);
-            setImage(base64);
+            setImage(file);
         }
     }
 
@@ -57,10 +54,9 @@ const Slide = (props) => {
         let data=e.target.files;
         let file=data[0];
         if(file){
-            let base64=await CommonUtils.getBase64(file);
             let objectUrl=URL.createObjectURL(file)
             setCategoryPreviewImg(objectUrl);
-            setCategoryImage(base64);
+            setCategoryImage(file);
         }
     }
 
@@ -73,56 +69,58 @@ const Slide = (props) => {
         setCategoryImage('');
     }
 
+    //reset value
+    const resetValue=()=>{
+        setName('');
+        setImage('');
+        setPreviewImg('');
+        setStatus('');
+        setCategoryId('');
+    }
+
+    //reset value category
+    const resetValueCategory=()=>{
+        setCategoryName('');
+        setCategoryImage('');
+        setCategoryPreviewImg('');
+        setCategoryDate('');
+    }
+
     //Add and Edit Slide
-    const handleSaveSlide=()=>{
+    const handleSaveSlide=(e)=>{
+        e.preventDefault();
+        const data = new FormData();
+        data.append('name', name);
+        data.append('status', status);
+        data.append('date', date);
+        data.append('categoryId', categoryId);
+        image && data.append('image', image);
+
         if(action===CRUD_ACTIONS.CREATE){
-            dispatch(CreateSlide({
-                name:name,
-                image:image,
-                status:status,
-                date:date,
-                categoryId:categoryId,
-            }));
-            setName('');
-            setImage('');
-            setStatus('');
-            setPreviewImg('');
-            setCategoryId('');
+            dispatch(CreateSlide(data));
+            resetValue();
         }
         if(action===CRUD_ACTIONS.EDIT){
             dispatch(EditSlide({
                 id:slideEdit,
                 name:name,
-                image:image,
+                image:previewImg,
                 status:status,
                 previewImg:previewImg,
                 date:date,
                 categoryId:categoryId,
             }));
-            setName('');
-            setImage('');
-            setStatus('');
-            setPreviewImg('');
-            setCategoryId('');
+            resetValue();
             setAction(CRUD_ACTIONS.CREATE);
         }
     }
-
     
-    
-    //delete slide
-    const deleteSlide=(slide)=>{
-        dispatch(DeleteSlide(slide.id));
-    }
-
-    //edit slide
+    // fill info edit slide
     const editSlide=(slide)=>{
-        let imageBase64='';
         if(slide.image){
-            imageBase64= new Buffer(slide.image, 'base64').toString('binary');
-        }
+            setPreviewImg(slide.image);
+        }   
         setName(slide.name);
-        setPreviewImg(imageBase64);
         setDate(slide.date);
         setStatus(slide.status);
         setCategoryId(slide.categoryId);
@@ -130,46 +128,44 @@ const Slide = (props) => {
         setSlideEdit(slide.id);
     }
     
+    //delete slide
+    const deleteSlide=(slide)=>{
+        dispatch(DeleteSlide(slide.id));
+    }
+
     //Add and edit Special category
-    const saveCategorySpecial = () => {
+    const saveCategorySpecial = (e) => {
+        e.preventDefault();
+        const data = new FormData();
+        data.append('name', categoryName);
+        data.append('date', categoryDate);
+        data.append('image', categoryImage);
+        data.append('categoryId', categoryId);
+
         if(categoryAction===CRUD_ACTIONS.CREATE){
-            dispatch(CreateSpecialCategory({
-                name:categoryName,
-                image:categoryImage,
-                date:categoryDate,
-                categoryId:categoryId,
-            }));
-            setCategoryName('');
-            setCategoryImage('');
-            setCategoryPreviewImg('');
-            setCategoryId('');
+            dispatch(CreateSpecialCategory(data));
+            resetValueCategory();
         }
 
         if(categoryAction===CRUD_ACTIONS.EDIT){
             dispatch(EditSpecialCategory({
                 id:categoryEdit,
                 name:categoryName,
-                image:categoryImage,
+                image:categoryPreviewImg,
                 previewImg:categoryPreviewImg,
                 date:categoryDate,
                 categoryId:categoryId,
             }));
-            setCategoryName('');
-            setCategoryImage('');
-            setCategoryPreviewImg('');
-            setCategoryId('');
+            resetValueCategory();
             setCategoryAction(CRUD_ACTIONS.CREATE);
         }
     }
-
-    //edit category special
+    //fill info edit category special
     const editSpecialCategory = (category) => {
-        let imageBase64='';
         if(category.image){
-            imageBase64= new Buffer(category.image, 'base64').toString('binary');
+            setCategoryPreviewImg(category.image);
         }
         setCategoryName(category.name);
-        setCategoryPreviewImg(imageBase64);
         setCategoryDate(category.date);
         setCategoryId(category.categoryId);
         setCategoryAction(CRUD_ACTIONS.EDIT);
@@ -207,7 +203,10 @@ const Slide = (props) => {
             
             <TabContent activeTab={activeTab} className='py-4 px-3 bg-light border'>
                 <TabPane tabId="1">
-                    <div className='list-slide'>
+                    <form className='list-slide'
+                        onSubmit={handleSaveSlide}
+                        encType="multipart/form-data"
+                    >
                         <div className='d-flex justify-content-between col-12 p-0'>
                             <div className="form-group col-3 p-0">
                                 <label htmlFor="">Tiêu đề</label>
@@ -261,6 +260,7 @@ const Slide = (props) => {
                                     <label>Ảnh</label>
                                     <input id="previewImg" type="file" hidden 
                                         onChange={(e)=>changeImage(e)}
+                                        name='image'
                                     />
 
                                     <label htmlFor="previewImg" className="btn btn-warning w-100"><i className="fas fa-upload"></i> Tải ảnh</label>  
@@ -283,7 +283,7 @@ const Slide = (props) => {
 
                         </div>
 
-                        <button onClick={() =>handleSaveSlide() } className={action === CRUD_ACTIONS.EDIT ? "btn btn-warning px-2" : "btn btn-success px-2" }>
+                        <button type='submit' className={action === CRUD_ACTIONS.EDIT ? "btn btn-warning px-2" : "btn btn-success px-2" }>
                             { action === CRUD_ACTIONS.EDIT ? 'Cập nhật' : "Thêm mới" } 
                         </button>
                         <hr/>
@@ -304,23 +304,12 @@ const Slide = (props) => {
                                 {
                                     slide && slide.length> 0 ?
                                     slide.map((item, index) => {
-                                        //endCode image
-                                        let imageBase64='';
-                                        if(item.image){
-                                            imageBase64=new Buffer(item.image, 'base64').toString('binary')
-                                        }
-
                                         return (
                                             <tr key={index}>
-                                                <td>
-                                                    <div className="form-group">
-                                                        <input type="checkbox" className="w-100" />
-                                                    </div>
-                                                </td>
-                                                <td>{index + 1}</td>
-                                                <td style={{backgroundImage: `url(${imageBase64})`, backgroundPosition: 'center', backgroundSize: 'cover', height: '45px',
-                                                    width: '45px', borderRadius: '50%', display: 'flex', margin: '0 auto'}}></td>
-                                                <td className='text-primary'>{item.name}</td>
+                                                <td><div className="form-group"><input type="checkbox" className="w-100" /></div></td>
+                                                <td>{index + 1}</td>                                               
+                                                <td style={{width:'6%'}}><img src={item.image} className='w-100' alt="" /> </td>
+                                                <td>{item.name}</td>
                                                 <td>{item.date}</td>
                                                 <td className=''>
                                                     <button onClick={() => editSlide(item)} type="button" className="btn text-primary  mr-3">
@@ -345,12 +334,15 @@ const Slide = (props) => {
                                 }
                             </tbody>
                         </table>
-                    </div>
+                    </form>
                 </TabPane>
 
                 <TabPane tabId="2">
-                <div className='list-category-special'>
-                    <div className='d-flex justify-content-between col-12 p-0'>
+                    <form className='list-category-special'
+                    onSubmit={saveCategorySpecial}
+                    encType="multipart/form-data"
+                    >
+                        <div className='d-flex justify-content-between col-12 p-0'>
                             <div className="form-group col-4 p-0">
                                 <label htmlFor="">Tiêu đề</label>
                                 <input type="text" className="form-control" 
@@ -408,8 +400,7 @@ const Slide = (props) => {
 
                         </div>
 
-                        <button onClick={() => saveCategorySpecial() }  
-                        className={action === CRUD_ACTIONS.EDIT ? "btn btn-warning px-2" : "btn btn-success px-2" }>
+                        <button type='submit' className={action === CRUD_ACTIONS.EDIT ? "btn btn-warning px-2" : "btn btn-success px-2" }>
                             { action === CRUD_ACTIONS.EDIT ? 'Cập nhật' : "Thêm mới" } 
                         </button>
                         <hr/>
@@ -430,11 +421,6 @@ const Slide = (props) => {
                                 {
                                     specialCategories && specialCategories.length> 0 ?
                                     specialCategories.map((item, index) => {
-                                        //endCode image
-                                        let imageBase64='';
-                                        if(item.image){
-                                            imageBase64=new Buffer(item.image, 'base64').toString('binary')
-                                        }
                                         return(
                                             <tr key={index}>
                                                 <td>
@@ -443,9 +429,7 @@ const Slide = (props) => {
                                                     </div>
                                                 </td>
                                                 <td>{index + 1}</td>
-                                                <td className='border'
-                                                    style={{backgroundImage: `url(${imageBase64})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat', borderRadius: '50%'}}
-                                                ></td>
+                                                <td style={{width:'6%'}}><img src={item.image} className='w-100' alt="" /> </td>
                                                 <td className='text-primary'>{item.name}</td>
                                                 <td>{Date()}</td>
                                                 <td className='d-flex'>
@@ -471,7 +455,7 @@ const Slide = (props) => {
                                 }
                             </tbody>
                         </table>
-                    </div>
+                    </form>
                 </TabPane>
 
                 <TabPane tabId="3">Tab 3 Content</TabPane>

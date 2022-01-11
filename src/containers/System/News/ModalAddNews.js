@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {CommonUtils} from "../../../utils"
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import * as actions from '../../../store/actions';
 
@@ -39,7 +38,6 @@ const ModalAddNews = (props) => {
         setContent('');
         setDescription('');
         setDate(new Date());
-        // setView('');
         setHot('');
         setStatus('');
         setProductId('');
@@ -52,7 +50,8 @@ const ModalAddNews = (props) => {
     }
 
     // add news & events
-    const handleAddNews=()=>{
+    const handleAddNews=(e)=>{
+        e.preventDefault();
         const data = {
             name,
             image,
@@ -62,10 +61,10 @@ const ModalAddNews = (props) => {
             description,
             date,
             author_id,
-            // view,
+            productId,
+
             hot,
             status,
-            productId,
             category_id,
         }
         props.createNews(data);
@@ -77,10 +76,9 @@ const ModalAddNews = (props) => {
         let data=e.target.files;
         let file=data[0];
         if(file){
-            let base64=await CommonUtils.getBase64(file);
             let objectUrl=URL.createObjectURL(file)
             setPreviewImg(objectUrl);
-            setImage(base64);
+            setImage(file);
         }
     }
     //remove image
@@ -94,10 +92,15 @@ const ModalAddNews = (props) => {
             isOpen={props.isOpen} 
             toggle={()=>toggle()} 
             size="lg"
+        >   
+        <form
+            onSubmit={handleAddNews}
+            encType='multipart/form-data'
         >
+
             <ModalHeader toggle={()=>toggle()}>Thêm mới tin tức, sự kiện</ModalHeader>
             <ModalBody>
-            <form>
+            <div>
                 <div className="row">
                     <div className="form-group col-md-6">
                         <label>Tiêu đề </label>
@@ -111,10 +114,10 @@ const ModalAddNews = (props) => {
                         <label>Ảnh</label>
                         <input id="previewImg" type="file" hidden 
                             onChange={(e)=>changeImage(e)}
+                            name='image'
                         />
 
                         <label htmlFor="previewImg" className="btn btn-success w-100"><i className="fas fa-upload"></i> Tải ảnh</label>  
-                    
                     </div>
 
                     <div className="preview-image col-md-2 border" 
@@ -209,15 +212,16 @@ const ModalAddNews = (props) => {
                         </select>
                     </div>
                 </div>
-            </form>
+            </div>
             </ModalBody>
 
             <ModalFooter>
-                <Button color="primary" className="px-3" onClick={() => {handleAddNews()}}>
+                <Button color="primary" className="px-3" type='submit' >
                     Thêm mới
                 </Button>
                 <Button color="secondary" className="px-3">Cancel</Button>
             </ModalFooter>
+        </form>
         </Modal>
     )
 }

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import {CommonUtils} from "../../../utils"
 
 import _ from 'lodash';
 import * as actions from '../../../store/actions';
@@ -28,16 +27,14 @@ const ModalEditNews  = (props) => {
 
     useEffect (() => {
         let news = props.currentNews;
-        if(news && !_.isEmpty(news)) {
-            //fix bug buffer
-            let imageBase64='';
-            if(news.image){
-                imageBase64= new Buffer(news.image, 'base64').toString('binary');
-            }
             // fill info news to edit
             setId(news.id);
             setName(news.name);
-            setImage(imageBase64);
+            if(news.image){
+                setPreviewImg(news.image);
+            }
+
+            setImage(news.previewImg);
             setDescription(news.description);
             setContent(news.content);
             setStatus(news.status);
@@ -47,8 +44,7 @@ const ModalEditNews  = (props) => {
             setDate(news.date);
             setView(news.view);
             setHot(news.hot);
-            setPreviewImg(imageBase64);
-        } 
+
         dispatch(actions.fetchAllCategory());
         dispatch(actions.fetchProducts());
     }, [dispatch, props.currentNews]);
@@ -62,10 +58,9 @@ const ModalEditNews  = (props) => {
         let data=e.target.files;
         let file=data[0];
         if(file){
-            let base64=await CommonUtils.getBase64(file);
             let objectUrl=URL.createObjectURL(file)
             setPreviewImg(objectUrl);
-            setImage(base64);
+            setImage(file);
         }
     }
     //remove image
@@ -74,11 +69,13 @@ const ModalEditNews  = (props) => {
         setImage('');
     }
 
-    const EditNews=()=>{
+    const EditNews=(e)=>{
+        e.preventDefault();
         props.editNews({
             id: id,
             name: name,
             image: image,
+            previewImg: previewImg,
             description: description,
             content: content,
             status: status,
@@ -92,21 +89,20 @@ const ModalEditNews  = (props) => {
         toggle();
     }
 
-    //update post
-    const updatePost = () => {
-        setDate(new Date());
-    }
-
     return (
         <Modal 
             isOpen={props.isOpen} 
             toggle={()=>toggle()} 
             size="lg"
         >
-            
+        
+        <form
+            onSubmit={EditNews}
+            encType='multipart/form-data'
+        >
             <ModalHeader toggle={()=>toggle()}>Cập nhật tin tức - sự kiện</ModalHeader>
             <ModalBody>
-                <form>
+                <div>
                     <div className="row">
                         <div className="form-group col-md-6">
                             <label>Tiêu đề </label>
@@ -120,6 +116,7 @@ const ModalEditNews  = (props) => {
                             <label>Ảnh</label>
                             <input id="previewImg" type="file" hidden 
                                 onChange={(e)=>changeImage(e)}
+                                name='image'
                             />
 
                             <label htmlFor="previewImg" className="btn btn-success w-100"><i className="fas fa-upload"></i> Tải ảnh</label>  
@@ -164,9 +161,8 @@ const ModalEditNews  = (props) => {
                         <div className="form-group col-4">
                             <label>Ngày đăng</label>
                             <input value={date} onChange={(e)=>setDate(e.target.value)} type="text" className="form-control" />
-                            <button onClick={()=> updatePost()} type="button" className="btn btn-primary px-2"><i className="fas fa-sync-alt"></i></button>
+                            <button onClick={()=> setDate(new Date())} type="button" className="btn btn-primary px-2"><i className="fas fa-sync-alt"></i></button>
                         </div>
-
 
                         <div className="form-group col-md-4">
                             <label>Trạng thái</label>
@@ -225,15 +221,16 @@ const ModalEditNews  = (props) => {
                             </select>
                         </div>
                     </div>
-                </form>
+                </div>
             </ModalBody>
             
             <ModalFooter>
-                <Button color="primary" className="px-3" onClick={() => {EditNews()}}>
+                <Button color="primary" className="px-3" type='submit'>
                     Cập nhật
                 </Button>
                 <Button color="secondary" className="px-3">Cancel</Button>
             </ModalFooter>
+        </form>
         </Modal>
     )
 }

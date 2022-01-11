@@ -27,14 +27,9 @@ function Slide() {
                     {   
                         slides && slides.length > 0 ?
                         slides.map((item, index) =>{
-                            let imgBase64 = "";
-                            if (item.image) {
-                                imgBase64=new Buffer(item.image, 'base64').toString('binary');
-                            }
-
                             return (  
                                 <div className={`carousel-item ${item.status}`} key={index}>   
-                                    <img className="w-100" style={{ height: '240px' }} src={imgBase64} alt="img slide" />
+                                    <img className="w-100" style={{ height: '240px' }} src={item.image} alt="img slide" />
                                 </div>
                             )
                         })

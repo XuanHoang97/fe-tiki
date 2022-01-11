@@ -58,7 +58,18 @@ const ProductManage = (props) => {
     }
 
     const CreateNewProduct=(data)=> {
-        dispatch(actions.CreateNewProduct(data));
+        const dataProduct = new FormData();
+        dataProduct.append('name', data.name);
+        dataProduct.append('price', data.price);
+        dataProduct.append('sale', data.sale);
+        dataProduct.append('status', data.status);
+        dataProduct.append('number', data.number);
+        dataProduct.append('warranty', data.warranty);
+        dataProduct.append('category_id', data.category_id);
+        dataProduct.append('supplier_id', data.supplier_id);
+        data.image && dataProduct.append('image', data.image);
+    
+        dispatch(actions.CreateNewProduct(dataProduct));
     }
 
     //delete product
@@ -133,11 +144,6 @@ const ProductManage = (props) => {
                     {   
                         filter && filter.length>0 ?
                         filter.map((item, index) => {
-                            //endCode image
-                            let imageBase64='';
-                            if(item.image){
-                                imageBase64=new Buffer(item.image, 'base64').toString('binary')
-                            }
                             return(
                                 <tr key={index}>
                                     <td>
@@ -146,9 +152,7 @@ const ProductManage = (props) => {
                                         </div>
                                     </td>
                                     <td>{index + 1}</td>
-                                    <td style={{backgroundImage: `url(${imageBase64})`, backgroundPosition: 'center', backgroundSize: 'cover', height: '45px',
-                                        width: '45px', borderRadius: '50%', display: 'flex', margin: '0 auto'}}>
-                                    </td>
+                                    <td style={{width:'6%'}}><img src={item.image} className='w-100' alt="" /> </td>
                                     <td className='text-primary'>{item.name}</td>
                                     <td>{item.number}</td>
                                     <td>{item.warranty}</td>

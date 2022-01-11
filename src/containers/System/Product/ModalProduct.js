@@ -49,7 +49,9 @@ const ModalProduct = (props) => {
     }
 
     // add new product
-    const handleAddNewProduct=()=>{
+    const handleAddNewProduct=(e)=>{
+        e.preventDefault();
+
         props.createProduct({
             name: name,
             image: image,
@@ -71,10 +73,9 @@ const ModalProduct = (props) => {
         let data=e.target.files;
         let file=data[0];
         if(file){
-            let base64=await CommonUtils.getBase64(file);
             let objectUrl=URL.createObjectURL(file)
             setPreviewImg(objectUrl);
-            setImage(base64);
+            setImage(file);
         }
     }
     //remove image
@@ -89,9 +90,13 @@ const ModalProduct = (props) => {
             toggle={()=>toggle()} 
             size="lg"
         >
+        <form
+            onSubmit={handleAddNewProduct}
+            encType='multipart/form-data'
+        >
             <ModalHeader toggle={()=>toggle()}>Thêm mới sản phẩm</ModalHeader>
             <ModalBody>
-            <form>
+            <div>
                 <div className="row">
                     <div className="form-group col-md-6">
                         <label>Tên </label>
@@ -105,6 +110,7 @@ const ModalProduct = (props) => {
                         <label>Ảnh</label>
                         <input id="previewImg" type="file" hidden 
                             onChange={(e)=>changeImage(e)}
+                            name='image'
                         />
 
                         <label htmlFor="previewImg" className="btn btn-success w-100"><i className="fas fa-upload"></i> Tải ảnh</label>  
@@ -207,15 +213,16 @@ const ModalProduct = (props) => {
                     </div>
 
                 </div>
-            </form>
+            </div>
             </ModalBody>
 
             <ModalFooter>
-                <Button color="primary" className="px-3" onClick={() => {handleAddNewProduct()}}>
+                <Button color="primary" className="px-3" type='submit'>
                     Thêm mới
                 </Button>
                 <Button color="secondary" className="px-3">Cancel</Button>
             </ModalFooter>
+        </form>
         </Modal>
     )
 }

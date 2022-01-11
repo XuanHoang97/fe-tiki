@@ -27,11 +27,9 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
     const [menuLeft, setMenuLeft] = useState(true);
     const [widthMenuRight, setWidthMenuRight] = useState('82%');
     const [widthMenuLeft, setWidthMenuLeft] = useState('18%');
-    const [dataSearch, setDataSearch] = useState([]);
+    const [searchAdmin, setSearchAdmin] = useState([]);
     const [query, setQuery] = useState('');
     const history = useHistory()
-
-    console.log(dataSearch);
 
     //toggle menu left
     const toggleMenu = () => {
@@ -43,7 +41,7 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
     const handleSearch = async() => {
         let res = await axios({
             method: 'GET',
-            'url': `${path.PORT}/api/search`,
+            'url': `${path.PORT}/search`,
             "params": { 
                 'keyword': query 
             }
@@ -65,9 +63,9 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
                     result.push(object);
                 });
             }
-            setDataSearch(result);
+            setSearchAdmin(result);
             setQuery('');
-            history.push(`/search/keyword=${query}`);
+            // history.push(`/search/keyword=${query}`);
         }
     }
 
@@ -103,7 +101,7 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
                                     handleKeyDown={handleKeyDown}
                                     query={query}
                                     setQuery={setQuery}
-                                    dataSearch={dataSearch}
+                                    searchAdmin={searchAdmin}
                                 />
                             </div>
 
@@ -133,12 +131,12 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
                 {!menuLeft ? <MenuLeftCollapse /> : ''}                
             
                 <div className="system-container bg-white py-3 px-2" style={{height: '90vh', overflowY: 'scroll', width: widthMenuRight, boxShadow: 'none'}}>
-                    {
-                        dataSearch && dataSearch.length > 0 ?
-                        <Switch><Route path={path.SEARCH}><Index dataSearch={dataSearch}/></Route></Switch>
+                    {/* {
+                        searchAdmin && searchAdmin.length > 0 ?
+                        <Index searchAdmin={searchAdmin}/>
                         : 
-                        <Switch><Route path={path.SEARCH}><NotFound/></Route></Switch> 
-                    }
+                        <NotFound/>
+                    } */}
 
                     <div className="system-list">
                         <Switch>

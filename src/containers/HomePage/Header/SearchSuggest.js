@@ -122,14 +122,9 @@ function SearchSuggest({ dataSearch, show, blur, search }) {
                     <div className="list__prod">
                         {
                             specialCategory.slice(0,8).map((item, index) => {
-                                let imageBase64='';
-                                if(item.image){
-                                    imageBase64=new Buffer(item.image, 'base64').toString('binary')
-                                } 
-
                                 return (
                                     <div className="item--prod" key={index}>
-                                        <img src={imageBase64} alt="" />
+                                        <img src={item.image} alt="" />
                                         <span>{item.name}</span>
                                     </div>
                                 )

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../../store/actions';
+import { SaveOptionProduct } from '../../../store/actions';
 import ModalArticle from './ModalArticle';
 import ModalEditArticle from './ModalEditArticle';
 
@@ -22,6 +23,8 @@ const ArticleManage = (props) => {
 
     const [option, setOption] = useState('');
     const [productId, setProductId] = useState('');
+    const [imageDesc, setImageDesc] = useState('');
+    const [previewImg, setPreviewImg] = useState('');
 
     //get option product
     useEffect(() => {
@@ -46,8 +49,31 @@ const ArticleManage = (props) => {
         console.log('check option product: ', data);
     }
 
-    const handleSaveChoose = () => {
-        console.log('save choose: ', option);
+    const handleSaveChoose = (e) => {
+        e.preventDefault();
+        const data = new FormData();
+        data.append('productId', productId);
+        imageDesc && data.append('imageDesc', imageDesc);
+        
+        dispatch(SaveOptionProduct(data));
+    }
+
+    //onChange multi image
+    const changeMultiImage = async(e) => {
+        let data=e.target.files;
+        let file=data[0];
+        if(file){
+            let objectUrl=URL.createObjectURL(file)
+            setPreviewImg(objectUrl);
+            setImageDesc(file);
+        }
+        console.log('check image: ', file);
+    }
+
+    //remove image
+    const removeImg=()=>{
+        setPreviewImg('');
+        setImageDesc('');
     }
 
     //OPEN MODAL Create, Edit article
@@ -165,7 +191,10 @@ const ArticleManage = (props) => {
 
             <hr/>   
             <div className="text-dark">Sản phẩm</div>
-            <div className='bg-light p-3'>
+            <form className='bg-light p-3'
+                onSubmit={handleSaveChoose}
+                encType="multipart/form-data"
+            >
                 <div className='d-flex justify-content-between p-0'>
                     <div className='d-flex'>
                         <label className='mr-3'>Chọn sản phẩm</label>
@@ -206,19 +235,15 @@ const ArticleManage = (props) => {
 
                     <div className="d-flex">
                         <label>Ảnh</label>
-                        <input id="previewImg" type="file" hidden />
-
-                        <label htmlFor="previewImg" className="btn btn-info w-100 px-3 mx-2"><i className="fas fa-upload"></i> Tải ảnh</label>  
-                    
-                        <div className="preview-image col-md-2 border">   
-                            <div className="" style={{textAlign: 'end', position: 'absolute', right: '-0.5rem', top: '-1rem'}}>
-                                <i className="far fa-times-circle text-danger"></i>
-                            </div> 
-                        </div>
+                        <input id="previewImg" type="file"
+                            name='multi-image' 
+                            multiple
+                            onChange={(e) => changeMultiImage(e)} 
+                        />
                     </div>
                 </div>
-                <button onClick={() => handleSaveChoose()} type="button" className="btn btn-success px-3">Lưu thông tin</button>
-            </div>
+                <button type ="submit" className="btn btn-success px-3">Lưu thông tin</button>
+            </form>
         </div>
     );
 }

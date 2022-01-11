@@ -9,6 +9,7 @@ import {
     editInfoProduct,
     getSomeProduct,
     getProductSimilar,
+    saveOptionProduct,
 
     getAllArticle,
     getAllProductByCategory
@@ -262,6 +263,32 @@ export const editInfoProductSuccess = () => ({
 
 export const editInfoProductFailed = () => ({
     type: actionTypes.EDIT_INFO_DETAIL_PRODUCT_FAILED,
+})
+
+//save option product
+export const SaveOptionProduct = (data) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await saveOptionProduct(data);
+            if (res && res.data.errCode === 0) {
+                dispatch(saveOptionProductSuccess());
+                toast.success('Thêm thông tin sản phẩm thành công !')
+            } else {
+                dispatch(saveOptionProductFailed());
+            }
+        } catch (e) {
+            dispatch(saveOptionProductFailed());
+            console.log('saveOptionProductFailed error', e)
+        }
+    }
+}
+
+export const saveOptionProductSuccess = () => ({
+    type: actionTypes.SAVE_OPTION_PRODUCT_SUCCESS,
+})
+
+export const saveOptionProductFailed = () => ({
+    type: actionTypes.SAVE_OPTION_PRODUCT_FAILED,
 })
 
 //get some product

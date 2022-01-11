@@ -2,19 +2,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function Index(props) {
-    const { dataSearch} = props;
+    const { searchAdmin} = props;
     return (
         <div>
             <div className='p-3'>
                 <div className="d-flex justify-content-between align-items-center">
                     <div className="d-flex align-items-center">
                         <span>Kết quả tìm kiếm: </span>
-                        <span className="text-primary ml-2">{dataSearch.length} kết quả</span>
+                        <span className="text-primary ml-2">{searchAdmin.length} kết quả</span>
                     </div>
                 </div>
 
                 {
-                    dataSearch.map((item, index) => {
+                    searchAdmin.map((item, index) => {
                      //endCode image
                      let imageBase64='';
                     if(item.image){
