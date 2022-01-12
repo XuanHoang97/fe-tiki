@@ -41,18 +41,13 @@ export default function Category() {
         >
           <div className="col-3 p-0 border-right">
             { category.map((item, index) => {
-              let imgBase64 = "";
-              if (item.image) {
-                imgBase64=new Buffer(item.image, 'base64').toString('binary');
-              }
-
               return (
                   <div className="dropdown-item drop__menu d-flex align-items-center py-2 px-3 bg-light" 
                     style={{ cursor: 'pointer' }}
                     key={index} 
                     onMouseEnter={() => viewDetailMenu(item)}
                   >
-                    <img className="col-1 px-0 mr-2 rounded-circle"  src={imgBase64} alt="img slide" />
+                    <img className="col-1 px-0 mr-2 rounded-circle"  src={item.image} alt="img slide" />
                     <div style={{fontSize: '13px'}}>{item.name}</div>
                   </div>
               );

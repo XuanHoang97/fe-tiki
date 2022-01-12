@@ -67,8 +67,8 @@ const ProductManage = (props) => {
         dataProduct.append('warranty', data.warranty);
         dataProduct.append('category_id', data.category_id);
         dataProduct.append('supplier_id', data.supplier_id);
+
         data.image && dataProduct.append('image', data.image);
-    
         dispatch(actions.CreateNewProduct(dataProduct));
     }
 
@@ -84,7 +84,19 @@ const ProductManage = (props) => {
     }
 
     const handleEditProduct = (data) => {
-        dispatch(actions.EditProduct(data));
+        dispatch(actions.EditProduct({
+            id: data.id,
+            name: data.name,
+            price: data.price,
+            sale: data.sale,
+            status: data.status,
+            number: data.number,
+            warranty: data.warranty,
+            category_id: data.category_id,
+            supplier_id: data.supplier_id,
+            image: data.previewImg,
+            previewImg: data.previewImg
+        }));
     }
 
     return (        
@@ -144,6 +156,7 @@ const ProductManage = (props) => {
                     {   
                         filter && filter.length>0 ?
                         filter.map((item, index) => {
+            
                             return(
                                 <tr key={index}>
                                     <td>
@@ -153,6 +166,7 @@ const ProductManage = (props) => {
                                     </td>
                                     <td>{index + 1}</td>
                                     <td style={{width:'6%'}}><img src={item.image} className='w-100' alt="" /> </td>
+                      
                                     <td className='text-primary'>{item.name}</td>
                                     <td>{item.number}</td>
                                     <td>{item.warranty}</td>

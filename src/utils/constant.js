@@ -5,7 +5,13 @@ export const path = {
     LOG_OUT: '/logout',
     SYSTEM: '/system',
     SEARCH: '/search/keyword',
-    PORT: 'http://localhost:8080'
+    PORT: 'http://localhost:8080',
+    NOTFOUND: '/404',
+
+    DETAIL_PRODUCT: '/products/:id',
+    ORDER: '/order',
+    PAYMENT: '/payment',
+    CHECK_ORDER: '/check-order',
 };
 
 export const CRUD_ACTIONS = {

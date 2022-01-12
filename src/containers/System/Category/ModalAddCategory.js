@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import {CommonUtils} from "../../../utils"
+import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 const ModalAddCategory = (props) => {
@@ -15,7 +14,8 @@ const ModalAddCategory = (props) => {
     }
 
     // add new category
-    const handleAddCategory=()=>{
+    const handleAddCategory=(e)=>{
+        e.preventDefault();
         props.CreateCategory({
             name: name,
             image: image,
@@ -32,10 +32,9 @@ const ModalAddCategory = (props) => {
         let data=e.target.files;
         let file=data[0];
         if(file){
-            let base64=await CommonUtils.getBase64(file);
             let objectUrl=URL.createObjectURL(file)
             setPreviewImg(objectUrl);
-            setImage(base64);
+            setImage(file);
         }
     }
     //remove image
@@ -50,11 +49,14 @@ const ModalAddCategory = (props) => {
             toggle={()=>toggle()} 
             size="lg"
         >
-            
+        <form
+            onSubmit={handleAddCategory}
+            encType='multipart/form-data'
+        >  
             <ModalHeader toggle={()=>toggle()}>Thêm mới danh mục</ModalHeader>
             <ModalBody>
             
-            <form>
+            <div>
                 <div className="row">
                     <div className="form-group col-md-6">
                         <label>Tên </label>
@@ -68,10 +70,10 @@ const ModalAddCategory = (props) => {
                         <label>Ảnh</label>
                         <input id="previewImg" type="file" hidden 
                             onChange={(e)=>changeImage(e)}
+                            name="image"
                         />
 
-                        <label htmlFor="previewImg" className="btn btn-success w-100"><i className="fas fa-upload"></i> Tải ảnh</label>  
-                    
+                        <label htmlFor="previewImg" className="btn btn-success w-100"><i className="fas fa-upload"></i> Tải ảnh</label>      
                     </div>
 
                     <div className="preview-image col-md-2 border" 
@@ -109,16 +111,17 @@ const ModalAddCategory = (props) => {
                         value={value}
                     />
                 </div>
-            </form>
+            </div>
             
             </ModalBody>
 
             <ModalFooter>
-                <Button color="primary" className="px-3" onClick={() => {handleAddCategory()}}>
+                <Button color="primary" className="px-3" type='submit'>
                     Thêm mới
                 </Button>
                 <Button color="secondary" className="px-3">Cancel</Button>
             </ModalFooter>
+        </form> 
         </Modal>
     )
 }

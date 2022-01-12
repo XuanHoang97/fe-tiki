@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import {CommonUtils} from "../../../utils"
 
 const ModalEditCategory  = (props) => {
     const [id, setId] = useState('');
@@ -13,15 +12,9 @@ const ModalEditCategory  = (props) => {
 
     useEffect (() => {
         let category = props.currentCategory;
-        //fix bug buffer
-        let imageBase64='';
-        if(category.image){
-            imageBase64= new Buffer(category.image, 'base64').toString('binary');
-        }
         //fill info category
         setId(category.id);
-        setPreviewImg(imageBase64);
-        setImage(imageBase64);
+        setPreviewImg(category.image);
         setName(category.name);
         setKeyMap(category.keyMap);
         setType(category.type);
@@ -37,10 +30,9 @@ const ModalEditCategory  = (props) => {
         let data=e.target.files;
         let file=data[0];
         if(file){
-            let base64=await CommonUtils.getBase64(file);
             let objectUrl=URL.createObjectURL(file)
             setPreviewImg(objectUrl);
-            setImage(base64);
+            setImage(file);
         }
     }
     //remove image
@@ -49,7 +41,8 @@ const ModalEditCategory  = (props) => {
         setImage('');
     }
 
-    const EditCategory=()=>{
+    const EditCategory=(e)=>{
+        e.preventDefault();
         props.editCategory({
             id: id,
             image : image,
@@ -68,9 +61,13 @@ const ModalEditCategory  = (props) => {
             toggle={()=>toggle()} 
             size="lg"
         >   
+        <form
+            onSubmit={EditCategory}
+            encType='multipart/form-data'
+        >
             <ModalHeader toggle={()=>toggle()}>Cập nhật danh mục</ModalHeader>
             <ModalBody>
-                <form>
+                <div>
                     <div className="row">
                         <div className="form-group col-md-6">
                             <label>Tên </label>
@@ -84,6 +81,7 @@ const ModalEditCategory  = (props) => {
                             <label>Ảnh</label>
                             <input id="previewImg" type="file" hidden 
                                 onChange={(e)=>changeImage(e)}
+                                name='image'
                             />
                             <label htmlFor="previewImg" className="btn btn-success w-100"><i className="fas fa-upload"></i> Tải ảnh</label>  
                         </div>
@@ -123,15 +121,16 @@ const ModalEditCategory  = (props) => {
                             value={value}
                         />
                     </div>
-                </form>
+                </div>
             </ModalBody>
 
             <ModalFooter>
-                <Button color="primary" className="px-3" onClick={() => {EditCategory()}}>
+                <Button color="primary" className="px-3" type='submit'>
                     Cập nhật
                 </Button>
                 <Button color="secondary" className="px-3">Cancel</Button>
             </ModalFooter>
+        </form>
         </Modal>
     )
 }

@@ -1,4 +1,5 @@
 import React,{useState, useEffect} from 'react';
+import { Preview } from 'react-markdown-editor-lite/cjs/editor/preview';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../../store/actions';
 import ModalAddCategory from './ModalAddCategory';
@@ -32,7 +33,14 @@ const CategoryManage = (props) => {
     }
 
     const CreateCategory = (data) => {
-        dispatch(actions.CreateCategory(data));
+        const dataCategory = new FormData();
+        dataCategory.append('name', data.name);
+        dataCategory.append('keyMap', data.keyMap);
+        dataCategory.append('type', data.type);
+        dataCategory.append('value', data.value);
+
+        data.image && dataCategory.append('image', data.image);
+        dispatch(actions.CreateCategory(dataCategory));
     }
 
     //edit category
@@ -42,7 +50,16 @@ const CategoryManage = (props) => {
     }
 
     const handleEditCategory = (data) => {
-        dispatch(actions.EditCategory(data));
+        dispatch(actions.EditCategory({
+            id: data.id,
+            name: data.name,
+            keyMap: data.keyMap,
+            type: data.type,
+            value: data.value,
+            image: data.previewImg,
+            previewImg: data.previewImg
+
+        }));
     }
 
     //delete category
@@ -88,12 +105,6 @@ const CategoryManage = (props) => {
                 {
                     listCategory && listCategory.length > 0 ?
                     listCategory.map((item, index) => {
-                        //endCode image
-                        let imageBase64='';
-                        if(item.image){
-                            imageBase64=new Buffer(item.image, 'base64').toString('binary')
-                        }
-                        
                         return (
                             <tr key={index}>
                                 <td>
@@ -102,9 +113,7 @@ const CategoryManage = (props) => {
                                     </div>
                                 </td>
                                 <td>{index + 1}</td>
-                                <td style={{backgroundImage: `url(${imageBase64})`, backgroundPosition: 'center', backgroundSize: 'cover', height: '45px',
-                                    width: '45px', borderRadius: '50%', display: 'flex', margin: '0 auto'}}>
-                                </td>
+                                <td style={{width:'6%'}}><img src={item.image} className='w-100' alt="" /> </td>
                                 <td className='text-primary'>{item.name}</td>
                            
                                 <td>

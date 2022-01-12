@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import {CommonUtils} from "../../../utils"
 
 import _ from 'lodash';
 import * as actions from '../../../store/actions';
@@ -26,24 +25,19 @@ const ModalEditProduct  = (props) => {
 
     useEffect (() => {
         let product = props.currentProduct;
-        if(product && !_.isEmpty(product)) {
-            //fix bug buffer
-            let imageBase64='';
-            if(product.image){
-                imageBase64= new Buffer(product.image, 'base64').toString('binary');
-            }
-            // fill info product to edit
-            setId(product.id);
-            setName(product.name);
-            setPrice(product.price);
-            setSale(product.sale);
-            setWarranty(product.warranty);
-            setNumber(product.number);
-            setCategory_id(product.category_id);
-            setSupplier_id(product.supplier_id);
-            setStatus(product.status);            
-            setPreviewImg(imageBase64);
-        } 
+      
+        // fill info product to edit
+        setId(product.id);
+        setName(product.name);
+        setPrice(product.price);
+        setSale(product.sale);
+        setStatus(product.status);            
+        setWarranty(product.warranty);
+        setNumber(product.number);
+        setCategory_id(product.category_id);
+        setSupplier_id(product.supplier_id);
+        setPreviewImg(product.image);
+
         dispatch(actions.fetchStatusProduct());
         dispatch(actions.fetchAllCategory());
         dispatch(actions.fetchSupplierProduct());
@@ -59,10 +53,9 @@ const ModalEditProduct  = (props) => {
         let data=e.target.files;
         let file=data[0];
         if(file){
-            let base64=await CommonUtils.getBase64(file);
             let objectUrl=URL.createObjectURL(file)
             setPreviewImg(objectUrl);
-            setImage(base64);
+            setImage(file);
         }
     }
     //remove image
@@ -71,19 +64,21 @@ const ModalEditProduct  = (props) => {
         setImage('');
     }
 
-    const EditProduct=()=>{
+    const EditProduct=(e)=>{
+        e.preventDefault();
+
         props.editProduct({
             id: id,
             name: name,
             price: price,
             sale: sale,
+            status: status,
             warranty: warranty,
             number: number,
             category_id: category_id,
             supplier_id: supplier_id,
-            image: image,
+            image: previewImg,
             previewImg: previewImg,
-            status: status,
         });
         toggle();
     }
@@ -94,10 +89,14 @@ const ModalEditProduct  = (props) => {
             toggle={()=>toggle()} 
             size="lg"
         >
+        <form
+            onSubmit={EditProduct}
+            encType='multipart/form-data'
+        >
             
             <ModalHeader toggle={()=>toggle()}>Cập nhật sản phẩm</ModalHeader>
             <ModalBody>
-            <form>
+            <div>
                 <div className="row">
                     <div className="form-group col-md-6">
                         <label>Tên </label>
@@ -111,10 +110,10 @@ const ModalEditProduct  = (props) => {
                         <label>Ảnh</label>
                         <input id="previewImg" type="file" hidden 
                             onChange={(e)=>changeImage(e)}
+                            name='image'
                         />
 
-                        <label htmlFor="previewImg" className="btn btn-success w-100"><i className="fas fa-upload"></i> Tải ảnh</label>  
-                    
+                        <label htmlFor="previewImg" className="btn btn-success w-100"><i className="fas fa-upload"></i> Tải ảnh</label>                
                     </div>
 
                     <div className="preview-image col-md-2 border" 
@@ -212,15 +211,16 @@ const ModalEditProduct  = (props) => {
                     </div>
 
                 </div>
-            </form>
+            </div>
             </ModalBody>
 
             <ModalFooter>
-                <Button color="primary" className="px-3" onClick={() => {EditProduct()}}>
+                <Button color="primary" className="px-3" type='submit'>
                     Cập nhật
                 </Button>
                 <Button color="secondary" className="px-3">Cancel</Button>
             </ModalFooter>
+        </form>   
         </Modal>
     )
 }

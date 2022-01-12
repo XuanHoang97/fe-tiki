@@ -27,6 +27,10 @@ const ProductDetail = ({ match }) => {
     dispatch(actions.GetProductSimilar(match.params.id));
   }, [])
 
+  useEffect(() => {
+    document.title = `${detailProduct.name}-giá rẻ nhất vịnh Bắc Bộ`;
+  }, [detailProduct]);
+
   console.log('data detail:', detailProduct);  
 
   return (
@@ -40,7 +44,7 @@ const ProductDetail = ({ match }) => {
           <div className="bg-white pt-4 pb-4 p-3 m-0 text-center row">
             <div className="col-md-3 p-0 text-left">
               <div>
-                <img className="w-75" src={detailProduct && detailProduct.image ? detailProduct.image :'loading'} alt="loading" />
+                <img className="w-75" src={detailProduct && detailProduct.image ? detailProduct.image :'loading...'} alt="loading" />
 
                 <div className="content-left"
                     style={{backgroundImage: `url(${detailProduct && detailProduct.image ? detailProduct.image : ''})` }}
@@ -51,16 +55,17 @@ const ProductDetail = ({ match }) => {
               <hr/>
 
               {/* character special */}
-              <div className="mt-3 px-2 py-1 text-white bg-info">Đặc Điểm Nổi Bật</div>
+              <div className="mt-3 py-1 text-primary border-bottom">Đặc Điểm Nổi Bật</div>
               {
-                detailProduct && detailProduct.Markdown && detailProduct.Markdown.characterHTML &&
+                detailProduct && detailProduct.Markdown && detailProduct.Markdown.characterHTML ?
                 <div className="character__special" dangerouslySetInnerHTML={{ __html: detailProduct.Markdown.characterHTML}} ></div>
+                : 'loadinng...'
               }
             </div>
             
             <div className="col-md-6 pl-4 pr-2 text-left">
               <div className="info d-flex align-items-center">
-                <h4 className="mr-5 font-weight-bold">{detailProduct && detailProduct.name ? detailProduct.name :'loading'}</h4>
+                <h4 className="mr-5 font-weight-bold">{detailProduct && detailProduct.name ? detailProduct.name :'loading...'}</h4>
                 <Rate />
               </div>
 
@@ -70,7 +75,7 @@ const ProductDetail = ({ match }) => {
                   <span className="badge badge-pill badge-warning ml-3 mr-4">
                     -1 %
                   </span>
-                  <strike className="small">{numberFormat(detailProduct && detailProduct.sale ? detailProduct.sale :'loading')}</strike>
+                  <strike className="small">{numberFormat(detailProduct && detailProduct.sale ? detailProduct.sale :'loading...')}</strike>
                 </div>
               </div>
               <Order />
@@ -126,15 +131,9 @@ const ProductDetail = ({ match }) => {
                         {
                           detailProduct && detailProduct.newData && detailProduct.newData ?  
                           detailProduct.newData.map((item, index) => {
-                            //endCode image
-                            let imageBase64='';
-                            if(item.image){
-                                imageBase64=new Buffer(item.image, 'base64').toString('binary')
-                            }
-
                             return (
                               <div className="mb-2 d-flex p-0" key={index}>
-                                  <img className="w-25 mr-2" src={imageBase64} alt="loading" />
+                                  <img className="w-25 mr-2" src={item.image} alt="loading" />
                                   <div className="col-md-8">
                                     <span className="p-0 text-primary">{item.name}</span>
                                     <div className="d-flex align-items-center">

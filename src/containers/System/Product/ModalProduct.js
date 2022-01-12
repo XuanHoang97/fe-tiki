@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {CommonUtils} from "../../../utils";
-
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import * as actions from '../../../store/actions';
 
@@ -51,20 +49,19 @@ const ModalProduct = (props) => {
     // add new product
     const handleAddNewProduct=(e)=>{
         e.preventDefault();
-
-        props.createProduct({
+        const data = {
             name: name,
             image: image,
             previewImg: previewImg,
-
             price: price,
             sale: sale,
             number: number,
             warranty: warranty,
             status: status,
             category_id: category_id,
-            supplier_id: supplier_id,
-        });
+            supplier_id: supplier_id    
+        };
+        props.createProduct(data);
         toggle();
     }
 
@@ -77,7 +74,9 @@ const ModalProduct = (props) => {
             setPreviewImg(objectUrl);
             setImage(file);
         }
+        console.log(file);
     }
+    
     //remove image
     const removeImg=()=>{
         setPreviewImg('');

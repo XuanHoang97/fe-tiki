@@ -31,16 +31,10 @@ const Product = (mobile) => {
                 {
                     listProduct && listProduct.length >0 ?
                     listProduct.map((item, index) => {
-                        //endCode image
-                        let imageBase64='';
-                        if(item.image){
-                            imageBase64=new Buffer(item.image, 'base64').toString('binary')
-                        }
-
                         return (
                             <div className="product--item col-md-2 col-6 py-4 p-0" key={index} >
                                 <div onClick={()=>viewDetail(item)} style={{cursor: 'pointer'}}>
-                                    <img src={imageBase64} className="w-75" alt="" />
+                                    <img src={item.image} className="w-75" alt="" />
                                     <h6 className="mt-2 mb-1 text-dark">{item.name}</h6>
                                 </div>
                                 <Rate />

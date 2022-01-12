@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { connect } from "react-redux";
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import * as actions from "./../store/actions";
@@ -75,6 +75,10 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
             handleSearch();
         }
     }
+
+    useEffect(() => {
+        document.title = "Hệ thống quản lý Tiki";
+    }, []);
 
     return (
         <div className='main-container'>

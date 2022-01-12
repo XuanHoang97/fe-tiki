@@ -2,7 +2,7 @@ import React, { } from 'react';
 
 const Mail = () => {
     return (
-        <div className="row p-3 my-3 align-items-center">
+        <div className="d-flex p-3 my-3 align-items-center">
             <div className="col-md-6 row">
                 <div className="col-md-3 col-3">
                     <img className="w-100" src="https://frontend.tikicdn.com/_desktop-next/static/img/footer/newsletter.png" alt="" />

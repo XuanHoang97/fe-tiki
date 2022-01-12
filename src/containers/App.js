@@ -15,6 +15,10 @@ import Login from './Auth/Login';
 import System from '../routes/System';
 import HomePage from './HomePage/HomePage';
 import ProductDetail from './Client/product/ProductDetail';
+import Cart from './Client/cart/Cart';
+import Payment from './Client/payment/Payment';
+import OrderSuccess from './Client/Check_order/OrderSuccess';
+import NotFound from './HomePage/NotFound/Index';
 
 console.warn = () => { };
 function App(props) {    
@@ -44,7 +48,15 @@ function App(props) {
 
                 {/* client  */}
                 <Route path={path.HOMEPAGE} component={HomePage} />
-                <Route path="/products/:id" component={ProductDetail} />
+                <Route path={path.DETAIL_PRODUCT} component={ProductDetail} />
+                <Route path={path.NOTFOUND} component={NotFound} />
+
+                {/* Order not login  */}
+                <Route path={path.ORDER} component={Cart} />
+                <Route path={path.PAYMENT} component={Payment} />
+                <Route path={path.CHECK_ORDER} component={OrderSuccess} />
+
+                {/* Order login  */}
             </Switch>
             <ToastContainer autoClose={5000} />
         </Router>

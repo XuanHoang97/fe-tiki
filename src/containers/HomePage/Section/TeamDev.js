@@ -32,7 +32,7 @@ function TeamDev(props) {
 
                         return(
                             <div className="card bg-light px-2 py-3 text-center" key={index} style={{width: '16.67%'}} >
-                                <div className='py-2' style={{backgroundImage: `url('https://png.pngtree.com/background/20210715/original/pngtree-fashion-blue-gradient-background-picture-image_1278728.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
+                                <div className='py-2' style={{backgroundImage: `url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx74u9u54E8ce4LKjTiMAE28Gru4ht-FH66XvuUbU1eOvhQTYoY0L6cdUY1dPawz0P2D0&usqp=CAU')`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
                                     <img className="card-img-top rounded-circle" src={imgBase64} alt="" style={{margin: '0 auto', width: '70px', height:' 70px'}} />
                                 </div>
 
