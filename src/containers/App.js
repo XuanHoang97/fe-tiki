@@ -52,9 +52,9 @@ function App(props) {
                 <Route path={path.NOTFOUND} component={NotFound} />
 
                 {/* Order not login  */}
-                <Route path={path.ORDER} component={Cart} />
+                <Route path={path.CART} component={Cart} />
                 <Route path={path.PAYMENT} component={Payment} />
-                <Route path={path.CHECK_ORDER} component={OrderSuccess} />
+                <Route path={path.MY_ORDER} component={OrderSuccess} />
 
                 {/* Order login  */}
             </Switch>

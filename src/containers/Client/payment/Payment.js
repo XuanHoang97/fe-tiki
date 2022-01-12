@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Footer from 'containers/HomePage/Footer/Footer';
 import Header from 'containers/HomePage/Header/Header';
 import ContactDeliver from './ContactDeliver';
@@ -6,6 +6,11 @@ import DeliverPayments from './DeliverPayments';
 import MethodPayment from './MethodPayment';
 
 function Payment() {
+
+    useEffect(() => {
+        document.title = 'Thông tin giao hàng';
+    }, [])
+    
     return (
         <>
             <Header />

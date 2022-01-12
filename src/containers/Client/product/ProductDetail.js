@@ -129,7 +129,7 @@ const ProductDetail = ({ match }) => {
                       <h5 className="mb-4">Tin tức và sự kiện</h5>
                       <div className="list_news row pl-3">
                         {
-                          detailProduct && detailProduct.newData && detailProduct.newData ?  
+                          detailProduct && detailProduct.newData >0 ?  
                           detailProduct.newData.map((item, index) => {
                             return (
                               <div className="mb-2 d-flex p-0" key={index}>

@@ -12,6 +12,10 @@ const Cart = (props) => {
     useEffect(() => {
     }, [])
 
+    useEffect(() => {
+        document.title = `Giỏ hàng - giá rẻ nhất vịnh Bắc Bộ`;
+    }, [])
+
     return (
         <>
             <Header />

@@ -52,13 +52,6 @@ const OrderManage = (props) => {
                         <span className='text-secondary statical'>0 đơn hàng</span>
                     </NavLink>
                 </NavItem>
-                
-                <NavItem>
-                    <NavLink className={activeTab == '7' ? 'active' : ''} onClick={() => setActiveTab('7')}>                 
-                        <div className='font-weight-bold'>LS đơn hàng</div>
-                        <span className='text-secondary statical'>0 đơn hàng</span>
-                    </NavLink>
-                </NavItem>
             </Nav>
             
             <TabContent activeTab={activeTab} className='py-4 px-3 bg-light border'>
@@ -134,7 +127,6 @@ const OrderManage = (props) => {
                 <TabPane tabId="4">Tab 4 Content</TabPane>
                 <TabPane tabId="5">Tab 5 Content</TabPane>
                 <TabPane tabId="6">Tab 6 Content</TabPane>
-                <TabPane tabId="7">Tab 7 Content</TabPane>
             </TabContent>
         </div>
     );

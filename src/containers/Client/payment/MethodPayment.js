@@ -33,7 +33,7 @@ const MethodPayment = () => {
                 <div className="form-check mb-3">
                     <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="option4" />
                     <label className="form-check-label" htmlFor="momo">
-                        <img className="ml-3 mr-2" src="https://developers.momo.vn/images/favicon/ms-icon-310x310.png" style={{ width: '4%' }} alt="" />
+                        <img className="ml-3 mr-2" src="https://business.momo.vn/assets/landingpage/img/931b119cf710fb54746d5be0e258ac89-logo-momo.png" style={{ width: '4%' }} alt="" />
                         Thanh toán bằng ví MoMo
                     </label>
                 </div>

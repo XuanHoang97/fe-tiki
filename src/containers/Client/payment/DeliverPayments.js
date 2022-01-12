@@ -1,26 +1,6 @@
 import React from 'react';
 
 const DeliverPayments = (props) => {
-
-    const renderProduct = () => {
-        
-        <div style={{ display: 'flex' }}>
-            <div className="col-md-3 p-0">
-                <img className="w-75" src="" alt="" />
-            </div>
-            
-            <div className="col-md-5 p-0">
-                <small>name</small>
-                <p>Số lượng: X2 </p>
-            </div>
-
-            <div className="col-md-4 p-0 text-right">
-                <span>1000000</span>
-            </div>
-        </div>
-            
-    }
-
     const handleChange = () => {
 
     }
@@ -46,7 +26,20 @@ const DeliverPayments = (props) => {
 
             <div className="info_prod border border-light mt-3 p-3 m-0 row justify-content-between">
                 <div className="col-md-6 p-0 row">
-                    {renderProduct()}
+                    <div style={{ display: 'flex' }}>
+                        <div className="col-md-3 p-0">
+                            <img className="w-75" src="https://salt.tikicdn.com/desktop/img/mascot@2x.png" alt="" />
+                        </div>
+                        
+                        <div className="col-md-5 p-0">
+                            <small>name</small>
+                            <p>Số lượng: X2 </p>
+                        </div>
+
+                        <div className="col-md-4 p-0 text-right">
+                            <span>1000000</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="col-md-6 p-0 row">

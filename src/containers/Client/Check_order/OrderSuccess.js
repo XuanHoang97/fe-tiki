@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Footer from 'containers/HomePage/Footer/Footer';
 import Header from 'containers/HomePage/Header/Header';
 import { Link } from "react-router-dom";
 
 const OrderSuccess = (props) => {
+    useEffect(() => {
+        document.title = 'Đặt hàng thành công';
+    }, [])
+
     return (
         <>
         <Header />

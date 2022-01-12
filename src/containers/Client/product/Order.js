@@ -34,12 +34,12 @@ function Order(props) {
                     </div>
 
                     <div className='d-flex mt-5 align-items-center' style={{gap: '10px'}}>
-                        <button type="button" className="btn btn-danger" style={{height: '40px', width:'50%'}}>
+                        <button type="button" className="btn btn-danger font-weight-normal" style={{height: '40px', width:'50%'}}>
                             <i className="fas fa-shopping-cart mr-2" />
                             MUA NGAY
                         </button>
                         
-                        <button type="button" className="btn btn-success" style={{height: '40px', width:'50%'}}>
+                        <button type="button" className="btn btn-success font-weight-normal" style={{height: '40px', width:'50%'}}>
                             <i className="fas fa-user mr-2" />
                             ĐĂNG NHẬP MUA HÀNG
                         </button>
