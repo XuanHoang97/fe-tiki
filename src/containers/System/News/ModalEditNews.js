@@ -28,6 +28,7 @@ const ModalEditNews  = (props) => {
     useEffect (() => {
         let news = props.currentNews;
             // fill info news to edit
+        if(news) {
             setId(news.id);
             setName(news.name);
             if(news.image){
@@ -44,6 +45,7 @@ const ModalEditNews  = (props) => {
             setDate(news.date);
             setView(news.view);
             setHot(news.hot);
+        }
 
         dispatch(actions.fetchAllCategory());
         dispatch(actions.fetchProducts());

@@ -1,59 +1,29 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
-import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
+import {TabContent, TabPane } from 'reactstrap';
+import ModalVerifyOrder from './ModalVerifyOrder';
 import './OrderManage.scss';
+import TabControlOrder from './TabControlOrder';
 
 const OrderManage = (props) => {
     const [activeTab, setActiveTab] = useState('1');
+    const [modalVerifyOrder, setmodalVerifyOrder] = useState(false);
+
+    const verifyOrder = () => {
+        setmodalVerifyOrder(!modalVerifyOrder);
+    }
 
     return (
         <div className="mx-2">
+            <ModalVerifyOrder
+                isOpen={modalVerifyOrder}
+                toggle={verifyOrder}
+            />
+
             <div className="h5 text-dark mb-4">Quản lý đơn hàng</div>
+            <TabControlOrder activeTab = {activeTab} setActiveTab = {setActiveTab}  />
 
-            <Nav tabs>
-                <NavItem>
-                    <NavLink className={activeTab == '1' ? 'active' : ''} onClick={() => setActiveTab('1')}>
-                        <div className='font-weight-bold'>Tất cả</div>
-                        <span className='text-secondary statical'>0 đơn hàng</span>
-                    </NavLink>
-                </NavItem>
-
-                <NavItem>
-                    <NavLink className={activeTab == '2' ? 'active' : ''} onClick={() => setActiveTab('2')}>
-                        <div className='font-weight-bold'>Chờ xác nhận</div>
-                        <span className='text-secondary statical'>0/0 đơn quá hạn xác nhận</span>
-                        
-                    </NavLink>
-                </NavItem>
-
-                <NavItem>
-                    <NavLink className={activeTab == '3' ? 'active' : ''} onClick={() => setActiveTab('3')}>
-                        <div className='font-weight-bold'>Đang xử lý</div>
-                        <span className='text-secondary statical'>0/0 đơn quá hạn xác nhận</span>
-                    </NavLink>
-                </NavItem>
-                <NavItem>
-                    <NavLink className={activeTab == '4' ? 'active' : ''} onClick={() => setActiveTab('4')}>                         
-                        <div className='font-weight-bold'>Đang vận chuyển</div>
-                        <span className='text-secondary statical'>0 đơn hàng</span>
-                    </NavLink>
-                </NavItem>
-                
-                <NavItem>
-                    <NavLink className={activeTab == '5' ? 'active' : ''} onClick={() => setActiveTab('5')}>
-                        <div className='font-weight-bold'>Đã giao hàng</div>
-                        <span className='text-secondary statical'>0 đơn hàng</span>
-                    </NavLink>
-                </NavItem>
-
-                <NavItem>
-                    <NavLink className={activeTab == '6' ? 'active' : ''} onClick={() => setActiveTab('6')}>                 
-                        <div className='font-weight-bold'>Đã huỷ</div>
-                        <span className='text-secondary statical'>0 đơn hàng</span>
-                    </NavLink>
-                </NavItem>
-            </Nav>
-            
             <TabContent activeTab={activeTab} className='py-4 px-3 bg-light border'>
                 <TabPane tabId="1">
                     <div className='filter d-flex'>
@@ -86,7 +56,7 @@ const OrderManage = (props) => {
                         <table className="table table-striped table-bordered table-hover w-100">
                             <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
                                 <tr>
-                                    <td>Tick</td>
+                                    <td>STT</td>
                                     <td>Mã đơn hàng</td>
                                     <td>Hình thức giao hàng</td>
                                     <td>Trạng thái</td>
@@ -98,22 +68,23 @@ const OrderManage = (props) => {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>
-                                        <div className="form-group">
-                                            <input type="checkbox" className="w-100" />
-                                        </div>
-                                    </td>
+                                    <td>1</td>
                                     <td>1dx45ab7d</td>
                                     <td>Tiki giao hàng</td>
-                                    <td>Tiki đã tiếp nhận đơn hàng</td>
+                                    <td className='text-warning'>Chờ xác nhận</td>
                                     <td>5</td>
                                     <td>1.450.374 đ</td>
                                     <td>Ngày mai 18/12/2021</td>
                                     <td className='d-flex flex-column-reverse'>
                                         <button type="button" className="btn text-danger">
+                                            <span className=''>Huỷ đơn hàng</span>
+                                        </button>
+
+                                        <button type="button" className="btn text-success">
                                             <span className=''>Xem chi tiết</span>
                                         </button>
-                                        <button type="button" className="btn text-primary">
+
+                                        <button onClick={() => verifyOrder()} type="button" className="btn text-primary">
                                             <span className=''>Xem và xác nhận</span>
                                         </button>
                                     </td>
@@ -122,25 +93,13 @@ const OrderManage = (props) => {
                         </table>
                     </div>
                 </TabPane>
-                <TabPane tabId="2">Tab 2 Content</TabPane>
-                <TabPane tabId="3">Tab 3 Content</TabPane>
-                <TabPane tabId="4">Tab 4 Content</TabPane>
-                <TabPane tabId="5">Tab 5 Content</TabPane>
-                <TabPane tabId="6">Tab 6 Content</TabPane>
+                <TabPane tabId="2">Loading...</TabPane>
+                <TabPane tabId="3">Loading...</TabPane>
+                <TabPane tabId="4">Loading...</TabPane>
+                <TabPane tabId="5">Loading...</TabPane>
+                <TabPane tabId="6">Loading...</TabPane>
             </TabContent>
         </div>
     );
-
 }
-
-const mapStateToProps = state => {
-    return {
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(OrderManage);
+export default OrderManage;

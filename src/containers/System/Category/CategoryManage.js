@@ -18,15 +18,6 @@ const CategoryManage = (props) => {
         dispatch(actions.fetchAllCategory());
     }, [dispatch]);
 
-    //OPEN MODAL Create, Edit category
-    const toggleCategoryModal=()=> {
-        setModalCategory(!modalCategory);
-    }
-
-    const toggleCategoryEditModal=()=>{
-        setModalEditCategory(!modalEditCategory);
-    }
-
     //create category
     const handleAddCategory = () => {
         setModalCategory(!modalCategory);
@@ -71,13 +62,13 @@ const CategoryManage = (props) => {
         <div className="mx-2">
             <ModalAddCategory
                 isOpen={modalCategory}
-                toggleParent={toggleCategoryModal}
+                toggleParent={handleAddCategory}
                 CreateCategory={CreateCategory}
             />
 
             <ModalEditCategory
                 isOpen={modalEditCategory}
-                toggleParent={toggleCategoryEditModal}
+                toggleParent={editCategory}
                 currentCategory = {categoryEdit}
                 editCategory={handleEditCategory}
             />

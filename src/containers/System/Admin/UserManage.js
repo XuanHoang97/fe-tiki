@@ -26,23 +26,10 @@ const UserManage = (props) => {
     useEffect(() => {
         dispatch(actions.fetchAllUser());
     }, [dispatch]);
-
-    //OPEN MODAL View, Create, Edit User
-    const toggleUserModal=()=> {
-        setIsOpenModalUser(!isOpenModalUser);
-    }
-
-    const toggleUserEditModal=()=>{
-        setIsOpenModalEditUser(!isOpenModalEditUser);
-    }
-
-    const toggleInfoModal=()=> {
-        setIsOpenModalInfoUser(!isOpenModalInfoUser);
-    }
     
     // Create users
     const handleAddNewUser=()=> {
-        setIsOpenModalUser(true);
+        setIsOpenModalUser(!isOpenModalUser);
     }
 
     const AddNewUser=(data)=> {
@@ -57,7 +44,7 @@ const UserManage = (props) => {
     //edit user
     const handleEditUser=(user)=>{
         setUserEdit(user);
-        setIsOpenModalEditUser(true);
+        setIsOpenModalEditUser(!isOpenModalEditUser);
     }
 
     const editUser=(data)=>{
@@ -67,7 +54,7 @@ const UserManage = (props) => {
     //info user
     const handleInfoUser=(user)=>{
         setSelectInfoUser(user);
-        setIsOpenModalInfoUser(true);
+        setIsOpenModalInfoUser(!isOpenModalInfoUser);
     }
 
     //search user
@@ -104,7 +91,7 @@ const UserManage = (props) => {
         <div className="mx-2">
             <ModalUser
                 isOpen={isOpenModalUser} 
-                toggleFromParent={toggleUserModal} 
+                toggleFromParent={handleAddNewUser}
                 AddNewUser={AddNewUser}
             />
 
@@ -112,7 +99,7 @@ const UserManage = (props) => {
                 isOpenModalEditUser &&
                 <ModalEditUser
                     isOpen={isOpenModalEditUser} 
-                    toggleFromParent={toggleUserEditModal} 
+                    toggleFromParent={handleEditUser}
                     currentUser={userEdit}
                     editUser={editUser}
                 />
@@ -120,7 +107,7 @@ const UserManage = (props) => {
 
             <InfoUser
                 isOpen={isOpenModalInfoUser} 
-                toggleFromParent={toggleInfoModal} 
+                toggleFromParent={handleInfoUser}
                 details={selectInfoUser}
             />
             

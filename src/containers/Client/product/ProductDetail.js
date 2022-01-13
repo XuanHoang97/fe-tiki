@@ -13,6 +13,8 @@ import Footer from "containers/HomePage/Footer/Footer";
 import * as actions from "store/actions";
 import Rate from "containers/HomePage/Section/Rate";
 import Moment from "react-moment";
+import { path } from "utils";
+import { Link } from "react-router-dom";
 
 const ProductDetail = ({ match }) => {
   const [detailProduct, setDetailProduct] = useState({});
@@ -31,15 +33,15 @@ const ProductDetail = ({ match }) => {
     document.title = `${detailProduct.name}-giá rẻ nhất vịnh Bắc Bộ`;
   }, [detailProduct]);
 
-  console.log('data detail:', detailProduct);  
-
   return (
     <>
       <Header/>
       <div className="main bg-light pb-3">
         <div className="container">
-          <h6 className="my-3">HOME / 
-          {detailProduct && detailProduct.categoryData && detailProduct.categoryData.name ? detailProduct.categoryData.name :'loading..'}</h6>
+          <h6 className="my-3">
+            <Link to ={path.HOMEPAGE} >Trang chủ</Link> / 
+            <span className="ml-2">{detailProduct && detailProduct.categoryData && detailProduct.categoryData.name ? detailProduct.categoryData.name :'loading..'}</span>
+          </h6>
           
           <div className="bg-white pt-4 pb-4 p-3 m-0 text-center row">
             <div className="col-md-3 p-0 text-left">
@@ -55,7 +57,7 @@ const ProductDetail = ({ match }) => {
               <hr/>
 
               {/* character special */}
-              <div className="mt-3 py-1 text-primary border-bottom">Đặc Điểm Nổi Bật</div>
+              <div className="mt-3 py-1 text-primary">Đặc Điểm Nổi Bật</div>
               {
                 detailProduct && detailProduct.Markdown && detailProduct.Markdown.characterHTML ?
                 <div className="character__special" dangerouslySetInnerHTML={{ __html: detailProduct.Markdown.characterHTML}} ></div>
@@ -113,7 +115,7 @@ const ProductDetail = ({ match }) => {
           <>
               <h6 className="mt-4 mb-2 m-0 px-2">MÔ TẢ SẢN PHẨM</h6>
               <div className="description row bg-white p-3 m-1">
-                  <div className="description--product col-md-8 p-0 pr-2">
+                  <div className="description--product col-md-8 p-0 pr-2 border-right">
                       {
                         detailProduct && detailProduct.Markdown && detailProduct.Markdown.descriptionHTML ?
                         <span className="character__special" dangerouslySetInnerHTML={{ __html: detailProduct.Markdown.descriptionHTML}}></span>
@@ -129,7 +131,7 @@ const ProductDetail = ({ match }) => {
                       <h5 className="mb-4">Tin tức và sự kiện</h5>
                       <div className="list_news row pl-3">
                         {
-                          detailProduct && detailProduct.newData >0 ?  
+                          detailProduct && detailProduct.newData ?  
                           detailProduct.newData.map((item, index) => {
                             return (
                               <div className="mb-2 d-flex p-0" key={index}>
@@ -160,14 +162,9 @@ const ProductDetail = ({ match }) => {
               {
                 similarProducts && similarProducts.length > 0 ?
                 similarProducts.map((item, index) => {
-                  let imgBase64 = '';
-                  if (item.image) {
-                    imgBase64=new Buffer(item.image, 'base64').toString('binary');
-                  }
-
                   return (
                     <div className="col-md-2 col-6 text-center" key={index} style={{cursor: 'pointer'}}>
-                      <img src={imgBase64} className="w-75" alt="" />
+                      <img src={item.image} className="w-75" alt="" />
                       <h6 className="mt-1 mb-3 text-center text-primary">{item.name}</h6>
 
                       <Rate />

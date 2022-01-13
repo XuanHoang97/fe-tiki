@@ -43,15 +43,6 @@ const ProductManage = (props) => {
         );
     }, [selectedTag, sortBy, products]);
 
-    //OPEN MODAL Create, Edit Product
-    const toggleProductModal=()=> {
-        setModalProduct(!modalProduct);
-    }
-
-    const toggleProductEditModal=()=>{
-        setModalEditProduct(!modalEditProduct);
-    }
-
     //create product
     const handleAddNewProduct = () => {
         setModalProduct(!modalProduct);
@@ -85,17 +76,17 @@ const ProductManage = (props) => {
 
     const handleEditProduct = (data) => {
         dispatch(actions.EditProduct({
-            id: data.id,
+            id: productEdit.id,
             name: data.name,
             price: data.price,
             sale: data.sale,
             status: data.status,
-            number: data.number,
             warranty: data.warranty,
+            number: data.number,
             category_id: data.category_id,
             supplier_id: data.supplier_id,
             image: data.previewImg,
-            previewImg: data.previewImg
+            previewImg: data.previewImg,
         }));
     }
 
@@ -103,13 +94,13 @@ const ProductManage = (props) => {
         <div className="mx-2">
             <ModalProduct
                 isOpen={modalProduct}
-                toggleParent={toggleProductModal} 
+                toggleParent={handleAddNewProduct}
                 createProduct={CreateNewProduct}
             />
 
             <ModalEditProduct  
                 isOpen={modalEditProduct}
-                toggleParent={toggleProductEditModal}
+                toggleParent={editProduct}
                 currentProduct={productEdit}
                 editProduct={handleEditProduct}
             />

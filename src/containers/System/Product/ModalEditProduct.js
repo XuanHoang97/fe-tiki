@@ -25,18 +25,19 @@ const ModalEditProduct  = (props) => {
 
     useEffect (() => {
         let product = props.currentProduct;
-      
-        // fill info product to edit
-        setId(product.id);
-        setName(product.name);
-        setPrice(product.price);
-        setSale(product.sale);
-        setStatus(product.status);            
-        setWarranty(product.warranty);
-        setNumber(product.number);
-        setCategory_id(product.category_id);
-        setSupplier_id(product.supplier_id);
-        setPreviewImg(product.image);
+        if(product) {
+            // fill info product to edit
+            setId(product.id);
+            setName(product.name);
+            setPrice(product.price);
+            setSale(product.sale);
+            setStatus(product.status);            
+            setWarranty(product.warranty);
+            setNumber(product.number);
+            setCategory_id(product.category_id);
+            setSupplier_id(product.supplier_id);
+            setPreviewImg(product.image);
+        }
 
         dispatch(actions.fetchStatusProduct());
         dispatch(actions.fetchAllCategory());
@@ -68,7 +69,7 @@ const ModalEditProduct  = (props) => {
         e.preventDefault();
 
         props.editProduct({
-            id: id,
+            id: props.currentProduct.id,
             name: name,
             price: price,
             sale: sale,
@@ -79,6 +80,17 @@ const ModalEditProduct  = (props) => {
             supplier_id: supplier_id,
             image: previewImg,
             previewImg: previewImg,
+
+            // name: name,
+            // price: price,
+            // sale: sale,
+            // status: status,
+            // warranty: warranty,
+            // number: number,
+            // category_id: category_id,
+            // supplier_id: supplier_id,
+            // image: previewImg,
+            // previewImg: previewImg,
         });
         toggle();
     }

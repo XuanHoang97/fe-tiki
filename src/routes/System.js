@@ -12,7 +12,7 @@ import ArticleManage from '../containers/System/Article/ArticleManage';
 import CategoryManage from '../containers/System/Category/CategoryManage';
 import StatisticalManage from '../containers/System/Statistical/Statistical';
 import Setting from '../containers/System/Setting/Index';
-import Notification from '../containers/Header/Notification';
+import Notification from '../containers/Header/notification/Notification';
 import Search from '../containers/Header/Search';
 import axios from 'axios';
 import MenuLeft from '../containers/Header/MenuLeft';

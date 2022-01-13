@@ -1,6 +1,7 @@
 import React from 'react';
 import {useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
+import { path } from 'utils';
 import SetAdrrOrder from './SetAdrrOrder';
 
 const ContactDeliver = (props) => {
@@ -66,7 +67,7 @@ const ContactDeliver = (props) => {
                 </div>
             </div>
 
-            <Link to="/dat-hang-thanh-cong">
+            <Link to={`${path.MY_ORDER}`}>
                 <button type="button" className="btn btn-danger btn-md btn-block mt-3 mb-1">Tiến hành thanh toán</button>
             </Link>
             <div className="text-right">

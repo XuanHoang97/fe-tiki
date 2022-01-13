@@ -14,21 +14,10 @@ const NewsManage = (props) => {
     const dispatch = useDispatch();
     const listNews = useSelector(state => state.admin.news);
 
-    console.log('danh sach tin tuc: ', listNews);
-
     //fetch data News
     useEffect(() => {
         dispatch(actions.fetchAllNews());
     }, [dispatch]);
-
-    //OPEN MODAL Create, Edit News
-    const toggleNewsModal=()=> {
-        setModalAddNews(!modalAddNews);
-    }
-
-    const toggleNewsEditModal=()=>{
-        setModalEditNews(!modalEditNews);
-    }
 
     //create News and events
     const handleAddNews = () => {
@@ -84,13 +73,13 @@ const NewsManage = (props) => {
         <div className="mx-2">
             <ModalAddNews
                 isOpen={modalAddNews}
-                toggleParent={toggleNewsModal}
+                toggleParent={handleAddNews}
                 createNews={CreateNews}
             />
 
             <ModalEditNews
                 isOpen={modalEditNews}
-                toggleParent={toggleNewsEditModal}
+                toggleParent={editNews}
                 currentNews={newsEdit}
                 editNews={handleEditNews}
             />

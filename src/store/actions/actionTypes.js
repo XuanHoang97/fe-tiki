@@ -169,6 +169,15 @@ const actionTypes = Object.freeze({
     //get all status slide
     FETCH_ALL_STATUS_SLIDE_SUCCESS: 'FETCH_ALL_STATUS_SLIDE_SUCCESS',
     FETCH_ALL_STATUS_SLIDE_FAILED: 'FETCH_ALL_STATUS_SLIDE_FAILED',
+
+    //get all cart
+    FETCH_ALL_CART_SUCCESS: 'FETCH_ALL_CART_SUCCESS',
+    FETCH_ALL_CART_FAILED: 'FETCH_ALL_CART_FAILED',
+
+    //add to cart
+    ADD_TO_CART_SUCCESS: 'ADD_TO_CART_SUCCESS',
+    ADD_TO_CART_FAILED: 'ADD_TO_CART_FAILED',
+    
 })
 
 export default actionTypes;
