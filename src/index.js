@@ -13,9 +13,9 @@ import reduxStore, { persistor } from './redux';
 const renderApp = () => {
     ReactDOM.render(
         <Provider store={reduxStore}>
-                <App persistor={persistor}/>
+            <App persistor={persistor}/>
         </Provider>,
-        document.getElementById('root')
+    document.getElementById('root')
     );
 };
 
