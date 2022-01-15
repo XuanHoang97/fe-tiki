@@ -20,16 +20,6 @@ const ProductDetail = ({ match }) => {
 
   const dispatch = useDispatch();
   const similarProducts = useSelector(state => state.admin.productSimilar);
-  const number = useSelector(state => state.client.qty);
-
-  //quantity options
-  const increment = () => {
-    dispatch(actions.increment())
-  }
-  const decrement = () => {
-    if (number > 1)
-      dispatch(actions.decrement())
-  }
 
   useEffect(() => {
     getDetailProduct(match.params.id).then(res => {
@@ -53,9 +43,6 @@ const ProductDetail = ({ match }) => {
             <Illustrator detailProduct={detailProduct} />
             <Order 
               detailProduct={detailProduct}  
-              increment={increment}
-              decrement={decrement}
-              number={number}
             />
             <Accessories detailProduct={detailProduct} />
           </div>

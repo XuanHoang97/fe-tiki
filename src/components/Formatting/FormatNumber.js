@@ -10,7 +10,7 @@ export const numberFormat = (money) => {
 export const totalMoney = (arr) => {
     let total = 0
     for (let item of arr) {
-        total += item.price * item.count
+        total += item.productPrice * item.qty
     }
     return total
 }

@@ -1,18 +1,28 @@
 import axios from 'axios';
 import { path } from 'utils';
 
-//get all cart
-const getAllCart = (inputId) => {
-    return axios.get(`${path.PORT}/get-all-cart?id=${inputId}`)
+//add to cart
+const addItemToCart = (data) => {
+    return axios.post(`${path.PORT}/add-item-to-cart`, data)
 }
 
-//add to cart
-const addToCart = (inputData) => {
-    return axios.post(`${path.PORT}/add-to-cart`, inputData)
+//get all cart
+const getAllCart = (cardId) => {
+    return axios.get(`${path.PORT}/cart?id=${cardId}`)
+}
+
+//delete item cart
+const deleteItemCart = (productId) => {
+    return axios.delete(`${path.PORT}/delete-item-cart`, {
+        data: {
+            id: productId
+        }
+    })
 }
 
 
 export{
+    addItemToCart,
     getAllCart,
-    addToCart
+    deleteItemCart
 }
