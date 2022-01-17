@@ -1,4 +1,5 @@
 import { numberFormat, totalMoney } from 'components/Formatting/FormatNumber';
+import ModalOrderNow from 'containers/Client/product/ModalOrderNow';
 import React, {useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -7,6 +8,7 @@ import * as actions from './../../../../store/actions/index';
 
 function CartHeader(props) {
     const [hoverCart, setHoverCart] = useState(false);
+    const [orderNow, setOrderNow] = useState(false)
 
     const dispatch = useDispatch();
     const carts = useSelector(state => state.client.carts);
@@ -15,7 +17,10 @@ function CartHeader(props) {
         dispatch(actions.GetAllCart());
     }, [dispatch]);
 
-    console.log('gio hang: ', carts);
+    //viewCart
+    const viewCart = (data) => {
+        setOrderNow(!orderNow)
+    }
 
     //delete item cart
     const deleteItemCart = (productId) => {
@@ -24,6 +29,11 @@ function CartHeader(props) {
 
     return (
         <>
+            <ModalOrderNow
+                show={orderNow}
+                toggle = {viewCart}
+            />
+
             <span className="cart nav-item dropdown active" onMouseEnter={() =>setHoverCart(true) }>
                 <div className="nav-link dropdown-toggle">
                     <i className="fas fa-shopping-cart mr-2" style={{ fontSize: '18px' }}>
@@ -51,17 +61,17 @@ function CartHeader(props) {
                                         <div className="info">
                                             <div className='d-flex justify-content-between align-items-start'>
                                                 <div className="col-md-2 p-0">
-                                                    <img className="w-100 rounded" src={item.productImage} alt="" />
+                                                    <img className="w-100 rounded" src={item.Image} alt="" />
                                                 </div>
 
                                                 <div className="col-md-6 mt-1 pl-2 p-0 content">
-                                                    <small>{item.productName}</small>
+                                                    <small>{item.Name}</small>
                                                     <div className='text-muted small mt-3'>Trả góp 0% - Tặng phụ kiện - Voucher 5% </div>
                                                 </div>
 
                                                 <div className="col-md-4 p-0 price">
                                                     <div className="p-0 price__num">
-                                                        <h6 className='small text-danger m-0'>{numberFormat(item.productPrice)}</h6>
+                                                        <h6 className='small text-danger m-0'>{numberFormat(item.Price)}</h6>
                                                         <span className='small m-0'> x{item.qty}</span>
                                                     </div>
                                                     <div onClick={() => deleteItemCart(item)} className="btnDelProd text-danger small mt-2">Xóa</div>
@@ -80,9 +90,7 @@ function CartHeader(props) {
                             </span>
                         </h6>
 
-                        <Link to={`${path.CART}`}>
-                            <button className='btn btn-success btn-sm w-100 mt-2 font-weight-bold'>Xem giỏ hàng</button>
-                        </Link>              
+                        <button onClick={viewCart} className='btn btn-success btn-sm w-100 mt-2 font-weight-bold'>Xem giỏ hàng</button>
                     </div>
                 </div>  
             }

@@ -20,9 +20,16 @@ const deleteItemCart = (productId) => {
     })
 }
 
+//create order
+const createOrder = (data) => {
+    return axios.post(`${path.PORT}/create-order`, data)
+}
+
+
 
 export{
     addItemToCart,
     getAllCart,
-    deleteItemCart
+    deleteItemCart,
+    createOrder
 }

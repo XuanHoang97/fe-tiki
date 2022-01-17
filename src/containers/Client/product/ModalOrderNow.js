@@ -1,17 +1,66 @@
-import { orderBy } from 'lodash';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { path } from 'utils';
+import { numberFormat, totalMoney } from 'components/Formatting/FormatNumber';
+import * as actions from 'store/actions';
+import {createOrder} from 'services/clientService';
 
 const ModalOrderNow = (props) => {
+    const saleOff = 240000;
+    const [qty, setQty] = useState(1);
+    const [name, setName] = useState('');
+    const [phone, setPhone] = useState('');
+    const [address, setAddress] = useState('');
+    const [email, setEmail] = useState('');
+    const [delivery_method, setDelivery] = useState('');
+    const [payment_method, setPayment] = useState('');
+    const [note, setNote] = useState('');
+    const [userId, setUserId] = useState(123);
 
     const toggle =()=>{
         props.toggle();
     }
 
+    const handleCountDown = (e) => {
+        setQty(e)
+    }
+
+    const handleCountUp = (e) => {
+        setQty(e)
+    }
+
     // add new category
-    const order=()=>{
-        toggle();
+    const order=async()=>{
+        console.log('data dat hang: ',carts, name, phone, address, email, note, userId);
+        console.log('giao hang vs thanh toan: ', delivery_method);
+        console.log('giao hang vs thanh toan: ', payment_method);
+
+        let res = await createOrder({
+            arrOrder: carts, 
+            userId: userId,
+            name, phone, address, email, note, delivery_method, payment_method
+        });
+        console.log('check result data dat hang: ',res);
+
+        // toggle();
+
+    }
+
+    //get cart
+    const dispatch = useDispatch();
+    const carts = useSelector(state => state.client.carts);
+    const delivery = useSelector(state => state.client.delivery);
+    const payment = useSelector(state => state.client.payment);
+
+    useEffect(() => {
+        dispatch(actions.GetAllCart());
+        dispatch(actions.getAllDelivery());
+        dispatch(actions.getAllPayment());
+    }, [dispatch]);
+
+    //delete item cart
+    const deleteItemCart = (productId) => {
+        dispatch(actions.DeleteItemCart(productId.id));
     }
     
     return (
@@ -20,43 +69,59 @@ const ModalOrderNow = (props) => {
             toggle={()=>toggle()} 
             size="lg"
         >
-            <ModalHeader toggle={()=>toggle()}>Có 1 sản phẩm trong giỏ hàng</ModalHeader>
+            <ModalHeader toggle={()=>toggle()}>Có {carts.length} sản phẩm trong giỏ hàng</ModalHeader>
             <ModalBody>
             <div>
-                <div className="my-3">
-                    <div className="product_info d-flex">
-                        <div className="product_image d-flex col-6">
-                            <img src="http://res.cloudinary.com/do7qmg6jr/image/upload/v1641951665/xaqcd2hpeonyce6ele6m.jpg" style={{width: '20%'}} alt="" />
-                            <h5 className='font-weight-bold ml-3'>Vertu 2022 </h5>
-                        </div>
+                <div className="">
+                    {
+                        carts && carts.length > 0 &&
+                        carts.map((item, index) => {
+                            return (
+                                <div className="product_info d-flex border-bottom py-2" key={index}>
+                                    <div className="product_image d-flex col-6">
+                                        <img src={item.Image} style={{width: '10%'}} alt="" />
+                                        <h6 className='font-weight-bold ml-3'>{item.Name}</h6>
+                                    </div>
 
-                        <div className="product_price col-3">
-                            <div className="input-group">
-                                <div className="input-group-prepend">
-                                    <button className="btn btn-light btn-sm px-2"><i className="fas fa-minus small" /></button>
+                                    <div className="product_price col-3 d-flex">
+                                        <div className="input-group">
+                                            <div onClick={() => { item.qty > 1 && --item.qty; handleCountDown(item.qty) }} className="input-group-prepend">
+                                                <button className="btn btn-light btn-sm px-2" style={{height: '27px'}}>
+                                                    <i className="fas fa-minus small" style={{fontSize: '10px'}} />
+                                                </button>
+                                            </div>
+
+                                            <input type="text" className="form-control text-center" style={{ height: '27px', border: '1px solid #ebebeb' }}
+                                                value={item.qty}
+                                                onChange={(e) => setQty(e.target.value)}
+                                            />
+
+                                            <div onClick={() => { ++item.qty; handleCountUp(item.qty) }} className="input-group-append">
+                                                <button className="btn btn-light btn-sm px-2" style={{height: '27px'}}>
+                                                    <i className="fas fa-plus small" style={{fontSize: '10px'}} />
+                                                </button>
+                                            </div>
+                                        </div>   
+
+                                        <span onClick={() => deleteItemCart(item)} className='text-danger small ml-4' style={{cursor: 'pointer'}} title='xoá sản phẩm khỏi giỏ hàng' >
+                                            <i className="fas fa-trash-alt"></i>    
+                                        </span>    
+                                    </div>
+
+                                    <div className='col-3 text-right'>
+                                        <div className='text-danger'>{numberFormat(item.Price)}</div>
+                                        <del className='text-secondary small'>{numberFormat(item.saleOff)}</del>
+                                    </div>
                                 </div>
+                            )
+                        })
+                    }
 
-                                <input type="text" value="1" className="form-control text-center" style={{ height: '31px' }}
-                                />
-
-                                <div className="input-group-append">
-                                    <button className="btn btn-light btn-sm px-2"><i className="fas fa-plus small" /></button>
-                                </div>
-                            </div>       
-                        </div>
-
-                        <div className='col-3 text-right'>
-                            <div className='text-danger'>9.240.000 đ</div>
-                            <del className='text-secondary'>9.734.000 đ</del>
-                        </div>
-                    </div>
-                    <hr />
-
-                    <div className="totalPay d-flex">
+                    <div className="totalPay bg-light py-2 d-flex border-bottom">
                         <div className="form-group col-6">
                             <label>Mã giảm giá</label>
                             <div className='d-flex'>
-                                <input type="text" className="form-control col-9" style={{ height: '31px' }} />
+                                <input type="text" className="form-control col-9" placeholder='voucher...' style={{ height: '31px' }} />
                                 <button type="button" className="btn btn-primary col-3 px-2">Áp dụng</button>
                             </div>
                         </div>
@@ -64,75 +129,105 @@ const ModalOrderNow = (props) => {
                         <div className='col-6'>
                             <div className='d-flex justify-content-between'>
                                 <span>Tổng tiền:</span>
-                                <span>9.240.000 đ</span>
+                                <span>{numberFormat(totalMoney(carts))}</span>
                             </div>
 
                             <div className='d-flex justify-content-between'>
                                 <span>Giảm:</span>
-                                <span className="text-secondary">- 240.000 đ</span>
+                                <small className="text-secondary">-{numberFormat(saleOff)}</small>
                             </div>
 
                             <div className='d-flex justify-content-between'>
                                 <span>Cần thanh toán:</span>
-                                <span className="text-danger font-weight-bold">9.240.000 đ</span>
+                                <span className="text-danger font-weight-bold">
+                                    {numberFormat(totalMoney(carts) - saleOff)}
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <hr/>
 
-                <div className="order_info">
+                <div className="order_info mt-3">
                     <div className="gender d-flex px-3">
                         <div className="radio mr-4">
-                            <label><input type="radio" name="gender" checked />Anh</label>
+                            <label><input type="radio" name="gender" readOnly checked />Anh</label>
                         </div>
                         <div className="radio">
-                            <label><input type="radio" name="gender" />Chị</label>
+                            <label><input type="radio" name="gender" readOnly />Chị</label>
                         </div>
                     </div>
 
                     <div className='info d-flex'>
                         <div className="form-group col-6">
-                            <input type="text" className="form-control" placeholder="Nhập họ tên..." />
-                            <input type="text" className="form-control my-2" placeholder="Nhập số điện thoại..." />
-                            <input type="text" className="form-control" placeholder="Nhập Email..." />
-                            <input type="text" className="form-control mt-2" placeholder="Nhập địa chỉ..." />
+                            <input type="text" className="form-control" placeholder="Nhập họ tên..." 
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                            <input type="text" className="form-control my-2" placeholder="Nhập số điện thoại..." 
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
+                            />
+                            <input type="text" className="form-control" placeholder="Nhập Email..." 
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                            <input type="text" className="form-control mt-2" placeholder="Nhập địa chỉ..." 
+                                value={address}
+                                onChange={(e) => setAddress(e.target.value)}
+                            />
                         </div>
 
                         <div className="form-group col-6">
-                            <label>Hình thức nhận hàng</label>
-                            <div className="delivery d-flex mb-4">
-                                <div className="radio mr-4">
-                                    <label><input type="radio" name="delivery" checked />Giao hàng tận nơi</label>
-                                </div>
-                                <div className="radio">
-                                    <label><input type="radio" name="delivery" />Nhận tại cửa hàng</label>
-                                </div>
+                            <label className='font-weight-bold'>Hình thức nhận hàng</label>
+                            <div className="delivery d-flex mb-3">
+                                {
+                                    delivery && delivery.length >0 &&
+                                    delivery.map((item, index) => {
+                                        return (
+                                            <div className="radio mr-4" key={index}>
+                                                <label>
+                                                    <input type="radio" name="delivery" 
+                                                        value={item.valueVi}
+                                                        onChange={(e) => setDelivery(e.target.value)}
+                                                    />
+                                                    <span>{item.valueVi}</span>
+                                                </label>
+                                            </div>
+                                        )
+                                    })
+                                }
                             </div>
 
-                            <label>Hình thức thanh toán</label>
+                            <label className='font-weight-bold'>Hình thức thanh toán</label>
                             <div className="payment d-flex">
-                                <div className="radio">
-                                    <label><input type="radio" name="payment" checked />Tiền mặt</label>
-                                </div>
-                                <div className="radio mx-4">
-                                    <label><input type="radio" name="payment" />Thẻ ATM</label>
-                                </div>
-
-                                <div className="radio mr-4">
-                                    <label><input type="radio" name="payment" />MoMo</label>
-                                </div>
-                                <div className="radio">
-                                    <label><input type="radio" name="payment" />Thẻ quốc tế</label>
-                                </div>
+                                {
+                                    payment && payment.length >0 &&
+                                    payment.map((item, index) => {
+                                        return (
+                                            <div className="radio mr-4" key={index}>
+                                                <label>
+                                                    <input type="radio" name="payment"
+                                                        value={item.valueVi}
+                                                        onChange={(e) => setPayment(e.target.value)}
+                                                    />
+                                                    <span>{item.valueVi}</span>
+                                                </label>
+                                            </div>
+                                        )
+                                    })
+                                }
                             </div>
+
+                            <input type="text" className="form-control" placeholder="Ghi chú..." 
+                                value={note}
+                                onChange={(e) => setNote(e.target.value)}
+                            />
                         </div>
                     </div>
                 </div>
             </div>
             
             </ModalBody>
-
             <ModalFooter>
                 <Button color="success" className="px-4 font-weight-normal" onClick={()=>order()}>
                     HOÀN TẤT ĐẶT HÀNG

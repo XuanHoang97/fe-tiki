@@ -2,7 +2,7 @@ import React from 'react';
 
 function Rate(props) {
     return (
-        <div className="rate row justify-content-center align-items-center mb-2">
+        <div className="rate d-flex mb-2">
             <div className="vote" style={{fontSize:'9px'}}>
                 <span className="fa fa-star checked text-warning" />
                 <span className="fa fa-star checked text-warning" />

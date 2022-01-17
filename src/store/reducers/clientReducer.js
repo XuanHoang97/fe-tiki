@@ -3,6 +3,8 @@ import actionTypes from '../actions/actionTypes';
 const initialState = {
     carts: [],
     qty: 1,
+    delivery: [],
+    payment: [],
 }
 
 const clientReducer = (state = initialState, action) => {
@@ -37,6 +39,32 @@ const clientReducer = (state = initialState, action) => {
             return {
                 ...state,
                 carts: []
+            }
+
+            //get all delivery
+        case actionTypes.FETCH_ALL_DELIVERY_SUCCESS:
+            return {
+                ...state,
+                delivery: action.dataDelivery
+            }
+
+        case actionTypes.FETCH_ALL_DELIVERY_FAILED:
+            return {
+                ...state,
+                delivery: []
+            }
+
+            //get all payment
+        case actionTypes.FETCH_ALL_PAYMENT_SUCCESS:
+            return {
+                ...state,
+                payment: action.dataPayment
+            }
+
+        case actionTypes.FETCH_ALL_PAYMENT_FAILED:
+            return {
+                ...state,
+                payment: []
             }
 
 

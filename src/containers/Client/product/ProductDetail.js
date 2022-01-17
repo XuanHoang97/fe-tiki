@@ -32,6 +32,18 @@ const ProductDetail = ({ match }) => {
     document.title = `${detailProduct.name}-giá rẻ nhất vịnh Bắc Bộ`;
   }, [detailProduct]);
 
+  // choose quantity order
+  const qty = useSelector(state => state.client.qty);
+  const incrementQty = () => {
+    dispatch(actions.increment());
+  };
+
+  const decrementQty = () => {
+    if(qty > 1) {
+      dispatch(actions.decrement());
+    }
+  };
+
   return (
     <>
       <Header/>
@@ -43,6 +55,8 @@ const ProductDetail = ({ match }) => {
             <Illustrator detailProduct={detailProduct} />
             <Order 
               detailProduct={detailProduct}  
+              incrementQty={incrementQty}
+              decrementQty={decrementQty}
             />
             <Accessories detailProduct={detailProduct} />
           </div>

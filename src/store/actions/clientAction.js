@@ -4,7 +4,9 @@ import {
     addItemToCart,
     deleteItemCart
 } from "../../services/clientService";
-import { toast } from "react-toastify"
+import { toast } from "react-toastify";
+
+import { getAllCodeService } from 'services/userService';
 
 //QUANTITY
 export const countProduct = (numberCart) => {
@@ -106,6 +108,58 @@ export const deleteItemCartSuccess = () => ({
 
 export const deleteItemCartFailed = () => ({
     type: actionTypes.DELETE_ITEM_CART_FAILED,
+})
+
+//get all delivery
+export const getAllDelivery = () => {
+    return async(dispatch, getState) => {
+        try{
+            let res = await getAllCodeService('DELIVERY');
+            if(res && res.data.errCode === 0){
+                dispatch(getAllDeliverySuccess(res.data.data));
+            }else{
+                dispatch(getAllDeliveryFailed());
+            }
+        }catch(e){
+            dispatch(getAllDeliveryFailed());
+            console.log('getAllDelivery error', e)
+        }
+    }
+}
+
+export const getAllDeliverySuccess = (data) => ({
+    type: actionTypes.FETCH_ALL_DELIVERY_SUCCESS,
+    dataDelivery: data
+})
+
+export const getAllDeliveryFailed = () => ({
+    type: actionTypes.FETCH_ALL_DELIVERY_FAILED,
+})
+
+//get all payment
+export const getAllPayment = () => {
+    return async(dispatch, getState) => {
+        try{
+            let res = await getAllCodeService('PAYMENT');
+            if(res && res.data.errCode === 0){
+                dispatch(getAllPaymentSuccess(res.data.data));
+            }else{
+                dispatch(getAllPaymentFailed());
+            }
+        }catch(e){
+            dispatch(getAllPaymentFailed());
+            console.log('getAllPayment error', e)
+        }
+    }
+}
+
+export const getAllPaymentSuccess = (data) => ({
+    type: actionTypes.FETCH_ALL_PAYMENT_SUCCESS,
+    dataPayment: data
+})
+
+export const getAllPaymentFailed = () => ({
+    type: actionTypes.FETCH_ALL_PAYMENT_FAILED,
 })
 
 
