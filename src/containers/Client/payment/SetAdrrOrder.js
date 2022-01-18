@@ -17,14 +17,14 @@ const SetAdrrOrder = (props) => {
             <ModalBody>
                 <div className='d-flex'>
                     <div className="col-6">
-                        <div class="form-group">
+                        <div className="form-group">
                         <label htmlFor="">Họ và tên</label>
                         <input type="text" className="form-control"  />
                         </div>
                     </div>
 
                     <div className="col-6">
-                        <div class="form-group">
+                        <div className="form-group">
                         <label htmlFor="">Địa chỉ</label>
                         <input type="text" className="form-control"  />
                         </div>
@@ -33,14 +33,14 @@ const SetAdrrOrder = (props) => {
 
                 <div className='d-flex'>
                     <div className="col-6">
-                        <div class="form-group">
+                        <div className="form-group">
                         <label htmlFor="">Số điện thoại</label>
                         <input type="text" className="form-control"  />
                         </div>
                     </div>
 
                     <div className="col-6">
-                        <div class="form-group">
+                        <div className="form-group">
                         <label htmlFor="">Email</label>
                         <input type="text" className="form-control"  />
                         </div>

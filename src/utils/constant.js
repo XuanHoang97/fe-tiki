@@ -12,6 +12,7 @@ export const path = {
     CART: '/cart',
     PAYMENT: '/payment',
     MY_ORDER: '/my-order',
+    MAIL: 'https://mail.google.com/mail/u/1/#inbox'
 };
 
 export const CRUD_ACTIONS = {

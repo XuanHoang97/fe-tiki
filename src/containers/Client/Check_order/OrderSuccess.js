@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import Footer from 'containers/HomePage/Footer/Footer';
 import Header from 'containers/HomePage/Header/Header';
 import { Link } from "react-router-dom";
+import { path } from 'utils';
 
 const OrderSuccess = (props) => {
     useEffect(() => {
@@ -12,45 +13,30 @@ const OrderSuccess = (props) => {
         <>
         <Header />
             <div className="order_success bg-light ">
-                <div className="pt-3 pb-3 container">
-                    <div className="row bg-white p-0 pt-3 pb-3">
-                        <div className="col-md-3">
-                            <img className="mb-2 w-100" src="http://shopeeplus.com//upload/images/1tiki.jpg" style={{ width: '12%' }} alt="" />
-                        </div>
+                <div className="py-3 container">
+                    <div className="bg-white p-0 py-3 text-center">
+                        <img className="mb-2"  src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Eo_circle_green_white_checkmark.svg/2048px-Eo_circle_green_white_checkmark.svg.png" style={{ width: '4%' }} alt="" />
 
-                        <div className="col-md-9">
+                        <div className="">
                             <div className="mb-5">
-                                <h5 className="text-warning">Cảm ơn bạn đã mua hàng tại Tiki.vn !</h5>
-                                <h6 className="small text-secondary">Mã số đơn hàng của bạn: </h6>
-                                <p class="badge badge-success  w-25 p-2">27101997</p>
+                                <h5 className="text-success">ĐẶT HÀNG THÀNH CÔNG!</h5>
+                                <h6 className="small text-secondary">Mã đơn hàng của bạn: </h6>
+                                <p className="bg-success text-white w-25 p-2 my-3" style={{margin: '0 auto'}}>27101997</p>
 
-                                <h6 class="mt-3 small">Bạn có thể xem
-                                    <Link to="" className="text-primary"> Đơn hàng của tôi</Link>
-                                </h6>
-
-                                <div style={{ fontSize: '13px' }}>
-                                    <img className="" style={{ width: '10%' }} src="https://www.clipartmax.com/png/middle/468-4680080_traffic-transport-lead-time-icon-png.png" alt="" />
-                                    <span>Thời gian giao hàng dự kiến từ 2-3 ngày làm việc, không kể Thứ 7 - Chủ nhật</span>
+                                <div>
+                                    <span>Thời gian giao hàng dự kiến từ 2-3 ngày</span>
                                     <p>Thông tin về đơn hàng đã được gửi đến email
-                                        <i className="text-success"> xuanhoang997@gmail.com</i>.
-                                        <span> Nếu không tìm thấy vui lòng kiểm tra trong hộp thư
-                                            <strong> Spam</strong> hoặc <strong>Junk folder</strong>
-                                        </span>
+                                        <a href='https://mail.google.com/mail/u/1/#inbox' target='_blank' className="text-primary" rel="noreferrer">
+                                            <i className="text-success ml-3">xuanhoang997@gmail.com</i>.
+                                        </a>
                                     </p>
                                 </div>
 
-                                <div className="order_next text-primary text-right">
-                                    <Link to="/">
+                                <div className="order_next text-primary text-center">
+                                    <Link to={path.HOMEPAGE}>
                                         Tiếp tục mua hàng
                                     </Link>
                                 </div>
-                            </div>
-                            <hr />
-                            <h6 className="text-secondary">Các câu hỏi thường gặp</h6>
-                            <div className="">
-                                <div><Link to="">Xác nhận đơn hàng như thế nào ?</Link></div>
-                                <div><Link to="">Thời gian giao hàng</Link></div>
-                                <div><Link to="" href="">Chính sách đổi trả hàng</Link></div>
                             </div>
                         </div>
                     </div>

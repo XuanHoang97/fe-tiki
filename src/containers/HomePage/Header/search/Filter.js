@@ -11,7 +11,7 @@ function Filter(props) {
                 <p>Phụ kiện máy ảnh</p>
 
                 <div className="viewMore text-primary small">Xem thêm
-                    <i class="fas fa-sort-down  ml-1"></i>
+                    <i className="fas fa-sort-down  ml-1"></i>
                 </div>
             </div>
 

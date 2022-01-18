@@ -10,7 +10,7 @@ import * as actions from 'store/actions';
 const OrderManage = (props) => {
     const [activeTab, setActiveTab] = useState('1');
     const [modalVerifyOrder, setModalVerifyOrder] = useState(false);
-    const [orderVerify, setOrderVerify] = useState([]);
+    const [detailOrder, setdetailOrder] = useState([]);
 
     //fetch data order
     const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const OrderManage = (props) => {
 
     //verify order
     const verifyOrder = (order) => {
-        setOrderVerify(order);
+        setdetailOrder(order);
         setModalVerifyOrder(!modalVerifyOrder);
     }
 
@@ -31,7 +31,7 @@ const OrderManage = (props) => {
             <ModalVerifyOrder
                 isOpen={modalVerifyOrder}
                 toggle={verifyOrder}
-                detailOrder={orderVerify}
+                detailOrder={detailOrder}
             />
 
             <div className="h5 text-dark mb-4">Quản lý đơn hàng</div>
@@ -97,7 +97,7 @@ const OrderManage = (props) => {
                                                 <td>{item.date}</td>
                                                 <td>{item.date}</td>
                                                 <td>{item.delivery}</td>
-                                                <td className ={item.status ==='Chờ xác nhận' ? "text-warning" : "text-success"}>{item.status}</td>
+                                                <td className ={item.status ==='S1' ? "text-warning" : "text-success"}>{item.status ==='S1' ? 'Chưa xác nhận' : 'loading...'}</td>
                                                 <td style={{width: '8%'}}>
                                                     <button onClick={() => verifyOrder(item)} type="button" className="btn text-success">
                                                         <span className=''>Xác nhận</span>

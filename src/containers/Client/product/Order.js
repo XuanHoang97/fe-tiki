@@ -32,8 +32,8 @@ function Order(props) {
         <div className="col-md-6 pl-4 pr-2 text-left">
             <div className="info d-flex align-items-center">
                 <h4 className="mr-5 font-weight-bold">{detailProduct && detailProduct.name ? detailProduct.name :'loading...'}</h4>
+                <Rate />
             </div>
-            <Rate />
 
             <div className="price bg-light py-3 px-2 my-2">
                 <div className="row m-1 align-items-center">

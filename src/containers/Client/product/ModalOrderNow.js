@@ -5,7 +5,7 @@ import { numberFormat, totalMoney } from 'components/Formatting/FormatNumber';
 import * as actions from 'store/actions';
 import {createOrder} from 'services/clientService';
 import { toast } from 'react-toastify';
-import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const ModalOrderNow = (props) => {
     const saleOff = 240000;

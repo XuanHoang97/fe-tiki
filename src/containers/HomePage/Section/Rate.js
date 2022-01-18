@@ -1,8 +1,10 @@
 import React from 'react';
+import { path } from 'utils';
 
 function Rate(props) {
     return (
-        <div className="rate d-flex mb-2">
+        <div className='d-flex mb-2 justify-content-center'>
+        {/* // <div className=`{path.DETAIL_PRODUCT}` "rate d-flex mb-2 justify-content-center"> */}
             <div className="vote" style={{fontSize:'9px'}}>
                 <span className="fa fa-star checked text-warning" />
                 <span className="fa fa-star checked text-warning" />
