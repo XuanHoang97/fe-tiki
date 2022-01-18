@@ -2,7 +2,8 @@ import actionTypes from './actionTypes';
 import {
     getAllCart,
     addItemToCart,
-    deleteItemCart
+    deleteItemCart,
+    getOrder,
 } from "../../services/clientService";
 import { toast } from "react-toastify";
 
@@ -160,6 +161,32 @@ export const getAllPaymentSuccess = (data) => ({
 
 export const getAllPaymentFailed = () => ({
     type: actionTypes.FETCH_ALL_PAYMENT_FAILED,
+})
+
+//get all order
+export const getAllOrder = () => {
+    return async(dispatch, getState) => {
+        try{
+            let res = await getOrder('ALL');
+            if(res && res.data.errCode === 0){
+                dispatch(getAllOrderSuccess(res.data.result));
+            }else{
+                dispatch(getAllOrderFailed());
+            }
+        }catch(e){
+            dispatch(getAllOrderFailed());
+            console.log('getAllOrder error', e)
+        }
+    }
+}
+
+export const getAllOrderSuccess = (data) => ({
+    type: actionTypes.FETCH_ALL_ORDER_SUCCESS,
+    dataOrder: data
+})
+
+export const getAllOrderFailed = () => ({
+    type: actionTypes.FETCH_ALL_ORDER_FAILED,
 })
 
 

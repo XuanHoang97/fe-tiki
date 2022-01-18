@@ -4,11 +4,13 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { numberFormat, totalMoney } from 'components/Formatting/FormatNumber';
 import * as actions from 'store/actions';
 import {createOrder} from 'services/clientService';
+import { toast } from 'react-toastify';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 
 const ModalOrderNow = (props) => {
     const saleOff = 240000;
     const [qty, setQty] = useState(1);
-    const [name, setName] = useState('');
+    const [username, setUsername] = useState('');
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
     const [email, setEmail] = useState('');
@@ -16,6 +18,7 @@ const ModalOrderNow = (props) => {
     const [payment_method, setPayment] = useState('');
     const [note, setNote] = useState('');
     const [userId, setUserId] = useState(123);
+    const history = useHistory()
 
     const toggle =()=>{
         props.toggle();
@@ -31,20 +34,26 @@ const ModalOrderNow = (props) => {
 
     // add new category
     const order=async()=>{
-        console.log('data dat hang: ',carts, name, phone, address, email, note, userId);
-        console.log('giao hang vs thanh toan: ', delivery_method);
-        console.log('giao hang vs thanh toan: ', payment_method);
-
         let res = await createOrder({
             arrOrder: carts, 
             userId: userId,
-            name, phone, address, email, note, delivery_method, payment_method
+            total : totalMoney(carts),
+            username: username,
+            phone: phone,
+            address: address,
+            email: email,
+            note: note,
+            delivery: delivery_method,
+            payment: payment_method
         });
-        console.log('check result data dat hang: ',res);
-
-        // toggle();
-
+        if(res.status === 200 && res.data.errCode === 0){
+            toast.success('Đặt hàng thành công');
+            dispatch(actions.GetAllCart());
+            toggle();
+            history.push('/my-order');
+        }   
     }
+
 
     //get cart
     const dispatch = useDispatch();
@@ -160,8 +169,8 @@ const ModalOrderNow = (props) => {
                     <div className='info d-flex'>
                         <div className="form-group col-6">
                             <input type="text" className="form-control" placeholder="Nhập họ tên..." 
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
                             />
                             <input type="text" className="form-control my-2" placeholder="Nhập số điện thoại..." 
                                 value={phone}

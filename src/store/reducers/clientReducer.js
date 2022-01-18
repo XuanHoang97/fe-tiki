@@ -5,6 +5,7 @@ const initialState = {
     qty: 1,
     delivery: [],
     payment: [],
+    orders: [],
 }
 
 const clientReducer = (state = initialState, action) => {
@@ -66,6 +67,20 @@ const clientReducer = (state = initialState, action) => {
                 ...state,
                 payment: []
             }
+
+        //get all order
+        case actionTypes.FETCH_ALL_ORDER_SUCCESS:
+            return {
+                ...state,
+                orders: action.dataOrder
+            }
+
+        case actionTypes.FETCH_ALL_ORDER_FAILED:
+            return {
+                ...state,
+                orders: []
+            }
+
 
 
         default:

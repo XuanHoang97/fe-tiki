@@ -1,17 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { connect } from 'react-redux';
 import {TabContent, TabPane } from 'reactstrap';
+import {numberFormat} from 'components/Formatting/FormatNumber';
 import ModalVerifyOrder from './ModalVerifyOrder';
 import './OrderManage.scss';
 import TabControlOrder from './TabControlOrder';
+import * as actions from 'store/actions';
 
 const OrderManage = (props) => {
     const [activeTab, setActiveTab] = useState('1');
-    const [modalVerifyOrder, setmodalVerifyOrder] = useState(false);
+    const [modalVerifyOrder, setModalVerifyOrder] = useState(false);
+    const [orderVerify, setOrderVerify] = useState([]);
 
-    const verifyOrder = () => {
-        setmodalVerifyOrder(!modalVerifyOrder);
+    //fetch data order
+    const dispatch = useDispatch();
+    const order = useSelector(state => state.client.orders);
+
+    useEffect(() => {
+        dispatch(actions.getAllOrder());
+    }, [dispatch])
+
+    //verify order
+    const verifyOrder = (order) => {
+        setOrderVerify(order);
+        setModalVerifyOrder(!modalVerifyOrder);
     }
 
     return (
@@ -19,6 +31,7 @@ const OrderManage = (props) => {
             <ModalVerifyOrder
                 isOpen={modalVerifyOrder}
                 toggle={verifyOrder}
+                detailOrder={orderVerify}
             />
 
             <div className="h5 text-dark mb-4">Quản lý đơn hàng</div>
@@ -52,43 +65,57 @@ const OrderManage = (props) => {
                     </div>
 
                     <div className='list-order mt-4'>
-                        <div className="text-dark">Danh sách đơn đặt hàng (<b>150</b>)</div>
+                        <div className="text-dark">Danh sách đơn đặt hàng (<b>{order.length}</b>)</div>
                         <table className="table table-striped table-bordered table-hover w-100">
                             <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
                                 <tr>
                                     <td>STT</td>
                                     <td>Mã đơn hàng</td>
+                                    <td>Khách hàng</td>
+                                    <td>Sản phẩm</td>
+                                    <td>SL</td>
+                                    <td>Tổng tiền</td>
+                                    <td>Ngày đặt</td>
+                                    <td>Ngày giao dự kiến</td>
                                     <td>Hình thức giao hàng</td>
                                     <td>Trạng thái</td>
-                                    <td>Số lượng</td>
-                                    <td>Khách hàng phải trả</td>
-                                    <td>Hạn xác nhận</td>
                                     <td>Thao tác</td>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1dx45ab7d</td>
-                                    <td>Tiki giao hàng</td>
-                                    <td className='text-warning'>Chờ xác nhận</td>
-                                    <td>5</td>
-                                    <td>1.450.374 đ</td>
-                                    <td>Ngày mai 18/12/2021</td>
-                                    <td className='d-flex flex-column-reverse'>
-                                        <button type="button" className="btn text-danger">
-                                            <span className=''>Huỷ đơn hàng</span>
-                                        </button>
+                                {
+                                    order && order.length > 0 ?
+                                    order.map((item, index) => {
+                                        return (
+                                            <tr key={index}>
+                                                <td>{index + 1}</td>
+                                                <td>{item.orderCode}</td>
+                                                <td className='text-primary'>{item.username}</td>
+                                                <td>{item.Name}</td>
+                                                <td>{item.qty}</td>
+                                                <td>{numberFormat(item.total)}</td>
+                                                <td>{item.date}</td>
+                                                <td>{item.date}</td>
+                                                <td>{item.delivery}</td>
+                                                <td className ={item.status ==='Chờ xác nhận' ? "text-warning" : "text-success"}>{item.status}</td>
+                                                <td style={{width: '8%'}}>
+                                                    <button onClick={() => verifyOrder(item)} type="button" className="btn text-success">
+                                                        <span className=''>Xác nhận</span>
+                                                    </button><br/>
 
-                                        <button type="button" className="btn text-success">
-                                            <span className=''>Xem chi tiết</span>
-                                        </button>
+                                                    <button type="button" className="btn text-danger">
+                                                        <span className=''>Huỷ đơn</span>
+                                                    </button>
 
-                                        <button onClick={() => verifyOrder()} type="button" className="btn text-primary">
-                                            <span className=''>Xem và xác nhận</span>
-                                        </button>
-                                    </td>
-                                </tr>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })
+                                    :
+                                    <tr>
+                                        <td colSpan="8" className="text-center">Không có dữ liệu</td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                     </div>

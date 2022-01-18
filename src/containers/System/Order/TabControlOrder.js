@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Nav, NavItem, NavLink } from 'reactstrap';
+import * as actions from './../../../store/actions';
 
 const TabControlOrder = ({activeTab, setActiveTab}) => {
+    //fetch data order
+    const dispatch = useDispatch();
+    const order = useSelector(state => state.client.orders);
+
+    useEffect(() => {
+        dispatch(actions.getAllOrder());
+    }, [dispatch])
+
     return (
         <Nav tabs>
             <NavItem>
                 <NavLink className={activeTab === '1' ? 'active' : ''} onClick={() => setActiveTab('1')}>
                     <div className='font-weight-bold'>Tất cả</div>
-                    <span className='text-secondary statical'>0 đơn hàng</span>
+                    <span className='text-secondary statical'>{order.length} đơn hàng</span>
                 </NavLink>
             </NavItem>
 

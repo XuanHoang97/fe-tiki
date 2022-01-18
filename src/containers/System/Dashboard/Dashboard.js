@@ -15,6 +15,7 @@ const  Dashboard = (props) => {
     const listSlide = useSelector(state => state.admin.slides);
     const specialCategory = useSelector(state => state.admin.specialCategories);
     const multimedia = listSlide.length + specialCategory.length;
+    const order = useSelector(state => state.client.orders);
 
     useEffect(() => {
         dispatch(actions.fetchAllUser());
@@ -24,6 +25,7 @@ const  Dashboard = (props) => {
         dispatch(actions.GetAllArticle());
         dispatch(actions.fetchAllSlide());
         dispatch(actions.fetchAllSpecialCategory());
+        dispatch(actions.getAllOrder());
     }, [dispatch]);
 
     return (
@@ -105,7 +107,7 @@ const  Dashboard = (props) => {
                     <img className="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyccB_TdSjBpEY5mAaZcmIA4rDmT14MVaj7-O75W1Xq6YLIaaonDPNNYhJ4eH8Xdjgc14&usqp=CAU" alt=''  />
                     <div className="card-img-overlay d-flex justify-content-between"  >
                         <div className="stat">
-                            <h3 className="card-text font-weight-bold">0</h3>
+                            <h3 className="card-text font-weight-bold">{order.length}</h3>
                             <h6 className="card-title">ĐƠN HÀNG</h6>
                         </div>
                         <NavLink to="/system/order-manage"  className="btn btn-warning px-2">Xem</NavLink>

@@ -25,11 +25,18 @@ const createOrder = (data) => {
     return axios.post(`${path.PORT}/create-order`, data)
 }
 
+//get order
+const getOrder = (orderId) => {
+    return axios.get(`${path.PORT}/get-order?id=${orderId}`)
+}
+
 
 
 export{
     addItemToCart,
     getAllCart,
     deleteItemCart,
-    createOrder
+
+    createOrder,
+    getOrder
 }

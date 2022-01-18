@@ -13,12 +13,10 @@ function Order(props) {
     const dispatch = useDispatch()
     const qty = useSelector(state => state.client.qty)
 
-    console.log(typeof userId)
-
     const buyNow = (data) => {
         dispatch(actions.addToCart(
             {
-                userId: parseInt(userId),
+                userId: userId,
                 productId: detailProduct.id,
                 Name: detailProduct.name,
                 Image: detailProduct.image,
