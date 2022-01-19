@@ -57,9 +57,9 @@ const OrderManage = (props) => {
 
                         <div className="form-group d-flex col-2 p-0">
                             <select className="form-control" name="" id=""  style={{height:'30px'}}>
-                                <option>Bộ lọc khác</option>
-                                <option>Từ cao xuống thấp</option>
-                                <option>Từ thấp lên cao</option>
+                                <option>Trạng thái</option>
+                                <option>Đã xác nhận</option>
+                                <option>Chưa xác nhận</option>
                             </select>
                         </div>
                     </div>
@@ -93,11 +93,11 @@ const OrderManage = (props) => {
                                                 <td className='text-primary'>{item.username}</td>
                                                 <td>{item.Name}</td>
                                                 <td>{item.qty}</td>
-                                                <td>{numberFormat(item.total)}</td>
+                                                <td className='text-primary'>{numberFormat(item.total)}</td>
                                                 <td>{item.date}</td>
                                                 <td>{item.date}</td>
                                                 <td>{item.delivery}</td>
-                                                <td className ={item.status ==='S1' ? "text-warning" : "text-success"}>{item.status ==='S1' ? 'Chưa xác nhận' : 'loading...'}</td>
+                                                <td className ={item.status ==='S1' ? "text-warning" : "text-success"}>{item.status ==='S1' ? 'Chưa xác nhận' : 'Đã xác nhận'}</td>
                                                 <td style={{width: '8%'}}>
                                                     <button onClick={() => verifyOrder(item)} type="button" className="btn text-success">
                                                         <span className=''>Xác nhận</span>

@@ -30,6 +30,10 @@ const getOrder = (orderId) => {
     return axios.get(`${path.PORT}/get-order?id=${orderId}`)
 }
 
+//verify order
+const verifyOrder = (data) => {
+    return axios.post(`${path.PORT}/verify-order`, data)
+}
 
 
 export{
@@ -38,5 +42,6 @@ export{
     deleteItemCart,
 
     createOrder,
-    getOrder
+    getOrder,
+    verifyOrder
 }

@@ -20,8 +20,12 @@ const ModalVerifyOrder = ({isOpen, toggle, detailOrder}) => {
                 <div className='d-flex justify-content-center align-items-center'>
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4yFntpSafsNXW2rPoGfpBqshjjmEfG-Yr_dj8Pw8cntTdbHPNB3JDN9MBV9yo9jFtO1g&usqp=CAU" style={{width: '5%'}} alt='' />
                     <h4 className='ml-2'><small>Đơn hàng:</small>
-                        <b className='text-warning ml-2'>{detailOrder.orderCode} 
-                        <small>({detailOrder.status ==='Chờ xác nhận' ? 'Chưa xác nhận' :'loading...'})</small></b>
+                        <b className={detailOrder.status ==='S1' ? 'text-warning ml-2' :'text-success ml-2'}>
+                            {detailOrder.orderCode} 
+                            <small>
+                                ({detailOrder.status ==='S1' ? 'Chưa xác nhận' :'Đã xác nhận'})
+                            </small>
+                        </b>
                     </h4>
                 </div>
                 <hr/>
@@ -92,6 +96,8 @@ const ModalVerifyOrder = ({isOpen, toggle, detailOrder}) => {
                         >  
                             <option value="">Chưa xác nhận</option>                                                                               
                             <option value="">Xác nhận</option>                                                                               
+                            <option value="">Đang giao hàng</option>                                                                               
+                            <option value="">Đã giao hàng</option>                                                                               
                         </select>
                     </div> 
 

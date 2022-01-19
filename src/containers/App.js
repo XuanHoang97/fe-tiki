@@ -19,6 +19,7 @@ import Cart from './Client/cart/Cart';
 import Payment from './Client/payment/Payment';
 import OrderSuccess from './Client/Check_order/OrderSuccess';
 import NotFound from './HomePage/NotFound/Index';
+import VerifyEmail from './Client/Check_order/VerifyEmail';
 
 console.warn = () => { };
 function App(props) {    
@@ -55,6 +56,7 @@ function App(props) {
                 <Route path={path.CART} component={Cart} />
                 <Route path={path.PAYMENT} component={Payment} />
                 <Route path={path.MY_ORDER} component={OrderSuccess} />
+                <Route path={path.VERIFY_EMAIL} component={VerifyEmail} />
 
                 {/* Order login  */}
             </Switch>
