@@ -12,32 +12,26 @@ const OrderSuccess = (props) => {
     return (
         <>
         <Header />
-            <div className="order_success bg-light ">
+            <div className="order_success bg-light " >
                 <div className="py-3 container">
-                    <div className="bg-white p-0 py-3 text-center">
+                    <div className="bg-white p-0 py-3 text-center"style={{backgroundImage: `url('https://acegif.com/wp-content/gif/confetti-31.gif')`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'}} >
                         <img className="mb-2"  src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Eo_circle_green_white_checkmark.svg/2048px-Eo_circle_green_white_checkmark.svg.png" style={{ width: '4%' }} alt="" />
 
                         <div className="">
-                            <div className="mb-5">
-                                <h5 className="text-success">ĐẶT HÀNG THÀNH CÔNG!</h5>
-                                <h6 className="small text-secondary">Mã đơn hàng của bạn: </h6>
-                                <p className="bg-success text-white w-25 p-2 my-3" style={{margin: '0 auto'}}>27101997</p>
-
-                                <div>
-                                    <span>Thời gian giao hàng dự kiến từ 2-3 ngày</span>
-                                    <p>Thông tin về đơn hàng đã được gửi đến email
-                                        <a href='https://mail.google.com/mail/u/1/#inbox' target='_blank' className="text-primary" rel="noreferrer">
-                                            <i className="text-success ml-3">xuanhoang997@gmail.com</i>.
-                                        </a>
-                                    </p>
-                                </div>
-
-                                <div className="order_next text-primary text-center">
-                                    <Link to={path.HOMEPAGE}>
-                                        Tiếp tục mua hàng
-                                    </Link>
-                                </div>
+                            <h5 className="text-success font-weight-bold">ĐẶT HÀNG THÀNH CÔNG!</h5>
+                            <div className='my-2'>
+                                <p>Thông tin đơn hàng đã được gửi đến email của bạn:
+                                    <a href='https://mail.google.com/mail/u/1/#inbox' target='_blank' className="text-primary" rel="noreferrer">
+                                        <b className="text-success ml-3" style={{fontSize: '15px'}}>Xem ngay</b>.
+                                    </a>
+                                </p>
                             </div>
+
+                            <button className="btn btn-primary text-center mt-5 px-2">
+                                <Link to={path.HOMEPAGE} className='text-white'>
+                                    Tiếp tục mua hàng
+                                </Link>
+                            </button>
                         </div>
                     </div>
                 </div>

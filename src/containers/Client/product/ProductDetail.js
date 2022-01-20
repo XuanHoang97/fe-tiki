@@ -32,6 +32,10 @@ const ProductDetail = ({ match }) => {
     document.title = `${detailProduct.name}-giá rẻ nhất vịnh Bắc Bộ`;
   }, [detailProduct]);
 
+  useEffect(() => {
+    detailProduct.length > 0 && dispatch(actions.addProduct(detailProduct[0]))
+  }, [dispatch])
+
   // choose quantity order
   const qty = useSelector(state => state.client.qty);
   const incrementQty = () => {
@@ -54,9 +58,10 @@ const ProductDetail = ({ match }) => {
           <div className="bg-white pt-4 pb-4 p-3 m-0 text-center row">
             <Illustrator detailProduct={detailProduct} />
             <Order 
-              detailProduct={detailProduct}  
+              order={detailProduct}  
               incrementQty={incrementQty}
               decrementQty={decrementQty}
+              qty={qty}
             />
             <Accessories detailProduct={detailProduct} />
           </div>

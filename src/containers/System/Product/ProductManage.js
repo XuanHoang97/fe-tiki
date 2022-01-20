@@ -134,7 +134,6 @@ const ProductManage = (props) => {
                         <td scope="col">STT</td>
                         <td scope="col">Ảnh</td>
                         <td scope="col">Tên SP</td>
-                        <td scope="col">Số lượng</td>
                         <td scope="col">Bảo hành</td>
                         <td scope="col">Giá (VND)</td>
                         <td scope="col">Sale (VND)</td>
@@ -159,7 +158,6 @@ const ProductManage = (props) => {
                                     <td style={{width:'6%'}}><img src={item.image} className='w-100' alt="" /> </td>
                       
                                     <td className='text-primary'>{item.name}</td>
-                                    <td>{item.number}</td>
                                     <td>{item.warranty}</td>
                                     <td>{numberFormat(item.price)}</td>
                                     <td>{numberFormat(item.sale)}</td>

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { path } from 'utils';
 
+//when user login
 //add to cart
 const addItemToCart = (data) => {
     return axios.post(`${path.PORT}/add-item-to-cart`, data)

@@ -70,14 +70,13 @@ const OrderManage = (props) => {
                             <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
                                 <tr>
                                     <td>STT</td>
-                                    <td>Mã đơn hàng</td>
+                                    <td>Mã ĐH</td>
                                     <td>Khách hàng</td>
                                     <td>Sản phẩm</td>
                                     <td>SL</td>
                                     <td>Tổng tiền</td>
                                     <td>Ngày đặt</td>
                                     <td>Ngày giao dự kiến</td>
-                                    <td>Hình thức giao hàng</td>
                                     <td>Trạng thái</td>
                                     <td>Thao tác</td>
                                 </tr>
@@ -90,13 +89,12 @@ const OrderManage = (props) => {
                                             <tr key={index}>
                                                 <td>{index + 1}</td>
                                                 <td>{item.orderCode}</td>
-                                                <td className='text-primary'>{item.username}</td>
+                                                <td className='text-primary font-weight-bold'>{item.username}</td>
                                                 <td>{item.Name}</td>
                                                 <td>{item.qty}</td>
-                                                <td className='text-primary'>{numberFormat(item.total)}</td>
+                                                <td className='text-danger'>{numberFormat(item.total)}</td>
                                                 <td>{item.date}</td>
                                                 <td>{item.date}</td>
-                                                <td>{item.delivery}</td>
                                                 <td className ={item.status ==='S1' ? "text-warning" : "text-success"}>{item.status ==='S1' ? 'Chưa xác nhận' : 'Đã xác nhận'}</td>
                                                 <td style={{width: '8%'}}>
                                                     <button onClick={() => verifyOrder(item)} type="button" className="btn text-success">

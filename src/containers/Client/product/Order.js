@@ -1,49 +1,41 @@
-import React, {useState} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { path } from 'utils';
 import * as actions from "store/actions";
 import { numberFormat } from 'components/Formatting/FormatNumber';
 import Rate from 'containers/HomePage/Section/Rate';
 
-function Order(props) {
-    const { detailProduct, incrementQty, decrementQty} = props
-    const [userId, setUserId] = useState(123);
-
+const Order = (props) => {
+    const {order, qty, incrementQty, decrementQty} = props;
     const dispatch = useDispatch()
-    const qty = useSelector(state => state.client.qty)
 
-    const buyNow = (data) => {
-        dispatch(actions.addToCart(
-            {
-                userId: userId,
-                productId: detailProduct.id,
-                Name: detailProduct.name,
-                Image: detailProduct.image,
-                Price: detailProduct.price,
-                saleOff: detailProduct.sale,
-                qty: parseInt(qty),
-            }
-        ))        
+    const buyNow = () => {
+        if (qty > 0) {
+            order.qty = qty
+            dispatch(actions.addToCart(order))
+            dispatch(actions.countProduct(1))
+        }       
     }
 
         
     return (
         <div className="col-md-6 pl-4 pr-2 text-left">
             <div className="info d-flex align-items-center">
-                <h4 className="mr-5 font-weight-bold">{detailProduct && detailProduct.name ? detailProduct.name :'loading...'}</h4>
+                <h4 className="mr-5 font-weight-bold">{order && order.name ? order.name :'loading...'}</h4>
                 <Rate />
             </div>
 
             <div className="price bg-light py-3 px-2 my-2">
                 <div className="row m-1 align-items-center">
-                    <h4 className="text-dark font-weight-bold">{numberFormat(detailProduct && detailProduct.price ? detailProduct.price :'loading')}</h4>
+                    <h4 className="text-dark font-weight-bold">{numberFormat(order && order.price ? order.price :'loading')}</h4>
                     <span className="badge badge-pill badge-warning mx-4">
                     -1 %
                     </span>
-                    <strike className="text-danger">{numberFormat(detailProduct && detailProduct.sale ? detailProduct.sale :'loading...')}</strike>
+                    <strike className="text-danger">{numberFormat(order && order.sale ? order.sale :'loading...')}</strike>
                 </div>
             </div>
+
             <div>
                 <div className="text-danger">
                     <img className="w-25" src="http://techshop-ecommerce.surge.sh/static/media/policy-image.62c1167a.png" alt="" />
@@ -58,19 +50,12 @@ function Order(props) {
 
                         <input type="text" readOnly className="form-control text-center" style={{ height: '31px' }}
                             value={qty}
-                            // onChange={(e) => setQty(e.target.value)}
                         />
 
                         <div onClick={incrementQty}  className="input-group-append">
                             <button className="btn btn-success btn-sm px-2"><i className="fas fa-plus small" /></button>
                         </div>
                     </div>
-
-                    <span>userId:
-                        <input type="text" readOnly className="form-control text-center" style={{ height: '31px' }}
-                            value={userId}
-                        />
-                    </span>
 
                     <div className='d-flex mt-5 align-items-center' style={{gap: '10px'}}>
                         <button onClick={buyNow} type="button" className="btn btn-danger font-weight-normal" style={{height: '40px', width:'50%'}}>
