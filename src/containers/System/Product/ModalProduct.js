@@ -9,7 +9,6 @@ const ModalProduct = (props) => {
     const [previewImg, setPreviewImg] = useState('');
     const [price, setPrice] = useState('');
     const [sale, setSale] = useState('');
-    const [number, setNumber] = useState('');
     const [warranty, setWarranty] = useState('');
 
     const [status, setStatus] = useState('');
@@ -35,7 +34,6 @@ const ModalProduct = (props) => {
         setPreviewImg('');
         setPrice('');
         setSale('');
-        setNumber('');
         setWarranty('');
         setStatus('');
         setCategory_id('');
@@ -55,7 +53,6 @@ const ModalProduct = (props) => {
             previewImg: previewImg,
             price: price,
             sale: sale,
-            number: number,
             warranty: warranty,
             status: status,
             category_id: category_id,
@@ -161,10 +158,6 @@ const ModalProduct = (props) => {
                     </div>
 
                     <div className="form-group col-md-4">
-                        <label>Số lượng</label>
-                        <input value={number} onChange={(e)=>setNumber(e.target.value)}  type="text" className="form-control" />
-                    </div>
-                    <div className="form-group col-md-4">
                         <label>Bảo hành</label>
                         <input value={warranty} onChange={(e)=>setWarranty(e.target.value)}  type="text" className="form-control" />
                     </div>                             
@@ -182,7 +175,7 @@ const ModalProduct = (props) => {
                                 listCategory && listCategory.length >0 ?
                                 listCategory.map((item, index) => {
                                     return (
-                                        <option key={index} value={item.keyMap}>{item.name}</option>
+                                        <option key={index} value={item.id}>{item.name}</option>
                                     )
                                 })
                                 : 

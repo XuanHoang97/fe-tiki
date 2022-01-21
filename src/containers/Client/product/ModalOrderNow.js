@@ -10,7 +10,6 @@ import LoadingOverlay from 'react-loading-overlay';
 
 const ModalOrderNow = (props) => {
     const saleOff = 240000;
-    const [userId, setUserId] = useState(false);
     const [qty, setQty] = useState(1);
     const [username, setUsername] = useState('');
     const [phone, setPhone] = useState('');
@@ -48,9 +47,19 @@ const ModalOrderNow = (props) => {
     // add new category
     const order=async()=>{         
         setLoadingOrder(true);
+        const newCart = carts.map(cart => {
+            return {
+                productId: cart.id,
+                qty: cart.qty,
+                price: cart.price,
+                name: cart.name,
+                image: cart.image,
+                sale_off: cart.sale_off,
+                total: cart.total
+            }
+        })
         let res = await createOrder({
-            arrOrder: carts, 
-            userId: userId,
+            arrOrder: newCart, 
             total : totalMoney(carts),
             username: username,
             phone: phone,

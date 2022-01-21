@@ -19,6 +19,7 @@ const initialState = {
     slides: [],
     specialCategories: [],
     statusSlide: [],
+    detailCategory: [],
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -189,9 +190,6 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
             }
-            
-
-
 
             
             //fetch all category
@@ -203,6 +201,19 @@ const adminReducer = (state = initialState, action) => {
 
         case actionTypes.FETCH_ALL_CATEGORIES_FAILED:
             state.categories = [];
+            return {
+                ...state,
+            }
+
+            //fetch all product in category
+        case actionTypes.FETCH_PRODUCT_IN_CATEGORY_SUCCESS:
+            state.detailCategory = action.detail;
+            return {
+                ...state,
+            }
+
+        case actionTypes.FETCH_PRODUCT_IN_CATEGORY_FAILED:
+            state.detailCategory = [];
             return {
                 ...state,
             }

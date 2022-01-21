@@ -80,10 +80,6 @@ const getProductSimilar = (productId) => {
     return axios.get(`${path.PORT}/similar-product?id=${productId}`)
 }
 
-//get all product by category
-const getAllProductByCategory = (categoryId) => {
-    return axios.get(`${path.PORT}/get-product-by-category?id=${categoryId}`)
-}
 
 //save info product
 const saveInfoProduct = (data) => {
@@ -209,6 +205,11 @@ const deleteSpecialCategory = (specialCategoryId) => {
     })
 }
 
+//get all product in category
+const detailCategory = (productId) => {
+    return axios.get(`${path.PORT}/get-detail-category?id=${productId}`)
+}
+
 
 
 export { 
@@ -238,6 +239,8 @@ export {
 
     deleteCategory,
     editCategory,
+    detailCategory,
+
     getAllArticle,
     getAllSlides,
     createSlides,
@@ -247,6 +250,5 @@ export {
     createSpecialCategory,
     editSpecialCategory,
     deleteSpecialCategory,
-    getAllProductByCategory,
     getProductSimilar
 };

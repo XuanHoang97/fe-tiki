@@ -10,7 +10,7 @@ import * as actions from 'store/actions';
 const OrderManage = (props) => {
     const [activeTab, setActiveTab] = useState('1');
     const [modalVerifyOrder, setModalVerifyOrder] = useState(false);
-    const [detailOrder, setdetailOrder] = useState([]);
+    const [detailOrder, setDetailOrder] = useState([]);
 
     //fetch data order
     const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const OrderManage = (props) => {
 
     //verify order
     const verifyOrder = (order) => {
-        setdetailOrder(order);
+        setDetailOrder(order);
         setModalVerifyOrder(!modalVerifyOrder);
     }
 
@@ -97,9 +97,17 @@ const OrderManage = (props) => {
                                                 <td>{item.date}</td>
                                                 <td className ={item.status ==='S1' ? "text-warning" : "text-success"}>{item.status ==='S1' ? 'Chưa xác nhận' : 'Đã xác nhận'}</td>
                                                 <td style={{width: '8%'}}>
-                                                    <button onClick={() => verifyOrder(item)} type="button" className="btn text-success">
-                                                        <span className=''>Xác nhận</span>
-                                                    </button><br/>
+                                                    {
+                                                        item.status ==='S1' ?
+                                                        <button onClick={() => verifyOrder(item)} type="button" className="btn text-success">
+                                                            <span className=''>Xác nhận</span>
+                                                        </button>
+                                                        : ''
+                                                    }
+
+                                                    <button onClick={() => verifyOrder(item)} type="button" className="btn text-primary">
+                                                        <span className=''>Chi tiết</span>
+                                                    </button>
 
                                                     <button type="button" className="btn text-danger">
                                                         <span className=''>Huỷ đơn</span>

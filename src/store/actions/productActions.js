@@ -12,7 +12,6 @@ import {
     saveOptionProduct,
 
     getAllArticle,
-    getAllProductByCategory
 } from "../../services/userService"
 import { toast } from "react-toastify"
 
@@ -125,35 +124,6 @@ export const deleteProductSuccess = () => ({
 
 export const deleteProductFailed = () => ({
     type: actionTypes.DELETE_PRODUCT_FAILED,
-})
-
-//get all product by category
-export const GetAllProductByCategory = (categoryId) => {
-    return async(dispatch, getState) => {
-        try {
-            let res = await getAllProductByCategory(categoryId);
-            if (res && res.data.errCode === 0) {
-                dispatch(getAllProductByCategorySuccess(res.data.products.reverse()));
-                dispatch(fetchProducts());
-            } else {
-                toast.error('get all product by category error !')
-                dispatch(getAllProductByCategoryFailed());
-            }
-        } catch (e) {
-            toast.error('get all product by category error !')
-            dispatch(getAllProductByCategoryFailed());
-            console.log('getAllProductByCategoryFailed error', e)
-        }
-    }
-}
-
-export const getAllProductByCategorySuccess = (data) => ({
-    type: actionTypes.FETCH_PRODUCT_BY_CATEGORY_SUCCESS,
-    listProduct: data
-})
-
-export const getAllProductByCategoryFailed = () => ({
-    type: actionTypes.FETCH_PRODUCT_BY_CATEGORY_FAILED,
 })
 
 

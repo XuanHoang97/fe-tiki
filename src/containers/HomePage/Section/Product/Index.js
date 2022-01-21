@@ -32,19 +32,23 @@ const Product = (mobile) => {
                     listProduct && listProduct.length >0 ?
                     listProduct.map((item, index) => {
                         return (
-                            <div className="product--item col-md-2 col-6 py-4 p-0" key={index} >
+                            <div className="product--item col-md-2 col-6 p-3" key={index} >
                                 <div onClick={()=>viewDetail(item)} style={{cursor: 'pointer'}}>
-                                    <img src={item.image} className="w-75" alt="" />
-                                    <h6 className="mt-2 mb-1 text-dark">{item.name}</h6>
+                                    <img src={item.image} className="" alt="" />
+                                    <h6 className="my-2 text-dark">{item.name}</h6>
                                 </div>
                                 <Rate />
 
-                                <div className="price__prod row align-items-center justify-content-center">
-                                    <span className="font-weight-bold" style={{ color: 'red', fontSize: '14px' }}>
+                                <div className="price__prod d-flex align-items-center">
+                                    <span className="font-weight-bold text-dark" style={{fontSize: '13px' }}>
                                         {numberFormat(item.price)}
                                     </span>
 
-                                    <span className="badge badge-pill badge-warning p-1 ml-3 mr-2">-1%</span>
+                                    <span className="badge badge-pill badge-danger p-1 mx-2">-1%</span>
+
+                                    <del className="text-secondary small">
+                                        {numberFormat(item.sale)}
+                                    </del>
                                 </div>
                             </div>
                         );

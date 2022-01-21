@@ -4,6 +4,7 @@ import {
     createCategory,
     deleteCategory,
     editCategory,
+    detailCategory
 } from "../../services/userService"
 import { toast } from "react-toastify"
 
@@ -117,4 +118,30 @@ export const deleteCategorySuccess = () => ({
 
 export const deleteCategoryFailed = () => ({
     type: actionTypes.DELETE_CATEGORY_FAILED,
+})
+
+//detail category
+export const DetailCategory = (id) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await detailCategory(id);
+            if (res) {
+                dispatch(detailCategorySuccess(res.data.categoryData));
+            } else {
+                dispatch(detailCategoryFailed());
+            }
+        } catch (e) {
+            dispatch(detailCategoryFailed());
+            console.log('detailCategoryFailed error', e)
+        }
+    }
+}
+
+export const detailCategorySuccess = (data) => ({
+    type: actionTypes.FETCH_PRODUCT_IN_CATEGORY_SUCCESS,
+    detail: data
+})
+
+export const detailCategoryFailed = () => ({
+    type: actionTypes.FETCH_PRODUCT_IN_CATEGORY_FAILED,
 })
