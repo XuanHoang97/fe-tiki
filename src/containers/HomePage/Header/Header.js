@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import Category from './Category';
-import Search from './Search';
+import Search from './search/Search';
 import CartHeader from './cart/Index';
 import MenuTop from './MenuTop';
 import './style/header.scss';
-import Account from './Account';
+import Account from './account/Account';
 import { path } from 'utils';
 
 function Header() {

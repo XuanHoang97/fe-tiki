@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import * as actions from "../../../store/actions";
 import { path } from '../../../utils';
+import * as actions from "../../../store/actions";
 
 export default function Category() {
   const [detailMenu, setDetailMenu] = useState(false);
@@ -11,17 +11,25 @@ export default function Category() {
 
   const dispatch = useDispatch();
   const category = useSelector(state => state.admin.categories); 
+  const DetailCategory = useSelector(state => state.admin.detailCategory);
 
   useEffect(() => {
     dispatch(actions.fetchAllCategory());
   }, [dispatch]);
 
-  const viewDetailMenu = () => {
+  const viewDetailMenu = (id) => {
     setDetailMenu(!detailMenu);
+    dispatch(actions.DetailCategory(id));
+
+    console.log('detail category', id, DetailCategory);
+  };
+
+  const viewDetailCategory = (id) => {
+    // setDetailMenu(!detailMenu);
   };
 
   return (
-    <>
+    <React.Fragment>
       <li className="menu_ctg nav-item dropdown mr-2 active"
         onMouseEnter={() => setHoverMenu(true)}
       >
@@ -43,9 +51,9 @@ export default function Category() {
             { category.map((item, index) => {
               return (
                   <div className="dropdown-item drop__menu d-flex align-items-center py-2 px-3 bg-light" 
-                    style={{ cursor: 'pointer' }}
                     key={index} 
-                    onMouseEnter={() => viewDetailMenu(item)}
+                    style={{ cursor: 'pointer' }}
+                    onMouseEnter={() => viewDetailMenu(item.id)}
                   >
                     <img className="col-1 px-0 mr-2 rounded-circle"  src={item.image} alt="img slide" />
                     <div style={{fontSize: '13px'}}>{item.name}</div>
@@ -53,30 +61,35 @@ export default function Category() {
               );
             })}
           </div>
-          
-          {
-            hoverSubMenu &&
-            <div className="menu__item d-flex col-9">
-              <div className="col-3">
-                <span className="text-primary">product1</span>
-                
-              </div>
 
-              <div className="col-3">
-                <span className="text-primary">product2</span>
+          <div className="menu__item col-9 p-0" style={{background: '#ebf7ff'}}>
+            {
+              detailMenu &&
+              <div className="d-flex p-0">
+                {
+                  DetailCategory && DetailCategory.length > 0 ?
+                  DetailCategory.map((item, index) => {
+                    return (
+                      <div className="col-4 d-flex align-items-center py-2 px-3 bg-light"
+                        key={index}
+                        onMouseEnter={() => viewDetailCategory(item.id)}
+                      >
+                        <img className="w-25" src={item.image} alt="img slide" />
+                        <div>{item.name}</div>
+                      </div>
+                    )
+                  }) 
+                  :
+                  <div className="d-flex align-items-center py-2 px-3 bg-light">
+                    <img className="w-25" src="https://via.placeholder.com/100" alt="img slide" />
+                    <div>Không có dữ liệu</div>
+                  </div>
+                }
               </div>
-
-              <div className="col-3">
-                <span className="text-primary">product3</span>
-              </div>
-
-              <div className="col-3">
-                <span className="text-primary">product4</span>
-              </div>
-            </div>
-          }
+            }
+          </div>
         </div>
       }
-    </>
+    </React.Fragment>
   )
 }

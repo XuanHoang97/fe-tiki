@@ -24,7 +24,7 @@ function Notification(props) {
                 <i className="far fa-bell"></i>
                 {
                     number_Notification && number_Notification > 0 ?
-                    <span className="badge badge-pill badge-danger" style={{position: 'absolute', right: '16rem', top: '0.35rem'}}>
+                    <span className="badge badge-pill badge-danger" style={{position: 'absolute', right: '-12px', top: '-4px'}}>
                         {number_Notification}
                     </span>
                     : null

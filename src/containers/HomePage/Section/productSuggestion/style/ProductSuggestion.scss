@@ -7,23 +7,31 @@
 }
 .tab_product {
     display: flex;
-    background: white;
+    background: #e3e3e3;
+    padding: 5px 0;
     .item-category{
-        width: 15%;
+        width: 16.2%;
+        background: white !important;
         a{
+            display: flex;
+            gap: 10px;
+            height: 60px ;
+            align-items: center;
             img{
-                width: 40px;
-                height: 30px;
+                width: 25px;
+                height: 25px;
             }
             span{
                 margin-left: 10px;
             }
         }
+        a.active{
+            border-bottom: 2px solid #538aff !important;
+        }
     }
 }
 
 .list{
-    display: flex;
     .list__prod{
         width: 20%;
         p{

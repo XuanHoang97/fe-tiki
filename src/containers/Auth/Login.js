@@ -7,7 +7,7 @@ import './Login.scss';
 import {handleLoginApi} from '../../services/userService';
 
 const Login = (props) => {
-    const [useName, setUserName] = useState('');
+    const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [isShowPassword, setIsShowPassword] = useState(false);
     const [errMessage, setErrMessage] = useState('');
@@ -17,7 +17,7 @@ const Login = (props) => {
         setErrMessage('');
 
         try{
-            let data= await handleLoginApi(useName, password);
+            let data= await handleLoginApi(userName, password);
             if(data && data.data.errCode !==0){
                 setErrMessage(data.data.errMessage);
             }
@@ -54,7 +54,7 @@ const Login = (props) => {
                         <label>Username:</label>
                         <input type="text" className="form-control" 
                             placeholder="Enter your username..."
-                            value={useName}
+                            value={userName}
                             onChange={(e) => setUserName(e.target.value)}
                         />
                     </div>

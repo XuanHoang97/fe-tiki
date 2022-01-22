@@ -12,13 +12,15 @@ const ModalEditCategory  = (props) => {
 
     useEffect (() => {
         let category = props.currentCategory;
-        //fill info category
-        setId(category.id);
-        setPreviewImg(category.image);
-        setName(category.name);
-        setKeyMap(category.keyMap);
-        setType(category.type);
-        setValue(category.value);
+        if(category) {
+            //fill info category
+            setId(category.id);
+            setPreviewImg(category.image);
+            setName(category.name);
+            setKeyMap(category.keyMap);
+            setType(category.type);
+            setValue(category.value);
+        }
     }, [props.currentCategory]);
 
     const toggle =()=>{

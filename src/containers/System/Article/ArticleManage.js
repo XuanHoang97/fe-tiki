@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../../store/actions';
-import { SaveOptionProduct } from '../../../store/actions';
 import ModalArticle from './ModalArticle';
 import ModalEditArticle from './ModalEditArticle';
 
@@ -9,53 +8,31 @@ const ArticleManage = (props) => {
     //fetch data
     const dispatch = useDispatch();
     const listArticle = useSelector(state => state.admin.articles);
+    const category = useSelector(state => state.admin.categories);
+    const DetailCategory = useSelector(state => state.admin.detailCategory);
     const optionProduct = useSelector(state => state.admin.optionProduct);
-    const someProduct = useSelector(state => state.admin.someProduct);
     
     useEffect(() => {
         dispatch(actions.GetAllArticle());
-        dispatch(actions.fetchProducts());
+        dispatch(actions.fetchAllCategory());
+        dispatch(actions.DetailCategory(3));
+        dispatch(actions.SelectOptionProduct());
     }, [dispatch]);
+
 
     const [modalAddArticle, setModalAddArticle] = useState(false);
     const [modalEditArticle, setModalEditArticle] = useState(false);
     const [articleEdit, setArticleEdit] = useState('');
 
+    const [categoryId, setCategoryId] = useState('');
+    const [productId, setProductId] = useState(3);
     const [option, setOption] = useState('');
-    const [productId, setProductId] = useState('');
-    const [imageDesc, setImageDesc] = useState('');
-    const [previewImg, setPreviewImg] = useState('');
-
-    //get option product
-    useEffect(() => {
-        let data = optionProduct;
-        if(data && data.length > 0){
-            data = data.map(item => ({...item, isSelected: false}))
-        }
-        dispatch(actions.SelectOptionProduct());
-        setOption(data);        
-    }, []);
-
-    //select option product
-    const SelectOptionProduct = (product) => {
-        let data = optionProduct;
-        if(data && data.length > 0){
-            data.map(item => {
-                if(item.id === product.id) item.isSelected = !item.isSelected;
-                return item;
-            })
-            setOption(data);
-        }
-        console.log('check option product: ', data);
-    }
-
-    const handleSaveChoose = (e) => {
-        e.preventDefault();
-        const data = new FormData();
-        data.append('productId', productId);
-        imageDesc && data.append('imageDesc', imageDesc);
+    const [image, setimage] = useState('');
         
-        dispatch(SaveOptionProduct(data));
+
+    const handleChangeCategory = (e) => {
+        setCategoryId(e.target.value);
+        dispatch(actions.DetailCategory(e.target.value));
     }
 
     //onChange multi image
@@ -64,25 +41,9 @@ const ArticleManage = (props) => {
         let file=data[0];
         if(file){
             let objectUrl=URL.createObjectURL(file)
-            setPreviewImg(objectUrl);
-            setImageDesc(file);
+            setimage(file);
         }
         console.log('check image: ', file);
-    }
-
-    //remove image
-    const removeImg=()=>{
-        setPreviewImg('');
-        setImageDesc('');
-    }
-
-    //OPEN MODAL Create, Edit article
-    const toggleArticleModal=()=> {
-        setModalAddArticle(!modalAddArticle);
-    }
-
-    const toggleArticleEditModal=()=>{
-        setModalEditArticle(!modalEditArticle);
     }
 
     //create article
@@ -131,13 +92,13 @@ const ArticleManage = (props) => {
             <div className='bg-light p-3'>
                 <ModalArticle
                     isOpen={modalAddArticle}
-                    toggleParent={toggleArticleModal}
+                    toggleParent={handleAddNewArticle}
                     SaveInfoProduct={SaveInfoProduct}
                 />
                 
                 <ModalEditArticle
                     isOpen={modalEditArticle}
-                    toggleParent={toggleArticleEditModal}
+                    toggleParent={editArticle}
                     currentArticle={articleEdit}
                     editInfoProduct={editInfoProduct}
                 />
@@ -150,7 +111,7 @@ const ArticleManage = (props) => {
                 <table className="table table-striped table-bordered table-hover">
                     <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
                         <tr>
-                            <td scope="col">Tick</td>
+                            <td scope="col">STT</td>
                             <td scope="col">ID SP</td>
                             <td scope="col">Tên SP</td>
                             <td scope="col">Tác vụ</td>
@@ -163,9 +124,7 @@ const ArticleManage = (props) => {
                                 return (
                                     <tr key={index}>
                                         <td>
-                                            <div className="form-group">
-                                                <input type="checkbox" className="w-100" />
-                                            </div>
+                                            {index + 1}
                                         </td>
                                         <td>{item.productId}</td>
                                         <td>loading...</td>
@@ -183,63 +142,93 @@ const ArticleManage = (props) => {
                             <tr>
                                 <td colSpan="5">Không có bài viết nào</td>
                             </tr>
-                        }
-                            
+                        }                        
                     </tbody>
                 </table>
             </div>
 
             <hr/>   
-            <div className="text-dark">Sản phẩm</div>
+            <div className="text-dark">Tuỳ chọn sản phẩm</div>
             <form className='bg-light p-3'
-                onSubmit={handleSaveChoose}
+                // onSubmit={handleSaveChoose}
                 encType="multipart/form-data"
             >
-                <div className='d-flex justify-content-between p-0'>
-                    <div className='d-flex'>
-                        <label className='mr-3'>Chọn sản phẩm</label>
+                <div className='d-flex p-0'>
+                    <div className='d-flex col-4 p-0'>
+                        <div className='col-6 p-0 mr-3'>
+                            <label className='mr-3'>Danh mục</label>
 
-                        <div className="form-group d-flex col-6 p-0">
-                            <select className="form-control" style={{height:'30px'}}
-                                defaultValue={productId}
-                                onChange={(e)=>setProductId(e.target.value)}
-                            >
-                                {   
-                                    someProduct && someProduct.length >0 &&
-                                    someProduct.map((item, index) => {
-                                        return(
-                                            <option key={index} value={item.name}> {item.name} </option>
-                                        ) 
-                                    })
-                                }
-                            </select>
+                            <div className="form-group d-flex p-0">
+                                <select className="form-control" style={{height:'30px'}}
+                                    value={categoryId}
+                                    onChange={(e, id)=>handleChangeCategory(e, id)}
+                                >     
+                                    {
+                                        category && category.length > 0 ?
+                                        category.map((item, index) => {
+                                            return (
+                                                <option key={index} value={index +3 }>{item.name}</option>
+                                            )
+                                        }) :
+                                        <option value="">Không có danh mục</option>
+                                    }                
+                                </select>
+                            </div>
                         </div>
-                    </div>
-
-                    <div className='d-flex'>    
-                        <label className=''>Mẫu mã</label>
+                        
                         {
-                            optionProduct && optionProduct.length >0 &&
-                            optionProduct.map((item, index) => {
-                                return(
-                                    <div className="d-flex" key={index}>
-                                        <button onClick={()=> SelectOptionProduct(item)} type="button" 
-                                            className={item.isSelected === true ? "btn btn-primary px-2 mx-2 font-weight-normal" : "btn btn-secondary btn-sm px-2 mx-2 font-weight-normal"}>
-                                            {item.valueVi}
-                                        </button>
-                                    </div>
-                                ) 
-                            })
+                            category && category.length > 0 ?
+                            <div className='col-6 p-0'>
+                                <label className='mr-3'>Sản phẩm</label>
+                                <div className="form-group d-flex p-0">
+                                    <select className="form-control" style={{height:'30px'}}
+                                        value={productId}
+                                        onChange={(e)=>setProductId(e.target.value)}
+                                    >
+                                        {
+                                            DetailCategory && DetailCategory.length > 0 ?
+                                            DetailCategory.map((item, index) => {
+                                                return (
+                                                    <option key={index} value={item.id}>{item.name}</option>
+                                                )
+                                            }) :
+                                            <option value="">Không có sản phẩm</option>
+                                        }                                     
+                                    </select>
+                                </div>
+                            </div> :
+                            <span>Không có sản phẩm nào ! </span>
                         }
                     </div>
 
-                    <div className="d-flex">
-                        <label>Ảnh</label>
-                        <input id="previewImg" type="file"
-                            name='multi-image' 
-                            multiple
-                            onChange={(e) => changeMultiImage(e)} 
-                        />
+                    <div className='d-flex col-6 ml-3'>   
+                        <div className='col-7 p-0 mr-3'>
+                            <label className='px-2'>Mẫu mã</label>
+                            <div className="d-flex">
+                            {
+                                optionProduct && optionProduct.length >0 &&
+                                optionProduct.map((item, index) => {
+                                    return(
+                                        <button 
+                                            type="button" 
+                                            key={index}
+                                            className={item.isSelected === true ? "btn btn-primary px-2 mx-2 font-weight-normal" : "btn btn-secondary btn-sm px-2 mx-2 font-weight-normal"}>
+                                            {item.valueVi}
+                                        </button>
+                                    ) 
+                                })
+                            }
+                            </div>
+                        </div>
+
+                        <div className='col-5 p-0 mr-3'>
+                            <label>Ảnh mô tả (Multiple image)</label>
+                            <input id="previewImg" type="file"
+                                name='multi-image' 
+                                multiple
+                                onChange={(e) => changeMultiImage(e)} 
+                            />
+                        </div>
                     </div>
                 </div>
                 <button type ="submit" className="btn btn-success px-3">Lưu thông tin</button>

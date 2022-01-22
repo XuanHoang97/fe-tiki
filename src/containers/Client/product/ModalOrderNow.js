@@ -47,6 +47,8 @@ const ModalOrderNow = (props) => {
     // add new category
     const order=async()=>{         
         setLoadingOrder(true);
+
+        //away duplicate data
         const newCart = carts.map(cart => {
             return {
                 productId: cart.id,

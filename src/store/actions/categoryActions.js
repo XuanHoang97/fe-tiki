@@ -8,7 +8,6 @@ import {
 } from "../../services/userService"
 import { toast } from "react-toastify"
 
-
 //fetch all category
 export const fetchAllCategory = () => {
     return async(dispatch, getState) => {
@@ -16,7 +15,7 @@ export const fetchAllCategory = () => {
             let res = await getAllCategory('ALL');
 
             if (res && res.data.errCode === 0) {
-                dispatch(fetchAllCategorySuccess(res.data.category.reverse()))
+                dispatch(fetchAllCategorySuccess(res.data.category))
             } else {
                 toast.error('fetch all category error !')
                 dispatch(fetchAllCategoryFailed());
@@ -125,6 +124,7 @@ export const DetailCategory = (id) => {
     return async(dispatch, getState) => {
         try {
             let res = await detailCategory(id);
+            console.log('res', res.data)
             if (res) {
                 dispatch(detailCategorySuccess(res.data.categoryData));
             } else {

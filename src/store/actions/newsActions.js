@@ -66,9 +66,6 @@ export const fetchStatusNewsFailed = () => ({
     type: actionTypes.FETCH_ALLCODE_NEWS_FAILED,
 })
 
-
-
-
 //create news and event
 export const CreateNews = (data) => {
     return async(dispatch, getState) => {

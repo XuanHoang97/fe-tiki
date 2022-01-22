@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import * as actions from '../../../store/actions';
+import * as actions from '../../../../store/actions';
 import MoreSuggest from './MoreSuggest';
 
 function SearchSuggest({ dataSearch, show, blur, search }) {

@@ -10,10 +10,6 @@ export default function Search() {
     const inputSearch = useRef(null)
 
     useEffect(() => {
-        
-    }, []);
-
-    useEffect(() => {
         if (mobile) {
             setAllData(mobile.filter(items => items.name ? items.name.toLowerCase().includes(search.toLowerCase()) : ''))
         }

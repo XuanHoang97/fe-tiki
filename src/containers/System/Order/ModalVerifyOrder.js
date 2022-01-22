@@ -21,7 +21,7 @@ const ModalVerifyOrder = ({isOpen, toggle, detailOrder}) => {
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4yFntpSafsNXW2rPoGfpBqshjjmEfG-Yr_dj8Pw8cntTdbHPNB3JDN9MBV9yo9jFtO1g&usqp=CAU" style={{width: '5%'}} alt='' />
                     <h4 className='ml-2'><small>Đơn hàng:</small>
                         <b className={detailOrder.status ==='S1' ? 'text-warning ml-2' :'text-success ml-2'}>
-                            {detailOrder.orderCode} 
+                            {detailOrder.code} 
                             <small>
                                 ({detailOrder.status ==='S1' ? 'Chưa xác nhận' :'Đã xác nhận'})
                             </small>
@@ -48,7 +48,7 @@ const ModalVerifyOrder = ({isOpen, toggle, detailOrder}) => {
 
                     <div className='d-flex mb-2'>
                         <span className='col-3'>Sản phẩm đặt hàng:</span> 
-                        <span className='col-4 font-weight-bold'>{detailOrder.Name}</span>
+                        <span className='col-4 font-weight-bold'>{detailOrder.name}</span>
                     </div>
 
                     <div className='d-flex mb-2'>

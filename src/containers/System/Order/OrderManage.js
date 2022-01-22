@@ -88,9 +88,9 @@ const OrderManage = (props) => {
                                         return (
                                             <tr key={index}>
                                                 <td>{index + 1}</td>
-                                                <td>{item.orderCode}</td>
+                                                <td>{item.code}</td>
                                                 <td className='text-primary font-weight-bold'>{item.username}</td>
-                                                <td>{item.Name}</td>
+                                                <td>{item.name}</td>
                                                 <td>{item.qty}</td>
                                                 <td className='text-danger'>{numberFormat(item.total)}</td>
                                                 <td>{item.date}</td>

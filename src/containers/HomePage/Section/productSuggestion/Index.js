@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {TabContent, TabPane } from 'reactstrap';
+import { numberFormat } from 'components/Formatting/FormatNumber';
 
 import { Nav, NavItem, NavLink } from 'reactstrap';
 import './style/ProductSuggestion.scss';
@@ -13,10 +14,9 @@ const ProductSuggestion = () => {
   const dispatch = useDispatch();
   const category = useSelector(state => state.admin.categories);
   const DetailCategory = useSelector(state => state.admin.detailCategory);
-  console.log(DetailCategory)
+
   useEffect(() => {
     dispatch(actions.fetchAllCategory);
-
     dispatch(actions.DetailCategory(3));
   }, [dispatch]);
 
@@ -24,8 +24,6 @@ const ProductSuggestion = () => {
   const detailCategory = (id) => {
     setActiveTab(id);
     dispatch(actions.DetailCategory(id));
-
-    console.log('view detail tab suggest:' , id, DetailCategory );
   }
 
   return (
@@ -59,48 +57,31 @@ const ProductSuggestion = () => {
           category.map((item, index) => {
             return (
               <TabPane tabId={item.id} key={index}>
+                <div className="list d-flex">
                 {
                   DetailCategory && DetailCategory.length > 0 ?
                   DetailCategory.map((item, index) => {
                     return (
-                      <div className='item-product' key={index}>
-                        <div className='img-product'>
-                          <img src={item.image} alt="" />
-                        </div>
-                        <div className='info-product'>
-                          <div className='name-product'>
-                            <h5>{item.name}</h5>
-                          </div>
-                          <div className='price-product'>
-                            <span>{item.price}</span>
-                          </div>
-                          <div className='rate-product'>
+                        <div className="list__prod" key={index}>
+                            <img src={item.image} className='w-75' alt="" />
+                            <p className="text-secondary mt-3 mb-1">{item.name}</p>
                             <Rate />
-                          </div>
+
+                            <div className="price">
+                                <span className="price_prod">{numberFormat(item.price)}</span>
+                                <span className="badge badge-danger">-6%</span>
+                            </div>
                         </div>
-                      </div>
                     )
                   })
                   :
                   <span> Loading... </span>
-
                 }
-                {/* <div className="list">
-                  <div className="list__prod">
-                      <img src={"https://salt.tikicdn.com/cache/w200/ts/product/58/ec/8a/117d32e6848e12d3074a51654f2a997f.jpg.webp"} alt="" />
-                      <p className="text-secondary mt-3 mb-1">Dầu gội X-Men For Boss Luxury - Hương trầm sang trọng 650g</p>
-                      <Rate />
-
-                      <div className="price">
-                          <span className="price_prod">185.000 đ</span>
-                          <span className="badge badge-danger">-6%</span>
-                      </div>
-                  </div>
                 </div>
 
                 <div className="view__more">
-                  <button type="button" className="btn btn-sm btn-outline-primary border">Xem thêm</button>
-                </div> */}
+                  <button type="button" className="btn btn-outline-primary border border-primary">Xem thêm</button>
+                </div>
               </TabPane>
             )
           })
