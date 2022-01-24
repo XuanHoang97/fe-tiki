@@ -124,7 +124,7 @@ export const DetailCategory = (id) => {
     return async(dispatch, getState) => {
         try {
             let res = await detailCategory(id);
-            console.log('res', res.data)
+            // console.log('res', res.data)
             if (res) {
                 dispatch(detailCategorySuccess(res.data.categoryData));
             } else {

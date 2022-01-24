@@ -96,11 +96,6 @@ const saveOptionProduct = (data) => {
     return axios.post(`${path.PORT}/save-option-product`, data)
 }
 
-//get some product
-const getSomeProduct = (productId) => {
-    return axios.get(`${path.PORT}/get-some-product?id=${productId}`)
-}
-
 //get all article
 const getAllArticle = (articleId) => {
     return axios.get(`${path.PORT}/get-article-product?id=${articleId}`)
@@ -229,7 +224,6 @@ export {
     editProduct,
     deleteProduct,
     getDetailProduct,
-    getSomeProduct,
     createNews,
     editNews,
     deleteNews,

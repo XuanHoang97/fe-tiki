@@ -1,7 +1,8 @@
+
 .dashboard{
     .menu-left{
         display: flex;
-        padding: 0.9rem 1rem;
+        padding: 0.7rem 1rem;
         align-items: center;
         justify-content: space-between;
         color: white;
@@ -19,4 +20,8 @@
 
 .menuleftCollapse{
     height: 90vh;
+}
+
+.menu-hoziron{
+    border-left: 1px solid rgb(69, 141, 141);
 }

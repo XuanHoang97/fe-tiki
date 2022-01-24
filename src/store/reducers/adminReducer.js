@@ -13,7 +13,6 @@ const initialState = {
     status_news: [],
     status: [],
     supplier: [],
-    someProduct: [],
     articles: [],
     optionProduct: [],
     slides: [],
@@ -133,19 +132,6 @@ const adminReducer = (state = initialState, action) => {
 
         case actionTypes.FETCH_STATUS_PRODUCT_FAILED:
             state.status = [];
-            return {
-                ...state,
-            }
-
-        //get some product
-        case actionTypes.FETCH_SOME_PRODUCT_SUCCESS:
-            state.someProduct = action.someProduct;
-            return {
-                ...state,
-            }
-
-        case actionTypes.FETCH_SOME_PRODUCT_FAILED:
-            state.someProduct = [];
             return {
                 ...state,
             }

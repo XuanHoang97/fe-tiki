@@ -22,6 +22,7 @@ import Footer from '../containers/Header/Footer';
 import NotFound from '../containers/System/Search/NotFound';
 import Index from '../containers/System/Search/Index';
 import Slide from '../containers/System/Slide/Index';
+import SupplierManage from 'containers/System/supplier/SupplierManage';
 
 const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
     const [menuLeft, setMenuLeft] = useState(true);
@@ -134,7 +135,7 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
                 {isLoggedIn && menuLeft && <MenuLeft widthMenuLeft = {widthMenuLeft} /> }
                 {!menuLeft ? <MenuLeftCollapse /> : ''}                
             
-                <div className="system-container bg-white py-3 px-2" style={{height: '90vh', overflowY: 'scroll', width: widthMenuRight, boxShadow: 'none'}}>
+                <div className="system-container bg-white py-3" style={{height: '90vh', overflowY: 'scroll', width: widthMenuRight, boxShadow: 'none'}}>
                     {/* {
                         searchAdmin && searchAdmin.length > 0 ?
                         <Index searchAdmin={searchAdmin}/>
@@ -142,7 +143,7 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
                         <NotFound/>
                     } */}
 
-                    <div className="system-list">
+                    <div className="system-list px-2">
                         <Switch>
                             <Route path="/system/dashboard" component={Dashboard} />
                             <Route path="/system/user-manage" component={UserManage} />
@@ -153,14 +154,15 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
                             <Route path="/system/category-manage" component={CategoryManage} />
                             <Route path="/system/slide-manage" component={Slide} />
                             <Route path="/system/report-Statistical" component={StatisticalManage} />
+                            <Route path="/system/supplier-manage" component={SupplierManage} />
                             <Route path="/system/setting" component={Setting} />
         
                             <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />
                         </Switch>
                     </div>
+                    <Footer />
                 </div>
             </div>
-            <Footer />
         </div>
     );
 }

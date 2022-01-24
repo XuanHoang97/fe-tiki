@@ -1,10 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../../store/actions';
 
-const Sort = ({ handleSort, handleTagChange, selectedTag, sortBy }) => {
-    const [sort, setSort] = useState('');
-
+const Sort = (props) => {
     //fetch data
     const dispatch = useDispatch();
     const listCategory = useSelector(state => state.admin.categories);
@@ -22,8 +20,6 @@ const Sort = ({ handleSort, handleTagChange, selectedTag, sortBy }) => {
 
             <div className="col-2 p-0">
                 <select className="form-control"
-                    onChange={(e) => handleSort(e.target.value)}
-                    value={sortBy}
                     style={{height: '30px'}}
                 >
                     <option value="">Giá cả</option>
@@ -34,9 +30,7 @@ const Sort = ({ handleSort, handleTagChange, selectedTag, sortBy }) => {
 
             <div className="form-group d-flex col-3 p-0">
 
-                <select className="form-control" name="" id=""  style={{height:'30px'}}
-                    value={sort}
-                    onChange={(e) => setSort(e.target.value)}
+                <select className="form-control" style={{height:'30px'}}
                 >
                     {   
                         listCategory && listCategory.length >0 ?

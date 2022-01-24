@@ -4,9 +4,9 @@ import './MenuLeft.scss'
 
 const MenuLeft = ({widthMenuLeft, effect}) => {
     return (
-        <div className='p-0 bg-dark text-white' style={{width: widthMenuLeft}}>
-            <div className="account d-flex p-3 align-items-center" style={{borderBottom: '1px solid rgb(67 69 81)'}}>
-                <img src="https://avatars.githubusercontent.com/u/38268599?v=4" alt="" style={{width: '50px'}}
+        <div className='p-0 bg-dark text-white menu-hoziron' style={{width: widthMenuLeft}}>
+            <div className="account d-flex p-3 align-items-center" style={{borderBottom: '1px solid rgb(79 81 91)'}}>
+                <img src="https://avatars.githubusercontent.com/u/38268599?v=4" alt="" style={{width: '40px'}}
                     className="rounded-circle" />
 
                 <div className="info ml-3">
@@ -78,6 +78,22 @@ const MenuLeft = ({widthMenuLeft, effect}) => {
                     <div className="d-flex align-items-center module">
                         <i className=" fas fa-cart-plus mr-2"></i>
                         <span>Quản lý đơn hàng </span> 
+                    </div>
+                    <span><i className="fas fa-angle-right small"></i></span>
+                </NavLink>
+
+                <NavLink to="/system/supplier-manage" activeClassName="active" className ="menu-left">
+                    <div className="d-flex align-items-center">
+                        <i className="far fa-building mr-2"></i>
+                        <span>Quản lý nhà cung cấp</span>
+                    </div>
+                    <span><i className="fas fa-angle-right small"></i></span>
+                </NavLink>
+
+                <NavLink to="/system/warehouse-manage" activeClassName="active" className ="menu-left">
+                    <div className="d-flex align-items-center">
+                        <i className="far fa-building mr-2"></i>
+                        <span>Quản lý kho hàng</span>
                     </div>
                     <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>

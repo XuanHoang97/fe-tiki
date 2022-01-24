@@ -1,23 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import * as actions from '../../../store/actions';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 const mdParser = new MarkdownIt();
 
 const ModalArticle = (props) => {
-    //fetch product
-    const dispatch = useDispatch();
-    const someProduct = useSelector(state => state.admin.someProduct);
-    
-    useEffect(() => {
-        dispatch(actions.GetSomeProduct());
-    }, [dispatch]);
+    const {category, DetailCategory, handleChangeCategory, categoryId, productId, setProductId, toggleParent} = props;
     
     //save to markdown to table
-    const [productId, setProductId] = useState('');
     const [characterHTML, setCharacterHTML] = useState('');
     const [characterMarkdown, setCharacterMarkdown] = useState('');
     const [accessoryHTML, setAccessoryHTML] = useState('');
@@ -28,7 +19,7 @@ const ModalArticle = (props) => {
     const [specificationMarkdown, setSpecificationMarkdown] = useState('');
     
     const toggle =()=>{
-        props.toggleParent();
+        toggleParent();
     }
 
     // add new product
@@ -43,6 +34,7 @@ const ModalArticle = (props) => {
             specificationHTML: specificationHTML,
             specificationMarkdown: specificationMarkdown,
             productId: productId,
+            categoryId: categoryId,
         });
         toggle();
     }
@@ -80,22 +72,44 @@ const ModalArticle = (props) => {
             <div className='d-flex col-12 p-0'>
                 <label className='mr-3'>Chọn sản phẩm</label>
 
-                <div className="form-group d-flex col-4 p-0">
+                <div className="form-group d-flex p-0">
                     <select className="form-control" style={{height:'30px'}}
-                        value={productId}
-                        onChange={(e)=>setProductId(e.target.value)}
-                    >
-                        {   
-                            someProduct && someProduct.length >0 &&
-                            someProduct.map((item, index) => {
-                                return(
-                                    <option key={index} value={item.id}> {item.name} </option>
-                                ) 
-                                    
-                            })
-                        }
+                        value={categoryId}
+                        onChange={(e)=>handleChangeCategory(e)}
+                    >     
+                        {
+                            category && category.length > 0 ?
+                            category.map((item, index) => {
+                                return (
+                                    <option key={index} value={index +3}>{item.name}</option>
+                                )
+                            }) :
+                            <option value="">Không có danh mục</option>
+                        }                
                     </select>
                 </div>
+
+                {
+                    category && category.length > 0 ?
+                    <div className='form-group d-flex col-3 p-0'>
+                        <select className="form-control" style={{height:'30px'}}
+                            value={productId}
+                            onChange={(e)=>setProductId(e.target.value)}
+                        >
+                            {
+                                DetailCategory && DetailCategory.length > 0 ?
+                                DetailCategory.map((item, index) => {
+                                    return (
+                                        <option key={index} value={item.id}>{item.name}</option>
+                                    )
+                                }) :
+                                <option value="">Không có sản phẩm</option>
+                            }                                     
+                        </select>
+                    </div> :
+                    <span>Không có sản phẩm nào ! </span>
+                }  
+                
             </div>
 
             <div className="input-group p-0">

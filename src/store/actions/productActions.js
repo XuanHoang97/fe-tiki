@@ -7,7 +7,6 @@ import {
     deleteProduct,
     saveInfoProduct,
     editInfoProduct,
-    getSomeProduct,
     getProductSimilar,
     saveOptionProduct,
 
@@ -261,31 +260,6 @@ export const saveOptionProductFailed = () => ({
     type: actionTypes.SAVE_OPTION_PRODUCT_FAILED,
 })
 
-//get some product
-export const GetSomeProduct = (productId) => {
-    return async(dispatch, getState) => {
-        try {
-            let res = await getSomeProduct(productId);
-            if (res && res.data.errCode === 0) {
-                dispatch(GetSomeProductSuccess(res.data.data))
-            } else {
-                dispatch(GetSomeProductFailed());
-            }
-        } catch (e) {
-            dispatch(GetSomeProductFailed());
-            console.log('GetSomeProductFailed error', e)
-        }
-    }
-}
-
-export const GetSomeProductSuccess = (data) => ({
-    type: actionTypes.FETCH_SOME_PRODUCT_SUCCESS,
-    someProduct: data
-})
-
-export const GetSomeProductFailed = () => ({
-    type: actionTypes.FETCH_SOME_PRODUCT_SUCCESS,
-})
 
 //get product similar
 export const GetProductSimilar = (productId) => {

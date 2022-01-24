@@ -6,9 +6,6 @@ import ModalEditProduct from './ModalEditProduct';
 import Sort from './Sort';
 import { numberFormat } from '../../../components/Formatting/FormatNumber';
 
-// test data
-import Filter from './Filter';
-
 const ProductManage = (props) => {
     const [modalProduct, setModalProduct] = useState(false);
     const [modalEditProduct, setModalEditProduct] = useState(false);
@@ -21,27 +18,6 @@ const ProductManage = (props) => {
     useEffect(() => {
         dispatch(actions.fetchProducts());
     }, [dispatch]);
-
-
-    //sorting product
-    const [products, setProducts] = useState([]);
-    const [filter, setFilter] = useState([]);
-    const [sortBy, setSortBy] = useState("");
-    const [selectedTag, setSelectedTag] = useState("");
-
-    useEffect(() => {
-        setProducts(listProducts);
-        setFilter(listProducts);
-    }, [products, listProducts]);
-
-    useEffect(() => {
-        const filtered = selectedTag ? products.filter((item) => item.category_id === selectedTag) : products;
-        setFilter(
-          sortBy
-            ? [...filtered].sort((a, b) => sortBy === "lowest" ? a.price - b.price : b.price - a.price )
-            : [...filtered].sort((a, b) => (a.id > b.id ? 1 : -1))
-        );
-    }, [selectedTag, sortBy, products]);
 
     //create product
     const handleAddNewProduct = () => {
@@ -111,22 +87,10 @@ const ProductManage = (props) => {
                     <i className="fas fa-plus"></i> Thêm sản phẩm
                 </button>
 
-                <Sort  
-                    handleSort={setSortBy}
-                    handleTagChange={setSelectedTag}
-                    selectedTag={selectedTag}
-                    sortBy={sortBy}
-                />
+                <Sort />
             </div>
 
-            <Filter 
-                handleSort={setSortBy}
-                handleTagChange={setSelectedTag}
-                selectedTag={selectedTag}
-                sortBy={sortBy}
-            />
-
-            <div className="text-dark">Danh sách sản phẩm (<b>{filter.length}</b>)</div>
+            <div className="text-dark">Danh sách sản phẩm (<b>{listProducts.length}</b>)</div>
             <table className="table table-striped table-bordered table-hover">
                 <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
                     <tr>
@@ -144,8 +108,8 @@ const ProductManage = (props) => {
                 </thead>
                 <tbody>
                     {   
-                        filter && filter.length>0 ?
-                        filter.map((item, index) => {
+                        listProducts && listProducts.length>0 ?
+                        listProducts.map((item, index) => {
             
                             return(
                                 <tr key={index}>

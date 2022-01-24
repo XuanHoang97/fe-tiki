@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import * as actions from '../../../store/actions';
 import ModalArticle from './ModalArticle';
 import ModalEditArticle from './ModalEditArticle';
+import {saveOptionProduct} from '../../../services/userService'
 
 const ArticleManage = (props) => {
     //fetch data
@@ -12,14 +14,6 @@ const ArticleManage = (props) => {
     const DetailCategory = useSelector(state => state.admin.detailCategory);
     const optionProduct = useSelector(state => state.admin.optionProduct);
     
-    useEffect(() => {
-        dispatch(actions.GetAllArticle());
-        dispatch(actions.fetchAllCategory());
-        dispatch(actions.DetailCategory(3));
-        dispatch(actions.SelectOptionProduct());
-    }, [dispatch]);
-
-
     const [modalAddArticle, setModalAddArticle] = useState(false);
     const [modalEditArticle, setModalEditArticle] = useState(false);
     const [articleEdit, setArticleEdit] = useState('');
@@ -28,8 +22,71 @@ const ArticleManage = (props) => {
     const [productId, setProductId] = useState(3);
     const [option, setOption] = useState('');
     const [image, setimage] = useState('');
-        
 
+    useEffect(() => {
+        dispatch(actions.GetAllArticle());
+        dispatch(actions.fetchAllCategory());
+        dispatch(actions.DetailCategory(3));
+        dispatch(actions.SelectOptionProduct());
+    }, [dispatch]);
+
+    //modify data
+    useEffect (() => {
+        let data = optionProduct;
+            if(data && data.length > 0){
+                data = data.map(item => ({...item, isSelected : false}))
+            }
+            setOption(data);
+    }, [optionProduct])
+
+    //select option product
+    const handleOptionProduct = (product) => {
+        let data = option;
+        if(data.length > 0){
+            data = data.map(item => {
+                if(item.id === product.id){
+                    item.isSelected = !item.isSelected;
+                }
+                return item;
+            })
+            setOption(data);
+        }
+    }
+
+    //handle save info
+    const handleSaveChoose = async(e) => {
+        e.preventDefault();
+        let result = [];
+
+        if(option && option.length > 0){
+            let selectedProduct = option.filter(item => item.isSelected === true);
+
+            if(selectedProduct && selectedProduct.length > 0){
+                selectedProduct.map(item => {
+                    let object = {};
+                    object.categoryId = categoryId;
+                    object.productId = productId;
+                    object.option = item.keyMap;
+                    result.push(object);
+                })
+            }else{
+                toast.error('Vui lòng chọn options sản phẩm');
+                return;
+            }
+        }
+
+        let res = await saveOptionProduct({
+            arrOptionProduct: result,
+            categoryId: categoryId,
+            productId: productId,
+        });
+        
+        console.log('check res : ',  res);
+        console.log('check result : ',  result);
+    }
+
+        
+    // load product by category
     const handleChangeCategory = (e) => {
         setCategoryId(e.target.value);
         dispatch(actions.DetailCategory(e.target.value));
@@ -52,17 +109,7 @@ const ArticleManage = (props) => {
     }
 
     const SaveInfoProduct=(data)=> {
-        dispatch(actions.SaveInfoProduct({
-            characterHTML: data.characterHTML,
-            characterMarkdown: data.characterMarkdown,
-            accessoryHTML: data.accessoryHTML,
-            accessoryMarkdown: data.accessoryMarkdown,
-            specificationHTML: data.specificationHTML,
-            specificationMarkdown: data.specificationMarkdown,
-            descriptionHTML: data.descriptionHTML,
-            descriptionMarkdown: data.descriptionMarkdown,
-            productId: data.productId,
-        }));
+        dispatch(actions.SaveInfoProduct(data));
     }
 
     //edit article
@@ -72,18 +119,7 @@ const ArticleManage = (props) => {
     }
 
     const editInfoProduct=(data)=> {
-        dispatch(actions.EditInfoProduct({
-            id: data.id,
-            characterHTML: data.characterHTML,
-            characterMarkdown: data.characterMarkdown,
-            accessoryHTML: data.accessoryHTML,
-            accessoryMarkdown: data.accessoryMarkdown,
-            specificationHTML: data.specificationHTML,
-            specificationMarkdown: data.specificationMarkdown,
-            descriptionHTML: data.descriptionHTML,
-            descriptionMarkdown: data.descriptionMarkdown,
-            productId: data.productId,
-        }));
+        dispatch(actions.EditInfoProduct(data));
     }
 
     return ( 
@@ -94,6 +130,13 @@ const ArticleManage = (props) => {
                     isOpen={modalAddArticle}
                     toggleParent={handleAddNewArticle}
                     SaveInfoProduct={SaveInfoProduct}
+
+                    categoryId={categoryId}
+                    category={category}
+                    DetailCategory={DetailCategory}
+                    handleChangeCategory={handleChangeCategory}
+                    productId={productId}
+                    setProductId={setProductId}
                 />
                 
                 <ModalEditArticle
@@ -101,6 +144,14 @@ const ArticleManage = (props) => {
                     toggleParent={editArticle}
                     currentArticle={articleEdit}
                     editInfoProduct={editInfoProduct}
+
+                    categoryId={categoryId}
+                    setCategoryId = {setCategoryId}
+                    category={category}
+                    DetailCategory={DetailCategory}
+                    handleChangeCategory={handleChangeCategory}
+                    productId={productId}
+                    setProductId={setProductId}
                 />
 
                 <button onClick={() => handleAddNewArticle()} type="button" className="btn btn-success px-3">
@@ -113,6 +164,7 @@ const ArticleManage = (props) => {
                         <tr>
                             <td scope="col">STT</td>
                             <td scope="col">ID SP</td>
+                            <td scope="col">ID danh muc</td>
                             <td scope="col">Tên SP</td>
                             <td scope="col">Tác vụ</td>
                         </tr>
@@ -127,6 +179,7 @@ const ArticleManage = (props) => {
                                             {index + 1}
                                         </td>
                                         <td>{item.productId}</td>
+                                        <td>{item.categoryId}</td>
                                         <td>loading...</td>
                                         <td>
                                             <button onClick={()=> editArticle(item)} type="button" className="btn text-primary px-2">
@@ -150,7 +203,7 @@ const ArticleManage = (props) => {
             <hr/>   
             <div className="text-dark">Tuỳ chọn sản phẩm</div>
             <form className='bg-light p-3'
-                // onSubmit={handleSaveChoose}
+                onSubmit={handleSaveChoose}
                 encType="multipart/form-data"
             >
                 <div className='d-flex p-0'>
@@ -206,10 +259,11 @@ const ArticleManage = (props) => {
                             <label className='px-2'>Mẫu mã</label>
                             <div className="d-flex">
                             {
-                                optionProduct && optionProduct.length >0 &&
-                                optionProduct.map((item, index) => {
+                                option && option.length >0 &&
+                                option.map((item, index) => {
                                     return(
                                         <button 
+                                            onClick={()=>handleOptionProduct(item)}
                                             type="button" 
                                             key={index}
                                             className={item.isSelected === true ? "btn btn-primary px-2 mx-2 font-weight-normal" : "btn btn-secondary btn-sm px-2 mx-2 font-weight-normal"}>
