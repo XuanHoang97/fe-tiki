@@ -8,20 +8,15 @@ import Sort from './Sort';
 import Pagination from './Pagination';
 
 const UserManage = (props) => {
-    const [users, setListUsers] = useState([]);
-    const [searchUser, setSearchUser] = useState('');
-    const [sortUser, setSortUser] = useState('role');
     const [selectInfoUser, setSelectInfoUser] = useState([]);
     const [isOpenModalUser, setIsOpenModalUser] = useState(false);
     const [isOpenModalEditUser, setIsOpenModalEditUser] = useState(false);
     const [isOpenModalInfoUser, setIsOpenModalInfoUser] = useState(false);
     const [userEdit, setUserEdit] = useState('');
 
-
     //fetch data
     const dispatch = useDispatch();
     const listUsers = useSelector(state => state.admin.users);
-
 
     useEffect(() => {
         dispatch(actions.fetchAllUser());
@@ -57,36 +52,6 @@ const UserManage = (props) => {
         setIsOpenModalInfoUser(!isOpenModalInfoUser);
     }
 
-    //search user
-    const onSearch = (searchUser) => {
-        setSearchUser(searchUser);
-    };
-
-    //sorting user
-    const sorting = (e) => {
-        const sorting = e.target.value;
-        const sortRes = listUsers.sort((a, b) => {
-            if (sorting === "role") {
-                return a.id > b.id ? 1 : -1;
-            }
-
-            if (sorting === "admin") {
-                return a.roleId < b.roleId ? 1 : -1;
-            }
-
-            if (sorting === "seller") {
-                return a.roleId > b.roleId ? 1 : -1;
-            }
-
-            if (sorting === "user") {
-                return a.roleId > b.roleId ? 1 : -1;
-            }
-        });
-        setSortUser(sorting);
-        setListUsers(sortRes);
-    };
-    const filterUser =listUsers.filter((item) => `${item.firstName} ${item.lastName} ${item.address}`.toLowerCase().includes(searchUser.toLowerCase()));
-
     return (
         <div className="mx-2">
             <ModalUser
@@ -96,7 +61,6 @@ const UserManage = (props) => {
             />
 
             {
-                isOpenModalEditUser &&
                 <ModalEditUser
                     isOpen={isOpenModalEditUser} 
                     toggleFromParent={handleEditUser}
@@ -117,11 +81,11 @@ const UserManage = (props) => {
                 <button onClick ={() => handleAddNewUser()}  type="button" className="btn btn-success col-2">
                     <i className="fas fa-plus mr-2"></i> Thêm thành viên
                 </button>
-                <Sort searchUser={searchUser} onSearch={onSearch} sorting={sorting} sorts={sortUser} />
+                <Sort />
             </div>
             
             {/* list user  */}
-            <div className="text-dark">Danh sách thành viên  (<b>{filterUser.length}</b>) </div>
+            <div className="text-dark">Danh sách thành viên  (<b>{listUsers.length}</b>) </div>
 
             <table className="table table-striped table-bordered table-hover">
                 <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
@@ -142,7 +106,7 @@ const UserManage = (props) => {
                 </thead>
                 {
                     listUsers && listUsers.length >0 &&
-                    filterUser.map((item, index) => {
+                    listUsers.map((item, index) => {
                         //endCode image
                         let imageBase64='';
                         if(item.image){
@@ -160,7 +124,7 @@ const UserManage = (props) => {
                                     <td>{index + 1}</td>
                                     <td style={{backgroundImage: `url(${imageBase64})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat', height: '45px',
                                     width: '45px', borderRadius: '50%', display: 'flex', margin: '0 auto'}}></td>
-                                    <td className='text-primary'>{item.firstName} {item.lastName}</td>
+                                    <td className='text-primary'>{item.username}</td>
                                     <td>{item.email}</td>
                                     <td>{item.phoneNumber}</td>
                                     <td>{item.address}</td>

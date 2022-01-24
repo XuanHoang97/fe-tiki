@@ -90,8 +90,6 @@ export const fetchPositionFailed = () => ({
     type: actionTypes.FETCH_POSITION_FAILED
 })
 
-
-
 //create a new user
 export const createNewUser = (data) => {
     return async(dispatch, getState) => {

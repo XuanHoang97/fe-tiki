@@ -20,7 +20,7 @@ const InfoUser = ({isOpen, details, toggleFromParent}) => {
                     <img className="w-25 rounded-circle border border-success" 
                     style={{height: '120px', backgroundImage: `url(${imageBase64})`, backgroundPosition: 'center', backgroundSize: 'cover'}} alt="" />
                     
-                    <div className="mt-2 h4 font-weight-bold">{details.firstName} {details.lastName}</div>
+                    <div className="mt-2 h4 font-weight-bold">{details.username}</div>
                     <div className="d-flex justify-content-center text-white" style={{gap : '20px'}}>
                         <span><i className="fas fa-circle mr-1 small text-danger"></i>{details.gender}</span>
                         <span><i className="fas fa-circle mr-1 small text-info"></i>24 Tuổi</span>

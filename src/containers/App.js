@@ -23,7 +23,7 @@ import VerifyEmail from './Client/Check_order/VerifyEmail';
 
 console.warn = () => { };
 function App(props) {    
-    //login-logout
+    //login-logout -save localstorage
     const handlePersistorState = () => {
         const { persistor } = props;
         let { bootstrapped } = persistor.getState();

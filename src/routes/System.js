@@ -15,8 +15,8 @@ import Setting from '../containers/System/Setting/Index';
 import Notification from '../containers/Header/notification/Notification';
 import Search from '../containers/Header/Search';
 import axios from 'axios';
-import MenuLeft from '../containers/Header/MenuLeft';
-import MenuLeftCollapse from '../containers/Header/MenuLeftCollapse';
+import MenuLeft from '../containers/Header/menuLeft/MenuLeft';
+import MenuLeftCollapse from '../containers/Header/menuLeft/MenuLeftCollapse';
 import { path } from '../utils';
 import Footer from '../containers/Header/Footer';
 import NotFound from '../containers/System/Search/NotFound';
@@ -30,7 +30,7 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
     const [widthMenuLeft, setWidthMenuLeft] = useState('18%');
     const [searchAdmin, setSearchAdmin] = useState([]);
     const [query, setQuery] = useState('');
-    const history = useHistory()
+    const history = useHistory();
 
     //toggle menu left
     const toggleMenu = () => {
@@ -107,6 +107,7 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
                                     query={query}
                                     setQuery={setQuery}
                                     searchAdmin={searchAdmin}
+                                    
                                 />
                             </div>
 
@@ -138,10 +139,19 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
                 <div className="system-container bg-white py-3" style={{height: '90vh', overflowY: 'scroll', width: widthMenuRight, boxShadow: 'none'}}>
                     {/* {
                         searchAdmin && searchAdmin.length > 0 ?
-                        <Index searchAdmin={searchAdmin}/>
-                        : 
-                        <NotFound/>
+                        <Switch>
+                            <Route exact path={path.SEARCH}>
+                                <Index searchAdmin={searchAdmin} />
+                            </Route>
+                        </Switch>
+                        :
+                        <Switch>
+                            <Route exact path=''>
+                                <NotFound />
+                            </Route>
+                        </Switch>
                     } */}
+
 
                     <div className="system-list px-2">
                         <Switch>

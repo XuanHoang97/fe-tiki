@@ -101,8 +101,6 @@ const getAllArticle = (articleId) => {
     return axios.get(`${path.PORT}/get-article-product?id=${articleId}`)
 }
 
-
-
 // get all category
 const getAllCategory = (categoryId) => {
     return axios.get(`${path.PORT}/get-all-category?id=${categoryId}`)
