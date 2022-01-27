@@ -25,7 +25,7 @@ function Header() {
                         </button>
 
                         <div className="collapse navbar-collapse col-md-11 p-0" id="collapsibleNavId">
-                            <ul className="navbar-nav align-items-center col-md-12">
+                            <ul className="navbar-nav align-items-center col-md-12 pr-0">
                                 <Category />
 
                                 <Search />

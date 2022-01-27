@@ -20,8 +20,6 @@ export default function Category() {
   const viewDetailMenu = (id) => {
     setDetailMenu(!detailMenu);
     dispatch(actions.DetailCategory(id));
-
-    console.log('detail category', id, DetailCategory);
   };
 
   const viewDetailCategory = (id) => {

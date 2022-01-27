@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { path } from 'utils';
 
-
 //login
 const handleLoginApi = (userEmail, userPassword) => {
     return axios.post(`${path.PORT}/login`, { email: userEmail, password: userPassword });
@@ -34,11 +33,6 @@ const editUserService = (inputData) => {
 //getAllCode
 const getAllCodeService = (inputType) => {
     return axios.get(`${path.PORT}/allcode?type=${inputType}`)
-}
-
-//detail user
-const getDetailUser = (userId) => {
-    return axios.get(`${path.PORT}/detail-user?id=${userId}`)
 }
 
 //search user
@@ -212,8 +206,8 @@ export {
     deleteUserService,
     editUserService,
     getAllCodeService,
-    getDetailUser,
     searchUser,
+
     getAllProduct,
     getAllCategory,
     createCategory,
@@ -222,6 +216,7 @@ export {
     editProduct,
     deleteProduct,
     getDetailProduct,
+    
     createNews,
     editNews,
     deleteNews,

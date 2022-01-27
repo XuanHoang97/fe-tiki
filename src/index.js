@@ -6,9 +6,10 @@ import './styles/styles.scss';
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 
-
+import axios from "axios";
 import { Provider } from 'react-redux';
 import reduxStore, { persistor } from './redux';
+axios.defaults.withCredentials = true;
 
 const renderApp = () => {
     ReactDOM.render(
