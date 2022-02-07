@@ -1,32 +1,33 @@
 import React, {useEffect, useState} from 'react';
-import RegisterAccount from './Register';
-import LoginAccount from './Login';
+import {useDispatch} from 'react-redux';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 import { useHistory } from 'react-router';
 import { path } from 'utils';
+import * as actions from './../../../../store/actions';
+import { Link } from 'react-router-dom';
+import {verifyToken} from './../../../../services/authService';
 
 const Account = () => {
     const [hoverAccount, setHoverAccount] = useState(false);
-    const [Register, setRegister] = useState(false);
-    const [Login, setLogin] = useState(false);
-
-    //verify token
     const [username, setUsername] = useState('');
     const [token, setToken] = useState('');
     const [expire, setExpire] = useState('');
-    const [users, setUsers] = useState([]);
     const history = useHistory();
-
+    const dispatch = useDispatch();
+    
+    // Refresh token
     useEffect(() => {
         refreshToken();
     }, []);
 
+    // Get token
     const refreshToken = async () => {
         try {
-            const response = await axios.get('http://localhost:8081/auth/token');
-            setToken(response.data.accessToken);
-            const decoded = jwt_decode(response.data.accessToken);
+            const res = await verifyToken();
+            let token = res.data.accessToken;
+            setToken(token);
+            const decoded = jwt_decode(token);
             setUsername(decoded.username);
             setExpire(decoded.exp);
         } catch (error) {
@@ -36,15 +37,17 @@ const Account = () => {
         }
     }
 
+    
     const axiosJWT = axios.create();
- 
-    axiosJWT.interceptors.request.use(async (config) => {
+    // Add a request interceptor - refresh token
+    axiosJWT.interceptors.response.use(async (config) => {
         const currentDate = new Date();
         if (expire * 1000 < currentDate.getTime()) {
-            const response = await axios.get('http://localhost:8081/auth/token');
-            config.headers.Authorization = `Bearer ${response.data.accessToken}`;
-            setToken(response.data.accessToken);
-            const decoded = jwt_decode(response.data.accessToken);
+            const res = await verifyToken();
+            let token = res.data.accessToken;
+            config.headers.Authorization = `Bearer ${token}`;
+            setToken(token);
+            const decoded = jwt_decode(token);
             setUsername(decoded.username);
             setExpire(decoded.exp);
         }
@@ -53,21 +56,10 @@ const Account = () => {
         return Promise.reject(error);
     });
 
-    //register account
-    const register = () => {
-        setRegister(!Register);
-    }
-
-    //login account
-    const login = () => {
-        setLogin(!Login);
-    }
-
-    //logout account
+    //logout
     const Logout = async () => {
         try {
-            await axios.delete('http://localhost:8081/auth/logout');
-            // setUsername(users);
+            dispatch(actions.logoutAccount());
             window.location.reload();
         } catch (error) {
             console.log(error);
@@ -80,7 +72,7 @@ const Account = () => {
                 onMouseEnter={() => setHoverAccount(true)}
             >    
                 {
-                    token && users ?
+                    token ?
                     <React.Fragment>
                         <img src="https://avatars.githubusercontent.com/u/38268599?v=4" className='w-25 rounded-circle' alt="" />
                         <b className='ml-2' style={{fontSize: '12px'}}>{username}</b>
@@ -92,11 +84,10 @@ const Account = () => {
 
             {hoverAccount && (
                 <div className="user-account" 
-                    // style={{display: 'block'}}
                     onMouseLeave={() => setHoverAccount(false)}
                 >
                     {
-                        token && users ?
+                        token ?
                         <div className='acc-detail'>
                             <div onClick={Logout} className="item-acc">
                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNU-ZEXVPgvlrEPzhaAIFjyRUaqglcuKdkx4lgk2r-ryshxRle56ba4S4SaUoI0GTf2Iw&usqp=CAU" className='mr-2' style={{width: '8%'}}  alt="" />
@@ -114,19 +105,17 @@ const Account = () => {
                         </div>
                         :
                         <div>
-                            <div className="dropdown-item mb-2">
-                                <button onClick={()=> register()} type="button" className="btn btn-warning btn-block">
+                            <Link to={path.REGISTER} className="dropdown-item mb-2">
+                                <button type="button" className="btn btn-warning btn-block">
                                     Tạo tài khoản
                                 </button>
-                            </div>
+                            </Link>
 
-                            <div className="dropdown-item mb-2">
-                                <button onClick={()=> login()} type="button" className="btn btn-success btn-block">
+                            <Link to={path.LOGIN_AUTH} className="dropdown-item mb-2">
+                                <button type="button" className="btn btn-success btn-block">
                                     Đăng nhập
                                 </button>
-                            </div>
-
-
+                            </Link>
                             <div className="dropdown-item mb-2">
                                 <button type="button" name="" id="" className="d-flex align-items-center px-3 btn btn-primary btn-block">
                                     <i className="fab fa-facebook-f mr-4"></i> <span>Đăng nhập bằng Facebook</span>
@@ -142,9 +131,6 @@ const Account = () => {
                     }
                 </div>
             )}
-
-            <RegisterAccount isRegister={Register} toggle={register} isLogin={Login} />
-            <LoginAccount isLogin={Login} toggle={login} />
         </React.Fragment>
     );
 }

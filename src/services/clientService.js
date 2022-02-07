@@ -36,6 +36,15 @@ const verifyOrder = (data) => {
     return axios.post(`${path.PORT}/verify-order`, data)
 }
 
+// Filter order by status
+const filterOrder = (status) => {
+    return axios.get(`${path.PORT}/filter-order?status=${status}`)
+}
+
+// update order
+const updateOrder = (data) => {
+    return axios.put(`${path.PORT}/update-order`, data)
+}
 
 export{
     addItemToCart,
@@ -44,5 +53,7 @@ export{
 
     createOrder,
     getOrder,
-    verifyOrder
+    verifyOrder,
+    filterOrder,
+    updateOrder
 }

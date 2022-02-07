@@ -125,6 +125,11 @@ const getAllNewsAndEvent = (newId) => {
     return axios.get(`${path.PORT}/get-all-news?id=${newId}`)
 }
 
+// pagination news and event
+const paginationNewsAndEvent = (inputData) => {
+    return axios.get(`${path.PORT}/get-all-news/:page`, inputData)
+}
+
 //create new news and event
 const createNews = (data) => {
     return axios.post(`${path.PORT}/create-news`, data)
@@ -217,6 +222,7 @@ export {
     deleteProduct,
     getDetailProduct,
     
+    paginationNewsAndEvent,
     createNews,
     editNews,
     deleteNews,

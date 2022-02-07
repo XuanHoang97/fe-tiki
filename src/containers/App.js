@@ -18,8 +18,11 @@ import ProductDetail from './Client/product/ProductDetail';
 import Cart from './Client/cart/Cart';
 import Payment from './Client/payment/Payment';
 import OrderSuccess from './Client/Check_order/OrderSuccess';
-import NotFound from './HomePage/NotFound/Index';
 import VerifyEmail from './Client/Check_order/VerifyEmail';
+import NotFound from './HomePage/NotFound/Index';
+import Register from './HomePage/Header/account/Register';
+import LoginAuth from './HomePage/Header/account/Login';
+import SearchResult from './Client/search/SearchResult';
 
 console.warn = () => { };
 function App(props) {    
@@ -51,6 +54,11 @@ function App(props) {
                 <Route path={path.HOMEPAGE} component={HomePage} />
                 <Route path={path.DETAIL_PRODUCT} component={ProductDetail} />
                 <Route path={path.NOTFOUND} component={NotFound} />
+                <Route path={path.SEARCH} component={SearchResult} />
+
+                {/* Authentication  */}
+                <Route path={path.REGISTER} component={Register} />
+                <Route path={path.LOGIN_AUTH} component={LoginAuth} />
 
                 {/* Order not login  */}
                 <Route path={path.CART} component={Cart} />

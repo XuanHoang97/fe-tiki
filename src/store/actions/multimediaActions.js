@@ -145,6 +145,7 @@ export const fetchAllSpecialCategoryFailed = () => ({
     type: actionTypes.FETCH_ALL_SPECIAL_CATEGORY_FAILED,
 })
 
+
 //create special category
 export const CreateSpecialCategory = (data) => {
     return async(dispatch, getState) => {

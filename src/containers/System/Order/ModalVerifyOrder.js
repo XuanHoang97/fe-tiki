@@ -1,13 +1,71 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import * as actions from 'store/actions';
 import { numberFormat } from 'components/Formatting/FormatNumber';
+import { useSelector, useDispatch } from 'react-redux';
+import * as actions from './../../../store/actions';
 
-const ModalVerifyOrder = ({isOpen, toggle, detailOrder}) => {
+const ModalVerifyOrder = (props) => { 
+    const {isOpen, toggle} = props;
+    const [id, setId] = useState('');
+    const [code, setOrderCode] = useState('');
+    const [username, setUsername] = useState('');
+    const [phone, setPhone] = useState('');
+    const [address, setAddress] = useState('');
+    const [note, setNote] = useState('');
+    const [total, setTotal] = useState('');
+    const [name, setName] = useState('');
+    const [qty, setQty] = useState('');
+    const [date, setDate] = useState('');
+    const [delivery, setDelivery] = useState('');
+    const [payment, setPayment] = useState('');
+    const [status, setStatus] = useState('');
+    const [email, setEmail] = useState('');
+    const dispatch = useDispatch();
+    const statusOrder = useSelector(state => state.client.statusOrder);
 
-    console.log('chi tiet don hang:', detailOrder);
+    // fill data order
+    useEffect (() => {
+        let order = props.updateOrder;
+        if(order) {
+            setId(order.id);
+            setOrderCode(order.code);
+            setUsername(order.username);
+            setPhone(order.phone);
+            setAddress(order.address);
+            setNote(order.note);
+            setTotal(order.total);
+            setName(order.name);
+            setQty(order.qty);
+            setDate(order.date);
+            setDelivery(order.delivery);
+            setPayment(order.payment);
+            setEmail(order.email);
+            setStatus(order.status);
+        }
+        dispatch(actions.getStatusOrder());
+    }, [dispatch, props.updateOrder]);
 
+    // update order
+    const handleUpdateOrder = (data) => {
+        props.handleUpdateOrder({
+            id: id,
+            code: code,
+            username: username,
+            phone: phone,
+            address: address,
+            note: note,
+            total: total,
+            name: name,
+            qty: qty,
+            date: date,
+            delivery: delivery,
+            payment: payment,
+            email: email,
+            status: status
+        });
+        toggle();
+    }
+    
     return (
         <Modal 
             isOpen={isOpen} 
@@ -20,10 +78,10 @@ const ModalVerifyOrder = ({isOpen, toggle, detailOrder}) => {
                 <div className='d-flex justify-content-center align-items-center'>
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4yFntpSafsNXW2rPoGfpBqshjjmEfG-Yr_dj8Pw8cntTdbHPNB3JDN9MBV9yo9jFtO1g&usqp=CAU" style={{width: '5%'}} alt='' />
                     <h4 className='ml-2'><small>Đơn hàng:</small>
-                        <b className={detailOrder.status ==='S1' ? 'text-warning ml-2' :'text-success ml-2'}>
-                            {detailOrder.code} 
+                        <b className={status ==='S1' ? 'text-warning ml-2' :'text-success ml-2'}>
+                            {code} 
                             <small>
-                                ({detailOrder.status ==='S1' ? 'Chưa xác nhận' :'Đã xác nhận'})
+                                ({status ==='S1' ? 'Chưa xác nhận' :'Đã xác nhận'})
                             </small>
                         </b>
                     </h4>
@@ -33,32 +91,32 @@ const ModalVerifyOrder = ({isOpen, toggle, detailOrder}) => {
                 <div className="">
                     <div className='d-flex mb-2'>
                         <span className='col-3'>Tên khách hàng:</span> 
-                        <h6 className='text-primary col-6 font-weight-bold'>{detailOrder.username}</h6>
+                        <h6 className='text-primary col-6 font-weight-bold'>{username}</h6>
                     </div>
 
                     <div className='d-flex mb-2'>
                         <span className='col-3'>Số điện thoại:</span> 
-                        <span className='col-6'>{detailOrder.phone}</span>
+                        <span className='col-6'>{phone}</span>
                     </div>
 
                     <div className='d-flex mb-2'>
                         <span className='col-3'>Địa chỉ:</span> 
-                        <span className='col-6'>{detailOrder.address}</span>
+                        <span className='col-6'>{address}</span>
                     </div>
 
                     <div className='d-flex mb-2'>
                         <span className='col-3'>Sản phẩm đặt hàng:</span> 
-                        <span className='col-4 font-weight-bold'>{detailOrder.name}</span>
+                        <span className='col-4 font-weight-bold'>{name}</span>
                     </div>
 
                     <div className='d-flex mb-2'>
                         <span className='col-3'>Số lượng</span> 
-                        <small className='col-4'>x{detailOrder.qty}</small>
+                        <small className='col-4'>x{qty}</small>
                     </div>
 
                     <div className='d-flex mb-2'>
                         <span className='col-3'>Ngày đặt hàng:</span> 
-                        <span className='col-6'>{detailOrder.date}</span>
+                        <span className='col-6'>{date}</span>
                     </div>
 
                     <div className='d-flex mb-2'>
@@ -68,22 +126,22 @@ const ModalVerifyOrder = ({isOpen, toggle, detailOrder}) => {
 
                     <div className='d-flex mb-2'>
                         <span className='col-3'>Hình thức giao hàng: </span> 
-                        <b className='col-6'>{detailOrder.delivery}</b>
+                        <b className='col-6'>{delivery}</b>
                     </div>
 
                     <div className='d-flex mb-2'>
                         <span className='col-3'>Hình thức thanh toán:</span> 
-                        <span className='col-6'>{detailOrder.payment}</span>
+                        <span className='col-6'>{payment}</span>
                     </div>
 
                     <div className='d-flex mb-2'>
                         <span className='col-3'>Ghi chú:</span> 
-                        <i className='col-6 text-secondary'>{detailOrder.note ? detailOrder.note : 'loading...'}</i>
+                        <i className='col-6 text-secondary'>{note ? note : 'loading...'}</i>
                     </div>
 
                     <div className='d-flex mb-2'>
                         <span className='col-3'>Tổng tiền:</span> 
-                        <b className='text-danger col-6'>{numberFormat(detailOrder.total)}</b>
+                        <b className='text-danger col-6'>{numberFormat(total)}</b>
                     </div>
                 </div>
                 <hr/>
@@ -92,19 +150,21 @@ const ModalVerifyOrder = ({isOpen, toggle, detailOrder}) => {
                     <div className="form-group col-md-3">
                         <label>Trạng thái</label>
                         <select className="form-control" 
-                            readOnly={true}                      
+                            value={status}  
+                            onChange={(e) => setStatus(e.target.value)}                   
                         >  
-                            <option value="">Chưa xác nhận</option>                                                                               
-                            <option value="">Xác nhận</option>                                                                               
-                            <option value="">Đang giao hàng</option>                                                                               
-                            <option value="">Đã giao hàng</option>                                                                               
+                            {
+                                statusOrder.map(item => (
+                                    <option key={item.id} value={item.keyMap}>{item.valueVi}</option>
+                                ))
+                            }                                                                       
                         </select>
                     </div> 
 
                     <div className="form-group col-md-4">
                         <label>Email</label>
-                        <input type="input" value={detailOrder.email} className="form-control" placeholder='Email nhận hoá đơn..'
-                            readOnly
+                        <input type="input" value={email} className="form-control" placeholder='Email nhận hoá đơn..'
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
                     
@@ -132,14 +192,12 @@ const ModalVerifyOrder = ({isOpen, toggle, detailOrder}) => {
                             {/* } */}
                         </div>
                     </div>
-
-
                 </div>
             </div>
             </ModalBody>
 
             <ModalFooter>
-                <Button color="primary" className="px-3">
+                <Button color="primary" className="px-3" onClick={() => handleUpdateOrder()} >
                     Xác nhận
                 </Button>
                 <Button color="secondary" className="px-3">Cancel</Button>

@@ -1,0 +1,29 @@
+.menu{
+    padding: 0 30px;
+}
+.register, .loginAuth{
+    background:rgb(40,134,234);
+    padding: 15px 30px;
+    height: 85vh;
+}
+
+.password{
+    position: relative;
+    cursor: pointer;
+    .showPass{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+}
+
+.login-social{
+    .item-social{
+        width: 10%;
+        a{
+            img{
+                width: 75%;
+            }
+        }
+    }
+}

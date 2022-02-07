@@ -37,6 +37,7 @@ const ModalEditCategory  = (props) => {
             setImage(file);
         }
     }
+    
     //remove image
     const removeImg=()=>{
         setPreviewImg('');

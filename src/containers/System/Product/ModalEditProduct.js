@@ -23,6 +23,8 @@ const ModalEditProduct  = (props) => {
     const listCategory = useSelector(state => state.admin.categories);
     const listSupplier = useSelector(state => state.admin.supplier);
 
+    console.log('data category:', listCategory);
+
     useEffect (() => {
         let product = props.currentProduct;
         if(product) {
@@ -194,7 +196,7 @@ const ModalEditProduct  = (props) => {
                                 listCategory && listCategory.length >0 ?
                                 listCategory.map((item, index) => {
                                     return (
-                                        <option key={index} value={item.keyMap}>{item.name}</option>
+                                        <option key={index} value={item.id}>{item.name}</option>
                                     )
                                 })
                                 : 

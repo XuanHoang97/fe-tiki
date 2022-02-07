@@ -43,7 +43,7 @@ const ModalOrderNow = (props) => {
     const order=async(data)=>{         
         setLoadingOrder(true);
 
-        // //away duplicate data
+        //away duplicate data
         const newCart = carts.map(cart => {
             return {
                 productId: cart.id,

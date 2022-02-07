@@ -1,5 +1,4 @@
 import React,{useState, useEffect} from 'react';
-import { Preview } from 'react-markdown-editor-lite/cjs/editor/preview';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../../store/actions';
 import ModalAddCategory from './ModalAddCategory';
@@ -49,7 +48,6 @@ const CategoryManage = (props) => {
             value: data.value,
             image: data.previewImg,
             previewImg: data.previewImg
-
         }));
     }
 
@@ -85,11 +83,11 @@ const CategoryManage = (props) => {
             <table className="table table-striped table-bordered table-hover">
                 <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
                     <tr>
-                        <td scope="col">Tick</td>
-                        <td scope="col">STT</td>
-                        <td scope="col">Ảnh</td>
-                        <td scope="col">Tên danh mục</td>
-                        <td scope="col">Tác vụ</td>
+                        <td>Tick</td>
+                        <td>STT</td>
+                        <td>Ảnh</td>
+                        <td>Tên danh mục</td>
+                        <td>Tác vụ</td>
                     </tr>
                 </thead>
                 <tbody>

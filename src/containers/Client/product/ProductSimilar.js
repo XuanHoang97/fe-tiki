@@ -1,19 +1,31 @@
+import React from 'react';
 import { numberFormat } from 'components/Formatting/FormatNumber';
 import Rate from 'containers/HomePage/Section/Rate';
-import React from 'react';
+import Slider from "react-slick";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import './Style.scss'
 
 const ProductSimilar = ({similarProducts}) => {
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 2000,
+    slidesToShow: 5,
+    slidesToScroll: 2
+  };
+
     return (
         <div>
             <h6 className="mt-4 mb-2 m-0">SẢN PHẨM TƯƠNG TỰ</h6>
-            <div className="row bg-white pt-4 pb-4 p-3 m-1">
+              <Slider {...settings}>
               {
                 similarProducts && similarProducts.length > 0 ?
                 similarProducts.map((item, index) => {
                   return (
-                    <div className="col-md-2 col-6 text-center" key={index} style={{cursor: 'pointer'}}>
+                    <div className="bg-white p-3" key={index} style={{cursor: 'pointer', display: 'grid', justifyItems: 'center'}}>
                       <img src={item.image} className="w-75" alt="" />
-                      <h6 className="mt-1 mb-3 text-center text-primary">{item.name}</h6>
+                      <h6 className="mt-1 mb-3 text-primary">{item.name}</h6>
 
                       <Rate />
                       <div className="price__prod row align-items-center justify-content-center">
@@ -24,14 +36,14 @@ const ProductSimilar = ({similarProducts}) => {
                           <span className="badge badge-pill badge-warning p-1 ml-3 mr-2">-1%</span>
                       </div>
                     </div>
-                  );
-                })
-                :
-                <div className="col-md-12">
+                    );
+                  })
+                  :
+                  <div className="col-md-12">
                   <h6 className="mt-1 mb-3 text-center text-danger">Không có sản phẩm nào tương tự...</h6>
-                </div>
+                  </div>
               }
-            </div>
+              </Slider>
         </div>
     );
 }

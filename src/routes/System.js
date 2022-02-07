@@ -18,7 +18,6 @@ import axios from 'axios';
 import MenuLeft from '../containers/Header/menuLeft/MenuLeft';
 import MenuLeftCollapse from '../containers/Header/menuLeft/MenuLeftCollapse';
 import { path } from '../utils';
-import Footer from '../containers/Header/Footer';
 import NotFound from '../containers/System/Search/NotFound';
 import Index from '../containers/System/Search/Index';
 import Slide from '../containers/System/Slide/Index';
@@ -37,6 +36,7 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
         setMenuLeft(!menuLeft);
         setWidthMenuRight(menuLeft ? '100%' : '82%');
     }
+
 
     //search
     const handleSearch = async() => {
@@ -66,7 +66,9 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
             }
             setSearchAdmin(result);
             setQuery('');
-            // history.push(`/search/keyword=${query}`);
+            console.log('data search:', searchAdmin);
+
+            // history.push(`${path.SEARCH}/keyword=${query}`);
         }
     }
 
@@ -121,7 +123,6 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
                                     <span>{userInfo && userInfo.firstName ? userInfo.firstName : 'Hoang'} <i className="fas fa-caret-down small"></i></span>
                                 </div>
 
-                                {/* logout  */}
                                 <div className="logout btn btn-default pr-3 text-white font-weight-normal" onClick={processLogout}>
                                     Đăng xuất
                                 </div>
@@ -132,25 +133,26 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
             }
 
             <div className='module d-flex'>
-                {/* toggle menu left  */}
+                {/* menu left  */}
                 {isLoggedIn && menuLeft && <MenuLeft widthMenuLeft = {widthMenuLeft} /> }
                 {!menuLeft ? <MenuLeftCollapse /> : ''}                
             
                 <div className="system-container bg-white py-3" style={{height: '90vh', overflowY: 'scroll', width: widthMenuRight, boxShadow: 'none'}}>
-                    {/* {
-                        searchAdmin && searchAdmin.length > 0 ?
-                        <Switch>
-                            <Route exact path={path.SEARCH}>
-                                <Index searchAdmin={searchAdmin} />
-                            </Route>
-                        </Switch>
-                        :
-                        <Switch>
-                            <Route exact path=''>
-                                <NotFound />
-                            </Route>
-                        </Switch>
-                    } */}
+                    
+                {/* {
+                    searchAdmin && searchAdmin.length > 0 ?
+                    <Switch>
+                        <Route exact path={path.SEARCH}>
+                            <Index searchAdmin={searchAdmin} />
+                        </Route>
+                    </Switch>
+                    :
+                    <Switch>
+                        <Route exact path={path.NOTFOUND}>
+                            <NotFound />
+                        </Route>
+                    </Switch>
+                } */}
 
 
                     <div className="system-list px-2">
@@ -170,7 +172,6 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
                             <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />
                         </Switch>
                     </div>
-                    <Footer />
                 </div>
             </div>
         </div>

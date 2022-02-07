@@ -5,6 +5,7 @@ import {
     createNews,
     editNews,
     deleteNews,
+    paginationNewsAndEvent,
 } from "../../services/userService"
 import { toast } from "react-toastify"
 
@@ -37,6 +38,38 @@ export const fetchAllNewsSuccess = (data) => ({
 export const fetchAllNewsFailed = () => ({
     type: actionTypes.FETCH_ALL_NEWS_FAILED,
 })
+
+// pagination news and event
+export const paginationNews = (inputData) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await paginationNewsAndEvent(inputData);
+            console.log('res data news', res)
+            if (res && res.data.errCode === 0) {
+                dispatch(paginationNewsSuccess(res.data.result.reverse()))
+            } else {
+                toast.error('pagination news and event error !')
+                dispatch(paginationNewsFailed());
+            }
+        } catch (e) {
+            toast.error('pagination news and event error !')
+            dispatch(paginationNewsFailed());
+            console.log('paginationNewsFailed error', e)
+        }
+    }
+}
+
+export const paginationNewsSuccess = (data) => ({
+    type: actionTypes.FETCH_ALL_NEWS_SUCCESS,
+    listNews: data
+})
+
+export const paginationNewsFailed = () => ({
+    type: actionTypes.FETCH_ALL_NEWS_FAILED,
+})
+
+
+
 
 //fetch allCode news and event
 export const fetchStatusNews = () => {

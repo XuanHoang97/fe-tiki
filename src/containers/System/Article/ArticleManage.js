@@ -214,7 +214,7 @@ const ArticleManage = (props) => {
                             <div className="form-group d-flex p-0">
                                 <select className="form-control" style={{height:'30px'}}
                                     value={categoryId}
-                                    onChange={(e, id)=>handleChangeCategory(e, id)}
+                                    onChange={(e)=>handleChangeCategory(e)}
                                 >     
                                     {
                                         category && category.length > 0 ?

@@ -26,7 +26,7 @@ const MenuLeft = ({widthMenuLeft, effect}) => {
                 <NavLink to="/system/user-manage" activeClassName="active" className ="menu-left">
                     <div className="d-flex align-items-center module">
                         <i className=" fas fa-users-cog mr-2"></i>
-                        <span>Quản lý người dùng</span> 
+                        <span>Quản lý nhân sự</span> 
                     </div>
                     <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>
@@ -109,7 +109,7 @@ const MenuLeft = ({widthMenuLeft, effect}) => {
                 <NavLink to="/system/setting" activeClassName="active" className ="menu-left">
                     <div className="d-flex align-items-center module">
                         <i className="fas fa-cog mr-2"></i>
-                        <span>Cài đặt</span> 
+                        <span>Cài đặt <small className='text-warning ml-2'>( v.04.12.21 )</small></span> 
                     </div>
                     <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>

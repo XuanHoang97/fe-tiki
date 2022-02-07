@@ -4,9 +4,14 @@ export const path = {
     LOGIN: '/login',
     LOG_OUT: '/logout',
     SYSTEM: '/system',
-    SEARCH: '/search/keyword',
-    PORT: 'http://localhost:8081',
+    SEARCH: '/search',
+    PORT: 'http://localhost:5000',
     NOTFOUND: '/404',
+
+    // Authentication
+    REGISTER: '/account/register',
+    LOGIN_AUTH: '/account/login',
+
 
     DETAIL_PRODUCT: '/products/:id',
     CART: '/cart',

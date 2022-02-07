@@ -6,3 +6,12 @@
         }
     }
 }
+
+.slick-next, .slick-prev{
+    // display: none;
+}
+
+.slick-next:before, .slick-prev:before{
+    color: blue !important;
+    font-size: 20px !important;
+}

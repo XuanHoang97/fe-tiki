@@ -1,8 +1,11 @@
 import actionTypes from './actionTypes';
 import {
     getOrder,
+    filterOrder,
+    updateOrder,
 } from "../../services/clientService";
 import { getAllCodeService } from 'services/userService';
+import { toast } from 'react-toastify';
 
 //add product to cart
 export const addProduct = (payload) => {
@@ -135,6 +138,59 @@ export const getAllOrderSuccess = (data) => ({
 export const getAllOrderFailed = () => ({
     type: actionTypes.FETCH_ALL_ORDER_FAILED,
 })
+
+// get status order
+export const getStatusOrder = () => {
+    return async (dispatch) => {
+        try {
+            const res = await getAllCodeService('ORDER_STATUS');
+            dispatch({
+                type: actionTypes.FETCH_STATUS_ORDER_SUCCESS,
+                payload: res.data.data
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+
+// Filter order by status
+export const filterOrderByStatus = (status) => {
+    return async (dispatch) => {
+        try {
+            const res = await filterOrder(status);
+            dispatch({
+                type: actionTypes.FILTER_ORDER_BY_STATUS_SUCCESS,
+                payload: res.data.result
+            });
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+// Update order
+export const updateOrderStatus = (id, status) => {
+    return async (dispatch) => {
+        try {
+            const res = await updateOrder(id, status);
+            dispatch({
+                type: actionTypes.UPDATE_ORDER_SUCCESS,
+                payload: res.data.result
+            });
+            toast.success('Xác nhận đơn hàng thành công');
+            dispatch(getAllOrder());
+            // dispatch(filterOrderByStatus());
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+
+
 
 
 

@@ -9,6 +9,8 @@ const initialState = {
     delivery: [],
     payment: [],
     orders: [],
+    statusOrder: [],
+    filterOrder: []
 }
 
 const clientReducer = (state = initialState, action) => {
@@ -125,6 +127,20 @@ const clientReducer = (state = initialState, action) => {
             return {
                 ...state,
                 orders: []
+            }
+
+        // get status order
+        case actionTypes.FETCH_STATUS_ORDER_SUCCESS:
+        return {
+            ...state,
+            statusOrder: action.payload
+        }
+    
+        // Filter order by status
+        case actionTypes.FILTER_ORDER_BY_STATUS_SUCCESS:
+            return {
+                ...state,
+                filterOrder: action.payload
             }
 
 
