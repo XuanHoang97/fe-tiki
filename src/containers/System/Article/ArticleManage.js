@@ -162,11 +162,11 @@ const ArticleManage = (props) => {
                 <table className="table table-striped table-bordered table-hover">
                     <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
                         <tr>
-                            <td scope="col">STT</td>
-                            <td scope="col">ID SP</td>
-                            <td scope="col">ID danh muc</td>
-                            <td scope="col">Tên SP</td>
-                            <td scope="col">Tác vụ</td>
+                            <td>STT</td>
+                            <td>ID SP</td>
+                            <td>ID danh muc</td>
+                            <td>Tên SP</td>
+                            <td>Tác vụ</td>
                         </tr>
                     </thead>
                     <tbody>

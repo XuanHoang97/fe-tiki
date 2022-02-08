@@ -17,6 +17,7 @@ const  Dashboard = (props) => {
     const specialCategory = useSelector(state => state.admin.specialCategories);
     const multimedia = listSlide.length + specialCategory.length;
     const order = useSelector(state => state.client.orders);
+    const filterOrder = useSelector(state => state.client.filterOrder);
 
     useEffect(() => {
         dispatch(actions.fetchAllUser());
@@ -27,6 +28,7 @@ const  Dashboard = (props) => {
         dispatch(actions.fetchAllSlide());
         dispatch(actions.fetchAllSpecialCategory());
         dispatch(actions.getAllOrder());
+        dispatch(actions.filterOrderByStatus('S4'));
     }, [dispatch]);
 
     return (
@@ -120,7 +122,17 @@ const  Dashboard = (props) => {
                     <div className="card-img-overlay d-flex justify-content-between"  >
                         <div className="stat">
                             <h4 className="card-text font-weight-bold">
-                                {numberFormat(45995525)}
+                                {
+                                    filterOrder && filterOrder.length > 0 
+                                    && filterOrder.filter(item => item.status === 'S4').length > 0 ?
+                                    <span>
+                                        {numberFormat(filterOrder.filter(item => item.status === 'S4').reduce((total, item) => {
+                                        return total + item.total
+                                        }, 0))}
+                                    </span>
+                                    : 
+                                    <span className='text-success'>0 đ</span>
+                                }
                             </h4>
                             <h6 className="card-title">DOANH THU</h6>
                         </div>

@@ -9,7 +9,6 @@ import {
 } from "../../services/userService"
 import { toast } from "react-toastify"
 
-
 //fetch all news and event
 export const fetchAllNews = () => {
     return async(dispatch, getState) => {
@@ -17,59 +16,51 @@ export const fetchAllNews = () => {
             let res = await getAllNewsAndEvent('ALL');
 
             if (res && res.data.errCode === 0) {
-                dispatch(fetchAllNewsSuccess(res.data.news.reverse()))
+                dispatch({
+                    type: actionTypes.FETCH_ALL_NEWS_SUCCESS,
+                    payload: res.data.news.reverse()
+                })
             } else {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_NEWS_FAILED,
+                    payload: res.data.errMessage
+                });
                 toast.error('fetch all news and event error !')
-                dispatch(fetchAllNewsFailed());
             }
         } catch (e) {
-            toast.error('fetch all news and event error !')
-            dispatch(fetchAllNewsFailed());
+            dispatch({
+                type: actionTypes.FETCH_ALL_NEWS_FAILED,
+            });
             console.log('fetchAllNewsFailed error', e)
         }
     }
 }
-
-export const fetchAllNewsSuccess = (data) => ({
-    type: actionTypes.FETCH_ALL_NEWS_SUCCESS,
-    listNews: data
-})
-
-export const fetchAllNewsFailed = () => ({
-    type: actionTypes.FETCH_ALL_NEWS_FAILED,
-})
 
 // pagination news and event
 export const paginationNews = (inputData) => {
     return async(dispatch, getState) => {
         try {
             let res = await paginationNewsAndEvent(inputData);
-            console.log('res data news', res)
             if (res && res.data.errCode === 0) {
-                dispatch(paginationNewsSuccess(res.data.result.reverse()))
+                dispatch({
+                    type: actionTypes.FETCH_ALL_NEWS_SUCCESS,    
+                    payload: res.data.result.reverse()
+                })
             } else {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_NEWS_FAILED,
+                    payload: res.data.errMessage
+                });
                 toast.error('pagination news and event error !')
-                dispatch(paginationNewsFailed());
             }
         } catch (e) {
+            dispatch({
+                type: actionTypes.FETCH_ALL_NEWS_FAILED,
+            });
             toast.error('pagination news and event error !')
-            dispatch(paginationNewsFailed());
-            console.log('paginationNewsFailed error', e)
         }
     }
 }
-
-export const paginationNewsSuccess = (data) => ({
-    type: actionTypes.FETCH_ALL_NEWS_SUCCESS,
-    listNews: data
-})
-
-export const paginationNewsFailed = () => ({
-    type: actionTypes.FETCH_ALL_NEWS_FAILED,
-})
-
-
-
 
 //fetch allCode news and event
 export const fetchStatusNews = () => {
@@ -77,27 +68,25 @@ export const fetchStatusNews = () => {
         try {
             let res = await getAllCodeService('STATUS_NEWS');
             if(res && res.data.errCode === 0){
-                dispatch(fetchStatusNewsSuccess(res.data.data))
+                dispatch({
+                    type: actionTypes.FETCH_ALLCODE_NEWS_SUCCESS,
+                    payload: res.data.data
+                })
             }else{
+                dispatch({
+                    type: actionTypes.FETCH_ALLCODE_NEWS_FAILED,
+                    payload: res.data.errMessage
+                });
                 toast.error('fetch all code news error !')
-                dispatch(fetchStatusNewsFailed());
             }
         } catch (e) {
+            dispatch({
+                type: actionTypes.FETCH_ALLCODE_NEWS_FAILED,
+            });
             toast.error('fetch all code news error !')
-            dispatch(fetchStatusNewsFailed());
-            console.log('fetchStatusNewsFailed error', e)
         }
     }
 }
-
-export const fetchStatusNewsSuccess = (data) => ({
-    type: actionTypes.FETCH_ALLCODE_NEWS_SUCCESS,
-    statusCodeNews: data
-})
-
-export const fetchStatusNewsFailed = () => ({
-    type: actionTypes.FETCH_ALLCODE_NEWS_FAILED,
-})
 
 //create news and event
 export const CreateNews = (data) => {
@@ -105,26 +94,24 @@ export const CreateNews = (data) => {
         try {
             let res = await createNews(data);
             if (res && res.data.errCode === 0) {
-                dispatch(createNewsSuccess());
+                dispatch({
+                    type: actionTypes.CREATE_NEWS_SUCCESS,
+                });
                 dispatch(fetchAllNews());
                 toast.success('Thêm mới tin tức thành công !')
             } else {
-                dispatch(createNewsFailed());
+                dispatch({
+                    type: actionTypes.CREATE_NEWS_FAILED,
+                });
             }
         } catch (e) {
-            dispatch(createNewsFailed());
+            dispatch({
+                type: actionTypes.CREATE_NEWS_FAILED,
+            });
             console.log('saveNewsFailed error', e)
         }
     }
 }
-
-export const createNewsSuccess = () => ({
-    type: actionTypes.CREATE_NEWS_SUCCESS,
-})
-
-export const createNewsFailed = () => ({
-    type: actionTypes.CREATE_NEWS_FAILED,
-})
 
 //edit news and event
 export const EditNews = (data) => {
@@ -132,26 +119,24 @@ export const EditNews = (data) => {
         try {
             let res = await editNews(data);
             if (res && res.data.errCode === 0) {
-                dispatch(editNewsSuccess());
+                dispatch({
+                    type: actionTypes.EDIT_NEWS_SUCCESS,
+                });
                 dispatch(fetchAllNews());
                 toast.success('Sửa tin tức thành công !')
             } else {
-                dispatch(editNewsFailed());
+                dispatch({
+                    type: actionTypes.EDIT_NEWS_FAILED,
+                });
             }
         } catch (e) {
-            dispatch(editNewsFailed());
+            dispatch({
+                type: actionTypes.EDIT_NEWS_FAILED,
+            });
             console.log('editNewsFailed error', e)
         }
     }
 }
-
-export const editNewsSuccess = () => ({
-    type: actionTypes.EDIT_NEWS_SUCCESS,
-})
-
-export const editNewsFailed = () => ({
-    type: actionTypes.EDIT_NEWS_FAILED,
-})
 
 //delete news and event
 export const DeleteNews = (id) => {
@@ -159,23 +144,21 @@ export const DeleteNews = (id) => {
         try {
             let res = await deleteNews(id);
             if (res && res.data.errCode === 0) {
-                dispatch(deleteNewsSuccess());
+                dispatch({
+                    type: actionTypes.DELETE_NEWS_SUCCESS,
+                });
                 dispatch(fetchAllNews());
                 toast.success('Xóa tin tức thành công !')
             } else {
-                dispatch(deleteNewsFailed());
+                dispatch({
+                    type: actionTypes.DELETE_NEWS_FAILED,
+                });
             }
         } catch (e) {
-            dispatch(deleteNewsFailed());
+            dispatch({
+                type: actionTypes.DELETE_NEWS_FAILED,
+            });
             console.log('deleteNewsFailed error', e)
         }
     }
 }
-
-export const deleteNewsSuccess = () => ({
-    type: actionTypes.DELETE_NEWS_SUCCESS,
-})
-
-export const deleteNewsFailed = () => ({
-    type: actionTypes.DELETE_NEWS_FAILED,
-})

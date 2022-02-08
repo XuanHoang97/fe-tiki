@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getDetailProduct } from "services/userService";
 import './Style.scss'
@@ -20,33 +20,30 @@ const ProductDetail = ({ match }) => {
 
   const dispatch = useDispatch();
   const similarProducts = useSelector(state => state.admin.productSimilar);
-  const [isVisible, setIsVisible] = useState(true);
 
   // Fix memory leak
+  const _isMounted = useRef(true);
   useEffect(() => {
-    let cancel = true;
-    getDetailProduct(match.params.id).then(res => {
-      setDetailProduct(res.data.detailProduct);
-      if (cancel) return;
-      setIsVisible(false);
-    });
-
-    return () => { 
-      cancel = false;
+    return () => {
+        _isMounted.current = false;
     }
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    getDetailProduct(match.params.id).then(res => {
+      if (_isMounted.current) {
+        setDetailProduct(res.data.detailProduct);
+     }
+    });
+  }, [ match.params.id ]);
 
   useEffect(() => {
     dispatch(actions.GetProductSimilar(match.params.id));
-  }, [])
+  }, [dispatch, match.params.id ]);
 
   useEffect(() => {
     document.title = `${detailProduct.name}-giá rẻ nhất vịnh Bắc Bộ`;
   }, [detailProduct]);
-
-  // useEffect(() => {
-  //   detailProduct.length > 0 && dispatch(actions.addProduct(detailProduct[0]))
-  // }, [dispatch])
 
   // choose quantity order
   const qty = useSelector(state => state.client.qty);

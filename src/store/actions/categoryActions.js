@@ -13,29 +13,25 @@ export const fetchAllCategory = () => {
     return async(dispatch, getState) => {
         try {
             let res = await getAllCategory('ALL');
-
             if (res && res.data.errCode === 0) {
-                dispatch(fetchAllCategorySuccess(res.data.category))
+                dispatch({
+                    type: actionTypes.FETCH_ALL_CATEGORIES_SUCCESS,
+                    payload: res.data.category
+                })
             } else {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_CATEGORIES_FAILED,
+                });
                 toast.error('fetch all category error !')
-                dispatch(fetchAllCategoryFailed());
             }
         } catch (e) {
+            dispatch({
+                type: actionTypes.FETCH_ALL_CATEGORIES_FAILED,
+            });
             toast.error('fetch all category error !')
-            dispatch(fetchAllCategoryFailed());
-            console.log('fetchAllCategoryFailed error', e)
         }
     }
 }
-
-export const fetchAllCategorySuccess = (data) => ({
-    type: actionTypes.FETCH_ALL_CATEGORIES_SUCCESS,
-    listCategory: data
-})
-
-export const fetchAllCategoryFailed = () => ({
-    type: actionTypes.FETCH_ALL_CATEGORIES_FAILED,
-})
 
 //create category
 export const CreateCategory = (data) => {
@@ -124,24 +120,21 @@ export const DetailCategory = (id) => {
     return async(dispatch, getState) => {
         try {
             let res = await detailCategory(id);
-            // console.log('res', res.data)
             if (res) {
-                dispatch(detailCategorySuccess(res.data.categoryData));
+                dispatch({
+                    type: actionTypes.FETCH_ALL_CATEGORIES_SUCCESS,
+                    payload: res.data.categoryData
+                });
             } else {
-                dispatch(detailCategoryFailed());
+                dispatch({
+                    type: actionTypes.FETCH_ALL_CATEGORIES_FAILED,
+                });
             }
         } catch (e) {
-            dispatch(detailCategoryFailed());
+            dispatch({
+                type: actionTypes.FETCH_ALL_CATEGORIES_FAILED,
+            });
             console.log('detailCategoryFailed error', e)
         }
     }
 }
-
-export const detailCategorySuccess = (data) => ({
-    type: actionTypes.FETCH_PRODUCT_IN_CATEGORY_SUCCESS,
-    detail: data
-})
-
-export const detailCategoryFailed = () => ({
-    type: actionTypes.FETCH_PRODUCT_IN_CATEGORY_FAILED,
-})

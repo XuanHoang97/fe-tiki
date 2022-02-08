@@ -4,13 +4,12 @@ import { toast } from "react-toastify";
 let dataLocalStorage = JSON.parse(localStorage.getItem('dataCart')) || []
 const initialState = {
     carts: dataLocalStorage,
-    productDetail: {},
     qty: 1,
     delivery: [],
     payment: [],
     orders: [],
     statusOrder: [],
-    filterOrder: []
+    filterOrder: [],
 }
 
 const clientReducer = (state = initialState, action) => {
@@ -140,7 +139,7 @@ const clientReducer = (state = initialState, action) => {
         case actionTypes.FILTER_ORDER_BY_STATUS_SUCCESS:
             return {
                 ...state,
-                filterOrder: action.payload
+                filterOrder: action.payload,
             }
 
 

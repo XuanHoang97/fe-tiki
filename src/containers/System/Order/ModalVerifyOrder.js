@@ -154,7 +154,7 @@ const ModalVerifyOrder = (props) => {
                             onChange={(e) => setStatus(e.target.value)}                   
                         >  
                             {
-                                statusOrder.map(item => (
+                                statusOrder.slice(1,6).map(item => (
                                     <option key={item.id} value={item.keyMap}>{item.valueVi}</option>
                                 ))
                             }                                                                       

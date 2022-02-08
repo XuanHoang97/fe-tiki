@@ -18,25 +18,24 @@ export const fetchAllSlide = () => {
         try {
             let res = await getAllSlides('ALL');
             if (res && res.data.errCode === 0) {
-                dispatch(fetchAllSlideSuccess(res.data.slides.reverse()))
+                dispatch({
+                    type: actionTypes.FETCH_ALL_SLIDE_SUCCESS,
+                    payload: res.data.slides.reverse()
+                })
             } else {
-                dispatch(fetchAllSlideFailed());
+                dispatch({
+                    type: actionTypes.FETCH_ALL_SLIDE_FAILED,
+                    payload: res.data.errMessage
+                });
             }
         } catch (e) {
-            dispatch(fetchAllSlideFailed());
+            dispatch({
+                type: actionTypes.FETCH_ALL_SLIDE_FAILED,
+            });
             console.log('fetchAllSlideFailed error', e)
         }
     }
 }
-
-export const fetchAllSlideSuccess = (data) => ({
-    type: actionTypes.FETCH_ALL_SLIDE_SUCCESS,
-    listSlide: data
-})
-
-export const fetchAllSlideFailed = () => ({
-    type: actionTypes.FETCH_ALL_SLIDE_FAILED,
-})
 
 //create slide
 export const CreateSlide = (data) => {
@@ -44,26 +43,24 @@ export const CreateSlide = (data) => {
         try {
             let res = await createSlides(data);
             if (res && res.data.errCode === 0) {
-                dispatch(createSlideSuccess());
+                dispatch({
+                    type: actionTypes.CREATE_SLIDE_SUCCESS,
+                });
                 dispatch(fetchAllSlide());
                 toast.success('Thêm mới slide thành công !')
             } else {
-                dispatch(createSlideFailed());
+                dispatch({
+                    type: actionTypes.CREATE_SLIDE_FAILED,
+                });
             }
         } catch (e) {
-            dispatch(createSlideFailed());
+            dispatch({
+                type: actionTypes.CREATE_SLIDE_FAILED,
+            });
             console.log('saveSlideFailed error', e)
         }
     }
 }
-
-export const createSlideSuccess = () => ({
-    type: actionTypes.CREATE_SLIDE_SUCCESS,
-})
-
-export const createSlideFailed = () => ({
-    type: actionTypes.CREATE_SLIDE_FAILED,
-})
 
 //edit slide
 export const EditSlide = (data) => {
@@ -71,26 +68,24 @@ export const EditSlide = (data) => {
         try {
             let res = await editSlides(data);
             if (res && res.data.errCode === 0) {
-                dispatch(editSlideSuccess());
+                dispatch({
+                    type: actionTypes.EDIT_SLIDE_SUCCESS,
+                });
                 dispatch(fetchAllSlide());
                 toast.success('Cập nhật slide thành công !')
             } else {
-                dispatch(editSlideFailed());
+                dispatch({
+                    type: actionTypes.EDIT_SLIDE_FAILED,
+                });
             }
         } catch (e) {
-            dispatch(editSlideFailed());
+            dispatch({
+                type: actionTypes.EDIT_SLIDE_FAILED,
+            });
             console.log('editSlideFailed error', e)
         }
     }
 }
-
-export const editSlideSuccess = () => ({
-    type: actionTypes.EDIT_SLIDE_SUCCESS,
-})
-
-export const editSlideFailed = () => ({
-    type: actionTypes.EDIT_SLIDE_FAILED,
-})
 
 //delete slide
 export const DeleteSlide = (id) => {
@@ -98,26 +93,24 @@ export const DeleteSlide = (id) => {
         try {
             let res = await deleteSlides(id);
             if (res && res.data.errCode === 0) {
-                dispatch(deleteSlideSuccess());
+                dispatch({
+                    type: actionTypes.DELETE_SLIDE_SUCCESS,
+                });
                 dispatch(fetchAllSlide());
                 toast.success('Xóa slide thành công !')
             } else {
-                dispatch(deleteSlideFailed());
+                dispatch({
+                    type: actionTypes.DELETE_SLIDE_FAILED,
+                });
             }
         } catch (e) {
-            dispatch(deleteSlideFailed());
+            dispatch({
+                type: actionTypes.DELETE_SLIDE_FAILED,
+            });
             console.log('deleteSlideFailed error', e)
         }
     }
 }
-
-export const deleteSlideSuccess = () => ({
-    type: actionTypes.DELETE_SLIDE_SUCCESS,
-})
-
-export const deleteSlideFailed = () => ({
-    type: actionTypes.DELETE_SLIDE_FAILED,
-})
 
 //get all special category
 export const fetchAllSpecialCategory = () => {
@@ -125,26 +118,24 @@ export const fetchAllSpecialCategory = () => {
         try {
             let res = await getAllSpecialCategory('ALL');
             if (res && res.data.errCode === 0) {
-                dispatch(fetchAllSpecialCategorySuccess(res.data.specialCategories.reverse()))
+                dispatch({
+                    type: actionTypes.FETCH_ALL_SPECIAL_CATEGORY_SUCCESS,
+                    payload: res.data.specialCategories.reverse()
+                })
             } else {
-                dispatch(fetchAllSpecialCategoryFailed());
+                dispatch({
+                    type: actionTypes.FETCH_ALL_SPECIAL_CATEGORY_FAILED,
+                    payload: res.data.errMessage
+                });
             }
         } catch (e) {
-            dispatch(fetchAllSpecialCategoryFailed());
+            dispatch({
+                type: actionTypes.FETCH_ALL_SPECIAL_CATEGORY_FAILED,
+            });
             console.log('fetchAllSpecialCategoryFailed error', e)
         }
     }
 }
-
-export const fetchAllSpecialCategorySuccess = (data) => ({
-    type: actionTypes.FETCH_ALL_SPECIAL_CATEGORY_SUCCESS,
-    listSpecialCategory: data
-})
-
-export const fetchAllSpecialCategoryFailed = () => ({
-    type: actionTypes.FETCH_ALL_SPECIAL_CATEGORY_FAILED,
-})
-
 
 //create special category
 export const CreateSpecialCategory = (data) => {
@@ -152,26 +143,24 @@ export const CreateSpecialCategory = (data) => {
         try {
             let res = await createSpecialCategory(data);
             if (res && res.data.errCode === 0) {
-                dispatch(createSpecialCategorySuccess());
+                dispatch({
+                    type: actionTypes.CREATE_SPECIAL_CATEGORY_SUCCESS,
+                });
                 dispatch(fetchAllSpecialCategory());
                 toast.success('Thêm mới danh mục thành công !')
             } else {
-                dispatch(createSpecialCategoryFailed());
+                dispatch({
+                    type: actionTypes.CREATE_SPECIAL_CATEGORY_FAILED,
+                });
             }
         } catch (e) {
-            dispatch(createSpecialCategoryFailed());
+            dispatch({
+                type: actionTypes.CREATE_SPECIAL_CATEGORY_FAILED,
+            });
             console.log('saveSpecialCategoryFailed error', e)
         }
     }
 }
-
-export const createSpecialCategorySuccess = () => ({
-    type: actionTypes.CREATE_SPECIAL_CATEGORY_SUCCESS,
-})
-
-export const createSpecialCategoryFailed = () => ({
-    type: actionTypes.CREATE_SPECIAL_CATEGORY_FAILED,
-})
 
 //edit special category
 export const EditSpecialCategory = (data) => {
@@ -179,27 +168,24 @@ export const EditSpecialCategory = (data) => {
         try {
             let res = await editSpecialCategory(data);
             if (res && res.data.errCode === 0) {
-                dispatch(editSpecialCategorySuccess());
+                dispatch({
+                    type: actionTypes.EDIT_SPECIAL_CATEGORY_SUCCESS,
+                });
                 dispatch(fetchAllSpecialCategory());
                 toast.success('Cập nhật danh mục thành công !')
             } else {
-                dispatch(editSpecialCategoryFailed());
+                dispatch({
+                    type: actionTypes.EDIT_SPECIAL_CATEGORY_FAILED,
+                });
             }
         } catch (e) {
-            dispatch(editSpecialCategoryFailed());
+            dispatch({
+                type: actionTypes.EDIT_SPECIAL_CATEGORY_FAILED,
+            });
             console.log('editSpecialCategoryFailed error', e)
         }
     }
 }
-
-export const editSpecialCategorySuccess = () => ({
-    type: actionTypes.EDIT_SPECIAL_CATEGORY_SUCCESS,
-})
-
-export const editSpecialCategoryFailed = () => ({
-    type: actionTypes.EDIT_SPECIAL_CATEGORY_FAILED,
-})
-
 
 //delete special category
 export const DeleteSpecialCategory = (id) => {
@@ -207,26 +193,24 @@ export const DeleteSpecialCategory = (id) => {
         try {
             let res = await deleteSpecialCategory(id);
             if (res && res.data.errCode === 0) {
-                dispatch(deleteSpecialCategorySuccess());
+                dispatch({
+                    type: actionTypes.DELETE_SPECIAL_CATEGORY_SUCCESS,
+                });
                 dispatch(fetchAllSpecialCategory());
                 toast.success('Xóa danh mục thành công !')
             } else {
-                dispatch(deleteSpecialCategoryFailed());
+                dispatch({
+                    type: actionTypes.DELETE_SPECIAL_CATEGORY_FAILED,
+                });
             }
         } catch (e) {
-            dispatch(deleteSpecialCategoryFailed());
+            dispatch({
+                type: actionTypes.DELETE_SPECIAL_CATEGORY_FAILED,
+            });
             console.log('deleteSpecialCategoryFailed error', e)
         }
     }
 }
-
-export const deleteSpecialCategorySuccess = () => ({
-    type: actionTypes.DELETE_SPECIAL_CATEGORY_SUCCESS,
-})
-
-export const deleteSpecialCategoryFailed = () => ({
-    type: actionTypes.DELETE_SPECIAL_CATEGORY_FAILED,
-})
 
 //get all status slide
 export const getStatusSlide = () => {
@@ -234,22 +218,21 @@ export const getStatusSlide = () => {
         try {
             let res = await getAllCodeService('ACTIVE');
             if (res && res.data.errCode === 0) {
-                dispatch(getStatusSlideSuccess(res.data.data));
+                dispatch({
+                    type: actionTypes.FETCH_ALL_STATUS_SLIDE_SUCCESS,
+                    payload: res.data.data
+                });
             } else {
-                dispatch(getStatusSlideFailed());
+                dispatch({
+                    type: actionTypes.FETCH_ALL_STATUS_SLIDE_FAILED,
+                    payload: res.data.errMessage
+                });
             }
         } catch (e) {
-            dispatch(getStatusSlideFailed());
+            dispatch({
+                type: actionTypes.FETCH_ALL_STATUS_SLIDE_FAILED,
+            });
             console.log('getStatusSlideFailed error', e)
         }
     }
 }
-
-export const getStatusSlideSuccess = (data) => ({
-    type: actionTypes.FETCH_ALL_STATUS_SLIDE_SUCCESS,
-    listStatus: data
-})
-
-export const getStatusSlideFailed = () => ({
-    type: actionTypes.FETCH_ALL_STATUS_SLIDE_FAILED,
-})

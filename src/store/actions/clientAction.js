@@ -7,14 +7,6 @@ import {
 import { getAllCodeService } from 'services/userService';
 import { toast } from 'react-toastify';
 
-//add product to cart
-export const addProduct = (payload) => {
-    return ({
-        type: actionTypes.ADD_PRODUCT,
-        payload
-    })
-}
-
 //QUANTITY
 export const countProduct = (payload) => {
     return ({
@@ -164,7 +156,6 @@ export const filterOrderByStatus = (status) => {
                 type: actionTypes.FILTER_ORDER_BY_STATUS_SUCCESS,
                 payload: res.data.result
             });
-
         } catch (error) {
             console.log(error);
         }
@@ -180,9 +171,9 @@ export const updateOrderStatus = (id, status) => {
                 type: actionTypes.UPDATE_ORDER_SUCCESS,
                 payload: res.data.result
             });
-            toast.success('Xác nhận đơn hàng thành công');
             dispatch(getAllOrder());
-            // dispatch(filterOrderByStatus());
+            dispatch(filterOrderByStatus('S0'))
+            toast.success('Xác nhận đơn hàng thành công');
         } catch (error) {
             console.log(error);
         }

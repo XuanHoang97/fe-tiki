@@ -171,7 +171,6 @@ const actionTypes = Object.freeze({
     FETCH_ALL_STATUS_SLIDE_FAILED: 'FETCH_ALL_STATUS_SLIDE_FAILED',
 
     //get number product to cart
-    ADD_PRODUCT: 'ADD_PRODUCT',
     COUNT: 'COUNT',
     INCREMENT_QUANTITY: 'INCREMENT_QUANTITY',
     DECREMENT_QUANTITY: 'DECREMENT_QUANTITY',
@@ -196,10 +195,6 @@ const actionTypes = Object.freeze({
     //get all order
     FETCH_ALL_ORDER_SUCCESS: 'FETCH_ALL_ORDER_SUCCESS',
     FETCH_ALL_ORDER_FAILED: 'FETCH_ALL_ORDER_FAILED',
-
-    // Register
-
-    // Login
 
     // Logout
     LOGOUT_SUCCESS: 'LOGOUT_SUCCESS',

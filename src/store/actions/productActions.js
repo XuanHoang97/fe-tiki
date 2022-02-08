@@ -20,29 +20,25 @@ export const fetchProducts = () => {
     return async(dispatch, getState) => {
         try {
             let res = await getAllProduct('ALL');
-
             if (res && res.data.errCode === 0) {
-                dispatch(fetchAllProductsSuccess(res.data.products.reverse()))
+                dispatch({
+                    type: actionTypes.FETCH_ALL_PRODUCTS_SUCCESS,
+                    payload: res.data.products.reverse()
+                })
             } else {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_PRODUCTS_FAILED,
+                });
                 toast.error('fetch all product error !')
-                dispatch(fetchAllProductsFailed());
             }
         } catch (e) {
+            dispatch({
+                type: actionTypes.FETCH_ALL_PRODUCTS_FAILED,
+            });
             toast.error('fetch all product error !')
-            dispatch(fetchAllProductsFailed());
-            console.log('fetchAllProductsFailed error', e)
         }
     }
 }
-
-export const fetchAllProductsSuccess = (data) => ({
-    type: actionTypes.FETCH_ALL_PRODUCTS_SUCCESS,
-    listProduct: data
-})
-
-export const fetchAllProductsFailed = () => ({
-    type: actionTypes.FETCH_ALL_PRODUCTS_FAILED,
-})
 
 //create a new product
 export const CreateNewProduct = (data) => {
@@ -50,26 +46,24 @@ export const CreateNewProduct = (data) => {
         try {
             let res = await createNewProduct(data);
             if (res && res.data.errCode === 0) {
-                dispatch(saveProductSuccess());
+                dispatch({
+                    type: actionTypes.CREATE_PRODUCT_SUCCESS,
+                });
                 dispatch(fetchProducts());
                 toast.success('Thêm mới sản phẩm thành công !')
             } else {
-                dispatch(saveProductFailed());
+                dispatch({
+                    type: actionTypes.CREATE_PRODUCT_FAILED,
+                });
             }
         } catch (e) {
-            dispatch(saveProductFailed());
+            dispatch({
+                type: actionTypes.CREATE_PRODUCT_FAILED,
+            });
             console.log('saveProductFailed error', e)
         }
     }
 }
-
-export const saveProductSuccess = () => ({
-    type: actionTypes.CREATE_PRODUCT_SUCCESS,
-})
-
-export const saveProductFailed = () => ({
-    type: actionTypes.CREATE_PRODUCT_FAILED,
-})
 
 //edit product
 export const EditProduct = (data) => {
@@ -77,26 +71,24 @@ export const EditProduct = (data) => {
         try {
             let res = await editProduct(data);
             if (res && res.data.errCode === 0) {
-                dispatch(editProductSuccess());
+                dispatch({
+                    type: actionTypes.EDIT_PRODUCT_SUCCESS,
+                });
                 dispatch(fetchProducts());
                 toast.success('Cập nhật sản phẩm thành công !')
             } else {
-                dispatch(editProductFailed());
+                dispatch({
+                    type: actionTypes.EDIT_PRODUCT_FAILED,
+                });
             }
         } catch (e) {
-            dispatch(editProductFailed());
+            dispatch({
+                type: actionTypes.EDIT_PRODUCT_FAILED,
+            });
             console.log('editProductFailed error', e)
         }
     }
 }
-
-export const editProductSuccess = () => ({
-    type: actionTypes.EDIT_PRODUCT_SUCCESS,
-})
-
-export const editProductFailed = () => ({
-    type: actionTypes.EDIT_PRODUCT_FAILED,
-})
 
 //delete product
 export const DeleteProduct = (productId) => {
@@ -104,27 +96,24 @@ export const DeleteProduct = (productId) => {
         try {
             let res = await deleteProduct(productId);
             if (res && res.data.errCode === 0) {
-                dispatch(deleteProductSuccess());
+                dispatch({
+                    type: actionTypes.DELETE_PRODUCT_SUCCESS,
+                });
                 dispatch(fetchProducts());
                 toast.success('Xoá sản phẩm thành công !')
             } else {
-                dispatch(deleteProductFailed());
+                dispatch({
+                    type: actionTypes.DELETE_PRODUCT_FAILED,
+                });
             }
         } catch (e) {
-            dispatch(deleteProductFailed());
+            dispatch({
+                type: actionTypes.DELETE_PRODUCT_FAILED,
+            });
             console.log('deleteProductFailed error', e)
         }
     }
 }
-
-export const deleteProductSuccess = () => ({
-    type: actionTypes.DELETE_PRODUCT_SUCCESS,
-})
-
-export const deleteProductFailed = () => ({
-    type: actionTypes.DELETE_PRODUCT_FAILED,
-})
-
 
 //fetch status product
 export const fetchStatusProduct = () => {
@@ -132,27 +121,24 @@ export const fetchStatusProduct = () => {
         try {
             let res = await getAllCodeService('STATUS_PRODUCT');
             if(res && res.data.errCode === 0){
-                dispatch(fetchStatusProductSuccess(res.data.data))
+                dispatch({
+                    type: actionTypes.FETCH_STATUS_PRODUCT_SUCCESS,
+                    payload: res.data.data
+                })
             }else{
+                dispatch({
+                    type: actionTypes.FETCH_STATUS_PRODUCT_FAILED,
+                });
                 toast.error('fetch status product error !')
-                dispatch(fetchStatusProductFailed());
             }
         } catch (e) {
+            dispatch({
+                type: actionTypes.FETCH_STATUS_PRODUCT_FAILED,
+            });
             toast.error('fetch status product error !')
-            dispatch(fetchStatusProductFailed());
-            console.log('fetchStatusProductFailed error', e)
         }
     }
-}
-
-export const fetchStatusProductSuccess = (data) => ({
-    type: actionTypes.FETCH_STATUS_PRODUCT_SUCCESS,
-    listStatus: data
-})
-
-export const fetchStatusProductFailed = () => ({
-    type: actionTypes.FETCH_STATUS_PRODUCT_FAILED,
-})   
+}  
 
 //fetch supplier product
 export const fetchSupplierProduct = () => {
@@ -160,27 +146,24 @@ export const fetchSupplierProduct = () => {
         try {
             let res = await getAllCodeService('PROVINCE');
             if(res && res.data.errCode === 0){
-                dispatch(fetchSupplierProductSuccess(res.data.data))
+                dispatch({
+                    type: actionTypes.FETCH_SUPPLIER_PRODUCT_SUCCESS,
+                    payload: res.data.data
+                })
             }else{
+                dispatch({
+                    type: actionTypes.FETCH_SUPPLIER_PRODUCT_FAILED,
+                });
                 toast.error('fetch supplier product error !')
-                dispatch(fetchSupplierProductFailed());
             }
         } catch (e) {
+            dispatch({
+                type: actionTypes.FETCH_SUPPLIER_PRODUCT_FAILED,
+            });
             toast.error('fetch supplier product error !')
-            dispatch(fetchSupplierProductFailed());
-            console.log('fetchSupplierProductFailed error', e)
         }
     }
 }
-
-export const fetchSupplierProductSuccess = (data) => ({
-    type: actionTypes.FETCH_SUPPLIER_PRODUCT_SUCCESS,
-    listSupplier: data
-})
-
-export const fetchSupplierProductFailed = () => ({
-    type: actionTypes.FETCH_SUPPLIER_PRODUCT_FAILED,
-}) 
 
 //save info product
 export const SaveInfoProduct = (data) => {
@@ -188,25 +171,24 @@ export const SaveInfoProduct = (data) => {
         try {
             let res = await saveInfoProduct(data);
             if (res && res.data.errCode === 0) {
-                dispatch(saveInfoProductSuccess());
+                dispatch({
+                    type: actionTypes.SAVE_INFO_DETAIL_PRODUCT_SUCCESS,
+                });
                 dispatch(GetAllArticle());
                 toast.success('Thêm mô tả thông tin sản phẩm thành công !')
             } else {
-                dispatch(saveInfoProductFailed());
+                dispatch({
+                    type: actionTypes.SAVE_INFO_DETAIL_PRODUCT_FAILED,
+                });
             }
         } catch (e) {
-            dispatch(saveInfoProductFailed());
+            dispatch({
+                type: actionTypes.SAVE_INFO_DETAIL_PRODUCT_FAILED,
+            });
             console.log('saveInfoProductFailed error', e)
         }
     }
 }
-export const saveInfoProductSuccess = () => ({
-    type: actionTypes.SAVE_INFO_DETAIL_PRODUCT_SUCCESS,
-})
-
-export const saveInfoProductFailed = () => ({
-    type: actionTypes.SAVE_INFO_DETAIL_PRODUCT_FAILED,
-})
 
 //edit info product
 export const EditInfoProduct = (data) => {
@@ -214,25 +196,23 @@ export const EditInfoProduct = (data) => {
         try {
             let res = await editInfoProduct(data);
             if (res && res.data.errCode === 0) {
-                dispatch(editInfoProductSuccess());
+                dispatch({
+                    type: actionTypes.EDIT_INFO_DETAIL_PRODUCT_SUCCESS,
+                });
                 toast.success('Cập nhật mô tả thông tin sản phẩm thành công !')
             } else {
-                dispatch(editInfoProductFailed());
+                dispatch({
+                    type: actionTypes.EDIT_INFO_DETAIL_PRODUCT_FAILED,
+                });
             }
         } catch (e) {
-            dispatch(editInfoProductFailed());
+            dispatch({
+                type: actionTypes.EDIT_INFO_DETAIL_PRODUCT_FAILED,
+            });
             console.log('editInfoProductFailed error', e)
         }
     }
 }
-
-export const editInfoProductSuccess = () => ({
-    type: actionTypes.EDIT_INFO_DETAIL_PRODUCT_SUCCESS,
-})
-
-export const editInfoProductFailed = () => ({
-    type: actionTypes.EDIT_INFO_DETAIL_PRODUCT_FAILED,
-})
 
 //save option product
 export const SaveOptionProduct = (data) => {
@@ -240,26 +220,23 @@ export const SaveOptionProduct = (data) => {
         try {
             let res = await saveOptionProduct(data);
             if (res && res.data.errCode === 0) {
-                dispatch(saveOptionProductSuccess());
+                dispatch({
+                    type: actionTypes.SAVE_OPTION_PRODUCT_SUCCESS,
+                });
                 toast.success('Thêm thông tin sản phẩm thành công !')
             } else {
-                dispatch(saveOptionProductFailed());
+                dispatch({
+                    type: actionTypes.SAVE_OPTION_PRODUCT_FAILED,
+                });
             }
         } catch (e) {
-            dispatch(saveOptionProductFailed());
+            dispatch({
+                type: actionTypes.SAVE_OPTION_PRODUCT_FAILED,
+            });
             console.log('saveOptionProductFailed error', e)
         }
     }
 }
-
-export const saveOptionProductSuccess = () => ({
-    type: actionTypes.SAVE_OPTION_PRODUCT_SUCCESS,
-})
-
-export const saveOptionProductFailed = () => ({
-    type: actionTypes.SAVE_OPTION_PRODUCT_FAILED,
-})
-
 
 //get product similar
 export const GetProductSimilar = (productId) => {
@@ -267,27 +244,23 @@ export const GetProductSimilar = (productId) => {
         try {
             let res = await getProductSimilar(productId);
             if (res && res.data.errCode === 0) {
-                dispatch(GetProductSimilarSuccess(res.data.products))
+                dispatch({
+                    type: actionTypes.FETCH_PRODUCT_SIMILAR_SUCCESS,
+                    payload: res.data.products
+                })
             } else {
-                dispatch(GetProductSimilarFailed());
+                dispatch({
+                    type: actionTypes.FETCH_PRODUCT_SIMILAR_FAILED,
+                });
             }
         } catch (e) {
-            dispatch(GetProductSimilarFailed());
+            dispatch({
+                type: actionTypes.FETCH_PRODUCT_SIMILAR_FAILED,
+            });
             console.log('GetProductSimilarFailed error', e)
         }
     }
 }
-
-export const GetProductSimilarSuccess = (data) => ({
-    type: actionTypes.FETCH_PRODUCT_SIMILAR_SUCCESS,
-    listProductSimilar: data
-})
-
-export const GetProductSimilarFailed = () => ({
-    type: actionTypes.FETCH_PRODUCT_SIMILAR_FAILED,
-})
-
-
 
 //select option product
 export const SelectOptionProduct = (data) => {
@@ -325,22 +298,20 @@ export const GetAllArticle = () => {
         try {
             let res = await getAllArticle('ALL')
             if (res && res.data.errCode === 0) {
-                dispatch(GetAllArticleSuccess(res.data.articles.reverse()))
+                dispatch({
+                    type: actionTypes.FETCH_ALL_ARTICLE_SUCCESS,
+                    payload: res.data.articles.reverse()
+                })
             } else {
-                dispatch(GetAllArticleFailed());
+                dispatch({
+                    type: actionTypes.FETCH_ALL_ARTICLE_FAILED,
+                });
             }
         } catch (e) {
-            dispatch(GetAllArticleFailed());
+            dispatch({
+                type: actionTypes.FETCH_ALL_ARTICLE_FAILED,
+            });
             console.log('GetAllArticleFailed error', e)
         }
     }
 }
-
-export const GetAllArticleSuccess = (data) => ({
-    type: actionTypes.FETCH_ALL_ARTICLE_SUCCESS,
-    allArticle: data
-})
-
-export const GetAllArticleFailed = () => ({
-    type: actionTypes.FETCH_ALL_ARTICLE_FAILED,
-})

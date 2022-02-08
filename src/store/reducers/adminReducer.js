@@ -98,42 +98,23 @@ const adminReducer = (state = initialState, action) => {
             
             //fetch all product
         case actionTypes.FETCH_ALL_PRODUCTS_SUCCESS:
-            state.products = action.listProduct;
             return {
                 ...state,
-            }
-
-        case actionTypes.FETCH_ALL_PRODUCTS_FAILED:
-            state.products = [];
-            return {
-                ...state,
+                products : action.payload
             }
 
             //fetch status product
         case actionTypes.FETCH_STATUS_PRODUCT_SUCCESS:
-            state.status = action.listStatus;
             return {
                 ...state,
+                status : action.payload,
             }
 
             //fetch supplier product
         case actionTypes.FETCH_SUPPLIER_PRODUCT_SUCCESS:
-            state.supplier = action.listSupplier;
             return {
                 ...state,
-            }
-
-            case actionTypes.FETCH_SUPPLIER_PRODUCT_FAILED:
-            state.supplier = [];
-            return {
-                ...state,
-            }
-
-
-        case actionTypes.FETCH_STATUS_PRODUCT_FAILED:
-            state.status = [];
-            return {
-                ...state,
+                supplier : action.payload
             }
 
             //SELECT option product
@@ -151,126 +132,66 @@ const adminReducer = (state = initialState, action) => {
 
         //get product similar
         case actionTypes.FETCH_PRODUCT_SIMILAR_SUCCESS:
-            state.productSimilar = action.listProductSimilar;
             return {
                 ...state,
+                productSimilar : action.payload,
             }
-
-        case actionTypes.FETCH_PRODUCT_SIMILAR_FAILED:
-            state.productSimilar = [];
-            return {
-                ...state,
-            }
-
 
 
             //fetch all article
         case actionTypes.FETCH_ALL_ARTICLE_SUCCESS:
-            state.articles = action.allArticle;
             return {
                 ...state,
+                articles : action.payload,
             }
-
-        case actionTypes.FETCH_ALL_ARTICLE_FAILED:
-            state.articles = [];
-            return {
-                ...state,
-            }
-
             
             //fetch all category
         case actionTypes.FETCH_ALL_CATEGORIES_SUCCESS:
-            state.categories = action.listCategory;
             return {
                 ...state,
-            }
-
-        case actionTypes.FETCH_ALL_CATEGORIES_FAILED:
-            state.categories = [];
-            return {
-                ...state,
+                categories : action.payload,
             }
 
             //fetch all product in category
         case actionTypes.FETCH_PRODUCT_IN_CATEGORY_SUCCESS:
-            state.detailCategory = action.detail;
             return {
                 ...state,
-            }
-
-        case actionTypes.FETCH_PRODUCT_IN_CATEGORY_FAILED:
-            state.detailCategory = [];
-            return {
-                ...state,
+                detailCategory : action.payload,
             }
 
             //fetch all news and event
         case actionTypes.FETCH_ALL_NEWS_SUCCESS:
-            state.news = action.listNews;
             return {
                 ...state,
-            }
-
-        case actionTypes.FETCH_ALL_NEWS_FAILED:
-            state.news = [];
-            return {
-                ...state,
+               news : action.payload
             }
 
             //fetch allCode news and event
         case actionTypes.FETCH_ALLCODE_NEWS_SUCCESS:
-            state.status_news = action.statusCodeNews;
             return {
                 ...state,
-            }
-
-        case actionTypes.FETCH_ALLCODE_NEWS_FAILED:
-            state.status_news = [];
-            return {
-                ...state,
+                status_news : action.payload
             }
 
         // get all slide
         case actionTypes.FETCH_ALL_SLIDE_SUCCESS:
-            state.slides = action.listSlide;
             return {
                 ...state,
-            }
-
-        case actionTypes.FETCH_ALL_SLIDE_FAILED:
-            state.slides = [];
-            return {
-                ...state,
+                slides: action.payload,
             }
             
         //get all special category
         case actionTypes.FETCH_ALL_SPECIAL_CATEGORY_SUCCESS:
-            state.specialCategories = action.listSpecialCategory;
             return {
                 ...state,
-            }
-
-        case actionTypes.FETCH_ALL_SPECIAL_CATEGORY_FAILED:
-            state.specialCategories = [];
-            return {
-                ...state,
+                specialCategories: action.payload
             }
 
         case actionTypes.FETCH_ALL_STATUS_SLIDE_SUCCESS:
-            state.statusSlide = action.listStatus;
             return {
                 ...state,
+                statusSlide : action.payload
             }
-
-        case actionTypes.FETCH_ALL_STATUS_SLIDE_FAILED:
-            state.statusSlide = [];
-            return {
-                ...state,
-            }
-
-
-
-
         default:
             return state;
     }

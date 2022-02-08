@@ -18,9 +18,9 @@ export const totalMoney = (arr) => {
 
 // total revenue
 export const totalRevenue = (arr) => {
-    let totalRevenue = 0
+    let revenue = 0
     for (let item of arr) {
-        totalRevenue += item.total * item.qty
+        revenue += item.total
     }
-    return totalRevenue
+    return revenue
 }
