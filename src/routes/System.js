@@ -20,7 +20,7 @@ import MenuLeftCollapse from '../containers/Header/menuLeft/MenuLeftCollapse';
 import { path } from '../utils';
 import NotFound from '../containers/System/Search/NotFound';
 import Index from '../containers/System/Search/Index';
-import Slide from '../containers/System/Slide/Index';
+import Multimedia from '../containers/System/Multimedia/Index';
 import SupplierManage from 'containers/System/supplier/SupplierManage';
 
 const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
@@ -164,7 +164,7 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
                             <Route path="/system/article-manage" component={ArticleManage} />
                             <Route path="/system/news-manage" component={NewsManage} />
                             <Route path="/system/category-manage" component={CategoryManage} />
-                            <Route path="/system/slide-manage" component={Slide} />
+                            <Route path="/system/slide-manage" component={Multimedia} />
                             <Route path="/system/report-Statistical" component={StatisticalManage} />
                             <Route path="/system/supplier-manage" component={SupplierManage} />
                             <Route path="/system/setting" component={Setting} />

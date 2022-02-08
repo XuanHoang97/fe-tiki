@@ -13,30 +13,25 @@ import { toast } from "react-toastify"
 export const fetchGenderStart = () => {
     return async(dispatch, getState) => {
         try {
-            dispatch({ type: actionTypes.FETCH_GENDER_START })
-
             let res = await getAllCodeService('GENDER');
             if (res && res.data.errCode === 0) {
-                dispatch(fetchGenderSuccess(res.data.data))
+                dispatch({
+                    type: actionTypes.FETCH_GENDER_SUCCESS,
+                    payload: res.data.data
+                })
             } else {
-                dispatch(fetchGenderFailed());
+                dispatch({
+                    type: actionTypes.FETCH_GENDER_FAILED
+                });
             }
         } catch (e) {
-            dispatch(fetchGenderFailed());
+            dispatch({
+                type: actionTypes.FETCH_GENDER_FAILED
+            });
             console.log('fetchGenderStart error', e)
         }
     }
 }
-
-export const fetchGenderSuccess = (genderData) => ({
-    type: actionTypes.FETCH_GENDER_SUCCESS,
-    data: genderData,
-})
-
-export const fetchGenderFailed = () => ({
-    type: actionTypes.FETCH_GENDER_FAILED
-})
-
 
 //fetch role 
 export const fetchRoleStart = () => {
@@ -44,25 +39,23 @@ export const fetchRoleStart = () => {
         try {
             let res = await getAllCodeService('ROLE');
             if (res && res.data.errCode === 0) {
-                dispatch(fetchRoleSuccess(res.data.data))
+                dispatch({
+                    type: actionTypes.FETCH_ROLE_SUCCESS,
+                    payload: res.data.data
+                })
             } else {
-                dispatch(fetchRoleFailed());
+                dispatch({
+                    type: actionTypes.FETCH_ROLE_FAILED
+                });
             }
         } catch (e) {
-            dispatch(fetchRoleFailed());
+            dispatch({
+                type: actionTypes.FETCH_ROLE_FAILED
+            });
             console.log('fetchRoleStart error', e)
         }
     }
 }
-
-export const fetchRoleSuccess = (roleData) => ({
-    type: actionTypes.FETCH_ROLE_SUCCESS,
-    data: roleData,
-})
-
-export const fetchRoleFailed = () => ({
-    type: actionTypes.FETCH_ROLE_FAILED
-})
 
 //fetch position
 export const fetchPositionStart = () => {
@@ -70,25 +63,23 @@ export const fetchPositionStart = () => {
         try {
             let res = await getAllCodeService('POSITION');
             if (res && res.data.errCode === 0) {
-                dispatch(fetchPositionSuccess(res.data.data))
+                dispatch({
+                    type: actionTypes.FETCH_POSITION_SUCCESS,
+                    payload: res.data.data
+                })
             } else {
-                dispatch(fetchPositionFailed());
+                dispatch({
+                    type: actionTypes.FETCH_POSITION_FAILED
+                });
             }
         } catch (e) {
-            dispatch(fetchPositionFailed());
+            dispatch({
+                type: actionTypes.FETCH_POSITION_FAILED
+            });
             console.log('fetchPositionStart error', e)
         }
     }
 }
-
-export const fetchPositionSuccess = (positionData) => ({
-    type: actionTypes.FETCH_POSITION_SUCCESS,
-    listPosition: positionData,
-})
-
-export const fetchPositionFailed = () => ({
-    type: actionTypes.FETCH_POSITION_FAILED
-})
 
 //create a new user
 export const createNewUser = (data) => {
@@ -124,27 +115,25 @@ export const fetchAllUser = () => {
             let res = await getAllUsers('ALL');
 
             if (res && res.data.errCode === 0) {
-                dispatch(fetchAllUSersSuccess(res.data.users.reverse()))
+                dispatch({
+                    type: actionTypes.FETCH_ALL_USERS_SUCCESS,
+                    payload: res.data.users.reverse()
+                })
             } else {
                 toast.error('fetch all user error !')
-                dispatch(fetchAllUSersFailed());
+                dispatch({
+                    type: actionTypes.FETCH_ALL_USERS_FAILED
+                });
             }
         } catch (e) {
             toast.error('fetch all user error !')
-            dispatch(fetchAllUSersFailed());
+            dispatch({
+                type: actionTypes.FETCH_ALL_USERS_FAILED
+            });
             console.log('fetchAllUSersFailed error', e)
         }
     }
 }
-
-export const fetchAllUSersSuccess = (data) => ({
-    type: actionTypes.FETCH_ALL_USERS_SUCCESS,
-    listUser: data
-})
-
-export const fetchAllUSersFailed = () => ({
-    type: actionTypes.FETCH_ALL_USERS_FAILED,
-})
 
 //delete user 
 export const deleteUser = (userId) => {
@@ -152,28 +141,25 @@ export const deleteUser = (userId) => {
         try {
             let res = await deleteUserService(userId);
             if (res && res.data.errCode === 0) {
-                dispatch(deleteUserSuccess());
+                dispatch({
+                    type: actionTypes.DELETE_USER_SUCCESS,
+                });
                 dispatch(fetchAllUser());
                 toast.success('Xoá thành viên thành công !')
             } else {
+                dispatch({
+                    type: actionTypes.DELETE_USER_FAILED
+                });
                 toast.error('delete the user error !')
-                dispatch(deleteUserFailed());
             }
         } catch (e) {
-            dispatch(deleteUserFailed());
+            dispatch({
+                type: actionTypes.DELETE_USER_FAILED
+            });
             console.log('deleteUserFailed error', e)
         }
     }
 }
-
-export const deleteUserSuccess = () => ({
-    type: actionTypes.DELETE_USER_SUCCESS,
-})
-
-export const deleteUserFailed = () => ({
-    type: actionTypes.DELETE_USER_FAILED,
-})
-
 
 //edit user
 export const editUser = (data) => {
@@ -181,28 +167,25 @@ export const editUser = (data) => {
         try {
             let res = await editUserService(data);
             if (res && res.data.errCode === 0) {
-                toast.success('update user succeed !')
-                dispatch(editUserSuccess());
+                dispatch({
+                    type: actionTypes.EDIT_USER_SUCCESS,
+                });
                 dispatch(fetchAllUser());
+                toast.success('update user succeed !')
             } else {
+                dispatch({
+                    type: actionTypes.EDIT_USER_FAILED
+                });
                 toast.error('update the user error !')
-                dispatch(editUserFailed());
             }
         } catch (e) {
+            dispatch({
+                type: actionTypes.EDIT_USER_FAILED
+            });
             toast.error('update the user error !')
-            dispatch(editUserFailed());
-            console.log('editUserFailed error', e)
         }
     }
 }
-
-export const editUserSuccess = () => ({
-    type: actionTypes.EDIT_USER_SUCCESS
-})
-
-export const editUserFailed = () => ({
-    type: actionTypes.EDIT_USER_FAILED
-})
 
 //SEARCH USER
 export const searchUserInfo = (keyword) => {
@@ -210,28 +193,25 @@ export const searchUserInfo = (keyword) => {
         try {
             let res = await searchUser(keyword);
             if (res && res.data.errCode === 0) {
-                dispatch(searchUserSuccess(res.data.users))
+                dispatch({
+                    type: actionTypes.SEARCH_USER_SUCCESS,
+                    payload: res.data.users
+                })
             } else {
+                dispatch({
+                    type: actionTypes.SEARCH_USER_FAILED
+                });
                 toast.error('search user error !')
-                dispatch(searchUserFailed());
             }
         } catch (e) {
             toast.error('search user error !')
-            dispatch(searchUserFailed());
+            dispatch({
+                type: actionTypes.SEARCH_USER_FAILED
+            });
             console.log('searchUserFailed error', e)
         }
     }
 }
-
-export const searchUserSuccess = (data) => ({
-    type: actionTypes.SEARCH_USER_SUCCESS,
-    listUser: data
-})
-
-export const searchUserFailed = () => ({
-    type: actionTypes.SEARCH_USER_FAILED,
-})
-
 
 
 

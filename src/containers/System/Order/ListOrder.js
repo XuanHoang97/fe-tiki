@@ -49,12 +49,13 @@ function ListOrder(props) {
                                     <td><Moment format="DD/MM/YYYY">{item.date}</Moment></td>
                                     <td className=
                                         {item.status ==='S1' ? "text-warning small font-weight-bold" : 'text-success small font-weight-bold'}
-                                        id={item.status ==='S3' && "delivery"}
+                                        id={item.status ==='S5' && "cancel"}
                                         >
                                         {item.status ==='S1' && 'Chưa xác nhận'}
                                         {item.status ==='S2' && 'Đã xác nhận'}
-                                        {item.status ==='S3' && 'Đang vận chuyển'}
+                                        {item.status ==='S3' && 'Đang giao hàng'}
                                         {item.status ==='S4' && 'Đã giao'}
+                                        {item.status ==='S5' && 'Đã hủy'}
                                     </td>
                                     <td style={{width: '10%'}}>
                                         {
@@ -71,6 +72,10 @@ function ListOrder(props) {
 
                                         {
                                             item.status ==='S4' && <span className="actionOrder text-primary">Đổi hàng</span>
+                                        }
+
+                                        {
+                                            item.status ==='S5' && <span className="actionOrder text-primary">Mua lại</span>
                                         }
                                         <br/>
                                         <span className="actionOrder text-danger">Huỷ đơn</span>

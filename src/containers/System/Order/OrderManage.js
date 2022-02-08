@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {TabContent, TabPane} from 'reactstrap';
-import {totalRevenue} from 'components/Formatting/FormatNumber';
 import ModalVerifyOrder from './ModalVerifyOrder';
 import FilterDataOrder from './FilterDataOrder';
-import Statistical from './Statistical';
-import './style.scss';
 import * as actions from 'store/actions';
 import OrderTabControl from './OrderTabControl';
 import ListOrder from './ListOrder';
+import './style.scss';
 
 const OrderManage = (props) => {
     const [activeTab, setActiveTab] = useState('4');
@@ -83,12 +81,6 @@ const OrderManage = (props) => {
                         filterOrder={filterOrder}
                         loadOrder={loadOrder}
                         verifyOrder={verifyOrder}
-                    />
-
-                    {/* statistical  */}
-                    <Statistical
-                        totalRevenue={totalRevenue}
-                        filterOrder={filterOrder}
                     />
                 </TabPane>
             </TabContent>

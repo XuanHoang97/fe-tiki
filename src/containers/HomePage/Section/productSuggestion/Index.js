@@ -19,7 +19,7 @@ const ProductSuggestion = () => {
   const Products = useSelector(state => state.admin.detailCategory);
 
   useEffect(() => {
-    dispatch(actions.fetchAllCategory);
+    dispatch(actions.fetchAllCategory());
     dispatch(actions.DetailCategory(3));
   }, [dispatch]);
 

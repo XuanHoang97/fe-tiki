@@ -87,8 +87,6 @@ const clientReducer = (state = initialState, action) => {
                 carts: []
             }
 
-            
-
             //get all delivery
         case actionTypes.FETCH_ALL_DELIVERY_SUCCESS:
             return {
@@ -119,13 +117,7 @@ const clientReducer = (state = initialState, action) => {
         case actionTypes.FETCH_ALL_ORDER_SUCCESS:
             return {
                 ...state,
-                orders: action.dataOrder
-            }
-
-        case actionTypes.FETCH_ALL_ORDER_FAILED:
-            return {
-                ...state,
-                orders: []
+                orders: action.payload
             }
 
         // get status order

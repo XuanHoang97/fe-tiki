@@ -24,3 +24,12 @@ export const totalRevenue = (arr) => {
     }
     return revenue
 }
+
+// investment cost
+export const investmentCost = (arr) => {
+    let investment = 150000
+    // for (let item of arr) {
+    //     investment += item.investment
+    // }
+    return investment
+}

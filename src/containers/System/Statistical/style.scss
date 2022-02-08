@@ -1,0 +1,14 @@
+.statistical{
+    display: flex;
+    gap: 10px;
+    .item-statistical{
+        display: grid;
+        grid-template-columns: 30% 70%;
+        gap: 10px;
+        border: 1px solid #e5e5e5;
+        padding: 10px 15px;
+        background: white;
+        width: 25%;
+    }
+
+}

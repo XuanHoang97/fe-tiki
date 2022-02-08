@@ -32,68 +32,37 @@ const adminReducer = (state = initialState, action) => {
 
             //fetch gender
         case actionTypes.FETCH_GENDER_SUCCESS:
-            state.genders = action.data;
             return {
                 ...state,
-            }
-
-        case actionTypes.FETCH_GENDER_FAILED:
-            state.genders = [];
-            return {
-                ...state,
+                genders : action.payload
             }
 
             //fetch role
         case actionTypes.FETCH_ROLE_SUCCESS:
-            state.roles = action.data;
             return {
                 ...state,
-            }
-
-        case actionTypes.FETCH_ROLE_FAILED:
-            state.roles = [];
-            return {
-                ...state,
+                roles : action.payload
             }
 
             //fetch position
         case actionTypes.FETCH_POSITION_SUCCESS:
-            state.positions = action.listPosition;
             return {
                 ...state,
+                positions : action.payload,
             }
-
-        case actionTypes.FETCH_POSITION_FAILED:
-            state.positions = [];
-            return {
-                ...state,
-            }
-
 
             //fetch all user
         case actionTypes.FETCH_ALL_USERS_SUCCESS:
-            state.users = action.listUser;
             return {
                 ...state,
-            }
-
-        case actionTypes.FETCH_ALL_USERS_FAILED:
-            state.users = [];
-            return {
-                ...state,
+                users : action.payload,
             }
 
             //search user
         case actionTypes.SEARCH_USER_SUCCESS:
-            state.users = action.listUser;
             return {
                 ...state,
-            }
-
-        case actionTypes.SEARCH_USER_FAILED:
-            state.users = [];
-            return {
-                ...state,
+                users : action.payload,
             }
             
             //fetch all product
@@ -119,15 +88,9 @@ const adminReducer = (state = initialState, action) => {
 
             //SELECT option product
         case actionTypes.SELECT_OPTION_PRODUCT_SUCCESS:
-            state.optionProduct = action.listOption;
             return {
                 ...state,
-            }
-
-        case actionTypes.SELECT_OPTION_PRODUCT_FAILED:
-            state.optionProduct = [];
-            return {
-                ...state,
+                optionProduct : action.payload,
             }
 
         //get product similar
@@ -136,7 +99,6 @@ const adminReducer = (state = initialState, action) => {
                 ...state,
                 productSimilar : action.payload,
             }
-
 
             //fetch all article
         case actionTypes.FETCH_ALL_ARTICLE_SUCCESS:
@@ -149,7 +111,7 @@ const adminReducer = (state = initialState, action) => {
         case actionTypes.FETCH_ALL_CATEGORIES_SUCCESS:
             return {
                 ...state,
-                categories : action.payload,
+                categories : action.listCategory,
             }
 
             //fetch all product in category
@@ -187,6 +149,7 @@ const adminReducer = (state = initialState, action) => {
                 specialCategories: action.payload
             }
 
+        //get all status slide
         case actionTypes.FETCH_ALL_STATUS_SLIDE_SUCCESS:
             return {
                 ...state,

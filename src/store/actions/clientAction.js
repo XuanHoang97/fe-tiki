@@ -111,25 +111,23 @@ export const getAllOrder = () => {
         try{
             let res = await getOrder('ALL');
             if(res && res.data.errCode === 0){
-                dispatch(getAllOrderSuccess(res.data.result));
+                dispatch({
+                    type: actionTypes.FETCH_ALL_ORDER_SUCCESS,
+                    payload: res.data.result
+                });
             }else{
-                dispatch(getAllOrderFailed());
+                dispatch({
+                    type: actionTypes.FETCH_ALL_ORDER_FAILED,
+                });
             }
         }catch(e){
-            dispatch(getAllOrderFailed());
+            dispatch({
+                type: actionTypes.FETCH_ALL_ORDER_FAILED,
+            });
             console.log('getAllOrder error', e)
         }
     }
 }
-
-export const getAllOrderSuccess = (data) => ({
-    type: actionTypes.FETCH_ALL_ORDER_SUCCESS,
-    dataOrder: data
-})
-
-export const getAllOrderFailed = () => ({
-    type: actionTypes.FETCH_ALL_ORDER_FAILED,
-})
 
 // get status order
 export const getStatusOrder = () => {

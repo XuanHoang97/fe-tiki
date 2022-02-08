@@ -268,29 +268,24 @@ export const SelectOptionProduct = (data) => {
         try {
             let res = await getAllCodeService('OPTION_PRODUCT');
             if(res && res.data.errCode === 0){
-                dispatch(SelectOptionProductSuccess(res.data.data))
+                dispatch({
+                    type: actionTypes.SELECT_OPTION_PRODUCT_SUCCESS,
+                    payload: res.data.data
+                })
             }else{
+                dispatch({
+                    type: actionTypes.SELECT_OPTION_PRODUCT_FAILED,
+                });
                 toast.error('fetch option product error !')
-                dispatch(SelectOptionProductFailed());
             }
         } catch (e) {
+            dispatch({
+                type: actionTypes.SELECT_OPTION_PRODUCT_FAILED,
+            });
             toast.error('fetch option product error !')
-            dispatch(SelectOptionProductFailed());
-            console.log('SelectOptionProductFailed error', e)
         }
     }
 }
-
-export const SelectOptionProductSuccess = (data) => ({
-    type: actionTypes.SELECT_OPTION_PRODUCT_SUCCESS,
-    listOption: data
-})
-
-export const SelectOptionProductFailed = () => ({
-    type: actionTypes.SELECT_OPTION_PRODUCT_FAILED,
-})
-
-
 
 //get all article
 export const GetAllArticle = () => {
