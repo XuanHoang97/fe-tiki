@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from "react-router-dom";
 import Voucher from './Voucher'
 import Header from 'containers/HomePage/Header/Header';
@@ -11,10 +11,6 @@ const Cart = (props) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-    }, [])
-
-    useEffect(() => {
-        document.title = `Giỏ hàng - giá rẻ nhất vịnh Bắc Bộ`;
     }, [])
 
     return (

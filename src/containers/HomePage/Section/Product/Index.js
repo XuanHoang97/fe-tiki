@@ -16,9 +16,8 @@ const Product = (mobile) => {
 
     //view detail product
     const viewDetail = (product) => {
-        history.push(`/products/${product.id}`)
+        return history.push(`/products/${product.id}`)
     }
-
 
     return (
         <div className="product mt-3 ml-0 mr-0 pb-4 p-3 bg-white text-center">
@@ -32,11 +31,14 @@ const Product = (mobile) => {
                     listProduct && listProduct.length >0 ?
                     listProduct.map((item, index) => {
                         return (
-                            <div className="product--item col-md-2 col-6 p-3" key={index} >
-                                <div onClick={()=>viewDetail(item)} style={{cursor: 'pointer'}}>
-                                    <img src={item.image} className="" alt="" />
+                            <div className="product--item col-md-2 col-6 p-3" 
+                                key={index} 
+                            >
+                                <div onClick={()=>viewDetail(item)}>
+                                    <img src={item.image} className="w-75" alt="" />
                                     <h6 className="my-2 text-dark">{item.name}</h6>
                                 </div>
+
                                 <Rate />
 
                                 <div className="price__prod d-flex align-items-center">

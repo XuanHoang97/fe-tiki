@@ -9,7 +9,7 @@ const NotFound = () => {
     return (
         <>
         <Header/>
-        <div className="container main" style={{ overflow: 'hidden' }}>
+        <div className="container main">
             <div className="err">
                 <div className="banner-top"></div>
                 <div className="banner-bottom"></div>

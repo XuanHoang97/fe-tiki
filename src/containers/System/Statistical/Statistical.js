@@ -95,6 +95,27 @@ const StatisticalManage = (props) => {
                     </div>
                 </div>
 
+                <div className='bg-white p-3 mt-3'>
+                    <div>THỐNG KÊ THEO THỜI GIAN</div>
+                    <div className='d-flex bg-light py-2 my-3'>
+                        <div className="form-group d-flex col-4 p-0">
+                            <label className='col-4'>Từ ngày</label>
+                            <input type="date" className="form-control col-8" />
+                        </div>
+
+                        <div class="form-group d-flex col-4 p-0 mx-4">
+                            <label className='col-4'>Đến ngày</label>
+                            <input type="date" className="form-control col-8" />
+                        </div>
+
+                        <button type="button" className="col-1 btn btn-primary px-3">Xem</button>
+                    </div>
+                    
+                    <div>
+                        Updating...
+                    </div>
+                </div>
+
                 </TabPane>
                 <TabPane tabId="2">Updating...</TabPane>
                 <TabPane tabId="3">

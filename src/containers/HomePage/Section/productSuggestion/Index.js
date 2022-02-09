@@ -2,10 +2,10 @@ import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {TabContent, TabPane } from 'reactstrap';
 import { numberFormat } from 'components/Formatting/FormatNumber';
-import { Nav, NavItem, NavLink } from 'reactstrap';
 import './style/ProductSuggestion.scss';
 import * as actions from './../../../../store/actions'
 import Rate from '../Rate';
+import TabCategory from './TabCategory';
 
 const ProductSuggestion = () => {
   const [activeTab, setActiveTab] = useState(3);
@@ -70,25 +70,11 @@ const ProductSuggestion = () => {
     <div className="suggest__list mt-4">
       <div style={{ position: 'sticky', top: '0' }}>
         <div className="Prod__Suggest"> <h5 className="m-0">Gợi Ý Hôm Nay</h5> </div>
-        <Nav tabs className='tab_product'>
-          {
-            category && category.length > 0 ?
-            category.map((item, index) => {
-                return (
-                    <NavItem key={index} className='item-category'>
-                        <NavLink
-                            className={`${activeTab === item.id ? 'active' : ''}`}
-                            onClick={() => detailCategory(item.id)}
-                        >   
-                          <img src={item.image}  alt="" />{item.name}
-                        </NavLink>
-                    </NavItem>
-                )
-            })
-            :
-            <span> Loading... </span>
-          }
-        </Nav>
+        <TabCategory
+          activeTab={activeTab}
+          category={category}
+          detailCategory={detailCategory}
+        />
       </div>
 
       <TabContent activeTab={activeTab} className='py-4 px-3 bg-light border bg-white'>
@@ -118,7 +104,7 @@ const ProductSuggestion = () => {
                     <span className='text-success'> Đang cập nhật sản phẩm... </span>
                   }
                   {
-                    !btnLoadMore &&
+                    !btnLoadMore && item.id === activeTab &&
                     <div className="view__more" onClick={loadMore}>
                       <button type="button" className="btn btn-outline-primary border border-primary">
                         {

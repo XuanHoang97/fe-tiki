@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { path } from 'utils';
+import instance from './../axios';
 
 //login
 const handleLoginApi = (userEmail, userPassword) => {
     return axios.post(`${path.PORT}/login`, { email: userEmail, password: userPassword });
 }
-
 //display all users
 const getAllUsers = (inputId) => {
     return axios.get(`${path.PORT}/get-all-users?id=${inputId}`)

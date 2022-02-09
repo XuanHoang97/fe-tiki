@@ -6,9 +6,16 @@ img {
 
 .slide {
     #carousel-example-1z {
-        .control {}
+        .control {
+            li{
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+            }
+        }
         .list_slide {
             .carousel-item {
+                height: 240px;
                 @include phone {
                     height: 150px;
                 }
@@ -31,11 +38,6 @@ img {
         }
         .carousel-control-next:hover {
             opacity: 1 !important;
-        }
-    }
-    .baner {
-        @include phone {
-            display: none;
         }
     }
 }

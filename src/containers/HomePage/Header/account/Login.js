@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
-import { useSelector } from 'react-redux';
 import { path } from 'utils';
 import {useHistory} from 'react-router-dom';
 import { loginAcc } from 'services/authService';
-import { toast } from 'react-toastify';
 import './style.scss'
+import instance from './../../../../axios';
+import { useDispatch } from 'react-redux';
+import { getUser } from 'store/actions';
+
  
 const LoginAuth = (props) => {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -15,25 +17,31 @@ const LoginAuth = (props) => {
     const [showPass, setShowPass] = useState(false);
     const [loading, setLoading] = useState(false);
     const history = useHistory();
-
+    const dispatch = useDispatch();
     //Login
     const login = async (data) => {
         try{
             let res = await loginAcc(data); 
             setLoading(true);
+            const user = await instance.get(`/user`,{
+                headers: {
+                    'Authorization': `Bearer ${res.data.accessToken}`
+                }
+            })
+            dispatch(getUser(user))
             setTimeout(() => {
                 if(res.data.status === 200) {
                     history.push(`${path.HOMEPAGE}`);
                 }
                 setLoading(false);
             }, 2000);
-            // save token
+            console.log(user)// ko can, luu user thoi
             localStorage.setItem('token', res.data.accessToken);
         }catch(error){
-            if (error.response.status === 400) {
-                setErrPass(error.response.data.errMessage);
+            if (error?.response?.status === 400) {
+                setErrPass(error.response?.data.errMessage);
             }else{
-                setErrMail(error.response.data.errMessage);
+                setErrMail(error.response?.data.errMessage);
             }
         }
     }

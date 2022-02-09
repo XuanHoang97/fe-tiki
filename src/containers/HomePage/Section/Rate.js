@@ -1,5 +1,4 @@
 import React from 'react';
-import { path } from 'utils';
 
 function Rate(props) {
     return (

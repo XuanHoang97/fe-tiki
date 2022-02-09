@@ -25,6 +25,11 @@ export const logoutAccount = () => {
     }
 }
 
+export const getUser = (userInfo) => ({
+    type: actionTypes.GET_USER,
+    userInfo: userInfo,
+})
+
 // Refresh Token
 // export const refreshToken = () => {
 //     return async (dispatch) => {

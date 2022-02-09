@@ -26,34 +26,12 @@ img {
                         width: 100%;
                     }
                     .category {
-                        i {
-                        }
-                        small {
-                        }
-                        .menu__item {
-                            display: none;
-                            width: 800px;
-                            position: absolute;
-                            top: 0;
-                            left: 14.5em;
-                            background-color: rgb(235, 247, 255);
-                            padding: 15px;
-                            height: 100%;
-                        }
-                        br {
-                            @include phone {
-                                display: none;
-                            }
-                        }
+                        padding: 10px 15px;
                         span {
+                            font-size: 15px;
                             @include phone {
                                 display: none;
                             }
-                        }
-                    }
-                    .dropdown-item:hover {
-                        .menu__item {
-                            display: flex;
                         }
                     }
                 }
@@ -116,6 +94,9 @@ img {
                         }
                         .search {
                             input {
+                                border-radius: 2px 0px 0px 2px;
+                                border: 0px;
+                                height: 32px;
                                 @include phone {
                                     height: 30px;
                                 }
@@ -253,10 +234,12 @@ img {
                                 }
                             }
                             .btn_search {
+                                height: 30px;
+                                width: 105px;
                                 @include phone {
-                                    height: 30px !important;
                                 }
                                 button {
+                                    background: rgb(13, 92, 182);
                                     @include phone {
                                         display: flex;
                                         align-items: center;
@@ -379,8 +362,13 @@ img {
             }
         }
         .menu--suggest {
+            margin-top: -0.75rem;
             @include phone {
                 display: none;
+            }
+            .suggest{
+                font-size: 11px;
+                padding-left: 35px;
             }
         }
     }
@@ -406,75 +394,31 @@ img {
     padding: 0;
 }
 
-.dropdown-item:hover {
+.activeCategory {
     background: #017fff !important;
     color: white;
     opacity: 0.8;
+    @extend .categoryMenu
 }
 
-.category:hover ~ .menu__item {
-    display: flex !important;
+.categoryMenu{
+    display: flex;
+    align-items: center;
+    padding: 10px 15px; 
+    cursor: pointer;
 }
 
 .menu__item {
-    z-index: 9;
+    background: #ebf7ff;
 }
 
 .view--more {
     cursor: pointer;
-    transition-duration: 0.4s;
-    i {
-        transition: all 0.3s ease-in-out;
-    }
 }
 
 .view--more:hover {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 15px !important;
     padding: 3px 5px;
     border-radius: 5px;
-}
-
-.view--more:hover {
-    i {
-        animation: fa-spin 1.5s infinite linear;
-    }
-}
-
-.view--more:after {
-    content: "";
-    background: #0051ff;
-    display: block;
-    position: absolute;
-    padding-top: 3%;
-    padding-left: 9%;
-    margin-left: -5px !important;
-    margin-top: -2.5%;
-    opacity: 0;
-    transition: all 0.6s;
-}
-
-.view--more:active:after {
-    padding: 0;
-    margin: 0;
-    opacity: 1;
-    transition: 0s;
-}
-
-.drop__menu:after {
-    display: none;
-    content: "";
-    border-bottom: 0.9rem solid #017fff;
-    opacity: 0.8;
-    border-right: 1.2rem solid transparent;
-    border-left: 1rem solid transparent;
-    position: absolute;
-    right: -1.6em;
-    margin-top: 3px;
-    z-index: 10;
-    transform: rotate(90deg);
-}
-
-.dropdown-item:hover:after {
-    display: block;
 }
 

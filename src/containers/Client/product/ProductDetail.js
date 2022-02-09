@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getDetailProduct } from "services/userService";
 import './Style.scss'
@@ -13,57 +13,60 @@ import Footer from "containers/HomePage/Footer/Footer";
 import Accessories from "./Accessories";
 import ProductDesc from "./ProductDesc";
 import ProductSimilar from "./ProductSimilar";
-import BreadCumb from "./Breadcumb";
+import BreadCrumb from "./Breadcrumb";
 
 const ProductDetail = ({ match }) => {
   const [detailProduct, setDetailProduct] = useState({});
-
   const dispatch = useDispatch();
   const similarProducts = useSelector(state => state.admin.productSimilar);
-
-  // Fix memory leak
-  const _isMounted = useRef(true);
+  
+  // view detail product
   useEffect(() => {
-    return () => {
-        _isMounted.current = false;
-    }
-  }, []);
+    // const abortController = new AbortController();
+    // const signal = abortController.signal;
+    // getDetailProduct(match.params.id, {signal: signal})
+    //   .then(res => {setDetailProduct(res.data.detailProduct);})
+    //   .catch(err => {console.log(err)});
+    // return () => {
+    //   abortController.abort();
+    // };
 
-  useEffect(() => {
-    getDetailProduct(match.params.id).then(res => {
-      if (_isMounted.current) {
+    let isSubscribe = true;
+    getDetailProduct(match.params.id)
+    .then(res => {
+      if (isSubscribe) {
         setDetailProduct(res.data.detailProduct);
-     }
-    });
+      }
+    }).catch((error) => { console.log(error); });
+    return () => { isSubscribe = false };
   }, [ match.params.id ]);
 
+  // get similar product
   useEffect(() => {
     dispatch(actions.GetProductSimilar(match.params.id));
   }, [dispatch, match.params.id ]);
-
-  useEffect(() => {
-    document.title = `${detailProduct.name}-giá rẻ nhất vịnh Bắc Bộ`;
-  }, [detailProduct]);
-
+  
   // choose quantity order
   const qty = useSelector(state => state.client.qty);
   const incrementQty = () => {
     dispatch(actions.increment());
   };
-
   const decrementQty = () => {
     if(qty > 1) {
       dispatch(actions.decrement());
     }
   };
-
-
+  
+  useEffect(() => {
+    document.title = `${detailProduct.name}-giá rẻ nhất vịnh Bắc Bộ`;
+  }, [detailProduct]);
+  
   return (
     <>
       <Header/>
       <div className="main bg-light pb-3">
         <div className="container">
-          <BreadCumb detailProduct={detailProduct} />
+          <BreadCrumb detailProduct={detailProduct} />
           
           <div className="bg-white pt-4 pb-4 p-3 m-0 text-center row">
             <Illustrator detailProduct={detailProduct} />

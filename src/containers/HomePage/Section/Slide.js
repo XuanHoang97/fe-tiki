@@ -15,12 +15,12 @@ function Slide() {
         <div className="slide row">
             <div id="carousel-example-1z" className="carousel slide carousel-fade col-md-8 pr-0" data-ride="carousel">
                 <ol className="carousel-indicators control">
-                    <li style={{ width: '10px', height: '10px', borderRadius: '50%' }} data-target="#carousel-example-1z" data-slide-to={0} className="active" />
-                    <li style={{ width: '10px', height: '10px', borderRadius: '50%' }} data-target="#carousel-example-1z" data-slide-to={1} />
-                    <li style={{ width: '10px', height: '10px', borderRadius: '50%' }} data-target="#carousel-example-1z" data-slide-to={2} />
-                    <li style={{ width: '10px', height: '10px', borderRadius: '50%' }} data-target="#carousel-example-1z" data-slide-to={3} />
-                    <li style={{ width: '10px', height: '10px', borderRadius: '50%' }} data-target="#carousel-example-1z" data-slide-to={4} />
-                    <li style={{ width: '10px', height: '10px', borderRadius: '50%' }} data-target="#carousel-example-1z" data-slide-to={5} />
+                    <li data-target="#carousel-example-1z" data-slide-to={0} className="active" />
+                    <li data-target="#carousel-example-1z" data-slide-to={1} />
+                    <li data-target="#carousel-example-1z" data-slide-to={2} />
+                    <li data-target="#carousel-example-1z" data-slide-to={3} />
+                    <li data-target="#carousel-example-1z" data-slide-to={4} />
+                    <li data-target="#carousel-example-1z" data-slide-to={5} />
                 </ol>
 
                 <div className="list_slide carousel-inner">
@@ -29,7 +29,7 @@ function Slide() {
                         slides.map((item, index) =>{
                             return (  
                                 <div className={`carousel-item ${item.status}`} key={index}>   
-                                    <img className="w-100" style={{ height: '240px' }} src={item.image} alt="img slide" />
+                                    <img className="w-100" src={item.image} alt="img slide" />
                                 </div>
                             )
                         })

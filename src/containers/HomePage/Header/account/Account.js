@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 import { useHistory } from 'react-router';
@@ -7,59 +7,78 @@ import { path } from 'utils';
 import * as actions from './../../../../store/actions';
 import { Link } from 'react-router-dom';
 import {verifyToken} from './../../../../services/authService';
+import instance from './../../../../axios';
+import { getUser } from './../../../../store/actions';
 
+const token = localStorage.getItem('token');
 const Account = () => {
     const [hoverAccount, setHoverAccount] = useState(false);
     const [username, setUsername] = useState('');
-    const [token, setToken] = useState('');
+    // const [token, setToken] = useState('');
     const [expire, setExpire] = useState('');
     const history = useHistory();
     const dispatch = useDispatch();
     
+
     // Refresh token
+    const user = useSelector(state => state.auth.user);
+    console.log(user)
     useEffect(() => {
-        refreshToken();
+        if(token){
+            instance.get(`/user`,{
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(res => {
+                //luu thong tin user vao redux r truy xuat thoi,
+                dispatch(getUser(res))
+            })
+            .catch(err => {
+                localStorage.removeItem('token');
+                console.log(err);
+            })
+        }
     }, []);
+    // const refreshToken = async () => {
+    //     try {
+    //         const res = await verifyToken();
+    //         let token = res.data.accessToken;
+    //         setToken(token);
+    //         const decoded = jwt_decode(token);
+    //         setUsername(decoded.username);
+    //         setExpire(decoded.exp);
+    //     } catch (error) {
+    //         if (error.response) {
+    //             history.push(`${path.HOMEPAGE}`);
+    //         }
+    //     }
+    // }
 
-    // Get token
-    const refreshToken = async () => {
-        try {
-            const res = await verifyToken();
-            let token = res.data.accessToken;
-            setToken(token);
-            const decoded = jwt_decode(token);
-            setUsername(decoded.username);
-            setExpire(decoded.exp);
-        } catch (error) {
-            if (error.response) {
-                history.push(`${path.HOMEPAGE}`);
-            }
-        }
-    }
 
-    
-    const axiosJWT = axios.create();
-    // Add a request interceptor - refresh token
-    axiosJWT.interceptors.response.use(async (config) => {
-        const currentDate = new Date();
-        if (expire * 1000 < currentDate.getTime()) {
-            const res = await verifyToken();
-            let token = res.data.accessToken;
-            config.headers.Authorization = `Bearer ${token}`;
-            setToken(token);
-            const decoded = jwt_decode(token);
-            setUsername(decoded.username);
-            setExpire(decoded.exp);
-        }
-        return config;
-    }, (error) => {
-        return Promise.reject(error);
-    });
-
+    // const axiosJWT = axios.create();
+    // // Add a request interceptor - refresh token
+    // axiosJWT.interceptors.response.use(async (config) => {
+    //     const currentDate = new Date();
+    //     if (expire * 1000 < currentDate.getTime()) {
+    //         const res = await verifyToken();
+    //         let token = res.data.accessToken;
+    //         config.headers.Authorization = `Bearer ${token}`;
+    //         setToken(token);
+    //         const decoded = jwt_decode(token);
+    //         setUsername(decoded.username);
+    //         setExpire(decoded.exp);
+    //     }
+    //     return config;
+    // }, (error) => {
+    //     return Promise.reject(error);
+    // });
+    //login dau 
     //logout
     const Logout = async () => {
         try {
             dispatch(actions.logoutAccount());
+            localStorage.removeItem('token');
             window.location.reload();
         } catch (error) {
             console.log(error);
@@ -72,10 +91,10 @@ const Account = () => {
                 onMouseEnter={() => setHoverAccount(true)}
             >    
                 {
-                    token ?
+                    user ?
                     <React.Fragment>
                         <img src="https://avatars.githubusercontent.com/u/38268599?v=4" className='w-25 rounded-circle' alt="" />
-                        <b className='ml-2' style={{fontSize: '12px'}}>{username}</b>
+                        <b className='ml-2' style={{fontSize: '12px'}}>{user?.username}</b>
                     </React.Fragment>
                     :
                     <span>Tài khoản <i className="fas fa-sort-down"></i></span>

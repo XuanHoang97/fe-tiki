@@ -1,7 +1,5 @@
 import React, { useEffect} from 'react';
-import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import * as actions from "./../store/actions";
 
 import { ConnectedRouter as Router } from 'connected-react-router';
 import { history } from '../redux'
@@ -26,7 +24,7 @@ import SearchResult from './Client/search/SearchResult';
 
 console.warn = () => { };
 function App(props) {    
-    //login-logout -save localstorage
+    // Keep state when refresh page
     const handlePersistorState = () => {
         const { persistor } = props;
         let { bootstrapped } = persistor.getState();
@@ -72,17 +70,4 @@ function App(props) {
         </Router>
     )
 }
-
-const mapStateToProps = state => {
-    return {
-        isLoggedIn: state.user.isLoggedIn,
-        userInfo : state.user.userInfo
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        processLogout: () => dispatch(actions.processLogout()),
-    };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
