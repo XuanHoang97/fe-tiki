@@ -1,28 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import axios from 'axios';
-import jwt_decode from "jwt-decode";
-import { useHistory } from 'react-router';
 import { path } from 'utils';
 import * as actions from './../../../../store/actions';
 import { Link } from 'react-router-dom';
-import {verifyToken} from './../../../../services/authService';
 import instance from './../../../../axios';
 import { getUser } from './../../../../store/actions';
+import { useHistory } from 'react-router-dom';
 
 const token = localStorage.getItem('token');
 const Account = () => {
     const [hoverAccount, setHoverAccount] = useState(false);
-    const [username, setUsername] = useState('');
-    // const [token, setToken] = useState('');
-    const [expire, setExpire] = useState('');
-    const history = useHistory();
     const dispatch = useDispatch();
-    
-
-    // Refresh token
+    const history = useHistory();
     const user = useSelector(state => state.auth.user);
-    console.log(user)
+    
+    // Refresh token
     useEffect(() => {
         if(token){
             instance.get(`/user`,{
@@ -31,7 +23,6 @@ const Account = () => {
                 }
             })
             .then(res => {
-                //luu thong tin user vao redux r truy xuat thoi,
                 dispatch(getUser(res))
             })
             .catch(err => {
@@ -39,41 +30,8 @@ const Account = () => {
                 console.log(err);
             })
         }
-    }, []);
-    // const refreshToken = async () => {
-    //     try {
-    //         const res = await verifyToken();
-    //         let token = res.data.accessToken;
-    //         setToken(token);
-    //         const decoded = jwt_decode(token);
-    //         setUsername(decoded.username);
-    //         setExpire(decoded.exp);
-    //     } catch (error) {
-    //         if (error.response) {
-    //             history.push(`${path.HOMEPAGE}`);
-    //         }
-    //     }
-    // }
+    }, [dispatch]);
 
-
-    // const axiosJWT = axios.create();
-    // // Add a request interceptor - refresh token
-    // axiosJWT.interceptors.response.use(async (config) => {
-    //     const currentDate = new Date();
-    //     if (expire * 1000 < currentDate.getTime()) {
-    //         const res = await verifyToken();
-    //         let token = res.data.accessToken;
-    //         config.headers.Authorization = `Bearer ${token}`;
-    //         setToken(token);
-    //         const decoded = jwt_decode(token);
-    //         setUsername(decoded.username);
-    //         setExpire(decoded.exp);
-    //     }
-    //     return config;
-    // }, (error) => {
-    //     return Promise.reject(error);
-    // });
-    //login dau 
     //logout
     const Logout = async () => {
         try {
@@ -83,6 +41,16 @@ const Account = () => {
         } catch (error) {
             console.log(error);
         }
+    }
+
+    // update account
+    const UpdateAccount = async () => {
+        history.push(path.ACCOUNT);
+    }
+
+    // my order
+    const myOrder = async () => {
+        history.push(path.ORDER);
     }
 
     return (
@@ -106,17 +74,19 @@ const Account = () => {
                     onMouseLeave={() => setHoverAccount(false)}
                 >
                     {
-                        token ?
+                        user ?
                         <div className='acc-detail'>
-                            <div onClick={Logout} className="item-acc">
+                            <div onClick={UpdateAccount} className="item-acc">
+                                <img src="https://icones.pro/wp-content/uploads/2021/02/icone-utilisateur-vert.png" className='mr-2' style={{width: '8%'}}  alt="" />
+                                Tài khoản của tôi
+                            </div>
+
+                            <div onClick={myOrder} className="item-acc">
                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNU-ZEXVPgvlrEPzhaAIFjyRUaqglcuKdkx4lgk2r-ryshxRle56ba4S4SaUoI0GTf2Iw&usqp=CAU" className='mr-2' style={{width: '8%'}}  alt="" />
                                 Đơn hàng của tôi
                                 <span className='ml-3 text-danger'>0</span>    
                             </div>
-                            <div onClick={Logout} className="item-acc">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYkD-kTOQbIAe99FFsWVOUBkNU-yoXM1l4Ajodjy-NOcMucxsFQSB_3SdStbbueWQq-vk&usqp=CAU" className='mr-2' style={{width: '8%'}}  alt="" />
-                                Cập nhật tài khoản
-                            </div>
+                            
                             <div onClick={Logout} className="item-acc">
                                 <img src="https://www.clipartmax.com/png/middle/147-1470587_logout-logout-icon-red-png.png" className='mr-2' style={{width: '8%'}}  alt="" />           
                                 Đăng xuất

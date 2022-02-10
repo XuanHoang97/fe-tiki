@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Category from './Category';
 import Search from './search/Search';
 import CartHeader from './cart/Index';
-import MenuTop from './MenuTop';
+import Suggest from './Suggest';
 import './style/header.scss';
 import Account from './account/Account';
 import { path } from 'utils';
@@ -37,7 +37,7 @@ function Header() {
                         </div>
                     </nav>
                 </div>
-                <MenuTop />
+                <Suggest />
             </div>
         </div>
     );

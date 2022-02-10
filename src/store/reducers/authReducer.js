@@ -9,8 +9,6 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
-        // Register
-        // Login
         // Logout
         case actionTypes.LOGOUT_SUCCESS:
             return {
@@ -18,20 +16,13 @@ const authReducer = (state = initialState, action) => {
                 tokens: '',
                 isAuthenticated: false
             }
-            case actionTypes.GET_USER:
-                return {
-                    ...state,
-                    user: action.userInfo
-                }
-        // Refresh Token
-        case actionTypes.REFRESH_TOKEN_SUCCESS:
+
+        // Get user when Login
+        case actionTypes.GET_USER:
             return {
                 ...state,
-                tokens: action.payload,
-                isAuthenticated: true
+                user: action.userInfo
             }
-
-
 
         default:
             return state;

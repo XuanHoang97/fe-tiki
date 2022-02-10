@@ -1,9 +1,8 @@
 import axios from 'axios';
-import _ from 'lodash';
 import { path } from 'utils';
 
 const instance = axios.create({
-    baseURL: 'http://localhost:5000',
+    baseURL: `${path.PORT}`,
     headers: {
         'Content-Type': 'application/json'
     },

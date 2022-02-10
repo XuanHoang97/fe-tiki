@@ -11,6 +11,10 @@ export const path = {
     // Authentication
     REGISTER: '/account/register',
     LOGIN_AUTH: '/account/login',
+    ACCOUNT: '/account/profile',
+    CHANGE_PASSWORD: '/account/password',
+    ORDER: '/user/purchase',
+    NOTIFICATION: '/user/notifications/order',
 
 
     DETAIL_PRODUCT: '/products/:id',

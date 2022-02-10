@@ -8,7 +8,6 @@ import './style.scss'
 import instance from './../../../../axios';
 import { useDispatch } from 'react-redux';
 import { getUser } from 'store/actions';
-
  
 const LoginAuth = (props) => {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -35,7 +34,6 @@ const LoginAuth = (props) => {
                 }
                 setLoading(false);
             }, 2000);
-            console.log(user)// ko can, luu user thoi
             localStorage.setItem('token', res.data.accessToken);
         }catch(error){
             if (error?.response?.status === 400) {
@@ -44,10 +42,6 @@ const LoginAuth = (props) => {
                 setErrMail(error.response?.data.errMessage);
             }
         }
-    }
-
-    const handleShowPass = () => {
-        setShowPass(!showPass);
     }
  
     return (
@@ -87,7 +81,7 @@ const LoginAuth = (props) => {
                             />
                             <div className='text-danger'>{errors.password?.type === 'required' && "Vui lòng nhập mật khẩu"}</div>
 
-                            <span onClick={()=> handleShowPass()}>
+                            <span onClick={()=> setShowPass(!showPass)}>
                                 {
                                     showPass ? 
                                     <i className="showPass fas fa-eye"></i>:

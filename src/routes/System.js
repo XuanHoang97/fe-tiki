@@ -37,7 +37,6 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
         setWidthMenuRight(menuLeft ? '100%' : '82%');
     }
 
-
     //search
     const handleSearch = async() => {
         let res = await axios({
@@ -109,7 +108,6 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
                                     query={query}
                                     setQuery={setQuery}
                                     searchAdmin={searchAdmin}
-                                    
                                 />
                             </div>
 
@@ -138,23 +136,6 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
                 {!menuLeft ? <MenuLeftCollapse /> : ''}                
             
                 <div className="system-container bg-white py-3" style={{height: '90vh', overflowY: 'scroll', width: widthMenuRight, boxShadow: 'none'}}>
-                    
-                {/* {
-                    searchAdmin && searchAdmin.length > 0 ?
-                    <Switch>
-                        <Route exact path={path.SEARCH}>
-                            <Index searchAdmin={searchAdmin} />
-                        </Route>
-                    </Switch>
-                    :
-                    <Switch>
-                        <Route exact path={path.NOTFOUND}>
-                            <NotFound />
-                        </Route>
-                    </Switch>
-                } */}
-
-
                     <div className="system-list px-2">
                         <Switch>
                             <Route path="/system/dashboard" component={Dashboard} />

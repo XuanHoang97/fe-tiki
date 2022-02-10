@@ -103,7 +103,7 @@ const StatisticalManage = (props) => {
                             <input type="date" className="form-control col-8" />
                         </div>
 
-                        <div class="form-group d-flex col-4 p-0 mx-4">
+                        <div className="form-group d-flex col-4 p-0 mx-4">
                             <label className='col-4'>Đến ngày</label>
                             <input type="date" className="form-control col-8" />
                         </div>

@@ -1,6 +1,5 @@
 import React, { useEffect} from 'react';
 import { Route, Switch } from 'react-router-dom';
-
 import { ConnectedRouter as Router } from 'connected-react-router';
 import { history } from '../redux'
 import { ToastContainer } from 'react-toastify';
@@ -21,6 +20,7 @@ import NotFound from './HomePage/NotFound/Index';
 import Register from './HomePage/Header/account/Register';
 import LoginAuth from './HomePage/Header/account/Login';
 import SearchResult from './Client/search/SearchResult';
+import InfoAccount from './HomePage/Header/account/Profile/InfoAccount';
 
 console.warn = () => { };
 function App(props) {    
@@ -57,6 +57,8 @@ function App(props) {
                 {/* Authentication  */}
                 <Route path={path.REGISTER} component={Register} />
                 <Route path={path.LOGIN_AUTH} component={LoginAuth} />
+                <Route path={path.ACCOUNT} component={InfoAccount} />
+
 
                 {/* Order not login  */}
                 <Route path={path.CART} component={Cart} />

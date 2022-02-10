@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { path } from 'utils';
-import instance from './../axios';
+// import instance from './../axios';
 
 //login
 const handleLoginApi = (userEmail, userPassword) => {

@@ -27,3 +27,98 @@
         }
     }
 }
+
+.avatar{
+    gap: 15px;
+    align-items: center;
+    img{
+        width: 25%;
+    }
+    .info{
+        .name{
+            font-weight: 600;
+        }
+        .editProfile{
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: grey;
+        }
+    }
+}
+.module{
+    cursor: pointer;
+    .profile{
+        .title{
+            margin: 30px 0 5px 0;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            .illustration{
+                width: 8%;
+            }
+            span{
+                font-weight: 600;
+                color: #595959;
+            }
+        }
+        .item-profile{
+            margin-left: 30px;
+            .item-module{
+                margin: 10px 0;
+                padding: 5px 0;
+            }
+            .active{
+                background: orange;
+                font-weight: 600;
+            }
+            .item-module:hover{
+                background: orange;
+            }
+        }
+    }
+}
+
+.my_Order, .notification{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    cursor: pointer;
+    span{
+        font-weight: 600;
+        color: #595959;
+    }
+    .illustration{
+        width: 8%;
+    }
+}
+
+.activeOrder, .activeNotification{
+    background: orange;
+    font-weight: 600;
+}
+
+.statusOrder{
+    display: flex;
+    justify-content: space-between;
+}
+
+.infoProduct{
+    display: flex;
+    justify-content: space-between;
+    .imgProduct{
+        display: flex;
+        gap: 10px;
+    }
+}
+
+.totalPrice, .action{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 10px;
+    .price{
+        font-size: 20px;
+    }
+}

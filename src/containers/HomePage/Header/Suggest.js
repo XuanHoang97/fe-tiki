@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MenuTop = () => {
+const Suggest = () => {
     return (
         <div className="row menu--suggest pb-2 pl-3 pr-2 justify-content-between align-items-center">
             <div className="col-md-2">
@@ -25,4 +25,4 @@ const MenuTop = () => {
     );
 }
 
-export default MenuTop;
+export default Suggest;
