@@ -63,12 +63,12 @@ img {
                     background-color: rgba(0, 0, 0, 0.5);
                     pointer-events: none;
                 }
-                .menu_ctg:hover:after {
-                    z-index: 10;
-                    opacity: 1;
-                    visibility: visible;
-                    position: fixed;
-                }
+                // .menu_ctg:hover:after {
+                //     z-index: 10;
+                //     opacity: 1;
+                //     visibility: visible;
+                //     position: fixed;
+                // }
                 .navbar-brand {
                 }
                 .navbar-toggler {
@@ -109,7 +109,7 @@ img {
                                     position: absolute;
                                     z-index: 99;
                                     height: auto;
-                                    width: 555px;
+                                    width: 565px;
                                     box-shadow: rgb(121, 121, 121) 0px 6px 12px 0px;
                                     .search__items:hover {
                                         background: rgb(227, 242, 252);
@@ -207,7 +207,7 @@ img {
                                         }
                                         .list__prod {
                                             display: grid;
-                                            grid-template-columns: 1fr 1fr 1fr 1fr;
+                                            grid-template-columns: repeat(5,1fr);
                                             .item--prod {
                                                 display: grid;
                                                 grid-template-rows: 50% 50%;

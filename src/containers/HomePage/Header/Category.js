@@ -31,7 +31,7 @@ export default function Category() {
   return (
     <React.Fragment>
       <li className="menu_ctg nav-item dropdown mr-2 active"
-        onMouseEnter={() => viewCategory()}
+        onClick={() => viewCategory()}
       >
         <Link className="category nav-link dropdown-toggle" to={path.HOMEPAGE}>
           <i className="fas fa-bars mr-2" />

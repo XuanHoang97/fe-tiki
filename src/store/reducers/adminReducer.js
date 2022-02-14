@@ -1,5 +1,8 @@
 import actionTypes from '../actions/actionTypes';
 
+const keywordSearchLocal = localStorage.getItem('keywordSearch') || '';
+const urlSearchLocal = localStorage.getItem('urlSearch') || '';
+
 const initialState = {
     genders: [],
     roles: [],
@@ -7,6 +10,10 @@ const initialState = {
     users: [],
     products: [],
     productSimilar: [],
+
+    keywordSearch: keywordSearchLocal,
+    urlSearch: '',
+    dataSearch: [],
 
     categories: [],
     news: [],
@@ -58,11 +65,35 @@ const adminReducer = (state = initialState, action) => {
                 users : action.payload,
             }
 
-            //search user
-        case actionTypes.SEARCH_USER_SUCCESS:
+
+            // keyword search
+            case actionTypes.SEARCH_KEYWORD:
+                localStorage.setItem('keywordSearch', action.payload);
             return {
                 ...state,
-                users : action.payload,
+                keywordSearch: action.payload
+            }
+
+            // url search
+            case actionTypes.SEARCH_URL:
+                localStorage.setItem('urlSearch', action.payload);
+            return {
+                ...state,
+                urlSearch: action.payload
+            }
+
+        //search
+        case actionTypes.SEARCH_SUCCESS:
+            return {
+                ...state,
+                dataSearch : action.payload,
+            }
+
+            // filter product by price
+        case actionTypes.FILTER_PRODUCT_SUCCESS:
+            return {
+                ...state,
+                dataSearch : action.payload,
             }
             
             //fetch all product
@@ -92,6 +123,13 @@ const adminReducer = (state = initialState, action) => {
                 ...state,
                 optionProduct : action.payload,
             }
+
+            // filter product
+        // case actionTypes.FILTER_PRODUCT_SUCCESS:
+        //     return {
+        //         ...state,
+        //         filterProduct : action.payload,
+        //     }
 
         //get product similar
         case actionTypes.FETCH_PRODUCT_SIMILAR_SUCCESS:

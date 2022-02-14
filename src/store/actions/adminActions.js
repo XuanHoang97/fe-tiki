@@ -5,7 +5,8 @@ import {
     createUser,
     deleteUserService,
     editUserService,
-    searchUser,
+    search,
+    FilterProductByPrice,
 } from "../../services/userService"
 import { toast } from "react-toastify"
 
@@ -187,32 +188,73 @@ export const editUser = (data) => {
     }
 }
 
-//SEARCH USER
-export const searchUserInfo = (keyword) => {
+//SEARCH
+
+// keyword search
+export const keywordSearch = (data) => {
+    return ({
+        type: actionTypes.SEARCH_KEYWORD,
+        payload: data
+    })
+}
+
+export const urlSearch = (data) => {
+    return ({
+        type: actionTypes.SEARCH_URL,
+        payload: data
+    })
+}
+
+export const searchResult = (keyword) => {
     return async(dispatch, getState) => {
         try {
-            let res = await searchUser(keyword);
+            let res = await search(keyword);
             if (res && res.data.errCode === 0) {
                 dispatch({
-                    type: actionTypes.SEARCH_USER_SUCCESS,
-                    payload: res.data.users
+                    type: actionTypes.SEARCH_SUCCESS,
+                    payload: res.data.info
                 })
             } else {
                 dispatch({
-                    type: actionTypes.SEARCH_USER_FAILED
+                    type: actionTypes.SEARCH_FAILED
                 });
-                toast.error('search user error !')
+                toast.error('search error !')
             }
         } catch (e) {
-            toast.error('search user error !')
+            toast.error('search error !')
             dispatch({
-                type: actionTypes.SEARCH_USER_FAILED
+                type: actionTypes.SEARCH_FAILED
             });
-            console.log('searchUserFailed error', e)
+            console.log('searchFailed error', e)
         }
     }
 }
 
+// Filter product by price
+export const filterProductByPrice = (keyword, priceFrom, priceTo) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await FilterProductByPrice(keyword, priceFrom, priceTo);
+            if (res && res.data.errCode === 0) {
+                dispatch({
+                    type: actionTypes.FILTER_PRODUCT_SUCCESS,
+                    payload: res.data.info
+                })
+            } else {
+                dispatch({
+                    type: actionTypes.FILTER_PRODUCT_FAILED
+                });
+                toast.error('filter error !')
+            }
+        } catch (e) {
+            toast.error('filter error !')
+            dispatch({
+                type: actionTypes.FILTER_PRODUCT_FAILED
+            });
+            console.log('filterFailed error', e)
+        }
+    }
+}
 
 
 

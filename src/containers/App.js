@@ -19,7 +19,7 @@ import VerifyEmail from './Client/Check_order/VerifyEmail';
 import NotFound from './HomePage/NotFound/Index';
 import Register from './HomePage/Header/account/Register';
 import LoginAuth from './HomePage/Header/account/Login';
-import SearchResult from './Client/search/SearchResult';
+import SearchResult from './HomePage/Header/search/Result';
 import InfoAccount from './HomePage/Header/account/Profile/InfoAccount';
 
 console.warn = () => { };

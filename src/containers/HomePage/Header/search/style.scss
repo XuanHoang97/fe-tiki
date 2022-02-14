@@ -1,0 +1,12 @@
+.item__price, .item__address {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    span{
+        font-size: 12px;
+        cursor: pointer;
+    }
+    span:hover{
+        color: #ff5a5f;
+    }
+}

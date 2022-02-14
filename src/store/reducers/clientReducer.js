@@ -15,12 +15,6 @@ const initialState = {
 const clientReducer = (state = initialState, action) => {
     switch (action.type) {
         //QUANTITY
-        case actionTypes.ADD_PRODUCT:
-            return {
-                ...state,
-                productDetail: action.payload
-            }
-
         case actionTypes.COUNT:
             return {
                 ...state,

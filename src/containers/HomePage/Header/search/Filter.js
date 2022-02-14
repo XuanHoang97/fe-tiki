@@ -1,99 +1,72 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import './style.scss'
+import {useDispatch, useSelector} from 'react-redux';
+import * as actions from './../../../../store/actions';
 
 function Filter(props) {
+    const [priceFrom, setPriceFrom] = useState(0);
+    const [priceTo, setPriceTo] = useState(0);
+    const dispatch = useDispatch();
+    const filterProduct = useSelector(state => state.admin.filterProduct);
+    const keyword = useSelector(state => state.admin.keywordSearch);
+
+    useEffect(() => {
+        dispatch(actions.filterProductByPrice(keyword, priceFrom, priceTo));
+    }, []);
+
+    const handleFilterProduct = (e) => {
+        dispatch(actions.filterProductByPrice(keyword, priceFrom, priceTo));
+    }
+
+    console.log('filterProduct:', filterProduct);
+
+
     return (
-        <div className="sort">
-            <div className="category">
-                <h6>DANH MỤC SẢN PHẨM</h6>
-                <p>Tai nghe có dây nhét tai</p>
-                <p>Điện thoại Smartphone</p>
-                <p>Tai nghe</p>
-                <p>Phụ kiện máy ảnh</p>
-
-                <div className="viewMore text-primary small">Xem thêm
-                    <i className="fas fa-sort-down  ml-1"></i>
-                </div>
+        <div className="sort col-2 border-right">
+            <div className="addr border-bottom py-3">
+                <h6>ĐỊA CHỈ NHẬN HÀNG</h6>
+                <div className='font-weight-bold'>Ba Đình, Hà Nội</div>
+                <div className="text-primary"> Đổi địa chỉ</div>
             </div>
 
-            <div className="addr__receive">
-                <h5>ĐỊA CHỈ NHẬN HÀNG</h5>
-                <h6>P. Yên NGhĩa, Q. Hà Đông, Hà Nội</h6>
-                <div className="change__addr text-primary">
-                    ĐỔI ĐỊA CHỈ
+            <div className="price border-bottom py-3">
+                <h6>GIÁ CẢ</h6>
+                <div className="item__price">
+                    <span>Dưới 1.000.000</span>
                 </div>
+
+                <div className="item__price">
+                    <span>Từ 1.000.000 - 5.000.000</span>
+                </div>
+
+                <div className="item__price">
+                    <span>Từ 5.000.000 - 10.000.000</span>
+                </div>
+
+                <div className="item__price">
+                    <span>Trên 10.000.000</span>
+                </div>
+
+                {/* between price */}
+                <div className="text-primary mt-3">Khoảng giá</div>
+                <div className="form-group d-flex">
+                  <input type="text" className="form-control col-6" 
+                    value={priceFrom}
+                    onChange={(e) => setPriceFrom(e.target.value)}
+                  />
+                  <input type="text" className="form-control col-6" 
+                    value={priceTo}
+                    onChange={(e) => setPriceTo(e.target.value)}
+                  />
+                </div>
+                <button onClick={()=> handleFilterProduct()} type="button" className="btn btn-primary px-3">Tìm</button>
             </div>
 
-            <div className="service">
-                <h6>DỊCH VỤ</h6>
-                <div className="item__service">
-                    <input type="checkbox" name="" id="" />
-                    <img src="https://salt.tikicdn.com/ts/upload/f9/ad/0e/a8a97f5ac7661d637942b42796893662.png" alt="" />
-                    <span>Giao siêu tốc 2H</span>
-                </div>
-
-                <div className="item__service">
-                    <input type="checkbox" name="" id="" />
-                    <img src="https://salt.tikicdn.com/ts/upload/af/84/fc/2037c3b93a81767aed21358ebf3f8b8e.png" alt="" />
-                    <span>Không giới hạn</span>
-                </div>
-
-                <div className="item__service">
-                    <input type="checkbox" name="" id="" />
-                    <span>Rẻ hơn hoàn tiền</span>
-                </div>
-            </div>
-
-            <div className="branding">
-                <h6>THƯƠNG HIỆU</h6>
-                <div className="item__branding">
-                    <input type="checkbox" name="" id="" />
-                    <span>Giao siêu tốc 2H</span>
-                </div>
-
-                <div className="item__branding">
-                    <input type="checkbox" name="" id="" />
-                    <span>Không giới hạn</span>
-                </div>
-
-                <div className="item__branding">
-                    <input type="checkbox" name="" id="" />
-                    <span>Rẻ hơn hoàn tiền</span>
-                </div>
-            </div>
-
-            <div className="branding">
-                <h6>KIỂU TAI NGHE</h6>
-                <div className="item__branding">
-                    <input type="checkbox" name="" id="" />
-                    <span>Giao siêu tốc 2H</span>
-                </div>
-
-                <div className="item__branding">
-                    <input type="checkbox" name="" id="" />
-                    <span>Không giới hạn</span>
-                </div>
-
-                <div className="item__branding">
-                    <input type="checkbox" name="" id="" />
-                    <span>Rẻ hơn hoàn tiền</span>
-                </div>
-            </div>
-
-            <div className="branding">
-                <h6>MÀU SẮC</h6>
-                <div className="item__branding">
-                    <input type="checkbox" name="" id="" />
-                    <span>Giao siêu tốc 2H</span>
-                </div>
-
-                <div className="item__branding">
-                    <input type="checkbox" name="" id="" />
-                    <span>Không giới hạn</span>
-                </div>
-
-                <div className="item__branding">
-                    <input type="checkbox" name="" id="" />
-                    <span>Rẻ hơn hoàn tiền</span>
+            <div className="address border-bottom py-3">
+                <h6>NƠI BÁN</h6>
+                <div className="item__address">
+                    <input type="checkbox"/>
+                    <span>Hà Nội</span>
                 </div>
             </div>
         </div>

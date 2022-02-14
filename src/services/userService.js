@@ -35,9 +35,13 @@ const getAllCodeService = (inputType) => {
     return axios.get(`${path.PORT}/allcode?type=${inputType}`)
 }
 
-//search user
-const searchUser= (keyword) => {
-    return axios.post(`${path.PORT}/search?keyword=${keyword}`)
+//search
+const search= (keyword) => {
+    return axios.get(`${path.PORT}/search?keyword=${keyword}`)
+}
+
+const FilterProductByPrice= (keyword, priceFrom, priceTo) => {
+    return axios.get(`${path.PORT}/search?keyword=${keyword}&priceFrom=${priceFrom}&priceTo=${priceTo}`)
 }
 
 //get all product
@@ -89,6 +93,12 @@ const editInfoProduct = (inputData) => {
 const saveOptionProduct = (data) => {
     return axios.post(`${path.PORT}/save-option-product`, data)
 }
+
+// filter product
+const filterProduct = (priceFrom, priceTo) => {
+    return axios.get(`${path.PORT}/filter-product?priceFrom=${priceFrom}&priceTo=${priceTo}`)
+}
+
 
 //get all article
 const getAllArticle = (articleId) => {
@@ -211,7 +221,8 @@ export {
     deleteUserService,
     editUserService,
     getAllCodeService,
-    searchUser,
+    search,
+    FilterProductByPrice,
 
     getAllProduct,
     getAllCategory,
@@ -229,6 +240,7 @@ export {
     saveInfoProduct,
     editInfoProduct,
     saveOptionProduct,
+    filterProduct,
 
     deleteCategory,
     editCategory,

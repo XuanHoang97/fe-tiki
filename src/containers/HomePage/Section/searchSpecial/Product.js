@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Rate from '../Rate';
-function SearchProduct(props) {
+function Product(props) {
     return (
         <div className="list__prod">
             <Link to="">
@@ -17,4 +17,4 @@ function SearchProduct(props) {
     );
 }
 
-export default SearchProduct;
+export default Product;

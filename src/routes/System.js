@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { connect } from "react-redux";
-import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import * as actions from "./../store/actions";
 
 import UserManage from '../containers/System/Admin/UserManage';
@@ -14,68 +14,20 @@ import StatisticalManage from '../containers/System/Statistical/Statistical';
 import Setting from '../containers/System/Setting/Index';
 import Notification from '../containers/Header/notification/Notification';
 import Search from '../containers/Header/Search';
-import axios from 'axios';
 import MenuLeft from '../containers/Header/menuLeft/MenuLeft';
 import MenuLeftCollapse from '../containers/Header/menuLeft/MenuLeftCollapse';
-import { path } from '../utils';
-import NotFound from '../containers/System/Search/NotFound';
-import Index from '../containers/System/Search/Index';
 import Multimedia from '../containers/System/Multimedia/Index';
 import SupplierManage from 'containers/System/supplier/SupplierManage';
 
 const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
     const [menuLeft, setMenuLeft] = useState(true);
     const [widthMenuRight, setWidthMenuRight] = useState('82%');
-    const [widthMenuLeft, setWidthMenuLeft] = useState('18%');
-    const [searchAdmin, setSearchAdmin] = useState([]);
-    const [query, setQuery] = useState('');
-    const history = useHistory();
+    const [widthMenuLeft] = useState('18%');
 
     //toggle menu left
     const toggleMenu = () => {
         setMenuLeft(!menuLeft);
         setWidthMenuRight(menuLeft ? '100%' : '82%');
-    }
-
-    //search
-    const handleSearch = async() => {
-        let res = await axios({
-            method: 'GET',
-            'url': `${path.PORT}/search`,
-            "params": { 
-                'keyword': query 
-            }
-        });
-
-        if(res && res.data && res.data.info) {
-            let raw = res.data.info;
-            let result = [];
-
-            if(raw && raw.length > 0) {
-                raw.map((item, index) => {
-                    let object = {};
-                    object.firstName = item.firstName;
-                    object.lastName = item.lastName;
-                    object.email = item.email;
-                    object.phoneNumber = item.phoneNumber;
-                    object.address = item.address;
-                    object.image = item.image;
-                    result.push(object);
-                });
-            }
-            setSearchAdmin(result);
-            setQuery('');
-            console.log('data search:', searchAdmin);
-
-            // history.push(`${path.SEARCH}/keyword=${query}`);
-        }
-    }
-
-    //press enter search
-    const handleKeyDown=(e)=>{
-        if(e.key=== 'Enter' || e.keyCode=== 13){     
-            handleSearch();
-        }
     }
 
     useEffect(() => {
@@ -102,13 +54,7 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
                                     onClick={() => toggleMenu()}  
                                     style={{cursor: 'pointer'}}><i className="fas fa-bars"></i>
                                 </span>  
-                                <Search 
-                                    handleSearch={handleSearch}
-                                    handleKeyDown={handleKeyDown}
-                                    query={query}
-                                    setQuery={setQuery}
-                                    searchAdmin={searchAdmin}
-                                />
+                                <Search />
                             </div>
 
                             <div className="account d-flex align-items-center">

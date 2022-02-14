@@ -9,6 +9,7 @@ import {
     editInfoProduct,
     getProductSimilar,
     saveOptionProduct,
+    filterProduct,
 
     getAllArticle,
 } from "../../services/userService"
@@ -286,6 +287,32 @@ export const SelectOptionProduct = (data) => {
         }
     }
 }
+
+// filter product
+// export const FilterProduct = (priceFrom, priceTo) => {
+//     return async(dispatch, getState) => {
+//         try {
+//             let res = await filterProduct(priceFrom, priceTo);
+//             if (res && res.data.errCode === 0) {
+//                 dispatch({
+//                     type: actionTypes.FILTER_PRODUCT_SUCCESS,
+//                     payload: res.data.products
+//                 });
+//             } else {
+//                 dispatch({
+//                     type: actionTypes.FILTER_PRODUCT_FAILED,
+//                 });
+//             }
+//         } catch (e) {
+//             dispatch({
+//                 type: actionTypes.FILTER_PRODUCT_FAILED,
+//             }); 
+//             console.log('FilterProductFailed error', e)
+//         }
+//     }
+// }
+
+
 
 //get all article
 export const GetAllArticle = () => {
