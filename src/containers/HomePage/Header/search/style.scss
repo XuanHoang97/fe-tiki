@@ -1,12 +1,27 @@
-.item__price, .item__address {
+.item__price{
+    background: #dddddd;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    padding: 0 5px;
+    cursor: pointer;
+    span{
+        font-size: 12px;
+    }
+    span:hover{
+        color: #3431ff;
+    }
+}
+
+.item__address {
     display: flex;
     align-items: center;
     gap: 10px;
-    span{
-        font-size: 12px;
-        cursor: pointer;
-    }
-    span:hover{
-        color: #ff5a5f;
-    }
+    font-size: 13px;
+}
+
+.priceBetween, .findProd{
+    height: 25px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
 }

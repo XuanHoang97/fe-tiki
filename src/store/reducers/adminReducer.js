@@ -1,7 +1,7 @@
 import actionTypes from '../actions/actionTypes';
 
 const keywordSearchLocal = localStorage.getItem('keywordSearch') || '';
-const urlSearchLocal = localStorage.getItem('urlSearch') || '';
+// const urlSearchLocal = localStorage.getItem('urlSearch') || '';
 
 const initialState = {
     genders: [],

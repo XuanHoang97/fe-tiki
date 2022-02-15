@@ -13,7 +13,6 @@ import Footer from "containers/HomePage/Footer/Footer";
 import Accessories from "./Accessories";
 import ProductDesc from "./ProductDesc";
 import ProductSimilar from "./ProductSimilar";
-import BreadCrumb from "./Breadcrumb";
 
 const ProductDetail = ({ match }) => {
   const [detailProduct, setDetailProduct] = useState({});
@@ -22,23 +21,10 @@ const ProductDetail = ({ match }) => {
   
   // view detail product
   useEffect(() => {
-    // const abortController = new AbortController();
-    // const signal = abortController.signal;
-    // getDetailProduct(match.params.id, {signal: signal})
-    //   .then(res => {setDetailProduct(res.data.detailProduct);})
-    //   .catch(err => {console.log(err)});
-    // return () => {
-    //   abortController.abort();
-    // };
-
-    let isSubscribe = true;
     getDetailProduct(match.params.id)
     .then(res => {
-      if (isSubscribe) {
         setDetailProduct(res.data.detailProduct);
-      }
     }).catch((error) => { console.log(error); });
-    return () => { isSubscribe = false };
   }, [ match.params.id ]);
 
   // get similar product
@@ -66,8 +52,6 @@ const ProductDetail = ({ match }) => {
       <Header/>
       <div className="main bg-light pb-3">
         <div className="container">
-          <BreadCrumb detailProduct={detailProduct} />
-          
           <div className="bg-white pt-4 pb-4 p-3 m-0 text-center row">
             <Illustrator detailProduct={detailProduct} />
             <Order 

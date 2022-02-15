@@ -10,6 +10,24 @@ import {
 } from "../../services/userService"
 import { toast } from "react-toastify"
 
+// Login admin
+export const addUserSuccess = () => ({
+    type: actionTypes.ADD_USER_SUCCESS
+})
+
+export const userLoginSuccess = (userInfo) => ({
+    type: actionTypes.USER_LOGIN_SUCCESS,
+    userInfo: userInfo,
+})
+
+export const userLoginFail = () => ({
+    type: actionTypes.USER_LOGIN_FAIL
+})
+
+export const processLogout = () => ({
+    type: actionTypes.PROCESS_LOGOUT
+})
+
 //fetch gender
 export const fetchGenderStart = () => {
     return async(dispatch, getState) => {
@@ -231,10 +249,10 @@ export const searchResult = (keyword) => {
 }
 
 // Filter product by price
-export const filterProductByPrice = (keyword, priceFrom, priceTo) => {
+export const filterProductByPrice = (keyword, price, priceFrom, priceTo) => {
     return async(dispatch, getState) => {
         try {
-            let res = await FilterProductByPrice(keyword, priceFrom, priceTo);
+            let res = await FilterProductByPrice(keyword, price, priceFrom, priceTo);
             if (res && res.data.errCode === 0) {
                 dispatch({
                     type: actionTypes.FILTER_PRODUCT_SUCCESS,

@@ -44,28 +44,28 @@ const ModalOrderNow = (props) => {
         setLoadingOrder(true);
 
         //away duplicate data
-        const newCart = carts.map(cart => {
+        let newCart = carts.map(cart => {
             return {
                 productId: cart.id,
                 qty: cart.qty,
                 price: cart.price,
                 name: cart.name,
                 image: cart.image,
-                sale_off: cart.sale_off,
-                total: cart.total
+                sale_off: saleOff,
+                total: cart.price-saleOff,
             }
         })
         let res = await createOrder({
             arrOrder: newCart, 
-            total : numberFormat(totalMoney(carts)),
+            total : totalMoney(newCart)-saleOff,
             username: data.username,
             phone: data.phone,
             address: data.address,
             email: data.email,
 
             note: data.note,
-            delivery: data.delivery_method,
-            payment: data.payment_method
+            delivery: data.delivery,
+            payment: data.payment,
         });
         
         setLoadingOrder(false);
@@ -77,6 +77,8 @@ const ModalOrderNow = (props) => {
         }else{
             toast.error('Đặt hàng thất bại');
         } 
+
+        // console.log('newcart', newCart, totalMoney(newCart)-saleOff, data.username, data.phone, data.address, data.email, data.note, data.delivery, data.payment);
     }
     
     return (    
@@ -128,7 +130,7 @@ const ModalOrderNow = (props) => {
 
                                             <div className='col-3 text-right'>
                                                 <div className='text-danger'>{numberFormat(item.price)}</div>
-                                                <del className='text-secondary small'>{item.sale}</del>
+                                                <del className='text-secondary small'>{numberFormat(item.sale)}</del>
                                             </div>
                                         </div>
                                     )
@@ -219,10 +221,10 @@ const ModalOrderNow = (props) => {
                                                 return (
                                                     <div className="radio mr-4" key={index}>
                                                         <label>
-                                                            <input type="radio" name="delivery" 
-                                                                {...register('delivery', {
-                                                                    required: true,
-                                                                })}
+                                                            <input type="radio" 
+                                                                name="delivery" 
+                                                                value={item.valueVi}
+                                                                {...register('delivery', { required: true, })}
                                                             />
                                                             <span>{item.valueVi}</span>
                                                         </label>
@@ -243,10 +245,10 @@ const ModalOrderNow = (props) => {
                                                 return (
                                                     <div className="radio mr-4" key={index}>
                                                         <label>
-                                                            <input type="radio" name="payment"
-                                                                { ...register('payment', {
-                                                                    required: true,
-                                                                })}
+                                                            <input type="radio" 
+                                                                name='payment'
+                                                                value={item.valueVi}
+                                                                {...register('payment', { required: true,})}
                                                             />
                                                             <span>{item.valueVi}</span>
                                                         </label>
@@ -269,9 +271,7 @@ const ModalOrderNow = (props) => {
                             </div>
                         </div>
                     </div>
-                    
                     </ModalBody>
-
                     <ModalFooter>
                         <Button color="success" className="px-4 font-weight-normal" type='submit'>
                             HOÀN TẤT ĐẶT HÀNG

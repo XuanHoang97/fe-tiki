@@ -113,7 +113,7 @@ export const getAllOrder = () => {
             if(res && res.data.errCode === 0){
                 dispatch({
                     type: actionTypes.FETCH_ALL_ORDER_SUCCESS,
-                    payload: res.data.result
+                    payload: res.data.result.reverse()
                 });
             }else{
                 dispatch({

@@ -1,27 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import './style.scss'
-import {useDispatch, useSelector} from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import './style.scss';
 import * as actions from './../../../../store/actions';
 
 function Filter(props) {
-    const [priceFrom, setPriceFrom] = useState(0);
-    const [priceTo, setPriceTo] = useState(0);
+    const {keyword, priceFrom, priceTo, setPriceFrom, setPriceTo, handleFilterProduct} = props;
     const dispatch = useDispatch();
-    const filterProduct = useSelector(state => state.admin.filterProduct);
-    const keyword = useSelector(state => state.admin.keywordSearch);
-
-    useEffect(() => {
-        dispatch(actions.filterProductByPrice(keyword, priceFrom, priceTo));
-    }, []);
-
-    const handleFilterProduct = (e) => {
-        dispatch(actions.filterProductByPrice(keyword, priceFrom, priceTo));
-    }
-
-    console.log('filterProduct:', filterProduct);
-
+    const minPrice = 1000000;
 
     return (
+
         <div className="sort col-2 border-right">
             <div className="addr border-bottom py-3">
                 <h6>ĐỊA CHỈ NHẬN HÀNG</h6>
@@ -31,15 +19,15 @@ function Filter(props) {
 
             <div className="price border-bottom py-3">
                 <h6>GIÁ CẢ</h6>
-                <div className="item__price">
+                <div className="item__price" onClick={()=>dispatch(actions.filterProductByPrice(keyword, minPrice, priceFrom, priceTo))}>
                     <span>Dưới 1.000.000</span>
                 </div>
 
-                <div className="item__price">
+                <div className="item__price" onClick={()=>dispatch(actions.filterProductByPrice(keyword,0, 1000000, 5000000))}>
                     <span>Từ 1.000.000 - 5.000.000</span>
                 </div>
 
-                <div className="item__price">
+                <div className="item__price" onClick={()=>dispatch(actions.filterProductByPrice(keyword,0, 5000000, 10000000))}>
                     <span>Từ 5.000.000 - 10.000.000</span>
                 </div>
 
@@ -48,18 +36,19 @@ function Filter(props) {
                 </div>
 
                 {/* between price */}
-                <div className="text-primary mt-3">Khoảng giá</div>
+                <div className="mt-4">Khoảng giá</div>
                 <div className="form-group d-flex">
-                  <input type="text" className="form-control col-6" 
+                <input type="text" className="priceBetween form-control col-6" placeholder='0'
                     value={priceFrom}
-                    onChange={(e) => setPriceFrom(e.target.value)}
-                  />
-                  <input type="text" className="form-control col-6" 
+                    onChange={(e) => setPriceFrom(e.target.value.replace(/[^0-9]/g, ''))}
+                />
+
+                <input type="text" className="priceBetween form-control col-6" placeholder='0'
                     value={priceTo}
-                    onChange={(e) => setPriceTo(e.target.value)}
-                  />
+                    onChange={(e) => setPriceTo(e.target.value.replace(/[^0-9]/g, ''))}
+                />
                 </div>
-                <button onClick={()=> handleFilterProduct()} type="button" className="btn btn-primary px-3">Tìm</button>
+                <button onClick={()=> handleFilterProduct()} type="button" className="findProd btn btn-warning px-3">Áp dụng</button>
             </div>
 
             <div className="address border-bottom py-3">
@@ -67,6 +56,11 @@ function Filter(props) {
                 <div className="item__address">
                     <input type="checkbox"/>
                     <span>Hà Nội</span>
+                </div>
+
+                <div className="item__address">
+                    <input type="checkbox"/>
+                    <span>TP. HCM</span>
                 </div>
             </div>
         </div>
