@@ -6,12 +6,37 @@ import ChangePassword from './ChangePassword';
 import Profile from './Profile';
 import Purchase from '../MyOrder/Purchase';
 import Order from '../notification/Order';
+import { useSelector, useDispatch } from 'react-redux';
+import instance from './../../../../../axios';
+import { getUser } from 'store/actions';
 
 function InfoAccount(props) {
+    const dispatch = useDispatch();
+    const token = localStorage.getItem('token');
+    const user = useSelector(state => state.auth.user);
+
+    // Refresh token
+    useEffect(() => {
+        if(token){
+            instance.get(`/user`,{
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(res => {
+                dispatch(getUser(res))
+            })
+            .catch(err => {
+                localStorage.removeItem('token');
+                console.log(err);
+            })
+        }
+    }, [dispatch, token]);
+    
     useEffect(() => {
         document.title = 'Thông tin tài khoản';
     }, []);
-
+    
     return (
         <div className='bg-light'>
             <Header />
@@ -21,7 +46,7 @@ function InfoAccount(props) {
                         <div className='avatar d-flex'>
                             <img src="https://cf.shopee.vn/file/0da87e797bc536f57ff4dadbd8781db4_tn" className='rounded-circle'  alt="" />
                             <div className='info'>
-                                <div className='name'>Lê Xuân Hoàng</div>
+                                <div className='name'>{ user ? user.username : '' }</div>
                                 <div className='editProfile'>
                                     <i className="fas fa-edit"></i>
                                     <span>Sửa hồ sơ</span>
@@ -59,9 +84,9 @@ function InfoAccount(props) {
                     <div className='col-10 bg-white p-4'>
                         <Switch>
                             <Route exact path={path.ACCOUNT} component={Profile} />
-                            <Route exact path={path.CHANGE_PASSWORD} component={ChangePassword} />
-                            <Route exact path={path.ORDER} component={Purchase} />
-                            <Route exact path={path.NOTIFICATION} component={Order} />
+                            <Route path={path.CHANGE_PASSWORD} component={ChangePassword} />
+                            <Route path={path.ORDER} component={Purchase} />
+                            <Route path={path.NOTIFICATION} component={Order} />
                         </Switch>
                     </div>
                 </div>

@@ -65,7 +65,6 @@ const adminReducer = (state = initialState, action) => {
                 users : action.payload,
             }
 
-
             // keyword search
             case actionTypes.SEARCH_KEYWORD:
                 localStorage.setItem('keywordSearch', action.payload);

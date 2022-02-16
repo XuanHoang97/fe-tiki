@@ -43,16 +43,6 @@ const Account = () => {
         }
     }
 
-    // update account
-    const UpdateAccount = async () => {
-        history.push(path.ACCOUNT);
-    }
-
-    // my order
-    const myOrder = async () => {
-        history.push(path.ORDER);
-    }
-
     return (
         <React.Fragment>
             <span className='account d-flex align-items-center text-white pl-3'
@@ -76,12 +66,12 @@ const Account = () => {
                     {
                         user ?
                         <div className='acc-detail'>
-                            <div onClick={UpdateAccount} className="item-acc">
+                            <div onClick={()=>history.push(path.ACCOUNT)} className="item-acc">
                                 <img src="https://icones.pro/wp-content/uploads/2021/02/icone-utilisateur-vert.png" className='mr-2' style={{width: '8%'}}  alt="" />
                                 Tài khoản của tôi
                             </div>
 
-                            <div onClick={myOrder} className="item-acc">
+                            <div onClick={()=>history.push(path.ORDER)} className="item-acc">
                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNU-ZEXVPgvlrEPzhaAIFjyRUaqglcuKdkx4lgk2r-ryshxRle56ba4S4SaUoI0GTf2Iw&usqp=CAU" className='mr-2' style={{width: '8%'}}  alt="" />
                                 Đơn hàng của tôi
                                 <span className='ml-3 text-danger'>0</span>    

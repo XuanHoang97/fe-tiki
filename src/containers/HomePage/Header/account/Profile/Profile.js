@@ -1,6 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import instance from './../../../../../axios';
+import { getUser } from 'store/actions';
 
 function Profile(props) {
+    const dispatch = useDispatch();
+    const token = localStorage.getItem('token');
+    const user = useSelector(state => state.auth.user);
+
+    const [userInfo, setUserInfo] = useState([])
+    const [phone, setPhone] = useState('');
+    const [address, setAddress] = useState('');
+
+    // Refresh token
+    useEffect(() => {
+        if(token){
+            instance.get(`/user`,{
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(res => {
+                dispatch(getUser(res))
+            })
+            .catch(err => {
+                localStorage.removeItem('token');
+                console.log(err);
+            })
+        }
+    }, [dispatch, token]);
+
     return (
         <div className=''>
             <h5>Hồ Sơ Của Tôi </h5>
@@ -10,22 +39,33 @@ function Profile(props) {
                 <div className='col-8 pl-0'>
                     <div className=''>
                         <label className='col-3'>Tên đăng nhập</label>
-                        <span className='ml-2'>Lê Xuân Hoàng</span>
+                        <span className='ml-2'>
+                            { user ? user.username : '' }
+                        </span>
                     </div>
 
                     <div className='form-group d-flex'>
                         <label className='col-3'>Tên</label>
-                        <input type="text" className="form-control" />
+                        <input type="text" className="form-control" 
+                            value={ user ? user.username : '' }
+                            onChange={ (e) => setUserInfo(e.target.value) }
+                        />
                     </div>
 
                     <div className='form-group d-flex'>
                         <label className='col-3'>Số Điện Thoại</label>
-                        <input type="text" className="form-control" />
+                        <input type="text" className="form-control" 
+                            value={ user ? user.phoneNumber : '' }
+                            onChange={ (e) => setPhone(e.target.value) }
+                        />
                     </div>
 
                     <div className='form-group d-flex'>
                         <label className='col-3'>Địa chỉ</label>
-                        <input type="text" className="form-control" />
+                        <input type="text" className="form-control" 
+                            value={ user ? user.address : '' }
+                            onChange={ (e) => setAddress(e.target.value) }
+                        />
                     </div>
 
                     <div className='form-group d-flex'>

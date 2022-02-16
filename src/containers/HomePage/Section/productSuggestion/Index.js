@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {TabContent, TabPane } from 'reactstrap';
 import { numberFormat } from 'components/Formatting/FormatNumber';
-import './style/ProductSuggestion.scss';
+import './style/style.scss';
 import * as actions from './../../../../store/actions'
 import Rate from '../Rate';
 import TabCategory from './TabCategory';

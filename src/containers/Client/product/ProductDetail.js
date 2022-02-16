@@ -15,8 +15,8 @@ import ProductDesc from "./ProductDesc";
 import ProductSimilar from "./ProductSimilar";
 
 const ProductDetail = ({ match }) => {
-  const [detailProduct, setDetailProduct] = useState({});
   const dispatch = useDispatch();
+  const [detailProduct, setDetailProduct] = useState({});
   const similarProducts = useSelector(state => state.admin.productSimilar);
   
   // view detail product

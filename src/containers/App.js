@@ -57,8 +57,11 @@ function App(props) {
                 {/* Authentication  */}
                 <Route path={path.REGISTER} component={Register} />
                 <Route path={path.LOGIN_AUTH} component={LoginAuth} />
-                <Route path={path.ACCOUNT} component={InfoAccount} />
 
+                <Route path={path.ACCOUNT} component={InfoAccount} />
+                <Route path={path.CHANGE_PASSWORD} component={InfoAccount} />
+                <Route path={path.ORDER} component={InfoAccount} />
+                <Route path={path.NOTIFICATION} component={InfoAccount} />
 
                 {/* Order not login  */}
                 <Route path={path.CART} component={Cart} />
@@ -66,7 +69,6 @@ function App(props) {
                 <Route path={path.MY_ORDER} component={OrderSuccess} />
                 <Route path={path.VERIFY_EMAIL} component={VerifyEmail} />
 
-                {/* Order login  */}
             </Switch>
             <ToastContainer autoClose={5000} />
         </Router>

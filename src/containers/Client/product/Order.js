@@ -1,15 +1,21 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { path } from 'utils';
 import * as actions from "store/actions";
 import { numberFormat } from 'components/Formatting/FormatNumber';
 import Rate from 'containers/HomePage/Section/Rate';
+import instance from './../../../axios';
+import { getUser } from 'store/actions';
+import './Style.scss'
 
 const Order = (props) => {
     const {order, qty, incrementQty, decrementQty} = props;
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const token = localStorage.getItem('token');
+    const user = useSelector(state => state.auth.user);
 
+    // Order without login 
     const buyNow = () => {
         if (qty > 0) {
             order.qty = qty
@@ -18,7 +24,24 @@ const Order = (props) => {
         }       
     }
 
-        
+    // Refresh token
+    useEffect(() => {
+        if(token){
+            instance.get(`/user`,{
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(res => {
+                dispatch(getUser(res))
+            })
+            .catch(err => {
+                localStorage.removeItem('token');
+                console.log(err);
+            })
+        }
+    }, [dispatch, token]);
+
     return (
         <div className="col-md-6 pl-4 pr-2 text-left">
             <div className="info d-flex align-items-center">
@@ -58,17 +81,24 @@ const Order = (props) => {
                     </div>
 
                     <div className='d-flex mt-5 align-items-center' style={{gap: '10px'}}>
-                        <button onClick={buyNow} type="button" className="btn btn-danger font-weight-normal" style={{height: '40px', width:'50%'}}>
-                            <i className="fas fa-shopping-cart mr-2" />
-                            MUA NGAY
-                        </button>
-                        
-                        <button type="button" className="btn btn-success font-weight-normal" style={{height: '40px', width:'50%'}}>
-                        <Link to={`${path.CART}`} className='text-white'>
-                            <i className="fas fa-user mr-2" />
-                            ĐĂNG NHẬP MUA HÀNG
-                        </Link>
-                        </button>
+                        {
+                            token && user ?
+                            <button type="button" className="addCart btn btn-danger">
+                                <Link to='' className='text-white'>
+                                    <i className="fas fa-shopping-cart mr-2" /> THÊM VÀO GIỎ HÀNG
+                                </Link>
+                            </button>
+                            :
+                            <>
+                                <button onClick={buyNow} type="button" className="orderLogin btn btn-danger">
+                                    <i className="fas fa-shopping-cart mr-2" /> MUA NGAY
+                                </button>
+
+                                <Link to={`${path.LOGIN_AUTH}`} type="button" className="orderLogin btn btn-success">
+                                    <i className="fas fa-shopping-cart mr-2" /> ĐĂNG NHẬP MUA HÀNG
+                                </Link>
+                            </>
+                        }
                     </div>
                 </div>
             </div>

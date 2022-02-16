@@ -7,11 +7,20 @@
     }
 }
 
-.slick-next, .slick-prev{
-    // display: none;
-}
-
 .slick-next:before, .slick-prev:before{
     color: blue !important;
     font-size: 20px !important;
+}
+
+.orderLogin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 50%;
+    font-weight: 600;
+}
+.addCart{
+    height: 40px;
+    width: 100%;
 }
