@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { path } from 'utils';
 
-//when user login
+// Option 1: Order without login 
 //add to cart
 const addItemToCart = (data) => {
     return axios.post(`${path.PORT}/add-item-to-cart`, data)
@@ -46,7 +46,29 @@ const updateOrder = (data) => {
     return axios.put(`${path.PORT}/update-order`, data)
 }
 
+// ...................................
+// Option 2: Order with login
+// add to cart
+const addItemToCartWithLogin = (data) => {
+    return axios.post(`${path.PORT}/add-item-to-cart`, data)
+}
+
+// Get cart by user
+const getCartByUser = (userId) => {
+    return axios.get(`${path.PORT}/cart?userId=${userId}`)
+}
+
+// delete item cart
+const deleteItemCartWithLogin = (productId) => {
+    return axios.delete(`${path.PORT}/delete-item-cart`, {
+        data: {
+            id: productId,
+        }
+    })
+}
+
 export{
+    // Option 1: Order without login
     addItemToCart,
     getAllCart,
     deleteItemCart,
@@ -55,5 +77,10 @@ export{
     getOrder,
     verifyOrder,
     filterOrder,
-    updateOrder
+    updateOrder,
+    
+    // Option 2: Order with login
+    addItemToCartWithLogin,
+    getCartByUser,
+    deleteItemCartWithLogin
 }

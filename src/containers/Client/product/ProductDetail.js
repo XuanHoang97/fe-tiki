@@ -24,7 +24,10 @@ const ProductDetail = ({ match }) => {
     getDetailProduct(match.params.id)
     .then(res => {
         setDetailProduct(res.data.detailProduct);
-    }).catch((error) => { console.log(error); });
+    })
+    .catch((error) => { 
+      console.log(error); 
+    });
   }, [ match.params.id ]);
 
   // get similar product

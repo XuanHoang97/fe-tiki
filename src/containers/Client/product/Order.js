@@ -6,7 +6,7 @@ import * as actions from "store/actions";
 import { numberFormat } from 'components/Formatting/FormatNumber';
 import Rate from 'containers/HomePage/Section/Rate';
 import instance from './../../../axios';
-import { getUser } from 'store/actions';
+import {getUser } from 'store/actions';
 import './Style.scss'
 
 const Order = (props) => {
@@ -22,6 +22,13 @@ const Order = (props) => {
             dispatch(actions.addToCart(order))
             dispatch(actions.countProduct(1))
         }       
+    }
+
+    // Order with login
+    const addCart = () => {
+        const userId = user.id;
+        const productId = order.id;
+        dispatch(actions.addToCartLogin({ userId, productId, qty }))
     }
 
     // Refresh token
@@ -83,10 +90,8 @@ const Order = (props) => {
                     <div className='d-flex mt-5 align-items-center' style={{gap: '10px'}}>
                         {
                             token && user ?
-                            <button type="button" className="addCart btn btn-danger">
-                                <Link to='' className='text-white'>
-                                    <i className="fas fa-shopping-cart mr-2" /> THÊM VÀO GIỎ HÀNG
-                                </Link>
+                            <button onClick={addCart} type="button" className="addCart btn btn-danger">
+                                <i className="fas fa-shopping-cart mr-2" /> THÊM VÀO GIỎ HÀNG
                             </button>
                             :
                             <>

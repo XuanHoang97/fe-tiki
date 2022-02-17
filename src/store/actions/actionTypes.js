@@ -181,19 +181,19 @@ const actionTypes = Object.freeze({
     FETCH_ALL_STATUS_SLIDE_SUCCESS: 'FETCH_ALL_STATUS_SLIDE_SUCCESS',
     FETCH_ALL_STATUS_SLIDE_FAILED: 'FETCH_ALL_STATUS_SLIDE_FAILED',
 
-    //get number product to cart
+    // Option 1: Order without login
     COUNT: 'COUNT',
     INCREMENT_QUANTITY: 'INCREMENT_QUANTITY',
     DECREMENT_QUANTITY: 'DECREMENT_QUANTITY',
-
-    //add to cart
     ADD_TO_CART: 'ADD_TO_CART',
-
-    //delete item cart
     DELETE_ITEM_CART: 'DELETE_ITEM_CART',
-
-    //delete all item cart
     DELETE_ALL_ITEM_CART: 'DELETE_ALL_ITEM_CART',
+
+    // Option 2: Order with login
+    ADD_TO_CART_LOGIN: 'ADD_TO_CART_LOGIN',
+    GET_CART_BY_USER: 'GET_CART_BY_USER',
+    DELETE_ITEM_CART_LOGIN: 'DELETE_ITEM_CART_LOGIN',
+    
 
     //get all delivery
     FETCH_ALL_DELIVERY_SUCCESS: 'FETCH_ALL_DELIVERY_SUCCESS',

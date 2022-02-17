@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 
 let dataLocalStorage = JSON.parse(localStorage.getItem('dataCart')) || []
 const initialState = {
+    // Option 1: Order without login
     carts: dataLocalStorage,
     qty: 1,
     delivery: [],
@@ -10,6 +11,9 @@ const initialState = {
     orders: [],
     statusOrder: [],
     filterOrder: [],
+
+    // Option 2: Order with login
+    cartsUser: 0,
 }
 
 const clientReducer = (state = initialState, action) => {
@@ -33,9 +37,10 @@ const clientReducer = (state = initialState, action) => {
                 qty: state.qty - 1
             }
  
-        //when user not login
+        // Option 1: Order without login
         //add to cart
         case actionTypes.ADD_TO_CART:
+            localStorage.setItem('dataCart', JSON.stringify([...state.carts, action.payload]));
             const { id, qty } = action.payload
             let { carts } = state;
             const index1 = carts.findIndex(item => item.id === id);
@@ -128,7 +133,23 @@ const clientReducer = (state = initialState, action) => {
                 filterOrder: action.payload,
             }
 
+        // ----------------------------------------------------
+        // Option 2: Order with login
+        // Get cart by user
+        case actionTypes.GET_CART_BY_USER:
+            return {
+                ...state,
+                cartsUser: action.payload
+            }
 
+        // Add to cart by user
+        // case actionTypes.ADD_TO_CART_LOGIN:
+        //     return {
+        //         ...state,
+        //         cartsUser: [...state.cartsUser, action.payload]
+        //     }
+
+        
 
         default:
             return state;

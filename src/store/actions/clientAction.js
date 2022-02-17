@@ -3,9 +3,13 @@ import {
     getOrder,
     filterOrder,
     updateOrder,
+    addItemToCartWithLogin,
+    getCartByUser,
+    deleteItemCartWithLogin,
 } from "../../services/clientService";
 import { getAllCodeService } from 'services/userService';
 import { toast } from 'react-toastify';
+import { getUser } from '.';
 
 //QUANTITY
 export const countProduct = (payload) => {
@@ -27,8 +31,8 @@ export const decrement = () => {
     })
 }
 
-
-//when user not login
+// ---------------------------------------------------- 
+// Option 1: Order without login
 //add to cart
 export const addToCart = (payload) => {
     return ({
@@ -177,6 +181,68 @@ export const updateOrderStatus = (id, status) => {
         }
     }
 }
+
+// ----------------------------------------------------
+// Option 2: Order with login
+//add to cart
+export const addToCartLogin = (data, userId) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await addItemToCartWithLogin(data);
+            if (res && res.data.errCode === 0) {
+                dispatch({
+                    type: actionTypes.ADD_TO_CART_LOGIN,
+                    payload: res.data.result
+                });
+
+                // dispatch(GetCartByUser(userId));
+                toast.success('Sản phẩm đã được thêm vào giỏ hàng !')
+            }
+        } catch (e) {
+            console.log('add to cart fail', e)
+        }
+    }
+}
+
+// Get cart by user
+export const GetCartByUser = (userId) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await getCartByUser(userId);
+            if (res && res.data.errCode === 0) {
+                dispatch({
+                    type: actionTypes.GET_CART_BY_USER,
+                    payload: res.data.result
+                });
+            }
+        } catch (e) {
+            console.log('get cart by user fail', e)
+        }
+    }
+}
+
+// Delete item cart
+export const DeleteItemCartByUser = (productId) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await deleteItemCartWithLogin(productId);
+            if (res && res.data.errCode === 0) {
+                dispatch({
+                    type: actionTypes.DELETE_ITEM_CART_LOGIN,
+                });
+                dispatch(GetCartByUser());
+                toast.success('Đã xoá sản phẩm khỏi giỏ hàng !')
+            }
+        } catch (e) {
+            console.log('delete item cart fail', e)
+        }
+    }
+}
+
+
+
+
+
 
 
 
