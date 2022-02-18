@@ -6,10 +6,10 @@ import {
     addItemToCartWithLogin,
     getCartByUser,
     deleteItemCartWithLogin,
+    updateItemCartWithLogin,
 } from "../../services/clientService";
 import { getAllCodeService } from 'services/userService';
 import { toast } from 'react-toastify';
-import { getUser } from '.';
 
 //QUANTITY
 export const countProduct = (payload) => {
@@ -31,7 +31,6 @@ export const decrement = () => {
     })
 }
 
-// ---------------------------------------------------- 
 // Option 1: Order without login
 //add to cart
 export const addToCart = (payload) => {
@@ -55,7 +54,6 @@ export const deleteAllItemCart = () => {
         type: actionTypes.DELETE_ALL_ITEM_CART,
     })
 }
-
 
 //get all delivery
 export const getAllDelivery = () => {
@@ -195,7 +193,6 @@ export const addToCartLogin = (data, userId) => {
                     payload: res.data.result
                 });
 
-                // dispatch(GetCartByUser(userId));
                 toast.success('Sản phẩm đã được thêm vào giỏ hàng !')
             }
         } catch (e) {
@@ -230,11 +227,26 @@ export const DeleteItemCartByUser = (productId) => {
                 dispatch({
                     type: actionTypes.DELETE_ITEM_CART_LOGIN,
                 });
-                dispatch(GetCartByUser());
                 toast.success('Đã xoá sản phẩm khỏi giỏ hàng !')
             }
         } catch (e) {
             console.log('delete item cart fail', e)
+        }
+    }
+}
+
+// update item cart
+export const UpdateItemCartByUser = (data) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await updateItemCartWithLogin(data);
+            if (res && res.data.errCode === 0) {
+                dispatch({
+                    type: actionTypes.UPDATE_ITEM_CART_LOGIN,
+                });
+            }
+        } catch (e) {
+            console.log('update item cart fail', e)
         }
     }
 }

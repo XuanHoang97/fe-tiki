@@ -3,23 +3,26 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { path } from 'utils';
 import { DeleteItemCartByUser, GetCartByUser } from 'store/actions';
-import { numberFormat } from 'components/Formatting/FormatNumber';
+import { numberFormat, totalMoneyOrder } from 'components/Formatting/FormatNumber';
 
 function OrderLogin(props) {
     const [hoverCart, setHoverCart] = useState(false);
     const dispatch = useDispatch();
     const cartsUser = useSelector(state => state.client.cartsUser);
     const user = useSelector(state => state.auth.user);
-    console.log('cart user', cartsUser);
 
     // get cart by user
+    let userId = user.id;
     useEffect(() => {
-        dispatch(GetCartByUser(user.id));
-    }, [dispatch, user.id]);
+        dispatch(GetCartByUser(userId));
+    }, [dispatch, userId]);
 
     // delete item cart
     const deleteItemCart = (productId) => {
         dispatch(DeleteItemCartByUser(productId));
+        setTimeout(() => {
+            dispatch(GetCartByUser(userId));
+        }, 1000)
     }
 
     return (
@@ -74,18 +77,14 @@ function OrderLogin(props) {
                                 
                         <h6>Tổng tiền :
                             <span className='ml-3 font-weight-bold text-danger'>
-                                {
-                                    cartsUser && cartsUser.length > 0 ?
-                                    numberFormat(
-                                        cartsUser.reduce((total, item) => {
-                                            return total + item.Price * item.qty
-                                        }, 0)
-                                    )
-                                    : 0
-                                }
+                            {
+                                cartsUser && cartsUser.length > 0 ?
+                                numberFormat(totalMoneyOrder(cartsUser))
+                                : 0
+                            }
                             </span>
                         </h6>
-                        <button className='btn btn-success btn-sm w-100 mt-2 font-weight-bold'>Xem giỏ hàng</button>
+                        <Link to={`${path.CART}`} className='btn btn-success btn-sm w-100 mt-2 font-weight-bold'>Xem giỏ hàng</Link>
                     </div>
                 </div>  
             }

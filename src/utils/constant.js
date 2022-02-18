@@ -19,8 +19,8 @@ export const path = {
 
 
     DETAIL_PRODUCT: '/products/:id',
-    CART: '/cart',
-    PAYMENT: '/payment',
+    CART: '/user/cart',
+    PAYMENT: '/user/payment',
     MY_ORDER: '/my-order',
     VERIFY_EMAIL: '/verify-order',
 };

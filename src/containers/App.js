@@ -63,12 +63,11 @@ function App(props) {
                 <Route path={path.ORDER} component={InfoAccount} />
                 <Route path={path.NOTIFICATION} component={InfoAccount} />
 
-                {/* Order not login  */}
+                {/* Order with login  */}
                 <Route path={path.CART} component={Cart} />
                 <Route path={path.PAYMENT} component={Payment} />
                 <Route path={path.MY_ORDER} component={OrderSuccess} />
                 <Route path={path.VERIFY_EMAIL} component={VerifyEmail} />
-
             </Switch>
             <ToastContainer autoClose={5000} />
         </Router>

@@ -21,6 +21,7 @@ export const logoutAccount = () => {
     }
 }
 
+// get user
 export const getUser = (userInfo) => ({
     type: actionTypes.GET_USER,
     userInfo: userInfo,

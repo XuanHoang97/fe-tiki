@@ -142,15 +142,6 @@ const clientReducer = (state = initialState, action) => {
                 cartsUser: action.payload
             }
 
-        // Add to cart by user
-        // case actionTypes.ADD_TO_CART_LOGIN:
-        //     return {
-        //         ...state,
-        //         cartsUser: [...state.cartsUser, action.payload]
-        //     }
-
-        
-
         default:
             return state;
     }

@@ -4,7 +4,6 @@ const initialState = {
     tokens: null,
     isAuthenticated: false,
     user: null
-
 }
 
 const authReducer = (state = initialState, action) => {

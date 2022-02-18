@@ -6,7 +6,7 @@ import * as actions from "store/actions";
 import { numberFormat } from 'components/Formatting/FormatNumber';
 import Rate from 'containers/HomePage/Section/Rate';
 import instance from './../../../axios';
-import {getUser } from 'store/actions';
+import {GetCartByUser, getUser } from 'store/actions';
 import './Style.scss'
 
 const Order = (props) => {
@@ -29,6 +29,10 @@ const Order = (props) => {
         const userId = user.id;
         const productId = order.id;
         dispatch(actions.addToCartLogin({ userId, productId, qty }))
+        setTimeout(() => {
+            dispatch(actions.countProduct(1))
+            dispatch(GetCartByUser(userId));
+        }, 1000)
     }
 
     // Refresh token

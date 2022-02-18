@@ -18,25 +18,26 @@ const ProductDetail = ({ match }) => {
   const dispatch = useDispatch();
   const [detailProduct, setDetailProduct] = useState({});
   const similarProducts = useSelector(state => state.admin.productSimilar);
+  const qty = useSelector(state => state.client.qty);
   
   // view detail product
+  let idParams = match.params.id;
   useEffect(() => {
-    getDetailProduct(match.params.id)
+    getDetailProduct(idParams)
     .then(res => {
         setDetailProduct(res.data.detailProduct);
     })
-    .catch((error) => { 
-      console.log(error); 
+    .catch((err) => { 
+      console.log(err); 
     });
-  }, [ match.params.id ]);
+  }, [ idParams ]);
 
   // get similar product
   useEffect(() => {
-    dispatch(actions.GetProductSimilar(match.params.id));
-  }, [dispatch, match.params.id ]);
+    dispatch(actions.GetProductSimilar(idParams));
+  }, [dispatch, idParams ]);
   
   // choose quantity order
-  const qty = useSelector(state => state.client.qty);
   const incrementQty = () => {
     dispatch(actions.increment());
   };

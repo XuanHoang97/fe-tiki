@@ -67,6 +67,11 @@ const deleteItemCartWithLogin = (productId) => {
     })
 }
 
+// update item cart
+const updateItemCartWithLogin = (data) => {
+    return axios.put(`${path.PORT}/update-item-cart`, data)
+}
+
 export{
     // Option 1: Order without login
     addItemToCart,
@@ -82,5 +87,6 @@ export{
     // Option 2: Order with login
     addItemToCartWithLogin,
     getCartByUser,
-    deleteItemCartWithLogin
+    deleteItemCartWithLogin,
+    updateItemCartWithLogin,
 }

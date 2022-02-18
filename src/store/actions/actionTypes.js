@@ -193,6 +193,7 @@ const actionTypes = Object.freeze({
     ADD_TO_CART_LOGIN: 'ADD_TO_CART_LOGIN',
     GET_CART_BY_USER: 'GET_CART_BY_USER',
     DELETE_ITEM_CART_LOGIN: 'DELETE_ITEM_CART_LOGIN',
+    UPDATE_ITEM_CART_LOGIN: 'UPDATE_ITEM_CART_LOGIN',
     
 
     //get all delivery
