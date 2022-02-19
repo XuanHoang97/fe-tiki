@@ -3,18 +3,22 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { path } from 'utils';
 import { DeleteItemCartByUser, GetCartByUser } from 'store/actions';
-import { numberFormat, totalMoneyOrder } from 'components/Formatting/FormatNumber';
+import { numberFormat, totalMoney } from 'components/Formatting/FormatNumber';
 
 function OrderLogin(props) {
-    const [hoverCart, setHoverCart] = useState(false);
     const dispatch = useDispatch();
+    const [hoverCart, setHoverCart] = useState(false);
     const cartsUser = useSelector(state => state.client.cartsUser);
     const user = useSelector(state => state.auth.user);
 
     // get cart by user
     let userId = user.id;
     useEffect(() => {
-        dispatch(GetCartByUser(userId));
+        try {
+            dispatch(GetCartByUser(userId));
+        } catch (e) {
+            console.log('get cart by user fail', e)
+        }
     }, [dispatch, userId]);
 
     // delete item cart
@@ -52,17 +56,17 @@ function OrderLogin(props) {
                                         <div className="info">
                                             <div className='d-flex justify-content-between align-items-start'>
                                                 <div className="col-md-2 p-0">
-                                                    <img className="w-100 rounded" src={item.Image} alt="" />
+                                                    <img className="w-100 rounded" src={item.image} alt="" />
                                                 </div>
 
                                                 <div className="col-md-6 mt-1 pl-2 p-0 content">
-                                                    <small>{item.Name}</small>
+                                                    <small>{item.name}</small>
                                                     <div className='text-muted small mt-3'>Trả góp 0% - Tặng phụ kiện - Voucher 5% </div>
                                                 </div>
 
                                                 <div className="col-md-4 p-0 price">
                                                     <div className="p-0 price__num">
-                                                        <h6 className='small text-danger m-0'>{numberFormat(item.Price)}</h6>
+                                                        <h6 className='small text-danger m-0'>{numberFormat(item.price)}</h6>
                                                         <span className='small m-0'> x {item.qty}</span>
                                                     </div>
                                                     <div onClick={()=> deleteItemCart(item.id)} className="btnDelProd text-danger small mt-2">Xóa</div>
@@ -79,7 +83,7 @@ function OrderLogin(props) {
                             <span className='ml-3 font-weight-bold text-danger'>
                             {
                                 cartsUser && cartsUser.length > 0 ?
-                                numberFormat(totalMoneyOrder(cartsUser))
+                                numberFormat(totalMoney(cartsUser))
                                 : 0
                             }
                             </span>

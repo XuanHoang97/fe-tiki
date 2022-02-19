@@ -7,6 +7,8 @@ import {
     getCartByUser,
     deleteItemCartWithLogin,
     updateItemCartWithLogin,
+    checkOutOrder,
+    getOrderByUser,
 } from "../../services/clientService";
 import { getAllCodeService } from 'services/userService';
 import { toast } from 'react-toastify';
@@ -250,6 +252,43 @@ export const UpdateItemCartByUser = (data) => {
         }
     }
 }
+
+// checkout order
+export const CheckoutOrder = (data) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await checkOutOrder(data);
+            if (res && res.data.errCode === 0) {
+                dispatch({
+                    type: actionTypes.CHECKOUT_ORDER,
+                });
+                toast.success('Đặt hàng thành công !')
+            }
+        } catch (e) {
+            console.log('checkout order fail', e)
+        }
+    }
+}
+
+// get order by user
+export const GetOrderByUser = (userId) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await getOrderByUser(userId);
+            if (res && res.data.errCode === 0) {
+                dispatch({
+                    type: actionTypes.GET_ORDER_BY_USER,
+                    payload: res.data.result
+                });
+            }
+        } catch (e) {
+            console.log('get order by user fail', e)
+        }
+    }
+}
+
+
+
 
 
 

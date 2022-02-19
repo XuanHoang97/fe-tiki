@@ -33,12 +33,3 @@ export const investmentCost = (arr) => {
     // }
     return investment
 }
-
-// totalMoney with order login
-export const totalMoneyOrder = (arr) => {
-    let total = 0
-    for (let item of arr) {
-        total += item.Price * item.qty
-    }
-    return total
-}

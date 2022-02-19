@@ -72,6 +72,16 @@ const updateItemCartWithLogin = (data) => {
     return axios.put(`${path.PORT}/update-item-cart`, data)
 }
 
+// check out order
+const checkOutOrder = (data) => {
+    return axios.post(`${path.PORT}/checkout`, data)
+}
+
+// get order by user
+const getOrderByUser = (userId) => {
+    return axios.get(`${path.PORT}/get-order-by-user?userId=${userId}`)
+}
+
 export{
     // Option 1: Order without login
     addItemToCart,
@@ -89,4 +99,7 @@ export{
     getCartByUser,
     deleteItemCartWithLogin,
     updateItemCartWithLogin,
+    checkOutOrder,
+    getOrderByUser
+
 }

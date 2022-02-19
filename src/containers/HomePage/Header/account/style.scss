@@ -111,6 +111,11 @@
         display: flex;
         gap: 10px;
     }
+    .detail{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
 }
 
 .totalPrice, .action{

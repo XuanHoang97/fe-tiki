@@ -39,7 +39,7 @@ const ModalOrderNow = (props) => {
         dispatch(actions.getAllPayment());
     }, [dispatch]);
 
-    // add new category
+    // create order
     const order=async(data)=>{         
         setLoadingOrder(true);
 

@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import Voucher from './Voucher'
 import Header from 'containers/HomePage/Header/Header';
-import Footer from 'containers/HomePage/Footer/Footer';
-import { numberFormat, totalMoneyOrder } from 'components/Formatting/FormatNumber';
+import { numberFormat, totalMoney } from 'components/Formatting/FormatNumber';
 import { UpdateItemCartByUser } from 'store/actions';
 import { useHistory } from 'react-router';
 import { path } from 'utils';
@@ -55,9 +54,9 @@ const Cart = (props) => {
                                 cartsUser.map((item, index) => {
                                     return (
                                         <div className="bg-white p-3 row border-bottom" key={index}>
-                                            <img className="col-md-2 w-100" src={item.Image} alt="" />
+                                            <img className="col-md-2 w-100" src={item.image} alt="" />
                                             <div className="col-md-5 small">
-                                                <h6>{item.Name}</h6>
+                                                <h6>{item.name}</h6>
                                                 <span className="mr-4 text-danger" style={{ cursor: 'pointer'}}>Xóa</span>
                                                 <span className="text-primary">Để dành mua sau</span>
                                             </div>
@@ -84,10 +83,10 @@ const Cart = (props) => {
 
                                             <div className="price col-md-3 text-right">
                                                 <h6 className="text-danger">
-                                                    {numberFormat(item.Price)}
+                                                    {numberFormat(item.price)}
                                                 </h6>
                                                 <strike className="small mr-2">
-                                                    {numberFormat(item.saleOff)}
+                                                    {numberFormat(item.sale)}
                                                 </strike>
                                                 <span className="text-danger small">-1%</span>
                                             </div>
@@ -106,7 +105,7 @@ const Cart = (props) => {
                                     <small className="text-danger">
                                     {
                                         cartsUser && cartsUser.length > 0 ?
-                                        numberFormat(totalMoneyOrder(cartsUser))
+                                        numberFormat(totalMoney(cartsUser))
                                         : 0
                                     }
                                     </small>
@@ -120,7 +119,7 @@ const Cart = (props) => {
                                     <h6 className="text-danger">
                                         {   
                                             cartsUser && cartsUser.length > 0 ?
-                                            numberFormat(totalMoneyOrder(cartsUser)- coupon)
+                                            numberFormat(totalMoney(cartsUser)- coupon)
                                             : 0
                                         }
                                     </h6>
@@ -135,7 +134,6 @@ const Cart = (props) => {
                     </div>
                 </div>
             </div>
-            <Footer />
         </>
     );
 }
