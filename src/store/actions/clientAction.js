@@ -9,6 +9,7 @@ import {
     updateItemCartWithLogin,
     checkOutOrder,
     getOrderByUser,
+    filterMyOrder
 } from "../../services/clientService";
 import { getAllCodeService } from 'services/userService';
 import { toast } from 'react-toastify';
@@ -64,23 +65,16 @@ export const getAllDelivery = () => {
             let res = await getAllCodeService('DELIVERY');
             if(res && res.data.errCode === 0){
                 dispatch(getAllDeliverySuccess(res.data.data));
-            }else{
-                dispatch(getAllDeliveryFailed());
             }
         }catch(e){
-            dispatch(getAllDeliveryFailed());
             console.log('getAllDelivery error', e)
         }
     }
 }
 
 export const getAllDeliverySuccess = (data) => ({
-    type: actionTypes.FETCH_ALL_DELIVERY_SUCCESS,
+    type: actionTypes.FETCH_ALL_DELIVERY,
     dataDelivery: data
-})
-
-export const getAllDeliveryFailed = () => ({
-    type: actionTypes.FETCH_ALL_DELIVERY_FAILED,
 })
 
 //get all payment
@@ -90,23 +84,16 @@ export const getAllPayment = () => {
             let res = await getAllCodeService('PAYMENT');
             if(res && res.data.errCode === 0){
                 dispatch(getAllPaymentSuccess(res.data.data));
-            }else{
-                dispatch(getAllPaymentFailed());
             }
         }catch(e){
-            dispatch(getAllPaymentFailed());
             console.log('getAllPayment error', e)
         }
     }
 }
 
 export const getAllPaymentSuccess = (data) => ({
-    type: actionTypes.FETCH_ALL_PAYMENT_SUCCESS,
+    type: actionTypes.FETCH_ALL_PAYMENT,
     dataPayment: data
-})
-
-export const getAllPaymentFailed = () => ({
-    type: actionTypes.FETCH_ALL_PAYMENT_FAILED,
 })
 
 //get all order
@@ -116,18 +103,11 @@ export const getAllOrder = () => {
             let res = await getOrder('ALL');
             if(res && res.data.errCode === 0){
                 dispatch({
-                    type: actionTypes.FETCH_ALL_ORDER_SUCCESS,
+                    type: actionTypes.FETCH_ALL_ORDER,
                     payload: res.data.result.reverse()
-                });
-            }else{
-                dispatch({
-                    type: actionTypes.FETCH_ALL_ORDER_FAILED,
                 });
             }
         }catch(e){
-            dispatch({
-                type: actionTypes.FETCH_ALL_ORDER_FAILED,
-            });
             console.log('getAllOrder error', e)
         }
     }
@@ -139,7 +119,7 @@ export const getStatusOrder = () => {
         try {
             const res = await getAllCodeService('ORDER_STATUS');
             dispatch({
-                type: actionTypes.FETCH_STATUS_ORDER_SUCCESS,
+                type: actionTypes.FETCH_STATUS_ORDER,
                 payload: res.data.data
             });
         } catch (error) {
@@ -148,14 +128,13 @@ export const getStatusOrder = () => {
     }
 }
 
-
 // Filter order by status
 export const filterOrderByStatus = (status) => {
     return async (dispatch) => {
         try {
             const res = await filterOrder(status);
             dispatch({
-                type: actionTypes.FILTER_ORDER_BY_STATUS_SUCCESS,
+                type: actionTypes.FILTER_ORDER_BY_STATUS,
                 payload: res.data.result
             });
         } catch (error) {
@@ -170,7 +149,7 @@ export const updateOrderStatus = (id, status) => {
         try {
             const res = await updateOrder(id, status);
             dispatch({
-                type: actionTypes.UPDATE_ORDER_SUCCESS,
+                type: actionTypes.UPDATE_ORDER,
                 payload: res.data.result
             });
             dispatch(getAllOrder());
@@ -286,6 +265,24 @@ export const GetOrderByUser = (userId) => {
         }
     }
 }
+
+// filter myOrder
+export const FilterMyOrder = (userId, status) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await filterMyOrder(userId, status);
+            if (res && res.data.errCode === 0) {
+                dispatch({
+                    type: actionTypes.FILTER_MY_ORDER,
+                    payload: res.data.result
+                });
+            }
+        } catch (e) {
+            console.log('filter my order fail', e)
+        }
+    }
+}
+
 
 
 

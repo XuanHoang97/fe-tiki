@@ -10,7 +10,6 @@ const ModalProduct = (props) => {
     const [price, setPrice] = useState('');
     const [sale, setSale] = useState('');
     const [warranty, setWarranty] = useState('');
-
     const [status, setStatus] = useState('');
     const [category_id, setCategory_id] = useState('');
     const [supplier_id, setSupplier_id] = useState('');
@@ -38,7 +37,7 @@ const ModalProduct = (props) => {
         setStatus('');
         setCategory_id('');
         setSupplier_id('');
-    }, [dispatch]);
+    }, []);
 
     const toggle =()=>{
         props.toggleParent();
@@ -81,11 +80,7 @@ const ModalProduct = (props) => {
     }
     
     return (
-        <Modal 
-            isOpen={props.isOpen} 
-            toggle={()=>toggle()} 
-            size="lg"
-        >
+        <Modal isOpen={props.isOpen} toggle={()=>toggle()} size="lg">
         <form
             onSubmit={handleAddNewProduct}
             encType='multipart/form-data'
@@ -108,9 +103,7 @@ const ModalProduct = (props) => {
                             onChange={(e)=>changeImage(e)}
                             name='image'
                         />
-
                         <label htmlFor="previewImg" className="btn btn-success w-100"><i className="fas fa-upload"></i> Tải ảnh</label>  
-                    
                     </div>
 
                     <div className="preview-image col-md-2 border" 
@@ -162,7 +155,6 @@ const ModalProduct = (props) => {
                         <input value={warranty} onChange={(e)=>setWarranty(e.target.value)}  type="text" className="form-control" />
                     </div>                             
                 </div>
-                
 
                 <div className="row">
                     <div className="form-group col-md-4">
@@ -181,7 +173,6 @@ const ModalProduct = (props) => {
                                 : 
                                 <option>Không có dữ liệu</option>
                             }                                                           
-                                    
                         </select>
                     </div>
 
@@ -209,9 +200,7 @@ const ModalProduct = (props) => {
             </ModalBody>
 
             <ModalFooter>
-                <Button color="primary" className="px-3" type='submit'>
-                    Thêm mới
-                </Button>
+                <Button color="primary" className="px-3" type='submit'>Thêm mới</Button>
                 <Button color="secondary" className="px-3">Cancel</Button>
             </ModalFooter>
         </form>

@@ -2,9 +2,9 @@ import React from 'react';
 import {TabPane } from 'reactstrap';
 import { CRUD_ACTIONS } from 'utils';
 
-
 function Slide(props) {
-    const { handleSaveSlide, name, setName, date, setDate, categoryId, setCategoryId,
+    const { 
+        handleSaveSlide, name, setName, date, setDate, categoryId, setCategoryId,
         category, status, setStatus, statusSlide, changeImage,
         previewImg, removeImg, action, slide, editSlide, deleteSlide
     } = props;
@@ -146,5 +146,4 @@ function Slide(props) {
         </TabPane>
     );
 }
-
 export default Slide;

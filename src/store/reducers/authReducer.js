@@ -5,11 +5,10 @@ const initialState = {
     isAuthenticated: false,
     user: null
 }
-
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
         // Logout
-        case actionTypes.LOGOUT_SUCCESS:
+        case actionTypes.LOGOUT:
             return {
                 ...state,
                 tokens: '',
@@ -27,5 +26,4 @@ const authReducer = (state = initialState, action) => {
             return state;
     }
 }
-
 export default authReducer;

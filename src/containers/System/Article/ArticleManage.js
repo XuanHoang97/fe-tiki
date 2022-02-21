@@ -17,11 +17,9 @@ const ArticleManage = (props) => {
     const [modalAddArticle, setModalAddArticle] = useState(false);
     const [modalEditArticle, setModalEditArticle] = useState(false);
     const [articleEdit, setArticleEdit] = useState('');
-
     const [categoryId, setCategoryId] = useState('');
     const [productId, setProductId] = useState(3);
     const [option, setOption] = useState('');
-    const [image, setimage] = useState('');
 
     useEffect(() => {
         dispatch(actions.GetAllArticle());
@@ -30,7 +28,7 @@ const ArticleManage = (props) => {
         dispatch(actions.SelectOptionProduct());
     }, [dispatch]);
 
-    //modify data
+    //modify data product
     useEffect (() => {
         let data = optionProduct;
             if(data && data.length > 0){
@@ -53,7 +51,7 @@ const ArticleManage = (props) => {
         }
     }
 
-    //handle save info
+    //Save info product
     const handleSaveChoose = async(e) => {
         e.preventDefault();
         let result = [];
@@ -74,7 +72,6 @@ const ArticleManage = (props) => {
                 return;
             }
         }
-
         let res = await saveOptionProduct({
             arrOptionProduct: result,
             categoryId: categoryId,
@@ -85,7 +82,6 @@ const ArticleManage = (props) => {
         console.log('check result : ',  result);
     }
 
-        
     // load product by category
     const handleChangeCategory = (e) => {
         setCategoryId(e.target.value);
@@ -94,20 +90,13 @@ const ArticleManage = (props) => {
 
     //onChange multi image
     const changeMultiImage = async(e) => {
-        let data=e.target.files;
-        let file=data[0];
-        if(file){
-            let objectUrl=URL.createObjectURL(file)
-            setimage(file);
-        }
-        console.log('check image: ', file);
+        
     }
 
     //create article
-    const handleAddNewArticle = () => {
+    const addArticle = () => {
         setModalAddArticle(!modalAddArticle);
     }
-
     const SaveInfoProduct=(data)=> {
         dispatch(actions.SaveInfoProduct(data));
     }
@@ -117,7 +106,6 @@ const ArticleManage = (props) => {
         setModalEditArticle(!modalEditArticle);
         setArticleEdit(article);
     }
-
     const editInfoProduct=(data)=> {
         dispatch(actions.EditInfoProduct(data));
     }
@@ -128,7 +116,7 @@ const ArticleManage = (props) => {
             <div className='bg-light p-3'>
                 <ModalArticle
                     isOpen={modalAddArticle}
-                    toggleParent={handleAddNewArticle}
+                    toggleParent={addArticle}
                     SaveInfoProduct={SaveInfoProduct}
 
                     categoryId={categoryId}
@@ -154,11 +142,11 @@ const ArticleManage = (props) => {
                     setProductId={setProductId}
                 />
 
-                <button onClick={() => handleAddNewArticle()} type="button" className="btn btn-success px-3">
+                <button onClick={() => addArticle()} type="button" className="btn btn-success px-3">
                     <i className="fas fa-plus"></i> Thêm bài viết
                 </button>
 
-                <div className="text-dark mt-4">Danh sách bài viết (<b>{listArticle.length}</b>)</div>
+                <div className="text-dark mt-4">Danh sách bài viết (<b>{listArticle && listArticle.length>0 ? listArticle.length : 0}</b>)</div>
                 <table className="table table-striped table-bordered table-hover">
                     <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
                         <tr>
@@ -234,7 +222,7 @@ const ArticleManage = (props) => {
                             <div className='col-6 p-0'>
                                 <label className='mr-3'>Sản phẩm</label>
                                 <div className="form-group d-flex p-0">
-                                    <select className="form-control" style={{height:'30px'}}
+                                    <select className="form-control"
                                         value={productId}
                                         onChange={(e)=>setProductId(e.target.value)}
                                     >
@@ -276,7 +264,7 @@ const ArticleManage = (props) => {
                         </div>
 
                         <div className='col-5 p-0 mr-3'>
-                            <label>Ảnh mô tả (Multiple image)</label>
+                            <label>Ảnh mô tả</label>
                             <input id="previewImg" type="file"
                                 name='multi-image' 
                                 multiple

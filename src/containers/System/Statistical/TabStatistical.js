@@ -27,5 +27,4 @@ function TabStatistical(props) {
         </Nav>
     );
 }
-
 export default TabStatistical;

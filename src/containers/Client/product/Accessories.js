@@ -30,5 +30,4 @@ const Accessories = ({detailProduct}) => {
         </div>
     );
 }
-
 export default Accessories;

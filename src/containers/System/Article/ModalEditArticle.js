@@ -8,9 +8,9 @@ const mdParser = new MarkdownIt();
 
 const ModalEditArticle = (props) => {
     const {category, DetailCategory, handleChangeCategory, categoryId, productId, setProductId, setCategoryId} = props;
+    
+    //save data markdown
     const [id, setId] = useState('');
-
-    //save to markdown to table
     const [characterHTML, setCharacterHTML] = useState('');
     const [characterMarkdown, setCharacterMarkdown] = useState('');
     const [accessoryHTML, setAccessoryHTML] = useState('');
@@ -36,7 +36,7 @@ const ModalEditArticle = (props) => {
             setSpecificationHTML(article.specificationHTML);
             setSpecificationMarkdown(article.specificationMarkdown);
         }
-    }, [props.currentArticle]);
+    }, [ props.currentArticle, setProductId, setCategoryId]);
 
     const toggle =()=>{
         props.toggleParent();
@@ -82,17 +82,12 @@ const ModalEditArticle = (props) => {
     }
     
     return (
-        <Modal 
-            isOpen={props.isOpen} 
-            toggle={()=>toggle()} 
-            size="lg"
-        >
+        <Modal isOpen={props.isOpen} toggle={()=>toggle()} size="lg">
             <ModalHeader toggle={()=>toggle()}>Cập nhật bài viết - chi tiết sản phẩm</ModalHeader>
             <ModalBody style={{height: '80vh', overflowY: 'scroll'}}>
             
             <div className='d-flex col-12 p-0'>
                 <label className='mr-3'>Chọn sản phẩm</label>
-
                 <div className="form-group d-flex p-0">
                     <select className="form-control" style={{height:'30px'}}
                         value={categoryId}
@@ -176,9 +171,7 @@ const ModalEditArticle = (props) => {
             </ModalBody>
 
             <ModalFooter>
-                <Button color="primary" className="px-3" onClick={() => {editInfoProduct()}}>
-                    Cập nhật
-                </Button>
+                <Button color="primary" className="px-3" onClick={() => {editInfoProduct()}}>Cập nhật</Button>
                 <Button color="secondary" className="px-3">Cancel</Button>
             </ModalFooter>
         </Modal>

@@ -27,6 +27,7 @@
     "react-flatpickr": "^3.10.7",
     "react-history-search": "0.0.5",
     "react-hook-form": "^7.24.1",
+    "react-js-pagination": "^3.0.3",
     "react-lazyload": "^3.2.0",
     "react-loading-overlay": "^1.0.1",
     "react-loading-skeleton": "^3.0.2",

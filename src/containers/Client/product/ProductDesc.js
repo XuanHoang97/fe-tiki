@@ -48,5 +48,4 @@ const ProductDesc = ({detailProduct}) => {
         </>
     );
 }
-
 export default ProductDesc;

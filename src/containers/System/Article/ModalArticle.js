@@ -8,7 +8,7 @@ const mdParser = new MarkdownIt();
 const ModalArticle = (props) => {
     const {category, DetailCategory, handleChangeCategory, categoryId, productId, setProductId, toggleParent} = props;
     
-    //save to markdown to table
+    //save data markdown
     const [characterHTML, setCharacterHTML] = useState('');
     const [characterMarkdown, setCharacterMarkdown] = useState('');
     const [accessoryHTML, setAccessoryHTML] = useState('');
@@ -61,17 +61,12 @@ const ModalArticle = (props) => {
     }
 
     return (
-        <Modal 
-            isOpen={props.isOpen} 
-            toggle={()=>toggle()} 
-            size="lg"
-        >
+        <Modal isOpen={props.isOpen} toggle={()=>toggle()} size="lg">
             <ModalHeader toggle={()=>toggle()}>Thêm mới bài viết - chi tiết sản phẩm</ModalHeader>
             <ModalBody style={{height: '80vh', overflowY: 'scroll'}}>
             
             <div className='d-flex col-12 p-0'>
                 <label className='mr-3'>Chọn sản phẩm</label>
-
                 <div className="form-group d-flex p-0">
                     <select className="form-control" style={{height:'30px'}}
                         value={categoryId}
@@ -109,7 +104,6 @@ const ModalArticle = (props) => {
                     </div> :
                     <span>Không có sản phẩm nào ! </span>
                 }  
-                
             </div>
 
             <div className="input-group p-0">
@@ -154,9 +148,7 @@ const ModalArticle = (props) => {
             </ModalBody>
 
             <ModalFooter>
-                <Button color="primary" className="px-3" onClick={() => {handleAddNewArticle()}}>
-                    Thêm mới
-                </Button>
+                <Button color="primary" className="px-3" onClick={() => {handleAddNewArticle()}}>Thêm mới</Button>
                 <Button color="secondary" className="px-3">Cancel</Button>
             </ModalFooter>
         </Modal>

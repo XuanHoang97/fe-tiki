@@ -10,10 +10,10 @@ const ModalEditCategory  = (props) => {
     const [type, setType] = useState('');
     const [value, setValue] = useState('');
 
+    //fill info category
     useEffect (() => {
         let category = props.currentCategory;
         if(category) {
-            //fill info category
             setId(category.id);
             setPreviewImg(category.image);
             setName(category.name);
@@ -128,9 +128,7 @@ const ModalEditCategory  = (props) => {
             </ModalBody>
 
             <ModalFooter>
-                <Button color="primary" className="px-3" type='submit'>
-                    Cập nhật
-                </Button>
+                <Button color="primary" className="px-3" type='submit'>Cập nhật</Button>
                 <Button color="secondary" className="px-3">Cancel</Button>
             </ModalFooter>
         </form>

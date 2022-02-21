@@ -1,8 +1,4 @@
-/*
- * General styles
- */
  body, html {
-    background-image: "#fff";
     background-repeat: no-repeat;
     background-size: cover;
     font-family: $fontmain;
@@ -13,17 +9,8 @@
 
 .btn {
     padding: 0;
-    border: none;
-    cursor: pointer;
-    font-weight: 700;
-    height: 30px;
-    line-height: 30px;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-    i {
-      font-size: $base-size - 3px;
-    }
+    font-weight: 600;
+    line-height: 25px !important;
 }
 
 .content-container {

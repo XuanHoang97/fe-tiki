@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import {CommonUtils} from "../../../utils"
-
 import _ from 'lodash';
 import * as actions from '../../../store/actions';
 
@@ -12,7 +11,7 @@ const ModalEditUser = (props) => {
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const [address, setAddress] = useState('');
-    const [phoneNumber, setPhonenumber] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
     const [gender, setGender] = useState('');
     const [roleId, setRoleId] = useState('');
     const [positionId, setPositionId] = useState('');
@@ -38,7 +37,7 @@ const ModalEditUser = (props) => {
             setPassword('hardcode');
             setUsername(user.username);
             setAddress(user.address);
-            setPhonenumber(user.phoneNumber);
+            setPhoneNumber(user.phoneNumber);
             setGender(user.gender);
             setRoleId(user.roleId);
             setPositionId(user.positionId);
@@ -47,7 +46,7 @@ const ModalEditUser = (props) => {
         dispatch(actions.fetchGenderStart());
         dispatch(actions.fetchRoleStart());
         dispatch(actions.fetchPositionStart());
-    }, []);
+    }, [dispatch, props.currentUser]);
 
     const toggle =()=>{
         props.toggleFromParent();
@@ -73,17 +72,8 @@ const ModalEditUser = (props) => {
 
     const handleSaveUser=()=>{
         props.editUser({
-            id,
-            email,
-            password,
-            username,
-            address,
-            phoneNumber,
-            gender,
-            roleId,
-            positionId,
-            avatar,
-            previewImgURL
+            id, email, password, username, address, phoneNumber,
+            gender, roleId, positionId, avatar, previewImgURL
         });
         props.toggleFromParent();
     }
@@ -111,10 +101,8 @@ const ModalEditUser = (props) => {
                                 <input id="previewImg" type="file" hidden 
                                 onChange={(e)=>handleOnchangeImage(e, 'previewImgURL')} 
                                 />
-
                                 <label htmlFor="previewImg" className="btn btn-success w-100"><i className="fas fa-upload"></i> Tải ảnh</label>                   
                             </div>
-
 
                             <div className="preview-image col-md-2 border" 
                                 style={{backgroundImage: `url(${previewImgURL})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat'}}
@@ -135,7 +123,7 @@ const ModalEditUser = (props) => {
                             </div>
                         </div>
                         
-                        .<div className="row">    
+                        <div className="row">    
                             <div className="form-group col-6">
                                 <label>Địa chỉ</label>
                                 <input onChange={(e)=>setAddress(e.target.value)} value={address} type="text" className="form-control" />
@@ -143,7 +131,7 @@ const ModalEditUser = (props) => {
 
                             <div className="form-group col-6">
                                 <label>Số điện thoại</label>
-                                <input onChange={(e)=>setPhonenumber(e.target.value)} value={phoneNumber} type="text" className="form-control" />
+                                <input onChange={(e)=>setPhoneNumber(e.target.value)} value={phoneNumber} type="text" className="form-control" />
                             </div>
                         </div>
 
@@ -199,9 +187,7 @@ const ModalEditUser = (props) => {
                                 </select>
                             </div>
                         </div>
-
                     </form>
-                    
                 </div>
             </ModalBody>
 

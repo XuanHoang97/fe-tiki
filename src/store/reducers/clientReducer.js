@@ -15,6 +15,7 @@ const initialState = {
     // Option 2: Order with login
     cartsUser: 0,
     listOrder: [],
+    filterMyOrder: [],
 }
 
 const clientReducer = (state = initialState, action) => {
@@ -88,53 +89,41 @@ const clientReducer = (state = initialState, action) => {
             }
 
             //get all delivery
-        case actionTypes.FETCH_ALL_DELIVERY_SUCCESS:
+        case actionTypes.FETCH_ALL_DELIVERY:
             return {
                 ...state,
                 delivery: action.dataDelivery
             }
 
-        case actionTypes.FETCH_ALL_DELIVERY_FAILED:
-            return {
-                ...state,
-                delivery: []
-            }
-
             //get all payment
-        case actionTypes.FETCH_ALL_PAYMENT_SUCCESS:
+        case actionTypes.FETCH_ALL_PAYMENT:
             return {
                 ...state,
                 payment: action.dataPayment
             }
 
-        case actionTypes.FETCH_ALL_PAYMENT_FAILED:
-            return {
-                ...state,
-                payment: []
-            }
 
         //get all order
-        case actionTypes.FETCH_ALL_ORDER_SUCCESS:
+        case actionTypes.FETCH_ALL_ORDER:
             return {
                 ...state,
                 orders: action.payload
             }
 
         // get status order
-        case actionTypes.FETCH_STATUS_ORDER_SUCCESS:
+        case actionTypes.FETCH_STATUS_ORDER:
         return {
             ...state,
             statusOrder: action.payload
         }
     
         // Filter order by status
-        case actionTypes.FILTER_ORDER_BY_STATUS_SUCCESS:
+        case actionTypes.FILTER_ORDER_BY_STATUS:
             return {
                 ...state,
                 filterOrder: action.payload,
             }
 
-        // ----------------------------------------------------
         // Option 2: Order with login
         // Get cart by user
         case actionTypes.GET_CART_BY_USER:
@@ -150,9 +139,15 @@ const clientReducer = (state = initialState, action) => {
                 listOrder: action.payload
             }
 
+        // filter my order
+        case actionTypes.FILTER_MY_ORDER:
+            return {
+                ...state,
+                filterMyOrder: action.payload,
+            }
+
         default:
             return state;
     }
 }
-
 export default clientReducer;

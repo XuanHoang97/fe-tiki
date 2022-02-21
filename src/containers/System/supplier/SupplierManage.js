@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import {TabContent, TabPane } from 'reactstrap';
 import TabControl from './TabControl';
 import WarehouseManage from './WarehouseManage';
@@ -12,7 +11,7 @@ const SupplierManage = (props) => {
         let data=e.target.files;
         let file=data[0];
         if(file){
-            let objectUrl=URL.createObjectURL(file)
+            // let objectUrl=URL.createObjectURL(file)
             // setPreviewImg(objectUrl);
             // setImage(file);
         }
@@ -20,17 +19,12 @@ const SupplierManage = (props) => {
 
     //remove image
     const removeImg=()=>{
-        // setPreviewImg('');
-        // setImage('');
-        
-        // setCategoryPreviewImg('');
-        // setCategoryImage('');
+
     }
 
     //Add and Edit supplier
     const handleSaveSlide=(e)=>{
         e.preventDefault();
-        
     }
 
     return (
@@ -89,30 +83,21 @@ const SupplierManage = (props) => {
                                         onChange={(e)=>changeImage(e)}
                                         name='image'
                                     />
-
                                     <label htmlFor="previewImg" className="btn btn-warning w-100"><i className="fas fa-upload"></i> Tải ảnh</label>  
                                 </div>
 
-                                <div className="preview-image col-6 border" 
-                                    // style={{backgroundImage: `url(${previewImg})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat'}}
-                                >
-                                    {/* { */}
-                                    {/* // previewImg ? */}
+                                <div className="preview-image col-6 border">
                                     <div 
                                         onClick={() =>removeImg()} 
                                         className="col-md-12" style={{textAlign: 'end', position: 'absolute', right: '-1.5rem', top: '-1rem'}}>
                                         <i className="far fa-times-circle text-danger"></i>
                                     </div> 
-                                    {/* // : <img src="https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png" className="w-50" alt="..." />
-                                    // } */}
                                 </div>
                             </div>
 
                         </div>
 
-                        <button type='submit' className="btn btn-success px-2">
-                            Thêm mới
-                        </button>
+                        <button type='submit' className="btn btn-success px-2">Thêm mới</button>
                         <hr/>
 
                         <div className="text-dark">Danh sách nhà cung cấp (<b>0</b>)</div>
@@ -128,37 +113,22 @@ const SupplierManage = (props) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {/* {
-                                    slide && slide.length> 0 ?
-                                    slide.map((item, index) => {
-                                        return ( */}
-                                            <tr>
-                                                <td><div className="form-group"><input type="checkbox" className="w-100" /></div></td>
-                                                <td>1</td>                                               
-                                                <td style={{width:'6%'}}><img src='' className='w-100' alt="" /> </td>
-                                                <td>abc</td>
-                                                <td>abc</td>
-                                                <td className=''>
-                                                    <button type="button" className="btn text-primary  mr-3">
-                                                        <i className="fas fa-edit"></i>
-                                                    </button>
+                                <tr>
+                                    <td><div className="form-group"><input type="checkbox" className="w-100" /></div></td>
+                                    <td>1</td>                                               
+                                    <td style={{width:'6%'}}><img src='' className='w-100' alt="" /> </td>
+                                    <td>abc</td>
+                                    <td>abc</td>
+                                    <td className=''>
+                                        <button type="button" className="btn text-primary  mr-3">
+                                            <i className="fas fa-edit"></i>
+                                        </button>
 
-                                                    <button type="button" className="btn text-danger">
-                                                        <i className="fas fa-trash-alt"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        {/* )
-                                    })
-                                    :
-                                    <tr>
-                                        <td colSpan={6}>
-                                            <div className="text-center">
-                                                <h4>Không có dữ liệu</h4>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                } */}
+                                        <button type="button" className="btn text-danger">
+                                            <i className="fas fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </form>
@@ -172,5 +142,4 @@ const SupplierManage = (props) => {
         </div>
     );
 }
-
 export default SupplierManage;

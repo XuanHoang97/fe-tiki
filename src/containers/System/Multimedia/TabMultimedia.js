@@ -31,5 +31,4 @@ function TabMultimedia(props) {
         </Nav>
     );
 }
-
 export default TabMultimedia;

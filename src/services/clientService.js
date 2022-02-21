@@ -46,7 +46,6 @@ const updateOrder = (data) => {
     return axios.put(`${path.PORT}/update-order`, data)
 }
 
-// ...................................
 // Option 2: Order with login
 // add to cart
 const addItemToCartWithLogin = (data) => {
@@ -82,6 +81,11 @@ const getOrderByUser = (userId) => {
     return axios.get(`${path.PORT}/get-order-by-user?userId=${userId}`)
 }
 
+// filter my order
+const filterMyOrder = (userId, status) => {
+    return axios.get(`${path.PORT}/filterMyOrder?userId=${userId}&status=${status}`)
+}
+
 export{
     // Option 1: Order without login
     addItemToCart,
@@ -100,6 +104,7 @@ export{
     deleteItemCartWithLogin,
     updateItemCartWithLogin,
     checkOutOrder,
-    getOrderByUser
+    getOrderByUser,
+    filterMyOrder
 
 }

@@ -1,0 +1,63 @@
+@import url("https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css");
+.steps .step {
+    display: block;
+    width: 100%;
+    text-align: center
+}
+.steps .step .step-icon-wrap {
+    display: block;
+    position: relative;
+}
+.steps .step .step-icon-wrap::before,
+.steps .step .step-icon-wrap::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    width: 50%;
+    height: 3px;
+    margin-top: -1px;
+    background: #e1e7ec;
+    content: '';
+    z-index: 1
+}
+.steps .step .step-icon-wrap::before {
+    left: 0
+}
+.steps .step .step-icon-wrap::after {
+    right: 0
+}
+.steps .step .step-icon {
+    display: inline-block;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #dfdfdf;
+    font-size: 25px;
+    line-height: 52px;
+    z-index: 5
+}
+.steps .step .step-title {
+    margin: 15px 0 0 0 ;
+    color: #878787;
+    font-size: 13px;
+}
+
+.activeStatus {
+    color: #28a745 !important;
+}
+
+.steps .step:first-child .step-icon-wrap::before {
+    display: none
+}
+.steps .step:last-child .step-icon-wrap::after {
+    display: none
+}
+.steps .step.completed .step-icon-wrap::before,
+.steps .step.completed .step-icon-wrap::after {
+    background-color: #28a745
+}
+.steps .step.completed .step-icon {
+    background-color: #28a745;
+    color: #fff
+}

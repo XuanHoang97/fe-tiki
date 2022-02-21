@@ -4,7 +4,7 @@ import { path } from 'utils';
 import * as actions from './../../../../store/actions';
 import { Link } from 'react-router-dom';
 import instance from './../../../../axios';
-import { GetOrderByUser, getUser } from './../../../../store/actions';
+import { getUser } from './../../../../store/actions';
 import { useHistory } from 'react-router-dom';
 
 const token = localStorage.getItem('token');
@@ -13,16 +13,6 @@ const Account = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const user = useSelector(state => state.auth.user);
-    const listOrder = useSelector(state => state.client.listOrder);
-
-    // get order by user
-    useEffect(() => {
-        try {
-            dispatch(GetOrderByUser(user.id));
-        } catch (e) {
-            console.log('get order by user fail', e)
-        }
-    }, [dispatch, user]);
 
     // Refresh token
     useEffect(() => {
@@ -84,7 +74,6 @@ const Account = () => {
                             <div onClick={()=>history.push(path.ORDER)} className="item-acc">
                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNU-ZEXVPgvlrEPzhaAIFjyRUaqglcuKdkx4lgk2r-ryshxRle56ba4S4SaUoI0GTf2Iw&usqp=CAU" className='mr-2' style={{width: '8%'}}  alt="" />
                                 Đơn hàng của tôi
-                                <span className='ml-3 text-danger'>{listOrder && listOrder.length >0 ? listOrder.length : 0 }</span>    
                             </div>
                             
                             <div onClick={Logout} className="item-acc">

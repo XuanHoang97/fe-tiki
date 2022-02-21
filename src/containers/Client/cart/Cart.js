@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import Voucher from './Voucher'
 import Header from 'containers/HomePage/Header/Header';
 import { numberFormat, totalMoney } from 'components/Formatting/FormatNumber';
 import { UpdateItemCartByUser } from 'store/actions';
@@ -30,12 +29,11 @@ const Cart = (props) => {
         setTimeout(() => {
             history.push(path.PAYMENT);
         }, 1000);
-        console.log('payment',cartsUser)
     }
 
     useEffect(() => {
         document.title = 'Thông tin Giỏ hàng';
-    })
+    }, []);
 
     return (
         <>
@@ -71,8 +69,7 @@ const Cart = (props) => {
                                                 <input type="text" className="form-control text-center" 
                                                     readOnly value={item.qty} 
                                                     onChange={(e) => setQty(e.target.value)}
-                                                
-                                                style={{ height: '31px' }} />
+                                                />
 
                                                 <div className="input-group-append">
                                                     <button onClick={(e) => (++item.qty, CountUp(item.qty))} className="btn btn-light btn-sm" type="submit">
@@ -97,9 +94,7 @@ const Cart = (props) => {
                         </div>
 
                         <div className="col-md-3 pr-0">
-                            <Voucher />
-
-                            <div className="bg-white mt-3 p-2">
+                            <div className="bg-white p-2">
                                 <div className="row  pl-3 pr-3 p-2 justify-content-between">
                                     <span>Tạm tính</span>
                                     <small className="text-danger">

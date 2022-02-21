@@ -38,28 +38,28 @@ const adminReducer = (state = initialState, action) => {
             }
 
             //fetch gender
-        case actionTypes.FETCH_GENDER_SUCCESS:
+        case actionTypes.FETCH_GENDER:
             return {
                 ...state,
                 genders : action.payload
             }
 
             //fetch role
-        case actionTypes.FETCH_ROLE_SUCCESS:
+        case actionTypes.FETCH_ROLE:
             return {
                 ...state,
                 roles : action.payload
             }
 
             //fetch position
-        case actionTypes.FETCH_POSITION_SUCCESS:
+        case actionTypes.FETCH_POSITION:
             return {
                 ...state,
                 positions : action.payload,
             }
 
             //fetch all user
-        case actionTypes.FETCH_ALL_USERS_SUCCESS:
+        case actionTypes.FETCH_ALL_USERS:
             return {
                 ...state,
                 users : action.payload,
@@ -82,112 +82,105 @@ const adminReducer = (state = initialState, action) => {
             }
 
         //search
-        case actionTypes.SEARCH_SUCCESS:
+        case actionTypes.SEARCH:
             return {
                 ...state,
                 dataSearch : action.payload,
             }
 
             // filter product by price
-        case actionTypes.FILTER_PRODUCT_SUCCESS:
+        case actionTypes.FILTER_PRODUCT:
             return {
                 ...state,
                 dataSearch : action.payload,
             }
             
             //fetch all product
-        case actionTypes.FETCH_ALL_PRODUCTS_SUCCESS:
+        case actionTypes.FETCH_PRODUCTS:
             return {
                 ...state,
                 products : action.payload
             }
 
             //fetch status product
-        case actionTypes.FETCH_STATUS_PRODUCT_SUCCESS:
+        case actionTypes.FETCH_STATUS_PRODUCT:
             return {
                 ...state,
                 status : action.payload,
             }
 
             //fetch supplier product
-        case actionTypes.FETCH_SUPPLIER_PRODUCT_SUCCESS:
+        case actionTypes.FETCH_SUPPLIER_PRODUCT:
             return {
                 ...state,
                 supplier : action.payload
             }
 
             //SELECT option product
-        case actionTypes.SELECT_OPTION_PRODUCT_SUCCESS:
+        case actionTypes.SELECT_OPTION_PRODUCT:
             return {
                 ...state,
                 optionProduct : action.payload,
             }
 
-            // filter product
-        // case actionTypes.FILTER_PRODUCT_SUCCESS:
-        //     return {
-        //         ...state,
-        //         filterProduct : action.payload,
-        //     }
-
         //get product similar
-        case actionTypes.FETCH_PRODUCT_SIMILAR_SUCCESS:
+        case actionTypes.FETCH_PRODUCT_SIMILAR:
             return {
                 ...state,
                 productSimilar : action.payload,
             }
 
             //fetch all article
-        case actionTypes.FETCH_ALL_ARTICLE_SUCCESS:
+        case actionTypes.FETCH_ARTICLE:
             return {
                 ...state,
                 articles : action.payload,
             }
             
             //fetch all category
-        case actionTypes.FETCH_ALL_CATEGORIES_SUCCESS:
+        case actionTypes.FETCH_CATEGORIES:
             return {
                 ...state,
                 categories : action.listCategory,
             }
 
             //fetch all product in category
-        case actionTypes.FETCH_PRODUCT_IN_CATEGORY_SUCCESS:
+        case actionTypes.FETCH_PRODUCT_IN_CATEGORY:
             return {
                 ...state,
                 detailCategory : action.payload,
             }
 
             //fetch all news and event
-        case actionTypes.FETCH_ALL_NEWS_SUCCESS:
+        case actionTypes.FETCH_ALL_NEWS:
             return {
                 ...state,
                news : action.payload
             }
 
             //fetch allCode news and event
-        case actionTypes.FETCH_ALLCODE_NEWS_SUCCESS:
+        case actionTypes.FETCH_CODE_NEWS:
             return {
                 ...state,
                 status_news : action.payload
             }
 
         // get all slide
-        case actionTypes.FETCH_ALL_SLIDE_SUCCESS:
+        case actionTypes.FETCH_ALL_SLIDE:
             return {
                 ...state,
                 slides: action.payload,
             }
             
         //get all special category
-        case actionTypes.FETCH_ALL_SPECIAL_CATEGORY_SUCCESS:
+        case actionTypes.FETCH_SPECIAL_CATEGORY:
             return {
                 ...state,
                 specialCategories: action.payload
             }
 
         //get all status slide
-        case actionTypes.FETCH_ALL_STATUS_SLIDE_SUCCESS:
+        case actionTypes.FETCH_ALL_STATUS_SLIDE:
             return {
                 ...state,
                 statusSlide : action.payload
@@ -196,5 +189,4 @@ const adminReducer = (state = initialState, action) => {
             return state;
     }
 }
-
 export default adminReducer;

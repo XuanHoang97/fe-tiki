@@ -29,9 +29,7 @@ const Sort = (props) => {
             </div>
 
             <div className="form-group d-flex col-3 p-0">
-
-                <select className="form-control" style={{height:'30px'}}
-                >
+                <select className="form-control" style={{height:'30px'}}>
                     {   
                         listCategory && listCategory.length >0 ?
                         listCategory.map((item, index) => {

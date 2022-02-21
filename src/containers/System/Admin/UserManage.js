@@ -4,14 +4,12 @@ import ModalUser from './ModalUser';
 import ModalEditUser from './ModalEditUser';
 import InfoUser from './InfoUser';
 import * as actions from '../../../store/actions';
-import Sort from './Sort';
-import Pagination from './Pagination';
 
 const UserManage = (props) => {
-    const [selectInfoUser, setSelectInfoUser] = useState([]);
-    const [isOpenModalUser, setIsOpenModalUser] = useState(false);
-    const [isOpenModalEditUser, setIsOpenModalEditUser] = useState(false);
-    const [isOpenModalInfoUser, setIsOpenModalInfoUser] = useState(false);
+    const [infoUser, setInfoUser] = useState([]);
+    const [modalUser, setModalUser] = useState(false);
+    const [modalEditUser, setModalEditUser] = useState(false);
+    const [modalInfoUser, setModalInfoUser] = useState(false);
     const [userEdit, setUserEdit] = useState('');
 
     //fetch data
@@ -24,7 +22,7 @@ const UserManage = (props) => {
     
     // Create users
     const handleAddNewUser=()=> {
-        setIsOpenModalUser(!isOpenModalUser);
+        setModalUser(!modalUser);
     }
 
     const AddNewUser=(data)=> {
@@ -39,7 +37,7 @@ const UserManage = (props) => {
     //edit user
     const handleEditUser=(user)=>{
         setUserEdit(user);
-        setIsOpenModalEditUser(!isOpenModalEditUser);
+        setModalEditUser(!modalEditUser);
     }
 
     const editUser=(data)=>{
@@ -48,21 +46,21 @@ const UserManage = (props) => {
 
     //info user
     const handleInfoUser=(user)=>{
-        setSelectInfoUser(user);
-        setIsOpenModalInfoUser(!isOpenModalInfoUser);
+        setInfoUser(user);
+        setModalInfoUser(!modalInfoUser);
     }
 
     return (
         <div className="mx-2">
             <ModalUser
-                isOpen={isOpenModalUser} 
+                isOpen={modalUser} 
                 toggleFromParent={handleAddNewUser}
                 AddNewUser={AddNewUser}
             />
 
             {
                 <ModalEditUser
-                    isOpen={isOpenModalEditUser} 
+                    isOpen={modalEditUser} 
                     toggleFromParent={handleEditUser}
                     currentUser={userEdit}
                     editUser={editUser}
@@ -70,9 +68,9 @@ const UserManage = (props) => {
             }
 
             <InfoUser
-                isOpen={isOpenModalInfoUser} 
+                isOpen={modalInfoUser} 
                 toggleFromParent={handleInfoUser}
-                details={selectInfoUser}
+                details={infoUser}
             />
             
             <div className="h5 text-dark mb-4">Quản lý thành viên</div>
@@ -81,12 +79,9 @@ const UserManage = (props) => {
                 <button onClick ={() => handleAddNewUser()}  type="button" className="btn btn-success col-2">
                     <i className="fas fa-plus mr-2"></i> Thêm thành viên
                 </button>
-                <Sort />
             </div>
             
-            {/* list user  */}
             <div className="text-dark">Danh sách thành viên  (<b>{listUsers.length}</b>) </div>
-
             <table className="table table-striped table-bordered table-hover">
                 <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
                     <tr>
@@ -156,7 +151,6 @@ const UserManage = (props) => {
                     </tbody> 
                 }
             </table>
-            <Pagination />
         </div>
     );
 }

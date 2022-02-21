@@ -11,7 +11,7 @@ export const logoutAccount = () => {
         try {
             await logout();
             dispatch({
-                type: actionTypes.LOGOUT_SUCCESS
+                type: actionTypes.LOGOUT
             });
         } catch (error) {
             if (error.response) {

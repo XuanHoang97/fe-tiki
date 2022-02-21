@@ -31,11 +31,7 @@ const WarehouseManage = ({activeTab, setActiveTab}) => {
                             // value={categoryId}
                             // onChange={(e) => setCategoryId(e.target.value)}
                         >
-                            {/* {
-                                category.map((item, index) => {
-                                    return <option key={index} value={item.id}>{item.name}</option>
-                                })
-                            }             */}
+                            
                         </select>
                     </div>
 
@@ -49,26 +45,18 @@ const WarehouseManage = ({activeTab, setActiveTab}) => {
                             <label htmlFor="previewImgCategory" className="btn btn-warning w-100"><i className="fas fa-upload"></i> Tải ảnh</label>  
                         </div>
 
-                        <div className="preview-image col-8 border" 
-                            // style={{backgroundImage: `url(${categoryPreviewImg})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat'}}
-                        >
-                            {/* {
-                            categoryPreviewImg ? */}
+                        <div className="preview-image col-8 border">
                             <div 
                                 // onClick={() =>removeImg()} 
                                 className="col-md-12" style={{textAlign: 'end', position: 'absolute', right: '-1.5rem', top: '-1rem'}}>
                                 <i className="far fa-times-circle text-danger"></i>
                             </div> 
-                            {/* : <img src="https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png" className="w-50" alt="..." />
-                            } */}
                         </div>
                     </div>
 
                 </div>
 
-                <button type='submit' className="btn btn-success px-2">
-                    "Thêm mới"
-                </button>
+                <button type='submit' className="btn btn-success px-2">Thêm mới</button>
                 <hr/>
 
                 <div className="text-dark">Danh sách danh mục nổi bật (<b>0</b>)</div>
@@ -84,46 +72,30 @@ const WarehouseManage = ({activeTab, setActiveTab}) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* {
-                            specialCategories && specialCategories.length> 0 ?
-                            specialCategories.map((item, index) => {
-                                return( */}
-                                    <tr>
-                                        <td>
-                                            <div className="form-group">
-                                                <input type="checkbox" className="w-100" />
-                                            </div>
-                                        </td>
-                                        <td>1</td>
-                                        <td style={{width:'6%'}}><img src="" className='w-100' alt="" /> </td>
-                                        <td className='text-primary'>abc</td>
-                                        <td>{Date()}</td>
-                                        <td className='d-flex'>
-                                            <button type="button" className="btn text-primary  mr-3">
-                                                <i className="fas fa-edit"></i>
-                                            </button>
+                        <tr>
+                            <td>
+                                <div className="form-group">
+                                    <input type="checkbox" className="w-100" />
+                                </div>
+                            </td>
+                            <td>1</td>
+                            <td style={{width:'6%'}}><img src="" className='w-100' alt="" /> </td>
+                            <td className='text-primary'>abc</td>
+                            <td>{Date()}</td>
+                            <td className='d-flex'>
+                                <button type="button" className="btn text-primary  mr-3">
+                                    <i className="fas fa-edit"></i>
+                                </button>
 
-                                            <button type="button" className="btn text-danger">
-                                                <i className="fas fa-trash-alt"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                {/* )
-                            })
-                            :
-                            <tr>
-                                <td colSpan={6}>
-                                    <div className="text-center">
-                                        <h4>Không có dữ liệu</h4>
-                                    </div>
-                                </td>
-                            </tr>
-                        } */}
+                                <button type="button" className="btn text-danger">
+                                    <i className="fas fa-trash-alt"></i>
+                                </button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </form>
         </TabPane>
     );
 }
-
 export default WarehouseManage;

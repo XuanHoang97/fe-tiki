@@ -112,13 +112,9 @@ const ModalAddCategory = (props) => {
                     />
                 </div>
             </div>
-            
             </ModalBody>
-
             <ModalFooter>
-                <Button color="primary" className="px-3" type='submit'>
-                    Thêm mới
-                </Button>
+                <Button color="primary" className="px-3" type='submit'>Thêm mới</Button>
                 <Button color="secondary" className="px-3">Cancel</Button>
             </ModalFooter>
         </form> 

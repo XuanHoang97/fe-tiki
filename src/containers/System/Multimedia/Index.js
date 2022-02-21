@@ -223,12 +223,10 @@ const Multimedia = (props) => {
                     specialCategories = {specialCategories}
                     editSpecialCategory = {editSpecialCategory}
                 />
-
                 <TabPane tabId="3">Tab 3 Content</TabPane>
                 <TabPane tabId="4">Tab 4 Content</TabPane>
             </TabContent>
         </div>
     );
 }
-
 export default Multimedia;

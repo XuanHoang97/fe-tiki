@@ -41,7 +41,7 @@ function InfoAccount(props) {
         <div className='bg-light'>
             <Header />
             <Router>
-                <div className='container my-4 d-flex'>
+                <div className='container my-3 d-flex'>
                     <div className='col-2 py-3 p-0'>
                         <div className='avatar d-flex'>
                             <img src="https://cf.shopee.vn/file/0da87e797bc536f57ff4dadbd8781db4_tn" className='rounded-circle'  alt="" />
@@ -81,7 +81,7 @@ function InfoAccount(props) {
                         </NavLink>
                     </div>
 
-                    <div className='col-10 bg-white p-4'>
+                    <div className='col-10 bg-white p-3'>
                         <Switch>
                             <Route exact path={path.ACCOUNT} component={Profile} />
                             <Route path={path.CHANGE_PASSWORD} component={ChangePassword} />

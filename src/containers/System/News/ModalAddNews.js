@@ -9,10 +9,8 @@ const ModalAddNews = (props) => {
     const [previewImg, setPreviewImg] = useState('');
     const [content, setContent] = useState('');
     const [description, setDescription] = useState('');
-
     const [date, setDate] = useState(new Date());
     const [author_id, setAuthor_id] = useState('');
-    const [view, setView] = useState('');
     const [hot, setHot] = useState('');
     const [status, setStatus] = useState('');
     const [productId, setProductId] = useState('');
@@ -53,19 +51,7 @@ const ModalAddNews = (props) => {
     const handleAddNews=(e)=>{
         e.preventDefault();
         const data = {
-            name,
-            image,
-            previewImg,
-
-            content,
-            description,
-            date,
-            author_id,
-            productId,
-
-            hot,
-            status,
-            category_id,
+            name, image, previewImg, content, description, date, author_id, productId, hot, status, category_id,
         }
         props.createNews(data);
         toggle();
@@ -88,16 +74,11 @@ const ModalAddNews = (props) => {
     }
     
     return (
-        <Modal 
-            isOpen={props.isOpen} 
-            toggle={()=>toggle()} 
-            size="lg"
-        >   
+        <Modal isOpen={props.isOpen} toggle={()=>toggle()} size="lg">   
         <form
             onSubmit={handleAddNews}
             encType='multipart/form-data'
         >
-
             <ModalHeader toggle={()=>toggle()}>Thêm mới tin tức, sự kiện</ModalHeader>
             <ModalBody>
             <div>
@@ -116,7 +97,6 @@ const ModalAddNews = (props) => {
                             onChange={(e)=>changeImage(e)}
                             name='image'
                         />
-
                         <label htmlFor="previewImg" className="btn btn-success w-100"><i className="fas fa-upload"></i> Tải ảnh</label>  
                     </div>
 
@@ -214,11 +194,8 @@ const ModalAddNews = (props) => {
                 </div>
             </div>
             </ModalBody>
-
             <ModalFooter>
-                <Button color="primary" className="px-3" type='submit' >
-                    Thêm mới
-                </Button>
+                <Button color="primary" className="px-3" type='submit' >Thêm mới</Button>
                 <Button color="secondary" className="px-3">Cancel</Button>
             </ModalFooter>
         </form>

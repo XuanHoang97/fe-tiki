@@ -35,18 +35,11 @@ export const fetchGenderStart = () => {
             let res = await getAllCodeService('GENDER');
             if (res && res.data.errCode === 0) {
                 dispatch({
-                    type: actionTypes.FETCH_GENDER_SUCCESS,
+                    type: actionTypes.FETCH_GENDER,
                     payload: res.data.data
                 })
-            } else {
-                dispatch({
-                    type: actionTypes.FETCH_GENDER_FAILED
-                });
             }
         } catch (e) {
-            dispatch({
-                type: actionTypes.FETCH_GENDER_FAILED
-            });
             console.log('fetchGenderStart error', e)
         }
     }
@@ -59,18 +52,11 @@ export const fetchRoleStart = () => {
             let res = await getAllCodeService('ROLE');
             if (res && res.data.errCode === 0) {
                 dispatch({
-                    type: actionTypes.FETCH_ROLE_SUCCESS,
+                    type: actionTypes.FETCH_ROLE,
                     payload: res.data.data
                 })
-            } else {
-                dispatch({
-                    type: actionTypes.FETCH_ROLE_FAILED
-                });
             }
         } catch (e) {
-            dispatch({
-                type: actionTypes.FETCH_ROLE_FAILED
-            });
             console.log('fetchRoleStart error', e)
         }
     }
@@ -83,18 +69,11 @@ export const fetchPositionStart = () => {
             let res = await getAllCodeService('POSITION');
             if (res && res.data.errCode === 0) {
                 dispatch({
-                    type: actionTypes.FETCH_POSITION_SUCCESS,
+                    type: actionTypes.FETCH_POSITION,
                     payload: res.data.data
                 })
-            } else {
-                dispatch({
-                    type: actionTypes.FETCH_POSITION_FAILED
-                });
             }
         } catch (e) {
-            dispatch({
-                type: actionTypes.FETCH_POSITION_FAILED
-            });
             console.log('fetchPositionStart error', e)
         }
     }
@@ -106,26 +85,18 @@ export const createNewUser = (data) => {
         try {
             let res = await createUser(data);
             if (res && res.data.errCode === 0) {
-                dispatch(saveUserSuccess());
+                dispatch({
+                    type: actionTypes.CREATE_USER,
+                });
                 dispatch(fetchAllUser());
                 toast.success('Thêm mới thành viên thành công !')
-            } else {
-                dispatch(saveUserFailed());
             }
         } catch (e) {
-            dispatch(saveUserFailed());
             console.log('saveUserFailed error', e)
         }
     }
 }
 
-export const saveUserSuccess = () => ({
-    type: actionTypes.CREATE_USER_SUCCESS,
-})
-
-export const saveUserFailed = () => ({
-    type: actionTypes.CREATE_USER_FAILED
-})
 
 //get all users
 export const fetchAllUser = () => {
@@ -135,20 +106,11 @@ export const fetchAllUser = () => {
 
             if (res && res.data.errCode === 0) {
                 dispatch({
-                    type: actionTypes.FETCH_ALL_USERS_SUCCESS,
+                    type: actionTypes.FETCH_ALL_USERS,
                     payload: res.data.users.reverse()
                 })
-            } else {
-                toast.error('fetch all user error !')
-                dispatch({
-                    type: actionTypes.FETCH_ALL_USERS_FAILED
-                });
             }
         } catch (e) {
-            toast.error('fetch all user error !')
-            dispatch({
-                type: actionTypes.FETCH_ALL_USERS_FAILED
-            });
             console.log('fetchAllUSersFailed error', e)
         }
     }
@@ -161,20 +123,12 @@ export const deleteUser = (userId) => {
             let res = await deleteUserService(userId);
             if (res && res.data.errCode === 0) {
                 dispatch({
-                    type: actionTypes.DELETE_USER_SUCCESS,
+                    type: actionTypes.DELETE_USER,
                 });
                 dispatch(fetchAllUser());
                 toast.success('Xoá thành viên thành công !')
-            } else {
-                dispatch({
-                    type: actionTypes.DELETE_USER_FAILED
-                });
-                toast.error('delete the user error !')
             }
         } catch (e) {
-            dispatch({
-                type: actionTypes.DELETE_USER_FAILED
-            });
             console.log('deleteUserFailed error', e)
         }
     }
@@ -187,27 +141,18 @@ export const editUser = (data) => {
             let res = await editUserService(data);
             if (res && res.data.errCode === 0) {
                 dispatch({
-                    type: actionTypes.EDIT_USER_SUCCESS,
+                    type: actionTypes.EDIT_USER,
                 });
                 dispatch(fetchAllUser());
                 toast.success('update user succeed !')
-            } else {
-                dispatch({
-                    type: actionTypes.EDIT_USER_FAILED
-                });
-                toast.error('update the user error !')
             }
         } catch (e) {
-            dispatch({
-                type: actionTypes.EDIT_USER_FAILED
-            });
             toast.error('update the user error !')
         }
     }
 }
 
 //SEARCH
-
 // keyword search
 export const keywordSearch = (data) => {
     return ({
@@ -229,20 +174,11 @@ export const searchResult = (keyword) => {
             let res = await search(keyword);
             if (res && res.data.errCode === 0) {
                 dispatch({
-                    type: actionTypes.SEARCH_SUCCESS,
+                    type: actionTypes.SEARCH,
                     payload: res.data.info
                 })
-            } else {
-                dispatch({
-                    type: actionTypes.SEARCH_FAILED
-                });
-                toast.error('search error !')
             }
         } catch (e) {
-            toast.error('search error !')
-            dispatch({
-                type: actionTypes.SEARCH_FAILED
-            });
             console.log('searchFailed error', e)
         }
     }
@@ -255,20 +191,11 @@ export const filterProductByPrice = (keyword, price, priceFrom, priceTo) => {
             let res = await FilterProductByPrice(keyword, price, priceFrom, priceTo);
             if (res && res.data.errCode === 0) {
                 dispatch({
-                    type: actionTypes.FILTER_PRODUCT_SUCCESS,
+                    type: actionTypes.FILTER_PRODUCT,
                     payload: res.data.info
                 })
-            } else {
-                dispatch({
-                    type: actionTypes.FILTER_PRODUCT_FAILED
-                });
-                toast.error('filter error !')
             }
         } catch (e) {
-            toast.error('filter error !')
-            dispatch({
-                type: actionTypes.FILTER_PRODUCT_FAILED
-            });
             console.log('filterFailed error', e)
         }
     }

@@ -15,19 +15,11 @@ export const fetchAllCategory = () => {
             let res = await getAllCategory('ALL');
             if (res && res.data.errCode === 0) {
                 dispatch({
-                    type: actionTypes.FETCH_ALL_CATEGORIES_SUCCESS,
+                    type: actionTypes.FETCH_CATEGORIES,
                     listCategory: res.data.category
                 })
-            } else {
-                dispatch({
-                    type: actionTypes.FETCH_ALL_CATEGORIES_FAILED,
-                });
-                toast.error('fetch all category error !')
             }
         } catch (e) {
-            dispatch({
-                type: actionTypes.FETCH_ALL_CATEGORIES_FAILED,
-            });
             toast.error('fetch all category error !')
         }
     }
@@ -40,31 +32,16 @@ export const CreateCategory = (data) => {
             let res = await createCategory(data);
             if (res && res.data.errCode === 0) {
                 dispatch({
-                    type: actionTypes.CREATE_CATEGORY_SUCCESS,
+                    type: actionTypes.CREATE_CATEGORY,
                 });
                 dispatch(fetchAllCategory());
                 toast.success('Thêm danh mục thành công !')
-            } else {
-                dispatch({
-                    type: actionTypes.CREATE_CATEGORY_FAILED,
-                });
             }
         } catch (e) {
-            dispatch({
-                type: actionTypes.CREATE_CATEGORY_FAILED,
-            });
             console.log('createCategoryFailed error', e)
         }
     }
 }
-
-export const createCategorySuccess = () => ({
-    type: actionTypes.CREATE_CATEGORY_SUCCESS,
-})
-
-export const createCategoryFailed = () => ({
-    type: actionTypes.CREATE_CATEGORY_FAILED,
-})
 
 //edit category
 export const EditCategory = (data) => {
@@ -73,19 +50,12 @@ export const EditCategory = (data) => {
             let res = await editCategory(data);
             if (res && res.data.errCode === 0) {
                 dispatch({
-                    type: actionTypes.EDIT_CATEGORY_SUCCESS,
+                    type: actionTypes.EDIT_CATEGORY,
                 });
                 dispatch(fetchAllCategory());
                 toast.success('Sửa danh mục thành công !')
-            } else {
-                dispatch({
-                    type: actionTypes.EDIT_CATEGORY_FAILED,
-                });
-            }
+            } 
         } catch (e) {
-            dispatch({
-                type: actionTypes.EDIT_CATEGORY_FAILED,
-            });
             console.log('editCategoryFailed error', e)
         }
     }
@@ -98,19 +68,12 @@ export const DeleteCategory = (id) => {
             let res = await deleteCategory(id);
             if (res && res.data.errCode === 0) {
                 dispatch({
-                    type: actionTypes.DELETE_CATEGORY_SUCCESS,
+                    type: actionTypes.DELETE_CATEGORY,
                 });
                 dispatch(fetchAllCategory());
                 toast.success('Xóa danh mục thành công !')
-            } else {
-                dispatch({
-                    type: actionTypes.DELETE_CATEGORY_FAILED,
-                });
-            }
+            } 
         } catch (e) {
-            dispatch({
-                type: actionTypes.DELETE_CATEGORY_FAILED,
-            });
             console.log('deleteCategoryFailed error', e)
         }
     }
@@ -123,18 +86,11 @@ export const DetailCategory = (id) => {
             let res = await detailCategory(id);
             if (res) {
                 dispatch({
-                    type: actionTypes.FETCH_PRODUCT_IN_CATEGORY_SUCCESS,
+                    type: actionTypes.FETCH_PRODUCT_IN_CATEGORY,
                     payload: res.data.categoryData
-                });
-            } else {
-                dispatch({
-                    type: actionTypes.FETCH_PRODUCT_IN_CATEGORY_FAILED,
                 });
             }
         } catch (e) {
-            dispatch({
-                type: actionTypes.FETCH_PRODUCT_IN_CATEGORY_FAILED,
-            });
             console.log('detailCategoryFailed error', e)
         }
     }

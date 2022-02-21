@@ -5,12 +5,11 @@ import ModalAddCategory from './ModalAddCategory';
 import ModalEditCategory from './ModalEditCategory';
 
 const CategoryManage = (props) => {
+    const dispatch = useDispatch();
     const [modalCategory, setModalCategory] = useState(false);
     const [modalEditCategory, setModalEditCategory] = useState(false);
     const [categoryEdit, setCategoryEdit] = useState('');
-
-    const dispatch = useDispatch();
-    const listCategory = useSelector(state => state.admin.categories);
+    const category = useSelector(state => state.admin.categories);
 
    //fetch product category
      useEffect(() => {        
@@ -72,14 +71,13 @@ const CategoryManage = (props) => {
             />
 
             <div className="h5 text-dark mb-4">Quản lý danh mục sản phẩm</div>
-
             <div className="d-flex mb-3 justify-content-between">
                 <button onClick={() => handleAddCategory()} type="button" className="btn btn-success col-2">
                     <i className="fas fa-plus"></i> Thêm danh mục
                 </button>
             </div>
 
-            <div className="text-dark">Danh mục sản phẩm (<b>{listCategory.length}</b>)</div>
+            <div className="text-dark">Danh mục sản phẩm (<b>{category.length}</b>)</div>
             <table className="table table-striped table-bordered table-hover">
                 <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
                     <tr>
@@ -92,8 +90,8 @@ const CategoryManage = (props) => {
                 </thead>
                 <tbody>
                 {
-                    listCategory && listCategory.length > 0 ?
-                    listCategory.map((item, index) => {
+                    category && category.length > 0 ?
+                    category.map((item, index) => {
                         return (
                             <tr key={index}>
                                 <td>

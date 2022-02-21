@@ -18,5 +18,4 @@ const TabControl = ({activeTab, setActiveTab}) => {
         </Nav>
     );
 }
-
 export default TabControl;

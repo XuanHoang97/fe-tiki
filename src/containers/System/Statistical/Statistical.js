@@ -51,7 +51,6 @@ const StatisticalManage = (props) => {
                             <h6 className="card-title small">TỔNG TIỀN ĐẶT HÀNG</h6>
                         </div>
                         <button className="btn btn-success px-3">Xem</button>
-
                     </div>
 
                     <div className="item-statistical  align-items-center">
@@ -73,7 +72,6 @@ const StatisticalManage = (props) => {
                             <h6 className="card-title small">DOANH THU</h6>
                         </div>
                         <button className="btn btn-success px-3">Xem</button>
-
                     </div>
 
                     <div className="item-statistical  align-items-center">
@@ -91,7 +89,6 @@ const StatisticalManage = (props) => {
                             <h6 className="card-title small">LỢI NHUẬN</h6>
                         </div>
                         <button className="btn btn-success px-3">Xem</button>
-
                     </div>
                 </div>
 
@@ -110,10 +107,7 @@ const StatisticalManage = (props) => {
                         
                         <button type="button" className="col-1 btn btn-primary px-3">Xem</button>
                     </div>
-                    
-                    <div>
-                        Updating...
-                    </div>
+                    <div>Updating... </div>
                 </div>
 
                 </TabPane>

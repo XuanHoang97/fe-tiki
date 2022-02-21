@@ -5,7 +5,6 @@ const initialState = {
     userInfo: null
 }
 
-
 const appReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.USER_LOGIN_SUCCESS:

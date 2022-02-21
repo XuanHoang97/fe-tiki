@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-import _ from 'lodash';
 import * as actions from '../../../store/actions';
 
 const ModalEditProduct  = (props) => {
-    const [id, setId] = useState('');
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [sale, setSale] = useState('');
@@ -23,13 +21,10 @@ const ModalEditProduct  = (props) => {
     const listCategory = useSelector(state => state.admin.categories);
     const listSupplier = useSelector(state => state.admin.supplier);
 
-    console.log('data category:', listCategory);
-
+    // fill info product to edit
     useEffect (() => {
         let product = props.currentProduct;
         if(product) {
-            // fill info product to edit
-            setId(product.id);
             setName(product.name);
             setPrice(product.price);
             setSale(product.sale);
@@ -40,11 +35,10 @@ const ModalEditProduct  = (props) => {
             setSupplier_id(product.supplier_id);
             setPreviewImg(product.image);
         }
-
         dispatch(actions.fetchStatusProduct());
         dispatch(actions.fetchAllCategory());
         dispatch(actions.fetchSupplierProduct());
-    }, [props.currentProduct]);
+    }, [dispatch, props.currentProduct]);
 
 
     const toggle =()=>{
@@ -61,17 +55,17 @@ const ModalEditProduct  = (props) => {
             setImage(file);
         }
     }
+
     //remove image
     const removeImg=()=>{
         setPreviewImg('');
         setImage('');
     }
 
+    // edit product
     const EditProduct=(e)=>{
         e.preventDefault();
-
         props.editProduct({
-            id: props.currentProduct.id,
             name: name,
             price: price,
             sale: sale,
@@ -82,32 +76,16 @@ const ModalEditProduct  = (props) => {
             supplier_id: supplier_id,
             image: previewImg,
             previewImg: previewImg,
-
-            // name: name,
-            // price: price,
-            // sale: sale,
-            // status: status,
-            // warranty: warranty,
-            // number: number,
-            // category_id: category_id,
-            // supplier_id: supplier_id,
-            // image: previewImg,
-            // previewImg: previewImg,
         });
         toggle();
     }
 
     return (
-        <Modal 
-            isOpen={props.isOpen} 
-            toggle={()=>toggle()} 
-            size="lg"
-        >
+        <Modal isOpen={props.isOpen} toggle={()=>toggle()} size="lg">
         <form
             onSubmit={EditProduct}
             encType='multipart/form-data'
         >
-            
             <ModalHeader toggle={()=>toggle()}>Cập nhật sản phẩm</ModalHeader>
             <ModalBody>
             <div>
@@ -126,7 +104,6 @@ const ModalEditProduct  = (props) => {
                             onChange={(e)=>changeImage(e)}
                             name='image'
                         />
-
                         <label htmlFor="previewImg" className="btn btn-success w-100"><i className="fas fa-upload"></i> Tải ảnh</label>                
                     </div>
 
@@ -223,15 +200,12 @@ const ModalEditProduct  = (props) => {
                             }
                         </select>
                     </div>
-
                 </div>
             </div>
             </ModalBody>
 
             <ModalFooter>
-                <Button color="primary" className="px-3" type='submit'>
-                    Cập nhật
-                </Button>
+                <Button color="primary" className="px-3" type='submit'>Cập nhật</Button>
                 <Button color="secondary" className="px-3">Cancel</Button>
             </ModalFooter>
         </form>   

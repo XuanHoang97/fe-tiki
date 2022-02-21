@@ -66,7 +66,6 @@ const OrderManage = (props) => {
 
             <TabContent activeTab={activeTab} className='p-3 py-4 bg-light border'>
                 <TabPane tabId={activeTab}>
-                    {/*Filter order */}
                     {
                         activeTab === '4' ?
                         <FilterDataOrder
@@ -76,7 +75,7 @@ const OrderManage = (props) => {
                         /> : ''
                     }
 
-                    {/* Display list order */}
+                    {/* list order */}
                     <ListOrder
                         filterOrder={filterOrder}
                         loadOrder={loadOrder}

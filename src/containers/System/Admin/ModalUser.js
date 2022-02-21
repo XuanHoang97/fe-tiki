@@ -6,7 +6,7 @@ import * as actions from '../../../store/actions';
 
 const ModalUser = (props) => {
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [password] = useState('');
     const [username, setUsername] = useState('');
     const [address, setAddress] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -34,17 +34,7 @@ const ModalUser = (props) => {
     // add new user
     const handleAddNewUser=()=>{
         props.AddNewUser({
-            email,
-            password,
-            username,
-            address,
-            phoneNumber,
-            gender,
-            roleId,
-            positionId,
-            avatar,
-            previewImgURL
-
+            email, password, username, address, phoneNumber, gender, roleId, positionId, avatar, previewImgURL
         });
         toggle();
     }
@@ -175,7 +165,6 @@ const ModalUser = (props) => {
                                 </select>
                             </div>
                         </div>
-
                     </form>
             </ModalBody>
 

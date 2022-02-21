@@ -17,6 +17,7 @@ const LoginAuth = (props) => {
     const [loading, setLoading] = useState(false);
     const history = useHistory();
     const dispatch = useDispatch();
+
     //Login
     const login = async (data) => {
         try{
@@ -94,7 +95,7 @@ const LoginAuth = (props) => {
                         <button type="submit" className="btn btn-success mt-3 mb-1 btn-block">
                             {
                                 loading ?
-                                <div className='d-flex align-items-center justify-content-center bg-secondary'>
+                                <div className='d-flex align-items-center justify-content-center bg-info'>
                                     <div className="spinner-border spinner-border-sm text-light">
                                     </div>
                                     <span className="ml-3">Đang đăng nhập...</span>

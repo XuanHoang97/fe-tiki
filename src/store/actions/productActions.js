@@ -22,19 +22,11 @@ export const fetchProducts = () => {
             let res = await getAllProduct('ALL');
             if (res && res.data.errCode === 0) {
                 dispatch({
-                    type: actionTypes.FETCH_ALL_PRODUCTS_SUCCESS,
+                    type: actionTypes.FETCH_PRODUCTS,
                     payload: res.data.products.reverse()
                 })
-            } else {
-                dispatch({
-                    type: actionTypes.FETCH_ALL_PRODUCTS_FAILED,
-                });
-                toast.error('fetch all product error !')
             }
         } catch (e) {
-            dispatch({
-                type: actionTypes.FETCH_ALL_PRODUCTS_FAILED,
-            });
             toast.error('fetch all product error !')
         }
     }
@@ -47,19 +39,12 @@ export const CreateNewProduct = (data) => {
             let res = await createNewProduct(data);
             if (res && res.data.errCode === 0) {
                 dispatch({
-                    type: actionTypes.CREATE_PRODUCT_SUCCESS,
+                    type: actionTypes.CREATE_PRODUCT,
                 });
                 dispatch(fetchProducts());
                 toast.success('Thêm mới sản phẩm thành công !')
-            } else {
-                dispatch({
-                    type: actionTypes.CREATE_PRODUCT_FAILED,
-                });
             }
         } catch (e) {
-            dispatch({
-                type: actionTypes.CREATE_PRODUCT_FAILED,
-            });
             console.log('saveProductFailed error', e)
         }
     }
@@ -72,19 +57,12 @@ export const EditProduct = (data) => {
             let res = await editProduct(data);
             if (res && res.data.errCode === 0) {
                 dispatch({
-                    type: actionTypes.EDIT_PRODUCT_SUCCESS,
+                    type: actionTypes.EDIT_PRODUCT,
                 });
                 dispatch(fetchProducts());
                 toast.success('Cập nhật sản phẩm thành công !')
-            } else {
-                dispatch({
-                    type: actionTypes.EDIT_PRODUCT_FAILED,
-                });
             }
         } catch (e) {
-            dispatch({
-                type: actionTypes.EDIT_PRODUCT_FAILED,
-            });
             console.log('editProductFailed error', e)
         }
     }
@@ -97,19 +75,12 @@ export const DeleteProduct = (productId) => {
             let res = await deleteProduct(productId);
             if (res && res.data.errCode === 0) {
                 dispatch({
-                    type: actionTypes.DELETE_PRODUCT_SUCCESS,
+                    type: actionTypes.DELETE_PRODUCT,
                 });
                 dispatch(fetchProducts());
                 toast.success('Xoá sản phẩm thành công !')
-            } else {
-                dispatch({
-                    type: actionTypes.DELETE_PRODUCT_FAILED,
-                });
             }
         } catch (e) {
-            dispatch({
-                type: actionTypes.DELETE_PRODUCT_FAILED,
-            });
             console.log('deleteProductFailed error', e)
         }
     }
@@ -122,19 +93,11 @@ export const fetchStatusProduct = () => {
             let res = await getAllCodeService('STATUS_PRODUCT');
             if(res && res.data.errCode === 0){
                 dispatch({
-                    type: actionTypes.FETCH_STATUS_PRODUCT_SUCCESS,
+                    type: actionTypes.FETCH_STATUS_PRODUCT,
                     payload: res.data.data
                 })
-            }else{
-                dispatch({
-                    type: actionTypes.FETCH_STATUS_PRODUCT_FAILED,
-                });
-                toast.error('fetch status product error !')
             }
         } catch (e) {
-            dispatch({
-                type: actionTypes.FETCH_STATUS_PRODUCT_FAILED,
-            });
             toast.error('fetch status product error !')
         }
     }
@@ -147,19 +110,11 @@ export const fetchSupplierProduct = () => {
             let res = await getAllCodeService('PROVINCE');
             if(res && res.data.errCode === 0){
                 dispatch({
-                    type: actionTypes.FETCH_SUPPLIER_PRODUCT_SUCCESS,
+                    type: actionTypes.FETCH_SUPPLIER_PRODUCT,
                     payload: res.data.data
                 })
-            }else{
-                dispatch({
-                    type: actionTypes.FETCH_SUPPLIER_PRODUCT_FAILED,
-                });
-                toast.error('fetch supplier product error !')
             }
         } catch (e) {
-            dispatch({
-                type: actionTypes.FETCH_SUPPLIER_PRODUCT_FAILED,
-            });
             toast.error('fetch supplier product error !')
         }
     }
@@ -172,19 +127,12 @@ export const SaveInfoProduct = (data) => {
             let res = await saveInfoProduct(data);
             if (res && res.data.errCode === 0) {
                 dispatch({
-                    type: actionTypes.SAVE_INFO_DETAIL_PRODUCT_SUCCESS,
+                    type: actionTypes.SAVE_INFO_DETAIL_PRODUCT,
                 });
                 dispatch(GetAllArticle());
                 toast.success('Thêm mô tả thông tin sản phẩm thành công !')
-            } else {
-                dispatch({
-                    type: actionTypes.SAVE_INFO_DETAIL_PRODUCT_FAILED,
-                });
             }
         } catch (e) {
-            dispatch({
-                type: actionTypes.SAVE_INFO_DETAIL_PRODUCT_FAILED,
-            });
             console.log('saveInfoProductFailed error', e)
         }
     }
@@ -197,18 +145,11 @@ export const EditInfoProduct = (data) => {
             let res = await editInfoProduct(data);
             if (res && res.data.errCode === 0) {
                 dispatch({
-                    type: actionTypes.EDIT_INFO_DETAIL_PRODUCT_SUCCESS,
+                    type: actionTypes.EDIT_INFO_DETAIL_PRODUCT,
                 });
                 toast.success('Cập nhật mô tả thông tin sản phẩm thành công !')
-            } else {
-                dispatch({
-                    type: actionTypes.EDIT_INFO_DETAIL_PRODUCT_FAILED,
-                });
             }
         } catch (e) {
-            dispatch({
-                type: actionTypes.EDIT_INFO_DETAIL_PRODUCT_FAILED,
-            });
             console.log('editInfoProductFailed error', e)
         }
     }
@@ -221,18 +162,11 @@ export const SaveOptionProduct = (data) => {
             let res = await saveOptionProduct(data);
             if (res && res.data.errCode === 0) {
                 dispatch({
-                    type: actionTypes.SAVE_OPTION_PRODUCT_SUCCESS,
+                    type: actionTypes.SAVE_OPTION_PRODUCT,
                 });
                 toast.success('Thêm thông tin sản phẩm thành công !')
-            } else {
-                dispatch({
-                    type: actionTypes.SAVE_OPTION_PRODUCT_FAILED,
-                });
             }
         } catch (e) {
-            dispatch({
-                type: actionTypes.SAVE_OPTION_PRODUCT_FAILED,
-            });
             console.log('saveOptionProductFailed error', e)
         }
     }
@@ -245,18 +179,11 @@ export const GetProductSimilar = (productId) => {
             let res = await getProductSimilar(productId);
             if (res && res.data.errCode === 0) {
                 dispatch({
-                    type: actionTypes.FETCH_PRODUCT_SIMILAR_SUCCESS,
+                    type: actionTypes.FETCH_PRODUCT_SIMILAR,
                     payload: res.data.products
                 })
-            } else {
-                dispatch({
-                    type: actionTypes.FETCH_PRODUCT_SIMILAR_FAILED,
-                });
             }
         } catch (e) {
-            dispatch({
-                type: actionTypes.FETCH_PRODUCT_SIMILAR_FAILED,
-            });
             console.log('GetProductSimilarFailed error', e)
         }
     }
@@ -269,19 +196,11 @@ export const SelectOptionProduct = (data) => {
             let res = await getAllCodeService('OPTION_PRODUCT');
             if(res && res.data.errCode === 0){
                 dispatch({
-                    type: actionTypes.SELECT_OPTION_PRODUCT_SUCCESS,
+                    type: actionTypes.SELECT_OPTION_PRODUCT,
                     payload: res.data.data
                 })
-            }else{
-                dispatch({
-                    type: actionTypes.SELECT_OPTION_PRODUCT_FAILED,
-                });
-                toast.error('fetch option product error !')
             }
         } catch (e) {
-            dispatch({
-                type: actionTypes.SELECT_OPTION_PRODUCT_FAILED,
-            });
             toast.error('fetch option product error !')
         }
     }
@@ -295,18 +214,11 @@ export const GetAllArticle = () => {
             let res = await getAllArticle('ALL')
             if (res && res.data.errCode === 0) {
                 dispatch({
-                    type: actionTypes.FETCH_ALL_ARTICLE_SUCCESS,
+                    type: actionTypes.FETCH_ARTICLE,
                     payload: res.data.articles.reverse()
                 })
-            } else {
-                dispatch({
-                    type: actionTypes.FETCH_ALL_ARTICLE_FAILED,
-                });
             }
         } catch (e) {
-            dispatch({
-                type: actionTypes.FETCH_ALL_ARTICLE_FAILED,
-            });
             console.log('GetAllArticleFailed error', e)
         }
     }

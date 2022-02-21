@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-
-import _ from 'lodash';
 import * as actions from '../../../store/actions';
 
 const ModalEditNews  = (props) => {
@@ -19,22 +17,21 @@ const ModalEditNews  = (props) => {
     const [view, setView] = useState('');
     const [hot, setHot] = useState('');
     
-    const [previewImg, setPreviewImg] = useState('');
     const dispatch = useDispatch();
+    const [previewImg, setPreviewImg] = useState('');
     const listCategory = useSelector(state => state.admin.categories);
     const listStatus = useSelector(state => state.admin.status_news);
     const listProduct = useSelector(state => state.admin.products);
 
+    // fill info news to edit
     useEffect (() => {
         let news = props.currentNews;
-            // fill info news to edit
         if(news) {
             setId(news.id);
             setName(news.name);
             if(news.image){
                 setPreviewImg(news.image);
             }
-
             setImage(news.previewImg);
             setDescription(news.description);
             setContent(news.content);
@@ -46,7 +43,6 @@ const ModalEditNews  = (props) => {
             setView(news.view);
             setHot(news.hot);
         }
-
         dispatch(actions.fetchAllCategory());
         dispatch(actions.fetchProducts());
     }, [dispatch, props.currentNews]);
@@ -65,6 +61,7 @@ const ModalEditNews  = (props) => {
             setImage(file);
         }
     }
+
     //remove image
     const removeImg=()=>{
         setPreviewImg('');
@@ -92,11 +89,7 @@ const ModalEditNews  = (props) => {
     }
 
     return (
-        <Modal 
-            isOpen={props.isOpen} 
-            toggle={()=>toggle()} 
-            size="lg"
-        >
+        <Modal isOpen={props.isOpen} toggle={()=>toggle()} size="lg">
         
         <form
             onSubmit={EditNews}
@@ -120,9 +113,7 @@ const ModalEditNews  = (props) => {
                                 onChange={(e)=>changeImage(e)}
                                 name='image'
                             />
-
                             <label htmlFor="previewImg" className="btn btn-success w-100"><i className="fas fa-upload"></i> Tải ảnh</label>  
-                        
                         </div>
 
                         <div className="preview-image col-md-2 border" 
@@ -227,9 +218,7 @@ const ModalEditNews  = (props) => {
             </ModalBody>
             
             <ModalFooter>
-                <Button color="primary" className="px-3" type='submit'>
-                    Cập nhật
-                </Button>
+                <Button color="primary" className="px-3" type='submit'>Cập nhật</Button>
                 <Button color="secondary" className="px-3">Cancel</Button>
             </ModalFooter>
         </form>

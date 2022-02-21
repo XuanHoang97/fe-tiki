@@ -57,7 +57,7 @@ const Payment = (props) => {
         setTimeout(() => {
             history.push(path.MY_ORDER);
             setLoadingOrder(false)
-        }, 2000);
+        }, 2500);
     }
 
     return (

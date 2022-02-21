@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useRef} from 'react';
 import useOutsideClick from 'containers/HomePage/OutSideClick';
 import './style.scss'
 import { Link } from 'react-router-dom';
@@ -7,7 +7,6 @@ function Notification(props) {
     const [show_Notification, setShowNotification] = useState(false);
     const [number_Notification, setNumberNotification] = useState(1);
     const ref = useRef();
-
 
     const view_Notification = () => {
         setShowNotification(!show_Notification);
@@ -53,5 +52,4 @@ function Notification(props) {
         </>
     );
 }
-
 export default Notification;

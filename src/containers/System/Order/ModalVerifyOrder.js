@@ -67,11 +67,7 @@ const ModalVerifyOrder = (props) => {
     }
     
     return (
-        <Modal 
-            isOpen={isOpen} 
-            toggle={toggle} 
-            size="lg"
-        >   
+        <Modal isOpen={isOpen} toggle={toggle} size="lg">   
             <ModalHeader toggle={toggle}>Xác nhận đơn hàng</ModalHeader>
             <ModalBody>
             <div>
@@ -179,17 +175,12 @@ const ModalVerifyOrder = (props) => {
                         </div>
 
                         <div className="preview-image col-7 border" 
-                            // style={{backgroundImage: `url(${previewImg})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat'}}
                         >
-                            {/* {
-                            previewImg ? */}
                             <div 
-                                // onClick={() =>removeImg()} 
                                 className="col-md-12" style={{textAlign: 'end', position: 'absolute', right: '-1.5rem', top: '-1rem'}}>
                                 <i className="far fa-times-circle text-danger"></i>
                             </div> 
                             : <img src="https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png" className="w-50" alt="..." />
-                            {/* } */}
                         </div>
                     </div>
                 </div>

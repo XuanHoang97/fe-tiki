@@ -37,5 +37,4 @@ function OrderTabControl(props) {
         </Nav>
     );
 }
-
 export default OrderTabControl;

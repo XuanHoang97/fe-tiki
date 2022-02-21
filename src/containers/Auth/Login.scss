@@ -43,35 +43,6 @@
                 font-size: 16px;
                 cursor: pointer;
             }
-            .social-login {
-                display: flex;
-                text-align: center;
-                justify-content: center;
-                margin-top: 10px;
-                gap: 15px;
-                cursor: pointer;
-                .google,
-                .facebook,
-                .twitter {
-                    font-size: 20px;
-                    border-radius: 50%;
-                    height: 40px;
-                    width: 40px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: white;
-                }
-                .google {
-                    background: #c32424;
-                }
-                .facebook {
-                    background: #2067ff
-                }
-                .twitter {
-                    background: #26baff;
-                }
-            }
         }
     }
 }

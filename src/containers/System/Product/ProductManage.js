@@ -14,7 +14,6 @@ const ProductManage = (props) => {
     //fetch product
     const dispatch = useDispatch();
     const listProducts = useSelector(state => state.admin.products);
-
     useEffect(() => {
         dispatch(actions.fetchProducts());
     }, [dispatch]);
@@ -23,7 +22,6 @@ const ProductManage = (props) => {
     const handleAddNewProduct = () => {
         setModalProduct(!modalProduct);
     }
-
     const CreateNewProduct=(data)=> {
         const dataProduct = new FormData();
         dataProduct.append('name', data.name);
@@ -49,7 +47,6 @@ const ProductManage = (props) => {
         setModalEditProduct(!modalEditProduct);
         setProductEdit(product);
     }
-
     const handleEditProduct = (data) => {
         dispatch(actions.EditProduct({
             id: productEdit.id,
@@ -86,7 +83,6 @@ const ProductManage = (props) => {
                 <button onClick={() => handleAddNewProduct()} type="button" className="btn btn-success col-2">
                     <i className="fas fa-plus"></i> Thêm sản phẩm
                 </button>
-
                 <Sort />
             </div>
 
@@ -94,23 +90,22 @@ const ProductManage = (props) => {
             <table className="table table-striped table-bordered table-hover">
                 <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
                     <tr>
-                        <td scope="col">Tick</td>
-                        <td scope="col">STT</td>
-                        <td scope="col">Ảnh</td>
-                        <td scope="col">Tên SP</td>
-                        <td scope="col">Bảo hành</td>
-                        <td scope="col">Giá (VND)</td>
-                        <td scope="col">Sale (VND)</td>
-                        <td scope="col">Trạng thái kho</td>
-                        <td scope="col">Xuất xứ</td>
-                        <td scope="col">Tác vụ</td>
+                        <td>Tick</td>
+                        <td>STT</td>
+                        <td>Ảnh</td>
+                        <td>Tên SP</td>
+                        <td>Bảo hành</td>
+                        <td>Giá (VND)</td>
+                        <td>Sale (VND)</td>
+                        <td>Trạng thái kho</td>
+                        <td>Xuất xứ</td>
+                        <td>Tác vụ</td>
                     </tr>
                 </thead>
                 <tbody>
                     {   
                         listProducts && listProducts.length>0 ?
                         listProducts.map((item, index) => {
-            
                             return(
                                 <tr key={index}>
                                     <td>
