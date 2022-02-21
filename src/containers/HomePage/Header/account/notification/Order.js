@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import Pagination from "react-js-pagination";
+import { path } from 'utils';
+import './pagination.scss'
 
 function Order(props) {
     const [data, setData] = React.useState([]);
     const [activePage, setActivePage] = useState(1);
     
     useEffect(() => {
-        axios
-        .get("https://jsonplaceholder.typicode.com/posts?_page=1&_limit=10")
+        axios.get(`${path.PORT}/news/${activePage}`)
         .then((res) => {
-            setData(res.data);
+            setData(res.data.result);
         });
-    }, []);
+    }, [ activePage ]);
 
     const handlePageChange = (pageNumber) => {
         console.log(`active page is ${pageNumber}`);
-        axios
-        .get( `https://jsonplaceholder.typicode.com/posts?_page=${pageNumber}&_limit=20` )
+        axios.get(`${path.PORT}/news/${activePage}`)
         .then((res) => {
-            setData(res.data);
+            setData(res.data.result);
         });
         setActivePage(pageNumber);
     };
@@ -32,7 +32,7 @@ function Order(props) {
                     data.map((item, index) => {
                         return (
                             <li key={index}>
-                                {item.title}
+                                {item.name}
                             </li>
                         );
                     })
@@ -40,11 +40,11 @@ function Order(props) {
                 }
             </ul>
             <Pagination
-            totalItemsCount={150}
-            onChange={handlePageChange}
-            activePage={activePage}
-            itemsCountPerPage={10}
-            pageRangeDisplayed={5}
+                totalItemsCount={10}
+                onChange={handlePageChange}
+                activePage={activePage}
+                itemsCountPerPage={3}
+                pageRangeDisplayed={3}
             />
         </div>
     );

@@ -7,6 +7,10 @@ import * as actions from 'store/actions';
 import OrderTabControl from './OrderTabControl';
 import ListOrder from './ListOrder';
 import './style.scss';
+import axios from 'axios';
+import { path } from 'utils';
+import Pagination from "react-js-pagination";
+
 
 const OrderManage = (props) => {
     const [activeTab, setActiveTab] = useState('4');
@@ -46,6 +50,25 @@ const OrderManage = (props) => {
         }, 1000);
     }
 
+    const [activePage, setActivePage] = useState(1);
+    const [dataOrder, setDataOrder] = useState([]);
+    
+    useEffect(() => {
+        axios.get(`${path.PORT}/orders/${activePage}`)
+        .then((res) => {
+            setDataOrder(res.data.result);
+        });
+    }, [ activePage ]);
+
+    const handlePageChange = (pageNumber) => {
+        console.log(`active page is ${pageNumber}`);
+        axios.get(`${path.PORT}/orders/${activePage}`)
+        .then((res) => {
+            setDataOrder(res.data.result);
+        });
+        setActivePage(pageNumber);
+    };
+
     return (
         <div className="mx-2">
             <ModalVerifyOrder
@@ -80,6 +103,14 @@ const OrderManage = (props) => {
                         filterOrder={filterOrder}
                         loadOrder={loadOrder}
                         verifyOrder={verifyOrder}
+                        dataOrder={dataOrder}
+                    />
+                    <Pagination
+                        totalItemsCount={17}
+                        onChange={handlePageChange}
+                        activePage={activePage}
+                        itemsCountPerPage={5}
+                        pageRangeDisplayed={5}
                     />
                 </TabPane>
             </TabContent>

@@ -1,0 +1,22 @@
+.pagination{
+    display: flex;
+    align-items: center;
+    li{
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        a{
+            color: black;
+        }
+    }
+    .active{
+        background: #348eff;
+        padding: 10px;
+        a{
+            color: white !important;
+        }
+    }
+}

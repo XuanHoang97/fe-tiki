@@ -3,7 +3,7 @@ import {numberFormat} from 'components/Formatting/FormatNumber';
 import Moment from 'react-moment';
 
 function ListOrder(props) {
-    const {filterOrder, loadOrder, verifyOrder} = props;
+    const {filterOrder, loadOrder, verifyOrder, dataOrder} = props;
 
     return (
         <div className='list-order mt-3'>
@@ -35,8 +35,8 @@ function ListOrder(props) {
                             </td>
                         </tr>
                         :
-                        filterOrder && filterOrder.length > 0 ?
-                        filterOrder.map((item, index) => {
+                        dataOrder && dataOrder.length > 0 ?
+                        dataOrder.map((item, index) => {
                             return (
                                 <tr key={index}>
                                     <td>{index + 1}</td>
