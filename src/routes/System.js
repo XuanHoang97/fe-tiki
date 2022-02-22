@@ -81,8 +81,8 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
                 {isLoggedIn && menuLeft && <MenuLeft widthMenuLeft = {widthMenuLeft} /> }
                 {!menuLeft ? <MenuLeftCollapse /> : ''}                
             
-                <div className="system-container bg-white py-3" style={{height: '90vh', overflowY: 'scroll', width: widthMenuRight, boxShadow: 'none'}}>
-                    <div className="system-list px-2 bg-light">
+                <div className="system-container bg-light py-2" style={{height: '95vh', overflowY: 'scroll', width: widthMenuRight, boxShadow: 'none'}}>
+                    <div className="system-list px-2 bg-white">
                         <Switch>
                             <Route path="/system/dashboard" component={Dashboard} />
                             <Route path="/system/user-manage" component={UserManage} />

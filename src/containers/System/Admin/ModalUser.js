@@ -1,30 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {CommonUtils} from "../../../utils"
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import * as actions from '../../../store/actions';
 
 const ModalUser = (props) => {
     const [email, setEmail] = useState('');
-    const [password] = useState('');
+    // const [password] = useState('');
     const [username, setUsername] = useState('');
     const [address, setAddress] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [gender, setGender] = useState('');
     const [roleId, setRoleId] = useState('');
     const [positionId, setPositionId] = useState('');
-    const [avatar, setAvatar] = useState('');
+    const [image, setImage] = useState('');
     const [previewImgURL, setPreviewImgURL] = useState('');
 
     const dispatch = useDispatch();
-    const genderRedux = useSelector(state => state.admin.genders);
-    const roleRedux = useSelector(state => state.admin.roles);
-    const positionRedux = useSelector(state => state.admin.positions);
+    const genders = useSelector(state => state.admin.genders);
+    const roles = useSelector(state => state.admin.roles);
+    const positions = useSelector(state => state.admin.positions);
 
     useEffect(() => {
-        dispatch(actions.fetchGenderStart());
-        dispatch(actions.fetchRoleStart());
-        dispatch(actions.fetchPositionStart());
+        dispatch(actions.fetchGender());
+        dispatch(actions.fetchRole());
+        dispatch(actions.fetchPosition());
     }, [dispatch]);
 
     const toggle =()=>{
@@ -32,10 +31,21 @@ const ModalUser = (props) => {
     }
 
     // add new user
-    const handleAddNewUser=()=>{
-        props.AddNewUser({
-            email, password, username, address, phoneNumber, gender, roleId, positionId, avatar, previewImgURL
-        });
+    const handleAddNewUser=(e)=>{
+        e.preventDefault();
+        const data = {
+            email: email,
+            // password: password,
+            username: username,
+            address: address,
+            phoneNumber: phoneNumber,
+            gender: gender,
+            roleId: roleId,
+            positionId: positionId,
+            image: image,
+            previewImgURL: previewImgURL
+        };
+        props.AddNewUser(data);
         toggle();
     }
 
@@ -44,18 +54,16 @@ const ModalUser = (props) => {
         let data=e.target.files;
         let file=data[0];
         if(file){
-            let base64=await CommonUtils.getBase64(file);
-            
             let objectUrl=URL.createObjectURL(file)
             setPreviewImgURL(objectUrl);
-            setAvatar(base64);                        
+            setImage(file);                        
         }
     }
 
     //remove image
     const removeImg=()=>{
         setPreviewImgURL('');
-        setAvatar('');
+        setImage('');
     }
 
     return (
@@ -65,6 +73,10 @@ const ModalUser = (props) => {
             className={'modal-user-container'}
             size="lg"
         >
+            <form
+                onSubmit={handleAddNewUser}
+                encType='multipart/form-data'
+            >
             <ModalHeader toggle={()=>toggle()}>Thêm mới thành viên</ModalHeader>
             <ModalBody>
                     <form>
@@ -77,7 +89,8 @@ const ModalUser = (props) => {
                             <div className="form-group col-md-3">
                                 <label>Ảnh đại diện</label>
                                 <input id="previewImg" type="file" hidden 
-                                onChange={(e)=>handleOnchangeImage(e)} 
+                                    onChange={(e)=>handleOnchangeImage(e)} 
+                                    name='image'
                                 />
                                 <label htmlFor="previewImg" className="btn btn-success w-100"><i className="fas fa-upload"></i> Tải ảnh</label>       
                             </div>
@@ -87,9 +100,10 @@ const ModalUser = (props) => {
                             >
                                 {
                                 previewImgURL ?
-                                <div onClick={() => removeImg()} className="col-md-12" style={{textAlign: 'end', position: 'absolute', right: '-1.5rem', top: '-1rem'}}>
-                                    <i className="far fa-times-circle text-danger"></i>
-                                </div> : <img src="https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png" className="w-100" alt="..." />
+                                    <div onClick={() => removeImg()} className="col-md-12" style={{textAlign: 'end', position: 'absolute', right: '-1.5rem', top: '-1rem'}}>
+                                        <i className="far fa-times-circle text-danger"></i>
+                                    </div> 
+                                    : <img src="https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png" className="w-100" alt="..." />
                                 }
                             </div>
                         </div>
@@ -121,8 +135,8 @@ const ModalUser = (props) => {
                                     value={gender}
                                 >
                                     {
-                                        genderRedux && genderRedux.length >0 &&
-                                        genderRedux.map((item, index) => {
+                                        genders && genders.length >0 &&
+                                        genders.map((item, index) => {
                                             return (
                                                 <option key={index} value={item.ValueVi}>{item.valueVi}</option>
                                             )
@@ -138,8 +152,8 @@ const ModalUser = (props) => {
                                     value={roleId}
                                 >
                                     {
-                                        roleRedux && roleRedux.length >0 &&
-                                        roleRedux.map((item, index) => {
+                                        roles && roles.length >0 &&
+                                        roles.map((item, index) => {
                                             return (
                                                 <option key={index} value={item.valueVi}>{item.valueVi}</option>
                                             )
@@ -155,8 +169,8 @@ const ModalUser = (props) => {
                                     value={positionId}
                                 >
                                     {
-                                        positionRedux && positionRedux.length >0 &&
-                                        positionRedux.map((item, index) => {
+                                        positions && positions.length >0 &&
+                                        positions.map((item, index) => {
                                             return (
                                                 <option key={index} value={item.valueVi}>{item.valueVi}</option>
                                             )
@@ -169,11 +183,12 @@ const ModalUser = (props) => {
             </ModalBody>
 
             <ModalFooter>
-                <Button onClick={()=>handleAddNewUser()} color="primary" className="px-3">
+                <Button type='submit' color="primary" className="px-3">
                     Thêm mới
                 </Button>
                 <Button color="secondary" className="px-3" onClick={()=>toggle()}>Cancel</Button>
             </ModalFooter>
+            </form>
         </Modal>
     )
 }

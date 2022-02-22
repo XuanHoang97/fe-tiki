@@ -1,16 +1,51 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import instance from './../../../../../axios';
-import { getUser } from 'store/actions';
+import { editUser, fetchGender, getUser } from 'store/actions';
 
 function Profile(props) {
     const dispatch = useDispatch();
     const token = localStorage.getItem('token');
     const user = useSelector(state => state.auth.user);
+    const gender = useSelector(state => state.admin.genders);
 
-    const [userInfo, setUserInfo] = useState([])
+    const [userName, setUserName] = useState('')
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
+    const [genderUser, setGender] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        if (user) {
+            setUserName(user ? user.username : '');
+            setPhone(user ? user.phoneNumber : '');
+            setAddress(user ? user.address : '');
+            setGender(user ? user.gender : '');
+        }
+    }, [user])
+
+    useEffect(() => {
+        dispatch(fetchGender());
+    }, [dispatch])
+
+
+    // edit info user
+    const updateUser = (data) => {
+        setLoading(true)
+        setTimeout(() => {
+            dispatch(editUser({
+                id: user.id,
+                username: userName,
+                phoneNumber: phone,
+                address: address,
+                gender: genderUser
+            }));
+            setLoading(false)
+        }, 1500);
+
+    console.log(user, genderUser)
+
+    }
 
     // Refresh token
     useEffect(() => {
@@ -40,22 +75,22 @@ function Profile(props) {
                     <div className=''>
                         <label className='col-3'>Tên đăng nhập</label>
                         <span className='ml-2'>
-                            { user ? user.username : '' }
+                            {userName}
                         </span>
                     </div>
 
                     <div className='form-group d-flex'>
                         <label className='col-3'>Tên</label>
                         <input type="text" className="form-control" 
-                            value={ user ? user.username : '' }
-                            onChange={ (e) => setUserInfo(e.target.value) }
+                            value={ userName }
+                            onChange={ (e) => setUserName(e.target.value) }
                         />
                     </div>
 
                     <div className='form-group d-flex'>
                         <label className='col-3'>Số Điện Thoại</label>
                         <input type="text" className="form-control" 
-                            value={ user ? user.phoneNumber : '' }
+                            value={ phone }
                             onChange={ (e) => setPhone(e.target.value) }
                         />
                     </div>
@@ -63,7 +98,7 @@ function Profile(props) {
                     <div className='form-group d-flex'>
                         <label className='col-3'>Địa chỉ</label>
                         <input type="text" className="form-control" 
-                            value={ user ? user.address : '' }
+                            value={address}
                             onChange={ (e) => setAddress(e.target.value) }
                         />
                     </div>
@@ -71,15 +106,23 @@ function Profile(props) {
                     <div className='form-group d-flex'>
                         <label className='col-3'>Giới Tính</label>
                         <div className="gender d-flex px-3">
-                            <div className="radio">
-                                <label><input type="radio" name="gender" readOnly checked />Nam</label>
-                            </div>
-                            <div className="radio mx-3">
-                                <label><input type="radio" name="gender" readOnly />Nữ</label>
-                            </div>
-                            <div className="radio">
-                                <label><input type="radio" name="gender" readOnly />Khác</label>
-                            </div>
+                            {
+                                gender && gender.length > 0 ?
+                                gender.map((item, index)=>{
+                                    return(
+                                        <div className="radio" key={index}>
+                                            <label>
+                                                <input type="radio" name="gender" 
+                                                    value={item.valueVi}
+                                                    checked ={item.valueVi=== genderUser ? genderUser : ''}
+                                                    onChange={ (e) => setGender(e.target.value) }
+                                                />{item.valueVi}
+                                            </label>
+                                        </div>
+                                    )
+                                })
+                                : 'null'
+                            }
                         </div>
                     </div>
 
@@ -88,7 +131,11 @@ function Profile(props) {
                         <input type="text" className="form-control" />
                     </div>
 
-                    <button type="button" className="btn btn-primary px-4 mx-3">Lưu</button>
+                    <button onClick={()=>updateUser()} type="button" className="btn btn-primary px-4 mx-3">
+                        {
+                            loading ? 'Đang cập nhật...' : 'Lưu'
+                        }
+                    </button>
                 </div>
 
                 <div className='col-4 bg-light text-center border-left'>
@@ -100,5 +147,4 @@ function Profile(props) {
         </div>
     );
 }
-
 export default Profile;

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import {CommonUtils} from "../../../utils"
 import _ from 'lodash';
 import * as actions from '../../../store/actions';
 
@@ -15,23 +14,18 @@ const ModalEditUser = (props) => {
     const [gender, setGender] = useState('');
     const [roleId, setRoleId] = useState('');
     const [positionId, setPositionId] = useState('');
-    const [avatar, setAvatar] = useState('');
+    const [image, setImage] = useState('');
     const [previewImgURL, setPreviewImgURL] = useState('');
 
     const dispatch = useDispatch();
-    const genderRedux = useSelector(state => state.admin.genders);
-    const roleRedux = useSelector(state => state.admin.roles);
-    const positionRedux = useSelector(state => state.admin.positions); 
+    const genders = useSelector(state => state.admin.genders);
+    const roles = useSelector(state => state.admin.roles);
+    const positions = useSelector(state => state.admin.positions); 
 
+    // fill info user to edit
     useEffect(() => {
         let user =props.currentUser;
         if(user && !_.isEmpty(user)){
-            //fix bug buffer
-            let imageBase64='';
-            if(user.image){
-                imageBase64= new Buffer(user.image, 'base64').toString('binary');
-            }
-            // fill info user to edit
             setId(user.id);
             setEmail(user.email);
             setPassword('hardcode');
@@ -41,11 +35,11 @@ const ModalEditUser = (props) => {
             setGender(user.gender);
             setRoleId(user.roleId);
             setPositionId(user.positionId);
-            setPreviewImgURL(imageBase64);
+            setPreviewImgURL(user.image);
         }
-        dispatch(actions.fetchGenderStart());
-        dispatch(actions.fetchRoleStart());
-        dispatch(actions.fetchPositionStart());
+        dispatch(actions.fetchGender());
+        dispatch(actions.fetchRole());
+        dispatch(actions.fetchPosition());
     }, [dispatch, props.currentUser]);
 
     const toggle =()=>{
@@ -57,25 +51,25 @@ const ModalEditUser = (props) => {
         let data=e.target.files;
         let file=data[0];
         if(file){
-            let base64=await CommonUtils.getBase64(file);            
             let objectUrl=URL.createObjectURL(file)
             setPreviewImgURL(objectUrl);
-            setAvatar(base64);
+            setImage(file);
         }
     }
 
     //remove image
     const removeImg=()=>{
         setPreviewImgURL('');
-        setAvatar('');
+        setImage('');
     }
 
-    const handleSaveUser=()=>{
+    const handleSaveUser=(e)=>{
+        e.preventDefault();
         props.editUser({
             id, email, password, username, address, phoneNumber,
-            gender, roleId, positionId, avatar, previewImgURL
+            gender, roleId, positionId, image, previewImgURL
         });
-        props.toggleFromParent();
+        toggle();
     }
 
     return (
@@ -85,6 +79,9 @@ const ModalEditUser = (props) => {
             className={'modal-user-container'}
             size="lg"
         >
+            <form onSubmit={handleSaveUser}
+                encType='multipart/form-data'
+            >
             
             <ModalHeader toggle={()=>toggle()}>Cập nhật thành viên</ModalHeader>
             <ModalBody>
@@ -99,7 +96,8 @@ const ModalEditUser = (props) => {
                             <div className="form-group col-md-3">
                                 <label>Ảnh đại diện</label>
                                 <input id="previewImg" type="file" hidden 
-                                onChange={(e)=>handleOnchangeImage(e, 'previewImgURL')} 
+                                    onChange={(e)=>handleOnchangeImage(e, 'previewImgURL')} 
+                                    name="image"
                                 />
                                 <label htmlFor="previewImg" className="btn btn-success w-100"><i className="fas fa-upload"></i> Tải ảnh</label>                   
                             </div>
@@ -143,8 +141,8 @@ const ModalEditUser = (props) => {
                                     value={gender}
                                 >
                                     {
-                                        genderRedux && genderRedux.length >0 &&
-                                        genderRedux.map((item, index) => {
+                                        genders && genders.length >0 &&
+                                        genders.map((item, index) => {
                                             return (
                                                 <option key={index} value={item.ValueVi}>{item.valueVi}</option>
                                             )
@@ -160,8 +158,8 @@ const ModalEditUser = (props) => {
                                     value={roleId}
                                 >
                                     {
-                                        roleRedux && roleRedux.length >0 &&
-                                        roleRedux.map((item, index) => {
+                                        roles && roles.length >0 &&
+                                        roles.map((item, index) => {
                                             return (
                                                 <option key={index} value={item.valueVi}>{item.valueVi}</option>
                                             )
@@ -177,8 +175,8 @@ const ModalEditUser = (props) => {
                                     value={positionId}
                                 >
                                     {
-                                        positionRedux && positionRedux.length >0 &&
-                                        positionRedux.map((item, index) => {
+                                        positions && positions.length >0 &&
+                                        positions.map((item, index) => {
                                             return (
                                                 <option key={index} value={item.valueVi}>{item.valueVi}</option>
                                             )
@@ -192,9 +190,10 @@ const ModalEditUser = (props) => {
             </ModalBody>
 
             <ModalFooter>
-                <Button onClick={()=>handleSaveUser()} color="primary" className="px-3">Cập nhật</Button>{' '}
+                <Button type='submit' color="primary" className="px-3">Cập nhật</Button>{' '}
                 <Button color="secondary" className="px-3" onClick={()=>toggle()}>Huỷ</Button>
             </ModalFooter>
+            </form>
         </Modal>
     )
 }

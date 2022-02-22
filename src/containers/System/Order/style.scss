@@ -17,17 +17,41 @@
         }
     }
 }
-
-#delivery{
-    color: #0a7bff !important;
-}
-
-#cancel{
-    color: red !important;
-}
-
 .actionOrder{
     font-size: 12px;
     cursor: pointer;
     font-weight: 600;
+}
+
+ul.paginationBttns{
+    background: none;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    a {
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #2b2eff;
+        cursor: pointer;
+    }
+}
+
+.paginationActive a {
+    color: white !important;
+    background-color: #04AA6D;
+}
+
+.paginationDisabled a {
+    color: rgb(202, 202, 202);
+    background-color: rgb(192, 192, 192);
+}
+.previous, .next{
+    a{
+        border: none !important;
+        background: none !important;
+    }
 }

@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import { FilterMyOrder, GetOrderByUser, getStatusOrder } from 'store/actions';
 import { numberFormat } from 'components/Formatting/FormatNumber';
 import DetailOrder from './DetailOrder';
+import ReactPaginate from "react-paginate";
 
 function Purchase(props) {
     const dispatch = useDispatch();
@@ -39,6 +40,15 @@ function Purchase(props) {
         setModalDetail(!modalDetail);
         setOrderDetail(order);
     }
+
+    //pagination
+    const [pageNumber, setPageNumber] = useState(0);
+    const orderPerPage = 5;
+    const pagesVisited = pageNumber * orderPerPage;
+    const pageCount = Math.ceil(filterOrder.length / orderPerPage);
+    const changePage = ({ selected }) => {
+        setPageNumber(selected);
+    };
 
     return (
         <div>
@@ -80,11 +90,11 @@ function Purchase(props) {
                 <TabPane tabId={activeTab} className='p-2 py-3'>
                     {
                         filterOrder && filterOrder.length > 0 ?
-                        filterOrder.map((item, index) => {
+                        filterOrder.slice(pagesVisited, pagesVisited + orderPerPage).map((item, index) => {
                             return (
                                 <div className='order p-3 mb-3 bg-white border-bottom' key={index}>
                                     <div className={item.status ==='S1' ? "text-warning statusOrder" : 'text-success statusOrder'}>
-                                        <div className='text-info'>{index + 1}. Đơn hàng <b>{item.code}</b></div>
+                                        <div className='text-dark'>{index + 1}. Đơn hàng <b>{item.code}</b></div>
                                         <span>
                                             {item.status ==='S1' && 'Đang xử lý'}
                                             {item.status ==='S2' && 'Đã xác nhận'}
@@ -105,10 +115,10 @@ function Purchase(props) {
                                         </div>
                                         <div className='detail'>
                                             <span className='text-danger'>{numberFormat(item.price*item.qty)}</span>
-                                            <button onClick={()=>detailOrder(item)} type="button" className="btn btn-success btn-sm px-3">Chi tiết</button>
+                                            <button onClick={()=>detailOrder(item)} type="button" className="btn btn-outline-secondary btn-sm px-3">Chi tiết</button>
                                             {
                                                 item.status ==='S1' || item.status ==='S2' || item.status ==='S3' ?
-                                                <button type="button" className="btn btn-danger btn-sm px-3">Huỷ</button>
+                                                <button type="button" className="btn btn-warning btn-sm px-3">Huỷ đơn</button>
                                                 : null
                                             }
 
@@ -125,6 +135,17 @@ function Purchase(props) {
                         :
                         <div className='text-center'>Không có đơn hàng nào...</div>
                     }
+                    <ReactPaginate
+                        previousLabel={"<"}
+                        nextLabel={">"}
+                        pageCount={pageCount}
+                        onPageChange={changePage}
+                        containerClassName={"paginationBttns"}
+                        previousLinkClassName={"previousBttn"}
+                        nextLinkClassName={"nextBttn"}
+                        disabledClassName={"paginationDisabled"}
+                        activeClassName={"paginationActive"}
+                    />
                 </TabPane>
             </TabContent>
         </div>

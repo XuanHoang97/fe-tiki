@@ -26,7 +26,18 @@ const UserManage = (props) => {
     }
 
     const AddNewUser=(data)=> {
-        dispatch(actions.createNewUser(data));
+        const dataUser = new FormData();
+        dataUser.append('email', data.email);
+        // dataUser.append('password', data.password);
+        dataUser.append('username', data.username);
+        dataUser.append('address', data.address);
+        dataUser.append('gender', data.gender);
+        dataUser.append('roleId', data.roleId);
+        dataUser.append('positionId', data.positionId);
+        dataUser.append('phoneNumber', data.phoneNumber);
+
+        data.image && dataUser.append('image', data.image);
+        dispatch(actions.createNewUser(dataUser));
     }
 
     //delete user 
@@ -41,7 +52,18 @@ const UserManage = (props) => {
     }
 
     const editUser=(data)=>{
-        dispatch(actions.editUser(data));
+        dispatch(actions.editUser({
+            id: userEdit.id,
+            email : data.email,
+            username : data.username,
+            address : data.address,
+            phoneNumber : data.phoneNumber,
+            roleId : data.roleId,
+            positionId : data.positionId,
+            gender : data.gender,
+            image : data.previewImgURL,
+            previewImgURL: data.previewImgURL
+        }));
     }
 
     //info user
@@ -102,12 +124,6 @@ const UserManage = (props) => {
                 {
                     listUsers && listUsers.length >0 &&
                     listUsers.map((item, index) => {
-                        //endCode image
-                        let imageBase64='';
-                        if(item.image){
-                            imageBase64=new Buffer(item.image, 'base64').toString('binary')
-                        }
-
                         return (
                             <tbody key={index}>
                                 <tr>
@@ -117,7 +133,7 @@ const UserManage = (props) => {
                                         </div>
                                     </th>
                                     <td>{index + 1}</td>
-                                    <td style={{backgroundImage: `url(${imageBase64})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat', height: '45px',
+                                    <td style={{backgroundImage: `url(${item.image})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat', height: '45px',
                                     width: '45px', borderRadius: '50%', display: 'flex', margin: '0 auto'}}></td>
                                     <td className='text-primary'>{item.username}</td>
                                     <td>{item.email}</td>

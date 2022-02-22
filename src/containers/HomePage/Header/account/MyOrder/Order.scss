@@ -35,8 +35,16 @@
     background: #dfdfdf;
     font-size: 25px;
     line-height: 52px;
-    z-index: 5
+    z-index: 5;
+    color: #858585
 }
+
+.step-icon{
+    i{
+        font-weight: 600;
+    }
+}
+
 .steps .step .step-title {
     margin: 15px 0 0 0 ;
     color: #878787;
@@ -60,4 +68,5 @@
 .steps .step.completed .step-icon {
     background-color: #28a745;
     color: #fff
+    
 }

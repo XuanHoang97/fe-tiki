@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../../store/actions';
 import ModalAddNews from './ModalAddNews';
 import ModalEditNews from './ModalEditNews';
-import Sort from './Sort';
 import Moment from 'react-moment';
 
 const NewsManage = (props) => {
@@ -86,7 +85,6 @@ const NewsManage = (props) => {
                 <button onClick={() => handleAddNews()} type="button" className="btn btn-success col-2">
                     <i className="fas fa-plus mr-2"></i> Thêm tin tức
                 </button>
-                <Sort />
             </div>
 
             <div className="text-dark">Danh sách bài viết (<b>{listNews.length}</b>)</div>

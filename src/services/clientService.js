@@ -28,7 +28,7 @@ const createOrder = (data) => {
 
 //get order
 const getOrder = (orderId) => {
-    return axios.get(`${path.PORT}/get-order?id=${orderId}`)
+    return axios.get(`${path.PORT}/orders?id=${orderId}`)
 }
 
 //verify order

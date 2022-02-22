@@ -69,7 +69,7 @@ function App(props) {
                 <Route path={path.MY_ORDER} component={OrderSuccess} />
                 <Route path={path.VERIFY_EMAIL} component={VerifyEmail} />
             </Switch>
-            <ToastContainer autoClose={5000} />
+            <ToastContainer autoClose={3000} />
         </Router>
     )
 }

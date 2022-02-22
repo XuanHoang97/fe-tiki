@@ -29,7 +29,7 @@ export const processLogout = () => ({
 })
 
 //fetch gender
-export const fetchGenderStart = () => {
+export const fetchGender = () => {
     return async(dispatch, getState) => {
         try {
             let res = await getAllCodeService('GENDER');
@@ -40,13 +40,13 @@ export const fetchGenderStart = () => {
                 })
             }
         } catch (e) {
-            console.log('fetchGenderStart error', e)
+            console.log('fetchGender error', e)
         }
     }
 }
 
 //fetch role 
-export const fetchRoleStart = () => {
+export const fetchRole = () => {
     return async(dispatch, getState) => {
         try {
             let res = await getAllCodeService('ROLE');
@@ -57,13 +57,13 @@ export const fetchRoleStart = () => {
                 })
             }
         } catch (e) {
-            console.log('fetchRoleStart error', e)
+            console.log('fetchRole error', e)
         }
     }
 }
 
 //fetch position
-export const fetchPositionStart = () => {
+export const fetchPosition = () => {
     return async(dispatch, getState) => {
         try {
             let res = await getAllCodeService('POSITION');
@@ -74,7 +74,7 @@ export const fetchPositionStart = () => {
                 })
             }
         } catch (e) {
-            console.log('fetchPositionStart error', e)
+            console.log('fetchPosition error', e)
         }
     }
 }
@@ -144,7 +144,7 @@ export const editUser = (data) => {
                     type: actionTypes.EDIT_USER,
                 });
                 dispatch(fetchAllUser());
-                toast.success('update user succeed !')
+                toast.success('Cập nhật tài khoản thành công !')
             }
         } catch (e) {
             toast.error('update the user error !')

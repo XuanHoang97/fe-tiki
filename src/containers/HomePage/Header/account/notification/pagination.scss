@@ -1,6 +1,7 @@
 .pagination{
     display: flex;
     align-items: center;
+    justify-content: end;
     li{
         border-radius: 50%;
         width: 30px;
