@@ -13,6 +13,7 @@ function Profile(props) {
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
     const [genderUser, setGender] = useState('');
+    const [avatar, setAvatar] = useState('');
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -21,6 +22,7 @@ function Profile(props) {
             setPhone(user ? user.phoneNumber : '');
             setAddress(user ? user.address : '');
             setGender(user ? user.gender : '');
+            setAvatar(user ? user.image : 'http://res.cloudinary.com/do7qmg6jr/image/upload/v1645518444/sbgr7wd9k1t9v8f0cwvm.jpg')
         }
     }, [user])
 
@@ -139,7 +141,7 @@ function Profile(props) {
                 </div>
 
                 <div className='col-4 bg-light text-center border-left'>
-                    <img src="https://cf.shopee.vn/file/0da87e797bc536f57ff4dadbd8781db4_tn" className='rounded-circle' alt="" style={{width: '40%'}}/>
+                    <img src={avatar} className='rounded-circle' alt="" style={{width: '40%'}}/>
                     <input type="file" className='my-2' />
                     <span className='text-secondary'>Dụng lượng file tối đa 1 MB Định dạng:.JPEG, .PNG</span>
                 </div>

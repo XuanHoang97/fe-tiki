@@ -61,7 +61,7 @@ const ModalProduct = (props) => {
         toggle();
     }
 
-    //onChange image
+    //upload file
     const changeImage = async(e) => {
         let data=e.target.files;
         let file=data[0];

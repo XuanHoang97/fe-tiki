@@ -5,7 +5,7 @@ export const path = {
     LOG_OUT: '/logout',
     SYSTEM: '/system',
     SEARCH: '/search',
-    PORT: 'http://localhost:8000',
+    PORT: 'http://localhost:2022',
     NOTFOUND: '/404',
 
     // Authentication

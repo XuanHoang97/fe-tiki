@@ -1,13 +1,13 @@
 import React  from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-const InfoUser = ({isOpen, details, toggleFromParent}) => {  
+const InfoUser = ({isOpen, details, toggleModal}) => {  
     const toggle = () => {
-        toggleFromParent();
+        toggleModal();
     }
 
     return (
-        <Modal isOpen={isOpen} toggle = {toggleFromParent} size="md" >
+        <Modal isOpen={isOpen} toggle = {toggleModal} size="md" >
             <ModalHeader toggle={()=>toggle()}>Thông tin thành viên</ModalHeader>
             <ModalBody>
                 <div className="text-center py-2" style={{background: `url("https://wallpaperaccess.com/full/1732235.jpg")`, backgroundPosition: 'center', backgroundSize: 'cover'}}>                        

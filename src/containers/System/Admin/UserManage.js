@@ -28,7 +28,6 @@ const UserManage = (props) => {
     const AddNewUser=(data)=> {
         const dataUser = new FormData();
         dataUser.append('email', data.email);
-        // dataUser.append('password', data.password);
         dataUser.append('username', data.username);
         dataUser.append('address', data.address);
         dataUser.append('gender', data.gender);
@@ -76,14 +75,14 @@ const UserManage = (props) => {
         <div className="mx-2">
             <ModalUser
                 isOpen={modalUser} 
-                toggleFromParent={handleAddNewUser}
+                toggleModal={handleAddNewUser}
                 AddNewUser={AddNewUser}
             />
 
             {
                 <ModalEditUser
                     isOpen={modalEditUser} 
-                    toggleFromParent={handleEditUser}
+                    toggleModal={handleEditUser}
                     currentUser={userEdit}
                     editUser={editUser}
                 />
@@ -91,7 +90,7 @@ const UserManage = (props) => {
 
             <InfoUser
                 isOpen={modalInfoUser} 
-                toggleFromParent={handleInfoUser}
+                toggleModal={handleInfoUser}
                 details={infoUser}
             />
             
@@ -133,8 +132,7 @@ const UserManage = (props) => {
                                         </div>
                                     </th>
                                     <td>{index + 1}</td>
-                                    <td style={{backgroundImage: `url(${item.image})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat', height: '45px',
-                                    width: '45px', borderRadius: '50%', display: 'flex', margin: '0 auto'}}></td>
+                                    <td style={{width:'6%'}}><img src={item.image} className='w-100 rounded-circle' alt="" /> </td>
                                     <td className='text-primary'>{item.username}</td>
                                     <td>{item.email}</td>
                                     <td>{item.phoneNumber}</td>

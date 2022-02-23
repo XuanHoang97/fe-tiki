@@ -43,7 +43,7 @@ const ModalEditUser = (props) => {
     }, [dispatch, props.currentUser]);
 
     const toggle =()=>{
-        props.toggleFromParent();
+        props.toggleModal();
     }
 
     //upload file
@@ -86,7 +86,7 @@ const ModalEditUser = (props) => {
             <ModalHeader toggle={()=>toggle()}>Cập nhật thành viên</ModalHeader>
             <ModalBody>
                 <div className="form-group">
-                    <form>
+                    <div>
                         <div className="row">
                             <div className="form-group col-md-6">
                                 <label>Email</label>
@@ -185,7 +185,7 @@ const ModalEditUser = (props) => {
                                 </select>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </ModalBody>
 
