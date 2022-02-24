@@ -152,6 +152,7 @@ export const editUser = (data) => {
     }
 }
 
+
 //SEARCH
 // keyword search
 export const keywordSearch = (data) => {

@@ -34,7 +34,6 @@ const UserManage = (props) => {
         dataUser.append('roleId', data.roleId);
         dataUser.append('positionId', data.positionId);
         dataUser.append('phoneNumber', data.phoneNumber);
-
         data.image && dataUser.append('image', data.image);
         dispatch(actions.createNewUser(dataUser));
     }
@@ -51,18 +50,17 @@ const UserManage = (props) => {
     }
 
     const editUser=(data)=>{
-        dispatch(actions.editUser({
-            id: userEdit.id,
-            email : data.email,
-            username : data.username,
-            address : data.address,
-            phoneNumber : data.phoneNumber,
-            roleId : data.roleId,
-            positionId : data.positionId,
-            gender : data.gender,
-            image : data.previewImgURL,
-            previewImgURL: data.previewImgURL
-        }));
+        const user = new FormData();
+        user.append('id', userEdit.id);
+        user.append('email', data.email);
+        user.append('username', data.username);
+        user.append('address', data.address);
+        user.append('gender', data.gender);
+        user.append('roleId', data.roleId);
+        user.append('positionId', data.positionId);
+        user.append('phoneNumber', data.phoneNumber);
+        data.image && user.append('image', data.image);
+        dispatch(actions.editUser(user));
     }
 
     //info user
@@ -95,7 +93,6 @@ const UserManage = (props) => {
             />
             
             <div className="h5 text-dark mb-4">Quản lý thành viên</div>
-
             <div className="d-flex mb-3 justify-content-between">
                 <button onClick ={() => handleAddNewUser()}  type="button" className="btn btn-success col-2">
                     <i className="fas fa-plus mr-2"></i> Thêm thành viên

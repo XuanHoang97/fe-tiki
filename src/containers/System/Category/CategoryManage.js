@@ -27,7 +27,6 @@ const CategoryManage = (props) => {
         dataCategory.append('keyMap', data.keyMap);
         dataCategory.append('type', data.type);
         dataCategory.append('value', data.value);
-
         data.image && dataCategory.append('image', data.image);
         dispatch(actions.CreateCategory(dataCategory));
     }
@@ -39,15 +38,14 @@ const CategoryManage = (props) => {
     }
 
     const handleEditCategory = (data) => {
-        dispatch(actions.EditCategory({
-            id: data.id,
-            name: data.name,
-            keyMap: data.keyMap,
-            type: data.type,
-            value: data.value,
-            image: data.previewImg,
-            previewImg: data.previewImg
-        }));
+        const category = new FormData();
+        category.append('id', categoryEdit.id);
+        category.append('name', data.name);
+        category.append('keyMap', data.keyMap);
+        category.append('type', data.type);
+        category.append('value', data.value);
+        data.image && category.append('image', data.image);
+        dispatch(actions.EditCategory(category));
     }
 
     //delete category

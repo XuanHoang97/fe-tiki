@@ -29,8 +29,7 @@ const ModalEditCategory  = (props) => {
 
     //onChange image
     const changeImage = async(e) => {
-        let data=e.target.files;
-        let file=data[0];
+        let file=e.target.files[0];
         if(file){
             let objectUrl=URL.createObjectURL(file)
             setPreviewImg(objectUrl);
@@ -59,11 +58,7 @@ const ModalEditCategory  = (props) => {
     }
 
     return (
-        <Modal 
-            isOpen={props.isOpen} 
-            toggle={()=>toggle()} 
-            size="lg"
-        >   
+        <Modal isOpen={props.isOpen} toggle={()=>toggle()} size="lg">   
         <form
             onSubmit={EditCategory}
             encType='multipart/form-data'
@@ -94,9 +89,9 @@ const ModalEditCategory  = (props) => {
                         >
                             {
                             previewImg ?
-                            <div onClick={() =>removeImg()} className="col-md-12" style={{textAlign: 'end', position: 'absolute', right: '-1.5rem', top: '-1rem'}}>
-                                <i className="far fa-times-circle text-danger"></i>
-                            </div> : <img src="https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png" className="w-100" alt="..." />
+                                <div onClick={() =>removeImg()} className="col-md-12" style={{textAlign: 'end', position: 'absolute', right: '-1.5rem', top: '-1rem'}}>
+                                    <i className="far fa-times-circle text-danger"></i>
+                                </div> : <img src="https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png" className="w-100" alt="..." />
                             }
                         </div>                  
                     </div>

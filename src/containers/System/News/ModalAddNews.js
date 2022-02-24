@@ -11,14 +11,11 @@ const ModalAddNews = (props) => {
     const [description, setDescription] = useState('');
     const [date, setDate] = useState(new Date());
     const [author_id, setAuthor_id] = useState('');
-    const [hot, setHot] = useState('');
-    const [status, setStatus] = useState('');
     const [productId, setProductId] = useState('');
     const [category_id, setCategory_id] = useState('');
     
     const dispatch = useDispatch();
     const listCategory = useSelector(state => state.admin.categories);
-    const listStatus = useSelector(state => state.admin.status_news);
     const listProduct = useSelector(state => state.admin.products);
 
     //fetch data
@@ -28,21 +25,6 @@ const ModalAddNews = (props) => {
         dispatch(actions.fetchProducts());
     }, [dispatch]);
 
-    //reset form
-    useEffect(() => {
-        setName('');
-        setImage('');
-        setPreviewImg('');
-        setContent('');
-        setDescription('');
-        setDate(new Date());
-        setHot('');
-        setStatus('');
-        setProductId('');
-        setCategory_id('');
-        setAuthor_id('');
-    }, [props.listNews]);
-
     const toggle =()=>{
         props.toggleParent();
     }
@@ -51,7 +33,7 @@ const ModalAddNews = (props) => {
     const handleAddNews=(e)=>{
         e.preventDefault();
         const data = {
-            name, image, previewImg, content, description, date, author_id, productId, hot, status, category_id,
+            name, image, previewImg, content, description, date, author_id, productId, category_id,
         }
         props.createNews(data);
         toggle();
@@ -59,8 +41,7 @@ const ModalAddNews = (props) => {
 
     //onChange image
     const changeImage = async(e) => {
-        let data=e.target.files;
-        let file=data[0];
+        let file=e.target.files[0];
         if(file){
             let objectUrl=URL.createObjectURL(file)
             setPreviewImg(objectUrl);
@@ -135,25 +116,6 @@ const ModalAddNews = (props) => {
                         <input value={date} onChange={(e)=>setDate(e.target.value)} type="text" className="form-control" />
                     </div>
 
-                    <div className="form-group col-md-4">
-                        <label>Trạng thái</label>
-                        <select className="form-control"
-                            onChange={(e) => setStatus(e.target.value)}
-                            value={status}
-                        >   
-                            {
-                                listStatus && listStatus.length >0 ?
-                                listStatus.map((item, index)=>{
-                                    return(
-                                        <option key={index} value={item.valueVi}>{item.valueVi}</option>                                                 
-                                    )
-                                })
-                                :
-                                <option>Không có dữ liệu</option>
-                            }    
-                        </select>
-                    </div> 
-                    
                     <div className="form-group col-md-4">
                         <label>Sản phẩm</label>
                         <select className="form-control"

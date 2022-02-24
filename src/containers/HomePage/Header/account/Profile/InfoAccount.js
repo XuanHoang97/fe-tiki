@@ -32,6 +32,10 @@ function InfoAccount(props) {
             })
         }
     }, [dispatch, token]);
+
+    useEffect(() => {
+        dispatch(getUser(user));
+    }, [dispatch, user]);
     
     useEffect(() => {
         document.title = 'Thông tin tài khoản';
@@ -44,7 +48,7 @@ function InfoAccount(props) {
                 <div className='container my-3 d-flex'>
                     <div className='col-2 py-3 p-0'>
                         <div className='avatar d-flex'>
-                            <img src={user ? user.image : 'http://res.cloudinary.com/do7qmg6jr/image/upload/v1645518444/sbgr7wd9k1t9v8f0cwvm.jpg'} className='rounded-circle'  alt="" />
+                            <img src={user && user.image ? user.image : 'http://res.cloudinary.com/do7qmg6jr/image/upload/v1645518444/sbgr7wd9k1t9v8f0cwvm.jpg'} className='rounded-circle'  alt="" />
                             <div className='info'>
                                 <div className='name'>{ user ? user.username : '' }</div>
                                 <div className='editProfile'>

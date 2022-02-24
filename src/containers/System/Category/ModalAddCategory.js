@@ -29,8 +29,7 @@ const ModalAddCategory = (props) => {
 
     //onChange image
     const changeImage = async(e) => {
-        let data=e.target.files;
-        let file=data[0];
+        let file=e.target.files[0];
         if(file){
             let objectUrl=URL.createObjectURL(file)
             setPreviewImg(objectUrl);
@@ -44,11 +43,7 @@ const ModalAddCategory = (props) => {
     }
     
     return (
-        <Modal 
-            isOpen={props.isOpen} 
-            toggle={()=>toggle()} 
-            size="lg"
-        >
+        <Modal isOpen={props.isOpen} toggle={()=>toggle()} size="lg">
         <form
             onSubmit={handleAddCategory}
             encType='multipart/form-data'

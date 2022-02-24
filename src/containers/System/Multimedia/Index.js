@@ -15,7 +15,6 @@ const Multimedia = (props) => {
     const [status, setStatus] = useState('');
     const [image, setImage] = useState('');
     const [previewImg, setPreviewImg] = useState('');
-    const [date, setDate] = useState(Date);
     const [action, setAction] = useState(CRUD_ACTIONS.CREATE);
     const [slideEdit, setSlideEdit] = useState();
 
@@ -23,7 +22,6 @@ const Multimedia = (props) => {
     const [categoryName, setCategoryName] = useState('');
     const [categoryImage, setCategoryImage] = useState('');
     const [categoryPreviewImg, setCategoryPreviewImg] = useState('');
-    const [categoryDate, setCategoryDate] = useState(Date);
     const [categoryAction, setCategoryAction] = useState(CRUD_ACTIONS.CREATE);
     const [categoryEdit, setCategoryEdit] = useState();
     
@@ -43,8 +41,7 @@ const Multimedia = (props) => {
 
     //onChange image
     const changeImage = async(e) => {
-        let data=e.target.files;
-        let file=data[0];
+        let file=e.target.files[0];
         if(file){
             let objectUrl=URL.createObjectURL(file)
             setPreviewImg(objectUrl);
@@ -53,8 +50,7 @@ const Multimedia = (props) => {
     }
 
     const changeImageCategory = async(e) => {
-        let data=e.target.files;
-        let file=data[0];
+        let file=e.target.files[0];
         if(file){
             let objectUrl=URL.createObjectURL(file)
             setCategoryPreviewImg(objectUrl);
@@ -85,7 +81,6 @@ const Multimedia = (props) => {
         setCategoryName('');
         setCategoryImage('');
         setCategoryPreviewImg('');
-        setCategoryDate('');
     }
 
     //Add and Edit Slide
@@ -94,7 +89,6 @@ const Multimedia = (props) => {
         const data = new FormData();
         data.append('name', name);
         data.append('status', status);
-        data.append('date', date);
         data.append('categoryId', categoryId);
         image && data.append('image', image);
 
@@ -103,15 +97,13 @@ const Multimedia = (props) => {
             resetValue();
         }
         if(action===CRUD_ACTIONS.EDIT){
-            dispatch(actions.EditSlide({
-                id:slideEdit,
-                name:name,
-                image:previewImg,
-                status:status,
-                previewImg:previewImg,
-                date:date,
-                categoryId:categoryId,
-            }));
+            const slide = new FormData();
+            slide.append('id', slideEdit);
+            slide.append('name', name);
+            slide.append('status', status);
+            slide.append('categoryId', categoryId);
+            image && slide.append('image', image);
+            dispatch(actions.EditSlide(slide));
             resetValue();
             setAction(CRUD_ACTIONS.CREATE);
         }
@@ -119,11 +111,8 @@ const Multimedia = (props) => {
     
     // fill info edit slide
     const editSlide=(slide)=>{
-        if(slide.image){
-            setPreviewImg(slide.image);
-        }   
+        setPreviewImg(slide.image);
         setName(slide.name);
-        setDate(slide.date);
         setStatus(slide.status);
         setCategoryId(slide.categoryId);
         setAction(CRUD_ACTIONS.EDIT);
@@ -140,9 +129,8 @@ const Multimedia = (props) => {
         e.preventDefault();
         const data = new FormData();
         data.append('name', categoryName);
-        data.append('date', categoryDate);
-        data.append('image', categoryImage);
         data.append('categoryId', categoryId);
+        categoryImage && data.append('image', categoryImage);
 
         if(categoryAction===CRUD_ACTIONS.CREATE){
             dispatch(actions.CreateSpecialCategory(data));
@@ -150,25 +138,20 @@ const Multimedia = (props) => {
         }
 
         if(categoryAction===CRUD_ACTIONS.EDIT){
-            dispatch(actions.EditSpecialCategory({
-                id:categoryEdit,
-                name:categoryName,
-                image:categoryPreviewImg,
-                previewImg:categoryPreviewImg,
-                date:categoryDate,
-                categoryId:categoryId,
-            }));
+            const category = new FormData();
+            category.append('id', categoryEdit);
+            category.append('name', categoryName);
+            category.append('categoryId', categoryId);
+            categoryImage && category.append('image', categoryImage);
+            dispatch(actions.EditSpecialCategory(category));
             resetValueCategory();
             setCategoryAction(CRUD_ACTIONS.CREATE);
         }
     }
     //fill info edit category special
     const editSpecialCategory = (category) => {
-        if(category.image){
-            setCategoryPreviewImg(category.image);
-        }
+        setCategoryPreviewImg(category.image);
         setCategoryName(category.name);
-        setCategoryDate(category.date);
         setCategoryId(category.categoryId);
         setCategoryAction(CRUD_ACTIONS.EDIT);
         setCategoryEdit(category.id);
@@ -188,8 +171,6 @@ const Multimedia = (props) => {
                     handleSaveSlide = {handleSaveSlide}
                     name = {name}
                     setName = {setName}
-                    date = {date}
-                    setDate = {setDate}
                     categoryId = {categoryId}
                     setCategoryId = {setCategoryId}
                     category = {category}
@@ -215,8 +196,6 @@ const Multimedia = (props) => {
                     saveCategorySpecial={saveCategorySpecial}
                     categoryName={categoryName}
                     setCategoryName={setCategoryName}
-                    categoryDate={categoryDate}
-                    setCategoryDate={setCategoryDate}
                     changeImageCategory = {changeImageCategory}
                     categoryPreviewImg = {categoryPreviewImg}
                     removeImg = {removeImg}

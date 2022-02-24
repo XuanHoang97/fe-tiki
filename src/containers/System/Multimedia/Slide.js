@@ -4,7 +4,7 @@ import { CRUD_ACTIONS } from 'utils';
 
 function Slide(props) {
     const { 
-        handleSaveSlide, name, setName, date, setDate, categoryId, setCategoryId,
+        handleSaveSlide, name, setName, categoryId, setCategoryId,
         category, status, setStatus, statusSlide, changeImage,
         previewImg, removeImg, action, slide, editSlide, deleteSlide
     } = props;
@@ -21,14 +21,6 @@ function Slide(props) {
                         <input type="text" className="form-control" 
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                        />
-                    </div>
-
-                    <div className="form-group col-2">
-                        <label htmlFor="">Ngày đăng</label>
-                        <input type="text" className="form-control" 
-                            value={date}
-                            onChange={(e) => setDate(e.target.value)}
                         />
                     </div>
 
@@ -104,7 +96,6 @@ function Slide(props) {
                             <td>STT</td>
                             <td>Ảnh</td>
                             <td>Tiêu đề</td>
-                            <td>Ngày đăng</td>
                             <td>Thao tác</td>
                         </tr>
                     </thead>
@@ -118,7 +109,6 @@ function Slide(props) {
                                         <td>{index + 1}</td>                                               
                                         <td style={{width:'6%'}}><img src={item.image} className='w-100' alt="" /> </td>
                                         <td>{item.name}</td>
-                                        <td>{item.date}</td>
                                         <td className=''>
                                             <button onClick={() => editSlide(item)} type="button" className="btn text-primary  mr-3">
                                                 <i className="fas fa-edit"></i>

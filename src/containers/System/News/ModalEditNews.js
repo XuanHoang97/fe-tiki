@@ -9,18 +9,14 @@ const ModalEditNews  = (props) => {
     const [image, setImage] = useState('');
     const [description, setDescription] = useState('');
     const [content, setContent] = useState('');
-    const [status, setStatus] = useState('');
     const [category_id, setCategory] = useState('');
     const [productId, setProductId] = useState('');
     const [author_id, setAuthor] = useState('');
     const [date, setDate] = useState('');
-    const [view, setView] = useState('');
-    const [hot, setHot] = useState('');
     
     const dispatch = useDispatch();
     const [previewImg, setPreviewImg] = useState('');
     const listCategory = useSelector(state => state.admin.categories);
-    const listStatus = useSelector(state => state.admin.status_news);
     const listProduct = useSelector(state => state.admin.products);
 
     // fill info news to edit
@@ -29,19 +25,14 @@ const ModalEditNews  = (props) => {
         if(news) {
             setId(news.id);
             setName(news.name);
-            if(news.image){
-                setPreviewImg(news.image);
-            }
+            setPreviewImg(news.image);
             setImage(news.previewImg);
             setDescription(news.description);
             setContent(news.content);
-            setStatus(news.status);
             setCategory(news.category_id);
             setProductId(news.productId);
             setAuthor(news.author_id);
             setDate(news.date);
-            setView(news.view);
-            setHot(news.hot);
         }
         dispatch(actions.fetchAllCategory());
         dispatch(actions.fetchProducts());
@@ -53,8 +44,7 @@ const ModalEditNews  = (props) => {
 
     //onChange image
     const changeImage = async(e) => {
-        let data=e.target.files;
-        let file=data[0];
+        let file=e.target.files[0];
         if(file){
             let objectUrl=URL.createObjectURL(file)
             setPreviewImg(objectUrl);
@@ -77,20 +67,16 @@ const ModalEditNews  = (props) => {
             previewImg: previewImg,
             description: description,
             content: content,
-            status: status,
             category_id: category_id,
             productId: productId,
             author_id: author_id,
             date: date,
-            view: view,
-            hot: hot,
         });
         toggle();
     }
 
     return (
         <Modal isOpen={props.isOpen} toggle={()=>toggle()} size="lg">
-        
         <form
             onSubmit={EditNews}
             encType='multipart/form-data'
@@ -143,11 +129,6 @@ const ModalEditNews  = (props) => {
                             <label>content</label>
                             <input value={content} onChange={(e)=>setContent(e.target.value)}  type="text" className="form-control" />
                         </div>
-
-                        <div className="form-group col-4">
-                            <label>Hot</label>
-                            <input value={hot} onChange={(e)=>setHot(e.target.value)}  type="text" className="form-control" />
-                        </div>
                     </div>
 
                     <div className="row">
@@ -156,26 +137,6 @@ const ModalEditNews  = (props) => {
                             <input value={date} onChange={(e)=>setDate(e.target.value)} type="text" className="form-control" />
                             <button onClick={()=> setDate(new Date())} type="button" className="btn btn-primary px-2"><i className="fas fa-sync-alt"></i></button>
                         </div>
-
-                        <div className="form-group col-md-4">
-                            <label>Trạng thái</label>
-                            <select className="form-control"
-                                onChange={(e) => setStatus(e.target.value)}
-                                value={status}
-                            >   
-                                {
-                                    listStatus && listStatus.length >0 ?
-                                    listStatus.map((item, index)=>{
-                                        return(
-                                            <option key={index} value={item.valueVi}>{item.valueVi}</option>                                                 
-                                        )
-                                    })
-                                    :
-                                    <option>Không có dữ liệu</option>
-                                }    
-                            </select>
-                        </div> 
-
                         <div className="form-group col-md-4">
                             <label>Danh mục</label>
                             <select className="form-control"

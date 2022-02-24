@@ -51,7 +51,7 @@ const Account = () => {
                 {
                     user ?
                     <React.Fragment>
-                        <img src={user ? user.image : 'http://res.cloudinary.com/do7qmg6jr/image/upload/v1645518444/sbgr7wd9k1t9v8f0cwvm.jpg'} className='w-25 rounded-circle' alt="" />
+                        <img src={user && user.image ? user.image : `http://res.cloudinary.com/do7qmg6jr/image/upload/v1645518444/sbgr7wd9k1t9v8f0cwvm.jpg`} className='w-25 rounded-circle' alt="" />
                         <b className='ml-2' style={{fontSize: '12px'}}>{user?.username}</b>
                     </React.Fragment>
                     :

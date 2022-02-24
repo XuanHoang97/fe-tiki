@@ -7,7 +7,6 @@ import * as actions from '../../../store/actions';
 const ModalEditUser = (props) => {
     const [id, setId] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const [address, setAddress] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -15,7 +14,7 @@ const ModalEditUser = (props) => {
     const [roleId, setRoleId] = useState('');
     const [positionId, setPositionId] = useState('');
     const [image, setImage] = useState('');
-    const [previewImgURL, setPreviewImgURL] = useState('');
+    const [previewImg, setPreviewImg] = useState('');
 
     const dispatch = useDispatch();
     const genders = useSelector(state => state.admin.genders);
@@ -28,14 +27,13 @@ const ModalEditUser = (props) => {
         if(user && !_.isEmpty(user)){
             setId(user.id);
             setEmail(user.email);
-            setPassword('hardcode');
             setUsername(user.username);
             setAddress(user.address);
             setPhoneNumber(user.phoneNumber);
             setGender(user.gender);
             setRoleId(user.roleId);
             setPositionId(user.positionId);
-            setPreviewImgURL(user.image);
+            setPreviewImg(user.image);
         }
         dispatch(actions.fetchGender());
         dispatch(actions.fetchRole());
@@ -47,38 +45,34 @@ const ModalEditUser = (props) => {
     }
 
     //upload file
-    const handleOnchangeImage=async(e)=>{
-        let data=e.target.files;
-        let file=data[0];
+    const changeImage=(e)=>{
+        let file=e.target.files[0];
         if(file){
             let objectUrl=URL.createObjectURL(file)
-            setPreviewImgURL(objectUrl);
+            setPreviewImg(objectUrl);
             setImage(file);
         }
     }
 
     //remove image
     const removeImg=()=>{
-        setPreviewImgURL('');
+        setPreviewImg('');
         setImage('');
     }
 
+    // edit user
     const handleSaveUser=(e)=>{
         e.preventDefault();
         props.editUser({
-            id, email, password, username, address, phoneNumber,
-            gender, roleId, positionId, image, previewImgURL
+            id, email, username, address, phoneNumber,
+            gender, roleId, positionId, image, previewImg
         });
         toggle();
     }
 
     return (
         <Modal 
-            isOpen={props.isOpen} 
-            toggle={()=>toggle()} 
-            className={'modal-user-container'}
-            size="lg"
-        >
+            isOpen={props.isOpen} toggle={()=>toggle()} size="lg">
             <form onSubmit={handleSaveUser}
                 encType='multipart/form-data'
             >
@@ -96,20 +90,20 @@ const ModalEditUser = (props) => {
                             <div className="form-group col-md-3">
                                 <label>Ảnh đại diện</label>
                                 <input id="previewImg" type="file" hidden 
-                                    onChange={(e)=>handleOnchangeImage(e, 'previewImgURL')} 
+                                    onChange={(e)=>changeImage(e)} 
                                     name="image"
                                 />
                                 <label htmlFor="previewImg" className="btn btn-success w-100"><i className="fas fa-upload"></i> Tải ảnh</label>                   
                             </div>
 
                             <div className="preview-image col-md-2 border" 
-                                style={{backgroundImage: `url(${previewImgURL})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat'}}
+                                style={{backgroundImage: `url(${previewImg})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat'}}
                             >
                                 {
-                                previewImgURL ?
-                                <div onClick={() => removeImg()} className="col-md-12" style={{textAlign: 'end', position: 'absolute', right: '-1.5rem', top: '-1rem'}}>
-                                    <i className="far fa-times-circle text-danger"></i>
-                                </div> : <img src="https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png" className="w-100" alt="..." />
+                                previewImg ?
+                                    <div onClick={() => removeImg()} className="col-md-12" style={{textAlign: 'end', position: 'absolute', right: '-1.5rem', top: '-1rem'}}>
+                                        <i className="far fa-times-circle text-danger"></i>
+                                    </div> : <img src="https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png" className="w-100" alt="..." />
                                 }
                             </div>
                         </div>

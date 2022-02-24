@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import instance from './../../../../../axios';
-import { editUser, fetchGender, getUser } from 'store/actions';
+import { editUser, fetchAllUser, fetchGender, getUser } from 'store/actions';
 
 function Profile(props) {
     const dispatch = useDispatch();
@@ -14,6 +14,7 @@ function Profile(props) {
     const [address, setAddress] = useState('');
     const [genderUser, setGender] = useState('');
     const [avatar, setAvatar] = useState('');
+    const [previewImg, setPreviewImg] = useState('');
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -22,7 +23,8 @@ function Profile(props) {
             setPhone(user ? user.phoneNumber : '');
             setAddress(user ? user.address : '');
             setGender(user ? user.gender : '');
-            setAvatar(user ? user.image : 'http://res.cloudinary.com/do7qmg6jr/image/upload/v1645518444/sbgr7wd9k1t9v8f0cwvm.jpg')
+            setAvatar(user ? user.image : '')
+            setPreviewImg(user ? user.image : '')
         }
     }, [user])
 
@@ -30,23 +32,24 @@ function Profile(props) {
         dispatch(fetchGender());
     }, [dispatch])
 
-
     // edit info user
-    const updateUser = (data) => {
+    const updateUser = (e) => {
+        e.preventDefault();
         setLoading(true)
-        setTimeout(() => {
-            dispatch(editUser({
-                id: user.id,
-                username: userName,
-                phoneNumber: phone,
-                address: address,
-                gender: genderUser
-            }));
+        setTimeout(async() => {
+            const data = new FormData();
+            data.append('id', user.id);
+            data.append('username', userName);
+            data.append('phoneNumber', phone);
+            data.append('address', address);
+            data.append('gender', genderUser);
+            avatar && data.append('image', avatar);
+            dispatch(editUser(data))
+            dispatch(fetchAllUser());
             setLoading(false)
-        }, 1500);
+        }, 2000);
 
-    console.log(user, genderUser)
-
+        console.log(userName, phone, address, genderUser, avatar, previewImg, user.id)
     }
 
     // Refresh token
@@ -67,12 +70,25 @@ function Profile(props) {
         }
     }, [dispatch, token]);
 
+    //onChange image
+    const changeImage = async(e) => {
+        let file=e.target.files[0];
+        if(file){
+            let objectUrl=URL.createObjectURL(file)
+            setPreviewImg(objectUrl);
+            setAvatar(file);
+        }
+    }
+
     return (
         <div className=''>
             <h5>Hồ Sơ Của Tôi </h5>
             <span className='text-secondary'>Quản lý thông tin hồ sơ để bảo mật tài khoản</span>
             <hr/>
-            <div className='d-flex'>
+            <form className='d-flex'
+                onSubmit={updateUser}
+                encType='multipart/form-data'
+            >
                 <div className='col-8 pl-0'>
                     <div className=''>
                         <label className='col-3'>Tên đăng nhập</label>
@@ -133,19 +149,28 @@ function Profile(props) {
                         <input type="text" className="form-control" />
                     </div>
 
-                    <button onClick={()=>updateUser()} type="button" className="btn btn-primary px-4 mx-3">
+                    <button type="submit" className="btn btn-primary px-4 mx-3">
                         {
                             loading ? 'Đang cập nhật...' : 'Lưu'
                         }
                     </button>
                 </div>
 
-                <div className='col-4 bg-light text-center border-left'>
-                    <img src={avatar} className='rounded-circle' alt="" style={{width: '40%'}}/>
-                    <input type="file" className='my-2' />
+                <div className='col-4 py-4 bg-light text-center border-left'>
+                    <div><img src={previewImg ? previewImg : `https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png`} className='rounded-circle' alt="" style={{width: '40%'}}/></div>
+                
+                    <div className='d-flex justify-content-center mt-3'>
+                        <div className="form-group">
+                            <input id="previewImg" type="file" hidden 
+                                onChange={(e)=>changeImage(e)}
+                                name='image'
+                            />
+                            <label htmlFor="previewImg" className="btn btn-success px-3"><i className="fas fa-upload"></i> Thay ảnh</label>  
+                        </div>
+                    </div>
                     <span className='text-secondary'>Dụng lượng file tối đa 1 MB Định dạng:.JPEG, .PNG</span>
                 </div>
-            </div>
+            </form>
         </div>
     );
 }

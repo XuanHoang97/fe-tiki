@@ -10,14 +10,12 @@ const ModalEditProduct  = (props) => {
     const [sale, setSale] = useState('');
     const [warranty, setWarranty] = useState('');
     const [number, setNumber] = useState('');
-    const [status, setStatus] = useState('');
     const [category_id, setCategory_id] = useState('');
     const [supplier_id, setSupplier_id] = useState('');
     const [image, setImage] = useState('');
     const [previewImg, setPreviewImg] = useState('');
 
     const dispatch = useDispatch();
-    const listStatus = useSelector(state => state.admin.status);
     const listCategory = useSelector(state => state.admin.categories);
     const listSupplier = useSelector(state => state.admin.supplier);
 
@@ -28,7 +26,6 @@ const ModalEditProduct  = (props) => {
             setName(product.name);
             setPrice(product.price);
             setSale(product.sale);
-            setStatus(product.status);            
             setWarranty(product.warranty);
             setNumber(product.number);
             setCategory_id(product.category_id);
@@ -47,8 +44,7 @@ const ModalEditProduct  = (props) => {
 
     //onChange image
     const changeImage = async(e) => {
-        let data=e.target.files;
-        let file=data[0];
+        let file=e.target.files[0];
         if(file){
             let objectUrl=URL.createObjectURL(file)
             setPreviewImg(objectUrl);
@@ -69,12 +65,11 @@ const ModalEditProduct  = (props) => {
             name: name,
             price: price,
             sale: sale,
-            status: status,
             warranty: warranty,
             number: number,
             category_id: category_id,
             supplier_id: supplier_id,
-            image: previewImg,
+            image: image,
             previewImg: previewImg,
         });
         toggle();
@@ -132,25 +127,6 @@ const ModalEditProduct  = (props) => {
                 </div>
 
                 <div className="row">
-                    <div className="form-group col-md-4">
-                        <label>Trạng thái</label>
-                        <select className="form-control"
-                            onChange={(e) => setStatus(e.target.value)}
-                            defaultValue={status}
-                        >   
-                            {
-                                listStatus && listStatus.length >0 ?
-                                    listStatus.map((item, index)=>{
-                                        return(
-                                            <option key={index} value={item.valueVi}>{item.valueVi}</option>                                                 
-                                        )
-                                    })
-                                    :
-                                    <option>Không có dữ liệu</option>
-                            }    
-                        </select>
-                    </div>
-
                     <div className="form-group col-md-4">
                         <label>Số lượng</label>
                         <input value={number} onChange={(e)=>setNumber(e.target.value)}  type="text" className="form-control" />

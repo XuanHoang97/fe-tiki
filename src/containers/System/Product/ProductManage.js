@@ -27,12 +27,10 @@ const ProductManage = (props) => {
         dataProduct.append('name', data.name);
         dataProduct.append('price', data.price);
         dataProduct.append('sale', data.sale);
-        dataProduct.append('status', data.status);
         dataProduct.append('number', data.number);
         dataProduct.append('warranty', data.warranty);
         dataProduct.append('category_id', data.category_id);
         dataProduct.append('supplier_id', data.supplier_id);
-
         data.image && dataProduct.append('image', data.image);
         dispatch(actions.CreateNewProduct(dataProduct));
     }
@@ -48,19 +46,17 @@ const ProductManage = (props) => {
         setProductEdit(product);
     }
     const handleEditProduct = (data) => {
-        dispatch(actions.EditProduct({
-            id: productEdit.id,
-            name: data.name,
-            price: data.price,
-            sale: data.sale,
-            status: data.status,
-            warranty: data.warranty,
-            number: data.number,
-            category_id: data.category_id,
-            supplier_id: data.supplier_id,
-            image: data.previewImg,
-            previewImg: data.previewImg,
-        }));
+        const product = new FormData();
+        product.append('id', productEdit.id);
+        product.append('name', data.name);
+        product.append('price', data.price);
+        product.append('sale', data.sale);
+        product.append('number', data.number);
+        product.append('warranty', data.warranty);
+        product.append('category_id', data.category_id);
+        product.append('supplier_id', data.supplier_id);
+        data.image && product.append('image', data.image);
+        dispatch(actions.EditProduct(product));
     }
 
     return (        
@@ -97,7 +93,6 @@ const ProductManage = (props) => {
                         <td>Bảo hành</td>
                         <td>Giá (VND)</td>
                         <td>Sale (VND)</td>
-                        <td>Trạng thái kho</td>
                         <td>Xuất xứ</td>
                         <td>Tác vụ</td>
                     </tr>
@@ -120,9 +115,6 @@ const ProductManage = (props) => {
                                     <td>{item.warranty}</td>
                                     <td>{numberFormat(item.price)}</td>
                                     <td>{numberFormat(item.sale)}</td>
-                                    <td className= {item.status==='Còn hàng' ? 'text-success': 'text-danger'}>  
-                                        {item.status}
-                                    </td>
                                     <td>{item.supplier_id}</td>
                                     <td>
                                         <button onClick={()=> editProduct(item)} type="button" className="btn text-primary px-2">

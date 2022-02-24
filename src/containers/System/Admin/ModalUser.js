@@ -42,17 +42,13 @@ const ModalUser = (props) => {
             positionId: positionId,
             image: image    
         };
-
         props.AddNewUser(data);
         toggle();
-
-        console.log(email, username, address, phoneNumber, gender, roleId, positionId, image, previewImg)
     }
 
     //upload file
-    const changeImage=async(e)=>{
-        let data=e.target.files;
-        let file=data[0];
+    const changeImage=(e)=>{
+        let file=e.target.files[0];
         if(file){
             let objectUrl=URL.createObjectURL(file)
             setPreviewImg(objectUrl);

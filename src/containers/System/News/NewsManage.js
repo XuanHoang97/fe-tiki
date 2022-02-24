@@ -28,11 +28,8 @@ const NewsManage = (props) => {
         dataNews.append('description', data.description);
         dataNews.append('date', data.date);
         dataNews.append('author_id', data.author_id);
-        dataNews.append('hot', data.hot);
-        dataNews.append('status', data.status);
         dataNews.append('productId', data.productId);
         dataNews.append('category_id', data.category_id);        
-
         data.image && dataNews.append('image', data.image);
         dispatch(actions.CreateNews(dataNews));
     }
@@ -48,21 +45,17 @@ const NewsManage = (props) => {
         setNewsEdit(news);
     }
     const handleEditNews = (data) => {
-        dispatch(actions.EditNews({
-            id: data.id,
-            name: data.name,
-            content: data.content,
-            description: data.description,
-            date: data.date,
-            author_id: data.author_id,
-            hot: data.hot,
-            status: data.status,
-            productId: data.productId,
-            category_id: data.category_id,
-            image: data.previewImg,
-            previewImg: data.previewImg
-
-        }));
+        const News = new FormData();
+        News.append('id', newsEdit.id );
+        News.append('name', data.name);
+        News.append('content', data.content);
+        News.append('description', data.description);
+        News.append('date', data.date);
+        News.append('author_id', data.author_id);
+        News.append('productId', data.productId);
+        News.append('category_id', data.category_id);        
+        data.image && News.append('image', data.image);
+        dispatch(actions.EditNews(News));
     }
 
     return (

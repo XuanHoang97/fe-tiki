@@ -5,7 +5,7 @@ import { CRUD_ACTIONS } from 'utils';
 function SpecialCategory(props) {
     const { 
         category, categoryId, setCategoryId, action, saveCategorySpecial,
-        categoryName, setCategoryName, categoryDate, setCategoryDate, 
+        categoryName, setCategoryName,
         changeImageCategory, categoryPreviewImg,
         removeImg, specialCategories, editSpecialCategory
     } = props;
@@ -22,14 +22,6 @@ function SpecialCategory(props) {
                         <input type="text" className="form-control" 
                             value={categoryName}
                             onChange={(e) => setCategoryName(e.target.value)}
-                        />
-                    </div>
-
-                    <div className="form-group col-2">
-                        <label htmlFor="">Ngày đăng</label>
-                        <input type="text" className="form-control" 
-                            value={categoryDate}
-                            onChange={(e) => setCategoryDate(e.target.value)}
                         />
                     </div>
 
