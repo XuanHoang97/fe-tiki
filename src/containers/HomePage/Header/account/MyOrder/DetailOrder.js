@@ -20,7 +20,7 @@ const DetailOrder = (props) => {
                         </div>
                         <div className="d-flex justify-content-around py-3 bg-light">
                             <div className=" py-1 px-2">
-                                <span className="text-medium">Đơn vị VC:</span> VN Post
+                                <span className="text-medium">Đơn vị vận chuyển:</span> VN Post
                             </div>
                             <div className=" py-1 px-2">
                                 <span>Trạng thái:</span> 
@@ -33,7 +33,7 @@ const DetailOrder = (props) => {
                                 </span>
                             </div>
                             <div className=" py-1 px-2">
-                                <span className="text-medium">Giao dự kiến:</span>
+                                <span className="text-medium">Giao hàng dự kiến:</span>
                                 <span> loading...</span>
                             </div>
                         </div>

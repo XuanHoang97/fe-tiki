@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import instance from './../../../../../axios';
-import { editUser, fetchAllUser, fetchGender, getUser } from 'store/actions';
+import { EditUSer, fetchGender } from 'store/actions';
 
 function Profile(props) {
     const dispatch = useDispatch();
-    const token = localStorage.getItem('token');
     const user = useSelector(state => state.auth.user);
     const gender = useSelector(state => state.admin.genders);
 
-    const [userName, setUserName] = useState('')
+    const [userName, setUserName] = useState('')    
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
     const [genderUser, setGender] = useState('');
@@ -17,14 +15,15 @@ function Profile(props) {
     const [previewImg, setPreviewImg] = useState('');
     const [loading, setLoading] = useState(false);
 
+    // fill info user
     useEffect(() => {
         if (user) {
             setUserName(user ? user.username : '');
             setPhone(user ? user.phoneNumber : '');
             setAddress(user ? user.address : '');
             setGender(user ? user.gender : '');
-            setAvatar(user ? user.image : '')
-            setPreviewImg(user ? user.image : '')
+            setAvatar(user ? user.image : '');
+            setPreviewImg(user ? user.image : '');
         }
     }, [user])
 
@@ -44,31 +43,13 @@ function Profile(props) {
             data.append('address', address);
             data.append('gender', genderUser);
             avatar && data.append('image', avatar);
-            dispatch(editUser(data))
-            dispatch(fetchAllUser());
+            dispatch(EditUSer(data))
             setLoading(false)
-        }, 2000);
+        }, 1500);
 
-        console.log(userName, phone, address, genderUser, avatar, previewImg, user.id)
+        console.log(userName, phone, address, genderUser, previewImg, user.id)
     }
 
-    // Refresh token
-    useEffect(() => {
-        if(token){
-            instance.get(`/user`,{
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-            .then(res => {
-                dispatch(getUser(res))
-            })
-            .catch(err => {
-                localStorage.removeItem('token');
-                console.log(err);
-            })
-        }
-    }, [dispatch, token]);
 
     //onChange image
     const changeImage = async(e) => {
@@ -79,7 +60,6 @@ function Profile(props) {
             setAvatar(file);
         }
     }
-
     return (
         <div className=''>
             <h5>Hồ Sơ Của Tôi </h5>
@@ -157,7 +137,7 @@ function Profile(props) {
                 </div>
 
                 <div className='col-4 py-4 bg-light text-center border-left'>
-                    <div><img src={previewImg ? previewImg : `https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png`} className='rounded-circle' alt="" style={{width: '40%'}}/></div>
+                    <div><img src={previewImg ? previewImg : `https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png`} className='rounded-circle' alt="" style={{width: '100px', height:'100px'}}/></div>
                 
                     <div className='d-flex justify-content-center mt-3'>
                         <div className="form-group">
@@ -165,7 +145,7 @@ function Profile(props) {
                                 onChange={(e)=>changeImage(e)}
                                 name='image'
                             />
-                            <label htmlFor="previewImg" className="btn btn-success px-3"><i className="fas fa-upload"></i> Thay ảnh</label>  
+                            <label htmlFor="previewImg" className="btn btn-success px-3"><i className="fas fa-upload"></i> Đổi ảnh</label>  
                         </div>
                     </div>
                     <span className='text-secondary'>Dụng lượng file tối đa 1 MB Định dạng:.JPEG, .PNG</span>

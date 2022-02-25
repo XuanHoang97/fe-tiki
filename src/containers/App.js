@@ -43,7 +43,7 @@ function App(props) {
 
     return (
         <Router history={history}>
-            <ToastContainer autoClose={3000} />
+            <ToastContainer autoClose={2500} />
             <Switch>
                 <Route path={path.HOME} exact component={(Home)} />
                 <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />

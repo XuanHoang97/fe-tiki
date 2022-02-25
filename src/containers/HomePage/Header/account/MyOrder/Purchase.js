@@ -93,14 +93,14 @@ function Purchase(props) {
                         filterOrder.slice(pagesVisited, pagesVisited + orderPerPage).map((item, index) => {
                             return (
                                 <div className='order p-3 mb-3 bg-white border-bottom' key={index}>
-                                    <div className={item.status ==='S1' ? "text-warning statusOrder" : 'text-success statusOrder'}>
+                                    <div className='statusOrder'>
                                         <div className='text-dark'>{index + 1}. Đơn hàng <b>{item.code}</b></div>
                                         <span>
-                                            {item.status ==='S1' && 'Đang xử lý'}
-                                            {item.status ==='S2' && 'Đã xác nhận'}
-                                            {item.status ==='S3' && 'Đang giao hàng'}
-                                            {item.status ==='S4' && 'Đã giao'}
-                                            {item.status ==='S5' && 'Đã hủy'}
+                                            {item.status ==='S1' && <span className='text-warning'><i className="fas fa-clock"></i>  Đang chờ xử lý</span>}
+                                            {item.status ==='S2' && <span className='text-success'><i className="fa fa-check"></i> Đã xác nhận</span>}
+                                            {item.status ==='S3' && <span className='text-primary'><i className="fa fa-truck"></i>  Đang giao hàng</span>}
+                                            {item.status ==='S4' && <span className='text-success'><i className="fa fa-check"></i> Đã giao</span>}
+                                            {item.status ==='S5' && <span className='text-danger'><i className="fa fa-times"></i> Đã hủy</span>}
                                         </span>
                                     </div>
                                     <hr/>
@@ -118,7 +118,7 @@ function Purchase(props) {
                                             <button onClick={()=>detailOrder(item)} type="button" className="btn btn-outline-secondary btn-sm px-3">Chi tiết</button>
                                             {
                                                 item.status ==='S1' || item.status ==='S2' || item.status ==='S3' ?
-                                                <button type="button" className="btn btn-warning btn-sm px-3">Huỷ đơn</button>
+                                                <button type="button" className="btn btn-danger btn-sm px-3">Huỷ đơn</button>
                                                 : null
                                             }
 

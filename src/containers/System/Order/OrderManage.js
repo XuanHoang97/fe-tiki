@@ -127,14 +127,12 @@ const OrderManage = (props) => {
                                                 <td>{numberFormat(item.total)}</td>
                                                 <td><Moment format="DD/MM/YYYY">{item.date}</Moment></td>
                                                 <td><Moment format="DD/MM/YYYY">{item.date}</Moment></td>
-                                                <td className=
-                                                    {item.status ==='S1' ? "text-warning small font-weight-bold" : 'text-success small font-weight-bold'}
-                                                    >
-                                                    {item.status ==='S1' && 'Chưa xác nhận'}
-                                                    {item.status ==='S2' && 'Đã xác nhận'}
-                                                    {item.status ==='S3' && 'Đang giao hàng'}
-                                                    {item.status ==='S4' && 'Đã giao'}
-                                                    {item.status ==='S5' && 'Đã hủy'}
+                                                <td className='font-weight-bold small'>
+                                                    {item.status ==='S1' && <span className='text-warning'>Đang chờ xử lý</span>}
+                                                    {item.status ==='S2' && <span className='text-success'>Đã xác nhận</span>}
+                                                    {item.status ==='S3' && <span className='text-primary'>Đang giao hàng</span>}
+                                                    {item.status ==='S4' && <span className='text-success'>Đã giao</span>}
+                                                    {item.status ==='S5' && <span className='text-danger'>Đã hủy</span>}
                                                 </td>
                                                 <td style={{width: '10%'}}>
                                                     {

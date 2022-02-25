@@ -25,10 +25,21 @@ const verifyToken = () => {
     });
 }
 
+// update user
+const updateUser = (data) => {
+    return axios.put(`${path.PORT}/update-user`, data, {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    });
+}
+
+
 
 export{
     registerAcc,
     loginAcc,
     logout,
-    verifyToken
+    verifyToken,
+    updateUser
 }

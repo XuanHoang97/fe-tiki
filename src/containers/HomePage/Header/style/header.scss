@@ -48,7 +48,7 @@ img {
                 }
 
                 .list__product{
-                    // box-shadow: inset 0 0 0.5rem 0 rgba(0,0,0,0.2);
+                    box-shadow: 0 2px 10px 1px grey;
                 }
 
                 .menu_ctg:after {
@@ -281,6 +281,8 @@ img {
                             background: white;
                             padding: 15px 0;
                             width: 300px;
+                            box-shadow: 0 2px 10px 1px grey;
+
                             .acc-detail{
                                 .item-acc{
                                     font-weight: 600;
@@ -366,6 +368,10 @@ img {
             @include phone {
                 display: none;
             }
+            @include tablet {
+                display: none;
+            }
+
             .suggest{
                 font-size: 11px;
                 padding-left: 35px;

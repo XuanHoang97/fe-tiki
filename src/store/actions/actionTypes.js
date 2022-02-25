@@ -9,6 +9,7 @@ const actionTypes = Object.freeze({
     USER_LOGIN_FAIL: 'USER_LOGIN_FAIL',
     PROCESS_LOGOUT: 'PROCESS_LOGOUT',
     GET_USER: 'GET_USER',
+    UPDATE_USER: 'UPDATE_USER',
     LOGOUT: 'LOGOUT',
     
     //admin
