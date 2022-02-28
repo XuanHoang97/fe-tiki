@@ -1,5 +1,6 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
+import { path } from 'utils';
 import './MenuLeft.scss'
 
 const MenuLeft = ({widthMenuLeft, effect}) => {
@@ -19,11 +20,11 @@ const MenuLeft = ({widthMenuLeft, effect}) => {
             </div>
 
             <div className="dashboard">
-                <NavLink to="/system/dashboard" activeClassName="active" className ="menu-left" exact>
+                <NavLink to={`${path.DASHBOARD}`} activeClassName="active" className ="menu-left" exact>
                     <span><i className="fas fa-tachometer-alt mr-2"></i>Bảng điều khiển</span>
                 </NavLink>
 
-                <NavLink to="/system/user-manage" activeClassName="active" className ="menu-left">
+                <NavLink to={`${path.USER_MANAGE}`} activeClassName="active" className ="menu-left">
                     <div className="d-flex align-items-center module">
                         <i className=" fas fa-users-cog mr-2"></i>
                         <span>Quản lý nhân sự</span> 
@@ -31,7 +32,7 @@ const MenuLeft = ({widthMenuLeft, effect}) => {
                     <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>
 
-                <NavLink to="/system/category-manage" activeClassName="active" className ="menu-left" >
+                <NavLink to={`${path.CATEGORY_MANAGE}`} activeClassName="active" className ="menu-left" >
                     <div className="d-flex align-items-center module" >
                         <i className=" fas fa-box-open mr-2"></i>
                         <span>Quản lý danh mục</span> 
@@ -40,7 +41,7 @@ const MenuLeft = ({widthMenuLeft, effect}) => {
                     <span><i className='fas fa-angle-right small'></i></span>
                 </NavLink>
 
-                <NavLink to="/system/product-manage" activeClassName="active" className ="menu-left">
+                <NavLink to={`${path.PRODUCT_MANAGE}`} activeClassName="active" className ="menu-left">
                     <div className="d-flex align-items-center module" >
                         <i className="fab fa-product-hunt mr-2"></i>
                         <span>Quản lý sản phẩm </span> 
@@ -50,7 +51,7 @@ const MenuLeft = ({widthMenuLeft, effect}) => {
                 </NavLink>
 
 
-                <NavLink to="/system/news-manage" activeClassName="active" className ="menu-left">
+                <NavLink to={`${path.NEWS_MANAGE}`} activeClassName="active" className ="menu-left">
                     <div className="d-flex align-items-center module">
                         <i className="far fa-newspaper mr-2"></i>
                         <span>Quản lý tin tức - sự kiện</span> 
@@ -58,7 +59,7 @@ const MenuLeft = ({widthMenuLeft, effect}) => {
                     <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>
                 
-                <NavLink to="/system/article-manage" activeClassName="active" className ="menu-left">
+                <NavLink to={`${path.ARTICLE_MANAGE}`} activeClassName="active" className ="menu-left">
                     <div className="d-flex align-items-center module">
                         <i className="fas fa-book mr-2"></i>
                         <span>Quản lý bài viết</span> 
@@ -66,7 +67,7 @@ const MenuLeft = ({widthMenuLeft, effect}) => {
                     <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>
 
-                <NavLink to="/system/slide-manage" activeClassName="active" className ="menu-left">
+                <NavLink to={`${path.MULTIMEDIA_MANAGE}`} activeClassName="active" className ="menu-left">
                     <div className="d-flex align-items-center module">
                         <i className="far fa-images mr-2"></i>
                         <span>Quản lý đa phương tiện</span> 
@@ -74,7 +75,7 @@ const MenuLeft = ({widthMenuLeft, effect}) => {
                     <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>
 
-                <NavLink to="/system/order-manage" activeClassName="active" className ="menu-left">
+                <NavLink to={`${path.ORDER_MANAGE}`} activeClassName="active" className ="menu-left">
                     <div className="d-flex align-items-center module">
                         <i className=" fas fa-cart-plus mr-2"></i>
                         <span>Quản lý đơn hàng </span> 
@@ -82,7 +83,7 @@ const MenuLeft = ({widthMenuLeft, effect}) => {
                     <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>
 
-                <NavLink to="/system/supplier-manage" activeClassName="active" className ="menu-left">
+                <NavLink to={`${path.SUPPLIER_MANAGE}`} activeClassName="active" className ="menu-left">
                     <div className="d-flex align-items-center">
                         <i className="far fa-building mr-2"></i>
                         <span>Quản lý nhà cung cấp</span>
@@ -90,7 +91,7 @@ const MenuLeft = ({widthMenuLeft, effect}) => {
                     <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>
 
-                <NavLink to="/system/warehouse-manage" activeClassName="active" className ="menu-left">
+                <NavLink to={`${path.WAREHOUSE_MANAGE}`} activeClassName="active" className ="menu-left">
                     <div className="d-flex align-items-center">
                         <i className="far fa-building mr-2"></i>
                         <span>Quản lý kho hàng</span>
@@ -98,7 +99,7 @@ const MenuLeft = ({widthMenuLeft, effect}) => {
                     <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>
 
-                <NavLink to="/system/report-Statistical" activeClassName="active" className ="menu-left">
+                <NavLink to={`${path.STATISTICAL}`} activeClassName="active" className ="menu-left">
                     <div className="d-flex align-items-center module">
                         <i className="far fa-flag mr-2"></i>
                         <span>Báo cáo, thống kê</span> 
@@ -106,7 +107,7 @@ const MenuLeft = ({widthMenuLeft, effect}) => {
                     <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>
 
-                <NavLink to="/system/setting" activeClassName="active" className ="menu-left">
+                <NavLink to={`${path.SETTING}`} activeClassName="active" className ="menu-left">
                     <div className="d-flex align-items-center module">
                         <i className="fas fa-cog mr-2"></i>
                         <span>Cài đặt <small className='text-warning ml-2'>( v.04.12.21 )</small></span> 

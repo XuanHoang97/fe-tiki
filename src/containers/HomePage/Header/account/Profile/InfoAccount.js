@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Header from '../../Header';
 import { path } from 'utils';
-import {BrowserRouter as Router, Route, Switch, NavLink } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, NavLink,Redirect } from 'react-router-dom';
 import ChangePassword from './ChangePassword';
 import Profile from './Profile';
 import Purchase from '../MyOrder/Purchase';
@@ -12,6 +12,7 @@ import { getUser } from 'store/actions';
 function InfoAccount(props) {
     const dispatch = useDispatch();
     const user = useSelector(state => state.auth.user);
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
         dispatch(getUser());
@@ -20,6 +21,10 @@ function InfoAccount(props) {
     useEffect(() => {
         document.title = 'Thông tin tài khoản';
     }, []);
+    
+    if (!token) {
+        return <Redirect to={path.HOMEPAGE} />
+    }
 
     return (
         <div className='bg-light'>
@@ -31,7 +36,7 @@ function InfoAccount(props) {
                             <img src={user && user.image ? user.image : 'http://res.cloudinary.com/do7qmg6jr/image/upload/v1645518444/sbgr7wd9k1t9v8f0cwvm.jpg'} className='rounded-circle' style={{width:'60px', height:'60px'}}  alt="" />
                             <div className='info'>
                                 <div className='name'>{ user ? user.username : '' }</div>
-                                <div className='editProfile'>
+                                <div className='editProfile small mt-1'>
                                     <i className="fas fa-edit"></i>
                                     <span>Sửa hồ sơ</span>
                                 </div>
@@ -65,7 +70,7 @@ function InfoAccount(props) {
                         </NavLink>
                     </div>
 
-                    <div className='col-10 bg-white p-3'>
+                    <div className='col-10 bg-white p-4'>
                         <Switch>
                             <Route exact path={path.ACCOUNT} component={Profile} />
                             <Route path={path.CHANGE_PASSWORD} component={ChangePassword} />

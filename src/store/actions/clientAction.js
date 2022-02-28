@@ -168,10 +168,10 @@ export const addToCartLogin = (data, userId) => {
     return async(dispatch, getState) => {
         try {
             let res = await addItemToCartWithLogin(data);
-            if (res && res.data.errCode === 0) {
+            if (res && res.errCode === 0) {
                 dispatch({
                     type: actionTypes.ADD_TO_CART_LOGIN,
-                    payload: res.data.result
+                    payload: res.result 
                 });
 
                 toast.success('Sản phẩm đã được thêm vào giỏ hàng !')
@@ -187,10 +187,10 @@ export const GetCartByUser = (userId) => {
     return async(dispatch, getState) => {
         try {
             let res = await getCartByUser(userId);
-            if (res && res.data.errCode === 0) {
+            if (res && res.errCode === 0) {
                 dispatch({
                     type: actionTypes.GET_CART_BY_USER,
-                    payload: res.data.result
+                    payload: res.result
                 });
             }
         } catch (e) {
@@ -221,7 +221,7 @@ export const UpdateItemCartByUser = (data) => {
     return async(dispatch, getState) => {
         try {
             let res = await updateItemCartWithLogin(data);
-            if (res && res.data.errCode === 0) {
+            if (res && res.errCode === 0) {
                 dispatch({
                     type: actionTypes.UPDATE_ITEM_CART_LOGIN,
                 });
@@ -237,7 +237,7 @@ export const CheckoutOrder = (data) => {
     return async(dispatch, getState) => {
         try {
             let res = await checkOutOrder(data);
-            if (res && res.data.errCode === 0) {
+            if (res && res.errCode === 0) {
                 dispatch({
                     type: actionTypes.CHECKOUT_ORDER,
                 });
@@ -254,10 +254,10 @@ export const GetOrderByUser = (userId) => {
     return async(dispatch, getState) => {
         try {
             let res = await getOrderByUser(userId);
-            if (res && res.data.errCode === 0) {
-                dispatch({
+            if (res && res.errCode === 0) {
+                dispatch({ 
                     type: actionTypes.GET_ORDER_BY_USER,
-                    payload: res.data.result
+                    payload: res.result
                 });
             }
         } catch (e) {
@@ -271,10 +271,10 @@ export const FilterMyOrder = (userId, status) => {
     return async(dispatch, getState) => {
         try {
             let res = await filterMyOrder(userId, status);
-            if (res && res.data.errCode === 0) {
+            if (res && res.errCode === 0) {
                 dispatch({
                     type: actionTypes.FILTER_MY_ORDER,
-                    payload: res.data.result
+                    payload: res.result
                 });
             }
         } catch (e) {

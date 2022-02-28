@@ -97,5 +97,8 @@ const actionTypes = Object.freeze({
     FETCH_STATUS_ORDER: 'FETCH_STATUS_ORDER',
     FILTER_ORDER_BY_STATUS: 'FILTER_ORDER_BY_STATUS',
     UPDATE_ORDER: 'UPDATE_ORDER',
+
+  
+
 })
 export default actionTypes;

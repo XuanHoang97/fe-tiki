@@ -1,3 +1,4 @@
+import instance from '../axios';
 import axios from 'axios';
 import { path } from 'utils';
 
@@ -34,6 +35,15 @@ const updateUser = (data) => {
     });
 }
 
+// change password
+const ChangePass= (data) => {
+    return instance.put(`/change-password`, data, {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    });
+}
+
 
 
 export{
@@ -41,5 +51,6 @@ export{
     loginAcc,
     logout,
     verifyToken,
-    updateUser
+    updateUser,
+    ChangePass
 }

@@ -1,3 +1,4 @@
+import instance from '../axios';
 import axios from 'axios';
 import { path } from 'utils';
 
@@ -49,12 +50,20 @@ const updateOrder = (data) => {
 // Option 2: Order with login
 // add to cart
 const addItemToCartWithLogin = (data) => {
-    return axios.post(`${path.PORT}/add-item-to-cart`, data)
+    return instance.post(`/add-item-to-cart`, data,{
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    })
 }
 
 // Get cart by user
 const getCartByUser = (userId) => {
-    return axios.get(`${path.PORT}/cart?userId=${userId}`)
+    return instance.get(`/cart?userId=${userId}`,{
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    })
 }
 
 // delete item cart
@@ -68,22 +77,38 @@ const deleteItemCartWithLogin = (productId) => {
 
 // update item cart
 const updateItemCartWithLogin = (data) => {
-    return axios.put(`${path.PORT}/update-item-cart`, data)
+    return instance.put(`/update-item-cart`, data, {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    })
 }
 
 // check out order
 const checkOutOrder = (data) => {
-    return axios.post(`${path.PORT}/checkout`, data)
+    return instance.post(`/checkout`, data,{
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    })
 }
 
 // get order by user
 const getOrderByUser = (userId) => {
-    return axios.get(`${path.PORT}/get-order-by-user?userId=${userId}`)
+    return instance.get(`/get-order-by-user?userId=${userId}`,{
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    })
 }
 
 // filter my order
 const filterMyOrder = (userId, status) => {
-    return axios.get(`${path.PORT}/filterMyOrder?userId=${userId}&status=${status}`)
+    return instance.get(`/filterMyOrder?userId=${userId}&status=${status}`,{
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    })
 }
 
 export{

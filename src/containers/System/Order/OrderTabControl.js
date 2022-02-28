@@ -20,14 +20,13 @@ function OrderTabControl(props) {
                                     dispatch(actions.filterOrderByStatus(`${item.keyMap}`));
                                 }}
                             >
-                                <div className='font-weight-bold'>{item.valueVi}</div>
+                                <span className='font-weight-bold mr-2'>{item.valueVi}</span>
                                 <span className='text-secondary statical'>
-                                    {
+                                    ({
                                         item.keyMap === 'S0' ?
                                         order.length :
                                         order.filter(x => x.status === `${item.keyMap}`).length
-                                    }
-                                    <span className='ml-1'>đơn hàng</span>
+                                    })
                                 </span>
                             </NavLink>
                         </NavItem>

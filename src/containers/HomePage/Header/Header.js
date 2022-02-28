@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
 import Category from './Category';
 import Search from './search/Search';
@@ -7,33 +7,12 @@ import Suggest from './Suggest';
 import './style/header.scss';
 import Account from './account/Account';
 import { path } from 'utils';
-import { useSelector, useDispatch } from 'react-redux';
-import instance from './../../../axios';
-import { getUser } from 'store/actions';
+import { useSelector } from 'react-redux';
 import OrderLogin from './cart/OrderLogin';
+import Notify from './Notify/Notify';
 
 const Header = () => {
-    const dispatch = useDispatch();
-    const token = localStorage.getItem('token');
     const user = useSelector(state => state.auth.user);
-
-    // Refresh token
-    useEffect(() => {
-        if(token){
-            instance.get(`/user`,{
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-            .then(res => {
-                dispatch(getUser(res))
-            })
-            .catch(err => {
-                localStorage.removeItem('token');
-                console.log(err);
-            })
-        }
-    }, [dispatch, token]);
 
     return (
         <div className="header">
@@ -54,6 +33,7 @@ const Header = () => {
                             <ul className="navbar-nav align-items-center col-md-12 pr-0">
                                 <Category />
                                 <Search />
+                                <Notify />
                                 <Account />
                                 {
                                     user ? <OrderLogin /> : <OrderWithoutLogin />

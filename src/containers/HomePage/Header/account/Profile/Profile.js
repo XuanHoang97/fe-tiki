@@ -50,7 +50,6 @@ function Profile(props) {
         console.log(userName, phone, address, genderUser, previewImg, user.id)
     }
 
-
     //onChange image
     const changeImage = async(e) => {
         let file=e.target.files[0];

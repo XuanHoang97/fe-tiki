@@ -4,6 +4,7 @@ import * as actions from '../../../store/actions';
 import {NavLink} from 'react-router-dom';
 import { numberFormat } from '../../../components/Formatting/FormatNumber';
 import './style.scss'
+import { path } from 'utils';
 
 const  Dashboard = (props) => {
     //fetch data
@@ -43,7 +44,7 @@ const  Dashboard = (props) => {
                             <h3 className="card-text font-weight-bold"> {listUsers.length} </h3>
                             <h6 className="card-title">THÀNH VIÊN</h6>
                         </div>
-                        <NavLink to="/system/user-manage" className="btn btn-warning viewDetail px-2">Xem</NavLink>
+                        <NavLink to={`${path.USER_MANAGE}`} className="btn btn-warning viewDetail px-2">Xem</NavLink>
                     </div>
                 </div>
 
@@ -54,7 +55,7 @@ const  Dashboard = (props) => {
                             <h3 className="card-text font-weight-bold"> {listCategory.length} </h3>
                             <h6 className="card-title">DANH MỤC </h6>
                         </div>
-                        <NavLink to="/system/category-manage"  className="btn btn-warning viewDetail px-2">Xem</NavLink>
+                        <NavLink to={`${path.CATEGORY_MANAGE}`}  className="btn btn-warning viewDetail px-2">Xem</NavLink>
                     </div>
                 </div>
 
@@ -67,7 +68,7 @@ const  Dashboard = (props) => {
                                 <h6 className="card-title">SẢN PHẨM</h6>
                             </div>
                         </div>
-                        <NavLink to="/system/product-manage" className="btn btn-warning viewDetail px-2">Xem</NavLink>
+                        <NavLink to={`${path.PRODUCT_MANAGE}`} className="btn btn-warning viewDetail px-2">Xem</NavLink>
                     </div>
                 </div>
 
@@ -78,7 +79,7 @@ const  Dashboard = (props) => {
                             <h3 className="card-text font-weight-bold"> {listNews.length} </h3>
                             <h6 className="card-title">TIN TỨC - SỰ KIỆN</h6>
                         </div>
-                        <NavLink to="/system/news-manage"  className="btn btn-warning viewDetail px-2">Xem</NavLink>
+                        <NavLink to={`${path.NEWS_MANAGE}`}  className="btn btn-warning viewDetail px-2">Xem</NavLink>
                     </div>
                 </div>
             </div>
@@ -91,7 +92,7 @@ const  Dashboard = (props) => {
                             <h3 className="card-text font-weight-bold"> {listArticle.length} </h3>
                             <h6 className="card-title">BÀI VIẾT</h6>
                         </div>
-                        <NavLink to="/system/article-manage" className="btn btn-warning viewDetail px-2">Xem</NavLink>
+                        <NavLink to={`${path.ARTICLE_MANAGE}`} className="btn btn-warning viewDetail px-2">Xem</NavLink>
                     </div>
                 </div>
 
@@ -102,7 +103,7 @@ const  Dashboard = (props) => {
                             <h3 className="card-text font-weight-bold"> {multimedia} </h3>
                             <h6 className="card-title">MULTIMEDIA</h6>
                         </div>
-                        <NavLink to="/system/slide-manage" className="btn btn-warning viewDetail px-2">Xem</NavLink>
+                        <NavLink to={`${path.MULTIMEDIA_MANAGE}`} className="btn btn-warning viewDetail px-2">Xem</NavLink>
                     </div>
                 </div>
 
@@ -113,7 +114,7 @@ const  Dashboard = (props) => {
                             <h3 className="card-text font-weight-bold">{order.length}</h3>
                             <h6 className="card-title">ĐƠN HÀNG</h6>
                         </div>
-                        <NavLink to="/system/order-manage"  className="btn btn-warning viewDetail px-2">Xem</NavLink>
+                        <NavLink to={`${path.ORDER_MANAGE}`}  className="btn btn-warning viewDetail px-2">Xem</NavLink>
                     </div>
                 </div>
 
@@ -136,7 +137,7 @@ const  Dashboard = (props) => {
                             </h4>
                             <h6 className="card-title">DOANH THU</h6>
                         </div>
-                        <NavLink to="/system/report-Statistical"  className="btn btn-warning viewDetail px-2">Xem</NavLink>
+                        <NavLink to={`${path.STATISTICAL}`}  className="btn btn-warning viewDetail px-2">Xem</NavLink>
                     </div>
                 </div>
             </div>
@@ -149,7 +150,7 @@ const  Dashboard = (props) => {
                             <h3 className="card-text font-weight-bold">0</h3>
                             <h6 className="card-title">NHÀ CUNG CẤP</h6>
                         </div>
-                        <NavLink to="/system/supplier-manage"  className="btn btn-warning viewDetail px-2">Xem</NavLink>
+                        <NavLink to={`${path.SUPPLIER_MANAGE}`}  className="btn btn-warning viewDetail px-2">Xem</NavLink>
                     </div>
                 </div>
 

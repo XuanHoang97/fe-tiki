@@ -28,8 +28,8 @@ function OrderWithoutLogin(props) {
             <ModalOrderNow show={orderNow} toggle = {viewCart} />
             <span className="cart nav-item dropdown active" onMouseEnter={() =>setHoverCart(true) }>
                 <div className="nav-link dropdown-toggle">
-                    <i className="fas fa-shopping-cart mr-2" style={{ fontSize: '18px' }}>
-                        <span className="badge badge-pill badge-warning position-absolute " style={{ top: '-5px', left: '1.4rem' }}>
+                    <i className="fas fa-shopping-cart mr-2" style={{ fontSize: '17px' }}>
+                        <span className="badge badge-pill badge-danger position-absolute " style={{ top: '-5px', left: '1.4rem' }}>
                             {carts.length}
                         </span>
                     </i>

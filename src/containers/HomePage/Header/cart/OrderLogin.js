@@ -33,12 +33,12 @@ function OrderLogin(props) {
         <>
             <span className="cart nav-item dropdown active" onMouseEnter={() =>setHoverCart(true) }>
                 <div className="nav-link dropdown-toggle">
-                    <i className="fas fa-shopping-cart mr-2" style={{ fontSize: '18px' }}>
-                        <span className="badge badge-pill badge-warning position-absolute " style={{ top: '-5px', left: '1.4rem' }}>
+                    <i className="fas fa-shopping-cart mr-2" style={{ fontSize: '17px' }}>
+                        <span className="badge badge-pill badge-danger position-absolute " style={{ top: '-5px', left: '20px' }}>
                             { cartsUser && cartsUser.length>0 ? cartsUser.length : 0 }
                         </span>
                     </i>
-                    <span>Giỏ Hàng</span>
+                    <span>Giỏ hàng</span>
                 </div>
             </span>
 

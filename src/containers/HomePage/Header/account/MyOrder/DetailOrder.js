@@ -5,7 +5,6 @@ import './Order.scss'
 
 const DetailOrder = (props) => { 
     const { isOpen, toggle, order, statusOrder } = props;
-    console.log('order', order);
 
     return (
         <Modal  isOpen={isOpen} toggle={toggle} size="lg">   

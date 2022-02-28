@@ -58,7 +58,7 @@ function App(props) {
                 {/* Authentication  */}
                 <Route path={path.REGISTER} component={Register} />
                 <Route path={path.LOGIN_AUTH} component={LoginAuth} />
-
+                
                 <Route path={path.ACCOUNT} component={InfoAccount} />
                 <Route path={path.CHANGE_PASSWORD} component={InfoAccount} />
                 <Route path={path.ORDER} component={InfoAccount} />

@@ -18,6 +18,8 @@ import MenuLeft from '../containers/Header/menuLeft/MenuLeft';
 import MenuLeftCollapse from '../containers/Header/menuLeft/MenuLeftCollapse';
 import Multimedia from '../containers/System/Multimedia/Index';
 import SupplierManage from 'containers/System/supplier/SupplierManage';
+import Warehouse from 'containers/System/Warehouse/Warehouse';
+import { path } from 'utils';
 
 const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
     const [menuLeft, setMenuLeft] = useState(true);
@@ -84,17 +86,18 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
                 <div className="system-container bg-light py-2" style={{height: '95vh', overflowY: 'scroll', width: widthMenuRight, boxShadow: 'none'}}>
                     <div className="system-list px-2 bg-white">
                         <Switch>
-                            <Route path="/system/dashboard" component={Dashboard} />
-                            <Route path="/system/user-manage" component={UserManage} />
-                            <Route path="/system/product-manage" component={ProductManage} />
-                            <Route path="/system/order-manage" component={OrderManage} />
-                            <Route path="/system/article-manage" component={ArticleManage} />
-                            <Route path="/system/news-manage" component={NewsManage} />
-                            <Route path="/system/category-manage" component={CategoryManage} />
-                            <Route path="/system/slide-manage" component={Multimedia} />
-                            <Route path="/system/report-Statistical" component={StatisticalManage} />
-                            <Route path="/system/supplier-manage" component={SupplierManage} />
-                            <Route path="/system/setting" component={Setting} />
+                            <Route path={`${path.DASHBOARD}`} component={Dashboard} />
+                            <Route path={`${path.USER_MANAGE}`} component={UserManage} />
+                            <Route path={`${path.PRODUCT_MANAGE}`} component={ProductManage} />
+                            <Route path={`${path.ORDER_MANAGE}`} component={OrderManage} />
+                            <Route path={`${path.ARTICLE_MANAGE}`} component={ArticleManage} />
+                            <Route path={`${path.NEWS_MANAGE}`} component={NewsManage} />
+                            <Route path={`${path.CATEGORY_MANAGE}`} component={CategoryManage} />
+                            <Route path={`${path.MULTIMEDIA_MANAGE}`} component={Multimedia} />
+                            <Route path={`${path.STATISTICAL}`} component={StatisticalManage} />
+                            <Route path={`${path.SUPPLIER_MANAGE}`} component={SupplierManage} />
+                            <Route path={`${path.WAREHOUSE_MANAGE}`} component={Warehouse} />
+                            <Route path={`${path.SETTING}`} component={Setting} />
         
                             <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />
                         </Switch>

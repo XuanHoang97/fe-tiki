@@ -32,12 +32,13 @@ const Account = () => {
         }
     }, [dispatch]);
 
+
     //logout
     const Logout = async () => {
         try {
             dispatch(actions.logoutAccount());
             localStorage.removeItem('token');
-            window.location.reload();
+            dispatch(getUser(''))
         } catch (error) {
             console.log(error);
         }
@@ -46,10 +47,11 @@ const Account = () => {
     const profile = () => {
         history.push(`${path.ACCOUNT}`);
     }
+    
 
     return (
         <React.Fragment>
-            <span className='account d-flex align-items-center text-white pl-3'
+            <span className='account d-flex align-items-center justify-content-center text-white'
                 onMouseEnter={() => setHoverAccount(true)}
             >    
                 {
