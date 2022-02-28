@@ -115,16 +115,16 @@ function Purchase(props) {
                                         </div>
                                         <div className='detail'>
                                             <span className='text-danger'>{numberFormat(item.price*item.qty)}</span>
-                                            <button onClick={()=>detailOrder(item)} type="button" className="btn btn-outline-secondary btn-sm px-3">Chi tiết</button>
+                                            <button onClick={()=>detailOrder(item)} type="button" className="btn btn-outline-secondary btn-sm">Chi tiết</button>
                                             {
                                                 item.status ==='S1' || item.status ==='S2' || item.status ==='S3' ?
-                                                <button type="button" className="btn btn-danger btn-sm px-3">Huỷ đơn</button>
+                                                <button type="button" className="btn btn-danger btn-sm">Huỷ đơn</button>
                                                 : null
                                             }
 
                                             {
                                                 item.status ==='S4' ?
-                                                <button type="button" className="btn btn-primary btn-sm px-3">Đổi hàng</button>
+                                                <button type="button" className="btn btn-primary btn-sm">Đổi hàng</button>
                                                 : null
                                             }
                                         </div>

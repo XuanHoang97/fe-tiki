@@ -123,8 +123,8 @@ const ModalEditCategory  = (props) => {
             </ModalBody>
 
             <ModalFooter>
-                <Button color="primary" className="px-3" type='submit'>Cập nhật</Button>
-                <Button color="secondary" className="px-3">Cancel</Button>
+                <Button color="primary" className="btn" type='submit'>Cập nhật</Button>
+                <Button color="secondary" className="btn">Cancel</Button>
             </ModalFooter>
         </form>
         </Modal>

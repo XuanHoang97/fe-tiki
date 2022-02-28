@@ -33,8 +33,8 @@ const InfoUser = ({isOpen, details, toggleModal}) => {
             </ModalBody>
                     
             <ModalFooter className="d-flex justify-content-between">
-                <Button color="info " className="px-3 btn-sm" onClick={()=>toggle()}><i className="fas fa-print mr-2"></i>In profile</Button>
-                <Button color="secondary" className="px-3 btn-sm" onClick={()=>toggle()}>Đóng</Button>
+                <Button color="info " className="btn-sm" onClick={()=>toggle()}><i className="fas fa-print mr-2"></i>In profile</Button>
+                <Button color="secondary" className="btn-sm" onClick={()=>toggle()}>Đóng</Button>
             </ModalFooter>
         </Modal>
     )

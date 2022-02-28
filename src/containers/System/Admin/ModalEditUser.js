@@ -184,8 +184,8 @@ const ModalEditUser = (props) => {
             </ModalBody>
 
             <ModalFooter>
-                <Button type='submit' color="primary" className="px-3">Cập nhật</Button>{' '}
-                <Button color="secondary" className="px-3" onClick={()=>toggle()}>Huỷ</Button>
+                <Button type='submit' color="primary" className="btn">Cập nhật</Button>{' '}
+                <Button color="secondary" className="btn" onClick={()=>toggle()}>Huỷ</Button>
             </ModalFooter>
             </form>
         </Modal>

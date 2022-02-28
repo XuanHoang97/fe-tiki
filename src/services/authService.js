@@ -44,6 +44,33 @@ const ChangePass= (data) => {
     });
 }
 
+// get all notify
+const getAllNotify = (userId) => {
+    return instance.get(`/notify?userId=${userId}`, {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    });
+}
+
+// get notify unread
+const getNotify = (userId, status) => {
+    return instance.get(`/notify?userId=${userId}&status=${status}`, {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    });
+}
+
+//update status notify
+const updateStatusNotify = (data) => {
+    return instance.put(`/update-notify`,data, {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    });
+}
+
 
 
 export{
@@ -52,5 +79,8 @@ export{
     logout,
     verifyToken,
     updateUser,
-    ChangePass
+    ChangePass,
+    getNotify,
+    getAllNotify,
+    updateStatusNotify
 }

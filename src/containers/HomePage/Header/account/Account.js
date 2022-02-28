@@ -97,13 +97,13 @@ const Account = () => {
                                 <button type="button" className="btn btn-success btn-block"> Đăng nhập</button>
                             </Link>
                             <div className="dropdown-item mb-2">
-                                <button type="button" name="" id="" className="d-flex align-items-center px-3 btn btn-primary btn-block">
+                                <button type="button" className="d-flex align-items-center btn btn-primary btn-block">
                                     <i className="fab fa-facebook-f mr-4"></i> <span>Đăng nhập bằng Facebook</span>
                                 </button>
                             </div>
 
                             <div className="dropdown-item mb-2">
-                                <button type="button" name="" id="" className="d-flex align-items-center px-3 btn btn-danger btn-block">
+                                <button type="button" className="d-flex align-items-center btn btn-danger btn-block">
                                     <i className="fab fa-google-plus-g mr-3"></i> <span>Đăng nhập bằng Google</span>
                                 </button>
                             </div>

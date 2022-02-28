@@ -173,7 +173,7 @@ const Payment = (props) => {
                                             <div>Đơn hàng</div>
                                             <small className='text-success'>{cartsUser && cartsUser.length > 0 ? cartsUser.length : 0} Sản phẩm</small>
                                         </div>
-                                        <button type="button" className="btn btn-success btn-sm px-2">Thay đổi</button>
+                                        <button type="button" className="btn btn-success btn-sm">Thay đổi</button>
                                     </div>
 
                                     <div className="d-flex px-2 justify-content-between">

@@ -14,7 +14,7 @@ const ProductDesc = ({detailProduct}) => {
                     }
                     
                     <div className="text-center ShowMore">
-                        <button type="button" className="btn btn-primary px-3 mt-3">Đọc thêm <i className="fas fa-caret-down ml-2" /></button>
+                        <button type="button" className="btn btn-primary mt-3">Đọc thêm <i className="fas fa-caret-down ml-2" /></button>
                     </div>
                 </div>
 

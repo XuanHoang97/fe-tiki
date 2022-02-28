@@ -26,13 +26,13 @@ const NotFound = () => {
                 <hr />
                 <div className='row btn-quit'>
                     <Link to={path.HOMEPAGE}>
-                        <button type="button" className="btn btn-primary px-2"><i className="fa fa-angle-left mr-2"></i> Quay lại trang trước</button>
+                        <button type="button" className="btn btn-primary"><i className="fa fa-angle-left mr-2"></i> Quay lại trang trước</button>
                     </Link>
                     <Link to={path.HOMEPAGE}>
-                        <button type="button" className="btn btn-success px-2">Tiếp tục mua hàng</button>
+                        <button type="button" className="btn btn-success">Tiếp tục mua hàng</button>
                     </Link>
                     <Link to={path.HOMEPAGE}>
-                        <button type="button" className="btn btn-primary px-2"> Xem thông tin tài khoản <i className="fa fa-angle-right ml-2"></i></button>
+                        <button type="button" className="btn btn-primary"> Xem thông tin tài khoản <i className="fa fa-angle-right ml-2"></i></button>
                     </Link>
                 </div>
             </div>

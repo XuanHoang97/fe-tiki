@@ -48,7 +48,7 @@ function Filter(props) {
                     onChange={(e) => setPriceTo(e.target.value.replace(/[^0-9]/g, ''))}
                 />
                 </div>
-                <button onClick={()=> handleFilterProduct()} type="button" className="findProd btn btn-warning px-3">Áp dụng</button>
+                <button onClick={()=> handleFilterProduct()} type="button" className="findProd btn btn-warning">Áp dụng</button>
             </div>
 
             <div className="address border-bottom py-3">

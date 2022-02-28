@@ -13,7 +13,7 @@ function Search(props) {
             />
 
             <div className="input-group-append">
-                <button  onClick={props.handleSearch} className="btn btn-light btn-sm px-2" style={{background :'white', height:'28px'}}>
+                <button  onClick={props.handleSearch} className="btn btn-light btn-sm" style={{background :'white'}}>
                     <i className="fas fa-search"></i>
                 </button>
             </div>

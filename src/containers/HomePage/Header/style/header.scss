@@ -234,12 +234,13 @@ img {
                                 }
                             }
                             .btn_search {
-                                height: 30px;
                                 width: 105px;
                                 @include phone {
                                 }
                                 button {
                                     background: rgb(13, 92, 182);
+                                    height: 30px !important;
+
                                     @include phone {
                                         display: flex;
                                         align-items: center;

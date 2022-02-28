@@ -1,9 +1,11 @@
 import actionTypes from './actionTypes';
 import {
     logout,
-    updateUser
+    updateUser,
+    getNotify,
+    getAllNotify,
+    updateStatusNotify,
 } from '../../services/authService';
-
 import { toast } from "react-toastify";
 
 // Logout
@@ -28,7 +30,6 @@ export const getUser = (userInfo) => ({
     userInfo: userInfo,
 })
 
-
 // update user
 export const EditUSer = (data) => {
     return async(dispatch, getState) => {
@@ -43,6 +44,55 @@ export const EditUSer = (data) => {
             }
         } catch (e) {
             toast.error('update the user error !')
+        }
+    }
+}
+
+// get notify unread
+export const GetNotify = (userId, status) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await getNotify(userId,status);
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.GET_NOTIFY_UNREAD,
+                    payload: res.notify
+                });
+            }
+        } catch (e) {
+            toast.error('get notify error !')
+        }
+    }
+}
+
+export const GetAllNotify = (userId) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await getAllNotify(userId);
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.GET_ALL_NOTIFY,
+                    payload: res.notify
+                });
+            }
+        } catch (e) {
+            toast.error('get notify error !')
+        }
+    }
+}
+
+// update status notify
+export const UpdateStatusNotify = (data) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await updateStatusNotify(data);
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.UPDATE_NOTIFY,
+                });
+            }
+        } catch (e) {
+            toast.error('update status notify error !')
         }
     }
 }

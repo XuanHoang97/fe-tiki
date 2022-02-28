@@ -20,8 +20,9 @@ function InfoAccount(props) {
 
     useEffect(() => {
         document.title = 'Thông tin tài khoản';
-    }, []);
+    }, [user]);
     
+    // setting route
     if (!token) {
         return <Redirect to={path.HOMEPAGE} />
     }
@@ -50,24 +51,40 @@ function InfoAccount(props) {
                                     <span>Tài khoản của tôi</span>
                                 </div>
                                 <div className='item-profile'>
-                                    <NavLink to={`${path.ACCOUNT}`} activeClassName="active" className='item-module' exact>Hồ sơ</NavLink>
+                                    <NavLink to={`${path.ACCOUNT}`} activeClassName="activeAcc" className='item-module' exact>Hồ sơ</NavLink>
                                 </div>
 
                                 <div className='item-profile'>
-                                    <NavLink to={`${path.CHANGE_PASSWORD}`} activeClassName="active" className='item-module'>Đổi mật khẩu</NavLink>
+                                    <NavLink to={`${path.CHANGE_PASSWORD}`} activeClassName="activeAcc" className='item-module'>Đổi mật khẩu</NavLink>
                                 </div>
                             </div>
                         </div>
 
-                        <NavLink to={`${path.ORDER}`} activeClassName="activeOrder" className='my_Order'>
-                            <img src="https://cf.shopee.vn/file/f0049e9df4e536bc3e7f140d071e9078" className='illustration' alt="" />
-                            <span>Đơn mua</span>
-                        </NavLink>
+                        <div className='myOrder'>
+                            <NavLink to={`${path.ORDER}`} activeClassName="activeOrder" className='my_Order'>
+                                <img src="https://cf.shopee.vn/file/f0049e9df4e536bc3e7f140d071e9078" className='illustration' alt="" />
+                                <span>Đơn mua</span>
+                            </NavLink>
+                        </div>
 
-                        <NavLink to={`${path.NOTIFICATION}`} activeClassName="activeNotification" className='notification'>
-                            <img src="https://cf.shopee.vn/file/e10a43b53ec8605f4829da5618e0717c" className='illustration' alt="" />
-                            <span>Thông báo</span>
-                        </NavLink>
+                        <div className='notify'>
+                            <div className='notification'>
+                                <img src="https://cf.shopee.vn/file/e10a43b53ec8605f4829da5618e0717c" className='illustration' alt="" />
+                                <span>Thông báo</span>
+                            </div>
+
+                            <div className='item-notify'>
+                                <NavLink to={`${path.NOTIFICATION}`} activeClassName="activeNotification" className='item-module' exact>Cập nhật đơn hàng</NavLink>
+                            </div>
+
+                            <div className='item-notify'>
+                                <div className='item-module'>Khuyến mãi</div>
+                            </div>
+
+                            <div className='item-notify'>
+                                <div className='item-module'>Hoạt động</div>
+                            </div>
+                        </div>
                     </div>
 
                     <div className='col-10 bg-white p-4'>

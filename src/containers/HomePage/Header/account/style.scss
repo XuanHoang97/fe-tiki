@@ -58,45 +58,65 @@
                 width: 8%;
             }
             span{
+                color: black;
                 font-weight: 600;
-                color: #595959;
+                font-family: system-ui;
             }
         }
         .item-profile{
-            margin-left: 30px;
+            margin-left: 25px;
+            padding: 5px 0;
             .item-module{
                 margin: 10px 0;
                 padding: 5px 0;
+                color: #595959 !important;
             }
-            .active{
-                background: orange;
-                font-weight: 600;
+            .activeAcc{
+                color: orange !important;
             }
             .item-module:hover{
-                background: orange;
+                color: orange;
             }
         }
     }
 }
 
-.my_Order, .notification{
+.notify{
+    .item-notify{
+        margin-left: 25px;
+        padding: 5px 0;
+        .item-module{
+            color: #595959;
+        }
+        .activeNotification{
+            color: rgb(255, 138, 4) !important;
+        }
+    }
+    .notification{
+        @extend .my_Order;
+        margin: 10px 0 0 0 !important;
+    }
+}
+
+.my_Order{
     display: flex;
     align-items: center;
     gap: 10px;
     margin: 10px 0;
     cursor: pointer;
+    color: black;
+    font-weight: 600;
+    font-family: system-ui;
     span{
-        font-weight: 600;
-        color: #595959;
+        
     }
     .illustration{
         width: 8%;
     }
 }
 
-.activeOrder, .activeNotification{
-    background: orange;
-    font-weight: 600;
+.activeOrder{
+    color: rgb(255, 138, 4) !important;
 }
 
 .statusOrder{

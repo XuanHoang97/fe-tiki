@@ -41,7 +41,7 @@ const OrderSuccess = (props) => {
                                 : ''
                             }
 
-                            <button className="btn btn-primary text-center mt-5 px-2">
+                            <button className="btn btn-primary text-center mt-5">
                                 <Link to={path.HOMEPAGE} className='text-white'>
                                     Tiếp tục mua hàng
                                 </Link>

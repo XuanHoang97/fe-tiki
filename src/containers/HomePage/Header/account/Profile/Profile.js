@@ -128,7 +128,7 @@ function Profile(props) {
                         <input type="text" className="form-control" />
                     </div>
 
-                    <button type="submit" className="btn btn-primary px-4 mx-3">
+                    <button type="submit" className="btn btn-primary mx-3">
                         {
                             loading ? 'Đang cập nhật...' : 'Lưu'
                         }

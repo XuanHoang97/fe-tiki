@@ -98,7 +98,10 @@ const actionTypes = Object.freeze({
     FILTER_ORDER_BY_STATUS: 'FILTER_ORDER_BY_STATUS',
     UPDATE_ORDER: 'UPDATE_ORDER',
 
-  
+    // Notify
+    GET_NOTIFY_UNREAD: 'GET_NOTIFY_UNREAD',
+    GET_ALL_NOTIFY: 'GET_ALL_NOTIFY',
+    UPDATE_NOTIFY: 'UPDATE_NOTIFY',
 
 })
 export default actionTypes;

@@ -142,7 +142,7 @@ const ModalOrderNow = (props) => {
                                     <label>Mã giảm giá</label>
                                     <div className='d-flex'>
                                         <input type="text" readOnly className="form-control col-9" placeholder='voucher...' style={{ height: '31px' }} />
-                                        <button type="button" className="btn btn-primary col-3 px-2">Áp dụng</button>
+                                        <button type="button" className="btn btn-primary col-3">Áp dụng</button>
                                     </div>
                                 </div>
                                 
@@ -273,11 +273,11 @@ const ModalOrderNow = (props) => {
                     </div>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="success" className="px-4 font-weight-normal" type='submit'>
+                        <Button color="success" className="font-weight-normal" type='submit'>
                             HOÀN TẤT ĐẶT HÀNG
                         </Button>
 
-                        <Button color="secondary" className="px-4 font-weight-normal">HUỶ ĐƠN</Button>
+                        <Button color="secondary" className="font-weight-normal">HUỶ ĐƠN</Button>
                     </ModalFooter>
                 </LoadingOverlay>
             </form>

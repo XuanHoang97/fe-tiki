@@ -171,8 +171,8 @@ const ModalEditArticle = (props) => {
             </ModalBody>
 
             <ModalFooter>
-                <Button color="primary" className="px-3" onClick={() => {editInfoProduct()}}>Cập nhật</Button>
-                <Button color="secondary" className="px-3">Cancel</Button>
+                <Button color="primary" className="btn" onClick={() => {editInfoProduct()}}>Cập nhật</Button>
+                <Button color="secondary" className="btn">Cancel</Button>
             </ModalFooter>
         </Modal>
     )

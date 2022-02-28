@@ -14,7 +14,7 @@ const Mail = () => {
             </div>
             <div className="input-group col-md-6">
                 <input type="text" className="form-control" placeholder="Địa chỉ Email của bạn" />
-                <button className="btn btn-success px-3" type="submit" style={{ height: '32px', borderRadius: 0 }}>Đăng ký</button>
+                <button className="btn btn-success" type="submit" style={{ height: '32px', borderRadius: 0 }}>Đăng ký</button>
             </div>
         </div>
     );

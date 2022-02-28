@@ -142,7 +142,7 @@ const ArticleManage = (props) => {
                     setProductId={setProductId}
                 />
 
-                <button onClick={() => addArticle()} type="button" className="btn btn-success px-3">
+                <button onClick={() => addArticle()} type="button" className="btn btn-success">
                     <i className="fas fa-plus"></i> Thêm bài viết
                 </button>
 
@@ -170,7 +170,7 @@ const ArticleManage = (props) => {
                                         <td>{item.categoryId}</td>
                                         <td>loading...</td>
                                         <td>
-                                            <button onClick={()=> editArticle(item)} type="button" className="btn text-primary px-2">
+                                            <button onClick={()=> editArticle(item)} type="button" className="btn text-primary">
                                                 <i className="fas fa-edit"></i>
                                             </button>
                                             <button type="button" className="btn text-danger">
@@ -273,7 +273,7 @@ const ArticleManage = (props) => {
                         </div>
                     </div>
                 </div>
-                <button type ="submit" className="btn btn-success px-3">Lưu thông tin</button>
+                <button type ="submit" className="btn btn-success">Lưu thông tin</button>
             </form>
         </div>
     );

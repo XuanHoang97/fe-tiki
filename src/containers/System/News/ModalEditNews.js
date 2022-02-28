@@ -135,7 +135,7 @@ const ModalEditNews  = (props) => {
                         <div className="form-group col-4">
                             <label>Ngày đăng</label>
                             <input value={date} onChange={(e)=>setDate(e.target.value)} type="text" className="form-control" />
-                            <button onClick={()=> setDate(new Date())} type="button" className="btn btn-primary px-2"><i className="fas fa-sync-alt"></i></button>
+                            <button onClick={()=> setDate(new Date())} type="button" className="btn btn-primary"><i className="fas fa-sync-alt"></i></button>
                         </div>
                         <div className="form-group col-md-4">
                             <label>Danh mục</label>
@@ -179,8 +179,8 @@ const ModalEditNews  = (props) => {
             </ModalBody>
             
             <ModalFooter>
-                <Button color="primary" className="px-3" type='submit'>Cập nhật</Button>
-                <Button color="secondary" className="px-3">Cancel</Button>
+                <Button color="primary" className="btn" type='submit'>Cập nhật</Button>
+                <Button color="secondary" className="btn">Cancel</Button>
             </ModalFooter>
         </form>
         </Modal>

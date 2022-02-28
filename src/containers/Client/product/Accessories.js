@@ -7,7 +7,7 @@ const Accessories = ({detailProduct}) => {
                 <button type="button" className="btn btn-default mr-2">
                     <img src="https://frontend.tikicdn.com/_desktop-next/static/img/pdp_revamp_v2/icons-like.svg" alt="" />
                 </button>
-                <button type="button" className="btn btn-default ">
+                <button type="button" className="btn btn-default">
                     <img src="https://frontend.tikicdn.com/_desktop-next/static/img/pdp_revamp_v2/icons-account-social.svg" alt="" />
                 </button>
             </div>

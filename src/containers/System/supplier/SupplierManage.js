@@ -97,7 +97,7 @@ const SupplierManage = (props) => {
 
                         </div>
 
-                        <button type='submit' className="btn btn-success px-2">Thêm mới</button>
+                        <button type='submit' className="btn btn-success">Thêm mới</button>
                         <hr/>
 
                         <div className="text-dark">Danh sách nhà cung cấp (<b>0</b>)</div>
@@ -120,7 +120,7 @@ const SupplierManage = (props) => {
                                     <td>abc</td>
                                     <td>abc</td>
                                     <td className=''>
-                                        <button type="button" className="btn text-primary  mr-3">
+                                        <button type="button" className="btn text-primary mr-3">
                                             <i className="fas fa-edit"></i>
                                         </button>
 

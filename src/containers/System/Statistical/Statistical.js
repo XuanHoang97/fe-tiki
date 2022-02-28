@@ -32,7 +32,7 @@ const StatisticalManage = (props) => {
                             <h5 className="card-text font-weight-bold text-danger">{numberFormat(investmentCost())}</h5>
                             <h6 className="card-title small">CHI PHÍ ĐẦU TƯ</h6>
                         </div>
-                        <button className="btn btn-success px-3">Xem</button>
+                        <button className="btn btn-success">Xem</button>
                     </div>
 
                     <div className="item-statistical  align-items-center">
@@ -50,7 +50,7 @@ const StatisticalManage = (props) => {
                             </h5>
                             <h6 className="card-title small">TỔNG TIỀN ĐẶT HÀNG</h6>
                         </div>
-                        <button className="btn btn-success px-3">Xem</button>
+                        <button className="btn btn-success">Xem</button>
                     </div>
 
                     <div className="item-statistical  align-items-center">
@@ -71,7 +71,7 @@ const StatisticalManage = (props) => {
                             </h5>
                             <h6 className="card-title small">DOANH THU</h6>
                         </div>
-                        <button className="btn btn-success px-3">Xem</button>
+                        <button className="btn btn-success">Xem</button>
                     </div>
 
                     <div className="item-statistical  align-items-center">
@@ -88,7 +88,7 @@ const StatisticalManage = (props) => {
                             </h5>
                             <h6 className="card-title small">LỢI NHUẬN</h6>
                         </div>
-                        <button className="btn btn-success px-3">Xem</button>
+                        <button className="btn btn-success">Xem</button>
                     </div>
                 </div>
 
@@ -105,7 +105,7 @@ const StatisticalManage = (props) => {
                             <input type="date" className="form-control col-8" />
                         </div>
                         
-                        <button type="button" className="col-1 btn btn-primary px-3">Xem</button>
+                        <button type="button" className="col-1 btn btn-primary">Xem</button>
                     </div>
                     <div>Updating... </div>
                 </div>

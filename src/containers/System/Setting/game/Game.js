@@ -13,7 +13,7 @@ const Game = (props) => {
             <ModalBody>
                 <img src="https://dbk.vn/uploads/ckfinder/images/1-content/tang-fps-lol-1.jpg" className="w-100" alt="" />
                 <div className='text-center mt-2'>
-                    <button className="btn btn-primary px-5" disabled>
+                    <button className="btn btn-primary" disabled>
                         <span className="spinner-border spinner-border-sm mr-2"></span>
                         Game đang trong quá trình phát triển...
                     </button>

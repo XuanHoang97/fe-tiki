@@ -174,8 +174,8 @@ const ModalUser = (props) => {
             </ModalBody>
 
             <ModalFooter>
-                <Button type='submit' color="primary" className="px-3"> Thêm mới </Button>
-                <Button color="secondary" className="px-3" onClick={()=>toggle()}>Cancel</Button>
+                <Button type='submit' color="primary" className="btn"> Thêm mới </Button>
+                <Button color="secondary" className="btn" onClick={()=>toggle()}>Cancel</Button>
             </ModalFooter>
             </form>
         </Modal>

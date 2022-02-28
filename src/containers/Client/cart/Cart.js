@@ -123,7 +123,7 @@ const Cart = (props) => {
                             </div>
 
                             <div onClick={()=> handlePayment()}>
-                                <button type="button" className="btn btn-danger btn-md btn-block mt-3 mb-3">Tiến hành đặt hàng</button>
+                                <button type="button" className="btn btn-danger btn-md btn-block my-3">Tiến hành đặt hàng</button>
                             </div>
                         </div>
                     </div>

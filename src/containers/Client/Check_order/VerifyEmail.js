@@ -45,7 +45,7 @@ const VerifyEmail = (props) => {
                             <div className="alert alert-success" role="alert">
                                 <h4>Đơn hàng của bạn đã được xác nhận!</h4>
                                 <Link to={path.HOMEPAGE}>
-                                    <button className="btn btn-primary ml-2 px-3">Về trang chủ</button>
+                                    <button className="btn btn-primary ml-2">Về trang chủ</button>
                                 </Link>
                             </div>
                             :

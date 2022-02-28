@@ -191,10 +191,10 @@ const ModalVerifyOrder = (props) => {
             </ModalBody>
 
             <ModalFooter>
-                <Button color="primary" className="px-3" onClick={() => handleUpdateOrder()} >
+                <Button color="primary" className="btn" onClick={() => handleUpdateOrder()} >
                     Xác nhận
                 </Button>
-                <Button color="secondary" className="px-3">Cancel</Button>
+                <Button color="secondary" className="btn">Cancel</Button>
             </ModalFooter>
         </Modal>
     )

@@ -90,7 +90,7 @@ function OrderWithoutLogin(props) {
                     <div>
                         <img className="w-25 mb-3" src="https://salt.tikicdn.com/desktop/img/mascot@2x.png" alt="" />
                         <p>Chưa có sản phẩm nào trong giỏ hàng</p>
-                        <Link to={`${path.HOMEPAGE}`}><button type="button" className="btn btn-primary px-4">Mua hàng</button></Link>
+                        <Link to={`${path.HOMEPAGE}`}><button type="button" className="btn btn-primary">Mua hàng</button></Link>
                     </div>        
                 </div>  
             }

@@ -102,7 +102,7 @@ const CategoryManage = (props) => {
                                 <td className='text-primary'>{item.name}</td>
                            
                                 <td>
-                                    <button onClick={()=> editCategory(item)} type="button" className="btn text-primary px-2">
+                                    <button onClick={()=> editCategory(item)} type="button" className="btn text-primary">
                                         <i className="fas fa-edit"></i>
                                     </button>
                                     <button onClick={()=> DeleteCategory(item)} type="button" className="btn text-danger">

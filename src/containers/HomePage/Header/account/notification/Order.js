@@ -1,51 +1,43 @@
-import React, { useEffect, useState } from 'react';
-import axios from "axios";
-import Pagination from "react-js-pagination";
-import { path } from 'utils';
-import './pagination.scss'
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { GetAllNotify } from 'store/actions';
 
-function Order(props) {
-    const [data, setData] = React.useState([]);
-    const [activePage, setActivePage] = useState(1);
-    
+const Order = () => {
+    const dispatch = useDispatch();
+    const user = useSelector(state => state.auth.user);
+    const notify = useSelector(state => state.auth.notify);
+
+    // fetch notify
+    let userId = user ? user.id : '';
     useEffect(() => {
-        axios.get(`${path.PORT}/news/${activePage}`)
-        .then((res) => {
-            setData(res.data.result);
-        });
-    }, [ activePage ]);
+        dispatch(GetAllNotify(userId));
+    }, [dispatch, userId]);
 
-    const handlePageChange = (pageNumber) => {
-        console.log(`active page is ${pageNumber}`);
-        axios.get(`${path.PORT}/news/${activePage}`)
-        .then((res) => {
-            setData(res.data.result);
-        });
-        setActivePage(pageNumber);
-    };
+    console.log('notify:', notify);
 
     return (
-        <div>
-            <ul>
-                {
-                    data && data.length > 0 ?
-                    data.map((item, index) => {
-                        return (
-                            <li key={index}>
-                                {item.name}
-                            </li>
-                        );
-                    })
-                    : <div>Loading...</div>
-                }
-            </ul>
-            <Pagination
-                totalItemsCount={10}
-                onChange={handlePageChange}
-                activePage={activePage}
-                itemsCountPerPage={3}
-                pageRangeDisplayed={3}
-            />
+        <div className=''>
+            <div className='text-right text-dark border markAll btn-light mb-2 p-2'>Đánh dấu đã đọc tất cả</div>
+            {
+                notify && notify.length > 0 ?
+                notify.map((item, index) => {
+                    return (
+                        <div className='d-flex align-items-center justify-content-between bg-light my-3 p-3' key={index}>
+                            <div className='d-flex'>
+                                <img src={item.image} style ={{width: '50px', height:'50px'}} alt="" />
+                                <div className='item-list ml-3'>
+                                    <div className='font-weight-bold text-primary'>{item.title}</div>
+                                    <span className='content'>{item.content}</span>
+                                    <div className='text-secondary small'>{item.date}</div>
+                                </div>
+                            </div>
+                            <button type='button' className="btn btn-outline-secondary">Xem chi tiết</button>
+                        </div>
+                    )
+                })
+                :
+                <div className='text-center'>Không có thông báo nào</div>
+            }
         </div>
     );
 }

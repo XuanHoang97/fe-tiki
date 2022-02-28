@@ -3,7 +3,9 @@ import actionTypes from '../actions/actionTypes';
 const initialState = {
     tokens: null,
     isAuthenticated: false,
-    user: null
+    user: null,
+    notify: [],
+    notifyUnread: []
 }
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -27,6 +29,20 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 user: action.userInfo
+            }
+
+            // get notify unread
+        case actionTypes.GET_NOTIFY_UNREAD:
+            return {
+                ...state,
+                notifyUnread: action.payload
+            }
+
+            // get all notify
+        case actionTypes.GET_ALL_NOTIFY:
+            return {
+                ...state,
+                notify: action.payload
             }
 
         default:

@@ -47,9 +47,7 @@ function Slide() {
             </div>
 
             <div className="col-md-4 pl-2 banner">
-                <a href="http://">
-                    <img src="https://salt.tikicdn.com/cache/w400/ts/banner/f8/58/e6/fd2aef5227b088be9677ddde42caf270.png.webp" alt="" style={{ height: '240px' }} />
-                </a>
+                <img src="https://salt.tikicdn.com/cache/w400/ts/banner/f8/58/e6/fd2aef5227b088be9677ddde42caf270.png.webp" alt="" style={{ height: '240px' }} />
             </div>
         </div>
     );

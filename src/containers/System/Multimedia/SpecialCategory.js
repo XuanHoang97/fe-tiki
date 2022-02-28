@@ -66,7 +66,7 @@ function SpecialCategory(props) {
 
                 </div>
 
-                <button type='submit' className={action === CRUD_ACTIONS.EDIT ? "btn btn-warning px-2" : "btn btn-success px-2" }>
+                <button type='submit' className={action === CRUD_ACTIONS.EDIT ? "btn btn-warning" : "btn btn-success" }>
                     { action === CRUD_ACTIONS.EDIT ? 'Cập nhật' : "Thêm mới" } 
                 </button>
                 <hr/>

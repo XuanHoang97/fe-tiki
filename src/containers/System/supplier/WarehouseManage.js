@@ -56,7 +56,7 @@ const WarehouseManage = ({activeTab, setActiveTab}) => {
 
                 </div>
 
-                <button type='submit' className="btn btn-success px-2">Thêm mới</button>
+                <button type='submit' className="btn btn-success">Thêm mới</button>
                 <hr/>
 
                 <div className="text-dark">Danh sách danh mục nổi bật (<b>0</b>)</div>
@@ -83,7 +83,7 @@ const WarehouseManage = ({activeTab, setActiveTab}) => {
                             <td className='text-primary'>abc</td>
                             <td>{Date()}</td>
                             <td className='d-flex'>
-                                <button type="button" className="btn text-primary  mr-3">
+                                <button type="button" className="btn text-primary mr-3">
                                     <i className="fas fa-edit"></i>
                                 </button>
 

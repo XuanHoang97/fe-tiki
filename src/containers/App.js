@@ -21,6 +21,7 @@ import Register from './HomePage/Header/account/Register';
 import LoginAuth from './HomePage/Header/account/Login';
 import SearchResult from './HomePage/Header/search/Result';
 import InfoAccount from './HomePage/Header/account/Profile/InfoAccount';
+import { useSelector } from 'react-redux';
 
 console.warn = () => { };
 function App(props) {    

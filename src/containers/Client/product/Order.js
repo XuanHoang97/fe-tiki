@@ -79,7 +79,7 @@ const Order = (props) => {
                     <small>Số lượng:</small>
                     <div className="input-group col-md-3 pt-2 col-6 p-0">
                         <div onClick={decrementQty} className="input-group-prepend">
-                            <button disabled={qty < 2 ? true : false} className="btn btn-success btn-sm px-2"><i className="fas fa-minus small" /></button>
+                            <button disabled={qty < 2 ? true : false} className="btn btn-success btn-sm"><i className="fas fa-minus small" /></button>
                         </div>
 
                         <input type="text" readOnly className="form-control text-center" style={{ height: '31px' }}
@@ -87,7 +87,7 @@ const Order = (props) => {
                         />
 
                         <div onClick={incrementQty}  className="input-group-append">
-                            <button className="btn btn-success btn-sm px-2"><i className="fas fa-plus small" /></button>
+                            <button className="btn btn-success btn-sm"><i className="fas fa-plus small" /></button>
                         </div>
                     </div>
 

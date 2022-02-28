@@ -99,7 +99,7 @@ const ChangePassword = () => {
                             {/* <div className='text-danger'>{errors.confirmPassword?.type === 'pattern' && "Mật khẩu phải từ 8 ký tự, bao gồm chữ và số"}</div> */}
                         </div>
                     </div>
-                    <button type="submit" className="btn btn-primary px-3">
+                    <button type="submit" className="btn btn-primary">
                         {
                             loading ?
                             <div className='d-flex align-items-center justify-content-center'>
