@@ -1,7 +1,8 @@
 import React, {useState, useEffect, useRef} from 'react';
 import useOutsideClick from 'containers/HomePage/OutSideClick';
 import { useSelector, useDispatch } from 'react-redux';
-import {GetAllNotify, GetNotify, UpdateStatusNotify} from '../../../../store/actions';
+import {GetAllNotify, GetNotify, MarkAllNotify, UpdateStatusNotify} from '../../../../store/actions';
+import {formatDate} from '../../../../components/Formatting/FormatDate';
 import './style.scss';
 
 const Notify = () => {
@@ -23,14 +24,22 @@ const Notify = () => {
     
     // view detail notify
     const viewDetail = (notify) => {
-        console.log('notify:', notify);
         dispatch(UpdateStatusNotify({
             id: notify,
             status: 'N2',
         }));
         setStyleUnread('notify-read');
         dispatch(GetNotify(userId, 'N1'));
-        // setShowNotify(false);
+        setShowNotify(false);
+    }
+
+    // mark all notify as read
+    const markAll = () => {
+        dispatch(MarkAllNotify({
+            userId: userId,
+        }));
+        setStyleUnread('notify-read');
+        dispatch(GetNotify(userId, 'N1'));
     }
     
     // view notify
@@ -40,6 +49,7 @@ const Notify = () => {
     useOutsideClick(ref, () => {
         if (showNotify) setShowNotify(false);
     });
+    
     return (
         <>
             <div className='px-4 notify' onClick={() => viewNotify()}>
@@ -69,14 +79,16 @@ const Notify = () => {
                             notify.map((item, index) => {
                                 return (
                                     <div className={`${ item.status === 'N1' ? styleUnread : 'notify-read' }`} 
-                                        key={index}
-                                        onClick={() => viewDetail(item.id)}
+                                    key={index}
+                                    onClick={() => viewDetail(item.id)}
                                     >
                                         <img src={item.image} alt="" />
                                         <div className='item-list'>
                                             <div className='font-weight-bold text-primary'>{item.title}</div>
                                             <span className='content'>{item.content}</span>
-                                            <div className='text-secondary text-right small'>{item.date}</div>
+                                            <div className='text-secondary small'>
+                                                {formatDate(item.date)}
+                                            </div>
                                         </div>
                                     </div>
                                 )
@@ -85,7 +97,7 @@ const Notify = () => {
                             <div className='text-center'>Không có thông báo nào</div>
                         }
                     </div>
-                    <div className='text-right text-dark border markAll btn-outline-light my-2'>Đánh dấu đã đọc tất cả</div>
+                    <div onClick={()=> markAll()} className='text-right text-dark border markAll btn-outline-light my-2'>Đánh dấu đã đọc tất cả</div>
                 </div>
             }
         </>

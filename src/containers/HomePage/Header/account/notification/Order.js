@@ -1,6 +1,7 @@
+import { formatDate } from 'components/Formatting/FormatDate';
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { GetAllNotify } from 'store/actions';
+import { GetAllNotify} from 'store/actions';
 
 const Order = () => {
     const dispatch = useDispatch();
@@ -12,8 +13,6 @@ const Order = () => {
     useEffect(() => {
         dispatch(GetAllNotify(userId));
     }, [dispatch, userId]);
-
-    console.log('notify:', notify);
 
     return (
         <div className=''>
@@ -28,7 +27,7 @@ const Order = () => {
                                 <div className='item-list ml-3'>
                                     <div className='font-weight-bold text-primary'>{item.title}</div>
                                     <span className='content'>{item.content}</span>
-                                    <div className='text-secondary small'>{item.date}</div>
+                                    <div className='text-secondary small'>{formatDate(item.date)}</div>
                                 </div>
                             </div>
                             <button type='button' className="btn btn-outline-secondary">Xem chi tiết</button>

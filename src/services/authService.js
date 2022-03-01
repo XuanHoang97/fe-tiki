@@ -71,7 +71,14 @@ const updateStatusNotify = (data) => {
     });
 }
 
-
+// mark all notify as read
+const MarkAllNotifyAsRead = (data) => {
+    return instance.put(`/mark-all-as-read`,data, {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    });
+}
 
 export{
     registerAcc,
@@ -82,5 +89,6 @@ export{
     ChangePass,
     getNotify,
     getAllNotify,
-    updateStatusNotify
+    updateStatusNotify,
+    MarkAllNotifyAsRead
 }

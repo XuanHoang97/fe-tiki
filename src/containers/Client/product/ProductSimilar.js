@@ -23,7 +23,7 @@ const ProductSimilar = ({similarProducts}) => {
                 similarProducts && similarProducts.length > 0 ?
                 similarProducts.map((item, index) => {
                   return (
-                    <div className="bg-white p-3" key={index} style={{cursor: 'pointer', display: 'grid', justifyItems: 'center'}}>
+                    <div className="prod-similar bg-white p-3" key={index}>
                       <img src={item.image} className="w-75" alt="" />
                       <h6 className="mt-1 mb-3 text-primary">{item.name}</h6>
 
@@ -40,12 +40,11 @@ const ProductSimilar = ({similarProducts}) => {
                   })
                   :
                   <div className="col-md-12">
-                  <h6 className="mt-1 mb-3 text-center text-danger">Không có sản phẩm nào tương tự...</h6>
+                    <h6 className="mt-1 mb-3 text-center text-danger">Không có sản phẩm nào tương tự...</h6>
                   </div>
               }
               </Slider>
         </div>
     );
 }
-
 export default ProductSimilar;

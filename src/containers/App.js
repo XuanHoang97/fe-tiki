@@ -23,6 +23,7 @@ import SearchResult from './HomePage/Header/search/Result';
 import InfoAccount from './HomePage/Header/account/Profile/InfoAccount';
 import { useSelector } from 'react-redux';
 
+
 console.warn = () => { };
 function App(props) {    
     // Keep state when refresh page
@@ -42,6 +43,17 @@ function App(props) {
         handlePersistorState();
     }, []);
 
+    // notify
+    const notifyUnread = useSelector(state => state.auth.notifyUnread);
+    useEffect(() => {
+        const title =' Mua hàng online giá tốt, hàng chuẩn ship nhanh';
+        if(notifyUnread && notifyUnread.length > 0) {
+            document.title = `Bạn có (${notifyUnread.length}) thông báo`;
+        } else{
+            document.title = title;
+        }
+    }, [notifyUnread]);
+    
     return (
         <Router history={history}>
             <ToastContainer autoClose={2500} />

@@ -5,6 +5,7 @@ import {
     getNotify,
     getAllNotify,
     updateStatusNotify,
+    MarkAllNotifyAsRead
 } from '../../services/authService';
 import { toast } from "react-toastify";
 
@@ -72,7 +73,7 @@ export const GetAllNotify = (userId) => {
             if (res && res.errCode === 0) {
                 dispatch({
                     type: actionTypes.GET_ALL_NOTIFY,
-                    payload: res.notify
+                    payload: res.notify.reverse()
                 });
             }
         } catch (e) {
@@ -97,6 +98,21 @@ export const UpdateStatusNotify = (data) => {
     }
 }
 
+// mark all notify as read
+export const MarkAllNotify = (data) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await MarkAllNotifyAsRead(data);
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.MARK_ALL_AS_READ,
+                });
+            }
+        } catch (e) {
+            toast.error('mark all notify as read error !')
+        }
+    }
+}
 
 
 

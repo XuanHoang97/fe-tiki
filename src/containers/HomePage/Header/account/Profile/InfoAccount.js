@@ -17,7 +17,7 @@ function InfoAccount(props) {
     useEffect(() => {
         dispatch(getUser());
     }, [dispatch]);
-
+    
     useEffect(() => {
         document.title = 'Thông tin tài khoản';
     }, [user]);
