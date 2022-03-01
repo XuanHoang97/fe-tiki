@@ -1,8 +1,8 @@
-import Header from 'containers/HomePage/Header/Header';
 import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { verifyOrder } from 'services/clientService';
 import { path } from 'utils';
+import Header from '../HomePage/Header/Header';
 
 const VerifyEmail = (props) => {
     const [statusVerify, setStatusVerify] = useState(false);

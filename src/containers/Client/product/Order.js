@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import { path } from 'utils';
 import * as actions from "store/actions";
 import { numberFormat } from 'components/Formatting/FormatNumber';
-import Rate from 'containers/HomePage/Section/Rate';
 import instance from './../../../axios';
 import {GetCartByUser, getUser } from 'store/actions';
 import './Style.scss'
+import Rate from '../HomePage/Section/Rate';
 
 const Order = (props) => {
     const {order, qty, incrementQty, decrementQty} = props;

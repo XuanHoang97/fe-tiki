@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
-import Header from 'containers/HomePage/Header/Header';
 import { Link } from "react-router-dom";
 import { path } from 'utils';
 import { useSelector } from 'react-redux';
+import Header from '../HomePage/Header/Header';
 
 const OrderSuccess = (props) => {
     const user = useSelector(state => state.auth.user);

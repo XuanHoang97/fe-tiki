@@ -24,7 +24,7 @@ function Slide(props) {
                         />
                     </div>
 
-                    <div className="form-group col-2 pl-0">
+                    <div className="form-group col-2 p-0">
                         <label>Danh mục</label>
                         <select className="form-control"
                             value={categoryId}
@@ -38,7 +38,7 @@ function Slide(props) {
                         </select>
                     </div>
 
-                    <div className="form-group col-2">
+                    <div className="form-group col-2 p-0">
                         <label htmlFor="">Trạng thái</label>
                         <select className="form-control"
                             value={status}
@@ -56,7 +56,7 @@ function Slide(props) {
                     </div>
 
                     <div className='upload-file d-flex col-3 p-0'>
-                        <div className="form-group col-4 p-0">
+                        <div className="form-group col-5 p-0">
                             <label>Ảnh</label>
                             <input id="previewImg" type="file" hidden 
                                 onChange={(e)=>changeImage(e)}
@@ -66,7 +66,7 @@ function Slide(props) {
                             <label htmlFor="previewImg" className="btn btn-warning w-100"><i className="fas fa-upload"></i> Tải ảnh</label>  
                         </div>
 
-                        <div className="preview-image col-8 border" 
+                        <div className="preview-image col-7 border" 
                             style={{backgroundImage: `url(${previewImg})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat'}}
                         >
                             {

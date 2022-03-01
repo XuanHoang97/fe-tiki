@@ -1,10 +1,10 @@
 import React from 'react';
 import { numberFormat } from 'components/Formatting/FormatNumber';
-import Rate from 'containers/HomePage/Section/Rate';
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './Style.scss'
+import Rate from '../HomePage/Section/Rate';
 
 const ProductSimilar = ({similarProducts}) => {
   const settings = {

@@ -4,24 +4,24 @@ import { ConnectedRouter as Router } from 'connected-react-router';
 import { history } from '../redux'
 import { ToastContainer } from 'react-toastify';
 import { userIsAuthenticated, userIsNotAuthenticated } from '../hoc/authentication';
+// import { useSelector } from 'react-redux';
 import { path } from '../utils';
 
 import './App.scss';
 import Home from '../routes/Home';
-import Login from './Auth/Login';
 import System from '../routes/System';
-import HomePage from './HomePage/HomePage';
 import ProductDetail from './Client/product/ProductDetail';
 import Cart from './Client/cart/Cart';
 import Payment from './Client/payment/Payment';
 import OrderSuccess from './Client/Check_order/OrderSuccess';
 import VerifyEmail from './Client/Check_order/VerifyEmail';
-import NotFound from './HomePage/NotFound/Index';
-import Register from './HomePage/Header/account/Register';
-import LoginAuth from './HomePage/Header/account/Login';
-import SearchResult from './HomePage/Header/search/Result';
-import InfoAccount from './HomePage/Header/account/Profile/InfoAccount';
-import { useSelector } from 'react-redux';
+import SearchResult from './Client/HomePage/Header/search/Result';
+import Login from './System/Auth/Login';
+import LoginAuth from './Client/HomePage/Header/account/Login';
+import InfoAccount from './Client/HomePage/Header/account/Profile/InfoAccount';
+import Register from './Client/HomePage/Header/account/Register';
+import HomePage from './Client/HomePage/HomePage';
+import NotFound from './Client/HomePage/NotFound/Index';
 
 
 console.warn = () => { };
@@ -44,15 +44,15 @@ function App(props) {
     }, []);
 
     // notify
-    const notifyUnread = useSelector(state => state.auth.notifyUnread);
-    useEffect(() => {
-        const title =' Mua hàng online giá tốt, hàng chuẩn ship nhanh';
-        if(notifyUnread && notifyUnread.length > 0) {
-            document.title = `Bạn có (${notifyUnread.length}) thông báo`;
-        } else{
-            document.title = title;
-        }
-    }, [notifyUnread]);
+    // const notifyUnread = useSelector(state => state.auth.notifyUnread);
+    // useEffect(() => {
+    //     const title =' Mua hàng online giá tốt, hàng chuẩn ship nhanh';
+    //     if(notifyUnread && notifyUnread.length > 0) {
+    //         document.title = `Bạn có (${notifyUnread.length}) thông báo`;
+    //     } else{
+    //         document.title = title;
+    //     }
+    // }, [notifyUnread]);
     
     return (
         <Router history={history}>

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import Header from 'containers/HomePage/Header/Header';
 import { numberFormat, totalMoney } from 'components/Formatting/FormatNumber';
 import { UpdateItemCartByUser } from 'store/actions';
 import { useHistory } from 'react-router';
 import { path } from 'utils';
+import Header from '../HomePage/Header/Header';
 
 const Cart = (props) => {
     const cartsUser = useSelector(state => state.client.cartsUser);

@@ -162,7 +162,7 @@ export const keywordSearch = (data) => {
     })
 }
 
-export const urlSearch = (data) => {
+export const URLSearch = (data) => {
     return ({
         type: actionTypes.SEARCH_URL,
         payload: data

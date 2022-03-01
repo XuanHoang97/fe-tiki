@@ -12,14 +12,18 @@ import ArticleManage from '../containers/System/Article/ArticleManage';
 import CategoryManage from '../containers/System/Category/CategoryManage';
 import StatisticalManage from '../containers/System/Statistical/Statistical';
 import Setting from '../containers/System/Setting/Index';
-import Notification from '../containers/Header/notification/Notification';
-import Search from '../containers/Header/Search';
-import MenuLeft from '../containers/Header/menuLeft/MenuLeft';
-import MenuLeftCollapse from '../containers/Header/menuLeft/MenuLeftCollapse';
+// import Notification from '../containers/Header/notification/Notification';
+// import Search from '../containers/Header/Search';
+// import MenuLeft from '../containers/Header/menuLeft/MenuLeft';
+// import MenuLeftCollapse from '../containers/Header/menuLeft/MenuLeftCollapse';
 import Multimedia from '../containers/System/Multimedia/Index';
 import SupplierManage from 'containers/System/supplier/SupplierManage';
 import Warehouse from 'containers/System/Warehouse/Warehouse';
 import { path } from 'utils';
+import Search from 'containers/System/Header/Search';
+import MenuLeft from 'containers/System/Header/menuLeft/MenuLeft';
+import MenuLeftCollapse from 'containers/System/Header/menuLeft/MenuLeftCollapse';
+import Notification from 'containers/System/Header/notification/Notification';
 
 const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
     const [menuLeft, setMenuLeft] = useState(true);

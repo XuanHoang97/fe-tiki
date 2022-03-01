@@ -1,0 +1,431 @@
+@import "../../../../../assets/css/variable.scss";
+
+img {
+    max-width: 100%;
+}
+
+.header {
+    background: rgb(1, 127, 255);
+    position: relative;
+    z-index: 1000;
+    @include phone {
+        padding: 5px 0;
+    }
+    .container {
+        .row {
+            @include phone {
+                margin: 0;
+                padding-right: 0;
+            }
+            .navbar {
+                @include phone {
+                    padding: 0 !important;
+                }
+                .menu_ctg {
+                    @include phone {
+                        width: 100%;
+                    }
+                    .category {
+                        padding: 10px 15px;
+                        span {
+                            font-size: 15px;
+                            @include phone {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+                .list__product::before {
+                    content: "";
+                    border-bottom: 0.75rem solid #fff;
+                    border-right: 0.7rem solid transparent;
+                    border-left: 0.7rem solid transparent;
+                    position: absolute;
+                    top: -0.7rem;
+                    left: 3rem;
+                    z-index: 10;
+                    
+                }
+
+                .list__product{
+                    box-shadow: 0 2px 10px 1px grey;
+                }
+
+                .menu_ctg:after {
+                    content: "";
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    transition: opacity 0.35s ease-in-out;
+                    opacity: 0;
+                    visibility: hidden;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    pointer-events: none;
+                }
+                // .menu_ctg:hover:after {
+                //     z-index: 10;
+                //     opacity: 1;
+                //     visibility: visible;
+                //     position: fixed;
+                // }
+                .navbar-brand {
+                }
+                .navbar-toggler {
+                    @include phone {
+                        color: white;
+                        border: none;
+                    }
+                }
+                .navbar-collapse {
+                    @include phone {
+                    }
+                    .navbar-nav {
+                        @include phone {
+                            display: flex;
+                            align-items: normal;
+                            position: relative;
+                            flex-direction: column-reverse;
+                            padding: 5px 15px;
+                        }
+                        .login_resg {
+                            .info {
+                            }
+                        }
+                        .search {
+                            input {
+                                border-radius: 2px 0px 0px 2px;
+                                border: 0px;
+                                height: 32px;
+                                @include phone {
+                                    height: 30px;
+                                }
+                            }
+                            .search-form {
+                                position: absolute;
+                                bottom: 0;
+                                .search__info {
+                                    background: white;
+                                    position: absolute;
+                                    z-index: 99;
+                                    height: auto;
+                                    width: 565px;
+                                    box-shadow: rgb(121, 121, 121) 0px 6px 12px 0px;
+                                    .search__items:hover {
+                                        background: rgb(227, 242, 252);
+                                    }
+                                    .search__items {
+                                        cursor: pointer;
+                                        padding: 5px;
+                                    }
+                                    .suggest {
+                                        padding: 10px;
+                                        .coupon {
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: space-between;
+                                            h6 {
+                                                font-size: 13px;
+                                            }
+                                        }
+                                        .history {
+                                            display: grid;
+                                            grid-template-columns: 80% 20%;
+                                            justify-content: space-between;
+                                            align-items: center;
+                                            cursor: pointer;
+                                            .item_log {
+                                                img {
+                                                    width: 7%;
+                                                }
+                                                span {
+                                                    font-size: 13px;
+                                                    font-weight: 500;
+                                                }
+                                            }
+                                            &:hover {
+                                                background: rgba(27, 168, 255, 0.1);
+                                            }
+                                            .close {
+                                                img {
+                                                    width: 20%;
+                                                }
+                                            }
+                                        }
+                                        .viewMore {
+                                            color: rgb(32, 109, 252);
+                                            font-size: 13px;
+                                            justify-content: center;
+                                            cursor: pointer;
+                                            display: flex;
+                                            gap: 5px;
+                                            align-items: center;
+                                        }
+                                    }
+                                    .list__search {
+                                        padding: 0 10px;
+                                        border-top: 1px solid rgb(236, 236, 236);
+                                        border-bottom: 1px solid rgb(236, 236, 236);
+                                        .search__popular {
+                                            margin: 10px 0;
+                                            display: flex;
+                                            gap: 5px;
+                                            img {
+                                                max-width: 4% !important;
+                                            }
+                                            span {
+                                                font-size: 14px;
+                                                font-weight: 500;
+                                            }
+                                        }
+                                        .pop {
+                                            display: grid;
+                                            grid-template-columns: 33% 33% 33%;
+                                            .list__item {
+                                                display: flex;
+                                                gap: 5px;
+                                                margin-bottom: 15px;
+                                                img {
+                                                    width: 20%;
+                                                }
+                                                span {
+                                                    font-size: 11px;
+                                                    background: rgb(250, 250, 250);
+                                                    width: 75%;
+                                                    padding: 3px 7px;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    .special__prod {
+                                        padding: 10px;
+                                        h6 {
+                                            color: rgb(68, 68, 68);
+                                            font-size: 14px;
+                                            margin-bottom: 15px;
+                                            font-weight: 500;
+                                        }
+                                        .list__prod {
+                                            display: grid;
+                                            grid-template-columns: repeat(5,1fr);
+                                            .item--prod {
+                                                display: grid;
+                                                grid-template-rows: 50% 50%;
+                                                gap: 20px;
+                                                justify-items: center;
+                                                margin-bottom: 10px;
+                                                img {
+                                                    width: 35%;
+                                                    border-radius: 35%;
+                                                }
+                                                span {
+                                                    font-size: 12px;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                .blur {
+                                    position: fixed;
+                                    inset: 0;
+                                    z-index: -1;
+                                    background: rgba(0, 0, 0, 0.53);
+                                    opacity: 0.3;
+                                }
+                            }
+                            .btn_search {
+                                width: 105px;
+                                @include phone {
+                                }
+                                button {
+                                    background: rgb(13, 92, 182);
+                                    height: 30px !important;
+
+                                    @include phone {
+                                        display: flex;
+                                        align-items: center;
+                                    }
+                                    small {
+                                        @include phone {
+                                            display: none;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .account {
+                            width: 120px;
+                            cursor: pointer;
+                            @include phone {
+                                position: absolute;
+                                top: -2.2rem;
+                                right: 5rem;
+                            }
+                        }
+
+                        .user-account::before{
+                            content: "";
+                            border-bottom: 2rem solid #fff;
+                            border-right: 0.8rem solid transparent;
+                            border-left: 0.8rem solid transparent;
+                            position: absolute;
+                            top: -1.7rem;
+                            right: 2rem;
+                            z-index: 10;
+                            transition: all 0.3s ease-in-out;
+                        }
+                        
+                        .user-account {
+                            position: absolute;
+                            top: 5rem;
+                            right: 5rem;
+                            background: white;
+                            padding: 15px 0;
+                            width: 300px;
+                            box-shadow: 0 2px 10px 1px grey;
+
+                            .acc-detail{
+                                .item-acc{
+                                    font-weight: 600;
+                                    color: rgb(88, 88, 88);
+                                    padding: 7px 15px;
+                                    cursor: pointer;
+                                    border-bottom: 1px solid rgb(236, 236, 236);
+                                    display: flex;
+                                    align-items: center;
+                                }
+                                .item-acc:hover {
+                                    background: orange;
+                                }
+                            }
+                        }
+
+                        .cart {
+                            font-size: 14px;
+                            cursor: pointer;
+                            @include phone {
+                                position: absolute;
+                                top: -2.2rem;
+                                right: 2.5rem;
+                            }
+                            @extend .account;
+               
+                        }
+                        .cart__info {
+                            display: block;
+                            box-shadow: 0 2px 10px 1px grey;
+                            position: absolute;
+                            width: 32rem;
+                            left: 44rem;
+                            top: 4rem;
+                          
+                            .text-left {
+                                .info {
+                                    .content {
+                                        line-height: 0;
+                                        small {
+                                            font-size: 14px;
+                                            font-weight: 500;
+                                        }
+                                        .small,
+                                        p {
+                                            line-height: 15px;
+                                        }
+                                    }
+                                    .price {
+                                        display: grid;
+                                        text-align: end;
+                                        .price__num {
+                                            display: inline-flex;
+                                            justify-content: flex-end;
+                                            gap: 5px;
+                                            h6 {
+                                                font-weight: bold;
+                                            }
+                                        }
+                                        .btnDelProd {
+                                            cursor: pointer;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .cart__info::before {
+                            content: "";
+                            border-bottom: 2rem solid #fff;
+                            border-right: 0.8rem solid transparent;
+                            border-left: 0.8rem solid transparent;
+                            position: absolute;
+                            top: -1.2rem;
+                            right: 2.4rem;
+                            z-index: 10;
+                        }
+                    }
+                }
+            }
+        }
+        .menu--suggest {
+            margin-top: -0.75rem;
+            @include phone {
+                display: none;
+            }
+            @include tablet {
+                display: none;
+            }
+
+            .suggest{
+                font-size: 11px;
+                padding-left: 35px;
+            }
+        }
+    }
+}
+
+
+.form-login:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
+
+::placeholder {
+    font-size: 12px;
+}
+
+.dropdown-menu{
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 20px;
+}
+
+.dropdown-menu .dropdown-item i {
+    color: rgb(194, 194, 194);
+    font-size: 13px;
+    padding: 0;
+}
+
+.activeCategory {
+    background: #017fff !important;
+    color: white;
+    opacity: 0.8;
+    @extend .categoryMenu
+}
+
+.categoryMenu{
+    display: flex;
+    align-items: center;
+    padding: 10px 15px; 
+    cursor: pointer;
+}
+
+.menu__item {
+    background: #ebf7ff;
+}
+
+.view--more {
+    cursor: pointer;
+}
+
+.view--more:hover {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 15px !important;
+    padding: 3px 5px;
+    border-radius: 5px;
+}
+

@@ -7,12 +7,10 @@ import * as actions from "store/actions";
 import Order from "./Order";
 import Specifications from "./Specifications";
 import Illustrator from "./Illustrator";
-import Mail from "containers/HomePage/Section/Mail";
-import Header from "containers/HomePage/Header/Header";
-import Footer from "containers/HomePage/Footer/Footer";
 import Accessories from "./Accessories";
 import ProductDesc from "./ProductDesc";
 import ProductSimilar from "./ProductSimilar";
+import Header from "../HomePage/Header/Header";
 
 const ProductDetail = ({ match }) => {
   const dispatch = useDispatch();
@@ -70,9 +68,7 @@ const ProductDetail = ({ match }) => {
           <Specifications />
           <ProductDesc detailProduct={detailProduct} />
           <ProductSimilar similarProducts={similarProducts} />
-          <Mail />
         </div>
-        <Footer />
       </div>
     </>
   );
