@@ -27,7 +27,6 @@ const ProductManage = (props) => {
         dataProduct.append('name', data.name);
         dataProduct.append('price', data.price);
         dataProduct.append('sale', data.sale);
-        dataProduct.append('number', data.number);
         dataProduct.append('warranty', data.warranty);
         dataProduct.append('category_id', data.category_id);
         dataProduct.append('supplier_id', data.supplier_id);
@@ -51,7 +50,6 @@ const ProductManage = (props) => {
         product.append('name', data.name);
         product.append('price', data.price);
         product.append('sale', data.sale);
-        product.append('number', data.number);
         product.append('warranty', data.warranty);
         product.append('category_id', data.category_id);
         product.append('supplier_id', data.supplier_id);
@@ -93,7 +91,6 @@ const ProductManage = (props) => {
                         <td>Bảo hành</td>
                         <td>Giá (VND)</td>
                         <td>Sale (VND)</td>
-                        <td>Xuất xứ</td>
                         <td>Tác vụ</td>
                     </tr>
                 </thead>
@@ -115,7 +112,6 @@ const ProductManage = (props) => {
                                     <td>{item.warranty}</td>
                                     <td>{numberFormat(item.price)}</td>
                                     <td>{numberFormat(item.sale)}</td>
-                                    <td>{item.supplier_id}</td>
                                     <td>
                                         <button onClick={()=> editProduct(item)} type="button" className="btn text-primary">
                                             <i className="fas fa-edit"></i>

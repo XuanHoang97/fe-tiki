@@ -186,7 +186,7 @@ export const searchResult = (keyword) => {
 }
 
 // Filter product by price
-export const filterProductByPrice = (keyword, price, priceFrom, priceTo) => {
+export const filterPrice = (keyword, price, priceFrom, priceTo) => {
     return async(dispatch, getState) => {
         try {
             let res = await FilterProductByPrice(keyword, price, priceFrom, priceTo);
@@ -201,6 +201,26 @@ export const filterProductByPrice = (keyword, price, priceFrom, priceTo) => {
         }
     }
 }
+
+// get all range price
+export const getAllRangePrice = () => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await getAllCodeService('PRICE_RANGE');
+            if (res && res.data.errCode === 0) {
+                dispatch({
+                    type: actionTypes.ALL_RANGE_PRICE,
+                    payload: res.data.data
+                })
+            }
+        } catch (e) {
+            console.log('getAllRangePrice error', e)
+        }
+    }
+}
+
+
+
 
 
 

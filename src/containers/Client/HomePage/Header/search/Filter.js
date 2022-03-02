@@ -1,15 +1,35 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { filterProductByPrice } from 'store/actions';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchSupplierProduct, getAllRangePrice, filterPrice } from 'store/actions';
 import './style.scss';
 
 function Filter(props) {
-    const {keyword, priceFrom, priceTo, setPriceFrom, setPriceTo, handleFilterProduct} = props;
     const dispatch = useDispatch();
-    const minPrice = 1000000;
+    const {keyword, priceFrom, priceTo, setPriceFrom, setPriceTo, filterProduct} = props;
+
+    // fetch data
+    const [activePrice, setActivePrice] = useState();
+    const suppliers = useSelector(state => state.admin.supplier);
+    const rangePrice = useSelector(state => state.admin.rangePrice);
+    useEffect(() => {
+        dispatch(fetchSupplierProduct());
+        dispatch(getAllRangePrice());
+    }, [dispatch]);
+
+    // filter by price
+    const filterProd = (opPrice) => {
+        setActivePrice(opPrice.id);
+
+        
+        console.log('opPrice', opPrice, opPrice.valueVi);
+        console.log('value', opPrice.valueVi);
+
+        // dispatch action
+        // dispatch(filterPrice(keyword, 0, priceFrom, priceTo));
+        
+    }
 
     return (
-
         <div className="sort col-2 border-right">
             <div className="addr border-bottom py-3">
                 <h6>ĐỊA CHỈ NHẬN HÀNG</h6>
@@ -19,52 +39,52 @@ function Filter(props) {
 
             <div className="price border-bottom py-3">
                 <h6>GIÁ CẢ</h6>
-                <div className="item__price" onClick={()=>dispatch(filterProductByPrice(keyword, minPrice, priceFrom, priceTo))}>
-                    <span>Dưới 1.000.000</span>
-                </div>
-
-                <div className="item__price" onClick={()=>dispatch(filterProductByPrice(keyword,0, 1000000, 5000000))}>
-                    <span>Từ 1.000.000 - 5.000.000</span>
-                </div>
-
-                <div className="item__price" onClick={()=>dispatch(filterProductByPrice(keyword,0, 5000000, 10000000))}>
-                    <span>Từ 5.000.000 - 10.000.000</span>
-                </div>
-
-                <div className="item__price">
-                    <span>Trên 10.000.000</span>
-                </div>
-
-                {/* between price */}
+                {
+                    rangePrice && rangePrice.length > 0 &&
+                    rangePrice.map((item, index) => {
+                        return (
+                            <div className={`item__price 
+                                ${item.id === activePrice ? 'activePrice' : ''}
+                            }`} key={index}
+                                onClick={() => filterProd(item)}
+                            >
+                                <span>{item.valueVi}</span>
+                            </div>
+                        )
+                    })
+                }
                 <div className="mt-4">Khoảng giá</div>
                 <div className="form-group d-flex">
-                <input type="text" className="priceBetween form-control col-6" placeholder='0'
-                    value={priceFrom}
-                    onChange={(e) => setPriceFrom(e.target.value.replace(/[^0-9]/g, ''))}
-                />
+                    <input type="text" className="priceBetween form-control col-6" placeholder='0 đ'
+                        value={priceFrom}
+                        onChange={(e) => setPriceFrom(e.target.value.replace(/[^0-9]/g, ''))}
+                    />
 
-                <input type="text" className="priceBetween form-control col-6" placeholder='0'
-                    value={priceTo}
-                    onChange={(e) => setPriceTo(e.target.value.replace(/[^0-9]/g, ''))}
-                />
+                    <input type="text" className="priceBetween form-control col-6" placeholder='0 đ'
+                        value={priceTo}
+                        onChange={(e) => setPriceTo(e.target.value.replace(/[^0-9]/g, ''))}
+                    />
                 </div>
-                <button onClick={()=> handleFilterProduct()} type="button" className="findProd btn btn-warning">Áp dụng</button>
+                <button onClick={()=> filterProduct()} type="button" className="findProd btn btn-warning">Áp dụng</button>
             </div>
 
             <div className="address border-bottom py-3">
                 <h6>NƠI BÁN</h6>
-                <div className="item__address">
-                    <input type="checkbox"/>
-                    <span>Hà Nội</span>
-                </div>
-
-                <div className="item__address">
-                    <input type="checkbox"/>
-                    <span>TP. HCM</span>
-                </div>
+                {
+                    suppliers && suppliers.length >0 ?
+                    suppliers.map((item, index) => {
+                        return (
+                            <div className="item__address" key={index}>
+                                <input type="checkbox"
+                                />
+                                <span>{item.valueVi}</span>
+                            </div>
+                        )
+                    })
+                    : <div>Không có nhà cung cấp</div>
+                }
             </div>
         </div>
     );
 }
-
 export default Filter;

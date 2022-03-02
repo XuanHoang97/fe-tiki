@@ -44,6 +44,7 @@ const FilterProductByPrice= (keyword, price, priceFrom, priceTo) => {
     return axios.get(`${path.PORT}/search?keyword=${keyword}&price=${price}&priceFrom=${priceFrom}&priceTo=${priceTo}`)
 }
 
+
 //get all product
 const getAllProduct = (inputId) => {
     return axios.get(`${path.PORT}/get-all-products?id=${inputId}`)
@@ -221,6 +222,7 @@ export {
     deleteUserService,
     editUserService,
     getAllCodeService,
+
     search,
     FilterProductByPrice,
 

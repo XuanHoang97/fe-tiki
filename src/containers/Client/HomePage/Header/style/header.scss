@@ -254,7 +254,7 @@ img {
                             }
                         }
                         .account {
-                            width: 120px;
+                            width: 150px;
                             cursor: pointer;
                             @include phone {
                                 position: absolute;
@@ -278,7 +278,7 @@ img {
                         .user-account {
                             position: absolute;
                             top: 5rem;
-                            right: 5rem;
+                            right: 6rem;
                             background: white;
                             padding: 15px 0;
                             width: 300px;

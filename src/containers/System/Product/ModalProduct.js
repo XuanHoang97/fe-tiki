@@ -161,7 +161,7 @@ const ModalProduct = (props) => {
                                 listSupplier && listSupplier.length >0 ?
                                 listSupplier.map((item, index)=>{
                                     return(
-                                        <option key={index} value={item.valueVi}>{item.valueVi}</option>
+                                        <option key={index} value={item.keyMap}>{item.valueVi}</option>
                                     )
                                 })
                                 :

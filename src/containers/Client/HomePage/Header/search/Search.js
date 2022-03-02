@@ -2,8 +2,8 @@ import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import SearchSuggest from './SearchSuggest';
-import { path } from 'utils';
 import { keywordSearch, searchResult, URLSearch } from 'store/actions';
+import { path } from 'utils';
 
 export default function Search() {
     const [search, setSearch] = useState('');
@@ -30,7 +30,7 @@ export default function Search() {
         }
     }
 
-    //press enter search
+    // press enter search
     const handleKeyDown=(e)=>{
         if(e.key=== 'Enter' || e.keyCode=== 13){     
             handleSearch();

@@ -14,6 +14,7 @@ const initialState = {
     keywordSearch: keywordSearchLocal,
     urlSearch: '',
     dataSearch: [],
+    rangePrice: [],
 
     categories: [],
     news: [],
@@ -93,6 +94,13 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
                 dataSearch : action.payload,
+            }
+
+            // get all range price
+        case actionTypes.ALL_RANGE_PRICE:
+            return {
+                ...state,
+                rangePrice : action.payload,
             }
             
             //fetch all product

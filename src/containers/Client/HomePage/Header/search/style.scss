@@ -7,9 +7,13 @@
     span{
         font-size: 12px;
     }
-    span:hover{
-        color: #3431ff;
-    }
+}
+.item__price:hover{
+    background: #ffc107;
+}
+
+.activePrice{
+    background: #ffc107;
 }
 
 .item__address {
@@ -24,4 +28,7 @@
     font-size: 13px;
     display: flex;
     align-items: center;
+    justify-content: center;
+    border-radius: 0px;
+    width: 100%;
 }

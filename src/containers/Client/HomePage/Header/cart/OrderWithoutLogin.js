@@ -5,7 +5,6 @@ import ModalOrderNow from 'containers/Client/product/ModalOrderNow';
 import { Link } from 'react-router-dom';
 import { path } from 'utils';
 import { deleteItemCart } from 'store/actions';
-// import * as actions from '../../../../store/actions/index';
 
 function OrderWithoutLogin(props) {
     const [hoverCart, setHoverCart] = useState(false);
@@ -28,13 +27,12 @@ function OrderWithoutLogin(props) {
         <>
             <ModalOrderNow show={orderNow} toggle = {viewCart} />
             <span className="cart nav-item dropdown active" onMouseEnter={() =>setHoverCart(true) }>
-                <div className="nav-link dropdown-toggle">
-                    <i className="fas fa-shopping-cart mr-2" style={{ fontSize: '17px' }}>
-                        <span className="badge badge-pill badge-danger position-absolute " style={{ top: '-5px', left: '1.4rem' }}>
+                <div className="text-white text-right">
+                    <i className="fas fa-shopping-cart mr-4" style={{ fontSize: '17px' }}>
+                        <span className="badge badge-pill badge-danger position-absolute " style={{ top: '-0.9rem', left: '4.7rem' }}>
                             {carts.length}
                         </span>
                     </i>
-                    <span>Giỏ Hàng</span>
                 </div>
             </span>
 

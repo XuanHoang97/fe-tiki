@@ -9,7 +9,6 @@ const ModalEditProduct  = (props) => {
     const [price, setPrice] = useState('');
     const [sale, setSale] = useState('');
     const [warranty, setWarranty] = useState('');
-    const [number, setNumber] = useState('');
     const [category_id, setCategory_id] = useState('');
     const [supplier_id, setSupplier_id] = useState('');
     const [image, setImage] = useState('');
@@ -27,7 +26,6 @@ const ModalEditProduct  = (props) => {
             setPrice(product.price);
             setSale(product.sale);
             setWarranty(product.warranty);
-            setNumber(product.number);
             setCategory_id(product.category_id);
             setSupplier_id(product.supplier_id);
             setPreviewImg(product.image);
@@ -66,7 +64,6 @@ const ModalEditProduct  = (props) => {
             price: price,
             sale: sale,
             warranty: warranty,
-            number: number,
             category_id: category_id,
             supplier_id: supplier_id,
             image: image,
@@ -128,10 +125,6 @@ const ModalEditProduct  = (props) => {
 
                 <div className="row">
                     <div className="form-group col-md-4">
-                        <label>Số lượng</label>
-                        <input value={number} onChange={(e)=>setNumber(e.target.value)}  type="text" className="form-control" />
-                    </div>
-                    <div className="form-group col-md-4">
                         <label>Bảo hành</label>
                         <input value={warranty} onChange={(e)=>setWarranty(e.target.value)}  type="text" className="form-control" />
                     </div>                             
@@ -168,7 +161,7 @@ const ModalEditProduct  = (props) => {
                                 listSupplier && listSupplier.length >0 ?
                                 listSupplier.map((item, index)=>{
                                     return(
-                                        <option key={index} value={item.valueVi}>{item.valueVi}</option>
+                                        <option key={index} value={item.keyMap}>{item.valueVi}</option>
                                     )
                                 })
                                 :

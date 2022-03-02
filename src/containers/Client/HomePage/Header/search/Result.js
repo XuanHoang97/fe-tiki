@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { numberFormat } from 'components/Formatting/FormatNumber';
+import { filterPrice, keywordSearch, searchResult, URLSearch } from 'store/actions';
+import { Nav, NavItem, NavLink, TabContent, TabPane} from 'reactstrap';
+import Rate from '../../Section/Rate';
 import Header from '../Header';
 import Filter from './Filter';
-import Sort from './Sort';
-import { numberFormat } from 'components/Formatting/FormatNumber';
-import { filterProductByPrice, keywordSearch, searchResult, URLSearch } from 'store/actions';
-import Rate from '../../Section/Rate';
 
 function Result(props) {
     const dispatch = useDispatch();
@@ -13,6 +13,7 @@ function Result(props) {
     const url = useSelector(state => state.admin.urlSearch);    
     const result = useSelector(state => state.admin.dataSearch);
     const [loading, setLoading] = useState(false);
+    const [activeTab, setActiveTab] = useState('1');
     
     // Result
     useEffect(() => {
@@ -33,9 +34,8 @@ function Result(props) {
     // Filter 
     const [priceFrom, setPriceFrom] = useState('');
     const [priceTo, setPriceTo] = useState('');
-
-    const handleFilterProduct = (e) => {
-        dispatch(filterProductByPrice(keyword, priceFrom, priceTo));
+    const filterProduct = (e) => {
+        dispatch(filterPrice(keyword, priceFrom, priceTo));
     }
 
     return (
@@ -49,28 +49,59 @@ function Result(props) {
                         priceTo={priceTo}
                         setPriceFrom={setPriceFrom}
                         setPriceTo={setPriceTo}
-                        handleFilterProduct={handleFilterProduct}
+                        filterProduct={filterProduct}
                     />
 
                     <div className="list__product col-10">
                         <div className="suggest__list">
                             <div>
-                                <div >
-                                    <div className="result py-3">
-                                        <h5 className="m-0">Kết quả tìm kiếm cho 
-                                            <span className='text-primary'>
-                                                `{keyword ? keyword :'Undefine'}`
-                                            </span>
-                                            :{result.length} <small>Kết quả</small>
-                                        </h5>
-                                    </div>
-                                    <Sort />
+                                <div className="result py-3">
+                                    <h5 className="m-0">Kết quả tìm kiếm cho 
+                                        <span className='text-primary'>
+                                            `{keyword ? keyword :'Undefine'}`
+                                        </span>
+                                        : {result.length} <small>Kết quả</small>
+                                    </h5>
                                 </div>
+                                
+                                <Nav tabs className='mb-4'>
+                                    <NavItem className='d-flex'>
+                                        <NavLink className={activeTab === '1' ? 'active' : ''}
+                                            onClick={() => {
+                                                setActiveTab('1');
+                                            }}
+                                        >
+                                            <span className='mr-2'>Phổ biến</span>
+                                        </NavLink>
+
+                                        <NavLink className={activeTab === '2' ? 'active' : ''}
+                                            onClick={() => {
+                                                setActiveTab('2');
+                                            }}
+                                        >
+                                            <span className='mr-2'>Bán chạy</span>
+                                        </NavLink>
+
+                                        <NavLink className={activeTab === '3' ? 'active' : ''}
+                                            onClick={() => {
+                                                setActiveTab('3');
+                                            }}
+                                        >
+                                            <span className='mr-2'>Giá thấp</span>
+                                        </NavLink>
+
+                                        <NavLink className={activeTab === '4' ? 'active' : ''}
+                                            onClick={() => { setActiveTab('4'); }}
+                                        >
+                                            <span className='mr-2'>Giá cao</span>
+                                        </NavLink>
+                                    </NavItem>
+                                </Nav>
                             </div>
 
-                            <div className="tab-content">
-                                <div id="home" className="container tab-pane active"><br />
-                                    <div className="list row">
+                            <TabContent activeTab={activeTab}>
+                                <TabPane tabId='1'>
+                                    <div className="list d-flex">
                                     {
                                         loading ?
                                         <div className="d-flex justify-content-center w-100 bg-light">
@@ -83,12 +114,12 @@ function Result(props) {
                                             return (
                                                 <div className="list__prod" key={index}>
                                                     <div>
-                                                        <img src={item.image} className="w-75" alt="" />
+                                                        <img src={item.image} className="w-75" alt="" style={{height: '100px'}} />
                                                         <p className="text-secondary mt-3 mb-1">{item.name}</p>
                                                         <Rate />
                                                         <div className="price">
                                                             <span className="price_prod">{numberFormat(item.price)}</span>
-                                                            <span className="badge badge-danger">-6%</span>
+                                                            <span className="badge badge-danger">-5%</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -96,28 +127,15 @@ function Result(props) {
                                         })
                                         :
                                         <div className="">
-                                            Không có kết quả nào, vui lòng tìm kiếm từ khoá khác
+                                            Không có kết quả nào, Bạn có thể quan tâm: iphone, samsung, vertu...
                                         </div>
                                     }
                                     </div>
-                                </div>
-
-                                <div id="menu1" className="container tab-pane fade"><br />
-                                    <h6>Menu 1</h6>
-                                </div>
-
-                                <div id="menu2" className="container tab-pane fade"><br />
-                                    <h6>Menu 2</h6>
-                                </div>
-
-                                <div id="menu3" className="container tab-pane fade"><br />
-                                    <h6>Menu 3</h6>
-                                </div>
-
-                                <div id="menu4" className="container tab-pane fade"><br />
-                                    <h6>Menu 4</h6>
-                                </div>
-                            </div>
+                                </TabPane>
+                                <TabPane tabId='2'> 456 </TabPane>
+                                <TabPane tabId='3'>789</TabPane>
+                                <TabPane tabId='4'>012</TabPane>
+                            </TabContent>
                         </div>
                     </div>
                 </div>

@@ -56,7 +56,7 @@ const Notify = () => {
                 <i className="far fa-bell text-white position-relative">
                     <span className="badge badge-pill badge-danger">
                         {
-                            notifyUnread && notifyUnread.length > 0 ? notifyUnread.length : 0
+                            notifyUnread && notifyUnread.length > 0 ? notifyUnread.length : ''
                         }
                     </span>
                 </i>

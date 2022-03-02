@@ -34,7 +34,7 @@ function OrderLogin(props) {
             <span className="cart nav-item dropdown active" onMouseEnter={() =>setHoverCart(true) }>
                 <div className="text-white text-right">
                     <i className="fas fa-shopping-cart mr-4" style={{ fontSize: '17px' }}>
-                        <span className="badge badge-pill badge-danger position-absolute " style={{ top: '-0.9rem', left: '3.7rem' }}>
+                        <span className="badge badge-pill badge-danger position-absolute " style={{ top: '-0.9rem', left: '4.7rem' }}>
                             { cartsUser && cartsUser.length>0 ? cartsUser.length : '' }
                         </span>
                     </i>
