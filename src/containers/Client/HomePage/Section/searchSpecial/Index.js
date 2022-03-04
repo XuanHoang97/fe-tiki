@@ -1,12 +1,6 @@
-import React, {useEffect } from "react";
-import { useDispatch} from "react-redux";
+import React  from "react";
 
-function Search_special(props) {
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-    }, [dispatch])
-
+const Search_special = () => {
     return(
         <>
             <div>
@@ -26,7 +20,7 @@ function Search_special(props) {
                 </div>
             </div>
 
-            <div className="search__hightlight mt-0 pl-3 pb-2 p-0 pr-1 bg-white">
+            <div className="search__hightLight mt-0 pl-3 pb-2 p-0 pr-1 bg-white">
                     
                 <div className="card col-md-3 p-0">
                     <div className="card-body pl-0 pr-0 pt-2 pb-0">

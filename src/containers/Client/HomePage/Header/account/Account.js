@@ -2,26 +2,25 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { path } from 'utils';
 import { Link } from 'react-router-dom';
-import instance from './../../../../../axios';
 import { useHistory } from 'react-router-dom';
 import { getUser, logoutAccount } from 'store/actions';
+import {GetUser} from './../../../../../services/authService';
 
-const token = localStorage.getItem('token');
 const Account = () => {
-    const [hoverAccount, setHoverAccount] = useState(false);
+    const token = localStorage.getItem('token');
     const dispatch = useDispatch();
     const history = useHistory();
+    const [hoverAccount, setHoverAccount] = useState(false);
     const user = useSelector(state => state.auth.user);
 
-    // Refresh token
+    // get user
     useEffect(() => {
+        getAccount();
+    }, []);
+
+    const getAccount = async() => {
         if(token){
-            instance.get(`/user`,{
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-            .then(res => {
+            await GetUser().then(res => {
                 dispatch(getUser(res))
             })
             .catch(err => {
@@ -29,7 +28,7 @@ const Account = () => {
                 console.log(err);
             })
         }
-    }, [dispatch]);
+    }
 
 
     //logout
@@ -46,7 +45,6 @@ const Account = () => {
     const profile = () => {
         history.push(`${path.ACCOUNT}`);
     }
-    
 
     return (
         <React.Fragment>

@@ -15,6 +15,7 @@ const initialState = {
     urlSearch: '',
     dataSearch: [],
     rangePrice: [],
+    sortType: [],
 
     categories: [],
     news: [],
@@ -102,7 +103,14 @@ const adminReducer = (state = initialState, action) => {
                 ...state,
                 rangePrice : action.payload,
             }
-            
+
+            // get all sort type
+        case actionTypes.SORT_TYPE:
+            return {
+                ...state,
+                sortType : action.payload,
+            }
+
             //fetch all product
         case actionTypes.FETCH_PRODUCTS:
             return {

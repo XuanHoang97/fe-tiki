@@ -8,11 +8,11 @@ import { numberFormat, totalMoney } from 'components/Formatting/FormatNumber';
 function OrderLogin(props) {
     const dispatch = useDispatch();
     const [hoverCart, setHoverCart] = useState(false);
-    const cartsUser = useSelector(state => state.client.cartsUser);
+    const carts = useSelector(state => state.client.cartsUser);
     const user = useSelector(state => state.auth.user);
 
     // get cart by user
-    let userId = user.id;
+    let userId = user ? user.id : '';
     useEffect(() => {
         try {
             dispatch(GetCartByUser(userId));
@@ -35,7 +35,7 @@ function OrderLogin(props) {
                 <div className="text-white text-right">
                     <i className="fas fa-shopping-cart mr-4" style={{ fontSize: '17px' }}>
                         <span className="badge badge-pill badge-danger position-absolute " style={{ top: '-0.9rem', left: '4.7rem' }}>
-                            { cartsUser && cartsUser.length>0 ? cartsUser.length : '' }
+                            { carts && carts.length>0 ? carts.length : '' }
                         </span>
                     </i>
                 </div>
@@ -48,8 +48,8 @@ function OrderLogin(props) {
                         <h6 className='text-muted'>Sản phẩm đã thêm</h6>
                         <hr />
                         {
-                            cartsUser && cartsUser.length > 0 &&
-                            cartsUser.map((item,index) => {
+                            carts && carts.length > 0 &&
+                            carts.map((item,index) => {
                                 return (
                                     <div className='' key={index}>
                                         <div className="info">
@@ -81,8 +81,8 @@ function OrderLogin(props) {
                         <h6>Tổng tiền :
                             <span className='ml-3 font-weight-bold text-danger'>
                             {
-                                cartsUser && cartsUser.length > 0 ?
-                                numberFormat(totalMoney(cartsUser))
+                                carts && carts.length > 0 ?
+                                numberFormat(totalMoney(carts))
                                 : 0
                             }
                             </span>
@@ -93,7 +93,7 @@ function OrderLogin(props) {
             }
 
             {
-                cartsUser.length === 0 && 
+                carts.length === 0 && 
                 hoverCart &&
                 <div className="dropdown-menu cart__info p-3 text-center" onMouseLeave={()=>setHoverCart(false)}>          
                     <div>

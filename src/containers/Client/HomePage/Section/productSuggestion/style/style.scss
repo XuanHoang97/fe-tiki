@@ -34,6 +34,8 @@
 .list{
     .list__prod{
         width: 16.6%;
+        cursor: pointer;
+        padding: 10px;
         p{
             font-size: 12px;
         }
@@ -41,6 +43,9 @@
             display: flex;
             gap: 15px;
         }
+    }
+    .list__prod:hover{
+        background: #f5f5f5;
     }
 }
 

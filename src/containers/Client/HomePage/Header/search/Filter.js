@@ -1,6 +1,7 @@
+import { numberFormat } from 'components/Formatting/FormatNumber';
+import { fetchSupplierProduct, getAllRangePrice, filterPrice } from 'store/actions';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSupplierProduct, getAllRangePrice, filterPrice } from 'store/actions';
 import './style.scss';
 
 function Filter(props) {
@@ -14,19 +15,16 @@ function Filter(props) {
     useEffect(() => {
         dispatch(fetchSupplierProduct());
         dispatch(getAllRangePrice());
-    }, [dispatch]);
+        dispatch(filterPrice(keyword));
+        setActivePrice()
+    }, [dispatch, keyword]);
 
     // filter by price
-    const filterProd = (opPrice) => {
-        setActivePrice(opPrice.id);
-
-        
-        console.log('opPrice', opPrice, opPrice.valueVi);
-        console.log('value', opPrice.valueVi);
-
-        // dispatch action
-        // dispatch(filterPrice(keyword, 0, priceFrom, priceTo));
-        
+    const filterProd = (price) => {
+        let priceFrom = price.valueFrom;
+        let priceTo = price.valueTo;
+        setActivePrice(price.id);
+        dispatch(filterPrice(keyword, priceFrom, priceTo));
     }
 
     return (
@@ -42,13 +40,20 @@ function Filter(props) {
                 {
                     rangePrice && rangePrice.length > 0 &&
                     rangePrice.map((item, index) => {
+                        let priceFrom = (item.valueFrom);
+                        let priceTo = (item.valueTo);
                         return (
                             <div className={`item__price 
                                 ${item.id === activePrice ? 'activePrice' : ''}
-                            }`} key={index}
+                                }`} key={index}
                                 onClick={() => filterProd(item)}
                             >
-                                <span>{item.valueVi}</span>
+                                <span>
+                                    { !(priceFrom) ? 'Dưới ' + numberFormat(priceTo) : '' }
+                                    { (priceTo===100000000) ? 'Trên ' + numberFormat(priceFrom) : '' }
+                                    { priceFrom && priceTo < 100000000 ? 'Từ' + '\xa0' + (priceFrom) : '' }
+                                    { priceFrom && priceTo < 100000000 ? '-' + '\xa0' +  (priceTo) : '' }
+                                </span>
                             </div>
                         )
                     })

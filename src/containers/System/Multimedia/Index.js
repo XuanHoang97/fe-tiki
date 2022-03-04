@@ -35,7 +35,7 @@ const Multimedia = (props) => {
     useEffect(() => {
         dispatch(actions.fetchAllSlide());
         dispatch(actions.fetchAllCategory());
-        dispatch(actions.fetchAllSpecialCategory());
+        dispatch(actions.SpecialCategory());
         dispatch(actions.getStatusSlide());
     }, [dispatch]);
 

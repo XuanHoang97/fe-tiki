@@ -84,7 +84,7 @@ export const DeleteSlide = (id) => {
 }
 
 //get all special category
-export const fetchAllSpecialCategory = () => {
+export const SpecialCategory = () => {
     return async(dispatch, getState) => {
         try {
             let res = await getAllSpecialCategory('ALL');
@@ -109,7 +109,7 @@ export const CreateSpecialCategory = (data) => {
                 dispatch({
                     type: actionTypes.CREATE_SPECIAL_CATEGORY,
                 });
-                dispatch(fetchAllSpecialCategory());
+                dispatch(SpecialCategory());
                 toast.success('Thêm mới danh mục thành công !')
             }
         } catch (e) {
@@ -127,7 +127,7 @@ export const EditSpecialCategory = (data) => {
                 dispatch({
                     type: actionTypes.EDIT_SPECIAL_CATEGORY,
                 });
-                dispatch(fetchAllSpecialCategory());
+                dispatch(SpecialCategory());
                 toast.success('Cập nhật danh mục thành công !')
             }
         } catch (e) {
@@ -145,7 +145,7 @@ export const DeleteSpecialCategory = (id) => {
                 dispatch({
                     type: actionTypes.DELETE_SPECIAL_CATEGORY,
                 });
-                dispatch(fetchAllSpecialCategory());
+                dispatch(SpecialCategory());
                 toast.success('Xóa danh mục thành công !')
             }
         } catch (e) {

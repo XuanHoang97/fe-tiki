@@ -68,9 +68,13 @@ const getCartByUser = (userId) => {
 
 // delete item cart
 const deleteItemCartWithLogin = (productId) => {
-    return axios.delete(`${path.PORT}/delete-item-cart`, {
+    return instance.delete(`${path.PORT}/delete-item-cart`, {
         data: {
             id: productId,
+        },
+
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
     })
 }

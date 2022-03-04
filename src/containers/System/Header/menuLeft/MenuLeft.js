@@ -21,7 +21,7 @@ const MenuLeft = ({widthMenuLeft, effect}) => {
 
             <div className="dashboard">
                 <NavLink to={`${path.DASHBOARD}`} activeClassName="active" className ="menu-left" exact>
-                    <span><i className="fas fa-tachometer-alt mr-2"></i>Bảng điều khiển</span>
+                    <span><i className="fas fa-tachometer-alt mr-2"></i>Tổng quan</span>
                 </NavLink>
 
                 <NavLink to={`${path.USER_MANAGE}`} activeClassName="active" className ="menu-left">
@@ -83,18 +83,18 @@ const MenuLeft = ({widthMenuLeft, effect}) => {
                     <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>
 
-                <NavLink to={`${path.SUPPLIER_MANAGE}`} activeClassName="active" className ="menu-left">
+                <NavLink to={`${path.SALE_MANAGE}`} activeClassName="active" className ="menu-left">
                     <div className="d-flex align-items-center">
-                        <i className="far fa-building mr-2"></i>
-                        <span>Quản lý nhà cung cấp</span>
+                        <i className=" fas fa-cart-plus mr-2"></i>
+                        <span>Quản lý bán hàng</span>
                     </div>
                     <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>
 
-                <NavLink to={`${path.WAREHOUSE_MANAGE}`} activeClassName="active" className ="menu-left">
+                <NavLink to={`${path.SUPPLIER_MANAGE}`} activeClassName="active" className ="menu-left">
                     <div className="d-flex align-items-center">
                         <i className="far fa-building mr-2"></i>
-                        <span>Quản lý kho hàng</span>
+                        <span>Nhà cung cấp, kho hàng</span>
                     </div>
                     <span><i className="fas fa-angle-right small"></i></span>
                 </NavLink>

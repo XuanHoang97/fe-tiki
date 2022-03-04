@@ -4,12 +4,12 @@ import Category from './Category';
 import Search from './search/Search';
 import OrderWithoutLogin from './cart/OrderWithoutLogin';
 import Suggest from './Suggest';
-import './style/header.scss';
 import Account from './account/Account';
 import { path } from 'utils';
 import { useSelector } from 'react-redux';
 import OrderLogin from './cart/OrderLogin';
 import Notify from './Notify/Notify';
+import './style/header.scss';
 
 const Header = () => {
     const user = useSelector(state => state.auth.user);

@@ -3,14 +3,12 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { fetchProducts } from "store/actions";
-// import { numberFormat } from '../../../../components/Formatting/FormatNumber';
-// import * as actions from '../../../../store/actions'
 import Rate from "../Rate";
 
 const Product = (mobile) => {
     const dispatch = useDispatch()
-    const listProduct = useSelector(state => state.admin.products)
     const history = useHistory()
+    const products = useSelector(state => state.admin.products)
 
     useEffect(() => {
         dispatch(fetchProducts())
@@ -30,8 +28,8 @@ const Product = (mobile) => {
 
             <div className="product__detail row mt-4">
                 {
-                    listProduct && listProduct.length >0 ?
-                    listProduct.map((item, index) => {
+                    products && products.length >0 ?
+                    products.map((item, index) => {
                         return (
                             <div className="product--item col-md-2 col-6 p-3" 
                                 key={index} 
@@ -40,16 +38,13 @@ const Product = (mobile) => {
                                     <img src={item.image} className="w-75" alt="" />
                                     <h6 className="my-2 text-dark">{item.name}</h6>
                                 </div>
-
                                 <Rate />
 
                                 <div className="price__prod d-flex align-items-center">
                                     <span className="font-weight-bold text-dark" style={{fontSize: '13px' }}>
                                         {numberFormat(item.price)}
                                     </span>
-
                                     <span className="badge badge-pill badge-danger p-1 mx-2">-1%</span>
-
                                     <del className="text-secondary small">
                                         {numberFormat(item.sale)}
                                     </del>
@@ -57,8 +52,7 @@ const Product = (mobile) => {
                             </div>
                         );
                     })
-                    :
-                    'Loading....'
+                    : 'Loading...'
                 }
             </div>
         </div>

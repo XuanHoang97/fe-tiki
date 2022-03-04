@@ -13,7 +13,6 @@ function InfoAccount(props) {
     const dispatch = useDispatch();
     const user = useSelector(state => state.auth.user);
     const token = localStorage.getItem('token');
-
     useEffect(() => {
         dispatch(getUser());
     }, [dispatch]);
@@ -26,6 +25,7 @@ function InfoAccount(props) {
     if (!token) {
         return <Redirect to={path.HOMEPAGE} />
     }
+    
 
     return (
         <div className='bg-light'>

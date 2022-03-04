@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllSlide } from 'store/actions';
 import './style/slide.scss';
-// import * as actions from "./.../../../../../store/actions/index";
 
 function Slide() {
     const dispatch = useDispatch()
@@ -38,7 +37,6 @@ function Slide() {
                     }
                 </div>
 
-                {/*Controls*/}
                 <a className="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev" style={{ left: '15px', width: '4%', top: '100px', opacity: '0.2', height: '40px' }}>
                     <img src="https://salt.tikicdn.com/ts/upload/6b/59/c2/b61db5f1c32cfdc6d75e59d4fac2dbe8.png" alt="" style={{ transform: 'rotate(180deg)' }} />
                 </a>

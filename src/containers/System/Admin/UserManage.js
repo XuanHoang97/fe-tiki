@@ -48,7 +48,6 @@ const UserManage = (props) => {
         setUserEdit(user);
         setModalEditUser(!modalEditUser);
     }
-
     const editUser=(data)=>{
         const user = new FormData();
         user.append('id', userEdit.id);

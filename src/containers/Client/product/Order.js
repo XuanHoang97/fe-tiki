@@ -10,10 +10,10 @@ import './Style.scss'
 import Rate from '../HomePage/Section/Rate';
 
 const Order = (props) => {
-    const {order, qty, incrementQty, decrementQty} = props;
     const dispatch = useDispatch();
     const token = localStorage.getItem('token');
     const user = useSelector(state => state.auth.user);
+    const {order, qty, incrementQty, decrementQty} = props;
 
     // Order without login 
     const buyNow = () => {
@@ -58,6 +58,13 @@ const Order = (props) => {
             <div className="info d-flex align-items-center">
                 <h4 className="mr-5 font-weight-bold">{order && order.name ? order.name :'loading...'}</h4>
                 <Rate />
+                <span className="text-muted ml-4">
+                    <small className='mr-2'>Đã bán</small>
+                    {
+                        order && order.productData && order.productData && order.productData.total ?
+                        order.productData.total  : 0
+                    }
+                </span>
             </div>
 
             <div className="price bg-light py-3 px-2 my-2">

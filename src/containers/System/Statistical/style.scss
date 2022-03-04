@@ -1,14 +1,35 @@
 .statistical{
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
     .item-statistical{
         display: grid;
         grid-template-columns: 30% 70%;
-        gap: 10px;
         border: 1px solid #e5e5e5;
         padding: 10px 15px;
         background: white;
-        width: 25%;
+        width: 32%;
     }
+}
 
+.overview{
+    background: white;
+    padding: 10px 15px;
+    .reportStatus{
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        .status{
+            color: rgb(148, 148, 148);
+        }
+        .number{
+            color: #00a8ff;
+            font-weight: 600;
+            margin-right: 10px;
+            font-size: 15px;
+        }
+        .illustrator{
+            width: 15%;
+        }
+    }
 }

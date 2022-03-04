@@ -16,7 +16,7 @@
     top: 4rem;
     right: 9rem;
     width: 27rem;
-    height: 35rem;
+    height: 38rem;
     background: #fff;
     border-radius: 5px;
     padding: 10px;
@@ -36,7 +36,7 @@
             }
         }
         img{
-            width: 10%;
+            width: 13%;
             border-radius: 50%;
         }
     }
@@ -48,8 +48,11 @@
         background: white !important;
     }
     .list-notify {
-        overflow-y: auto;
-        height: 30rem;
+        overflow-y: hidden;
+        height: 32rem;
+    }
+    .list-notify:hover {
+        overflow-y: scroll;
     }
     .markAll{
         position: absolute;

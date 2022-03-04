@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getDetailProduct } from "services/userService";
-import './Style.scss'
 import * as actions from "store/actions";
+import './Style.scss'
 
 import Order from "./Order";
 import Specifications from "./Specifications";
@@ -30,7 +30,7 @@ const ProductDetail = ({ match }) => {
     });
   }, [ idParams ]);
 
-  // get similar product
+  // similar product
   useEffect(() => {
     dispatch(actions.GetProductSimilar(idParams));
   }, [dispatch, idParams ]);

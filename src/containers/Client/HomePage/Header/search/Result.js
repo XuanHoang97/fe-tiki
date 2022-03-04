@@ -1,22 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { numberFormat } from 'components/Formatting/FormatNumber';
-import { filterPrice, keywordSearch, searchResult, URLSearch } from 'store/actions';
+import { filterPrice, getTypeSort, keywordSearch, searchResult, URLSearch } from 'store/actions';
 import { Nav, NavItem, NavLink, TabContent, TabPane} from 'reactstrap';
 import Rate from '../../Section/Rate';
 import Header from '../Header';
 import Filter from './Filter';
+import {useHistory} from 'react-router-dom';
 
 function Result(props) {
     const dispatch = useDispatch();
+    const history = useHistory();
+    const [loading, setLoading] = useState(false);
+    const [activeTab, setActiveTab] = useState(51);
+
     const keyword = useSelector(state => state.admin.keywordSearch);
     const url = useSelector(state => state.admin.urlSearch);    
     const result = useSelector(state => state.admin.dataSearch);
-    const [loading, setLoading] = useState(false);
-    const [activeTab, setActiveTab] = useState('1');
-    
+    const sortType = useSelector(state => state.admin.sortType);
+
     // Result
     useEffect(() => {
+        dispatch(getTypeSort());
         dispatch(keywordSearch(keyword));
         dispatch(URLSearch(url));
 
@@ -36,6 +41,15 @@ function Result(props) {
     const [priceTo, setPriceTo] = useState('');
     const filterProduct = (e) => {
         dispatch(filterPrice(keyword, priceFrom, priceTo));
+    }
+
+    const sort = (product) => {
+        setActiveTab(product.id)
+        console.log(product)
+    }
+
+    const viewDetail = (product) => {
+        return history.push(`/products/${product.id}`)
     }
 
     return (
@@ -60,47 +74,32 @@ function Result(props) {
                                         <span className='text-primary'>
                                             `{keyword ? keyword :'Undefine'}`
                                         </span>
-                                        : {result.length} <small>Kết quả</small>
+                                        : {result && result.length ? result.length : 0} <small>Kết quả</small>
                                     </h5>
                                 </div>
                                 
                                 <Nav tabs className='mb-4'>
                                     <NavItem className='d-flex'>
-                                        <NavLink className={activeTab === '1' ? 'active' : ''}
-                                            onClick={() => {
-                                                setActiveTab('1');
-                                            }}
-                                        >
-                                            <span className='mr-2'>Phổ biến</span>
-                                        </NavLink>
-
-                                        <NavLink className={activeTab === '2' ? 'active' : ''}
-                                            onClick={() => {
-                                                setActiveTab('2');
-                                            }}
-                                        >
-                                            <span className='mr-2'>Bán chạy</span>
-                                        </NavLink>
-
-                                        <NavLink className={activeTab === '3' ? 'active' : ''}
-                                            onClick={() => {
-                                                setActiveTab('3');
-                                            }}
-                                        >
-                                            <span className='mr-2'>Giá thấp</span>
-                                        </NavLink>
-
-                                        <NavLink className={activeTab === '4' ? 'active' : ''}
-                                            onClick={() => { setActiveTab('4'); }}
-                                        >
-                                            <span className='mr-2'>Giá cao</span>
-                                        </NavLink>
+                                        {
+                                            sortType && sortType.length > 0 &&
+                                            sortType.map((item, index) => {
+                                                return (
+                                                    <NavLink
+                                                        key={index}
+                                                        className={`${activeTab === item.id ? 'active' : ''}`}
+                                                        onClick={() => sort(item) }
+                                                    >
+                                                        {item.valueVi}
+                                                    </NavLink>
+                                                )
+                                            })
+                                        }
                                     </NavItem>
                                 </Nav>
                             </div>
 
                             <TabContent activeTab={activeTab}>
-                                <TabPane tabId='1'>
+                                <TabPane tabId={activeTab}>
                                     <div className="list d-flex">
                                     {
                                         loading ?
@@ -112,7 +111,7 @@ function Result(props) {
                                         result && result.length >0 ?
                                         result.map((item, index) => {
                                             return (
-                                                <div className="list__prod" key={index}>
+                                                <div onClick={()=> viewDetail(item)} className="list__prod" key={index}>
                                                     <div>
                                                         <img src={item.image} className="w-75" alt="" style={{height: '100px'}} />
                                                         <p className="text-secondary mt-3 mb-1">{item.name}</p>
@@ -127,14 +126,11 @@ function Result(props) {
                                         })
                                         :
                                         <div className="">
-                                            Không có kết quả nào, Bạn có thể quan tâm: iphone, samsung, vertu...
+                                            Không có sản phẩm nào, gợi ý: iphone, samsung, nokia, vivo ...
                                         </div>
                                     }
                                     </div>
                                 </TabPane>
-                                <TabPane tabId='2'> 456 </TabPane>
-                                <TabPane tabId='3'>789</TabPane>
-                                <TabPane tabId='4'>012</TabPane>
                             </TabContent>
                         </div>
                     </div>

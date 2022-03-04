@@ -1,23 +1,23 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { SpecialCategory } from "store/actions";
 import { Link } from "react-router-dom";
-import { fetchAllSpecialCategory } from "store/actions";
 
 export default function Category() {
     const dispatch = useDispatch()
-    const listCategory = useSelector(state => state.admin.specialCategories)
+    const categories = useSelector(state => state.admin.specialCategories)
 
     useEffect(() => {
-        dispatch(fetchAllSpecialCategory())
+        dispatch(SpecialCategory())
     }, [dispatch])
     
     return (
-        <div className="category__hightlight mt-3 p-3 bg-white">
+        <div className="hightLight mt-3 p-3 bg-white">
             <h5><span className="text-danger">Danh Mục Nổi Bật</span></h5>
             <div className="list__category pt-4 pl-2 pr-2 row">
                 {
-                    listCategory && listCategory.length > 0 ?
-                    listCategory.map((item, index) => {
+                    categories && categories.length > 0 ?
+                    categories.map((item, index) => {
                         return (
                             <div className="col-md-1 col-6 p-0 text-center" key={index}>
                                 <Link to="">

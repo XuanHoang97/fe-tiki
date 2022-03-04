@@ -1,13 +1,11 @@
 import React, { useEffect} from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter as Router } from 'connected-react-router';
-import { history } from '../redux'
-import { ToastContainer } from 'react-toastify';
 import { userIsAuthenticated, userIsNotAuthenticated } from '../hoc/authentication';
-// import { useSelector } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+import { history } from '../redux'
 import { path } from '../utils';
 
-import './App.scss';
 import Home from '../routes/Home';
 import System from '../routes/System';
 import ProductDetail from './Client/product/ProductDetail';
@@ -22,11 +20,17 @@ import InfoAccount from './Client/HomePage/Header/account/Profile/InfoAccount';
 import Register from './Client/HomePage/Header/account/Register';
 import HomePage from './Client/HomePage/HomePage';
 import NotFound from './Client/HomePage/NotFound/Index';
+import './App.scss';
 
 
-console.warn = () => { };
+console.warn = () => {};
 function App(props) {    
-    // Keep state when refresh page
+    
+    useEffect(() => {
+        handlePersistorState();
+    }, []);
+    
+    // save redux state to localStorage
     const handlePersistorState = () => {
         const { persistor } = props;
         let { bootstrapped } = persistor.getState();
@@ -38,22 +42,6 @@ function App(props) {
             }else { persistor.purge(); }
         }
     }
-
-    useEffect(() => {
-        handlePersistorState();
-    }, []);
-
-    // notify
-    // const notifyUnread = useSelector(state => state.auth.notifyUnread);
-    // useEffect(() => {
-    //     const title =' Mua hàng online giá tốt, hàng chuẩn ship nhanh';
-    //     if(notifyUnread && notifyUnread.length > 0) {
-    //         document.title = `Bạn có (${notifyUnread.length}) thông báo`;
-    //     } else{
-    //         document.title = title;
-    //     }
-    // }, [notifyUnread]);
-    
     return (
         <Router history={history}>
             <ToastContainer autoClose={2500} />

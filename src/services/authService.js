@@ -17,6 +17,15 @@ const logout = () => {
     return axios.delete(`${path.PORT}/auth/logout`)
 }
 
+// get user
+const GetUser = () => {
+    return instance.get(`${path.PORT}/user`, {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    })
+}
+
 // Verify token
 const verifyToken = () => {
     return axios.get(`${path.PORT}/auth/token`,{
@@ -84,6 +93,7 @@ export{
     registerAcc,
     loginAcc,
     logout,
+    GetUser,
     verifyToken,
     updateUser,
     ChangePass,

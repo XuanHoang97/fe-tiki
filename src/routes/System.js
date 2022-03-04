@@ -12,18 +12,14 @@ import ArticleManage from '../containers/System/Article/ArticleManage';
 import CategoryManage from '../containers/System/Category/CategoryManage';
 import StatisticalManage from '../containers/System/Statistical/Statistical';
 import Setting from '../containers/System/Setting/Index';
-// import Notification from '../containers/Header/notification/Notification';
-// import Search from '../containers/Header/Search';
-// import MenuLeft from '../containers/Header/menuLeft/MenuLeft';
-// import MenuLeftCollapse from '../containers/Header/menuLeft/MenuLeftCollapse';
 import Multimedia from '../containers/System/Multimedia/Index';
 import SupplierManage from 'containers/System/supplier/SupplierManage';
-import Warehouse from 'containers/System/Warehouse/Warehouse';
-import { path } from 'utils';
 import Search from 'containers/System/Header/Search';
 import MenuLeft from 'containers/System/Header/menuLeft/MenuLeft';
 import MenuLeftCollapse from 'containers/System/Header/menuLeft/MenuLeftCollapse';
 import Notification from 'containers/System/Header/notification/Notification';
+import Sale from 'containers/System/Sale/Sale';
+import { path } from 'utils';
 
 const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
     const [menuLeft, setMenuLeft] = useState(true);
@@ -100,7 +96,7 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
                             <Route path={`${path.MULTIMEDIA_MANAGE}`} component={Multimedia} />
                             <Route path={`${path.STATISTICAL}`} component={StatisticalManage} />
                             <Route path={`${path.SUPPLIER_MANAGE}`} component={SupplierManage} />
-                            <Route path={`${path.WAREHOUSE_MANAGE}`} component={Warehouse} />
+                            <Route path={`${path.SALE_MANAGE}`} component={Sale} />
                             <Route path={`${path.SETTING}`} component={Setting} />
         
                             <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />
@@ -124,5 +120,4 @@ const mapDispatchToProps = dispatch => {
         processLogout: () => dispatch(actions.processLogout()),
     };
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(System);

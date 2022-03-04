@@ -1,4 +1,4 @@
-.category__hightlight {
+.hightLight {
     .list__category {
         .col-md-1:hover {
             color: blue important;
@@ -8,15 +8,7 @@
     }
 }
 
-.voucher {
-    .col-md-1:hover {
-        color: blue !important;
-        transform: scale(1.1);
-        transition: transform 0.3s linear;
-    }
-}
-
-.search__hightlight {
+.search__hightLight {
     display: flex;
     .card {
         border: none;

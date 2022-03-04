@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllSpecialCategory } from 'store/actions';
+import { SpecialCategory } from 'store/actions';
 
 function SearchSuggest(props) {
     const {show, blur, search} = props;
@@ -19,7 +19,7 @@ function SearchSuggest(props) {
     // fetch special product
     const specialCategory = useSelector(state => state.admin.specialCategories);
     useEffect(() => {
-        dispatch(fetchAllSpecialCategory())
+        dispatch(SpecialCategory())
     }, [dispatch])
     
     return (

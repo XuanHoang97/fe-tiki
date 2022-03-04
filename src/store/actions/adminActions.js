@@ -186,10 +186,10 @@ export const searchResult = (keyword) => {
 }
 
 // Filter product by price
-export const filterPrice = (keyword, price, priceFrom, priceTo) => {
+export const filterPrice = (keyword, priceFrom, priceTo) => {
     return async(dispatch, getState) => {
         try {
-            let res = await FilterProductByPrice(keyword, price, priceFrom, priceTo);
+            let res = await FilterProductByPrice(keyword, priceFrom, priceTo);
             if (res && res.data.errCode === 0) {
                 dispatch({
                     type: actionTypes.FILTER_PRODUCT,
@@ -215,6 +215,23 @@ export const getAllRangePrice = () => {
             }
         } catch (e) {
             console.log('getAllRangePrice error', e)
+        }
+    }
+}
+
+// get all type sort product
+export const getTypeSort = () => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await getAllCodeService('SORT_TYPE');
+            if (res && res.data.errCode === 0) {
+                dispatch({
+                    type: actionTypes.SORT_TYPE,
+                    payload: res.data.data
+                })
+            }
+        } catch (e) {
+            console.log('getTypeSort error', e)
         }
     }
 }

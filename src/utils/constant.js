@@ -27,7 +27,7 @@ export const path = {
     MULTIMEDIA_MANAGE: '/system/slide-manage',
     STATISTICAL: '/system/report-Statistical',
     SUPPLIER_MANAGE: '/system/supplier-manage',
-    WAREHOUSE_MANAGE: '/system/warehouse-manage',
+    SALE_MANAGE: '/system/sale-manage',
     SETTING: '/system/setting',
 
     // client

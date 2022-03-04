@@ -40,8 +40,8 @@ const search= (keyword) => {
     return axios.get(`${path.PORT}/search?keyword=${keyword}`)
 }
 
-const FilterProductByPrice= (keyword, price, priceFrom, priceTo) => {
-    return axios.get(`${path.PORT}/search?keyword=${keyword}&price=${price}&priceFrom=${priceFrom}&priceTo=${priceTo}`)
+const FilterProductByPrice= (keyword, priceFrom, priceTo) => {
+    return axios.get(`${path.PORT}/search?keyword=${keyword}&priceFrom=${priceFrom}&priceTo=${priceTo}`)
 }
 
 

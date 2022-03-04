@@ -31,7 +31,7 @@ export default function Search() {
     }
 
     // press enter search
-    const handleKeyDown=(e)=>{
+    const enterSearch=(e)=>{
         if(e.key=== 'Enter' || e.keyCode=== 13){     
             handleSearch();
         }
@@ -44,7 +44,7 @@ export default function Search() {
                 onChange={(e) => setSearch(e.target.value)}
                 ref={inputSearch}
                 onFocus={() => setSuggest(true)}
-                onKeyDown={handleKeyDown}
+                onKeyDown={enterSearch}
                 type="text" className="form-control"
                 placeholder="Tìm sản phẩm, danh mục hay thương hiệu mong muốn ..."
             />

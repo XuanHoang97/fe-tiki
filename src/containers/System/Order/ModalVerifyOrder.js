@@ -77,10 +77,10 @@ const ModalVerifyOrder = (props) => {
                         <b className={status ==='S1' ? 'text-warning ml-2' :'text-success ml-2'}>
                             {code} - 
                             <small>
-                                {status ==='S1' ? 'Chưa xác nhận' : ''}
-                                {status ==='S2' ? 'Đã xác nhận' : ''}
-                                {status ==='S3' ? 'Đang giao hàng' : ''}
-                                {status ==='S4' ? 'Đã giao hàng' : ''}
+                                {status ==='S1' ? ' Chưa xác nhận' : ''}
+                                {status ==='S2' ? ' Đã xác nhận' : ''}
+                                {status ==='S3' ? ' Đang giao hàng' : ''}
+                                {status ==='S4' ? ' Đã giao hàng' : ''}
                             </small>
                         </b>
                     </h4>

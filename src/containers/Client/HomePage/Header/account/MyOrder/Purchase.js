@@ -16,22 +16,15 @@ function Purchase(props) {
     const [modalDetail, setModalDetail] = useState(false);
     const [orderDetail, setOrderDetail] = useState({});
 
-    // get status order
+    // get order
     useEffect(() => {
         try{
+            let userId = user ? user.id : null;
             dispatch(getStatusOrder());
-            dispatch(FilterMyOrder(user.id, 'S0'));
+            dispatch(FilterMyOrder(userId, 'S0'));
+            dispatch(GetOrderByUser(userId));
         }catch(e){
-            console.log('get status order fail', e)
-        }
-    }, [dispatch, user]);
-
-    // get order by user
-    useEffect(() => {
-        try {
-            dispatch(GetOrderByUser(user.id));
-        } catch (e) {
-            console.log('get order by user fail', e)
+            console.log('get order fail', e)
         }
     }, [dispatch, user]);
 

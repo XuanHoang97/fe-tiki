@@ -1,3 +1,4 @@
+import { formatDate } from 'components/Formatting/FormatDate';
 import { numberFormat } from 'components/Formatting/FormatNumber';
 import React from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
@@ -31,10 +32,14 @@ const DetailOrder = (props) => {
                                     {order.status ==='S5' && 'Đã huỷ'}
                                 </span>
                             </div>
-                            <div className=" py-1 px-2">
-                                <span className="text-medium">Giao hàng dự kiến:</span>
-                                <span> loading...</span>
-                            </div>
+
+                            {
+                                order.status !=='S4' && 
+                                <div className=" py-1 px-2">
+                                    <span className="text-medium">Giao hàng dự kiến:</span>
+                                    <span> {formatDate(order.dateDelivery)}</span>
+                                </div>
+                            }
                         </div>
                         <div className="card-body my-2">
                             <div className="steps d-flex flex-wrap flex-sm-nowrap py-2">
@@ -45,7 +50,7 @@ const DetailOrder = (props) => {
                                         </div>
                                     </div>
                                     <h4 className='step-title activeStatus'>Đơn hàng đã đặt</h4>
-                                    <small className='text-secondary'>{order.date}</small>
+                                    <small className='text-secondary'>{formatDate(order.date)}</small>
                                 </div>
                             {
                                 statusOrder && statusOrder.length >0 ?
@@ -78,6 +83,11 @@ const DetailOrder = (props) => {
                                                     (item.keyMap < order.status) ? 'step-title activeStatus' : 'step-title'
                                                 }
                                             >{item.valueVi}</h4>
+                                            <span className='text-secondary small'>{
+                                                item.keyMap === order.status ?
+                                                formatDate(order.timeTrack)
+                                                : ''
+                                            }</span>
                                         </div>
                                     )
                                 }) : 'loading...'

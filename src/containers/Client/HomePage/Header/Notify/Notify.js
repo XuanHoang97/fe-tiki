@@ -21,7 +21,6 @@ const Notify = () => {
         dispatch(GetAllNotify(userId));
     }, [dispatch, userId]);
     
-    
     // view detail notify
     const viewDetail = (notify) => {
         dispatch(UpdateStatusNotify({

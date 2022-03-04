@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {TabContent, TabPane} from 'reactstrap';
 import ModalVerifyOrder from './ModalVerifyOrder';
-import FilterDataOrder from './FilterDataOrder';
 import * as actions from 'store/actions';
 import OrderTabControl from './OrderTabControl';
-import './style.scss';
 import ReactPaginate from "react-paginate";
 import { numberFormat } from 'components/Formatting/FormatNumber';
+import SortOrder from './SortOrder';
 import Moment from 'react-moment';
+import './style.scss';
 
 const OrderManage = (props) => {
     const [activeTab, setActiveTab] = useState('4');
@@ -78,7 +78,7 @@ const OrderManage = (props) => {
                 <TabPane tabId={activeTab}>
                     {
                         activeTab === '4' ?
-                        <FilterDataOrder
+                        <SortOrder
                             StatusOrder={StatusOrder}
                             status={status}
                             FilterOrder={FilterOrder}
@@ -128,11 +128,12 @@ const OrderManage = (props) => {
                                                 <td><Moment format="DD/MM/YYYY">{item.date}</Moment></td>
                                                 <td><Moment format="DD/MM/YYYY">{item.date}</Moment></td>
                                                 <td className='font-weight-bold small'>
-                                                    {item.status ==='S1' && <span className='text-warning'>Đang chờ xử lý</span>}
-                                                    {item.status ==='S2' && <span className='text-success'>Đã xác nhận</span>}
-                                                    {item.status ==='S3' && <span className='text-primary'>Đang giao hàng</span>}
-                                                    {item.status ==='S4' && <span className='text-success'>Đã giao</span>}
-                                                    {item.status ==='S5' && <span className='text-danger'>Đã hủy</span>}
+                                                    {item.status ==='S1' && <span className='badge badge-warning'>Đang chờ xử lý</span>}
+                                                    {item.status ==='S2' && <span className='badge badge-success'>Đã xác nhận</span>}
+                                                    {item.status ==='S3' && <span className='badge badge-primary'>Đang giao hàng</span>}
+                                                    {item.status ==='S4' && <span className='badge badge-success'>Đã giao</span>}
+                                                    {item.status ==='S5' && <span className='badge badge-danger'>Đã hủy</span>}
+                                                    {item.status ==='S6' && <span className='badge badge-warning'>Hoàn trả</span>}
                                                 </td>
                                                 <td style={{width: '10%'}}>
                                                     {

@@ -1,13 +1,13 @@
 import React from 'react';
 
-function FilterDataOrder(props) {
+function SortOrder(props) {
     const {status, StatusOrder, FilterOrder} = props;
 
     return (
         <div className='filter bg-success py-2 text-white d-flex align-items-center'>
             <div className="col-4 d-flex align-items-center">
                 <label className="p-0 col-3">Tìm kiếm</label>
-                <input type="text" className="col-9 form-control" placeholder="Tìm kiếm đơn hàng..." 
+                <input type="text" className="col-9 form-control" placeholder="Mã đơn hàng..." 
                     style={{height:'30px'}}
                 />
             </div>
@@ -27,7 +27,7 @@ function FilterDataOrder(props) {
             </div>
 
             <div className="col-4 d-flex align-items-center">
-                <label className="col-4 p-0">Ngày đặt hàng</label>
+                <label className="col-4 p-0">Ngày đặt</label>
                 <select className="col-8 form-control" name="" id=""  style={{height:'30px'}}>
                     <option>Ngày đặt</option>
                     <option>Mới nhất</option>
@@ -37,4 +37,4 @@ function FilterDataOrder(props) {
         </div>
     );
 }
-export default FilterDataOrder;
+export default SortOrder;

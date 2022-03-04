@@ -1,34 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch} from 'react-redux';
 import { numberFormat, totalMoney } from 'components/Formatting/FormatNumber';
-import moment from "moment";
 import { CheckoutOrder } from 'store/actions';
 import { useHistory } from 'react-router';
-import { path } from 'utils';
 import LoadingOverlay from 'react-loading-overlay';
 import Header from '../HomePage/Header/Header';
+import moment from "moment";
+import { path } from 'utils';
 
 const Payment = (props) => {
+    const dispatch = useDispatch();
+    const history = useHistory();
     const cartsUser = useSelector(state => state.client.cartsUser);
     const delivery = useSelector(state => state.client.delivery);
     const payment = useSelector(state => state.client.payment);
     const user = useSelector(state => state.auth.user);
     const [loadingOrder, setLoadingOrder] = useState(false);
     
+    const date = new Date();
+    const coupon = 30000;
     const [deliveryMethod, setDeliveryMethod] = useState('GIAO HÀNG TẬN NƠI');
     const [paymentMethod, setPaymentMethod] = useState('Tiền mặt');
     const [deliveryFee, setDeliveryFee] = useState(50000);
-    const coupon = 30000;
-    const date = new Date();
     const dateDelivery=date.setDate(date.getDate() + 1)
     const dateDeliveryFormat = moment(dateDelivery).locale('vi').format('dddd, DD/MM/YYYY');
-    const dispatch = useDispatch();
-    const history = useHistory();
-
-    useEffect(() => {
-        document.title = 'Thông tin giao hàng';
-    }, [])
-
+    
     // show value of delivery method
     const handleDelivery = (e) => {
         setDeliveryMethod(e.target.value)
@@ -40,7 +36,7 @@ const Payment = (props) => {
         }
     }
 
-    // payment order
+    // payment -checkout order
     const handlePayment = () => {
         dispatch(CheckoutOrder({
             arrOrder: cartsUser,
@@ -51,6 +47,7 @@ const Payment = (props) => {
             email: user.email,
             delivery: deliveryMethod,
             payment: paymentMethod,
+            date: new Date().valueOf() + 7 * 60 * 60,
             dateDelivery: dateDelivery,
         }))
         setLoadingOrder(true)
@@ -60,6 +57,10 @@ const Payment = (props) => {
         }, 2500);
     }
 
+    useEffect(() => {
+        document.title = 'Thông tin giao hàng';
+    }, [])
+    
     return (
         <>
             <Header />

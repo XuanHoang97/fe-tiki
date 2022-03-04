@@ -54,15 +54,15 @@ function MenuLeftCollapse(props) {
                     </div>
                 </NavLink>
 
-                <NavLink to={`${path.SUPPLIER_MANAGE}`} activeClassName="active" className ="menu-left">
+                <NavLink to={`${path.SALE_MANAGE}`} activeClassName="active" className ="menu-left">
                     <div className="d-flex align-items-center">
-                        <i className="far fa-building"></i>
+                        <i className=" fas fa-cart-plus"></i>
                     </div>
                 </NavLink>
 
-                <NavLink to={`${path.WAREHOUSE_MANAGE}`} activeClassName="active" className ="menu-left">
+                <NavLink to={`${path.SUPPLIER_MANAGE}`} activeClassName="active" className ="menu-left">
                     <div className="d-flex align-items-center">
-                        <i className="far fa-building mr-2"></i>
+                        <i className="far fa-building"></i>
                     </div>
                 </NavLink>
 

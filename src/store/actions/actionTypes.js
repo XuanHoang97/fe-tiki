@@ -29,6 +29,7 @@ const actionTypes = Object.freeze({
     SEARCH: 'SEARCH',
     FILTER_PRODUCT: 'FILTER_PRODUCT',
     ALL_RANGE_PRICE: 'ALL_RANGE_PRICE',
+    SORT_TYPE : 'SORT_TYPE',
     
     //get all product
     FETCH_PRODUCTS: 'FETCH_PRODUCTS',
@@ -44,9 +45,6 @@ const actionTypes = Object.freeze({
     SELECT_OPTION_PRODUCT: 'SELECT_OPTION_PRODUCT',
     FETCH_ARTICLE: 'FETCH_ARTICLE',
 
-    // get number product sold
-    GET_NUMBER_PRODUCT_SOLD: 'GET_NUMBER_PRODUCT_SOLD',
-    
     //Category
     FETCH_CATEGORIES: 'FETCH_CATEGORIES',
     CREATE_CATEGORY: 'CREATE_CATEGORY',
