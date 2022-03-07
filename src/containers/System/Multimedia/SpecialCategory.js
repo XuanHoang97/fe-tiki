@@ -75,7 +75,6 @@ function SpecialCategory(props) {
                 <table className="table table-striped table-bordered table-hover w-100">
                     <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
                         <tr>
-                            <td>Tick</td>
                             <td>STT</td>
                             <td>Ảnh</td>
                             <td>Tên</td>
@@ -89,11 +88,6 @@ function SpecialCategory(props) {
                             specialCategories.map((item, index) => {
                                 return(
                                     <tr key={index}>
-                                        <td>
-                                            <div className="form-group">
-                                                <input type="checkbox" className="w-100" />
-                                            </div>
-                                        </td>
                                         <td>{index + 1}</td>
                                         <td style={{width:'6%'}}><img src={item.image} className='w-100' alt="" /> </td>
                                         <td className='text-primary'>{item.name}</td>

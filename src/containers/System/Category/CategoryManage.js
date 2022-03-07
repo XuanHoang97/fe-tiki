@@ -54,7 +54,7 @@ const CategoryManage = (props) => {
     }      
 
     return (        
-        <div className="mx-2">
+        <div className="p-2 bg-white">
             <ModalAddCategory
                 isOpen={modalCategory}
                 toggleParent={handleAddCategory}
@@ -79,7 +79,6 @@ const CategoryManage = (props) => {
             <table className="table table-striped table-bordered table-hover">
                 <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
                     <tr>
-                        <td>Tick</td>
                         <td>STT</td>
                         <td>Ảnh</td>
                         <td>Tên danh mục</td>
@@ -92,11 +91,6 @@ const CategoryManage = (props) => {
                     category.map((item, index) => {
                         return (
                             <tr key={index}>
-                                <td>
-                                    <div className="form-group">
-                                        <input type="checkbox" className="w-100" />
-                                    </div>
-                                </td>
                                 <td>{index + 1}</td>
                                 <td style={{width:'6%'}}><img src={item.image} className='w-100' alt="" /> </td>
                                 <td className='text-primary'>{item.name}</td>

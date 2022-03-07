@@ -1,8 +1,58 @@
-.stat{
-}
-a.viewDetail{
-    height: 25px;
-    font-size: 13px;
+.statistical{
     display: flex;
-    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+    .item-statistical{
+        display: grid;
+        grid-template-columns: 30% 70%;
+        border: 1px solid #e5e5e5;
+        padding: 15px;
+        background: white;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        width: 32%;
+        border-radius: 10px;
+        color: white;
+        img{
+            border-radius: 50%;
+        }
+    }
+}
+
+.revenue{
+    background: white;
+    padding: 15px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    .item-revenue{
+        color: #474747;
+        font-size: 14px;
+    }
+}
+
+.overview{
+    background: white;
+    padding: 15px;
+    width: 100%;
+    margin-right: 20px;
+    margin-top: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    .reportStatus{
+        display: flex;
+        align-items: center;
+        border-bottom: 1px dotted lightgrey;
+        padding: 5px 0;
+        .status{
+            color: #7b7b7b;
+        }
+        .number{
+            color: #0089ce;
+            font-weight: 600;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+        .illustrator{
+            width: 6%;
+            opacity: 0.7;
+            margin-right: 15px;
+        }
+    }
 }

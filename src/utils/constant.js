@@ -15,6 +15,10 @@ export const path = {
     CHANGE_PASSWORD: '/account/password',
     ORDER: '/user/purchase',
     NOTIFICATION: '/user/notifications/order',
+    TIKI_XU: '/user/tiki-xu',
+    VOUCHER: '/user/voucher',
+    DISCOUNT: '/user/notifications/discount',
+    ACTIVITY: '/user/notifications/activity',
 
     // Admin
     DASHBOARD: '/system/dashboard',
@@ -28,7 +32,10 @@ export const path = {
     STATISTICAL: '/system/report-Statistical',
     SUPPLIER_MANAGE: '/system/supplier-manage',
     SALE_MANAGE: '/system/sale-manage',
+    DISCOUNT_MANAGE: '/system/discount-manage',
+    VOTE_MANAGE: '/system/vote-manage',
     SETTING: '/system/setting',
+
 
     // client
     DETAIL_PRODUCT: '/products/:id',

@@ -1,18 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../../Header';
-import { path } from 'utils';
 import {BrowserRouter as Router, Route, Switch, NavLink,Redirect } from 'react-router-dom';
 import ChangePassword from './ChangePassword';
 import Profile from './Profile';
 import Purchase from '../MyOrder/Purchase';
 import Order from '../notification/Order';
+import { path } from 'utils';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUser } from 'store/actions';
+import {MenuUser} from './DataMenu';
 
-function InfoAccount(props) {
+const InfoAccount = () => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.auth.user);
     const token = localStorage.getItem('token');
+    const [subMenu, setSubMenu] = useState(`${path.ACCOUNT}`);
+
     useEffect(() => {
         dispatch(getUser());
     }, [dispatch]);
@@ -21,11 +24,9 @@ function InfoAccount(props) {
         document.title = 'Thông tin tài khoản';
     }, [user]);
     
-    // setting route
     if (!token) {
         return <Redirect to={path.HOMEPAGE} />
     }
-    
 
     return (
         <div className='bg-light'>
@@ -44,47 +45,45 @@ function InfoAccount(props) {
                             </div>
                         </div>
 
-                        <div className='module'>
-                            <div className='profile'>
-                                <div className='title'>
-                                    <img src="https://cf.shopee.vn/file/ba61750a46794d8847c3f463c5e71cc4" className='illustration' alt=""/>
-                                    <span>Tài khoản của tôi</span>
-                                </div>
-                                <div className='item-profile'>
-                                    <NavLink to={`${path.ACCOUNT}`} activeClassName="activeAcc" className='item-module' exact>Hồ sơ</NavLink>
-                                </div>
+                        {
+                            MenuUser && MenuUser.length > 0 &&
+                            MenuUser.map((item, index) => {
+                                return (
+                                    <div key={index} className='menu-user'>
+                                        <NavLink to={item.path} 
+                                            activeClassName={`${item.sub ? '' : 'activeMenu' }`}
+                                            className='item-menu'>
+                                            <div className='item'
+                                                onClick={() => setSubMenu(item.path)}
+                                            >
+                                                <img src={item.icon} alt='' />
+                                                <span>{item.name}</span>
+                                            </div>
+                                        </NavLink>
 
-                                <div className='item-profile'>
-                                    <NavLink to={`${path.CHANGE_PASSWORD}`} activeClassName="activeAcc" className='item-module'>Đổi mật khẩu</NavLink>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className='myOrder'>
-                            <NavLink to={`${path.ORDER}`} activeClassName="activeOrder" className='my_Order'>
-                                <img src="https://cf.shopee.vn/file/f0049e9df4e536bc3e7f140d071e9078" className='illustration' alt="" />
-                                <span>Đơn mua</span>
-                            </NavLink>
-                        </div>
-
-                        <div className='notify'>
-                            <div className='notification'>
-                                <img src="https://cf.shopee.vn/file/e10a43b53ec8605f4829da5618e0717c" className='illustration' alt="" />
-                                <span>Thông báo</span>
-                            </div>
-
-                            <div className='item-notify'>
-                                <NavLink to={`${path.NOTIFICATION}`} activeClassName="activeNotification" className='item-module' exact>Cập nhật đơn hàng</NavLink>
-                            </div>
-
-                            <div className='item-notify'>
-                                <div className='item-module'>Khuyến mãi</div>
-                            </div>
-
-                            <div className='item-notify'>
-                                <div className='item-module'>Hoạt động</div>
-                            </div>
-                        </div>
+                                        {
+                                            subMenu === item.path &&
+                                            <div className="subMenu"
+                                            >
+                                                {
+                                                    item.sub && item.sub.length > 0 &&
+                                                    item.sub.map((sub, index) => {
+                                                        return (
+                                                            <NavLink to={sub.path} key={index}
+                                                                className='item-menu' 
+                                                                activeClassName='activeSubMenu'
+                                                            >
+                                                                <div>{sub.name}</div>
+                                                            </NavLink>
+                                                        )
+                                                    })
+                                                }
+                                            </div>
+                                        }
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
 
                     <div className='col-10 bg-white p-4'>

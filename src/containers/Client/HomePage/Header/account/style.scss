@@ -31,6 +31,7 @@
 .avatar{
     gap: 15px;
     align-items: center;
+    margin-bottom: 30px;
     img{
         width: 25%;
     }
@@ -46,76 +47,41 @@
         }
     }
 }
-.module{
-    .profile{
-        .title{
-            margin: 30px 0 5px 0;
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            .illustration{
-                width: 8%;
-            }
-            span{
-                color: black;
-                font-weight: 600;
-                font-family: system-ui;
-            }
-        }
-        .item-profile{
-            margin-left: 25px;
-            padding: 5px 0;
-            .item-module{
-                margin: 10px 0;
-                padding: 5px 0;
-                color: #595959 !important;
-            }
-            .activeAcc{
-                color: orange !important;
-            }
-            .item-module:hover{
-                color: orange;
-            }
-        }
-    }
-}
 
-.notify{
-    .item-notify{
-        margin-left: 25px;
-        padding: 5px 0;
-        .item-module{
-            color: #595959;
-        }
-        .activeNotification{
-            color: rgb(255, 138, 4) !important;
-        }
-    }
-    .notification{
-        @extend .my_Order;
-        margin: 10px 0 0 0 !important;
-    }
-}
-
-.my_Order{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 10px 0;
-    cursor: pointer;
-    color: black;
+.menu-user{
     font-weight: 600;
     font-family: system-ui;
-    span{
-        
+    .item-menu{
+        color: black;
+        .item{
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            img{
+                width: 10%; 
+            }
+        }
     }
-    .illustration{
-        width: 8%;
+
+    .subMenu{
+        padding: 0 25px;
+        .item-menu{
+            div{
+                color: #777777;
+                margin: 5px 0;
+            }
+        }
+    }
+
+    .activeSubMenu{
+        div{
+            color: #ff5e00 !important;
+        }
     }
 }
-
-.activeOrder{
-    color: rgb(255, 138, 4) !important;
+.activeMenu{
+    color: #ff5e00 !important;
 }
 
 .statusOrder{

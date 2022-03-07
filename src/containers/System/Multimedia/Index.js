@@ -158,7 +158,7 @@ const Multimedia = (props) => {
     }
 
     return (
-        <div className="mx-2">
+        <div className="p-2 bg-white">
             <div className="h5 text-dark mb-4">Quản lý đa phương tiện</div>
             <TabMultimedia
                 activeTab={activeTab}

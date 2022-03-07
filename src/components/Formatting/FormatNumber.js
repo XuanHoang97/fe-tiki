@@ -16,15 +16,6 @@ export const totalMoney = (arr) => {
     return total
 }
 
-// total revenue
-export const totalRevenue = (arr) => {
-    let revenue = 0
-    for (let item of arr) {
-        revenue += item.total
-    }
-    return revenue
-}
-
 // investment cost
 export const investmentCost = (arr) => {
     let investment = 150000

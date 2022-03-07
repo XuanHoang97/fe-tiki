@@ -111,7 +111,7 @@ const ArticleManage = (props) => {
     }
 
     return ( 
-        <div className="mx-2">
+        <div className="p-2 bg-white">
             <div className="h5 text-dark">Quản lý bài viết - chi tiết sản phẩm</div>
             <div className='bg-light p-3'>
                 <ModalArticle

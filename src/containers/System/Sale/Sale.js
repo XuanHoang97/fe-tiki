@@ -2,7 +2,7 @@ import React from 'react';
 
 function Sale(props) {
     return (
-        <div>
+        <div className='p-2 bg-white'>
             Sale manage
         </div>
     );

@@ -58,7 +58,7 @@ const OrderManage = (props) => {
     };
 
     return (
-        <div className="mx-2">
+        <div className="p-2 bg-white">
             <ModalVerifyOrder
                 isOpen={modalVerifyOrder}
                 toggle={verifyOrder}

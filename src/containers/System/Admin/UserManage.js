@@ -69,7 +69,7 @@ const UserManage = (props) => {
     }
 
     return (
-        <div className="mx-2">
+        <div className="p-2 bg-white">
             <ModalUser
                 isOpen={modalUser} 
                 toggleModal={handleAddNewUser}
@@ -102,7 +102,6 @@ const UserManage = (props) => {
             <table className="table table-striped table-bordered table-hover">
                 <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
                     <tr>
-                        <th scope="col">Tick</th>
                         <th scope="col">STT</th>
                         <th scope="col">Avatar</th>
                         <th scope="col">Họ tên</th>
@@ -122,11 +121,6 @@ const UserManage = (props) => {
                         return (
                             <tbody key={index}>
                                 <tr>
-                                    <th scope='row'>
-                                        <div className="form-group">
-                                            <input type="checkbox" className="w-100" />
-                                        </div>
-                                    </th>
                                     <td>{index + 1}</td>
                                     <td style={{width:'6%'}}><img src={item.image} className='w-100 rounded-circle' alt="" /> </td>
                                     <td className='text-primary'>{item.username}</td>

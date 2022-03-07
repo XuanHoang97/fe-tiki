@@ -59,7 +59,7 @@ const NewsManage = (props) => {
     }
 
     return (
-        <div className="mx-2">
+        <div className="p-2 bg-white">
             <ModalAddNews
                 isOpen={modalAddNews}
                 toggleParent={handleAddNews}
@@ -84,7 +84,6 @@ const NewsManage = (props) => {
             <table className="table table-striped table-bordered table-hover">
                 <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
                     <tr>
-                        <th>Tick</th>
                         <th>STT</th>
                         <th>Ảnh</th>
                         <th>Tiêu đề</th>
@@ -101,11 +100,6 @@ const NewsManage = (props) => {
                         listNews.map((item, index) => {
                             return(
                                 <tr key={index}>
-                                    <td>
-                                        <div className="form-group">
-                                            <input type="checkbox" className="w-100" />
-                                        </div>
-                                    </td>
                                     <td>{index + 1}</td>
                                     <td style={{width:'6%'}}><img src={item.image} className='w-100' alt="" /> </td>
                                     <td className='text-primary'>{item.name}</td>

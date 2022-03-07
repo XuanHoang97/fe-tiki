@@ -1,0 +1,37 @@
+.main-container{
+    .module{
+        .system-container{
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: none;
+            .menuAdmin{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background: white;
+                border-bottom: 1px solid lightgray;
+                .collapse_module{
+                    display: flex;
+                    align-items: center;
+                    margin-left: 15px;
+                    span{
+                        i{cursor: pointer;}
+                    }
+                }
+                .account{
+                    display: flex;
+                    align-items: center;
+                    .acc{
+                        img{
+                            width: 32px;
+                        }
+                    }
+                    .logout{
+                        padding-right: 15px;
+                        font-weight: normal;
+                    }
+                }
+            }
+        }
+    }
+}
