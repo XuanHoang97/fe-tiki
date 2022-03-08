@@ -15,11 +15,13 @@ import Multimedia from '../containers/System/Multimedia/Index';
 import MenuLeft from 'containers/System/Header/menuLeft/MenuLeft';
 import MenuLeftCollapse from 'containers/System/Header/menuLeft/MenuLeftCollapse';
 import Notification from 'containers/System/Header/notification/Notification';
-import Sale from 'containers/System/Sale/Sale';
+import Bill from 'containers/System/Sale/Bill';
 import { path } from 'utils';
 import './style.scss'
+import VoteManage from 'containers/System/Vote/VoteManage';
 
-const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
+const System = (props) => {
+    const {systemMenuPath, isLoggedIn,userInfo, processLogout} = props;
     const [menuLeft, setMenuLeft] = useState(true);
     const [widthMenuRight, setWidthMenuRight] = useState('82%');
     const [widthMenuLeft] = useState('18%');
@@ -70,7 +72,8 @@ const System = ({ systemMenuPath, isLoggedIn, userInfo, processLogout }) => {
                             <Route path={`${path.CATEGORY_MANAGE}`} component={CategoryManage} />
                             <Route path={`${path.MULTIMEDIA_MANAGE}`} component={Multimedia} />
                             <Route path={`${path.STATISTICAL}`} component={StatisticalManage} />
-                            <Route path={`${path.SALE_MANAGE}`} component={Sale} />
+                            <Route path={`${path.SALE_MANAGE}`} component={Bill} />
+                            <Route path={`${path.VOTE_MANAGE}`} component={VoteManage} />
                             <Route path={`${path.SETTING}`} component={Setting} />
         
                             <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />

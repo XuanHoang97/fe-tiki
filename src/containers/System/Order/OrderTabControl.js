@@ -20,7 +20,7 @@ function OrderTabControl(props) {
                                     dispatch(actions.filterOrderByStatus(`${item.keyMap}`));
                                 }}
                             >
-                                <span className='font-weight-bold mr-2'>{item.valueVi}</span>
+                                <span className='mr-2'>{item.valueVi}</span>
                                 <span className='text-secondary statical'>
                                     ({
                                         item.keyMap === 'S0' ?

@@ -112,7 +112,7 @@ const ArticleManage = (props) => {
 
     return ( 
         <div className="p-2 bg-white">
-            <div className="h5 text-dark">Quản lý bài viết - chi tiết sản phẩm</div>
+            <div className="h5 text-dark">Chi tiết sản phẩm (<small>{listArticle && listArticle.length>0 ? listArticle.length : 0}</small>)</div>
             <div className='bg-light p-3'>
                 <ModalArticle
                     isOpen={modalAddArticle}
@@ -142,11 +142,10 @@ const ArticleManage = (props) => {
                     setProductId={setProductId}
                 />
 
-                <button onClick={() => addArticle()} type="button" className="btn btn-success">
+                <button onClick={() => addArticle()} type="button" className="btn btn-success mb-3">
                     <i className="fas fa-plus"></i> Thêm bài viết
                 </button>
 
-                <div className="text-dark mt-4">Danh sách bài viết (<b>{listArticle && listArticle.length>0 ? listArticle.length : 0}</b>)</div>
                 <table className="table table-striped table-bordered table-hover">
                     <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
                         <tr>

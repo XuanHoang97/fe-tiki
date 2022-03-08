@@ -5,6 +5,7 @@
         .active.nav-link{
             color: rgb(83, 138, 255) !important;
             border-bottom: 3px solid rgb(83, 138, 255);
+            font-weight: 600;
         }
         .nav-link{
             color: #535353;
@@ -14,6 +15,13 @@
         }
     }
 }
+
+.tab-content{
+    padding: 20px 15px;
+    background: #f6f7f7;
+    border: 1px solid #e5e5e5;
+}
+
 .actionOrder{
     font-size: 12px;
     cursor: pointer;

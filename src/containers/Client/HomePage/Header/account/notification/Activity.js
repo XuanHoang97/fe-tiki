@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FilterNotify} from 'store/actions';
 
-const Order = () => {
+const ACTIVITY = () => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.auth.user);
     const notify = useSelector(state => state.auth.notify);
@@ -11,7 +11,7 @@ const Order = () => {
     // fetch notify
     useEffect(() => {
         let userId = user ? user.id : '';
-        dispatch(FilterNotify(userId, 'ORDER'));
+        dispatch(FilterNotify(userId, 'ACTIVITY'));
     }, [dispatch, user, notify]);
 
     return (
@@ -40,4 +40,4 @@ const Order = () => {
         </div>
     );
 }
-export default Order;
+export default ACTIVITY;

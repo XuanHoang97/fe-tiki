@@ -45,6 +45,13 @@ const authReducer = (state = initialState, action) => {
                 notify: action.payload
             }
 
+            // filter notify 
+        case actionTypes.FILTER_NOTIFY:
+            return {
+                ...state,
+                notify: action.payload
+            }
+
         default:
             return state;
     }

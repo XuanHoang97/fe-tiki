@@ -73,14 +73,13 @@ const NewsManage = (props) => {
                 editNews={handleEditNews}
             />
 
-            <div className="h5 text-dark mb-4">Quản lý tin tức và sự kiện</div>
+            <div className="h5 text-dark mb-4">Quản lý tin tức và sự kiện (<small>{listNews.length}</small>)</div>
             <div className="d-flex justify-content-between mb-3">
                 <button onClick={() => handleAddNews()} type="button" className="btn btn-success col-2">
                     <i className="fas fa-plus mr-2"></i> Thêm tin tức
                 </button>
             </div>
 
-            <div className="text-dark">Danh sách bài viết (<b>{listNews.length}</b>)</div>
             <table className="table table-striped table-bordered table-hover">
                 <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
                     <tr>

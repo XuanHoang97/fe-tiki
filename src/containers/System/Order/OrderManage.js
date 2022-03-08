@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {TabContent, TabPane} from 'reactstrap';
-import ModalVerifyOrder from './ModalVerifyOrder';
+import VerifyOrder from './VerifyOrder';
 import * as actions from 'store/actions';
 import OrderTabControl from './OrderTabControl';
 import ReactPaginate from "react-paginate";
 import { numberFormat } from 'components/Formatting/FormatNumber';
 import SortOrder from './SortOrder';
-import Moment from 'react-moment';
 import './style.scss';
+import { formatDate } from 'components/Formatting/FormatDate';
 
 const OrderManage = (props) => {
     const [activeTab, setActiveTab] = useState('4');
@@ -59,7 +59,7 @@ const OrderManage = (props) => {
 
     return (
         <div className="p-2 bg-white">
-            <ModalVerifyOrder
+            <VerifyOrder
                 isOpen={modalVerifyOrder}
                 toggle={verifyOrder}
                 updateOrder={updateOrder}
@@ -74,7 +74,7 @@ const OrderManage = (props) => {
                 order={order}
             />
 
-            <TabContent activeTab={activeTab} className='p-3 py-4 bg-light border'>
+            <TabContent activeTab={activeTab}>
                 <TabPane tabId={activeTab}>
                     {
                         activeTab === '4' ?
@@ -86,8 +86,7 @@ const OrderManage = (props) => {
                     }
 
                     <div className='list-order mt-3'>
-                        <div className="text-dark">Danh sách (<b>{filterOrder.length}</b>)</div>
-                        <table className="table table-striped table-bordered table-hover w-100">
+                        <table className="table table-striped table-bordered table-hover">
                             <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
                                 <tr>
                                     <td>STT</td>
@@ -125,8 +124,8 @@ const OrderManage = (props) => {
                                                 <td>{item.name}</td>
                                                 <td>{item.qty}</td>
                                                 <td>{numberFormat(item.total)}</td>
-                                                <td><Moment format="DD/MM/YYYY">{item.date}</Moment></td>
-                                                <td><Moment format="DD/MM/YYYY">{item.date}</Moment></td>
+                                                <td>{item.date ? formatDate(item.date) : ''}</td>
+                                                <td>{item.dateDelivery ? formatDate(item.dateDelivery) : ''}</td>
                                                 <td className='font-weight-bold small'>
                                                     {item.status ==='S1' && <span className='badge badge-warning'>Đang chờ xử lý</span>}
                                                     {item.status ==='S2' && <span className='badge badge-success'>Đã xác nhận</span>}

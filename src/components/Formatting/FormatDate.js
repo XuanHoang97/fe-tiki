@@ -7,3 +7,10 @@ export const formatDate = (date) => {
         .format(date)
     return moment(convert).format("HH:mm DD/MM/YYYY")
 }
+
+export const formatDateNew = (date) => {
+    let convert = new Intl.DateTimeFormat
+        ('en-US', { day: '2-digit', year: 'numeric', month: '2-digit'})
+        .format(date)
+    return moment(convert).format("DD/MM/YYYY")
+}

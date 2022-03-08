@@ -79,8 +79,8 @@ function Purchase(props) {
                 }
             </Nav>
 
-            <TabContent activeTab={activeTab} className='bg-light border'>
-                <TabPane tabId={activeTab} className='p-2 py-3'>
+            <TabContent activeTab={activeTab}>
+                <TabPane tabId={activeTab}>
                     {
                         filterOrder && filterOrder.length > 0 ?
                         filterOrder.slice(pagesVisited, pagesVisited + orderPerPage).map((item, index) => {
@@ -94,6 +94,7 @@ function Purchase(props) {
                                             {item.status ==='S3' && <span className='text-primary'><i className="fa fa-truck"></i>  Đang giao hàng</span>}
                                             {item.status ==='S4' && <span className='text-success'><i className="fa fa-check"></i> Đã giao</span>}
                                             {item.status ==='S5' && <span className='text-danger'><i className="fa fa-times"></i> Đã hủy</span>}
+                                            {item.status ==='S6' && <span className='text-secondary'><i className="fa fa-undo"></i> Hoàn trả</span>}
                                         </span>
                                     </div>
                                     <hr/>

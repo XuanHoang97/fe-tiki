@@ -68,14 +68,13 @@ const CategoryManage = (props) => {
                 editCategory={handleEditCategory}
             />
 
-            <div className="h5 text-dark mb-4">Quản lý danh mục sản phẩm</div>
+            <div className="h5 text-dark mb-4">Danh mục sản phẩm (<small>{category.length}</small>)</div>
             <div className="d-flex mb-3 justify-content-between">
                 <button onClick={() => handleAddCategory()} type="button" className="btn btn-success col-2">
                     <i className="fas fa-plus"></i> Thêm danh mục
                 </button>
             </div>
 
-            <div className="text-dark">Danh mục sản phẩm (<b>{category.length}</b>)</div>
             <table className="table table-striped table-bordered table-hover">
                 <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
                     <tr>

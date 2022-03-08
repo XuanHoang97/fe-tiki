@@ -3,7 +3,7 @@ import { path } from "utils";
 export const MenuAdmin = [
     {
         name: 'Tổng quan',
-        icon: 'fas fa-tachometer-alt',
+        icon: 'fa fa-home',
         path: path.DASHBOARD,
         subMenu: []
     },
@@ -27,8 +27,9 @@ export const MenuAdmin = [
     },
 
     {
-        name: 'Bán hàng',
-        icon: 'fas fa-shopping-cart',
+        name: 'Hoá đơn',
+        //icon money
+        icon: 'fas fa-money-bill-wave',
         path: path.SALE_MANAGE,
         subMenu: [
             {
@@ -67,65 +68,40 @@ export const MenuAdmin = [
         name: 'Danh mục',
         icon: 'fas fa-box-open',
         path: path.CATEGORY_MANAGE,
-        subMenu: [
-            {
-                name: 'Danh sách danh mục',
-                path: path.CATEGORY_MANAGE,
-            },
-        ]
+        subMenu: []
     },
 
     {
         name: 'Bài viết',
         icon: 'fas fa-book',
         path: path.ARTICLE_MANAGE,
-        subMenu: [
-            {
-                name: 'Danh sách bài viết',
-                path: path.ARTICLE_MANAGE,
-            },
-        ]
+        subMenu: []
     },
 
     {
         name: 'Tin tức - sự kiện',
         icon: 'far fa-newspaper',
         path: path.NEWS_MANAGE,
-        subMenu: [
-            {
-                name: 'Danh sách tin tức',
-                path: path.NEWS_MANAGE,
-            },
-        ]
+        subMenu: []
     },
     
     {
         name: 'Đa phương tiện',
         icon: 'far fa-images ',
         path: path.MULTIMEDIA_MANAGE,
-        subMenu: [
-            {
-                name: 'Danh sách đa phương tiện',
-                path: path.MULTIMEDIA_MANAGE,
-            },
-        ]
+        subMenu: []
+    },
+    
+    {
+        name: 'Đánh giá sản phẩm',
+        icon: 'fas fa-star',
+        path: path.VOTE_MANAGE,
+        subMenu: []
     },
     {
         name: 'Khuyến mãi',
         icon: 'fa fa-percent',
         path: path.DISCOUNT_MANAGE,
-        subMenu: [
-            {
-                name: 'Danh sách khuyến mãi',
-                path: path.DISCOUNT_MANAGE,
-            },
-        ]
-    },
-
-    {
-        name: 'Đánh giá sản phẩm',
-        icon: 'fas fa-star',
-        path: path.VOTE_MANAGE,
         subMenu: []
     },
 

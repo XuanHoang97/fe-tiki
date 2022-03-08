@@ -7,6 +7,7 @@ function MenuLeftCollapse(props) {
     return (
         <div>
             <div className="dashboard bg-dark menuleftCollapse">
+                <div>TIKI</div>
                 {
                     MenuAdmin && MenuAdmin.length > 0 &&
                     MenuAdmin.map((item, index) => {

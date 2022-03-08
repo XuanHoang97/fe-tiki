@@ -1,3 +1,4 @@
+import { formatDateNew } from 'components/Formatting/FormatDate';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { EditUSer, fetchGender } from 'store/actions';
@@ -9,23 +10,40 @@ function Profile(props) {
 
     const [userName, setUserName] = useState('')    
     const [phone, setPhone] = useState('');
-    const [address, setAddress] = useState('');
     const [genderUser, setGender] = useState('');
     const [avatar, setAvatar] = useState('');
     const [previewImg, setPreviewImg] = useState('');
     const [loading, setLoading] = useState(false);
 
+    
+    // convert timestamp 852051600000 => dd, mm, yyyy
+    const convertTimestamp = formatDateNew(user? user.age :'');
+    console.log(convertTimestamp)
+    
+    // cup convertTimestamp => [dd, mm, yyyy]
+    const convertTimestampToArray = convertTimestamp.split('/');
+    console.log(convertTimestampToArray, convertTimestampToArray[0], convertTimestampToArray[1], convertTimestampToArray[2])
+    
+    const [date, setDateBirth] = useState(convertTimestampToArray[0]);
+    const [month, setMonthBirth] = useState(1);
+    const [year, setYearBirth] = useState(1990);
+    const birthday = `${month}/${date}/${year}`;
+    const birthdayTimestamp = new Date(birthday).getTime();
+
     // fill info user
     useEffect(() => {
         if (user) {
-            setUserName(user ? user.username : '');
-            setPhone(user ? user.phoneNumber : '');
-            setAddress(user ? user.address : '');
-            setGender(user ? user.gender : '');
-            setAvatar(user ? user.image : '');
-            setPreviewImg(user ? user.image : '');
+            setUserName(user.username);
+            setPhone(user.phoneNumber);
+            setGender(user.gender);
+            setAvatar(user.image);
+            setPreviewImg(user.image);
+
+            setDateBirth(convertTimestampToArray[0]);
+            setMonthBirth(convertTimestampToArray[1]);
+            setYearBirth(convertTimestampToArray[2]);
         }
-    }, [user])
+    }, [user, date, month, year, convertTimestampToArray]);
 
     useEffect(() => {
         dispatch(fetchGender());
@@ -39,15 +57,15 @@ function Profile(props) {
             const data = new FormData();
             data.append('id', user.id);
             data.append('username', userName);
+            data.append('age', birthdayTimestamp);
             data.append('phoneNumber', phone);
-            data.append('address', address);
             data.append('gender', genderUser);
             avatar && data.append('image', avatar);
             dispatch(EditUSer(data))
             setLoading(false)
         }, 1500);
 
-        console.log(userName, phone, address, genderUser, previewImg, user.id)
+        // console.log(birthday, birthdayTimestamp);
     }
 
     //onChange image
@@ -69,13 +87,6 @@ function Profile(props) {
                 encType='multipart/form-data'
             >
                 <div className='col-8 pl-0'>
-                    <div className=''>
-                        <label className='col-3'>Tên đăng nhập</label>
-                        <span className='ml-2'>
-                            {userName}
-                        </span>
-                    </div>
-
                     <div className='form-group d-flex'>
                         <label className='col-3'>Tên</label>
                         <input type="text" className="form-control" 
@@ -89,14 +100,6 @@ function Profile(props) {
                         <input type="text" className="form-control" 
                             value={ phone }
                             onChange={ (e) => setPhone(e.target.value) }
-                        />
-                    </div>
-
-                    <div className='form-group d-flex'>
-                        <label className='col-3'>Địa chỉ</label>
-                        <input type="text" className="form-control" 
-                            value={address}
-                            onChange={ (e) => setAddress(e.target.value) }
                         />
                     </div>
 
@@ -125,8 +128,76 @@ function Profile(props) {
 
                     <div className='form-group d-flex'>
                         <label className='col-3'>Ngày sinh</label>
-                        <input type="text" className="form-control" />
+                            
+
+                        <div className="form-group col-9 p-0 d-flex">
+                        <select className="form-control col-4"
+                            value={date}
+                            onChange={(e) => setDateBirth(e.target.value)}
+                        >
+                            {
+                                [...Array(31)].map((item, index) => {
+                                    return(
+                                        <option key={index}
+                                            value={index + 1}
+                                        >{index + 1}</option>
+                                    )
+                                })
+                            }
+                        </select>
+
+                        <select className="form-control col-4"
+                            value={month}
+                            onChange={ (e) => setMonthBirth(e.target.value) }
+                        >
+                            {
+                                [...Array(12)].map((item, index) => {
+                                    return(
+                                        <option key={index}>{index + 1}</option>
+                                    )
+                                })
+                            }
+                        </select>
+
+                        <select className="form-control col-4"
+                            value={year}
+                            onChange={ (e) => setYearBirth(e.target.value) }
+                        >
+                            {
+                                [...Array(50)].map((item, index) => {
+                                    return(
+                                        <option key={index}>{2022 - index}</option>
+                                    )
+                                })
+                            }
+
+                        </select>
+                        </div>
                     </div>
+
+                    {
+                        convertTimestampToArray && convertTimestampToArray.length > 0 ?
+                        <div className='form-group d-flex'>
+                            <span className='col-9'>ngay {convertTimestampToArray[0]} </span>
+                        </div>
+                        : ''
+                    }
+
+{
+                        convertTimestampToArray && convertTimestampToArray.length > 0 ?
+                        <div className='form-group d-flex'>
+                            <span className='col-9'>thang {convertTimestampToArray[1]} </span>
+                        </div>
+                        : ''
+                    }
+
+{
+                        convertTimestampToArray && convertTimestampToArray.length > 0 ?
+                        <div className='form-group d-flex'>
+                            <span className='col-9'>nam {convertTimestampToArray[2]} </span>
+                        </div>
+                        : ''
+                    }
 
                     <button type="submit" className="btn btn-primary mx-3">
                         {

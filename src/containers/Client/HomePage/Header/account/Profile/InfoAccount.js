@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../../Header';
 import {BrowserRouter as Router, Route, Switch, NavLink,Redirect } from 'react-router-dom';
 import ChangePassword from './ChangePassword';
 import Profile from './Profile';
 import Purchase from '../MyOrder/Purchase';
 import Order from '../notification/Order';
+import Header from '../../Header';
 import { path } from 'utils';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUser } from 'store/actions';
+import { FilterNotify, getUser } from 'store/actions';
 import {MenuUser} from './DataMenu';
+import ACTIVITY from '../notification/Activity';
+import Address from './Address';
 
 const InfoAccount = () => {
     const dispatch = useDispatch();
@@ -27,6 +29,12 @@ const InfoAccount = () => {
     if (!token) {
         return <Redirect to={path.HOMEPAGE} />
     }
+
+    const viewDetail = (notify) => {
+        let userId = user ? user.id : '';
+        dispatch(FilterNotify(userId, notify.type));
+    }
+
 
     return (
         <div className='bg-light'>
@@ -72,6 +80,7 @@ const InfoAccount = () => {
                                                             <NavLink to={sub.path} key={index}
                                                                 className='item-menu' 
                                                                 activeClassName='activeSubMenu'
+                                                                onClick={() => viewDetail(sub)}
                                                             >
                                                                 <div>{sub.name}</div>
                                                             </NavLink>
@@ -90,8 +99,11 @@ const InfoAccount = () => {
                         <Switch>
                             <Route exact path={path.ACCOUNT} component={Profile} />
                             <Route path={path.CHANGE_PASSWORD} component={ChangePassword} />
+                            <Route path={path.ADDRESS_CHANGE} component={Address} />
+
                             <Route path={path.ORDER} component={Purchase} />
                             <Route path={path.NOTIFICATION} component={Order} />
+                            <Route path={path.ACTIVITY} component={ACTIVITY} />
                         </Switch>
                     </div>
                 </div>

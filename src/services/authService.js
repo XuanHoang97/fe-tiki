@@ -89,6 +89,15 @@ const MarkAllNotifyAsRead = (data) => {
     });
 }
 
+// filterNotify
+const filterNotify = (userId, type) => {
+    return instance.get(`/notify?userId=${userId}&type=${type}`, {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    });
+}
+
 export{
     registerAcc,
     loginAcc,
@@ -100,5 +109,6 @@ export{
     getNotify,
     getAllNotify,
     updateStatusNotify,
-    MarkAllNotifyAsRead
+    MarkAllNotifyAsRead,
+    filterNotify
 }

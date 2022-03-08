@@ -102,6 +102,7 @@ const actionTypes = Object.freeze({
     GET_ALL_NOTIFY: 'GET_ALL_NOTIFY',
     UPDATE_NOTIFY: 'UPDATE_NOTIFY',
     MARK_ALL_AS_READ: 'MARK_ALL_AS_READ',
+    FILTER_NOTIFY: 'FILTER_NOTIFY',
 
 })
 export default actionTypes;

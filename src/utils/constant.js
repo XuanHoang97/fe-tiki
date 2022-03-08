@@ -13,6 +13,8 @@ export const path = {
     LOGIN_AUTH: '/account/login',
     ACCOUNT: '/account/profile',
     CHANGE_PASSWORD: '/account/password',
+    ADDRESS_CHANGE: '/account/address',
+    PAYMENT_CHANGE: '/account/payment',
     ORDER: '/user/purchase',
     NOTIFICATION: '/user/notifications/order',
     TIKI_XU: '/user/tiki-xu',
@@ -35,7 +37,6 @@ export const path = {
     DISCOUNT_MANAGE: '/system/discount-manage',
     VOTE_MANAGE: '/system/vote-manage',
     SETTING: '/system/setting',
-
 
     // client
     DETAIL_PRODUCT: '/products/:id',

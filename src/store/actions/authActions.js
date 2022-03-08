@@ -5,7 +5,8 @@ import {
     getNotify,
     getAllNotify,
     updateStatusNotify,
-    MarkAllNotifyAsRead
+    MarkAllNotifyAsRead,
+    filterNotify
 } from '../../services/authService';
 import { toast } from "react-toastify";
 
@@ -113,6 +114,21 @@ export const MarkAllNotify = (data) => {
         }
     }
 }
-
+// filterNotify
+export const FilterNotify = (userId, type) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await filterNotify(userId, type);
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.FILTER_NOTIFY,
+                    payload: res.notify
+                });
+            }
+        } catch (e) {
+            toast.error('filter notify error !')
+        }
+    }
+}
 
 

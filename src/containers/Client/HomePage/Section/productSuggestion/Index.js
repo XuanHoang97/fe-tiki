@@ -77,7 +77,7 @@ const ProductSuggestion = () => {
         />
       </div>
 
-      <TabContent activeTab={activeTab} className='py-4 px-3 bg-light border bg-white'>
+      <TabContent activeTab={activeTab}>
         {
           category && category.length > 0 ?
           category.map((item, index) => {

@@ -165,8 +165,7 @@ const Multimedia = (props) => {
                 setActiveTab={setActiveTab}
             />
             
-            <TabContent activeTab={activeTab} className='py-4 px-3 bg-light border'>
-                {/* Tab 1 - Slide  */}
+            <TabContent activeTab={activeTab}>
                 <Slide
                     handleSaveSlide = {handleSaveSlide}
                     name = {name}
@@ -186,7 +185,6 @@ const Multimedia = (props) => {
                     deleteSlide = {deleteSlide}
                 />
                 
-                {/* Tab 2 - specialCategory  */}
                 <SpecialCategory
                     category={category}
                     categoryId={categoryId}

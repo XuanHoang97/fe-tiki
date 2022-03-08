@@ -16,6 +16,16 @@ export const MenuUser = [
                 name: 'Đổi mật khẩu',
                 path: path.CHANGE_PASSWORD,
             },
+
+            {
+                name: 'Địa chỉ',
+                path: path.ADDRESS_CHANGE,
+            },
+
+            {
+                name: 'Thông tin thanh toán',
+                path: path.PAYMENT_CHANGE,
+            },
         ],
     },
 
@@ -35,15 +45,18 @@ export const MenuUser = [
             {
                 name: 'Cập nhật đơn hàng',
                 path: path.NOTIFICATION,
+                type: 'ORDER',
             },
             
             {
                 name: 'Hoạt động',
                 path: path.ACTIVITY,
+                type: 'ACTIVITY',
             },
             {
                 name: 'Khuyến mãi',
                 path: path.DISCOUNT,
+                type: 'DISCOUNT',
             },
         ],
     },
