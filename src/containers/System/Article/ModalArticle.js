@@ -9,10 +9,6 @@ const ModalArticle = (props) => {
     const {category, DetailCategory, handleChangeCategory, categoryId, productId, setProductId, toggleParent} = props;
     
     //save data markdown
-    const [characterHTML, setCharacterHTML] = useState('');
-    const [characterMarkdown, setCharacterMarkdown] = useState('');
-    const [accessoryHTML, setAccessoryHTML] = useState('');
-    const [accessoryMarkdown, setAccessoryMarkdown] = useState('');
     const [descriptionHTML, setDescriptionHTML] = useState('');
     const [descriptionMarkdown, setDescriptionMarkdown] = useState('');
     const [specificationHTML, setSpecificationHTML] = useState('');
@@ -23,33 +19,19 @@ const ModalArticle = (props) => {
     }
 
     // add new product
-    const handleAddNewArticle=()=>{
+    const addArticle=()=>{
         props.SaveInfoProduct({
-            characterHTML: characterHTML,
-            characterMarkdown: characterMarkdown,
-            accessoryHTML: accessoryHTML,
-            accessoryMarkdown: accessoryMarkdown,
-            descriptionHTML: descriptionHTML,   
-            descriptionMarkdown: descriptionMarkdown,
-            specificationHTML: specificationHTML,
-            specificationMarkdown: specificationMarkdown,
-            productId: productId,
-            categoryId: categoryId,
+            descriptionHTML,   
+            descriptionMarkdown,
+            specificationHTML,
+            specificationMarkdown,
+            productId,
+            categoryId,
         });
         toggle();
     }
 
     //onchange editor
-    function editorCharacter({ html, text }) {
-        setCharacterHTML(html);
-        setCharacterMarkdown(text);
-    }
-
-    function editorAccessory({html, text}){
-        setAccessoryHTML(html);
-        setAccessoryMarkdown(text);
-    }
-
     function editorDescription({html, text}){
         setDescriptionHTML(html);
         setDescriptionMarkdown(text);
@@ -108,26 +90,6 @@ const ModalArticle = (props) => {
 
             <div className="input-group p-0">
                 <div className="form-group col-12 p-0">
-                    <label>Đặc điểm nổi bật</label>
-                    <MdEditor style={{ height: '200px' }} renderHTML={text => mdParser.render(text)}
-                        onChange={editorCharacter}
-                        value={characterMarkdown}
-                    />
-                </div>
-            </div>
-
-            <div className="input-group p-0">
-                <div className="form-group col-12 p-0">
-                    <label>Phụ kiện</label>
-                    <MdEditor style={{ height: '200px' }} renderHTML={text => mdParser.render(text)}
-                        onChange={editorAccessory}
-                        value={accessoryMarkdown}
-                    />
-                </div>
-            </div>
-
-            <div className="input-group p-0">
-                <div className="form-group col-12 p-0">
                     <label>Thông số kỹ thuật</label>
                     <MdEditor style={{ height: '200px' }} renderHTML={text => mdParser.render(text)}
                         onChange={editorSpecification}
@@ -148,7 +110,7 @@ const ModalArticle = (props) => {
             </ModalBody>
 
             <ModalFooter>
-                <Button color="primary" className="btn" onClick={() => {handleAddNewArticle()}}>Thêm mới</Button>
+                <Button color="primary" className="btn" onClick={() => {addArticle()}}>Thêm mới</Button>
                 <Button color="secondary" className="btn">Cancel</Button>
             </ModalFooter>
         </Modal>

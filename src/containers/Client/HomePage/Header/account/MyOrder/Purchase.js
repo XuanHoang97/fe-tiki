@@ -118,7 +118,10 @@ function Purchase(props) {
 
                                             {
                                                 item.status ==='S4' ?
-                                                <button type="button" className="btn btn-primary btn-sm">Đổi hàng</button>
+                                                <>
+                                                    <button type="button" className="btn btn-success btn-sm">Đánh giá</button>
+                                                    <button type="button" className="btn btn-primary btn-sm">Đổi hàng</button>
+                                                </>
                                                 : null
                                             }
                                         </div>

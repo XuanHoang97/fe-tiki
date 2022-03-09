@@ -24,7 +24,7 @@ export const MenuUser = [
 
             {
                 name: 'Thông tin thanh toán',
-                path: path.PAYMENT_CHANGE,
+                path: path.INFO_PAYMENT,
             },
         ],
     },

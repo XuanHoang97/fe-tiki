@@ -16,9 +16,9 @@ import MenuLeft from 'containers/System/Header/menuLeft/MenuLeft';
 import MenuLeftCollapse from 'containers/System/Header/menuLeft/MenuLeftCollapse';
 import Notification from 'containers/System/Header/notification/Notification';
 import Bill from 'containers/System/Sale/Bill';
+import VoteManage from 'containers/System/Vote/VoteManage';
 import { path } from 'utils';
 import './style.scss'
-import VoteManage from 'containers/System/Vote/VoteManage';
 
 const System = (props) => {
     const {systemMenuPath, isLoggedIn,userInfo, processLogout} = props;

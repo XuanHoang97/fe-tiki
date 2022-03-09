@@ -173,6 +173,7 @@ const Multimedia = (props) => {
                     categoryId = {categoryId}
                     setCategoryId = {setCategoryId}
                     category = {category}
+                    
                     status = {status}
                     setStatus = {setStatus}
                     statusSlide = {statusSlide}

@@ -14,7 +14,7 @@ export const path = {
     ACCOUNT: '/account/profile',
     CHANGE_PASSWORD: '/account/password',
     ADDRESS_CHANGE: '/account/address',
-    PAYMENT_CHANGE: '/account/payment',
+    INFO_PAYMENT: '/account/payment',
     ORDER: '/user/purchase',
     NOTIFICATION: '/user/notifications/order',
     TIKI_XU: '/user/tiki-xu',

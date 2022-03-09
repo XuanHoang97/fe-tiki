@@ -21,13 +21,6 @@ const Illustrator = ({detailProduct}) => {
                 </div>
             </div>
             <hr/>
-
-            <div className="mt-3 py-1 text-primary">Đặc Điểm Nổi Bật</div>
-            {
-            detailProduct && detailProduct.Markdown && detailProduct.Markdown.characterHTML ?
-            <div className="character__special" dangerouslySetInnerHTML={{ __html: detailProduct.Markdown.characterHTML}} ></div>
-            : 'loadinng...'
-            }
         </div> 
     );
 }

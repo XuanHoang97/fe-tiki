@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllSlide } from 'store/actions';
 import './style/slide.scss';
@@ -6,6 +6,7 @@ import './style/slide.scss';
 function Slide() {
     const dispatch = useDispatch()
     const slides = useSelector(state => state.admin.slides)
+    const [active, setActive] = useState(0)
 
     useEffect(() => {
         dispatch(fetchAllSlide())
@@ -15,12 +16,16 @@ function Slide() {
         <div className="slide row">
             <div id="carousel-example-1z" className="carousel slide carousel-fade col-md-8 pr-0" data-ride="carousel">
                 <ol className="carousel-indicators control">
-                    <li data-target="#carousel-example-1z" data-slide-to={0} className="active" />
-                    <li data-target="#carousel-example-1z" data-slide-to={1} />
-                    <li data-target="#carousel-example-1z" data-slide-to={2} />
-                    <li data-target="#carousel-example-1z" data-slide-to={3} />
-                    <li data-target="#carousel-example-1z" data-slide-to={4} />
-                    <li data-target="#carousel-example-1z" data-slide-to={5} />
+                    {
+                        slides.map((slide, index) => {
+                            return (
+                                <li data-target="#carousel-example-1z" data-slide-to={index}  key={index}
+                                    className={index === active ? 'active' : ''} 
+                                    onClick={() => setActive(index)}>
+                                </li>
+                            )
+                        })
+                    }
                 </ol>
 
                 <div className="list_slide carousel-inner">

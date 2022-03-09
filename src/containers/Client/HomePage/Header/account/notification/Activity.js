@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FilterNotify} from 'store/actions';
 
-const ACTIVITY = () => {
+const Activity = () => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.auth.user);
     const notify = useSelector(state => state.auth.notify);
@@ -40,4 +40,4 @@ const ACTIVITY = () => {
         </div>
     );
 }
-export default ACTIVITY;
+export default Activity;

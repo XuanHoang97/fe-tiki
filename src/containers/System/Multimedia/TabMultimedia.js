@@ -8,7 +8,7 @@ function TabMultimedia(props) {
         <Nav tabs>
             <NavItem>
                 <NavLink className={activeTab === '1' ? 'active' : ''} onClick={() => setActiveTab('1')}>
-                    <div>Quản lý Slide</div>
+                    <div>Slide</div>
                 </NavLink>
             </NavItem>
 
@@ -20,12 +20,12 @@ function TabMultimedia(props) {
 
             <NavItem>
                 <NavLink className={activeTab === '3' ? 'active' : ''} onClick={() => setActiveTab('3')}>
-                    <div>Quản lý hình ảnh và video</div>
+                    <div>Hình ảnh và video</div>
                 </NavLink>
             </NavItem>
             <NavItem>
                 <NavLink className={activeTab === '4' ? 'active' : ''} onClick={() => setActiveTab('4')}>                         
-                    <div>Quản lý Banner </div>
+                    <div>Banner </div>
                 </NavLink>
             </NavItem>
         </Nav>

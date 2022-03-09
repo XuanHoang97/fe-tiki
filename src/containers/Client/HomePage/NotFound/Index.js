@@ -1,30 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { path } from 'utils';
-import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
+import { path } from 'utils';
 import './NotFound.scss';
 
 const NotFound = () => {
     return (
         <>
-        <Header/>
-        <div className="container main">
-            <div className="err">
-                <div className="banner-top"></div>
-                <div className="banner-bottom"></div>
-                <div className="banner-content">
-                    <div className="err-404 question"><img className="w-50" src="https://salt.tikicdn.com/assets/img/404/super.png" alt='404 Not Found' /></div>
-                    <div className="err-404"><img className="w-75" src="https://salt.tikicdn.com/assets/img/404/404.png" alt='404 Not Found' /></div>
-                    <div className="err-404 err-h">
-                        <h1>Xin lỗi, trang bạn tìm kiếm <br /> đang trong quá trình phát triển !</h1>
-                    </div>
+            <Header/>
+            <div className="container main">
+                <div className="err">
+                    <img src="https://salt.tikicdn.com/ts/brickv2og/3c/7c/9b/1d101c4757843340d812828590283374.png" className='w-25' alt="" />
                 </div>
-            </div>
-            <div className="err">
-                <h5 className="suggest">Bạn có thể thử những liên kết sau</h5>
-                <hr />
-                <div className='row btn-quit'>
+
+                <div className='btn-quit'>
                     <Link to={path.HOMEPAGE}>
                         <button type="button" className="btn btn-primary"><i className="fa fa-angle-left mr-2"></i> Quay lại trang trước</button>
                     </Link>
@@ -36,11 +25,7 @@ const NotFound = () => {
                     </Link>
                 </div>
             </div>
-        </div>
-
-        <Footer />
         </>
     );
 }
-
 export default NotFound;

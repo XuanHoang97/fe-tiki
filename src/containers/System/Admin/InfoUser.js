@@ -1,18 +1,21 @@
 import React  from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-const InfoUser = ({isOpen, details, toggleModal}) => {  
+const InfoUser = (props) => {  
+    const {isOpen, details, toggleModal} = props;
     const toggle = () => {
         toggleModal();
     }
 
+    console.log(details, details.image);
+
     return (
-        <Modal isOpen={isOpen} toggle = {toggleModal} size="md" >
+        <Modal isOpen={isOpen} toggle = {toggleModal}>
             <ModalHeader toggle={()=>toggle()}>Thông tin thành viên</ModalHeader>
             <ModalBody>
                 <div className="text-center py-2" style={{background: `url("https://wallpaperaccess.com/full/1732235.jpg")`, backgroundPosition: 'center', backgroundSize: 'cover'}}>                        
                     <img className="w-25 rounded-circle border border-success" 
-                    style={{height: '120px', backgroundImage: `url(${details.image})`, backgroundPosition: 'center', backgroundSize: 'cover'}} alt="" />
+                    style={{height: '120px', backgroundImage: `url(${details ? details.image : ''})`, backgroundPosition: 'center', backgroundSize: 'cover'}} alt="" />
                     
                     <div className="mt-2 h4 font-weight-bold">{details.username}</div>
                     <div className="d-flex justify-content-center text-white" style={{gap : '20px'}}>

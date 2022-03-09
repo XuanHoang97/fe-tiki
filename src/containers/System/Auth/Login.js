@@ -14,7 +14,6 @@ const Login = (props) => {
     //login
     const handleLogin=async()=>{
         setErrMessage('');
-
         try{
             let data= await handleLoginApi(userName, password);
             if(data && data.data.errCode !==0){

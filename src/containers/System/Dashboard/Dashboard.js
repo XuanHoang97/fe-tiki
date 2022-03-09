@@ -18,8 +18,7 @@ const  Dashboard = (props) => {
              <div className="d-flex">
                 <div className="statistical col-8 p-0">
                     <div className="item-statistical align-items-center" style={{background:'rgb(239 169 64) '}}>
-                        <img src="https://thumbs.dreamstime.com/b/pre-order-icon-isolated-white-background-pre-order-icon-isolated-white-background-your-web-mobile-app-design-133861058.jpg" 
-                        className='w-75' alt="" />
+                        <img src="https://thumbs.dreamstime.com/b/shopping-cart-icon-trolley-icon-shopping-cart-icon-trolley-icon-vector-illustration-isolated-white-background-163727286.jpg" alt="" />
                         <div className="stat">
                             <h6 className="card-title small">ĐƠN HÀNG HÔM NAY</h6>
                             <h5 className="card-text font-weight-bold">0</h5>
@@ -27,7 +26,7 @@ const  Dashboard = (props) => {
                     </div>
 
                     <div className="item-statistical  align-items-center" style={{background:'rgb(25 159 47)'}}>
-                        <img src="https://previews.123rf.com/images/asmati/asmati1706/asmati170606218/80947997-dollars-sign-illustration-usd-currency-symbol-money-label-vector-white-icon-with-soft-shadow-on-tran.jpg" className="w-75" alt="" />
+                        <img src="https://image.shutterstock.com/image-vector/dollar-icon-symbol-vector-money-260nw-1723606144.jpg"  alt="" />
                         <div className="stat">
                             <h6 className="card-title small">DOANH THU HÔM NAY</h6>
                             <h5 className="card-text font-weight-bold">
@@ -37,7 +36,7 @@ const  Dashboard = (props) => {
                     </div>
 
                     <div className="item-statistical  align-items-center" style={{background:'rgb(76 117 235)'}}>
-                        <img src="https://thumbs.dreamstime.com/b/user-icon-vector-people-profile-person-illustration-business-users-group-symbol-male-195161330.jpg" className='w-75' alt="" />
+                        <img src="https://thumbs.dreamstime.com/b/user-icon-vector-people-profile-person-illustration-business-users-group-symbol-male-195161330.jpg" alt="" />
                         <div className="stat">
                             <h6 className="card-title small">KHÁCH HÀNG MỚI</h6>
                             <h5 className="card-text font-weight-bold">
@@ -47,7 +46,7 @@ const  Dashboard = (props) => {
                     </div>
 
                     <div className="item-statistical align-items-center text-danger">
-                        <img src="https://previews.123rf.com/images/mariiasimakova/mariiasimakova2004/mariiasimakova200400644/145706280-investment-icon-simple-illustration-from-startup-collection-creative-investment-icon-for-web-design-.jpg" className="w-75" alt="" />
+                        <img src="https://previews.123rf.com/images/mariiasimakova/mariiasimakova2004/mariiasimakova200400644/145706280-investment-icon-simple-illustration-from-startup-collection-creative-investment-icon-for-web-design-.jpg"  alt="" />
                         <div className="stat">
                             <h6 className="card-title small text-dark">ĐẦU TƯ</h6>
                             <h5 className="card-text font-weight-bold">{numberFormat(investmentCost())}</h5>
@@ -55,7 +54,7 @@ const  Dashboard = (props) => {
                     </div>
 
                     <div className="item-statistical  align-items-center text-primary">
-                        <img src="https://icon-library.com/images/revenue-icon-png/revenue-icon-png-2.jpg" className="w-75" alt="" />
+                        <img src="https://icon-library.com/images/revenue-icon-png/revenue-icon-png-2.jpg"  alt="" />
                         <div className="stat">
                             <h6 className="card-title small text-dark">TỔNG DOANH THU</h6>
                             <h5 className="card-text font-weight-bold">
@@ -75,7 +74,7 @@ const  Dashboard = (props) => {
                     </div>
 
                     <div className="item-statistical  align-items-center text-success">
-                        <img src="https://image.shutterstock.com/image-illustration/growth-icon-business-success-conceptselement-260nw-1464772178.jpg" className="w-75" alt="" />
+                        <img src="https://image.shutterstock.com/image-illustration/growth-icon-business-success-conceptselement-260nw-1464772178.jpg"  alt="" />
                         <div className="stat">
                             <h6 className="card-title small text-dark">TỔNG LỢI NHUẬN</h6>
                             <h5 className="card-text font-weight-bold">

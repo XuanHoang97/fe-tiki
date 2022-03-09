@@ -17,6 +17,7 @@ const VerifyOrder = (props) => {
     const [name, setName] = useState('');
     const [qty, setQty] = useState('');
     const [date, setDate] = useState('');
+    const [dateDelivery, setDateDelivery] = useState('');
     const [delivery, setDelivery] = useState('');
     const [payment, setPayment] = useState('');
     const [status, setStatus] = useState('');
@@ -38,6 +39,7 @@ const VerifyOrder = (props) => {
             setName(order.name);
             setQty(order.qty);
             setDate(order.date);
+            setDateDelivery(order.dateDelivery);
             setDelivery(order.delivery);
             setPayment(order.payment);
             setEmail(order.email);
@@ -59,6 +61,7 @@ const VerifyOrder = (props) => {
             name: name,
             qty: qty,
             date: date,
+            dateDelivery: dateDelivery,
             delivery: delivery,
             payment: payment,
             email: email,
@@ -89,7 +92,7 @@ const VerifyOrder = (props) => {
 
                 <div className="d-flex justify-content-center bg-light p-3" style={{gap: '10px'}}>
                     <div className="customer bg-white col-6 py-3">
-                        <span className=''>Thông tin khách hàng</span>
+                        <h5 className=''>Thông tin khách hàng</h5>
                         <hr/>
                         <div className='d-flex'>
                             <span className='col-5 p-0'>Tên khách hàng:</span> 
@@ -113,7 +116,7 @@ const VerifyOrder = (props) => {
                     </div>
 
                     <div className="order bg-white col-6 py-3">
-                        <span className=''>Thông tin đơn hàng</span>
+                        <h5 className=''>Thông tin đơn hàng</h5>
                         <hr/>
                         <div className='d-flex mb-2'>
                             <span className='col-6 p-0'>Sản phẩm đặt hàng:</span> 
@@ -132,12 +135,12 @@ const VerifyOrder = (props) => {
 
                         <div className='d-flex mb-2'>
                             <span className='col-6 p-0'>Ngày giao hàng dự kiến: </span>
-                            <input type="date" />
+                            <span>{formatDate(dateDelivery)}</span>
                         </div>
 
                         <div className='d-flex mb-2'>
                             <span className='col-6 p-0'>Hình thức giao hàng: </span> 
-                            <b>{delivery}</b>
+                            <span>{delivery}</span>
                         </div>
 
                         <div className='d-flex mb-2'>

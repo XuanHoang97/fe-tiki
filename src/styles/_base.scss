@@ -46,7 +46,6 @@
         }
         .btn-close {
           position: absolute;
-          color: $common-text-color;
           i {
             line-height: 35px;
             font-size: $base-size + 2px;
@@ -54,6 +53,8 @@
         }
         .close{
           padding: 1.5rem 1rem;
+          color: white;
+          opacity: 1;
         }
       }
     }

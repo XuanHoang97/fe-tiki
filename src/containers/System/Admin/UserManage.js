@@ -4,6 +4,7 @@ import ModalUser from './ModalUser';
 import ModalEditUser from './ModalEditUser';
 import InfoUser from './InfoUser';
 import * as actions from '../../../store/actions';
+import { formatDateNew } from 'components/Formatting/FormatDate';
 
 const UserManage = (props) => {
     const [infoUser, setInfoUser] = useState([]);
@@ -108,7 +109,7 @@ const UserManage = (props) => {
                         <th scope="col">Số ĐT</th>
                         <th scope="col">Địa chỉ</th>
                         <th scope="col">Giới tính</th>
-                        <th scope="col">TuổI</th>
+                        <th scope="col">Năm sinh</th>
                         <th scope="col">Nghề nghiệp</th>
                         <th scope="col">Chức danh</th>
                         <th scope="col">Tác vụ</th>
@@ -127,14 +128,14 @@ const UserManage = (props) => {
                                     <td>{item.phoneNumber}</td>
                                     <td>{item.address}</td>
                                     <td>{item.gender}</td>
-                                    <td>24</td>
+                                    <td>{formatDateNew(item.age)}</td>
                                     <td>{item.roleId}</td>
                                     <td>{item.positionId}</td>
                                     <td>
                                         <button onClick={()=> handleInfoUser(item)} type="button" className="btn text-success">
                                             <i className="fas fa-info-circle"></i>
                                         </button>
-                                        <button onClick={()=> handleEditUser(item)} type="button" className="btn text-primary mx-2">
+                                        <button onClick={()=> handleEditUser(item)} type="button" className="btn text-primary">
                                             <i className="fas fa-pencil-alt"></i>
                                         </button>
                                         <button onClick={()=> deleteUser(item)} type="button" className="btn text-danger">

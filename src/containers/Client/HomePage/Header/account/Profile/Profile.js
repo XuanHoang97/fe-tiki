@@ -14,22 +14,24 @@ function Profile(props) {
     const [avatar, setAvatar] = useState('');
     const [previewImg, setPreviewImg] = useState('');
     const [loading, setLoading] = useState(false);
-
     
-    // convert timestamp 852051600000 => dd, mm, yyyy
-    const convertTimestamp = formatDateNew(user? user.age :'');
-    console.log(convertTimestamp)
-    
-    // cup convertTimestamp => [dd, mm, yyyy]
-    const convertTimestampToArray = convertTimestamp.split('/');
-    console.log(convertTimestampToArray, convertTimestampToArray[0], convertTimestampToArray[1], convertTimestampToArray[2])
-    
-    const [date, setDateBirth] = useState(convertTimestampToArray[0]);
+    const [date, setDateBirth] = useState(1);
     const [month, setMonthBirth] = useState(1);
     const [year, setYearBirth] = useState(1990);
     const birthday = `${month}/${date}/${year}`;
     const birthdayTimestamp = new Date(birthday).getTime();
 
+    // convert timestamp to date
+    const convertDateBirth = formatDateNew(user? user.age :'');
+    const result = convertDateBirth.split('/');
+    useEffect (() => {
+        if(user){
+            setDateBirth(result[0]);
+            setMonthBirth(result[1]);
+            setYearBirth(result[2]);
+        }
+    }, [user]);
+    
     // fill info user
     useEffect(() => {
         if (user) {
@@ -38,12 +40,8 @@ function Profile(props) {
             setGender(user.gender);
             setAvatar(user.image);
             setPreviewImg(user.image);
-
-            setDateBirth(convertTimestampToArray[0]);
-            setMonthBirth(convertTimestampToArray[1]);
-            setYearBirth(convertTimestampToArray[2]);
         }
-    }, [user, date, month, year, convertTimestampToArray]);
+    }, [user]);
 
     useEffect(() => {
         dispatch(fetchGender());
@@ -64,8 +62,6 @@ function Profile(props) {
             dispatch(EditUSer(data))
             setLoading(false)
         }, 1500);
-
-        // console.log(birthday, birthdayTimestamp);
     }
 
     //onChange image
@@ -77,6 +73,7 @@ function Profile(props) {
             setAvatar(file);
         }
     }
+
     return (
         <div className=''>
             <h5>Hồ Sơ Của Tôi </h5>
@@ -128,8 +125,6 @@ function Profile(props) {
 
                     <div className='form-group d-flex'>
                         <label className='col-3'>Ngày sinh</label>
-                            
-
                         <div className="form-group col-9 p-0 d-flex">
                         <select className="form-control col-4"
                             value={date}
@@ -138,9 +133,7 @@ function Profile(props) {
                             {
                                 [...Array(31)].map((item, index) => {
                                     return(
-                                        <option key={index}
-                                            value={index + 1}
-                                        >{index + 1}</option>
+                                        <option key={index}>{index + 1}</option>
                                     )
                                 })
                             }
@@ -153,9 +146,12 @@ function Profile(props) {
                             {
                                 [...Array(12)].map((item, index) => {
                                     return(
-                                        <option key={index}>{index + 1}</option>
+                                        <option key={`${index}`} value={index+1}>
+                                            Tháng {index + 1}
+                                        </option>
+                                        
                                     )
-                                })
+                                }) 
                             }
                         </select>
 
@@ -170,45 +166,18 @@ function Profile(props) {
                                     )
                                 })
                             }
-
-                        </select>
+                        </select>   
                         </div>
                     </div>
-
-                    {
-                        convertTimestampToArray && convertTimestampToArray.length > 0 ?
-                        <div className='form-group d-flex'>
-                            <span className='col-9'>ngay {convertTimestampToArray[0]} </span>
-                        </div>
-                        : ''
-                    }
-
-{
-                        convertTimestampToArray && convertTimestampToArray.length > 0 ?
-                        <div className='form-group d-flex'>
-                            <span className='col-9'>thang {convertTimestampToArray[1]} </span>
-                        </div>
-                        : ''
-                    }
-
-{
-                        convertTimestampToArray && convertTimestampToArray.length > 0 ?
-                        <div className='form-group d-flex'>
-                            <span className='col-9'>nam {convertTimestampToArray[2]} </span>
-                        </div>
-                        : ''
-                    }
-
                     <button type="submit" className="btn btn-primary mx-3">
                         {
-                            loading ? 'Đang cập nhật...' : 'Lưu'
+                            loading ? 'Đang cập nhật...' : 'Cập nhật'
                         }
                     </button>
                 </div>
 
                 <div className='col-4 py-4 bg-light text-center border-left'>
                     <div><img src={previewImg ? previewImg : `https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png`} className='rounded-circle' alt="" style={{width: '100px', height:'100px'}}/></div>
-                
                     <div className='d-flex justify-content-center mt-3'>
                         <div className="form-group">
                             <input id="previewImg" type="file" hidden 

@@ -9,8 +9,10 @@ import { path } from 'utils';
 import { useSelector, useDispatch } from 'react-redux';
 import { FilterNotify, getUser } from 'store/actions';
 import {MenuUser} from './DataMenu';
-import ACTIVITY from '../notification/Activity';
 import Address from './Address';
+import InfoPayment from './InfoPayment';
+import TikiXu from '../coin/TikiXu';
+import Activity from '../notification/Activity';
 
 const InfoAccount = () => {
     const dispatch = useDispatch();
@@ -100,10 +102,12 @@ const InfoAccount = () => {
                             <Route exact path={path.ACCOUNT} component={Profile} />
                             <Route path={path.CHANGE_PASSWORD} component={ChangePassword} />
                             <Route path={path.ADDRESS_CHANGE} component={Address} />
+                            <Route path={path.INFO_PAYMENT} component={InfoPayment} />
 
                             <Route path={path.ORDER} component={Purchase} />
                             <Route path={path.NOTIFICATION} component={Order} />
-                            <Route path={path.ACTIVITY} component={ACTIVITY} />
+                            <Route path={path.ACTIVITY} component={Activity} />
+                            <Route path={path.TIKI_XU} component={TikiXu} />
                         </Switch>
                     </div>
                 </div>

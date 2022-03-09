@@ -2,15 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getDetailProduct } from "services/userService";
 import * as actions from "store/actions";
-import './Style.scss'
-
 import Order from "./Order";
 import Specifications from "./Specifications";
 import Illustrator from "./Illustrator";
-import Accessories from "./Accessories";
 import ProductDesc from "./ProductDesc";
 import ProductSimilar from "./ProductSimilar";
 import Header from "../HomePage/Header/Header";
+import './Style.scss'
+import Vote from "./Vote";
 
 const ProductDetail = ({ match }) => {
   const dispatch = useDispatch();
@@ -62,11 +61,10 @@ const ProductDetail = ({ match }) => {
               decrementQty={decrementQty}
               qty={qty}
             />
-            <Accessories detailProduct={detailProduct} />
           </div>
-
           <Specifications />
           <ProductDesc detailProduct={detailProduct} />
+          <Vote />
           <ProductSimilar similarProducts={similarProducts} />
         </div>
       </div>

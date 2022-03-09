@@ -22,7 +22,6 @@ import HomePage from './Client/HomePage/HomePage';
 import NotFound from './Client/HomePage/NotFound/Index';
 import './App.scss';
 
-
 console.warn = () => {};
 function App(props) {    
     
@@ -64,6 +63,8 @@ function App(props) {
                 <Route path={path.CHANGE_PASSWORD} component={InfoAccount} />
                 <Route path={path.ORDER} component={InfoAccount} />
                 <Route path={path.NOTIFICATION} component={InfoAccount} />
+                <Route path={path.ACTIVITY} component={InfoAccount} />
+                <Route path={path.TIKI_XU} component={InfoAccount} />
 
                 {/* Order with login  */}
                 <Route path={path.CART} component={Cart} />

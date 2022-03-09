@@ -9,12 +9,12 @@ function Address(props) {
     const [address, setAddress] = useState('');
 
     useEffect(() => {
-        setName(user ? user.username : '');
-        setPhone(user ? user.phoneNumber : '');
-        setAddress(user ? user.address : '');
+        if(user){
+            setName(user.username);
+            setPhone(user.phoneNumber);
+            setAddress(user.address);
+        }
     }, [user])
-
-    console.log(user, user.address)
 
     return (
         <div>
@@ -30,7 +30,14 @@ function Address(props) {
                 <div className='col-6'>
                     <div className='d-flex'>
                         <span className='col-4'>Họ và tên: </span>
-                        <span>{address ? name : 'Chưa có địa chỉ...'}</span>
+                        <h6>
+                            {address ? 
+                            <>
+                                <b className='text-uppercase'>{name}</b>
+                                <span className='badge badge-info ml-3'>Mặc định</span> 
+                            </>
+                            : 'Chưa có địa chỉ...'}
+                        </h6>
                     </div>
                     <div className='d-flex'>
                         <span className='col-4'>Số điên thoại: </span>
@@ -42,8 +49,8 @@ function Address(props) {
                     </div>
                 </div>
                 <div className='col-6 text-right'>
-                    <span className="text-primary mr-4">Sửa</span>
-                    <span className="text-danger">Xóa</span>
+                    <span className="mr-4">Sửa</span>
+                    <span>Xóa</span>
                 </div>
             </div>
         </div>
