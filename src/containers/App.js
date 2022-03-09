@@ -65,6 +65,7 @@ function App(props) {
                 <Route path={path.NOTIFICATION} component={InfoAccount} />
                 <Route path={path.ACTIVITY} component={InfoAccount} />
                 <Route path={path.TIKI_XU} component={InfoAccount} />
+                <Route path={path.VOUCHER} component={InfoAccount} />
 
                 {/* Order with login  */}
                 <Route path={path.CART} component={Cart} />

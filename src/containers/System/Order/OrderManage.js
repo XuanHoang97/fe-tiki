@@ -87,7 +87,7 @@ const OrderManage = (props) => {
 
                     <div className='list-order mt-3'>
                         <table className="table table-striped table-bordered table-hover">
-                            <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
+                            <thead className="text-white">
                                 <tr>
                                     <td>STT</td>
                                     <td>Mã ĐH</td>

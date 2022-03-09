@@ -76,7 +76,7 @@ const CategoryManage = (props) => {
             </div>
 
             <table className="table table-striped table-bordered table-hover">
-                <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
+                <thead className="text-white">
                     <tr>
                         <td>STT</td>
                         <td>Ảnh</td>

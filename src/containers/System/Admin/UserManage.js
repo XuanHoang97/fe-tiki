@@ -2,15 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ModalUser from './ModalUser';
 import ModalEditUser from './ModalEditUser';
-import InfoUser from './InfoUser';
 import * as actions from '../../../store/actions';
 import { formatDateNew } from 'components/Formatting/FormatDate';
 
 const UserManage = (props) => {
-    const [infoUser, setInfoUser] = useState([]);
     const [modalUser, setModalUser] = useState(false);
     const [modalEditUser, setModalEditUser] = useState(false);
-    const [modalInfoUser, setModalInfoUser] = useState(false);
     const [userEdit, setUserEdit] = useState('');
 
     //fetch data
@@ -63,12 +60,6 @@ const UserManage = (props) => {
         dispatch(actions.editUser(user));
     }
 
-    //info user
-    const handleInfoUser=(user)=>{
-        setInfoUser(user);
-        setModalInfoUser(!modalInfoUser);
-    }
-
     return (
         <div className="p-2 bg-white">
             <ModalUser
@@ -85,13 +76,6 @@ const UserManage = (props) => {
                     editUser={editUser}
                 />
             }
-
-            <InfoUser
-                isOpen={modalInfoUser} 
-                toggleModal={handleInfoUser}
-                details={infoUser}
-            />
-            
             <div className="h5 text-dark mb-4">Quản lý thành viên (<small>{listUsers.length}</small>)</div>
             <div className="d-flex mb-3 justify-content-between">
                 <button onClick ={() => handleAddNewUser()}  type="button" className="btn btn-success col-2">
@@ -100,7 +84,7 @@ const UserManage = (props) => {
             </div>
             
             <table className="table table-striped table-bordered table-hover">
-                <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
+                <thead className="text-white">
                     <tr>
                         <th scope="col">STT</th>
                         <th scope="col">Avatar</th>
@@ -132,7 +116,7 @@ const UserManage = (props) => {
                                     <td>{item.roleId}</td>
                                     <td>{item.positionId}</td>
                                     <td>
-                                        <button onClick={()=> handleInfoUser(item)} type="button" className="btn text-success">
+                                        <button type="button" className="btn text-success">
                                             <i className="fas fa-info-circle"></i>
                                         </button>
                                         <button onClick={()=> handleEditUser(item)} type="button" className="btn text-primary">

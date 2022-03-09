@@ -36,7 +36,7 @@ const VoteManage = (props) => {
                         <div>Số đánh giá: <b>0</b></div>
                         <div className='list-vote mt-3'>
                             <table className="table table-striped table-bordered table-hover">
-                                <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
+                                <thead className="text-white">
                                     <tr>
                                         <td>STT</td>
                                         <td>Mã đơn hàng</td>

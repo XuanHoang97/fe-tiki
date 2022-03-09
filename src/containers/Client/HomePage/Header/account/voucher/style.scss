@@ -1,0 +1,70 @@
+.list-voucher{
+    display: flex;
+    gap: 10px;
+}
+
+.voucher{
+    display: flex;
+    width: 50%;
+    padding: 0;
+    background: white;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    .voucher-provider {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        padding: 10px;
+        height: 100%;
+        position: relative;
+        display: flex;
+        background: linear-gradient(90deg,transparent 0,transparent 0.1875rem,#ee4d2d 0);
+        .vc-img{
+            background-image: url('https://cf.shopee.vn/file/e6a3b7beffa95ca492926978d5235f79');
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 50px;
+            height: 50px;
+        }
+        .ribbon{
+            position: absolute;
+            top: 0.3125rem;
+            left: -1px;
+            width: 0.4rem;
+            height: calc(100% - 0.4375rem);
+            background: radial-gradient(circle at 0,at .25rem,transparent 0,transparent .1875rem,#ee4d2d 0);
+            background: radial-gradient(circle at 0 0.25rem,transparent 0,transparent 0.1875rem,#ee4d2d 0);
+            background-size: 0.3rem 0.625rem;
+            background-repeat: repeat-y;
+        }
+        span{
+            font-size: 12px;
+        }
+    }
+
+    .voucher-info{
+        .voucher-value{
+
+        }
+        .voucher-right{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    }
+}
+
+.overview-voucher {
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-voucher {
+    background: #f6f7f7;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 10% 50% 10%;
+    justify-content: center;
+    align-items: center;
+    margin: 25px 0;
+}

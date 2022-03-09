@@ -6,11 +6,11 @@ function Vote(props) {
             <h5>Đánh giá - Nhận xét từ khách hàng </h5>
             <div className='star-overview'>
                 <div className='col-3'>
-                    4.8
-                    <span className="fa fa-star checked"></span>
-                    <span className="fa fa-star checked"></span>
-                    <span className="fa fa-star checked"></span>
-                    <span className="fa fa-star"></span>
+                    <span className='text-primary mr-2' style={{fontSize: '27px'}}>4.8</span>
+                    <span className="fa fa-star text-warning"></span>
+                    <span className="fa fa-star text-warning"></span>
+                    <span className="fa fa-star text-warning"></span>
+                    <span className="fa fa-star text-warning"></span>
                     <span className="fa fa-star"></span>
 
                     <div className='small'>10 nhận xét</div>
@@ -44,10 +44,10 @@ function Vote(props) {
                 <div className='list-vote-customer col-9'>
                     <div className='title d-flex'>
                         <div>
-                            <span className="fa fa-star checked"></span>
-                            <span className="fa fa-star checked"></span>
-                            <span className="fa fa-star checked"></span>
-                            <span className="fa fa-star"></span>
+                            <span className="fa fa-star text-warning"></span>
+                            <span className="fa fa-star text-warning"></span>
+                            <span className="fa fa-star text-warning"></span>
+                            <span className="fa fa-star text-warning"></span>
                             <span className="fa fa-star"></span>
                         </div>
                         <span>Cực kỳ hài lòng</span>

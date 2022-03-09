@@ -18,6 +18,11 @@ const ModalArticle = (props) => {
         toggleParent();
     }
 
+    //onChange multi image
+    const changeMultiImage = async(e) => {
+        
+    }
+
     // add new product
     const addArticle=()=>{
         props.SaveInfoProduct({
@@ -85,7 +90,16 @@ const ModalArticle = (props) => {
                         </select>
                     </div> :
                     <span>Không có sản phẩm nào ! </span>
-                }  
+                } 
+
+                <div className='d-flex col-5 p-0 mr-3'>
+                    <label>Ảnh mô tả</label>
+                    <input id="previewImg" type="file"
+                        name='multi-image' 
+                        multiple
+                        onChange={(e) => changeMultiImage(e)} 
+                    />
+                </div> 
             </div>
 
             <div className="input-group p-0">

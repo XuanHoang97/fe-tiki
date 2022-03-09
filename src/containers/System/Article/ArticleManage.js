@@ -4,9 +4,13 @@ import { toast } from 'react-toastify';
 import * as actions from '../../../store/actions';
 import ModalArticle from './ModalArticle';
 import ModalEditArticle from './ModalEditArticle';
-import {saveOptionProduct} from '../../../services/userService'
+import {saveOptionProduct} from '../../../services/userService';
+import { TabContent, TabPane } from 'reactstrap';
+import TabArticle from './TabArticle';
 
 const ArticleManage = (props) => {
+    const [activeTab, setActiveTab] = useState('1');
+
     //fetch data
     const dispatch = useDispatch();
     const listArticle = useSelector(state => state.admin.articles);
@@ -88,11 +92,6 @@ const ArticleManage = (props) => {
         dispatch(actions.DetailCategory(e.target.value));
     }
 
-    //onChange multi image
-    const changeMultiImage = async(e) => {
-        
-    }
-
     //create article
     const addArticle = () => {
         setModalAddArticle(!modalAddArticle);
@@ -112,168 +111,167 @@ const ArticleManage = (props) => {
 
     return ( 
         <div className="p-2 bg-white">
-            <div className="h5 text-dark">Chi tiết sản phẩm (<small>{listArticle && listArticle.length>0 ? listArticle.length : 0}</small>)</div>
-            <div className='bg-light p-3'>
-                <ModalArticle
-                    isOpen={modalAddArticle}
-                    toggleParent={addArticle}
-                    SaveInfoProduct={SaveInfoProduct}
+            <TabArticle
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+            />
 
-                    categoryId={categoryId}
-                    category={category}
-                    DetailCategory={DetailCategory}
-                    handleChangeCategory={handleChangeCategory}
-                    productId={productId}
-                    setProductId={setProductId}
-                />
-                
-                <ModalEditArticle
-                    isOpen={modalEditArticle}
-                    toggleParent={editArticle}
-                    currentArticle={articleEdit}
-                    editInfoProduct={editInfoProduct}
+            <TabContent activeTab={activeTab}>
+                <TabPane tabId="1">
+                    <div className="h5 text-dark">Danh sách(<small>{listArticle && listArticle.length>0 ? listArticle.length : 0}</small>)</div>
+                    <div className='bg-white p-3'>
+                    <ModalArticle
+                        isOpen={modalAddArticle}
+                        toggleParent={addArticle}
+                        SaveInfoProduct={SaveInfoProduct}
 
-                    categoryId={categoryId}
-                    setCategoryId = {setCategoryId}
-                    category={category}
-                    DetailCategory={DetailCategory}
-                    handleChangeCategory={handleChangeCategory}
-                    productId={productId}
-                    setProductId={setProductId}
-                />
+                        categoryId={categoryId}
+                        category={category}
+                        DetailCategory={DetailCategory}
+                        handleChangeCategory={handleChangeCategory}
+                        productId={productId}
+                        setProductId={setProductId}
+                    />
+                    
+                    <ModalEditArticle
+                        isOpen={modalEditArticle}
+                        toggleParent={editArticle}
+                        currentArticle={articleEdit}
+                        editInfoProduct={editInfoProduct}
 
-                <button onClick={() => addArticle()} type="button" className="btn btn-success mb-3">
-                    <i className="fas fa-plus"></i> Thêm bài viết
-                </button>
+                        categoryId={categoryId}
+                        setCategoryId = {setCategoryId}
+                        category={category}
+                        DetailCategory={DetailCategory}
+                        handleChangeCategory={handleChangeCategory}
+                        productId={productId}
+                        setProductId={setProductId}
+                    />
 
-                <table className="table table-striped table-bordered table-hover">
-                    <thead className="text-white" style={{background: 'rgb(58 158 229)'}}>
-                        <tr>
-                            <td>STT</td>
-                            <td>ID SP</td>
-                            <td>ID danh muc</td>
-                            <td>Tên SP</td>
-                            <td>Tác vụ</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {   
-                            listArticle && listArticle.length >0 ?
-                            listArticle.map((item, index) => {
-                                return (
-                                    <tr key={index}>
-                                        <td>
-                                            {index + 1}
-                                        </td>
-                                        <td>{item.productId}</td>
-                                        <td>{item.categoryId}</td>
-                                        <td>loading...</td>
-                                        <td>
-                                            <button onClick={()=> editArticle(item)} type="button" className="btn text-primary">
-                                                <i className="fas fa-edit"></i>
-                                            </button>
-                                            <button type="button" className="btn text-danger">
-                                                <i className="fas fa-trash-alt"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                )
-                            }) :
+                    <button onClick={() => addArticle()} type="button" className="btn btn-success mb-3">
+                        <i className="fas fa-plus"></i> Thêm bài viết
+                    </button>
+
+                    <table className="table table-striped table-bordered table-hover">
+                        <thead className="text-white">
                             <tr>
-                                <td colSpan="5">Không có bài viết nào</td>
+                                <td>STT</td>
+                                <td>ID SP</td>
+                                <td>ID danh muc</td>
+                                <td>Tên SP</td>
+                                <td>Tác vụ</td>
                             </tr>
-                        }                        
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            {   
+                                listArticle && listArticle.length >0 ?
+                                listArticle.map((item, index) => {
+                                    return (
+                                        <tr key={index}>
+                                            <td>
+                                                {index + 1}
+                                            </td>
+                                            <td>{item.productId}</td>
+                                            <td>{item.categoryId}</td>
+                                            <td>loading...</td>
+                                            <td>
+                                                <button onClick={()=> editArticle(item)} type="button" className="btn text-primary">
+                                                    <i className="fas fa-edit"></i>
+                                                </button>
+                                                <button type="button" className="btn text-danger">
+                                                    <i className="fas fa-trash-alt"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    )
+                                }) :
+                                <tr>
+                                    <td colSpan="5">Không có bài viết nào</td>
+                                </tr>
+                            }                        
+                        </tbody>
+                    </table>
+                </div>
+                </TabPane>
+                <TabPane tabId="2">
+                    <form className='bg-white p-3'
+                    onSubmit={handleSaveChoose}
+                    encType="multipart/form-data"
+                    >
+                    <div className='d-flex p-0'>
+                        <div className='d-flex col-4 p-0'>
+                            <div className='col-6 p-0 mr-3'>
+                                <label className='mr-3'>Danh mục</label>
 
-            <hr/>   
-            <div className="text-dark">Tuỳ chọn sản phẩm</div>
-            <form className='bg-light p-3'
-                onSubmit={handleSaveChoose}
-                encType="multipart/form-data"
-            >
-                <div className='d-flex p-0'>
-                    <div className='d-flex col-4 p-0'>
-                        <div className='col-6 p-0 mr-3'>
-                            <label className='mr-3'>Danh mục</label>
-
-                            <div className="form-group d-flex p-0">
-                                <select className="form-control" style={{height:'30px'}}
-                                    value={categoryId}
-                                    onChange={(e)=>handleChangeCategory(e)}
-                                >     
-                                    {
-                                        category && category.length > 0 ?
-                                        category.map((item, index) => {
-                                            return (
-                                                <option key={index} value={index +3 }>{item.name}</option>
-                                            )
-                                        }) :
-                                        <option value="">Không có danh mục</option>
-                                    }                
-                                </select>
-                            </div>
-                        </div>
-                        
-                        {
-                            category && category.length > 0 ?
-                            <div className='col-6 p-0'>
-                                <label className='mr-3'>Sản phẩm</label>
                                 <div className="form-group d-flex p-0">
-                                    <select className="form-control"
-                                        value={productId}
-                                        onChange={(e)=>setProductId(e.target.value)}
-                                    >
+                                    <select className="form-control" style={{height:'30px'}}
+                                        value={categoryId}
+                                        onChange={(e)=>handleChangeCategory(e)}
+                                    >     
                                         {
-                                            DetailCategory && DetailCategory.length > 0 ?
-                                            DetailCategory.map((item, index) => {
+                                            category && category.length > 0 ?
+                                            category.map((item, index) => {
                                                 return (
-                                                    <option key={index} value={item.id}>{item.name}</option>
+                                                    <option key={index} value={index +3 }>{item.name}</option>
                                                 )
                                             }) :
-                                            <option value="">Không có sản phẩm</option>
-                                        }                                     
+                                            <option value="">Không có danh mục</option>
+                                        }                
                                     </select>
                                 </div>
-                            </div> :
-                            <span>Không có sản phẩm nào ! </span>
-                        }
-                    </div>
-
-                    <div className='d-flex col-6 ml-3'>   
-                        <div className='col-7 p-0 mr-3'>
-                            <label className='px-2'>Mẫu mã</label>
-                            <div className="d-flex">
+                            </div>
+                            
                             {
-                                option && option.length >0 &&
-                                option.map((item, index) => {
-                                    return(
-                                        <button 
-                                            onClick={()=>handleOptionProduct(item)}
-                                            type="button" 
-                                            key={index}
-                                            className={item.isSelected === true ? "btn btn-primary px-2 mx-2 font-weight-normal" : "btn btn-secondary btn-sm px-2 mx-2 font-weight-normal"}>
-                                            {item.valueVi}
-                                        </button>
-                                    ) 
-                                })
+                                category && category.length > 0 ?
+                                <div className='col-6 p-0'>
+                                    <label className='mr-3'>Sản phẩm</label>
+                                    <div className="form-group d-flex p-0">
+                                        <select className="form-control"
+                                            value={productId}
+                                            onChange={(e)=>setProductId(e.target.value)}
+                                        >
+                                            {
+                                                DetailCategory && DetailCategory.length > 0 ?
+                                                DetailCategory.map((item, index) => {
+                                                    return (
+                                                        <option key={index} value={item.id}>{item.name}</option>
+                                                    )
+                                                }) :
+                                                <option value="">Không có sản phẩm</option>
+                                            }                                     
+                                        </select>
+                                    </div>
+                                </div> :
+                                <span>Không có sản phẩm nào ! </span>
                             }
+                        </div>
+
+                        <div className='d-flex col-6 ml-3'>   
+                            <div className='col-7 p-0 mr-3'>
+                                <label className='px-2'>Mẫu mã</label>
+                                <div className="d-flex">
+                                {
+                                    option && option.length >0 &&
+                                    option.map((item, index) => {
+                                        return(
+                                            <button 
+                                                onClick={()=>handleOptionProduct(item)}
+                                                type="button" 
+                                                key={index}
+                                                className={item.isSelected === true ? "btn btn-primary px-2 mx-2 font-weight-normal" : "btn btn-secondary btn-sm px-2 mx-2 font-weight-normal"}>
+                                                {item.valueVi}
+                                            </button>
+                                        ) 
+                                    })
+                                }
+                                </div>
                             </div>
                         </div>
-
-                        <div className='col-5 p-0 mr-3'>
-                            <label>Ảnh mô tả</label>
-                            <input id="previewImg" type="file"
-                                name='multi-image' 
-                                multiple
-                                onChange={(e) => changeMultiImage(e)} 
-                            />
-                        </div>
                     </div>
-                </div>
-                <button type ="submit" className="btn btn-success">Lưu thông tin</button>
-            </form>
+                    <button type ="submit" className="btn btn-success">Lưu thông tin</button>
+                    </form>
+                </TabPane>
+            </TabContent>
         </div>
     );
 }

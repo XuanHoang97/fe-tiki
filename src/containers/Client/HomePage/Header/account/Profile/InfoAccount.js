@@ -13,6 +13,7 @@ import Address from './Address';
 import InfoPayment from './InfoPayment';
 import TikiXu from '../coin/TikiXu';
 import Activity from '../notification/Activity';
+import Voucher from '../voucher/Voucher';
 
 const InfoAccount = () => {
     const dispatch = useDispatch();
@@ -108,6 +109,7 @@ const InfoAccount = () => {
                             <Route path={path.NOTIFICATION} component={Order} />
                             <Route path={path.ACTIVITY} component={Activity} />
                             <Route path={path.TIKI_XU} component={TikiXu} />
+                            <Route path={path.VOUCHER} component={Voucher} />
                         </Switch>
                     </div>
                 </div>
