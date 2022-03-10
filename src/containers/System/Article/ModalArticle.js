@@ -3,6 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
+import axios from 'axios';
 const mdParser = new MarkdownIt();
 
 const ModalArticle = (props) => {
@@ -13,6 +14,8 @@ const ModalArticle = (props) => {
     const [descriptionMarkdown, setDescriptionMarkdown] = useState('');
     const [specificationHTML, setSpecificationHTML] = useState('');
     const [specificationMarkdown, setSpecificationMarkdown] = useState('');
+    const [pictures, setPictures] = useState([]);
+    const [previewImg, setPreviewImg] = useState('');
     
     const toggle =()=>{
         toggleParent();
@@ -20,20 +23,30 @@ const ModalArticle = (props) => {
 
     //onChange multi image
     const changeMultiImage = async(e) => {
-        
+        let file=e.target.files[0];
+        if(file){
+            let objectUrl=URL.createObjectURL(file)
+            setPreviewImg(objectUrl);
+            setPictures(file);
+        }
+        console.log('image before send:', file, pictures);
     }
 
     // add new product
-    const addArticle=()=>{
-        props.SaveInfoProduct({
-            descriptionHTML,   
-            descriptionMarkdown,
-            specificationHTML,
-            specificationMarkdown,
-            productId,
-            categoryId,
-        });
-        toggle();
+    const addArticle=(e)=>{
+        e.preventDefault();
+        // props.SaveInfoProduct({
+        //     descriptionHTML,   
+        //     descriptionMarkdown,
+        //     specificationHTML,
+        //     specificationMarkdown,
+        //     productId,
+        //     categoryId,
+        //     pictures
+        // });
+        // toggle();
+
+        console.log(pictures);
     }
 
     //onchange editor
@@ -49,84 +62,93 @@ const ModalArticle = (props) => {
 
     return (
         <Modal isOpen={props.isOpen} toggle={()=>toggle()} size="lg">
-            <ModalHeader toggle={()=>toggle()}>Thêm mới bài viết - chi tiết sản phẩm</ModalHeader>
-            <ModalBody style={{height: '80vh', overflowY: 'scroll'}}>
-            
-            <div className='d-flex col-12 p-0'>
-                <label className='mr-3'>Chọn sản phẩm</label>
-                <div className="form-group d-flex p-0">
-                    <select className="form-control" style={{height:'30px'}}
-                        value={categoryId}
-                        onChange={(e)=>handleChangeCategory(e)}
-                    >     
-                        {
-                            category && category.length > 0 ?
-                            category.map((item, index) => {
-                                return (
-                                    <option key={index} value={index +3}>{item.name}</option>
-                                )
-                            }) :
-                            <option value="">Không có danh mục</option>
-                        }                
-                    </select>
-                </div>
-
-                {
-                    category && category.length > 0 ?
-                    <div className='form-group d-flex col-3 p-0'>
+            <form onSubmit={addArticle}
+                encType="multipart/form-data"
+            >
+                <ModalHeader toggle={()=>toggle()}>Thêm mới bài viết - chi tiết sản phẩm</ModalHeader>
+                <ModalBody style={{height: '80vh', overflowY: 'scroll'}}>
+                
+                <div className='d-flex col-12 p-0'>
+                    <label className='mr-3'>Chọn sản phẩm</label>
+                    <div className="form-group d-flex p-0">
                         <select className="form-control" style={{height:'30px'}}
-                            value={productId}
-                            onChange={(e)=>setProductId(e.target.value)}
-                        >
+                            value={categoryId}
+                            onChange={(e)=>handleChangeCategory(e)}
+                        >     
                             {
-                                DetailCategory && DetailCategory.length > 0 ?
-                                DetailCategory.map((item, index) => {
+                                category && category.length > 0 ?
+                                category.map((item, index) => {
                                     return (
-                                        <option key={index} value={item.id}>{item.name}</option>
+                                        <option key={index} value={index +3}>{item.name}</option>
                                     )
                                 }) :
-                                <option value="">Không có sản phẩm</option>
-                            }                                     
+                                <option value="">Không có danh mục</option>
+                            }                
                         </select>
-                    </div> :
-                    <span>Không có sản phẩm nào ! </span>
-                } 
+                    </div>
 
-                <div className='d-flex col-5 p-0 mr-3'>
-                    <label>Ảnh mô tả</label>
-                    <input id="previewImg" type="file"
-                        name='multi-image' 
-                        multiple
-                        onChange={(e) => changeMultiImage(e)} 
-                    />
-                </div> 
-            </div>
+                    {
+                        category && category.length > 0 ?
+                        <div className='form-group d-flex col-3 p-0'>
+                            <select className="form-control" style={{height:'30px'}}
+                                value={productId}
+                                onChange={(e)=>setProductId(e.target.value)}
+                            >
+                                {
+                                    DetailCategory && DetailCategory.length > 0 ?
+                                    DetailCategory.map((item, index) => {
+                                        return (
+                                            <option key={index} value={item.id}>{item.name}</option>
+                                        )
+                                    }) :
+                                    <option value="">Không có sản phẩm</option>
+                                }                                     
+                            </select>
+                        </div> :
+                        <span>Không có sản phẩm nào ! </span>
+                    } 
 
-            <div className="input-group p-0">
-                <div className="form-group col-12 p-0">
-                    <label>Thông số kỹ thuật</label>
-                    <MdEditor style={{ height: '200px' }} renderHTML={text => mdParser.render(text)}
-                        onChange={editorSpecification}
-                        value={specificationMarkdown}
-                    />
+                    <div className='d-flex col-5 p-0 mr-3'>
+                        <label>Ảnh mô tả</label>
+                        <input id="previewImg" type="file"
+                            name='pictures' 
+                            multiple
+                            onChange={(e) => changeMultiImage(e)} 
+                        />
+                        {
+                            previewImg ?
+                            <img src={previewImg} alt="previewImg" style={{width: '100px', height: '100px'}}/> :
+                            <span>Không có ảnh</span>
+                        }
+                    </div> 
                 </div>
-            </div>
 
-            <div className="input-group p-0">
-                <div className="form-group col-12 p-0">
-                    <label>Mô tả sản phẩm</label>
-                    <MdEditor style={{ height: '200px' }} renderHTML={text => mdParser.render(text)}
-                        onChange={editorDescription}
-                        value={descriptionMarkdown}
-                    />
+                <div className="input-group p-0">
+                    <div className="form-group col-12 p-0">
+                        <label>Thông số kỹ thuật</label>
+                        <MdEditor style={{ height: '200px' }} renderHTML={text => mdParser.render(text)}
+                            onChange={editorSpecification}
+                            value={specificationMarkdown}
+                        />
+                    </div>
                 </div>
-            </div>  
-            </ModalBody>
 
-            <ModalFooter>
-                <Button color="primary" className="btn" onClick={() => {addArticle()}}>Thêm mới</Button>
-                <Button color="secondary" className="btn">Cancel</Button>
-            </ModalFooter>
+                <div className="input-group p-0">
+                    <div className="form-group col-12 p-0">
+                        <label>Mô tả sản phẩm</label>
+                        <MdEditor style={{ height: '200px' }} renderHTML={text => mdParser.render(text)}
+                            onChange={editorDescription}
+                            value={descriptionMarkdown}
+                        />
+                    </div>
+                </div>  
+                </ModalBody>
+
+                <ModalFooter>
+                    <Button color="primary" className="btn" type='submit'>Thêm mới</Button>
+                    <Button color="secondary" className="btn">Cancel</Button>
+                </ModalFooter>
+            </form>
         </Modal>
     )
 }

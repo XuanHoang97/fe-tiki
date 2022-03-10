@@ -12,7 +12,7 @@ const Activity = () => {
     useEffect(() => {
         let userId = user ? user.id : '';
         dispatch(FilterNotify(userId, 'ACTIVITY'));
-    }, [dispatch, user, notify]);
+    }, [dispatch, user]);
 
     return (
         <div className=''>

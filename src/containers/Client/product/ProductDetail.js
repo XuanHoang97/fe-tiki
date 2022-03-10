@@ -9,7 +9,7 @@ import ProductDesc from "./ProductDesc";
 import ProductSimilar from "./ProductSimilar";
 import Header from "../HomePage/Header/Header";
 import './Style.scss'
-import Vote from "./Vote";
+import Rating from "./Rating";
 
 const ProductDetail = ({ match }) => {
   const dispatch = useDispatch();
@@ -64,7 +64,7 @@ const ProductDetail = ({ match }) => {
           </div>
           <Specifications />
           <ProductDesc detailProduct={detailProduct} />
-          <Vote />
+          <Rating detailProduct={detailProduct} />
           <ProductSimilar similarProducts={similarProducts} />
         </div>
       </div>

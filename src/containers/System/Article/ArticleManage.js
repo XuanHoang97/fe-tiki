@@ -97,7 +97,17 @@ const ArticleManage = (props) => {
         setModalAddArticle(!modalAddArticle);
     }
     const SaveInfoProduct=(data)=> {
-        dispatch(actions.SaveInfoProduct(data));
+        // dispatch(actions.SaveInfoProduct(data));
+
+        const detailProduct = new FormData();
+        detailProduct.append('specificationHTML', data.specificationHTML);
+        detailProduct.append('specificationMarkdown', data.specificationMarkdown);
+        detailProduct.append('descriptionHTML', data.descriptionHTML);
+        detailProduct.append('descriptionMarkdown', data.descriptionMarkdown);
+        detailProduct.append('productId', data.productId);
+        detailProduct.append('categoryId', data.categoryId);
+        data.pictures && detailProduct.append('pictures', data.pictures);
+        dispatch(actions.SaveInfoProduct(detailProduct));
     }
 
     //edit article
@@ -195,8 +205,8 @@ const ArticleManage = (props) => {
                 </TabPane>
                 <TabPane tabId="2">
                     <form className='bg-white p-3'
-                    onSubmit={handleSaveChoose}
-                    encType="multipart/form-data"
+                        onSubmit={handleSaveChoose}
+                        encType="multipart/form-data"
                     >
                     <div className='d-flex p-0'>
                         <div className='d-flex col-4 p-0'>

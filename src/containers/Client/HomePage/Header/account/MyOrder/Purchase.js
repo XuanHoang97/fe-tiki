@@ -5,6 +5,7 @@ import { FilterMyOrder, GetOrderByUser, getStatusOrder } from 'store/actions';
 import { numberFormat } from 'components/Formatting/FormatNumber';
 import DetailOrder from './DetailOrder';
 import ReactPaginate from "react-paginate";
+import RatingProduct from './Rating';
 
 function Purchase(props) {
     const dispatch = useDispatch();
@@ -15,6 +16,7 @@ function Purchase(props) {
     const filterOrder = useSelector(state => state.client.filterMyOrder);
     const [modalDetail, setModalDetail] = useState(false);
     const [orderDetail, setOrderDetail] = useState({});
+    const [rating, setRating] = useState(false);
 
     // get order
     useEffect(() => {
@@ -43,6 +45,12 @@ function Purchase(props) {
         setPageNumber(selected);
     };
 
+    // rating
+    const handleRated = (order) => {
+        setRating(!rating);
+        console.log('rating', order);
+    }
+
     return (
         <div>
             <DetailOrder
@@ -50,6 +58,11 @@ function Purchase(props) {
                 toggle={() => setModalDetail(!modalDetail)}
                 order={orderDetail}
                 statusOrder = {statusOrder}
+            />
+
+            <RatingProduct
+                isOpen={rating}
+                toggle={handleRated}
             />
 
             <Nav tabs>
@@ -95,6 +108,7 @@ function Purchase(props) {
                                             {item.status ==='S4' && <span className='text-success'><i className="fa fa-check"></i> Đã giao</span>}
                                             {item.status ==='S5' && <span className='text-danger'><i className="fa fa-times"></i> Đã hủy</span>}
                                             {item.status ==='S6' && <span className='text-secondary'><i className="fa fa-undo"></i> Hoàn trả</span>}
+                                            {item.status ==='S7' && <span className='text-secondary'><i className="fa fa-star"></i> Đã đánh giá</span>}
                                         </span>
                                     </div>
                                     <hr/>
@@ -119,8 +133,14 @@ function Purchase(props) {
                                             {
                                                 item.status ==='S4' ?
                                                 <>
-                                                    <button type="button" className="btn btn-success btn-sm">Đánh giá</button>
-                                                    <button type="button" className="btn btn-primary btn-sm">Đổi hàng</button>
+                                                    <button onClick={() => handleRated(item)} type="button" className="btn btn-success btn-sm">Đánh giá</button>
+                                                </>
+                                                : null
+                                            }
+
+                                            { item.status ==='S7' ?
+                                                <>
+                                                    <button type="button" className="btn btn-success btn-sm">Xem đánh giá</button>
                                                 </>
                                                 : null
                                             }

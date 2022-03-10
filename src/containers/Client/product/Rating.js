@@ -1,6 +1,12 @@
 import React from 'react';
+import { formatDate } from 'components/Formatting/FormatDate';
 
-function Vote(props) {
+const Rating = (props) => {
+    const {detailProduct} = props;
+
+    console.log('detailProduct', detailProduct);
+    console.log('rating data', detailProduct.ratingData);
+
     return (
         <div className='vote'>
             <h5>Đánh giá - Nhận xét từ khách hàng </h5>
@@ -13,7 +19,7 @@ function Vote(props) {
                     <span className="fa fa-star text-warning"></span>
                     <span className="fa fa-star"></span>
 
-                    <div className='small'>10 nhận xét</div>
+                    <div className='small'>{detailProduct.ratingData ? detailProduct.ratingData.length : 0} nhận xét</div>
                 </div>
 
                 <div className='filter-vote col-9'>
@@ -55,12 +61,26 @@ function Vote(props) {
                     <span className='small text-success'>
                         <i className="fa fa-check-circle mr-2" aria-hidden="true"></i>
                         Đã mua hàng</span>
-                    <div className='my-2'>tuyệt vời,hợp với túi tiền đt Sài thấy cũng OK lắm</div>
-                    <div className='optionProd text-secondary'>abc</div>
-                    <span className='small text-secondary'> 1 ngày trước</span>
+                    <div className='my-2'>
+                        {
+                            detailProduct && detailProduct.ratingData ?
+                            detailProduct.ratingData.map((item, index) => {
+                                return (
+                                    <div key={index}>
+                                        <div className='d-flex'>
+                                            <span className='small'>{item.comment}</span>
+                                        </div>
+                                        <span className='small text-secondary'>{formatDate(item.date)}</span>
+                                    </div>
+                                )
+                            })
+                            :
+                            'loading...'
+                        }
+                    </div>
                 </div>
             </div>
         </div>
     );
 }
-export default Vote;
+export default Rating;

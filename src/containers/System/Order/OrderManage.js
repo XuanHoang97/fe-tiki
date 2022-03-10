@@ -3,12 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import {TabContent, TabPane} from 'reactstrap';
 import VerifyOrder from './VerifyOrder';
 import * as actions from 'store/actions';
-import OrderTabControl from './OrderTabControl';
 import ReactPaginate from "react-paginate";
 import { numberFormat } from 'components/Formatting/FormatNumber';
 import SortOrder from './SortOrder';
 import './style.scss';
 import { formatDate } from 'components/Formatting/FormatDate';
+import TabOrder from './TabOrder';
 
 const OrderManage = (props) => {
     const [activeTab, setActiveTab] = useState('4');
@@ -67,7 +67,7 @@ const OrderManage = (props) => {
             />
 
             <div className="h5 text-dark mb-3">Quản lý đơn hàng</div>
-            <OrderTabControl
+            <TabOrder
                 status={status}
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}

@@ -33,10 +33,10 @@ const InfoAccount = () => {
         return <Redirect to={path.HOMEPAGE} />
     }
 
-    const viewDetail = (notify) => {
-        let userId = user ? user.id : '';
-        dispatch(FilterNotify(userId, notify.type));
-    }
+    // const viewDetail =(notify) => {
+    //     let userId = user ? user.id : '';
+    //     dispatch(FilterNotify(userId, notify.type));
+    // }
 
 
     return (
@@ -83,7 +83,7 @@ const InfoAccount = () => {
                                                             <NavLink to={sub.path} key={index}
                                                                 className='item-menu' 
                                                                 activeClassName='activeSubMenu'
-                                                                onClick={() => viewDetail(sub)}
+                                                                // onClick={() => viewDetail(sub)}
                                                             >
                                                                 <div>{sub.name}</div>
                                                             </NavLink>

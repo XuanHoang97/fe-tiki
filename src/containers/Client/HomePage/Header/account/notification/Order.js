@@ -12,7 +12,7 @@ const Order = () => {
     useEffect(() => {
         let userId = user ? user.id : '';
         dispatch(FilterNotify(userId, 'ORDER'));
-    }, [dispatch, user, notify]);
+    }, [dispatch, user]);
 
     return (
         <div className=''>

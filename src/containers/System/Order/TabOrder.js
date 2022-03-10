@@ -3,7 +3,7 @@ import {Nav, NavItem, NavLink } from 'reactstrap';
 import {useDispatch} from 'react-redux';
 import * as actions from 'store/actions';
 
-function OrderTabControl(props) {
+function TabOrder(props) {
     const {status, activeTab, setActiveTab, order} = props;
     const dispatch = useDispatch();
 
@@ -36,4 +36,4 @@ function OrderTabControl(props) {
         </Nav>
     );
 }
-export default OrderTabControl;
+export default TabOrder;

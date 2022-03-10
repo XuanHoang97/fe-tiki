@@ -1,10 +1,9 @@
  body, html {
-    background-repeat: no-repeat;
-    background-size: cover;
     font-family: $fontmain;
     font-size: $base-size - 2px;
     height: 100vh;
     overflow: hidden;
+    background: #f8f9fa;
 }
 
 .btn {
@@ -12,51 +11,29 @@
     font-weight: 600;
     height: 28px !important;
 }
-
-.content-container {
-  .title {
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: $base-size + 4px;
-    margin-top: 15px;
-    color: $colormain;
+.modal-header {
+  padding: 0 10px;
+  .modal-title {
+    line-height: 35px;
   }
-  .content {
-    margin: 15px 30px;
-    box-shadow: 2px 2px 4px 0 $box-shadow-color;
-    -webkit-box-shadow: 2px 2px 4px 0 $box-shadow-color;
+  .close{
+    padding: 1.5rem 1rem;
   }
 }
 
-.modal {
-  .modal-dialog {
-    .modal-content {
-      .modal-header {
-        padding: 0 10px;
-        height: 35px;
-        background-position: center;
-        background-size: cover;
-        background-image: url('https://png.pngtree.com/background/20210715/original/pngtree-fashion-blue-gradient-background-picture-image_1278728.jpg');
-        color: $common-text-color;
-        .modal-title {
-          line-height: 35px;
-          font-weight: 500;
-          font-size: $base-size + 1px;
-        }
-        .btn-close {
-          position: absolute;
-          i {
-            line-height: 35px;
-            font-size: $base-size + 2px;
-          }
-        }
-        .close{
-          padding: 1.5rem 1rem;
-          color: white;
-          opacity: 1;
-        }
-      }
-    }
-  }
+#root{
+  height:100vh;
+  overflow-y: auto;
+}
+.badge {
+  padding: 3px 5px !important;
+}
+
+thead {
+  background: rgb(58,158,229);
+}
+
+.table th,
+.table td {
+  padding: 0.5rem !important;
 }

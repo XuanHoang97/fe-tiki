@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { TabContent, TabPane } from 'reactstrap';
+import {useSelector} from 'react-redux';
 import TabCoin from './TabCoin';
 import './style.scss'
 
 const TikiXu = (props) => {
+    const user = useSelector(state => state.auth.user);
     const [activeTab, setActiveTab] = useState('1');
 
     return (
@@ -11,7 +13,7 @@ const TikiXu = (props) => {
             <div className='coin-overview '>
                 <div className='myCoin '>
                     <img src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/paymentfe/75efaf1b556a8e2fac6ab9383e95d4e3.png" alt='' />
-                    <div className='numbCoin'>7.898.500</div>
+                    <div className='numbCoin'>{user ? user.TikiXu : 0}0</div>
                     <div className='coin-current'>
                         <span>Xu đang có</span>
                         <div>100 Tiki xu sẽ hết hạn vào 30/06/2022 
