@@ -5,7 +5,9 @@ const initialState = {
     isAuthenticated: false,
     user: null,
     notify: [],
-    notifyUnread: []
+    notifyUnread: [],
+    point: 0,
+    rating: {}
 }
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -50,6 +52,20 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 notify: action.payload
+            }
+
+            // get point user
+        case actionTypes.TIKI_POINT:
+            return {
+                ...state,
+                point: action.payload
+            }
+
+            // view rating
+        case actionTypes.VIEW_RATING:
+            return {
+                ...state,
+                rating: action.payload
             }
 
         default:

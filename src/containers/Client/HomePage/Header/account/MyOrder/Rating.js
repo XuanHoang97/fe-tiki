@@ -23,25 +23,22 @@ const RatingProduct = (props) => {
         }
     }, [dispatch, currentOrder]);
     
-    console.log('currentOrder', currentOrder);
-
-    
     // Rating product -update order - add notify -add point
     const ratingProduct = () => {
-        dispatch(rate(
-            {
-                userId: currentOrder.userId,
-                orderId: currentOrder.id,
-                productId: currentOrder.productId,
-                point: point,
-                rating: rating,
-                comment: comment
+        dispatch(rate({
+            userId: currentOrder.userId,
+            orderId: currentOrder.id,
+            productId: currentOrder.productId,
+            point: point,
+            rating: rating,
+            comment: comment
             })
-            );
-            toggle();
+        );
+        toggle();
+            
+            // console.log('currentOrder', currentOrder && currentOrder.userId, currentOrder.id, currentOrder.productId);
+            // console.log('rating', point, rating, comment);
         }
-        // console.log('currentOrder', currentOrder && currentOrder.userId, currentOrder.id, currentOrder.productId);
-        // console.log('rating', point, rating, comment);
 
     return (
         <Modal  isOpen={isOpen} toggle={toggle} size="md">   

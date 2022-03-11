@@ -106,6 +106,8 @@ const actionTypes = Object.freeze({
 
     // Rating product - update order - add notify - add point to Tiki Point
     RATING_PRODUCT: 'RATING_PRODUCT',
+    TIKI_POINT: 'TIKI_POINT',
+    VIEW_RATING: 'VIEW_RATING',
 
 })
 export default actionTypes;

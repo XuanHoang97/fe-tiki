@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Nav, NavItem, NavLink, TabContent, TabPane} from 'reactstrap';
 import {useDispatch, useSelector} from 'react-redux';
-import { FilterMyOrder, GetOrderByUser, getStatusOrder } from 'store/actions';
+import { FilterMyOrder, GetOrderByUser, getStatusOrder, viewRating } from 'store/actions';
 import { numberFormat } from 'components/Formatting/FormatNumber';
 import DetailOrder from './DetailOrder';
 import ReactPaginate from "react-paginate";
 import RatingProduct from './Rating';
+import ViewRating from './ViewRating';
 
 function Purchase(props) {
     const dispatch = useDispatch();
@@ -18,6 +19,20 @@ function Purchase(props) {
     const [orderDetail, setOrderDetail] = useState({});
     const [rating, setRating] = useState(false);
     const [ratingEdit, setRatingEdit] = useState('');
+
+    const myRating = useSelector(state => state.auth.rating);
+    const [showRating, setShowRating] = useState(false);
+    // useEffect(() => {
+    //     let userId = user ? user.id : '';
+    //     dispatch(viewRating(userId, 6));
+    // }, [dispatch, user]);
+
+    
+    const viewRate = () => {
+        setShowRating(!showRating);
+        // dispatch(viewRating(user.id, 6));
+        console.log('myrating:', myRating);
+    }
 
     // get order
     useEffect(() => {
@@ -66,6 +81,11 @@ function Purchase(props) {
                 isOpen={rating}
                 toggle={handleRated}
                 currentOrder={ratingEdit}
+            />
+
+            <ViewRating
+                isOpen={showRating}
+                toggle={viewRate}
             />
 
             <Nav tabs>
@@ -142,7 +162,7 @@ function Purchase(props) {
 
                                             {
                                                 item.status ==='S4' && item.action ==='Đã đánh giá' &&
-                                                <button type="button" className="btn btn-success btn-sm">Xem đánh giá</button>
+                                                <button onClick={() => viewRate(item) } type="button" className="btn btn-success btn-sm">Xem đánh giá</button>
                                             }
                                         </div>
                                     </div>

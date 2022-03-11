@@ -7,6 +7,7 @@ import LoadingOverlay from 'react-loading-overlay';
 import Header from '../HomePage/Header/Header';
 import moment from "moment";
 import { path } from 'utils';
+import { v4 as uuidv4 } from 'uuid';
 
 const Payment = (props) => {
     const dispatch = useDispatch();
@@ -36,10 +37,30 @@ const Payment = (props) => {
         }
     }
 
+    useEffect(() => {
+    console.log('cart user:', cartsUser);
+    }, [cartsUser]);
+
     // payment -checkout order
     const handlePayment = () => {
+        //away duplicate data
+        let newCart = cartsUser.map(cart => {
+            return {
+                // assign new id with uuid
+                id: uuidv4(),
+                productId: cart.productId,
+                image: cart.image,
+                name: cart.name,
+                price: cart.price,
+                qty: cart.qty,
+                sale: cart.sale,
+                userId: cart.userId
+
+            }
+        })
+
         dispatch(CheckoutOrder({
-            arrOrder: cartsUser,
+            arrOrder: newCart,
             total: totalMoney(cartsUser) - coupon + deliveryFee,
             username: user.username,
             phone: user.phoneNumber,

@@ -1,5 +1,7 @@
 import React from 'react';
 import { formatDate , formatDateNew} from 'components/Formatting/FormatDate';
+import ReactStars from 'react-stars';
+import {averageStarRating} from 'components/Formatting/FormatNumber';
 
 const Rating = (props) => {
     const {detailProduct} = props;
@@ -9,13 +11,27 @@ const Rating = (props) => {
             <h5>Đánh giá - Nhận xét từ khách hàng </h5>
             <div className='star-overview'>
                 <div className='col-3'>
-                    <span className='text-primary mr-2' style={{fontSize: '27px'}}>4.5</span>
-                    <span className="fa fa-star text-warning"></span>
-                    <span className="fa fa-star text-warning"></span>
-                    <span className="fa fa-star text-warning"></span>
-                    <span className="fa fa-star text-warning"></span>
-                    <span className="fa fa-star"></span>
-
+                    <div className='d-flex'>
+                        <span className='text-primary mr-2' style={{fontSize: '27px'}}>
+                            {
+                                detailProduct.ratingData && detailProduct.ratingData.length > 0 ?
+                                averageStarRating(detailProduct.ratingData)
+                                : 0
+                            }
+                        </span>
+                        
+                        <ReactStars
+                            count={5}
+                            value={
+                                detailProduct.ratingData && detailProduct.ratingData.length > 0 ?
+                                averageStarRating(detailProduct.ratingData)
+                                : 0
+                            }
+                            edit={false}
+                            size={24}
+                            color2={'#ffd700'}
+                        />
+                    </div>
                     <div className='small'>{detailProduct && detailProduct.ratingData ? detailProduct.ratingData.length : 0} nhận xét</div>
                 </div>
 

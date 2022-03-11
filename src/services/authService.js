@@ -107,6 +107,24 @@ const RatingProduct = (data) => {
     });
 }
 
+// get point user
+const getPointUser = (userId) => {
+    return instance.get(`/point-user?id=${userId}`, {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    });
+}
+
+// view rating product
+const viewRatingProduct = (userId, productId) => {
+    return instance.get(`/rating?userId=${userId}&productId=${productId}`, {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    });
+}
+
 export{
     registerAcc,
     loginAcc,
@@ -120,5 +138,7 @@ export{
     updateStatusNotify,
     MarkAllNotifyAsRead,
     filterNotify,
-    RatingProduct
+    RatingProduct,
+    getPointUser,
+    viewRatingProduct
 }

@@ -24,3 +24,12 @@ export const investmentCost = (arr) => {
     // }
     return investment
 }
+
+// calculator average star rating
+export const averageStarRating = (arr) => {
+    let total = 0
+    for (let item of arr) {
+        total += item.rating
+    }
+    return total / arr.length
+}

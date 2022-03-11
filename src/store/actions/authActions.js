@@ -7,10 +7,12 @@ import {
     updateStatusNotify,
     MarkAllNotifyAsRead,
     filterNotify,
-    RatingProduct
+    RatingProduct,
+    getPointUser,
+    viewRatingProduct
 } from '../../services/authService';
 import { toast } from "react-toastify";
-import { GetOrderByUser } from '../actions/clientAction';
+// import { GetOrderByUser } from '../actions/clientAction';
 
 // Logout
 export const logoutAccount = () => {
@@ -143,12 +145,44 @@ export const rate = (data) => {
                     type: actionTypes.RATING_PRODUCT,
                 });
                 toast.success('Cảm ơn bạn đã đánh giá sản phẩm !')
-
-                // get all order
-                dispatch(GetOrderByUser());
             }
         }catch(e){
             toast.error('rating product error !')
+        }
+    }
+}
+
+// get point user
+export const getPoint = (userId) => {
+    return async(dispatch) => {
+        try{
+            let res = await getPointUser(userId);
+            if(res){
+                dispatch({
+                    type: actionTypes.TIKI_POINT,
+                    payload: res
+                });
+            }
+        }catch(e){
+            toast.error('get point error !')
+        }
+    }
+}
+
+// view rating product
+export const viewRating = (userId, productId) => {
+    return async(dispatch) => {
+        try{
+            let res = await viewRatingProduct(userId, productId);
+            console(res);
+            if(res){
+                dispatch({
+                    type: actionTypes.VIEW_RATING,
+                    payload: res.result
+                });
+            }
+        }catch(e){
+            toast.error('get point error !')
         }
     }
 }
