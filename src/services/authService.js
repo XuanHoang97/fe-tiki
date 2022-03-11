@@ -98,6 +98,15 @@ const filterNotify = (userId, type) => {
     });
 }
 
+// Rating product
+const RatingProduct = (data) => {
+    return instance.post(`/rating`, data, {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    });
+}
+
 export{
     registerAcc,
     loginAcc,
@@ -110,5 +119,6 @@ export{
     getAllNotify,
     updateStatusNotify,
     MarkAllNotifyAsRead,
-    filterNotify
+    filterNotify,
+    RatingProduct
 }

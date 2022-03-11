@@ -6,9 +6,11 @@ import {
     getAllNotify,
     updateStatusNotify,
     MarkAllNotifyAsRead,
-    filterNotify
+    filterNotify,
+    RatingProduct
 } from '../../services/authService';
 import { toast } from "react-toastify";
+import { GetOrderByUser } from '../actions/clientAction';
 
 // Logout
 export const logoutAccount = () => {
@@ -127,6 +129,26 @@ export const FilterNotify = (userId, type) => {
             }
         } catch (e) {
             toast.error('filter notify error !')
+        }
+    }
+}
+
+// Rating product
+export const rate = (data) => {
+    return async(dispatch) => {
+        try{
+            let res = await RatingProduct(data);
+            if(res && res.errCode === 0){
+                dispatch({
+                    type: actionTypes.RATING_PRODUCT,
+                });
+                toast.success('Cảm ơn bạn đã đánh giá sản phẩm !')
+
+                // get all order
+                dispatch(GetOrderByUser());
+            }
+        }catch(e){
+            toast.error('rating product error !')
         }
     }
 }

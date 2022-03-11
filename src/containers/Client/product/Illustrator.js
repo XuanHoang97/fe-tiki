@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Illustrator = ({detailProduct}) => {
+    
     return (
         <div className="col-md-3 p-0 text-left">
             <div>

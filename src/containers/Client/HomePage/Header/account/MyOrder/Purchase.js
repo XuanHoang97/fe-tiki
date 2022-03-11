@@ -17,6 +17,7 @@ function Purchase(props) {
     const [modalDetail, setModalDetail] = useState(false);
     const [orderDetail, setOrderDetail] = useState({});
     const [rating, setRating] = useState(false);
+    const [ratingEdit, setRatingEdit] = useState('');
 
     // get order
     useEffect(() => {
@@ -48,7 +49,8 @@ function Purchase(props) {
     // rating
     const handleRated = (order) => {
         setRating(!rating);
-        console.log('rating', order);
+        setRatingEdit(order);
+        console.log('order', order);
     }
 
     return (
@@ -63,6 +65,7 @@ function Purchase(props) {
             <RatingProduct
                 isOpen={rating}
                 toggle={handleRated}
+                currentOrder={ratingEdit}
             />
 
             <Nav tabs>
@@ -102,13 +105,16 @@ function Purchase(props) {
                                     <div className='statusOrder'>
                                         <div className='text-dark'>{index + 1}. Đơn hàng <b>{item.code}</b></div>
                                         <span>
-                                            {item.status ==='S1' && <span className='text-warning'><i className="fas fa-clock"></i>  Đang chờ xử lý</span>}
-                                            {item.status ==='S2' && <span className='text-success'><i className="fa fa-check"></i> Đã xác nhận</span>}
-                                            {item.status ==='S3' && <span className='text-primary'><i className="fa fa-truck"></i>  Đang giao hàng</span>}
-                                            {item.status ==='S4' && <span className='text-success'><i className="fa fa-check"></i> Đã giao</span>}
-                                            {item.status ==='S5' && <span className='text-danger'><i className="fa fa-times"></i> Đã hủy</span>}
-                                            {item.status ==='S6' && <span className='text-secondary'><i className="fa fa-undo"></i> Hoàn trả</span>}
-                                            {item.status ==='S7' && <span className='text-secondary'><i className="fa fa-star"></i> Đã đánh giá</span>}
+                                            {item.status ==='S1' && <span className='text-warning'><i className="fas fa-clock"></i>  ĐANG CHỜ XỬ LÝ</span>}
+                                            {item.status ==='S2' && <span className='text-success'><i className="fa fa-check"></i> ĐÃ XÁC NHẬN</span>}
+                                            {item.status ==='S3' && <span className='text-primary'><i className="fa fa-truck"></i>  ĐANG GIAO HÀNG</span>}
+
+                                            {item.status ==='S4' && item.action ==='Chưa đánh giá' && <span className='text-success'><i className="fa fa-check"></i> ĐÃ GIAO</span>}
+                                            {item.status ==='S4' && item.action ==='Đã đánh giá' && <span className='text-success'><i className="fa fa-check"></i> ĐÃ ĐÁNH GIÁ</span>}
+                                            
+                                            {item.status ==='S5' && <span className='text-danger'><i className="fa fa-times"></i> ĐÃ HUỶ</span>}
+                                            {item.status ==='S6' && <span className='text-secondary'><i className="fa fa-undo"></i> HOÀN TRẢ</span>}
+                                            {item.status ==='S7' && <span className='text-danger'><i className="fa fa-star"></i> ĐÃ ĐÁNH GIÁ</span>}
                                         </span>
                                     </div>
                                     <hr/>
@@ -125,24 +131,18 @@ function Purchase(props) {
                                             <span className='text-danger'>{numberFormat(item.price*item.qty)}</span>
                                             <button onClick={()=>detailOrder(item)} type="button" className="btn btn-outline-secondary btn-sm">Chi tiết</button>
                                             {
-                                                item.status ==='S1' || item.status ==='S2' || item.status ==='S3' ?
+                                                item.status ==='S1' || item.status ==='S2' || item.status ==='S3' &&
                                                 <button type="button" className="btn btn-danger btn-sm">Huỷ đơn</button>
-                                                : null
                                             }
 
                                             {
-                                                item.status ==='S4' ?
-                                                <>
-                                                    <button onClick={() => handleRated(item)} type="button" className="btn btn-success btn-sm">Đánh giá</button>
-                                                </>
-                                                : null
+                                                item.status ==='S4' && item.action ==='Chưa đánh giá' &&
+                                                <button onClick={() => handleRated(item)} type="button" className="btn btn-success btn-sm">Đánh giá</button>
                                             }
 
-                                            { item.status ==='S7' ?
-                                                <>
-                                                    <button type="button" className="btn btn-success btn-sm">Xem đánh giá</button>
-                                                </>
-                                                : null
+                                            {
+                                                item.status ==='S4' && item.action ==='Đã đánh giá' &&
+                                                <button type="button" className="btn btn-success btn-sm">Xem đánh giá</button>
                                             }
                                         </div>
                                     </div>

@@ -104,5 +104,8 @@ const actionTypes = Object.freeze({
     MARK_ALL_AS_READ: 'MARK_ALL_AS_READ',
     FILTER_NOTIFY: 'FILTER_NOTIFY',
 
+    // Rating product - update order - add notify - add point to Tiki Point
+    RATING_PRODUCT: 'RATING_PRODUCT',
+
 })
 export default actionTypes;

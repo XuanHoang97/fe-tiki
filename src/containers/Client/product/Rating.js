@@ -1,25 +1,22 @@
 import React from 'react';
-import { formatDate } from 'components/Formatting/FormatDate';
+import { formatDate , formatDateNew} from 'components/Formatting/FormatDate';
 
 const Rating = (props) => {
     const {detailProduct} = props;
-
-    console.log('detailProduct', detailProduct);
-    console.log('rating data', detailProduct.ratingData);
 
     return (
         <div className='vote'>
             <h5>Đánh giá - Nhận xét từ khách hàng </h5>
             <div className='star-overview'>
                 <div className='col-3'>
-                    <span className='text-primary mr-2' style={{fontSize: '27px'}}>4.8</span>
+                    <span className='text-primary mr-2' style={{fontSize: '27px'}}>4.5</span>
                     <span className="fa fa-star text-warning"></span>
                     <span className="fa fa-star text-warning"></span>
                     <span className="fa fa-star text-warning"></span>
                     <span className="fa fa-star text-warning"></span>
                     <span className="fa fa-star"></span>
 
-                    <div className='small'>{detailProduct.ratingData ? detailProduct.ratingData.length : 0} nhận xét</div>
+                    <div className='small'>{detailProduct && detailProduct.ratingData ? detailProduct.ratingData.length : 0} nhận xét</div>
                 </div>
 
                 <div className='filter-vote col-9'>
@@ -36,50 +33,113 @@ const Rating = (props) => {
                     <div>1<span className="fa fa-star"></span></div>
                 </div>
             </div>
-            <hr/>
 
-            <div className='list-vote d-flex'>
-                <div className='customer col-3'>
-                    <img src="http://res.cloudinary.com/do7qmg6jr/image/upload/v1645867723/wp5vgklspxgam0pw9kii.jpg" className='w-25' alt="" />
-                    <div>
-                        <div>Hoang le</div>
-                        <span className='text-secondary small'>Đã tham gia 1 tháng</span>
-                    </div>
-                </div>
+            {
+                detailProduct && detailProduct.ratingData &&
+                detailProduct.ratingData.map((item, index) => {
+                    return (
+                        <div className='list-vote d-flex border-bottom py-3' key={index}>
+                            <div className='customer col-3'>
+                                <img src={item.avatar} alt="" />
+                                <div>
+                                    <div className='font-weight-bold'>{item.username}</div>
+                                    <span className='text-secondary small mr-1'>Tham gia từ</span>
+                                    <small>{formatDateNew(item.joinDate) }</small>
+                                </div>
+                            </div>
 
-                <div className='list-vote-customer col-9'>
-                    <div className='title d-flex'>
-                        <div>
-                            <span className="fa fa-star text-warning"></span>
-                            <span className="fa fa-star text-warning"></span>
-                            <span className="fa fa-star text-warning"></span>
-                            <span className="fa fa-star text-warning"></span>
-                            <span className="fa fa-star"></span>
-                        </div>
-                        <span>Cực kỳ hài lòng</span>
-                    </div>
-                    <span className='small text-success'>
-                        <i className="fa fa-check-circle mr-2" aria-hidden="true"></i>
-                        Đã mua hàng</span>
-                    <div className='my-2'>
-                        {
-                            detailProduct && detailProduct.ratingData ?
-                            detailProduct.ratingData.map((item, index) => {
-                                return (
-                                    <div key={index}>
-                                        <div className='d-flex'>
-                                            <span className='small'>{item.comment}</span>
-                                        </div>
-                                        <span className='small text-secondary'>{formatDate(item.date)}</span>
+                            <div className='list-vote-customer col-9'>
+                                <div className='title d-flex'>
+                                    {item.rating === 5 &&
+                                    <div className='star'>
+                                        <span>
+                                            {[...Array(5)].map((e, i) => {
+                                                return (
+                                                    <span key={i} className='fa fa-star text-warning'></span>
+                                                )
+                                            })}
+                                        </span>
+                                        <span>Cực kỳ hài lòng</span>
+                                    </div>}
+
+                                    {item.rating === 4 &&
+                                    <div className='star'>
+                                        <span>
+                                            {[...Array(4)].map((e, i) => {
+                                                return (
+                                                    <span key={i} className='fa fa-star text-warning'></span>
+                                                )
+                                            })}
+                                            <span className='fa fa-star'></span>
+                                        </span>
+                                        <span>Hài lòng</span>
+                                    </div>}
+
+                                    {item.rating === 3 &&
+                                    <div className='star'>
+                                        <span>
+                                            {[...Array(3)].map((e, i) => {
+                                                return (
+                                                    <span key={i} className='fa fa-star text-warning'></span>
+                                                )
+                                            })}
+                                            <span className='fa fa-star'></span>
+                                        </span>
+                                        <span>Bình thường</span>
+                                    </div>}
+
+                                    {item.rating === 2 &&
+                                    <div className='star'>
+                                        <span>
+                                            {[...Array(2)].map((e, i) => {
+                                                return (
+                                                    <span key={i} className='fa fa-star text-warning'></span>
+                                                )
+                                            })}
+                                            <span className='fa fa-star'></span>
+                                        </span>
+                                        <span>Không hài lòng</span>
+                                    </div>}
+
+                                    {item.rating === 1 &&
+                                    <div className='star'>
+                                        <span>
+                                            {[...Array(1)].map((e, i) => {
+                                                return (
+                                                    <span key={i} className='fa fa-star text-warning'></span>
+                                                )
+                                            })}
+                                            <span className='fa fa-star'></span>
+                                        </span>
+                                        <span>Rất tệ</span>
+                                    </div>}
+                                </div>
+                                <span className='small text-success'>
+                                    <i className="fa fa-check-circle mr-2" aria-hidden="true"></i>
+                                    Đã mua hàng
+                                </span>
+                                <div className='my-2'>
+                                    <div className='d-flex'>
+                                        <span>{item.comment}</span>
                                     </div>
-                                )
-                            })
-                            :
-                            'loading...'
-                        }
-                    </div>
-                </div>
-            </div>
+                                    <span className='small text-secondary'>{formatDate(item.date)}</span>
+                                </div>
+
+                                <div className='reply'>
+                                    <button type="button" className="btn btn-outline-primary font-weight-normal">Hữu ích</button>
+                                    <span>Bình luận</span>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                })
+                
+            }
+
+            {
+                detailProduct && detailProduct.ratingData && detailProduct.ratingData.length === 0 &&
+                <div className='text-center'>Chưa có nhận xét nào</div>
+            }
         </div>
     );
 }
