@@ -97,8 +97,6 @@ const ArticleManage = (props) => {
         setModalAddArticle(!modalAddArticle);
     }
     const SaveInfoProduct=(data)=> {
-        // dispatch(actions.SaveInfoProduct(data));
-
         const detailProduct = new FormData();
         detailProduct.append('specificationHTML', data.specificationHTML);
         detailProduct.append('specificationMarkdown', data.specificationMarkdown);
@@ -106,7 +104,12 @@ const ArticleManage = (props) => {
         detailProduct.append('descriptionMarkdown', data.descriptionMarkdown);
         detailProduct.append('productId', data.productId);
         detailProduct.append('categoryId', data.categoryId);
-        data.pictures && detailProduct.append('pictures', data.pictures);
+        console.log('check data : ', data.pictures);
+        if(data.pictures && data.pictures.length > 0){
+            for(let i = 0; i < data.pictures.length; i++){
+                detailProduct.append('pictures', data.pictures[i]);
+            }
+        }
         dispatch(actions.SaveInfoProduct(detailProduct));
     }
 
@@ -169,6 +172,7 @@ const ArticleManage = (props) => {
                                 <td>ID SP</td>
                                 <td>ID danh muc</td>
                                 <td>Tên SP</td>
+                                <td>Ảnh mô tả</td>
                                 <td>Tác vụ</td>
                             </tr>
                         </thead>
@@ -203,6 +207,7 @@ const ArticleManage = (props) => {
                     </table>
                 </div>
                 </TabPane>
+
                 <TabPane tabId="2">
                     <form className='bg-white p-3'
                         onSubmit={handleSaveChoose}

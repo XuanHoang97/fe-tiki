@@ -6,8 +6,8 @@ import './style.scss';
 import useOutsideClick from '../../OutSideClick';
 
 const Notify = () => {
-    const ref = useRef();
     const dispatch = useDispatch();
+    const ref = useRef();
     const [showNotify, setShowNotify] = useState(false);
     const [styleUnread, setStyleUnread] = useState('list my-2');
     const user = useSelector(state => state.auth.user);
@@ -55,7 +55,7 @@ const Notify = () => {
                 <i className="far fa-bell text-white position-relative">
                     <span className="badge badge-pill badge-danger">
                         {
-                            notifyUnread && notifyUnread.length > 0 ? notifyUnread.length : ''
+                            user && notifyUnread && notifyUnread.length > 0 ? notifyUnread.length : ''
                         }
                     </span>
                 </i>
@@ -67,14 +67,14 @@ const Notify = () => {
                     <div className='d-flex justify-content-between'>
                         <h5 className='font-weight-bold'>Thông báo</h5>
                         <div>
-                            <span className='text-secondary mr-3'>Chưa đọc {notifyUnread && notifyUnread.length > 0 ? notifyUnread.length : 0} </span>
-                            <span className='text-primary'>Tất cả {notify && notify.length > 0 ? notify.length : 0}</span>
+                            <span className='text-secondary mr-3'>Chưa đọc {user && notifyUnread && notifyUnread.length > 0 ? notifyUnread.length : 0} </span>
+                            <span className='text-primary'>Tất cả {user && notify && notify.length > 0 ? notify.length : 0}</span>
                         </div>
                     </div>
 
                     <div className='list-notify'>
                         {
-                            notify && notify.length > 0 ?
+                            user && notify && notify.length > 0 ?
                             notify.map((item, index) => {
                                 return (
                                     <div className={`${ item.status === 'N1' ? styleUnread : 'notify-read' }`} 

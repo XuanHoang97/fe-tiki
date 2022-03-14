@@ -7,7 +7,6 @@ const initialState = {
     notify: [],
     notifyUnread: [],
     point: 0,
-    rating: {}
 }
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -61,12 +60,6 @@ const authReducer = (state = initialState, action) => {
                 point: action.payload
             }
 
-            // view rating
-        case actionTypes.VIEW_RATING:
-            return {
-                ...state,
-                rating: action.payload
-            }
 
         default:
             return state;

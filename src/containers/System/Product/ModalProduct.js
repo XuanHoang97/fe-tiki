@@ -9,7 +9,6 @@ const ModalProduct = (props) => {
     const [previewImg, setPreviewImg] = useState('');
     const [price, setPrice] = useState('');
     const [sale, setSale] = useState('');
-    const [warranty, setWarranty] = useState('');
     const [category_id, setCategory_id] = useState('');
     const [supplier_id, setSupplier_id] = useState('');
     
@@ -31,7 +30,6 @@ const ModalProduct = (props) => {
         setPreviewImg('');
         setPrice('');
         setSale('');
-        setWarranty('');
         setCategory_id('');
         setSupplier_id('');
     }, []);
@@ -49,7 +47,6 @@ const ModalProduct = (props) => {
             previewImg: previewImg,
             price: price,
             sale: sale,
-            warranty: warranty,
             category_id: category_id,
             supplier_id: supplier_id    
         };
@@ -123,14 +120,7 @@ const ModalProduct = (props) => {
                         <input value={sale} onChange={(e)=>setSale(e.target.value)}  type="text" className="form-control" />
                     </div>
                 </div>
-
-                <div className="row">
-                    <div className="form-group col-md-4">
-                        <label>Bảo hành</label>
-                        <input value={warranty} onChange={(e)=>setWarranty(e.target.value)}  type="text" className="form-control" />
-                    </div>                             
-                </div>
-
+                
                 <div className="row">
                     <div className="form-group col-md-4">
                         <label>Danh mục</label>

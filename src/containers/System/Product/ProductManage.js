@@ -27,7 +27,6 @@ const ProductManage = (props) => {
         dataProduct.append('name', data.name);
         dataProduct.append('price', data.price);
         dataProduct.append('sale', data.sale);
-        dataProduct.append('warranty', data.warranty);
         dataProduct.append('category_id', data.category_id);
         dataProduct.append('supplier_id', data.supplier_id);
         data.image && dataProduct.append('image', data.image);
@@ -50,7 +49,6 @@ const ProductManage = (props) => {
         product.append('name', data.name);
         product.append('price', data.price);
         product.append('sale', data.sale);
-        product.append('warranty', data.warranty);
         product.append('category_id', data.category_id);
         product.append('supplier_id', data.supplier_id);
         data.image && product.append('image', data.image);
@@ -86,7 +84,6 @@ const ProductManage = (props) => {
                         <td>STT</td>
                         <td>Ảnh</td>
                         <td>Tên SP</td>
-                        <td>Bảo hành</td>
                         <td>Giá (VND)</td>
                         <td>Sale (VND)</td>
                         <td>Tác vụ</td>
@@ -102,7 +99,6 @@ const ProductManage = (props) => {
                                     <td style={{width:'6%'}}><img src={item.image} className='w-100' alt="" /> </td>
                       
                                     <td className='text-primary'>{item.name}</td>
-                                    <td>{item.warranty}</td>
                                     <td>{numberFormat(item.price)}</td>
                                     <td>{numberFormat(item.sale)}</td>
                                     <td>

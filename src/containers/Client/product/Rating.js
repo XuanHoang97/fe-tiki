@@ -10,29 +10,29 @@ const Rating = (props) => {
         <div className='vote'>
             <h5>Đánh giá - Nhận xét từ khách hàng </h5>
             <div className='star-overview'>
-                <div className='col-3'>
-                    <div className='d-flex'>
+                <div className='star col-3'>
+                    <div className='d-flex align-items-center'>
                         <span className='text-primary mr-2' style={{fontSize: '27px'}}>
                             {
-                                detailProduct.ratingData && detailProduct.ratingData.length > 0 ?
+                                detailProduct.ratingData && detailProduct.ratingData.length > 0 &&
                                 averageStarRating(detailProduct.ratingData)
-                                : 0
                             }
                         </span>
                         
-                        <ReactStars
-                            count={5}
-                            value={
-                                detailProduct.ratingData && detailProduct.ratingData.length > 0 ?
-                                averageStarRating(detailProduct.ratingData)
-                                : 0
-                            }
-                            edit={false}
-                            size={24}
-                            color2={'#ffd700'}
-                        />
+                        <div>
+                            <ReactStars
+                                count={5}
+                                value={
+                                    detailProduct.ratingData && detailProduct.ratingData.length > 0 &&
+                                    parseInt(averageStarRating(detailProduct.ratingData))
+                                }
+                                edit={false}
+                                size={24}
+                                color2={'#ffd700'}
+                            />
+                            <div className='small'>{detailProduct && detailProduct.ratingData ? detailProduct.ratingData.length : 0} nhận xét</div>
+                        </div>
                     </div>
-                    <div className='small'>{detailProduct && detailProduct.ratingData ? detailProduct.ratingData.length : 0} nhận xét</div>
                 </div>
 
                 <div className='filter-vote col-9'>
@@ -68,66 +68,42 @@ const Rating = (props) => {
                                 <div className='title d-flex'>
                                     {item.rating === 5 &&
                                     <div className='star'>
-                                        <span>
-                                            {[...Array(5)].map((e, i) => {
-                                                return (
-                                                    <span key={i} className='fa fa-star text-warning'></span>
-                                                )
-                                            })}
-                                        </span>
-                                        <span>Cực kỳ hài lòng</span>
+                                        <ReactStars
+                                            count={5} value={5} edit={false} size={20} color2={'#ffd700'}
+                                        />
+                                        <b>Cực kỳ hài lòng</b>
                                     </div>}
 
                                     {item.rating === 4 &&
                                     <div className='star'>
-                                        <span>
-                                            {[...Array(4)].map((e, i) => {
-                                                return (
-                                                    <span key={i} className='fa fa-star text-warning'></span>
-                                                )
-                                            })}
-                                            <span className='fa fa-star'></span>
-                                        </span>
-                                        <span>Hài lòng</span>
+                                        <ReactStars
+                                            count={5} value={4} edit={false} size={20} color2={'#ffd700'}
+                                        />
+                                        <b>Hài lòng</b>
                                     </div>}
 
                                     {item.rating === 3 &&
                                     <div className='star'>
-                                        <span>
-                                            {[...Array(3)].map((e, i) => {
-                                                return (
-                                                    <span key={i} className='fa fa-star text-warning'></span>
-                                                )
-                                            })}
-                                            <span className='fa fa-star'></span>
-                                        </span>
-                                        <span>Bình thường</span>
+                                        <ReactStars
+                                            count={5} value={3} edit={false} size={20} color2={'#ffd700'}
+                                        />
+                                        <b>Bình thường</b>
                                     </div>}
 
                                     {item.rating === 2 &&
                                     <div className='star'>
-                                        <span>
-                                            {[...Array(2)].map((e, i) => {
-                                                return (
-                                                    <span key={i} className='fa fa-star text-warning'></span>
-                                                )
-                                            })}
-                                            <span className='fa fa-star'></span>
-                                        </span>
-                                        <span>Không hài lòng</span>
+                                        <ReactStars
+                                            count={5} value={2} edit={false} size={20} color2={'#ffd700'}
+                                        />
+                                        <b>Không hài lòng</b>
                                     </div>}
 
                                     {item.rating === 1 &&
                                     <div className='star'>
-                                        <span>
-                                            {[...Array(1)].map((e, i) => {
-                                                return (
-                                                    <span key={i} className='fa fa-star text-warning'></span>
-                                                )
-                                            })}
-                                            <span className='fa fa-star'></span>
-                                        </span>
-                                        <span>Rất tệ</span>
+                                        <ReactStars
+                                            count={5} value={1} edit={false} size={20} color2={'#ffd700'}
+                                        />
+                                        <b>Rất tệ</b>
                                     </div>}
                                 </div>
                                 <span className='small text-success'>
@@ -149,7 +125,6 @@ const Rating = (props) => {
                         </div>
                     )
                 })
-                
             }
 
             {

@@ -3,7 +3,6 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
-import axios from 'axios';
 const mdParser = new MarkdownIt();
 
 const ModalArticle = (props) => {
@@ -23,30 +22,38 @@ const ModalArticle = (props) => {
 
     //onChange multi image
     const changeMultiImage = async(e) => {
-        let file=e.target.files[0];
+        let file=e.target.files;
+        console.log(file);
         if(file){
-            let objectUrl=URL.createObjectURL(file)
-            setPreviewImg(objectUrl);
             setPictures(file);
         }
         console.log('image before send:', file, pictures);
+
+        const selectedFIles =[];
+        const targetFiles =e.target.files;
+        const targetFilesObject= [...targetFiles]
+        targetFilesObject.map((file)=>{
+            return selectedFIles.push(URL.createObjectURL(file))
+        })
+        setPreviewImg(selectedFIles);
     }
 
     // add new product
     const addArticle=(e)=>{
         e.preventDefault();
-        // props.SaveInfoProduct({
-        //     descriptionHTML,   
-        //     descriptionMarkdown,
-        //     specificationHTML,
-        //     specificationMarkdown,
-        //     productId,
-        //     categoryId,
-        //     pictures
-        // });
-        // toggle();
+        props.SaveInfoProduct({
+            descriptionHTML,   
+            descriptionMarkdown,
+            specificationHTML,
+            specificationMarkdown,
+            productId,
+            categoryId,
+            pictures
+        });
+        toggle();
 
-        console.log(pictures);
+        console.log(parseInt(categoryId), parseInt(productId));
+        // console.log(pictures);
     }
 
     //onchange editor
@@ -69,7 +76,7 @@ const ModalArticle = (props) => {
                 <ModalBody style={{height: '80vh', overflowY: 'scroll'}}>
                 
                 <div className='d-flex col-12 p-0'>
-                    <label className='mr-3'>Chọn sản phẩm</label>
+                    <label className='mr-3'>Danh mục</label>
                     <div className="form-group d-flex p-0">
                         <select className="form-control" style={{height:'30px'}}
                             value={categoryId}
@@ -117,7 +124,14 @@ const ModalArticle = (props) => {
                         />
                         {
                             previewImg ?
-                            <img src={previewImg} alt="previewImg" style={{width: '100px', height: '100px'}}/> :
+                            previewImg.map((url, index)=>{
+                                return (
+                                    <div className="col-3" key={index}>
+                                        <img src={url} alt=""  />
+                                    </div>
+                                )
+                            })
+                            :
                             <span>Không có ảnh</span>
                         }
                     </div> 

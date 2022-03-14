@@ -19,6 +19,7 @@ import Bill from 'containers/System/Sale/Bill';
 import VoteManage from 'containers/System/Vote/VoteManage';
 import { path } from 'utils';
 import './style.scss'
+import Discount from 'containers/System/discount/Discount';
 
 const System = (props) => {
     const {systemMenuPath, isLoggedIn,userInfo, processLogout} = props;
@@ -74,6 +75,7 @@ const System = (props) => {
                             <Route path={`${path.STATISTICAL}`} component={StatisticalManage} />
                             <Route path={`${path.SALE_MANAGE}`} component={Bill} />
                             <Route path={`${path.VOTE_MANAGE}`} component={VoteManage} />
+                            <Route path={`${path.DISCOUNT_MANAGE}`} component={Discount} />
                             <Route path={`${path.SETTING}`} component={Setting} />
         
                             <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />

@@ -169,22 +169,4 @@ export const getPoint = (userId) => {
     }
 }
 
-// view rating product
-export const viewRating = (userId, productId) => {
-    return async(dispatch) => {
-        try{
-            let res = await viewRatingProduct(userId, productId);
-            console(res);
-            if(res){
-                dispatch({
-                    type: actionTypes.VIEW_RATING,
-                    payload: res.result
-                });
-            }
-        }catch(e){
-            toast.error('get point error !')
-        }
-    }
-}
-
 

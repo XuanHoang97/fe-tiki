@@ -3,12 +3,12 @@ import {useDispatch, useSelector} from 'react-redux';
 import { path } from 'utils';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import { getUser, logoutAccount } from 'store/actions';
+import { GetAllNotify, getUser, logoutAccount } from 'store/actions';
 import {GetUser} from './../../../../../services/authService';
 
 const Account = () => {
-    const token = localStorage.getItem('token');
     const dispatch = useDispatch();
+    const token = localStorage.getItem('token');
     const history = useHistory();
     const [hoverAccount, setHoverAccount] = useState(false);
     const user = useSelector(state => state.auth.user);
@@ -29,7 +29,6 @@ const Account = () => {
             })
         }
     }
-
 
     //logout
     const Logout = async () => {
@@ -93,17 +92,6 @@ const Account = () => {
                             <Link to={path.LOGIN_AUTH} className="dropdown-item mb-2">
                                 <button type="button" className="btn btn-success btn-block"> Đăng nhập</button>
                             </Link>
-                            <div className="dropdown-item mb-2">
-                                <button type="button" className="d-flex align-items-center btn btn-primary btn-block">
-                                    <i className="fab fa-facebook-f mr-4"></i> <span>Đăng nhập bằng Facebook</span>
-                                </button>
-                            </div>
-
-                            <div className="dropdown-item mb-2">
-                                <button type="button" className="d-flex align-items-center btn btn-danger btn-block">
-                                    <i className="fab fa-google-plus-g mr-3"></i> <span>Đăng nhập bằng Google</span>
-                                </button>
-                            </div>
                         </div>
                     }
                 </div>

@@ -1,26 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { TabContent, TabPane } from 'reactstrap';
+import {useSelector, useDispatch} from 'react-redux';
+import { fetchRating } from 'store/actions';
 import TabVote from './TabVote';
 
 const VoteManage = (props) => {
+    const dispatch = useDispatch();
     const [activeTab, setActiveTab] = useState('0');
+    const ratings  = useSelector(state => state.rating.rate);
+
+    useEffect(() => {
+        dispatch(fetchRating());
+    }, [dispatch]);
+
+    console.log('ratings', ratings);
 
     return (
         <div className='p-2 bg-white'>
-            <h5 className='mb-4'>Quản lý đánh giá</h5>
+            <h5 className='mb-3'>Quản lý đánh giá</h5>
             <TabVote
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
             />
 
-            <TabContent activeTab={activeTab}>
+            <TabContent activeTab={activeTab} className='py-3'>
                 <TabPane tabId="0">
                     <div className='filterVote d-flex bg-white p-3' style={{gap: '10px'}}>
-                        <div className="form-group">
+                        <div>
                           <input type="text" className="form-control" placeholder="Tìm sản phẩm ...." />
                         </div>
 
-                        <div className="form-group">
+                        <div>
                           <select className="form-control">
                             <option>Danh mục</option>
                             <option>abc</option>
@@ -33,21 +43,45 @@ const VoteManage = (props) => {
                     </div>
 
                     <div className="vote bg-white mt-3 p-3">
-                        <div>Số đánh giá: <b>0</b></div>
+                        <div>Số đánh giá: <b>{ratings && ratings.length >0 ? ratings.length : 0}</b></div>
                         <div className='list-vote mt-3'>
                             <table className="table table-striped table-bordered table-hover">
                                 <thead className="text-white">
                                     <tr>
                                         <td>STT</td>
-                                        <td>Mã đơn hàng</td>
+                                        <td>Mã ĐH</td>
                                         <td>Sản phẩm</td>
                                         <td>Đánh giá</td>
                                         <td>Nội dung</td>
+                                        <td>trả lời</td>
                                         <td>Thao tác</td>
                                     </tr>
                                 </thead>
                                 
                                 <tbody>
+                                    {
+                                        ratings && ratings.length > 0 ?
+                                        ratings.map((item, index) => {
+                                            return (
+                                                <tr key={index}>
+                                                    <td>{index + 1} </td>
+                                                    <td className='text-primary'>{item.orderCode}</td>
+                                                    <td>
+                                                        <img src={item.imgProduct} style={{width: '10%'}} alt="" />
+                                                        <span>{item.nameProduct}</span>
+                                                    </td>
+                                                    <td>{item.rating} sao</td>
+                                                    <td className='w-50'>{item.comment}</td>
+                                                    <td>tks you</td>
+                                                    <td className='text-primary'>Trả lời</td>
+                                                </tr>   
+                                            )
+                                        })
+                                        :
+                                        <tr>
+                                            <td className='text-center' colSpan={6}>Không có dữ liệu</td>
+                                        </tr>
+                                    }
                                     <tr>
                                         <td>1</td>
                                         <td className='text-primary'>HD001</td>

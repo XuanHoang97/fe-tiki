@@ -31,5 +31,5 @@ export const averageStarRating = (arr) => {
     for (let item of arr) {
         total += item.rating
     }
-    return total / arr.length
+    return (total / arr.length).toFixed(1)
 }

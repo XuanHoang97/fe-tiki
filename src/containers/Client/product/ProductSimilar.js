@@ -8,16 +8,16 @@ import './Style.scss'
 const ProductSimilar = ({similarProducts}) => {
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 2000,
     slidesToShow: 5,
-    slidesToScroll: 2
+    slidesToScroll: 1
   };
 
     return (
         <div>
             <h6 className="mt-4 mb-2 m-0">SẢN PHẨM TƯƠNG TỰ</h6>
-              <Slider {...settings}>
+              <Slider {...settings} className="bg-white" >
               {
                 similarProducts && similarProducts.length > 0 ?
                 similarProducts.map((item, index) => {
