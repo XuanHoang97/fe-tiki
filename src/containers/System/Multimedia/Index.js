@@ -158,7 +158,7 @@ const Multimedia = (props) => {
     }
 
     return (
-        <div className="p-2 bg-white">
+        <div className="multimedia p-2 bg-white">
             <div className="h5 text-dark mb-4">Quản lý đa phương tiện</div>
             <TabMultimedia
                 activeTab={activeTab}
@@ -202,7 +202,6 @@ const Multimedia = (props) => {
                     editSpecialCategory = {editSpecialCategory}
                 />
                 <TabPane tabId="3">Tab 3 Content</TabPane>
-                <TabPane tabId="4">Tab 4 Content</TabPane>
             </TabContent>
         </div>
     );

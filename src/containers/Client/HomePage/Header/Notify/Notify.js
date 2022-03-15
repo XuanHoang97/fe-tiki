@@ -2,8 +2,8 @@ import React, {useState, useEffect, useRef} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { formatDate } from 'components/Formatting/FormatDate';
 import { GetAllNotify, GetNotify, MarkAllNotify, UpdateStatusNotify } from 'store/actions';
-import './style.scss';
 import useOutsideClick from '../../OutSideClick';
+import './style.scss';
 
 const Notify = () => {
     const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const Notify = () => {
         dispatch(GetAllNotify(userId));
     }, [dispatch, userId]);
     
-    // view detail notify
+    // detail notify
     const viewDetail = (notify) => {
         dispatch(UpdateStatusNotify({
             id: notify,

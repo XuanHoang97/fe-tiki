@@ -5,7 +5,7 @@ function TabMultimedia(props) {
     const { activeTab, setActiveTab } = props;
 
     return (
-        <Nav tabs>
+        <Nav tabs className='tabMedia'>
             <NavItem>
                 <NavLink className={activeTab === '1' ? 'active' : ''} onClick={() => setActiveTab('1')}>
                     <div>Slide</div>
@@ -21,11 +21,6 @@ function TabMultimedia(props) {
             <NavItem>
                 <NavLink className={activeTab === '3' ? 'active' : ''} onClick={() => setActiveTab('3')}>
                     <div>Hình ảnh và video</div>
-                </NavLink>
-            </NavItem>
-            <NavItem>
-                <NavLink className={activeTab === '4' ? 'active' : ''} onClick={() => setActiveTab('4')}>                         
-                    <div>Banner </div>
                 </NavLink>
             </NavItem>
         </Nav>

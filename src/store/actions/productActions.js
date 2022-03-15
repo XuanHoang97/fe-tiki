@@ -9,6 +9,7 @@ import {
     editInfoProduct,
     getProductSimilar,
     saveOptionProduct,
+    uploadMultiFile,
 
     getAllArticle,
 } from "../../services/userService"
@@ -125,6 +126,7 @@ export const SaveInfoProduct = (data) => {
     return async(dispatch, getState) => {
         try {
             let res = await saveInfoProduct(data);
+            console.log('saveInfoProduct', res)
             if (res && res.data.errCode === 0) {
                 dispatch({
                     type: actionTypes.SAVE_INFO_DETAIL_PRODUCT,
@@ -137,6 +139,26 @@ export const SaveInfoProduct = (data) => {
         }
     }
 }
+
+// upload multi file (description product)
+export const UploadMultiFile = (data) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await uploadMultiFile(data);
+            console.log('res', res)
+            if (res && res.data.errCode === 0) {
+                dispatch({
+                    type: actionTypes.UPLOAD_MULTIPLE_IMAGE,
+                })
+                toast.success('Upload ảnh thành công !')
+            }
+        } catch (e) {
+            console.log('uploadMultiFile error', e)
+            toast.error('Upload ảnh thất bại !')
+        }
+    }
+}
+
 
 //edit info product
 export const EditInfoProduct = (data) => {

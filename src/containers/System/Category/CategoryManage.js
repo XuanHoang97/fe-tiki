@@ -70,7 +70,7 @@ const CategoryManage = (props) => {
 
             <div className="h5 text-dark mb-4">Danh mục sản phẩm (<small>{category.length}</small>)</div>
             <div className="d-flex mb-3 justify-content-between">
-                <button onClick={() => handleAddCategory()} type="button" className="btn btn-success col-2">
+                <button onClick={() => handleAddCategory()} type="button" className="btn btn-success col-md-2">
                     <i className="fas fa-plus"></i> Thêm danh mục
                 </button>
             </div>

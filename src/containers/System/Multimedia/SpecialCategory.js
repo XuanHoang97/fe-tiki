@@ -16,8 +16,8 @@ function SpecialCategory(props) {
             onSubmit={saveCategorySpecial}
             encType="multipart/form-data"
             >
-                <div className='d-flex justify-content-between col-12 p-0'>
-                    <div className="form-group col-4 p-0">
+                <div className='formCategory d-flex justify-content-between col-12 p-0'>
+                    <div className="form-group col-md-4 p-0">
                         <label htmlFor="">Tiêu đề</label>
                         <input type="text" className="form-control" 
                             value={categoryName}
@@ -25,7 +25,7 @@ function SpecialCategory(props) {
                         />
                     </div>
 
-                    <div className="form-group col-2 pl-0">
+                    <div className="form-group col-md-2 pl-0">
                         <label>Danh mục</label>
                         <select className="form-control"
                             value={categoryId}
@@ -39,7 +39,7 @@ function SpecialCategory(props) {
                         </select>
                     </div>
 
-                    <div className='upload-file d-flex col-4 p-0'>
+                    <div className='upload-file d-flex col-md-4 p-0'>
                         <div className="form-group col-4 p-0">
                             <label>Ảnh</label>
                             <input id="previewImgCategory" type="file" hidden 
@@ -49,7 +49,7 @@ function SpecialCategory(props) {
                             <label htmlFor="previewImgCategory" className="btn btn-warning w-100"><i className="fas fa-upload"></i> Tải ảnh</label>  
                         </div>
 
-                        <div className="preview-image col-8 border" 
+                        <div className="preview-image col-md-8 border" 
                             style={{backgroundImage: `url(${categoryPreviewImg})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat'}}
                         >
                             {
@@ -71,7 +71,7 @@ function SpecialCategory(props) {
                 </button>
                 <hr/>
 
-                <div className="text-dark">Danh sách danh mục nổi bật (<b>{specialCategories.length}</b>)</div>
+                <div className="text-dark">Danh sách (<b>{specialCategories.length}</b>)</div>
                 <table className="table table-striped table-bordered table-hover">
                     <thead className="text-white">
                         <tr>

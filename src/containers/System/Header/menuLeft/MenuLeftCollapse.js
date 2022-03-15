@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {MenuAdmin} from './DataMenu';
-import './MenuLeft.scss'
+import './MenuLeft.scss';
 
 function MenuLeftCollapse(props) {
     return (
-        <div>
+        <div className='menuLeft'>
             <div className="dashboard bg-dark menuleftCollapse">
                 <div>TIKI</div>
                 {

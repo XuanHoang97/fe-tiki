@@ -7,22 +7,24 @@ import ModalEditArticle from './ModalEditArticle';
 import {saveOptionProduct} from '../../../services/userService';
 import { TabContent, TabPane } from 'reactstrap';
 import TabArticle from './TabArticle';
+import OptionProduct from './OptionProduct';
+import DescProduct from './DescProduct';
 
 const ArticleManage = (props) => {
     const [activeTab, setActiveTab] = useState('1');
 
     //fetch data
     const dispatch = useDispatch();
-    const listArticle = useSelector(state => state.admin.articles);
+    const articles = useSelector(state => state.admin.articles);
     const category = useSelector(state => state.admin.categories);
     const DetailCategory = useSelector(state => state.admin.detailCategory);
     const optionProduct = useSelector(state => state.admin.optionProduct);
-    
+
     const [modalAddArticle, setModalAddArticle] = useState(false);
     const [modalEditArticle, setModalEditArticle] = useState(false);
     const [articleEdit, setArticleEdit] = useState('');
-    const [categoryId, setCategoryId] = useState('');
-    const [productId, setProductId] = useState(3);
+    const [categoryId, setCategoryId] = useState(3);
+    const [productId, setProductId] = useState(1);
     const [option, setOption] = useState('');
 
     useEffect(() => {
@@ -86,8 +88,8 @@ const ArticleManage = (props) => {
         console.log('check result : ',  result);
     }
 
-    // load product by category
-    const handleChangeCategory = (e) => {
+    // get product by category
+    const changeCategory = (e) => {
         setCategoryId(e.target.value);
         dispatch(actions.DetailCategory(e.target.value));
     }
@@ -96,21 +98,8 @@ const ArticleManage = (props) => {
     const addArticle = () => {
         setModalAddArticle(!modalAddArticle);
     }
-    const SaveInfoProduct=(data)=> {
-        const detailProduct = new FormData();
-        detailProduct.append('specificationHTML', data.specificationHTML);
-        detailProduct.append('specificationMarkdown', data.specificationMarkdown);
-        detailProduct.append('descriptionHTML', data.descriptionHTML);
-        detailProduct.append('descriptionMarkdown', data.descriptionMarkdown);
-        detailProduct.append('productId', data.productId);
-        detailProduct.append('categoryId', data.categoryId);
-        console.log('check data : ', data.pictures);
-        if(data.pictures && data.pictures.length > 0){
-            for(let i = 0; i < data.pictures.length; i++){
-                detailProduct.append('pictures', data.pictures[i]);
-            }
-        }
-        dispatch(actions.SaveInfoProduct(detailProduct));
+    const InfoProduct=(data)=> {
+        dispatch(actions.SaveInfoProduct(data));
     }
 
     //edit article
@@ -123,7 +112,7 @@ const ArticleManage = (props) => {
     }
 
     return ( 
-        <div className="p-2 bg-white">
+        <div className="articleManage p-2 bg-white">
             <TabArticle
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
@@ -131,17 +120,24 @@ const ArticleManage = (props) => {
 
             <TabContent activeTab={activeTab}>
                 <TabPane tabId="1">
-                    <div className="h5 text-dark">Danh sách(<small>{listArticle && listArticle.length>0 ? listArticle.length : 0}</small>)</div>
-                    <div className='bg-white p-3'>
+                    <DescProduct 
+                        categoryId={categoryId}
+                        setProductId={setProductId}
+                        DetailCategory={DetailCategory}
+                        category={category}
+                        changeCategory={changeCategory}
+                        productId={productId}
+                    />
+
                     <ModalArticle
                         isOpen={modalAddArticle}
                         toggleParent={addArticle}
-                        SaveInfoProduct={SaveInfoProduct}
+                        InfoProduct={InfoProduct}
 
                         categoryId={categoryId}
                         category={category}
                         DetailCategory={DetailCategory}
-                        handleChangeCategory={handleChangeCategory}
+                        changeCategory={changeCategory}
                         productId={productId}
                         setProductId={setProductId}
                     />
@@ -156,10 +152,16 @@ const ArticleManage = (props) => {
                         setCategoryId = {setCategoryId}
                         category={category}
                         DetailCategory={DetailCategory}
-                        handleChangeCategory={handleChangeCategory}
+                        changeCategory={changeCategory}
+
                         productId={productId}
                         setProductId={setProductId}
                     />
+                </TabPane>
+
+                <TabPane tabId="2">
+                    <div className="h5 text-dark">Danh sách(<small>{articles?.length>0 ? articles.length : 0}</small>)</div>
+                    <div className='bg-white p-3'>
 
                     <button onClick={() => addArticle()} type="button" className="btn btn-success mb-3">
                         <i className="fas fa-plus"></i> Thêm bài viết
@@ -172,14 +174,13 @@ const ArticleManage = (props) => {
                                 <td>ID SP</td>
                                 <td>ID danh muc</td>
                                 <td>Tên SP</td>
-                                <td>Ảnh mô tả</td>
                                 <td>Tác vụ</td>
                             </tr>
                         </thead>
                         <tbody>
                             {   
-                                listArticle && listArticle.length >0 ?
-                                listArticle.map((item, index) => {
+                                articles && articles.length >0 ?
+                                articles.map((item, index) => {
                                     return (
                                         <tr key={index}>
                                             <td>
@@ -208,83 +209,19 @@ const ArticleManage = (props) => {
                 </div>
                 </TabPane>
 
-                <TabPane tabId="2">
-                    <form className='bg-white p-3'
-                        onSubmit={handleSaveChoose}
-                        encType="multipart/form-data"
-                    >
-                    <div className='d-flex p-0'>
-                        <div className='d-flex col-4 p-0'>
-                            <div className='col-6 p-0 mr-3'>
-                                <label className='mr-3'>Danh mục</label>
+                <TabPane tabId="3">
+                    <OptionProduct
+                        option={option}
+                        handleOptionProduct={handleOptionProduct}
+                        handleSaveChoose={handleSaveChoose}
 
-                                <div className="form-group d-flex p-0">
-                                    <select className="form-control" style={{height:'30px'}}
-                                        value={categoryId}
-                                        onChange={(e)=>handleChangeCategory(e)}
-                                    >     
-                                        {
-                                            category && category.length > 0 ?
-                                            category.map((item, index) => {
-                                                return (
-                                                    <option key={index} value={index +3 }>{item.name}</option>
-                                                )
-                                            }) :
-                                            <option value="">Không có danh mục</option>
-                                        }                
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            {
-                                category && category.length > 0 ?
-                                <div className='col-6 p-0'>
-                                    <label className='mr-3'>Sản phẩm</label>
-                                    <div className="form-group d-flex p-0">
-                                        <select className="form-control"
-                                            value={productId}
-                                            onChange={(e)=>setProductId(e.target.value)}
-                                        >
-                                            {
-                                                DetailCategory && DetailCategory.length > 0 ?
-                                                DetailCategory.map((item, index) => {
-                                                    return (
-                                                        <option key={index} value={item.id}>{item.name}</option>
-                                                    )
-                                                }) :
-                                                <option value="">Không có sản phẩm</option>
-                                            }                                     
-                                        </select>
-                                    </div>
-                                </div> :
-                                <span>Không có sản phẩm nào ! </span>
-                            }
-                        </div>
-
-                        <div className='d-flex col-6 ml-3'>   
-                            <div className='col-7 p-0 mr-3'>
-                                <label className='px-2'>Mẫu mã</label>
-                                <div className="d-flex">
-                                {
-                                    option && option.length >0 &&
-                                    option.map((item, index) => {
-                                        return(
-                                            <button 
-                                                onClick={()=>handleOptionProduct(item)}
-                                                type="button" 
-                                                key={index}
-                                                className={item.isSelected === true ? "btn btn-primary px-2 mx-2 font-weight-normal" : "btn btn-secondary btn-sm px-2 mx-2 font-weight-normal"}>
-                                                {item.valueVi}
-                                            </button>
-                                        ) 
-                                    })
-                                }
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button type ="submit" className="btn btn-success">Lưu thông tin</button>
-                    </form>
+                        category={category}
+                        categoryId={categoryId}
+                        changeCategory={changeCategory}
+                        productId={productId}
+                        setProductId={setProductId}
+                        DetailCategory={DetailCategory}
+                    />
                 </TabPane>
             </TabContent>
         </div>

@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getDetailProduct } from "services/userService";
 import * as actions from "store/actions";
-import Order from "./Order";
 import Specifications from "./Specifications";
 import Illustrator from "./Illustrator";
 import ProductDesc from "./ProductDesc";
 import ProductSimilar from "./ProductSimilar";
 import Header from "../HomePage/Header/Header";
-import './Style.scss'
 import Rating from "./Rating";
+import Order from "./Order";
+import './Style.scss'
 
 const ProductDetail = ({ match }) => {
   const dispatch = useDispatch();
@@ -51,9 +51,9 @@ const ProductDetail = ({ match }) => {
   return (
     <>
       <Header/>
-      <div className="main bg-light pb-3">
+      <div className="main">
         <div className="container">
-          <div className="bg-white pt-4 pb-4 p-3 m-0 text-center row">
+          <div className="order">
             <Illustrator detailProduct={detailProduct} />
             <Order 
               order={detailProduct}  

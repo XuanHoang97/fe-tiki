@@ -85,6 +85,13 @@ const saveInfoProduct = (data) => {
     return axios.post(`${path.PORT}/save-info-product`, data)
 }
 
+// upload multi file(image description product)
+const uploadMultiFile = (data) => {
+    return axios.post(`${path.PORT}/uploadImage`, data)
+}
+
+
+
 //edit info product
 const editInfoProduct = (inputData) => {
     return axios.put(`${path.PORT}/edit-info-product`, inputData)
@@ -234,6 +241,7 @@ export {
     editProduct,
     deleteProduct,
     getDetailProduct,
+    uploadMultiFile,
     
     paginationNewsAndEvent,
     createNews,

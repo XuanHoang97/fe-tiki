@@ -58,7 +58,7 @@ const OrderManage = (props) => {
     };
 
     return (
-        <div className="p-2 bg-white">
+        <div className="orderManage p-2 bg-white">
             <VerifyOrder
                 isOpen={modalVerifyOrder}
                 toggle={verifyOrder}
@@ -74,8 +74,8 @@ const OrderManage = (props) => {
                 order={order}
             />
 
-            <TabContent activeTab={activeTab}>
-                <TabPane tabId={activeTab}>
+            <TabContent activeTab={activeTab} className = 'listOrder'>
+                <TabPane tabId={activeTab} className= 'tableOrder' >
                     {
                         activeTab === '4' ?
                         <SortOrder

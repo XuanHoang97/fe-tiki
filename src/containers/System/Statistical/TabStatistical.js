@@ -5,7 +5,7 @@ function TabStatistical(props) {
     const { activeTab, setActiveTab } = props;
     
     return (
-        <Nav tabs>
+        <Nav tabs className='tabStatistical'>
             <NavItem>
                 <NavLink className={activeTab === '1' ? 'active' : ''} onClick={() => setActiveTab('1')}>
                     <div>Doanh thu bán hàng</div>

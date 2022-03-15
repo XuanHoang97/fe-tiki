@@ -1,5 +1,11 @@
+@import "./../../../../assets/css/variable.scss";
 
 .dashboard{
+    @include phone{
+        position: absolute;
+        top: 40px;
+        z-index: 100 !important;
+    }
     .menu-left{
         display: flex;
         padding: 0.65rem 1rem;
@@ -34,6 +40,9 @@
     color: white;
     padding: 0px;
     border-left: 1px solid rgb(69, 141, 141);
+    @include phone{
+        display: none;
+    }
     .sideNav{
         background: #0c1e35;
         height: 100%;

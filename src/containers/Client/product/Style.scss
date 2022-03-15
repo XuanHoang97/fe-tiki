@@ -1,55 +1,88 @@
-.vote{
-    background: white;
-    padding: 15px;
-    margin: 15px 0;
-    .star-overview{
-        display: flex;
-        padding: 20px 0px;
-        border-bottom: 1px solid lightgrey;
-        .filter-vote{
+.main{
+    background: #f8f9fa;
+    margin: 15px 0 !important;
+    .container{
+        .order{
+            background: white;
+            padding: 15px;
+            margin: 0;
+            text-align: center;
             display: flex;
-            gap: 10px;
-            align-items: center;
-            span{
-                background: rgb(238, 238, 238);
-                padding: 4px 10px;
-                border-radius: 10px;
-            }
-            div{
-                @extend span;
-            }
         }
-    }
-    .list-vote{
-        .customer{
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            img{
-                width: 60px;
-                height: 60px;
-                border-radius: 50%;
-            }
-        }
-        .list-vote-customer {
-            .title{
+        .vote{
+            background: white;
+            padding: 15px;
+            margin: 15px 0;
+            .star-overview{
                 display: flex;
-                align-items: center;
-                gap: 10px;
-                .star{
+                padding: 20px 0px;
+                border-bottom: 1px solid lightgrey;
+                .filter-vote{
                     display: flex;
-                    font-size: 12px;
-                    align-items: center;
                     gap: 10px;
+                    align-items: center;
+                    span{
+                        background: rgb(238, 238, 238);
+                        padding: 4px 10px;
+                        border-radius: 10px;
+                    }
+                    div{
+                        @extend span;
+                    }
                 }
             }
-            .reply{
-                display: flex;
-                align-items: center;
-                gap: 30px;
-                margin-top: 10px;
+            .list-vote{
+                .customer{
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    img{
+                        width: 60px;
+                        height: 60px;
+                        border-radius: 50%;
+                    }
+                }
+                .list-vote-customer {
+                    .title{
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        .star{
+                            display: flex;
+                            font-size: 12px;
+                            align-items: center;
+                            gap: 10px;
+                        }
+                    }
+                    .reply{
+                        display: flex;
+                        align-items: center;
+                        gap: 30px;
+                        margin-top: 10px;
+                    }
+                }
             }
         }
+        
+        .description{
+            .description--product{
+                .read-more{
+                    .ShowMore{
+                        position: absolute;
+                        z-index: 100;
+                        bottom: -2px;
+                        left: 0;
+                        right: 0;
+                        display: block;
+                        padding: 80px 0 0px;
+                        border-radius: 0 0 5px 5px;
+                        text-align: center;
+                        background-image: linear-gradient(180deg,hsla(0,0%,100%,0),#fff 98%,transparent);
+                    }
+                }
+            }
+        }
+
     }
 }
 

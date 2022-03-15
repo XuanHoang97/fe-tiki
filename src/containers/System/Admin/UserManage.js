@@ -61,7 +61,7 @@ const UserManage = (props) => {
     }
 
     return (
-        <div className="p-2 bg-white">
+        <div className="userManage p-2 bg-white">
             <ModalUser
                 isOpen={modalUser} 
                 toggleModal={handleAddNewUser}
@@ -77,8 +77,8 @@ const UserManage = (props) => {
                 />
             }
             <div className="h5 text-dark mb-4">Quản lý thành viên (<small>{listUsers.length}</small>)</div>
-            <div className="d-flex mb-3 justify-content-between">
-                <button onClick ={() => handleAddNewUser()}  type="button" className="btn btn-success col-2">
+            <div className="addUser d-flex mb-3 justify-content-between">
+                <button onClick ={() => handleAddNewUser()}  type="button" className="btn btn-success col-md-2">
                     <i className="fas fa-plus mr-2"></i> Thêm thành viên
                 </button>
             </div>

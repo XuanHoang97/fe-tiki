@@ -16,15 +16,15 @@ const VoteManage = (props) => {
     console.log('ratings', ratings);
 
     return (
-        <div className='p-2 bg-white'>
+        <div className='voteManage p-2 bg-white'>
             <h5 className='mb-3'>Quản lý đánh giá</h5>
             <TabVote
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
             />
 
-            <TabContent activeTab={activeTab} className='py-3'>
-                <TabPane tabId="0">
+            <TabContent activeTab={activeTab} className='py-3 voteContent'>
+                <TabPane tabId="0" className='listVote'>
                     <div className='filterVote d-flex bg-white p-3' style={{gap: '10px'}}>
                         <div>
                           <input type="text" className="form-control" placeholder="Tìm sản phẩm ...." />

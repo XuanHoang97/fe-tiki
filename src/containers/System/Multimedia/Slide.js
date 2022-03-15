@@ -15,8 +15,8 @@ function Slide(props) {
                 onSubmit={handleSaveSlide}
                 encType="multipart/form-data"
             >
-                <div className='d-flex justify-content-between col-12 p-0'>
-                    <div className="form-group col-3 p-0">
+                <div className='formSlide d-flex justify-content-between col-md-12 p-0'>
+                    <div className="form-group col-md-3 p-0">
                         <label htmlFor="">Tiêu đề</label>
                         <input type="text" className="form-control" 
                             value={name}
@@ -24,7 +24,7 @@ function Slide(props) {
                         />
                     </div>
 
-                    <div className="form-group col-2 p-0">
+                    <div className="form-group col-md-2 p-0">
                         <label>Danh mục</label>
                         <select className="form-control"
                             value={categoryId}
@@ -38,7 +38,7 @@ function Slide(props) {
                         </select>
                     </div>
 
-                    <div className="form-group col-2 p-0">
+                    <div className="form-group col-md-2 p-0">
                         <label htmlFor="">Trạng thái</label>
                         <select className="form-control"
                             value={status}
@@ -55,7 +55,7 @@ function Slide(props) {
                         </select>
                     </div>
 
-                    <div className='upload-file d-flex col-3 p-0'>
+                    <div className='upload-file d-flex col-md-3 p-0'>
                         <div className="form-group col-5 p-0">
                             <label>Ảnh</label>
                             <input id="previewImg" type="file" hidden 
@@ -88,7 +88,7 @@ function Slide(props) {
                 </button>
                 <hr/>
 
-                <div className="text-dark">Danh sách slide (<b>{slide.length}</b>)</div>
+                <div className="text-dark">Danh sách (<b>{slide.length}</b>)</div>
                 <table className="table table-striped table-bordered table-hover">
                     <thead className="text-white">
                         <tr>

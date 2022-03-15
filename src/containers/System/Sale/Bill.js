@@ -6,15 +6,15 @@ const Bill = (props) => {
     const [activeTab, setActiveTab] = useState('1');
 
     return (
-        <div className='p-2 bg-white'>
+        <div className='Bill p-2 bg-white'>
             <h5>Hoá đơn</h5>
             <TabBill
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
             />
 
-            <TabContent activeTab={activeTab}>
-                <TabPane tabId="1">
+            <TabContent activeTab={activeTab} className='detailBill' >
+                <TabPane tabId="1" className='allBill'>
                 <div className='list-bill'>
                     <table className="table table-striped table-bordered table-hover">
                         <thead className="text-white">

@@ -5,7 +5,7 @@ function TabVote(props) {
     const { activeTab, setActiveTab } = props;
     
     return (
-        <Nav tabs>
+        <Nav tabs className='tabVote'>
             <NavItem>
                 <NavLink className={activeTab === '0' ? 'active' : ''} onClick={() => setActiveTab('0')}>
                     Tất cả 

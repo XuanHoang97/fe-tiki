@@ -56,7 +56,7 @@ const ProductManage = (props) => {
     }
 
     return (        
-        <div className="p-2 bg-white">
+        <div className="productManage p-2 bg-white">
             <ModalProduct
                 isOpen={modalProduct}
                 toggleParent={handleAddNewProduct}
@@ -71,8 +71,8 @@ const ProductManage = (props) => {
             />
 
             <div className="h5 text-dark mb-4">Quản lý sản phẩm (<small>{listProducts.length}</small>)</div>
-            <div className="d-flex mb-2 justify-content-between">
-                <button onClick={() => handleAddNewProduct()} type="button" className="btn btn-success col-2">
+            <div className="action d-flex mb-2 justify-content-between">
+                <button onClick={() => handleAddNewProduct()} type="button" className="btn btn-success col-md-2">
                     <i className="fas fa-plus"></i> Thêm sản phẩm
                 </button>
                 <Sort />

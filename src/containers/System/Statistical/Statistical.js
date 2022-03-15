@@ -7,15 +7,15 @@ const StatisticalManage = (props) => {
     const [activeTab, setActiveTab] = useState('1');
 
     return (
-        <div className="p-2 bg-white">
+        <div className="statistical p-2 bg-white">
             <h5 className="mb-3">Báo cáo thống kê</h5>
             <TabStatistical
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
             />
 
-            <TabContent activeTab={activeTab}>
-                <TabPane tabId="1">
+            <TabContent activeTab={activeTab} className ="content-statistical">
+                <TabPane tabId="1" className='report-revenue'>
                     test
                 </TabPane>
                 <TabPane tabId="2">Updating...</TabPane>

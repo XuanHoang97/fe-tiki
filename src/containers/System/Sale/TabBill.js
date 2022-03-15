@@ -5,10 +5,10 @@ function TabBill(props) {
     const { activeTab, setActiveTab } = props;
     
     return (
-        <Nav tabs>
+        <Nav tabs className='tabBill'>
             <NavItem>
                 <NavLink className={activeTab === '1' ? 'active' : ''} onClick={() => setActiveTab('1')}>
-                    <div>Tất cả hoá đơn (0)</div>
+                    <div>Tất cả (0)</div>
                 </NavLink>
             </NavItem>
 

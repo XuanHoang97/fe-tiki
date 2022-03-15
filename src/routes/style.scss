@@ -1,9 +1,14 @@
+@import "./../assets/css/variable.scss";
+
 .main-container{
     .module{
         .system-container{
             height: 100vh;
             overflow-y: auto;
             box-shadow: none;
+            @include phone{
+                width: 100% !important;
+            }
             .menuAdmin{
                 display: flex;
                 justify-content: space-between;
@@ -29,6 +34,255 @@
                     .logout{
                         padding-right: 15px;
                         font-weight: normal;
+                    }
+                }
+            }
+
+            .system-list{
+                @include phone{
+                    padding: 10px !important;
+                }
+                .dashboardTiki{
+                    @include phone{
+                        margin: 0 !important;
+                    }
+                    .detail-overview{
+                        @include phone{
+                            flex-direction: column;
+                        }
+                        .statistical{
+                            .item-statistical{
+                                @include phone{
+                                    display: flex;
+                                    padding: 10px;
+                                }
+                                img{
+                                    @include phone{
+                                        display: none;
+                                    }
+                                }
+                                .stat{
+                                    h6{
+                                        @include phone{
+                                            font-size: 9.5px;
+                                        }
+                                    }
+                                    h5{
+                                        @include phone{
+                                            font-size: 13.5px;
+                                        }
+                                    }
+                                }
+                            }
+                            .overview{
+                                @include phone{
+                                    margin-right: 0;
+                                    margin-bottom: 15px;
+                                }
+                            }
+                        }
+                        .revenue{
+                            @include phone{
+
+                            }
+                        }
+                    }
+                }
+
+                .orderManage{
+                    ul{
+                        @include phone {
+                            display: grid;
+                            grid-template-columns: repeat(7,32%);
+                            overflow-x: scroll;
+                            overflow-y: hidden;
+                        }
+                        li{
+                            @include phone{
+                                font-size: 12px;
+                                a{
+                                    @include phone{
+                                        padding: 5px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .listOrder{
+                        .tableOrder{
+                            .filter{
+                                .orderSort{
+                                    .labelSort{
+                                        @include phone{
+                                            display: none;
+                                        }
+                                    }
+                                }
+                            }
+                            .list-order{
+                                table{
+                                    @include phone{
+                                        overflow-x: scroll;
+                                        display: block;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .Bill{
+                    .tabBill{
+                        @include phone{
+                            display: grid;
+                            grid-template-columns: 25% 35% 50%;
+                            font-size: 12px;
+                            overflow-x: auto;
+                            overflow-y: hidden;
+                        }
+                    }
+                    .detailBill{
+                        .allBill{
+                            .list-bill{
+                                table{
+                                    @include phone{
+                                        overflow-x: scroll;
+                                        display: block;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .productManage{
+                    .action{
+                        @include phone{
+                            flex-direction: column;
+                        }
+                    }
+                    table{
+                        @include phone{
+                            overflow-x: scroll;
+                            display: block;
+                        }
+                    }
+                }
+
+                .userManage{
+                    table{
+                        @include phone{
+                            overflow-x: scroll;
+                            display: block;
+                        }
+                    }
+                }
+
+                .articleManage{
+                    .tabArticle{
+                        @include phone{
+                            display: grid;
+                            grid-template-columns: 27% 40% 40%;
+                            font-size: 12px;
+                            overflow-x: auto;
+                            overflow-y: hidden;
+                        }
+                    }
+                    .tab-content{
+                        @include phone{
+                            padding: 15px 10px;
+                        }
+                    }
+                }
+
+                .newManage{
+                    table{
+                        @include phone{
+                            overflow-x: scroll;
+                            display: block;
+                        }
+                    }
+                }
+
+                .multimedia{
+                    .tabMedia{
+                        @include phone{
+                            display: grid;
+                            grid-template-columns: 20% 40% 40%;
+                            overflow-x: auto;
+                            overflow-y: hidden;
+                            overflow-x: auto;
+                            font-size: 12px;
+                        }
+                    }
+                    .tab-content{
+                        .tab-pane{
+                            .list-slide{
+                                .formSlide{
+                                    @include phone{
+                                        display: flex;
+                                        flex-direction: column;
+                                    }
+                                }
+                            }
+                            .list-category-special{
+                                .formCategory{
+                                    @include phone{
+                                        display: flex;
+                                        flex-direction: column;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .voteManage{
+                    .tabVote{
+                        @include phone{
+                            display: grid;
+                            grid-template-columns: 20% 15% 15% 15% 15% 15%;
+                            overflow-x: auto;
+                            overflow-y: hidden;
+                            font-size: 12px;
+                        }
+                        li{
+                            a{
+                                @include phone{
+                                    padding: 5px;
+                                }
+                            }
+                        }
+                    }
+                    .voteContent{
+                        .listVote{
+                            .filterVote{
+                                @include phone{
+                                    display: flex;
+                                    flex-direction: column;
+                                }
+                            }
+                            .vote{
+                                .list-vote{
+                                    table{
+                                        @include phone{
+                                            overflow-x: scroll;
+                                            display: block;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .statistical{
+                    .tabStatistical{
+                        @include phone{
+                            font-size: 12px;
+                            display: grid;
+                            grid-template-columns: 45% 35% 30%;
+                        }
                     }
                 }
             }

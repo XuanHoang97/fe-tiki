@@ -13,10 +13,10 @@ const  Dashboard = (props) => {
     }, [dispatch])
 
     return (
-        <div className="mx-2">
+        <div className="dashboardTiki mx-2">
             <h5 className='my-2'>Tổng quan</h5>
-             <div className="d-flex">
-                <div className="statistical col-8 p-0">
+             <div className="detail-overview d-flex">
+                <div className="statistical col-md-8 col-xs-12 p-0">
                     <div className="item-statistical align-items-center" style={{background:'rgb(239 169 64) '}}>
                         <img src="https://thumbs.dreamstime.com/b/shopping-cart-icon-trolley-icon-shopping-cart-icon-trolley-icon-vector-illustration-isolated-white-background-163727286.jpg" alt="" />
                         <div className="stat">
@@ -151,7 +151,7 @@ const  Dashboard = (props) => {
                 </div>
                 </div>
 
-                <div className="col-4 revenue">
+                <div className="col-md-4 col-xs-12 revenue">
                     <div className='d-flex justify-content-between'>
                         <div className='item-revenue'>DOANH THU</div>
                         <div className="form-group">

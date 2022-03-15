@@ -12,13 +12,13 @@ const Sort = (props) => {
     }, [dispatch]);
 
     return (
-        <div className='d-flex col-9 p-0'>
+        <div className='d-flex col-md-9 p-0'>
             <div className="input-group col-5 p-0">
                 <label className="p-0">Tìm kiếm</label>
                 <input type="text" className="form-control ml-2" placeholder="Search..." style={{height:'30px'}}/>
             </div>
 
-            <div className="col-2 p-0">
+            <div className="col-md-2 p-0">
                 <select className="form-control"
                     style={{height: '30px'}}
                 >
