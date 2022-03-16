@@ -17,8 +17,6 @@ const TikiXu = (props) => {
         dispatch(getPoint(user ? user.id : 2));
     }, [dispatch, user]);
 
-    console.log('TikiPoint', TikiPoint);
-
     return (
         <div>
             <div className='coin-overview '>

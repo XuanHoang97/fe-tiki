@@ -5,9 +5,10 @@ import { CheckoutOrder } from 'store/actions';
 import { useHistory } from 'react-router';
 import LoadingOverlay from 'react-loading-overlay';
 import Header from '../HomePage/Header/Header';
+import { v4 as uuidv4 } from 'uuid';
 import moment from "moment";
 import { path } from 'utils';
-import { v4 as uuidv4 } from 'uuid';
+import './style.scss'
 
 const Payment = (props) => {
     const dispatch = useDispatch();
@@ -85,10 +86,10 @@ const Payment = (props) => {
     return (
         <>
             <Header />
-            <div className="main bg-light pt-3 pb-3">
+            <div className="paymentInfo">
                 <LoadingOverlay active={loadingOrder} spinner text='Đang xử lý đơn hàng...' >
                     <div className="container">
-                        <div className="paymentDetail row m-1 justify-content-between">
+                        <div className="paymentDetail row">
                             <div className="delivery col-md-9 p-0 ">
                                 <div className="bg-white p-3">
                                 <div>
@@ -178,9 +179,9 @@ const Payment = (props) => {
                                 </div>
                             </div>
                             
-                            <div className="paymentInfo col-md-3 pr-0">
-                                <div className="bg-white p-3">
-                                    <div className="d-flex border-bottom py-1 justify-content-between">Địa chỉ giao hàng</div>
+                            <div className="payment-info col-md-3 pr-0">
+                                <div className="addrOrder">
+                                    <div className="border-bottom">Địa chỉ giao hàng</div>
                                     <div className='mt-2'>
                                         <b>{user ? user.username : ''}</b>
                                         <p className="mb-0">Địa chỉ: {user ? user.address : ''}</p>
@@ -189,8 +190,8 @@ const Payment = (props) => {
                                     </div>
                                 </div>
 
-                                <div className="bg-white mt-3 p-2">
-                                    <div className="d-flex p-2 justify-content-between align-items-center">
+                                <div className="paymentCalc">
+                                    <div className="changeOrder">
                                         <div>
                                             <div>Đơn hàng</div>
                                             <small className='text-success'>{cartsUser && cartsUser.length > 0 ? cartsUser.length : 0} Sản phẩm</small>
@@ -198,7 +199,7 @@ const Payment = (props) => {
                                         <button type="button" className="btn btn-success btn-sm">Thay đổi</button>
                                     </div>
 
-                                    <div className="d-flex px-2 justify-content-between">
+                                    <div className="valueOrder">
                                         <div><span>Tạm tính</span></div>
                                         <h6>{
                                             cartsUser && cartsUser.length > 0 ?
@@ -208,18 +209,18 @@ const Payment = (props) => {
                                         </h6>
                                     </div>
 
-                                    <div className="d-flex px-2 justify-content-between">
+                                    <div className="valueOrder">
                                         <div><span>Giảm giá</span></div>
                                         <h6>-{numberFormat(coupon)}</h6>
                                     </div>
 
-                                    <div className="d-flex px-2 justify-content-between">
+                                    <div className="valueOrder">
                                         <div><span>Phí vận chuyển</span></div>
                                         <h6>{numberFormat(deliveryFee)}</h6>
                                     </div>
                                     <hr />
 
-                                    <div className="d-flex p-2 justify-content-between">
+                                    <div className="totalMoney">
                                         <div><span>Thành tiền</span></div>
                                         <h5 className="text-danger">
                                             {

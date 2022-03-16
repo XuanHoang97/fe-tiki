@@ -34,9 +34,9 @@ const ProductDesc = (props) => {
 
     return (
         <>
-            <h6 className="mt-4 mb-2 m-0 px-2">MÔ TẢ SẢN PHẨM</h6>
-            <div className="description row bg-white p-3 m-1">
-                <div className="description--product col-md-8 p-0 pr-2 border-right">
+            <h6 className="headDesc">MÔ TẢ SẢN PHẨM</h6>
+            <div className="desc">
+                <div className="descProd col-md-8">
                     <ReadMore>
                         {
                             detailProduct?.Markdown?.descriptionHTML ?

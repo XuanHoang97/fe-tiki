@@ -1,0 +1,11 @@
+@import '../../../../../../assets/css/variable.scss';
+
+.myAddress{
+    display: flex;
+    justify-content: space-between;
+}
+
+.infoAddr{
+    @extend .myAddress
+
+}

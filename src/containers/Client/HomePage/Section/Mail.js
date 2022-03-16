@@ -1,10 +1,11 @@
 import React from 'react';
+import './style/body.scss';
 
 const Mail = () => {
     return (
-        <div className="mail d-flex p-3 my-3 align-items-center">
-            <div className="col-6 row">
-                <div className="col-3">
+        <div className="mail">
+            <div className="titleMail col-6 d-flex">
+                <div className="imgMail col-3">
                     <img className="w-100" src="https://frontend.tikicdn.com/_desktop-next/static/img/footer/newsletter.png" alt="" />
                 </div>
                 <div className="info--mail col-9">
@@ -12,9 +13,9 @@ const Mail = () => {
                     <p className="small">Đừng bỏ lỡ hàng ngàn sản phẩm và chương trình siêu hấp dẫn</p>
                 </div>
             </div>
-            <div className="input-group col-6">
+            <div className="formMail col-6">
                 <input type="text" className="form-control" placeholder="Địa chỉ Email của bạn" />
-                <button className="btn btn-success" type="submit" style={{ height: '32px', borderRadius: 0 }}>Đăng ký</button>
+                <button className="btn btn-success" type="submit">Đăng ký</button>
             </div>
         </div>
     );

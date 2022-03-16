@@ -2,10 +2,10 @@ import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {TabContent, TabPane } from 'reactstrap';
 import { numberFormat } from 'components/Formatting/FormatNumber';
-import './style/style.scss';
-import Rate from '../Rate';
-import TabCategory from './TabCategory';
 import { DetailCategory, fetchAllCategory } from 'store/actions';
+import TabCategory from './TabCategory';
+import Rate from '../Rate';
+import './style/style.scss';
 
 const ProductSuggestion = () => {
   const [activeTab, setActiveTab] = useState(3);
@@ -77,7 +77,7 @@ const ProductSuggestion = () => {
         />
       </div>
 
-      <TabContent activeTab={activeTab}>
+      <TabContent activeTab={activeTab} className="bg-white" >
         {
           category && category.length > 0 ?
           category.map((item, index) => {
@@ -103,6 +103,7 @@ const ProductSuggestion = () => {
                     :
                     <span className='text-success'> Đang cập nhật sản phẩm... </span>
                   }
+                </div>
                   {
                     !btnLoadMore && item.id === activeTab &&
                     <div className="view__more" onClick={loadMore}>
@@ -119,7 +120,6 @@ const ProductSuggestion = () => {
                       </button>
                     </div>
                   }
-                </div>
 
                 {resetButton && (
                   <div className="reset">

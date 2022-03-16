@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { path } from 'utils';
 import * as actions from "store/actions";
 import { numberFormat } from 'components/Formatting/FormatNumber';
-import instance from './../../../axios';
 import {GetCartByUser, getUser } from 'store/actions';
-import './Style.scss'
 import Rate from '../HomePage/Section/Rate';
+import instance from './../../../axios';
+import { path } from 'utils';
+import './Style.scss';
 
 const Order = (props) => {
     const dispatch = useDispatch();
@@ -55,8 +55,8 @@ const Order = (props) => {
 
     return (
         <div className="orderDetail col-md-6">
-            <div className="info d-flex align-items-center">
-                <h4 className="mr-5 font-weight-bold">{order && order.name ? order.name :'loading...'}</h4>
+            <div className="info">
+                <h4 className="prodName">{order && order.name ? order.name :'loading...'}</h4>
                 <Rate />
                 <span className="text-muted ml-4">
                     <small className='mr-2'>Đã bán</small>
@@ -67,17 +67,15 @@ const Order = (props) => {
                 </span>
             </div>
 
-            <div className="price bg-light py-3 px-2 my-2">
-                <div className="row m-1 align-items-center">
-                    <h4 className="text-dark font-weight-bold">{numberFormat(order && order.price ? order.price :'loading')}</h4>
-                    <span className="badge badge-pill badge-warning mx-4">
-                    -1 %
-                    </span>
+            <div className="price">
+                <div className="priceDetail">
+                    <h4>{numberFormat(order && order.price ? order.price :'loading')}</h4>
+                    <span className="badge badge-pill badge-warning mx-4"> -1 % </span>
                     <strike className="text-danger">{numberFormat(order && order.sale ? order.sale :'loading...')}</strike>
                 </div>
             </div>
 
-            <div>
+            <>
                 <div className="text-danger">
                     <img className="w-25" src="http://techshop-ecommerce.surge.sh/static/media/policy-image.62c1167a.png" alt="" />
                 </div>
@@ -98,7 +96,7 @@ const Order = (props) => {
                         </div>
                     </div>
 
-                    <div className='d-flex mt-5 align-items-center' style={{gap: '10px'}}>
+                    <div className='Buy'>
                         {
                             token && user ?
                             <button onClick={addCart} type="button" className="addCart btn btn-danger">
@@ -117,7 +115,7 @@ const Order = (props) => {
                         }
                     </div>
                 </div>
-            </div>
+            </>
         </div> 
     );
 }

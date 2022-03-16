@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import './style.scss'
 
 function Address(props) {
     const user = useSelector(state => state.auth.user);
@@ -18,15 +19,15 @@ function Address(props) {
 
     return (
         <div>
-            <div className='d-flex justify-content-between'>
-                <div className='font-weight-bold'>Địa chỉ của tôi</div>
+            <div className='myAddress'>
+                <h5>Địa chỉ của tôi</h5>
                 <button type="button" className="btn btn-primary">
                     <i className="fa fa-plus mr-3" aria-hidden="true"></i>
                     Thêm địa chỉ mới
                 </button>
             </div>
             <hr/>
-            <div className='d-flex justify-content-between'>
+            <div className='infoAddr'>
                 <div className='col-6'>
                     <div className='d-flex'>
                         <span className='col-4'>Họ và tên: </span>
@@ -56,5 +57,4 @@ function Address(props) {
         </div>
     );
 }
-
 export default Address;

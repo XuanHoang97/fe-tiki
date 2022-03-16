@@ -25,7 +25,7 @@ const ProductSimilar = ({similarProducts}) => {
                     <div className="prod-similar bg-white p-3" key={index}>
                       <img src={item.image} className="w-50" alt="" />
                       <h6 className="mt-1 mb-3 text-primary">{item.name}</h6>
-                      <div className="price__prod row align-items-center justify-content-center">
+                      <div className="price__prod">
                           <span className="font-weight-bold" style={{ color: 'red', fontSize: '14px' }}>
                               {numberFormat(item.price)}
                           </span>

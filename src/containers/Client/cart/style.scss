@@ -1,0 +1,38 @@
+@import '../../../assets/css/variable.scss';
+
+.cartPage{
+    background: #f8f9fa !important;
+    padding: 15px 0;
+    .container{
+        .numberCart{
+            margin: 5px 5px 10px 5px;
+            display: flex;
+        }
+        .cartInfo{
+            display: flex;
+            justify-content: space-between;
+            margin: 5px;
+            @include phone{
+                flex-direction: column;
+            }
+            .itemCart{
+                .detailCart{
+                    background: white;
+                    padding: 15px;
+                    border-bottom: 1px solid grey;
+                }
+            }
+            .totalCart{
+                .detailTotal{
+                    background: white;
+                    padding: 10px;
+                    .calOrder{
+                        padding: 10px 15px;
+                        display: flex;
+                        justify-content: space-between;
+                    }
+                }
+            }
+        }
+    }
+}

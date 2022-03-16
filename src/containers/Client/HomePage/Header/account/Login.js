@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { path } from 'utils';
@@ -44,10 +44,14 @@ const LoginAuth = (props) => {
             }
         }
     }
+
+    useEffect(() => {
+        document.title = 'Đăng nhập';
+    }, [])
  
     return (
         <div className=''>
-            <div className='menu d-flex align-items-center justify-content-between'>
+            <div className='menuAuth'>
                 <div className='d-flex align-items-center'>
                     <Link to={path.HOMEPAGE}  className='w-25'>
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOalO4LbzM8rEMLzCO2rvdXbFKHOqJRcRaZ-FuU3uFMfuCKf9Xjh5sAa58M7YKepoYXMY&usqp=CAU" alt="" />
@@ -58,7 +62,7 @@ const LoginAuth = (props) => {
             </div>
 
             <div className="loginAuth d-flex justify-content-end">
-                <div className="bgLogin col-md-8 p-0">
+                <div className="bgLogin col-md-8">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIFcGvp7AOiZTesQCIXyZ8Wnh9WyQKUzDDjA&usqp=CAU" alt="" 
                         className='w-100'
                     />

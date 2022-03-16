@@ -43,7 +43,7 @@ const ChangePassword = () => {
     }
 
     return (
-        <div className=''>
+        <div>
             <h5>Đổi Mật Khẩu </h5>
             <span className='text-secondary'>Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác</span>
             <hr/>
@@ -72,13 +72,11 @@ const ChangePassword = () => {
                                 {...register('newPassword', 
                                     { 
                                         required: true,
-                                        // pattern: /^(?=.*?[a-z])(?=.*?[0-9]).{8,32}$/g,
 
                                     })
                                 }
                             />
                             <div className='text-danger'>{errors.newPassword?.type=== 'required' && "Vui lòng nhập mật khẩu"}</div>
-                            {/* <div className='text-danger'>{errors.newPassword?.type === 'pattern' && "Mật khẩu phải từ 8 ký tự, bao gồm chữ và số"}</div> */}
                         </div>
                     </div>
 
@@ -89,14 +87,12 @@ const ChangePassword = () => {
                                 {...register('confirmPassword', 
                                     { 
                                         required: true,
-                                        // pattern: /^(?=.*?[a-z])(?=.*?[0-9]).{8,32}$/g,
 
                                     })
                                 }
                             />
                             {errConfirmPass ? <span className='text-danger'>{errConfirmPass}</span> : ''}
                             <div className='text-danger'>{errors.confirmPassword?.type=== 'required' && "Vui lòng nhập mật khẩu"}</div>
-                            {/* <div className='text-danger'>{errors.confirmPassword?.type === 'pattern' && "Mật khẩu phải từ 8 ký tự, bao gồm chữ và số"}</div> */}
                         </div>
                     </div>
                     <button type="submit" className="btn btn-primary">

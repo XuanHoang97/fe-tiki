@@ -1,14 +1,18 @@
 @import "../../../../../assets/css/variable.scss";
 
-
-.menu{
+.menuAuth{
     padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 .register, .loginAuth{
     background:rgb(40,134,234);
     padding: 15px 30px;
     height: 85vh;
+    display: flex;
     .bgRegister, .bgLogin{
+        padding: 0;
         @include phone{
             display: none;
         }

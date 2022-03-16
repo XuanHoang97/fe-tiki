@@ -1,3 +1,5 @@
+
+@import '../../../../../../assets/css/variable.scss';
 .coin-overview {
     display: flex;
     justify-content: space-between;
@@ -26,6 +28,10 @@
     .getMoreCoin{
         color: orange;
     }
+}
+
+.tabCoin{
+    @include TabItem;
 }
 
 .coin-item{

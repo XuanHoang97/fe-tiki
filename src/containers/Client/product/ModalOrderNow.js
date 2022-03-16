@@ -92,18 +92,18 @@ const ModalOrderNow = (props) => {
                 <LoadingOverlay active={loadingOrder} spinner text='Đang xử lý, vui lòng đợi trong giây lát .....' >
                     <ModalBody>
                     <div>
-                        <div className="">
+                        <div className="OrderNow">
                             {
                                 carts && carts.length > 0 &&
                                 carts.map((item, index) => {
                                     return (
-                                        <div className="product_info d-flex border-bottom py-2" key={index}>
-                                            <div className="product_image d-flex col-6">
+                                        <div className="product_info" key={index}>
+                                            <div className="product_image col-6">
                                                 <img src={item.image} style={{width: '10%'}} alt="" />
                                                 <h6 className='font-weight-bold ml-3'>{item.name}</h6>
                                             </div>
 
-                                            <div className="product_price col-3 d-flex">
+                                            <div className="product_price col-3">
                                                 <div className="input-group">
                                                     <div className="input-group-prepend">
                                                         <button onClick={(e) => (item.qty > 1 && --item.qty, handleCountDown(item.qty))} className="btn btn-light btn-sm px-2" style={{height: '27px'}}>
@@ -137,15 +137,7 @@ const ModalOrderNow = (props) => {
                                 })
                             }
 
-                            <div className="totalPay bg-light py-2 d-flex border-bottom">
-                                <div className="form-group col-6">
-                                    <label>Mã giảm giá</label>
-                                    <div className='d-flex'>
-                                        <input type="text" readOnly className="form-control col-9" placeholder='voucher...' style={{ height: '31px' }} />
-                                        <button type="button" className="btn btn-primary col-3">Áp dụng</button>
-                                    </div>
-                                </div>
-                                
+                            <div className="totalPay">
                                 <div className='col-6'>
                                     <div className='d-flex justify-content-between'>
                                         <span>Tổng tiền:</span>
@@ -273,10 +265,7 @@ const ModalOrderNow = (props) => {
                     </div>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="success" className="font-weight-normal" type='submit'>
-                            HOÀN TẤT ĐẶT HÀNG
-                        </Button>
-
+                        <Button color="success" className="font-weight-normal" type='submit'>HOÀN TẤT ĐẶT HÀNG</Button>
                         <Button color="secondary" className="font-weight-normal">HUỶ ĐƠN</Button>
                     </ModalFooter>
                 </LoadingOverlay>

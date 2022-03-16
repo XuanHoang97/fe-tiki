@@ -1,0 +1,34 @@
+@import '../../../../assets/css/variable.scss';
+
+.footer{
+    color: white;
+    font-size: 13px;
+    text-align: center;
+    padding: 5px 0;
+}
+
+.menuMB{
+    display: none !important;
+
+    @include phone{
+        background: rgb(250, 250, 250);
+        border: 1px solid rgb(236, 236, 236);
+        width: 100%;
+        justify-content: space-between;
+        padding: 10px;
+        display: flex !important;
+        position: fixed;
+        bottom: 0;
+        z-index: 100;
+    }
+    .menu-item{
+        i{
+            @include phone{
+                display: flex;
+                justify-content: center;
+                font-size: 15px;
+                color: grey;
+            }
+        }
+    }
+}

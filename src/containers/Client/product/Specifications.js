@@ -4,7 +4,7 @@ function Specifications(props) {
     return (
         <>
             <h6 className="mt-4 mb-2">THÔNG SỐ KỸ THUẬT</h6>
-            <div className="parameter bg-white pt-4 pb-4 p-3 m-1 row">
+            <div className="specification">
                 <table className="table table-responsive table-striped">
                     <tbody>
                         <tr>

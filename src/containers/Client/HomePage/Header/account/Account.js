@@ -47,9 +47,7 @@ const Account = () => {
 
     return (
         <React.Fragment>
-            <span className='account d-flex align-items-center justify-content-center text-white'
-                onMouseEnter={() => setHoverAccount(true)}
-            >    
+            <span className='account' onMouseEnter={() => setHoverAccount(true)} >    
                 {
                     user ?
                     <React.Fragment>
@@ -57,7 +55,7 @@ const Account = () => {
                         <b className='ml-2' style={{fontSize: '12px'}}>{user?.username}</b>
                     </React.Fragment>
                     :
-                    <span>Tài khoản <i className="fas fa-sort-down"></i></span>
+                    <span className='accTitle'>Tài khoản <i className="fas fa-sort-down"></i></span>
                 }
             </span>
 

@@ -9,7 +9,9 @@ img {
     position: relative;
     z-index: 1000;
     @include phone {
+        position: relative;
         padding: 5px 0;
+        background: #6000a9;
     }
     .container {
         .row {
@@ -18,10 +20,15 @@ img {
                 padding-right: 0;
             }
             .navbar {
-                @include phone {
+                justify-content: space-between !important;
+                @include tablet {
                     padding: 0 !important;
                 }
                 a{
+                    padding-left: 15px;
+                    @include phone{
+                        padding-left: 0;
+                    }
                     .navbar-brand{
                         img{
                             @include phone {
@@ -32,15 +39,12 @@ img {
                 }
                 .menu_ctg {
                     @include phone {
-                        width: 100%;
+                        display: none;
                     }
                     .category {
                         padding: 10px 15px;
                         span {
                             font-size: 15px;
-                            @include phone {
-                                display: none;
-                            }
                         }
                     }
                 }
@@ -72,25 +76,18 @@ img {
                     background-color: rgba(0, 0, 0, 0.5);
                     pointer-events: none;
                 }
-                .navbar-toggler {
-                    @include phone {
-                        color: white;
-                        border: none;
-                    }
-                }
+         
                 .navbar-collapse {
-                    @include phone {
-                    }
                     .navbar-nav {
                         @include phone {
-                            display: flex;
-                            align-items: normal;
-                            position: relative;
-                            flex-direction: column-reverse;
-                            padding: 5px 15px;
                         }
                       
                         .search {
+                            @include phone{
+                                position: sticky;
+                                top: 50px;
+                                margin: 5px 0;
+                            }
                             input {
                                 border-radius: 2px 0px 0px 2px;
                                 border: 0px;
@@ -234,6 +231,7 @@ img {
                             .btn_search {
                                 width: 105px;
                                 @include phone {
+                                    display: none;
                                 }
                                 button {
                                     background: rgb(13, 92, 182);
@@ -254,6 +252,12 @@ img {
                         .account {
                             width: 150px;
                             cursor: pointer;
+                            color: white;
+                            .accTitle{
+                                @include phone{
+                                    display: none;
+                                }
+                            }
                             @include phone {
                                 position: absolute;
                                 top: -2.2rem;
@@ -302,12 +306,27 @@ img {
                             font-size: 14px;
                             cursor: pointer;
                             @include phone {
+                                width: 35px;
                                 position: absolute;
-                                top: -2.2rem;
-                                right: 2.5rem;
+                                top: -2rem;
+                                right: 0rem;
                             }
                             @extend .account;
-               
+                            .itemCart{
+                                color: white;
+                                text-align: right;
+                                i{
+                                    .numbCart{
+                                        position: absolute;
+                                        top: -0.9rem;
+                                        left: 4.7rem;
+                                        @include phone{
+                                            top: -0.5rem !important;
+                                            left: 1rem !important;
+                                        }
+                                    }
+                                }
+                            }
                         }
                         .cart__info {
                             display: block;
@@ -316,34 +335,46 @@ img {
                             width: 32rem;
                             left: 44rem;
                             top: 4rem;
+                            padding: 15px;
+                            text-align: center;
+                            @include phone{
+                                left: 0rem;
+                                width: 24rem;
+                            }
                           
                             .text-left {
                                 .info {
-                                    .content {
-                                        line-height: 0;
-                                        small {
-                                            font-size: 14px;
-                                            font-weight: 500;
-                                        }
-                                        .small,
-                                        p {
-                                            line-height: 15px;
-                                        }
-                                    }
-                                    .price {
-                                        display: grid;
-                                        text-align: end;
-                                        .price__num {
-                                            display: inline-flex;
-                                            justify-content: flex-end;
-                                            gap: 5px;
-                                            h6 {
-                                                font-weight: bold;
+                                    .infoCart{
+                                        display: flex;
+                                        justify-content: space-between;
+                                        align-items: flex-start;
+                                        .content {
+                                            line-height: 0;
+                                            small {
+                                                font-size: 14px;
+                                                font-weight: 500;
+                                            }
+                                            .small,
+                                            p {
+                                                line-height: 15px;
                                             }
                                         }
-                                        .btnDelProd {
-                                            cursor: pointer;
+                                        .price {
+                                            display: grid;
+                                            text-align: end;
+                                            .price__num {
+                                                display: inline-flex;
+                                                justify-content: flex-end;
+                                                gap: 5px;
+                                                h6 {
+                                                    font-weight: bold;
+                                                }
+                                            }
+                                            .btnDelProd {
+                                                cursor: pointer;
+                                            }
                                         }
+
                                     }
                                 }
                             }
@@ -363,17 +394,34 @@ img {
             }
         }
         .menu--suggest {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
             margin-top: -0.75rem;
-            @include phone {
-                display: none;
-            }
             @include tablet {
-                display: none;
+            }
+            .freeShip{
+                @include phone{
+                    display: block !important;
+                    position: absolute;
+                    top: 12px;
+                    left: 80px;
+                    width: 160px;
+                    z-index: 10000000;
+                }
             }
 
             .suggest{
                 font-size: 11px;
-                padding-left: 35px;
+                @include phone {
+                    display: none;
+                }
+            }
+            .saleTiki{
+                @include phone {
+                    display: none;
+                }
             }
         }
     }

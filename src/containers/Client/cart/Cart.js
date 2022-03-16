@@ -3,8 +3,9 @@ import {useSelector, useDispatch} from 'react-redux';
 import { numberFormat, totalMoney } from 'components/Formatting/FormatNumber';
 import { UpdateItemCartByUser } from 'store/actions';
 import { useHistory } from 'react-router';
-import { path } from 'utils';
 import Header from '../HomePage/Header/Header';
+import { path } from 'utils';
+import './style.scss'
 
 const Cart = (props) => {
     const cartsUser = useSelector(state => state.client.cartsUser);
@@ -38,20 +39,20 @@ const Cart = (props) => {
     return (
         <>
             <Header />
-            <div className="main bg-light pt-3 pb-3">
+            <div className="cartPage">
                 <div className="container">
-                    <div className="mb-2 m-1 d-flex">
+                    <div className="numberCart">
                         <h6 className="mr-2">GIỎ HÀNG</h6>
                         <small> ({cartsUser && cartsUser.length >0 ? cartsUser.length :0 } Sản phẩm)</small>
                     </div>
 
-                    <div className="row m-1 justify-content-between">
-                        <div className="col-md-9 pl-0 ">
+                    <div className="cartInfo">
+                        <div className="itemCart col-md-9 pl-0">
                             {
                                 cartsUser && cartsUser.length > 0 &&
                                 cartsUser.map((item, index) => {
                                     return (
-                                        <div className="bg-white p-3 row border-bottom" key={index}>
+                                        <div className="detailCart row" key={index}>
                                             <img className="col-md-2 w-100" src={item.image} alt="" />
                                             <div className="col-md-5 small">
                                                 <h6>{item.name}</h6>
@@ -93,9 +94,9 @@ const Cart = (props) => {
                             }
                         </div>
 
-                        <div className="col-md-3 pr-0">
-                            <div className="bg-white p-2">
-                                <div className="row  pl-3 pr-3 p-2 justify-content-between">
+                        <div className="totalCart col-md-3 pr-0">
+                            <div className="detailTotal">
+                                <div className="calOrder">
                                     <span>Tạm tính</span>
                                     <small className="text-danger">
                                     {
@@ -105,11 +106,11 @@ const Cart = (props) => {
                                     }
                                     </small>
                                 </div>
-                                <div className="row  pl-3 pr-3 p-2 justify-content-between">
+                                <div className="calOrder">
                                     <span>Giảm giá</span>
                                     <small className="text-secondary">{numberFormat(coupon)}</small>
                                 </div>
-                                <div className="row  pl-3 pr-3 p-2 justify-content-between">
+                                <div className="calOrder">
                                     <span>Tổng cộng</span>
                                     <h6 className="text-danger">
                                         {   
@@ -118,8 +119,8 @@ const Cart = (props) => {
                                             : 0
                                         }
                                     </h6>
-                                    <small className="col-md-12 p-0 text-right">(Đã bao gồm VAT nếu có)</small>
                                 </div>
+                                <small className="col-md-12">(Đã bao gồm VAT nếu có)</small>
                             </div>
 
                             <div onClick={()=> handlePayment()}>

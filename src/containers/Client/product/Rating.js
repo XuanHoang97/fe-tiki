@@ -11,11 +11,11 @@ const Rating = (props) => {
             <h5>Đánh giá - Nhận xét từ khách hàng </h5>
             <div className='star-overview'>
                 <div className='star col-md-3'>
-                    <div className='d-flex align-items-center'>
+                    <div className='numbStar'>
                         <span className='text-primary mr-2' style={{fontSize: '27px'}}>
                             {
-                                detailProduct.ratingData && detailProduct.ratingData.length > 0 &&
-                                averageStarRating(detailProduct.ratingData)
+                                detailProduct.ratingData && detailProduct.ratingData.length > 0 ?
+                                averageStarRating(detailProduct.ratingData) : 0
                             }
                         </span>
                         
@@ -23,8 +23,8 @@ const Rating = (props) => {
                             <ReactStars
                                 count={5}
                                 value={
-                                    detailProduct.ratingData && detailProduct.ratingData.length > 0 &&
-                                    parseInt(averageStarRating(detailProduct.ratingData))
+                                    detailProduct.ratingData && detailProduct.ratingData.length > 0 ?
+                                    parseInt(averageStarRating(detailProduct.ratingData)) : 0
                                 }
                                 edit={false}
                                 size={24}
@@ -40,7 +40,6 @@ const Rating = (props) => {
                     <span>Mới nhất</span>
                     <span>Có hình ảnh</span>
                     <span>Đã mua hàng</span>
-                    
 
                     <div>5<span className="fa fa-star"></span></div>
                     <div>4<span className="fa fa-star"></span></div>
@@ -54,7 +53,7 @@ const Rating = (props) => {
                 detailProduct && detailProduct.ratingData &&
                 detailProduct.ratingData.map((item, index) => {
                     return (
-                        <div className='list-vote d-flex border-bottom py-3' key={index}>
+                        <div className='list-vote' key={index}>
                             <div className='customer col-md-3'>
                                 <img src={item.avatar} alt="" />
                                 <div>
@@ -129,7 +128,7 @@ const Rating = (props) => {
 
             {
                 detailProduct && detailProduct.ratingData && detailProduct.ratingData.length === 0 &&
-                <div className='text-center'>Chưa có nhận xét nào</div>
+                <div className='text-center my-2'>Chưa có nhận xét nào</div>
             }
         </div>
     );

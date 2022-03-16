@@ -1,14 +1,15 @@
 import React from 'react';
+import './Style.scss';
 
 const Illustrator = ({detailProduct}) => {
     return (
-        <div className="descProduct col-md-3 p-0 text-left">
+        <div className="descProduct col-md-3">
             <div>
                 <img className="w-75" src={detailProduct && detailProduct.image ? detailProduct.image :'loading...'} alt="loading" />
                 <div className="content-left" style={{backgroundImage: `url(${detailProduct && detailProduct.image ? detailProduct.image : ''})` }}></div>
             </div>
             <hr/>
-            <div className="row mt-2 m-0">
+            <div className="imgDesc">
                 {
                     detailProduct && detailProduct.picturesData ?
                     detailProduct.picturesData.map((item, index) => {

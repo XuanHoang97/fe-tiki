@@ -1,0 +1,39 @@
+@import '../../../assets/css/variable.scss';
+
+.paymentInfo{
+    background: rgb(248, 248, 248);
+    padding: 15px 0;
+    .container{
+        .paymentDetail{
+            margin: 5px;
+            justify-content: space-between;
+            .payment-info{
+                .addrOrder{
+                    background: white;
+                    padding: 15px;
+                }
+                .paymentCalc{
+                    background: white;
+                    margin-top: 15px;
+                    padding: 10px;
+                    .changeOrder{
+                        display: flex;
+                        padding: 10px;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+                    .valueOrder{
+                        display: flex;
+                        justify-content: space-between;
+                        padding: 0 10px;
+                    }
+                    .totalMoney{
+                        display: flex;
+                        padding: 10px;
+                        justify-content: space-between;
+                    }
+                }
+            }
+        }
+    }
+}

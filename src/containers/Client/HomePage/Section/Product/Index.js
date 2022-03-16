@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { fetchProducts } from "store/actions";
 import Rate from "../Rate";
+import './style.scss';
 
 const Product = (mobile) => {
     const dispatch = useDispatch()
@@ -20,18 +21,18 @@ const Product = (mobile) => {
     }
 
     return (
-        <div className="product mt-3 ml-0 mr-0 pb-4 p-3 bg-white text-center">
-            <h5 className="text-left text-danger d-flex align-items-center">
+        <div className="product">
+            <h5 className="headProduct">
                 <img src="https://salt.tikicdn.com/ts/upload/c5/0e/02/23066556738e7f5df8b8fde5d0d1dfd6.png" style={{ width: '2%' }} alt="" />
                 <span className="ml-2">Sản Phẩm Nổi Bật</span>
             </h5>
 
-            <div className="product__detail mt-4">
+            <div className="productDetail">
                 {
                     products && products.length >0 ?
                     products.map((item, index) => {
                         return (
-                            <div className="product--item col-md-2 col-6 p-3" 
+                            <div className="product--item col-md-2 col-6" 
                                 key={index} 
                             >
                                 <div onClick={()=>viewDetail(item)}>
@@ -40,14 +41,11 @@ const Product = (mobile) => {
                                 </div>
                                 <Rate />
 
-                                <div className="price__prod d-flex align-items-center">
-                                    <span className="font-weight-bold text-dark" style={{fontSize: '13px' }}>
+                                <div className="price__prod">
+                                    <span className="price">
                                         {numberFormat(item.price)}
                                     </span>
                                     <span className="badge badge-pill badge-danger p-1 mx-2">-1%</span>
-                                    <del className="oldPrice text-secondary small">
-                                        {numberFormat(item.sale)}
-                                    </del>
                                 </div>
                             </div>
                         );

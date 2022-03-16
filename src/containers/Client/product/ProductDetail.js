@@ -9,6 +9,7 @@ import ProductSimilar from "./ProductSimilar";
 import Header from "../HomePage/Header/Header";
 import Rating from "./Rating";
 import Order from "./Order";
+import Footer from "../HomePage/Footer/Footer";
 import './Style.scss'
 
 const ProductDetail = ({ match }) => {
@@ -68,6 +69,7 @@ const ProductDetail = ({ match }) => {
           <ProductSimilar similarProducts={similarProducts} />
         </div>
       </div>
+      <Footer />
     </>
   );
 };

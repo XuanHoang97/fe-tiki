@@ -1,0 +1,43 @@
+@import '../../../../../assets/css/variable.scss';
+
+.shoppingTrend{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    margin: 15px 0 0 0 ;
+    padding: 15px 20px 5px 15px;
+    .headerShopping{
+        display: flex;
+        align-items: center;
+        text-align: left;
+    }
+}
+
+.searchTrend {
+    display: flex;
+    background: white;
+    padding: 0 5px 10px 15px;
+    .card {
+        border: none;
+        cursor: pointer;
+        .card-body:hover {
+            border: 1px solid rgb(85, 85, 255) !important;
+            transform: scale(1.05);
+            transition: transform 0.2s linear;
+        }
+        .card-body{
+            padding: 10px 0 0 0;
+            border-radius: 5px;
+            border: 1px solid rgb(230,230,230);
+            margin-right: 15px;
+            .info{
+                .card-text{
+                    font-size: 12px;
+                    font-weight: bold;
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}

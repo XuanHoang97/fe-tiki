@@ -6,13 +6,13 @@
     transform: $transforms;
 }
 
-@mixin screen1440 {
+@mixin pcLarge {
     @media(max-width: 1440px) {
         @content;
     }
 }
 
-@mixin screen1024 {
+@mixin pc {
     @media(max-width: 1024px) {
         @content;
     }

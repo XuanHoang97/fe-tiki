@@ -27,9 +27,9 @@ function OrderWithoutLogin(props) {
         <>
             <ModalOrderNow show={orderNow} toggle = {viewCart} />
             <span className="cart nav-item dropdown active" onMouseEnter={() =>setHoverCart(true) }>
-                <div className="text-white text-right">
+                <div className="itemCart">
                     <i className="fas fa-shopping-cart mr-4" style={{ fontSize: '17px' }}>
-                        <span className="badge badge-pill badge-danger position-absolute " style={{ top: '-0.9rem', left: '4.7rem' }}>
+                        <span className="numbCart badge badge-pill badge-danger">
                             {carts.length}
                         </span>
                     </i>
@@ -38,7 +38,7 @@ function OrderWithoutLogin(props) {
 
             {
                 hoverCart &&
-                <div className="dropdown-menu cart__info p-3 text-center" onMouseLeave={()=>setHoverCart(false)}>          
+                <div className="dropdown-menu cart__info" onMouseLeave={()=>setHoverCart(false)}>          
                     <div className='text-left'>
                         <h6 className='text-muted'>Sản phẩm đã thêm</h6>
                         <hr />
@@ -48,7 +48,7 @@ function OrderWithoutLogin(props) {
                                 return (
                                     <div className='' key={index} >
                                         <div className="info">
-                                            <div className='d-flex justify-content-between align-items-start'>
+                                            <div className='infoCart'>
                                                 <div className="col-md-2 p-0">
                                                     <img className="w-100 rounded" src={item.image} alt="" />
                                                 </div>
@@ -85,7 +85,7 @@ function OrderWithoutLogin(props) {
             {
                 carts.length === 0 && 
                 hoverCart &&
-                <div className="dropdown-menu cart__info p-3 text-center" onMouseLeave={()=>setHoverCart(false)}>          
+                <div className="dropdown-menu cart__info" onMouseLeave={()=>setHoverCart(false)}>          
                     <div>
                         <img className="w-25 mb-3" src="https://salt.tikicdn.com/desktop/img/mascot@2x.png" alt="" />
                         <p>Chưa có sản phẩm nào trong giỏ hàng</p>

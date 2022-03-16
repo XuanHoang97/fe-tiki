@@ -10,50 +10,30 @@
     }
 }
 
-.search__hightLight {
+.mail{
     display: flex;
-    .card {
-        border: none;
-        cursor: pointer;
-        .card-body:hover {
-            border: 1px solid rgb(85, 85, 255) !important;
-            transform: scale(1.1);
-            transition: transform 0.2s linear;
-        }
-        .card-body{
-            border-radius: 5px;
-            border: 1px solid rgb(230,230,230);
-            margin-right: 15px;
-        }
-    }
-}
-
-.product {
-    .product__detail {
-        display: flex;
-        flex-wrap: wrap;
-        @include phone {
-            overflow-x: auto;
-            flex-wrap: nowrap !important;
-        }
-        .product--item {
-            div{
-                cursor: pointer;
+    align-items: center;
+    padding: 15px;
+    margin: 15px 0;
+    background: white;
+    .titleMail{
+        .imgMail{
+            @include phone{
+                display: none;
             }
-            .price__prod{
-                .oldPrice{
-                    @include phone{
-                        display: none;
-                    }
+        }
+        .info--mail {
+            p{
+                @include phone{
+                    display: none;
                 }
             }
         }
-        .product--item:hover {
-            box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 20px !important;
+    }
+    .formMail{
+        display: flex;
+        button{
+            width: 120px;
         }
     }
-}
-
-.suggest__list{
-
 }

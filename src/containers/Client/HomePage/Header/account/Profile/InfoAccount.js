@@ -7,7 +7,7 @@ import Order from '../notification/Order';
 import Header from '../../Header';
 import { path } from 'utils';
 import { useSelector, useDispatch } from 'react-redux';
-import { FilterNotify, getUser } from 'store/actions';
+import { getUser } from 'store/actions';
 import {MenuUser} from './DataMenu';
 import Address from './Address';
 import InfoPayment from './InfoPayment';
@@ -32,12 +32,6 @@ const InfoAccount = () => {
     if (!token) {
         return <Redirect to={path.HOMEPAGE} />
     }
-
-    // const viewDetail =(notify) => {
-    //     let userId = user ? user.id : '';
-    //     dispatch(FilterNotify(userId, notify.type));
-    // }
-
 
     return (
         <div className='bg-light'>
@@ -83,7 +77,6 @@ const InfoAccount = () => {
                                                             <NavLink to={sub.path} key={index}
                                                                 className='item-menu' 
                                                                 activeClassName='activeSubMenu'
-                                                                // onClick={() => viewDetail(sub)}
                                                             >
                                                                 <div>{sub.name}</div>
                                                             </NavLink>
