@@ -51,7 +51,7 @@ const TikiXu = (props) => {
                         TikiPoint && TikiPoint.pointData ?
                         TikiPoint.pointData.reverse().map((item, index) => {
                             return (
-                                <div className='coin-item'>
+                                <div className='coin-item' key={index}>
                                     <div className='d-flex align-items-center'>
                                         <img src={item.icon} style ={{width: '70px', height:'70px'}} alt="" />
                                         <div className='listGetCoin ml-3'>

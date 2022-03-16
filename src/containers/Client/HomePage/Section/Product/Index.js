@@ -26,7 +26,7 @@ const Product = (mobile) => {
                 <span className="ml-2">Sản Phẩm Nổi Bật</span>
             </h5>
 
-            <div className="product__detail row mt-4">
+            <div className="product__detail mt-4">
                 {
                     products && products.length >0 ?
                     products.map((item, index) => {
@@ -45,7 +45,7 @@ const Product = (mobile) => {
                                         {numberFormat(item.price)}
                                     </span>
                                     <span className="badge badge-pill badge-danger p-1 mx-2">-1%</span>
-                                    <del className="text-secondary small">
+                                    <del className="oldPrice text-secondary small">
                                         {numberFormat(item.sale)}
                                     </del>
                                 </div>

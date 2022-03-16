@@ -68,7 +68,7 @@ const ModalUser = (props) => {
                 onSubmit={AddUser}
                 encType='multipart/form-data'
             >
-            <ModalHeader toggle={()=>toggle()}>Thêm mới thành viên</ModalHeader>
+            <ModalHeader toggle={()=>toggle()}>Thêm thành viên</ModalHeader>
             <ModalBody>
                 <div>
                     <div className="row">
@@ -174,8 +174,8 @@ const ModalUser = (props) => {
             </ModalBody>
 
             <ModalFooter>
-                <Button type='submit' color="primary" className="btn"> Thêm mới </Button>
-                <Button color="secondary" className="btn" onClick={()=>toggle()}>Cancel</Button>
+                <Button type='submit' color="primary" className="btn"> Tạo thành viên </Button>
+                <Button color="secondary" className="btn" onClick={()=>toggle()}>Huỷ</Button>
             </ModalFooter>
             </form>
         </Modal>

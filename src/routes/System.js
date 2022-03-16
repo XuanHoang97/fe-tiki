@@ -15,10 +15,10 @@ import Multimedia from '../containers/System/Multimedia/Index';
 import MenuLeft from 'containers/System/Header/menuLeft/MenuLeft';
 import MenuLeftCollapse from 'containers/System/Header/menuLeft/MenuLeftCollapse';
 import Notification from 'containers/System/Header/notification/Notification';
-import Bill from 'containers/System/Sale/Bill';
 import VoteManage from 'containers/System/Vote/VoteManage';
-import { path } from 'utils';
 import Discount from 'containers/System/discount/Discount';
+import Bill from 'containers/System/Sale/Bill';
+import { path } from 'utils';
 import './style.scss'
 
 const System = (props) => {
@@ -42,17 +42,15 @@ const System = (props) => {
                 {isLoggedIn && menuLeft && <MenuLeft widthMenuLeft = {widthMenuLeft} /> }
                 {!menuLeft ? <MenuLeftCollapse /> : ''}                
             
-                <div className="system-container bg-light" style={{width: widthMenuRight}}>
+                <div className="system-container" style={{width: widthMenuRight}}>
                     <div className="menuAdmin">
                         <div className="collapse_module">
-                            <span onClick={() => toggleMenu()}>
-                                <i className="fas fa-bars"></i>
-                            </span>  
+                            <span onClick={() => toggleMenu()}><i className="fas fa-bars"></i></span>  
                         </div>
 
                         <div className="account">
                             <Notification />
-                            <div className="acc py-1 px-3 mx-4">
+                            <div className="acc">
                                 <img src="https://avatars.githubusercontent.com/u/38268599?v=4" alt="" className="rounded-circle mr-2" />
                                 <span>{userInfo && userInfo.firstName ? userInfo.firstName : 'Hoang'} 
                                     <i className="fas fa-caret-down small"></i>
@@ -62,7 +60,7 @@ const System = (props) => {
                         </div>
                     </div>
                     
-                    <div className="system-list px-3 py-2">
+                    <div className="system-list">
                         <Switch>
                             <Route path={`${path.DASHBOARD}`} component={Dashboard} />
                             <Route path={`${path.USER_MANAGE}`} component={UserManage} />

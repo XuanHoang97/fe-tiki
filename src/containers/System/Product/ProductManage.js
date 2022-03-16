@@ -3,8 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../../store/actions';
 import ModalProduct from './ModalProduct';
 import ModalEditProduct from './ModalEditProduct';
-import Sort from './Sort';
 import { numberFormat } from '../../../components/Formatting/FormatNumber';
+import Sort from './Sort';
+import './style.scss';
 
 const ProductManage = (props) => {
     const [modalProduct, setModalProduct] = useState(false);
@@ -56,7 +57,7 @@ const ProductManage = (props) => {
     }
 
     return (        
-        <div className="productManage p-2 bg-white">
+        <div className="productManage">
             <ModalProduct
                 isOpen={modalProduct}
                 toggleParent={handleAddNewProduct}
@@ -70,13 +71,15 @@ const ProductManage = (props) => {
                 editProduct={handleEditProduct}
             />
 
-            <div className="h5 text-dark mb-4">Quản lý sản phẩm (<small>{listProducts.length}</small>)</div>
-            <div className="action d-flex mb-2 justify-content-between">
-                <button onClick={() => handleAddNewProduct()} type="button" className="btn btn-success col-md-2">
-                    <i className="fas fa-plus"></i> Thêm sản phẩm
-                </button>
-                <Sort />
+            <div className='addProduct'>
+                <div className="h5 text-dark mb-4">Quản lý sản phẩm (<small>{listProducts.length}</small>)</div>
+                <div className="action">
+                    <button onClick={() => handleAddNewProduct()} type="button" className="btn btn-success">
+                        <i className="fas fa-plus"></i> Thêm sản phẩm
+                    </button>
+                </div>
             </div>
+                    <Sort />
 
             <table className="table table-striped table-bordered table-hover">
                 <thead className="text-white">

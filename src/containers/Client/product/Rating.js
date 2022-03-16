@@ -10,7 +10,7 @@ const Rating = (props) => {
         <div className='vote'>
             <h5>Đánh giá - Nhận xét từ khách hàng </h5>
             <div className='star-overview'>
-                <div className='star col-3'>
+                <div className='star col-md-3'>
                     <div className='d-flex align-items-center'>
                         <span className='text-primary mr-2' style={{fontSize: '27px'}}>
                             {
@@ -35,7 +35,7 @@ const Rating = (props) => {
                     </div>
                 </div>
 
-                <div className='filter-vote col-9'>
+                <div className='filter-vote col-md-9'>
                     <label>Lọc xem theo: </label>
                     <span>Mới nhất</span>
                     <span>Có hình ảnh</span>
@@ -55,7 +55,7 @@ const Rating = (props) => {
                 detailProduct.ratingData.map((item, index) => {
                     return (
                         <div className='list-vote d-flex border-bottom py-3' key={index}>
-                            <div className='customer col-3'>
+                            <div className='customer col-md-3'>
                                 <img src={item.avatar} alt="" />
                                 <div>
                                     <div className='font-weight-bold'>{item.username}</div>
@@ -64,7 +64,7 @@ const Rating = (props) => {
                                 </div>
                             </div>
 
-                            <div className='list-vote-customer col-9'>
+                            <div className='list-vote-customer col-md-9'>
                                 <div className='title d-flex'>
                                     {item.rating === 5 &&
                                     <div className='star'>

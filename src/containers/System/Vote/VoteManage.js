@@ -3,6 +3,7 @@ import { TabContent, TabPane } from 'reactstrap';
 import {useSelector, useDispatch} from 'react-redux';
 import { fetchRating } from 'store/actions';
 import TabVote from './TabVote';
+import './style.scss'
 
 const VoteManage = (props) => {
     const dispatch = useDispatch();
@@ -16,16 +17,16 @@ const VoteManage = (props) => {
     console.log('ratings', ratings);
 
     return (
-        <div className='voteManage p-2 bg-white'>
-            <h5 className='mb-3'>Quản lý đánh giá</h5>
+        <div className='voteManage'>
+            <h5 className='mb-3'>Đánh giá</h5>
             <TabVote
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
             />
 
-            <TabContent activeTab={activeTab} className='py-3 voteContent'>
+            <TabContent activeTab={activeTab} className=' voteContent'>
                 <TabPane tabId="0" className='listVote'>
-                    <div className='filterVote d-flex bg-white p-3' style={{gap: '10px'}}>
+                    <div className='filterVote'>
                         <div>
                           <input type="text" className="form-control" placeholder="Tìm sản phẩm ...." />
                         </div>
@@ -42,7 +43,7 @@ const VoteManage = (props) => {
                         <div className='bg-light px-3 py-2'>Chưa trả lời</div>
                     </div>
 
-                    <div className="vote bg-white mt-3 p-3">
+                    <div className="vote">
                         <div>Số đánh giá: <b>{ratings && ratings.length >0 ? ratings.length : 0}</b></div>
                         <div className='list-vote mt-3'>
                             <table className="table table-striped table-bordered table-hover">
@@ -82,17 +83,6 @@ const VoteManage = (props) => {
                                             <td className='text-center' colSpan={6}>Không có dữ liệu</td>
                                         </tr>
                                     }
-                                    <tr>
-                                        <td>1</td>
-                                        <td className='text-primary'>HD001</td>
-                                        <td>
-                                            <img src="http://res.cloudinary.com/do7qmg6jr/image/upload/v1645756781/kaigq5tukxut4pzfazve.jpg" style={{width: '10%'}} alt="" />
-                                            <span>Vertu 2022</span>
-                                        </td>
-                                        <td>5 sao</td>
-                                        <td>good</td>
-                                        <td className='text-primary'>Trả lời</td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>

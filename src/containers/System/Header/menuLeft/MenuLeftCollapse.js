@@ -6,7 +6,7 @@ import './MenuLeft.scss';
 function MenuLeftCollapse(props) {
     return (
         <div className='menuLeft'>
-            <div className="dashboard bg-dark menuleftCollapse">
+            <div className="dashboard bg-dark menuLeftCollapse">
                 <div>TIKI</div>
                 {
                     MenuAdmin && MenuAdmin.length > 0 &&

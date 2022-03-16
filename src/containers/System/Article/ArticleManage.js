@@ -9,6 +9,7 @@ import { TabContent, TabPane } from 'reactstrap';
 import TabArticle from './TabArticle';
 import OptionProduct from './OptionProduct';
 import DescProduct from './DescProduct';
+import './style.scss';
 
 const ArticleManage = (props) => {
     const [activeTab, setActiveTab] = useState('1');
@@ -112,7 +113,7 @@ const ArticleManage = (props) => {
     }
 
     return ( 
-        <div className="articleManage p-2 bg-white">
+        <div className="articleManage">
             <TabArticle
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}

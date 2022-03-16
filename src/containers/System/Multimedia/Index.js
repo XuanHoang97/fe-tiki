@@ -6,6 +6,7 @@ import SpecialCategory from './SpecialCategory';
 import TabMultimedia from './TabMultimedia';
 import * as actions from './../../../store/actions';
 import Slide from './Slide';
+import './style.scss';
 
 const Multimedia = (props) => {
     const [activeTab, setActiveTab] = useState('1');
@@ -158,8 +159,8 @@ const Multimedia = (props) => {
     }
 
     return (
-        <div className="multimedia p-2 bg-white">
-            <div className="h5 text-dark mb-4">Quản lý đa phương tiện</div>
+        <div className="multimedia">
+            <div className="h5 text-dark mb-4">Đa phương tiện</div>
             <TabMultimedia
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}

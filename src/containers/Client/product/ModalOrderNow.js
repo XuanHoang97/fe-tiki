@@ -177,8 +177,8 @@ const ModalOrderNow = (props) => {
                                 </div>
                             </div>
 
-                            <div className='info d-flex'>
-                                <form className="form-group col-6">
+                            <div className='infoOrder d-flex'>
+                                <form className="form-group col-md-6">
                                     <input type="text" className="form-control" placeholder="Nhập họ tên..." 
                                         {...register('username', { 
                                             required: true,
@@ -212,7 +212,7 @@ const ModalOrderNow = (props) => {
                                     <div className='text-danger'>{errors.address?.type === 'required' && "Vui lòng nhập địa chỉ"}</div>
                                 </form>
 
-                                <div className="form-group col-6">
+                                <div className="form-group col-md-6">
                                     <label className='font-weight-bold'>Hình thức nhận hàng</label>
                                     <div className="delivery d-flex mb-3">
                                         {

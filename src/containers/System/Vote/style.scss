@@ -1,0 +1,51 @@
+@import '../../../assets/css/variable.scss';
+
+.voteManage{
+    background: white;
+    padding: 10px;
+    .tabVote{
+        @include phone{
+            display: grid;
+            grid-template-columns: 20% 15% 15% 15% 15% 15%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            font-size: 12px;
+        }
+        @include TabItem ;
+        
+        li{
+            a{
+                @include phone{
+                    padding: 5px;
+                }
+            }
+        }
+    }
+    .voteContent{
+        padding: 15px 0;
+        .listVote{
+            .filterVote{
+                display: flex;
+                background: white;
+                padding: 15px;
+                gap: 10px;
+                @include phone{
+                    display: flex;
+                    flex-direction: column;
+                }
+            }
+            .vote{
+                background: white;
+                padding: 15px;
+                .list-vote{
+                    table{
+                        @include phone{
+                            overflow-x: scroll;
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

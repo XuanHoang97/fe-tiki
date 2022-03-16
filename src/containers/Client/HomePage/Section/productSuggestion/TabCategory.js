@@ -15,7 +15,8 @@ function TabCategory(props) {
                             className={`${activeTab === item.id ? 'active' : ''}`}
                             onClick={() => detailCategory(item.id)}
                         >   
-                          <img src={item.image}  alt="" />{item.name}
+                          <img src={item.image}  alt="" />
+                          <span>{item.name}</span>
                         </NavLink>
                     </NavItem>
                 )

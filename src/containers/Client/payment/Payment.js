@@ -88,8 +88,8 @@ const Payment = (props) => {
             <div className="main bg-light pt-3 pb-3">
                 <LoadingOverlay active={loadingOrder} spinner text='Đang xử lý đơn hàng...' >
                     <div className="container">
-                        <div className="row m-1 justify-content-between">
-                            <div className="col-md-9 pl-0 ">
+                        <div className="paymentDetail row m-1 justify-content-between">
+                            <div className="delivery col-md-9 p-0 ">
                                 <div className="bg-white p-3">
                                 <div>
                                     <h6 className="text-dark">1. Chọn hình thức giao hàng</h6>
@@ -178,7 +178,7 @@ const Payment = (props) => {
                                 </div>
                             </div>
                             
-                            <div className="col-md-3 pr-0">
+                            <div className="paymentInfo col-md-3 pr-0">
                                 <div className="bg-white p-3">
                                     <div className="d-flex border-bottom py-1 justify-content-between">Địa chỉ giao hàng</div>
                                     <div className='mt-2'>

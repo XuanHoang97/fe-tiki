@@ -56,14 +56,15 @@ const LoginAuth = (props) => {
                 </div>
                 <span className='text-primary'>Cần trợ giúp ?</span>
             </div>
+
             <div className="loginAuth d-flex justify-content-end">
-                <div className="col-8 p-0">
+                <div className="bgLogin col-md-8 p-0">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIFcGvp7AOiZTesQCIXyZ8Wnh9WyQKUzDDjA&usqp=CAU" alt="" 
                         className='w-100'
                     />
                 </div>
 
-                <div className="col-md-4 bg-white p-4">
+                <div className="formLogin col-md-4 bg-white p-4">
                     <form className="form-group" onSubmit={handleSubmit(login)}>
                         <h4 htmlFor="" className='mb-4'>Đăng nhập </h4>
                         <input type="text" className="form-control email" placeholder="Nhập email..." 

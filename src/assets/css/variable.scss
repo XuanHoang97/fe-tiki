@@ -6,8 +6,6 @@
     transform: $transforms;
 }
 
-;
-//transform mixin for all browser;
 @mixin screen1440 {
     @media(max-width: 1440px) {
         @content;
@@ -29,5 +27,32 @@
 @mixin phone {
     @media(max-width: 576px) {
         @content;
+    }
+}
+
+// tab modules
+@mixin TabItem{
+    .nav-item{
+        cursor: pointer;
+        margin-right: 5px;
+        @include phone{
+            font-size: 12px;
+            a{
+                @include phone{
+                    padding: 5px;
+                }
+            }
+        }
+        .active.nav-link{
+            color: rgb(83, 138, 255) !important;
+            border-bottom: 3px solid rgb(83, 138, 255);
+            font-weight: 600;
+        }
+        .nav-link{
+            color: #535353;
+            .statical{
+                font-size: 13px;
+            }
+        }
     }
 }

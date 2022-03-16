@@ -1,17 +1,22 @@
 @import '../../../assets/css/variable.scss';
 
-.report-statistical{
+.Discount{
     background: white;
     padding: 10px;
-    .tabStatistical{
-        margin-bottom: 15px;
-        @include phone{
-            font-size: 12px;
-            display: grid;
-            grid-template-columns: 45% 35% 30%;
+
+    .addDiscount{
+        display: flex;
+        justify-content: space-between;
+        .addUser{
+            display: flex;
+            justify-content: space-between;
         }
+    }
+
+    .nav{
         @include TabItem ;
     }
+
     table{
         @include phone{
             overflow-x: scroll;

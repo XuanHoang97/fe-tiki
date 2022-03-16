@@ -48,7 +48,7 @@ const ModalAddCategory = (props) => {
             onSubmit={handleAddCategory}
             encType='multipart/form-data'
         >  
-            <ModalHeader toggle={()=>toggle()}>Thêm mới danh mục</ModalHeader>
+            <ModalHeader toggle={()=>toggle()}>Tạo danh mục</ModalHeader>
             <ModalBody>
             
             <div>
@@ -109,8 +109,8 @@ const ModalAddCategory = (props) => {
             </div>
             </ModalBody>
             <ModalFooter>
-                <Button color="primary" className="btn" type='submit'>Thêm mới</Button>
-                <Button color="secondary" className="btn">Cancel</Button>
+                <Button color="primary" className="btn" type='submit'>Tạo danh mục</Button>
+                <Button color="secondary" className="btn">Huỷ</Button>
             </ModalFooter>
         </form> 
         </Modal>

@@ -1,3 +1,6 @@
+@import "../../../../../assets/css/variable.scss";
+
+
 .menu{
     padding: 0 30px;
 }
@@ -5,6 +8,11 @@
     background:rgb(40,134,234);
     padding: 15px 30px;
     height: 85vh;
+    .bgRegister, .bgLogin{
+        @include phone{
+            display: none;
+        }
+    }
 }
 
 .password{

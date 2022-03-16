@@ -54,7 +54,7 @@ const Order = (props) => {
     }, [dispatch, token]);
 
     return (
-        <div className="col-md-6 pl-4 pr-2 text-left">
+        <div className="orderDetail col-md-6">
             <div className="info d-flex align-items-center">
                 <h4 className="mr-5 font-weight-bold">{order && order.name ? order.name :'loading...'}</h4>
                 <Rate />

@@ -60,7 +60,7 @@ const ModalAddNews = (props) => {
             onSubmit={handleAddNews}
             encType='multipart/form-data'
         >
-            <ModalHeader toggle={()=>toggle()}>Thêm mới tin tức, sự kiện</ModalHeader>
+            <ModalHeader toggle={()=>toggle()}>Tạo tin tức</ModalHeader>
             <ModalBody>
             <div>
                 <div className="row">
@@ -157,8 +157,8 @@ const ModalAddNews = (props) => {
             </div>
             </ModalBody>
             <ModalFooter>
-                <Button color="primary" className="btn" type='submit' >Thêm mới</Button>
-                <Button color="secondary" className="btn">Cancel</Button>
+                <Button color="primary" className="btn" type='submit' >Tạo tin tức</Button>
+                <Button color="secondary" className="btn">Huỷ</Button>
             </ModalFooter>
         </form>
         </Modal>

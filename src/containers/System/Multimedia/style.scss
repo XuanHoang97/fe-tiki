@@ -1,0 +1,38 @@
+@import '../../../assets/css/variable.scss';
+
+.multimedia{
+    background: white;
+    padding: 10px;
+    .tabMedia{
+        margin-bottom: 15px;
+        @include phone{
+            display: grid;
+            grid-template-columns: 20% 40% 40%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+        @include TabItem ;
+    }
+    .tab-content{
+        .tab-pane{
+            .list-slide{
+                .formSlide{
+                    @include phone{
+                        display: flex;
+                        flex-direction: column;
+                    }
+                }
+            }
+            .list-category-special{
+                .formCategory{
+                    @include phone{
+                        display: flex;
+                        flex-direction: column;
+                    }
+                }
+            }
+        }
+    }
+}

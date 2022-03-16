@@ -40,4 +40,9 @@ img {
             opacity: 1 !important;
         }
     }
+    .banner{
+        @include phone {
+            display: none;
+        }
+    }
 }

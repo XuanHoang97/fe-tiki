@@ -6,9 +6,9 @@ import * as actions from 'store/actions';
 import ReactPaginate from "react-paginate";
 import { numberFormat } from 'components/Formatting/FormatNumber';
 import SortOrder from './SortOrder';
-import './style.scss';
 import { formatDate } from 'components/Formatting/FormatDate';
 import TabOrder from './TabOrder';
+import './style.scss';
 
 const OrderManage = (props) => {
     const [activeTab, setActiveTab] = useState('4');

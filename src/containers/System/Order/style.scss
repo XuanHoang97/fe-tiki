@@ -1,26 +1,42 @@
-.nav.nav-tabs{
-    .nav-item{
-        cursor: pointer;
-        margin-right: 5px;
-        .active.nav-link{
-            color: rgb(83, 138, 255) !important;
-            border-bottom: 3px solid rgb(83, 138, 255);
-            font-weight: 600;
+@import '../../../assets/css/variable.scss';
+
+.orderManage{
+    .nav, .nav-tabs{
+        @include phone {
+            display: grid;
+            grid-template-columns: repeat(7,32%);
+            overflow-x: scroll;
+            overflow-y: hidden;
         }
-        .nav-link{
-            color: #535353;
-            .statical{
-                font-size: 13px;
+        @include TabItem ;
+    }
+
+    .listOrder{
+        padding: 20px 15px;
+        background: #f6f7f7;
+        border: 1px solid #e5e5e5;
+        .tableOrder{
+            .filter{
+                .orderSort{
+                    .labelSort{
+                        @include phone{
+                            display: none;
+                        }
+                    }
+                }
+            }
+            .list-order{
+                table{
+                    @include phone{
+                        overflow-x: scroll;
+                        display: block;
+                    }
+                }
             }
         }
     }
 }
 
-.tab-content{
-    padding: 20px 15px;
-    background: #f6f7f7;
-    border: 1px solid #e5e5e5;
-}
 
 .actionOrder{
     font-size: 12px;

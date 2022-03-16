@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import ModalUser from './ModalUser';
-import ModalEditUser from './ModalEditUser';
 import * as actions from '../../../store/actions';
 import { formatDateNew } from 'components/Formatting/FormatDate';
+import ModalEditUser from './ModalEditUser';
+import ModalUser from './ModalUser';
+import './style.scss'
 
 const UserManage = (props) => {
     const [modalUser, setModalUser] = useState(false);
@@ -61,7 +62,7 @@ const UserManage = (props) => {
     }
 
     return (
-        <div className="userManage p-2 bg-white">
+        <div className="userManage">
             <ModalUser
                 isOpen={modalUser} 
                 toggleModal={handleAddNewUser}
@@ -76,11 +77,14 @@ const UserManage = (props) => {
                     editUser={editUser}
                 />
             }
-            <div className="h5 text-dark mb-4">Quản lý thành viên (<small>{listUsers.length}</small>)</div>
-            <div className="addUser d-flex mb-3 justify-content-between">
-                <button onClick ={() => handleAddNewUser()}  type="button" className="btn btn-success col-md-2">
-                    <i className="fas fa-plus mr-2"></i> Thêm thành viên
-                </button>
+
+            <div className='addUser'>
+                <div className="h5 text-dark mb-4">Quản lý thành viên (<small>{listUsers.length}</small>)</div>
+                <div className="addUser">
+                    <button onClick ={() => handleAddNewUser()}  type="button" className="btn btn-success">
+                        <i className="fas fa-plus mr-2"></i> Thêm thành viên
+                    </button>
+                </div>
             </div>
             
             <table className="table table-striped table-bordered table-hover">

@@ -2,7 +2,7 @@ import React from 'react';
 
 const Illustrator = ({detailProduct}) => {
     return (
-        <div className="col-md-3 p-0 text-left">
+        <div className="descProduct col-md-3 p-0 text-left">
             <div>
                 <img className="w-75" src={detailProduct && detailProduct.image ? detailProduct.image :'loading...'} alt="loading" />
                 <div className="content-left" style={{backgroundImage: `url(${detailProduct && detailProduct.image ? detailProduct.image : ''})` }}></div>

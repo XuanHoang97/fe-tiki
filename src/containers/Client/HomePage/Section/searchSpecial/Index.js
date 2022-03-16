@@ -22,10 +22,10 @@ const Search_special = () => {
 
             <div className="search__hightLight mt-0 pl-3 pb-2 p-0 pr-1 bg-white">
                     
-                <div className="card col-md-3 p-0">
+                <div className="card col-md-3 col-3 p-0">
                     <div className="card-body pl-0 pr-0 pt-2 pb-0">
                         <div className="illustrator row m-1">
-                            <img className="col-md-4 col-4 p-0" src="https://salt.tikicdn.com/cache/w100/ts/product/1b/58/65/16e873c283c090b3cb3e28ab3e660648.jpg.webp" alt="" />
+                            <img className="col-md-4 col-12 p-0" src="https://salt.tikicdn.com/cache/w100/ts/product/1b/58/65/16e873c283c090b3cb3e28ab3e660648.jpg.webp" alt="" />
                         </div>
                         <div className="info mt-2 pt-2 pl-3 pb-2" style={{ background: 'https://salt.tikicdn.com/cache/w100/ts/product/1b/58/65/16e873c283c090b3cb3e28ab3e660648.jpg.webp' }}>
                             <h5 className="card-text small font-weight-bold mb-0 text-dark">abcd</h5>

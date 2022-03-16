@@ -1,3 +1,5 @@
+@import "../../../../../assets/css/variable.scss";
+
 .hightLight {
     .list__category {
         .col-md-1:hover {
@@ -28,13 +30,30 @@
 
 .product {
     .product__detail {
+        display: flex;
+        flex-wrap: wrap;
+        @include phone {
+            overflow-x: auto;
+            flex-wrap: nowrap !important;
+        }
         .product--item {
             div{
                 cursor: pointer;
+            }
+            .price__prod{
+                .oldPrice{
+                    @include phone{
+                        display: none;
+                    }
+                }
             }
         }
         .product--item:hover {
             box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 20px !important;
         }
     }
+}
+
+.suggest__list{
+
 }

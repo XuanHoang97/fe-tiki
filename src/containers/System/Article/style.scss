@@ -1,21 +1,23 @@
 @import '../../../assets/css/variable.scss';
 
-.report-statistical{
+.articleManage{
     background: white;
     padding: 10px;
-    .tabStatistical{
+    .tabArticle{
         margin-bottom: 15px;
         @include phone{
-            font-size: 12px;
             display: grid;
-            grid-template-columns: 45% 35% 30%;
+            grid-template-columns: 27% 40% 40%;
+            font-size: 12px;
+            overflow-x: auto;
+            overflow-y: hidden;
         }
+
         @include TabItem ;
     }
-    table{
+    .tab-content{
         @include phone{
-            overflow-x: scroll;
-            display: block;
+            padding: 15px 10px;
         }
     }
 }

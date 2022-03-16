@@ -1,0 +1,21 @@
+@import '../../../assets/css/variable.scss';
+
+.productManage{
+    background: white;
+    padding: 10px;
+    .addProduct{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .action{
+            display: flex;
+            margin-bottom: 10px;
+        }
+    }
+    table{
+        @include phone{
+            overflow-x: scroll;
+            display: block;
+        }
+    }
+}

@@ -164,7 +164,7 @@ const ModalEditProduct  = (props) => {
 
             <ModalFooter>
                 <Button color="primary" className="btn" type='submit'>Cập nhật</Button>
-                <Button color="secondary" className="btn">Cancel</Button>
+                <Button color="secondary" className="btn">Huỷ</Button>
             </ModalFooter>
         </form>   
         </Modal>

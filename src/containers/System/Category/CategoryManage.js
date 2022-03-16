@@ -11,7 +11,7 @@ const CategoryManage = (props) => {
     const [categoryEdit, setCategoryEdit] = useState('');
     const category = useSelector(state => state.admin.categories);
 
-   //fetch product category
+   //fetch category
      useEffect(() => {        
         dispatch(actions.fetchAllCategory());
     }, [dispatch]);
@@ -68,11 +68,13 @@ const CategoryManage = (props) => {
                 editCategory={handleEditCategory}
             />
 
-            <div className="h5 text-dark mb-4">Danh mục sản phẩm (<small>{category.length}</small>)</div>
-            <div className="d-flex mb-3 justify-content-between">
-                <button onClick={() => handleAddCategory()} type="button" className="btn btn-success col-md-2">
-                    <i className="fas fa-plus"></i> Thêm danh mục
-                </button>
+            <div className='d-flex align-items-center justify-content-between'>
+                <div className="h5 text-dark mb-4">Danh mục sản phẩm (<small>{category.length}</small>)</div>
+                <div className="d-flex mb-3 justify-content-between">
+                    <button onClick={() => handleAddCategory()} type="button" className="btn btn-success">
+                        <i className="fas fa-plus"></i> Thêm danh mục
+                    </button>
+                </div>
             </div>
 
             <table className="table table-striped table-bordered table-hover">

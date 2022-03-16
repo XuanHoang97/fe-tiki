@@ -44,14 +44,14 @@ const Register = (props) => {
                 <span className='text-primary'>Cần trợ giúp ?</span>
             </div>
 
-            <div className="register d-flex justify-content-end">
-                <div className="col-8 p-0">
+            <div className="register d-flex">
+                <div className="bgRegister col-md-8 p-0">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIFcGvp7AOiZTesQCIXyZ8Wnh9WyQKUzDDjA&usqp=CAU" alt="" 
                         className='w-100'
                     />
                 </div>
 
-                <div className="col-4 p-4 bg-white">
+                <div className="formRegister col-md-4 p-4 bg-white">
                     <form className="form-group" onSubmit={handleSubmit(signUp)}>
                         <h4 htmlFor="" className='mb-4'>Đăng ký</h4>
                         <input type="text" className="form-control name" placeholder="Nhập họ và tên..." 

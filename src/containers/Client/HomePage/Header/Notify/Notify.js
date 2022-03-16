@@ -9,7 +9,7 @@ const Notify = () => {
     const dispatch = useDispatch();
     const ref = useRef();
     const [showNotify, setShowNotify] = useState(false);
-    const [styleUnread, setStyleUnread] = useState('list my-2');
+    const [styleUnread, setStyleUnread] = useState('listNotify my-2');
     const user = useSelector(state => state.auth.user);
     const notify = useSelector(state => state.auth.notify);
     const notifyUnread = useSelector(state => state.auth.notifyUnread);

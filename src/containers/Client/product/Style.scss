@@ -1,13 +1,40 @@
+@import '../../../assets/css/variable.scss';
+
 .main{
     background: #f8f9fa;
     margin: 15px 0 !important;
+    @include phone{
+        margin: 0 !important;
+    }
     .container{
+        .paymentDetail{
+            .delivery{
+
+            }
+            .paymentInfo{
+                @include phone{
+                    padding-left: 0 !important;
+                }
+            }
+        }
         .order{
             background: white;
             padding: 15px;
             margin: 0;
             text-align: center;
             display: flex;
+            @include phone{
+                flex-wrap: wrap;
+            }
+            .descProduct{
+                padding: 0;
+                text-align: left;
+            }
+            .orderDetail{
+                padding-left: 20px;
+                padding-right: 10px;
+                text-align: left;
+            }
         }
         .vote{
             background: white;
@@ -17,6 +44,9 @@
                 display: flex;
                 padding: 20px 0px;
                 border-bottom: 1px solid lightgrey;
+                @include phone{
+                    flex-direction: column;
+                }
                 .filter-vote{
                     display: flex;
                     gap: 10px;
@@ -36,6 +66,9 @@
                     display: flex;
                     align-items: center;
                     gap: 10px;
+                    @include phone{
+                        padding: 0;
+                    }
                     img{
                         width: 60px;
                         height: 60px;
@@ -43,6 +76,9 @@
                     }
                 }
                 .list-vote-customer {
+                    @include phone{
+                        padding: 0;
+                    }
                     .title{
                         display: flex;
                         align-items: center;
@@ -83,6 +119,12 @@
             }
         }
 
+    }
+}
+
+.infoOrder{
+    @include phone{
+        flex-direction: column;
     }
 }
 

@@ -1,47 +1,76 @@
 @import "../../../../../../assets/css/variable.scss";
 
-.Prod__Suggest{
-    background: white;
-    padding: 10px;
-    border: 1px solid #e6e6e6;
-}
-.tab_product {
-    display: flex;
-    background: #e3e3e3;
-    padding: 5px 0;
-    .item-category{
-        width: 16.2%;
-        background: white !important;
-        a{
-            display: flex;
-            gap: 10px;
-            height: 60px ;
-            align-items: center;
-            img{
-                width: 25px;
-                height: 25px;
-            }
-            span{
-                margin-left: 10px;
-            }
+.tabSuggest{
+    position: sticky;
+    top: 0;
+    .Prod__Suggest{
+        background: white;
+        padding: 10px;
+        border: 1px solid #e6e6e6;
+    }
+    .tab_product {
+        display: flex;
+        background: #e3e3e3;
+        padding: 5px 0;
+        @include phone{
+            display: grid;
+            grid-template-columns: repeat(6,1fr);
         }
-        a.active{
-            border-bottom: 2px solid #538aff !important;
+        .item-category{
+            width: 16.2%;
+            background: white !important;
+            @include phone{
+                width: 100%;
+                border-right: 1px solid rgb(219, 219, 219);
+            }
+            a{
+                display: flex;
+                gap: 10px;
+                height: 60px ;
+                align-items: center;
+                img{
+                    width: 25px;
+                    height: 25px;
+                }
+                span{
+                    margin-left: 10px;
+                    @include phone{
+                        display: none;
+                    }
+                }
+            }
+            a.active{
+                border-bottom: 2px solid #538aff !important;
+            }
         }
     }
 }
 
 .list{
+    display: flex;
+    flex-wrap: wrap;
+    @include phone{
+        overflow-x: auto;
+        flex-wrap: nowrap;
+    }
     .list__prod{
         width: 16.6%;
-        cursor: pointer;
         padding: 10px;
+        cursor: pointer;
+        @include phone{
+            width: 33.3%;
+        }
         p{
             font-size: 12px;
         }
         .price{
             display: flex;
             gap: 15px;
+            .badge{
+                @include phone{
+                    display: none;
+                }
+            }
         }
     }
     .list__prod:hover{

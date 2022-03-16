@@ -21,6 +21,15 @@ img {
                 @include phone {
                     padding: 0 !important;
                 }
+                a{
+                    .navbar-brand{
+                        img{
+                            @include phone {
+                                width: 40px;
+                            }
+                        }
+                    }
+                }
                 .menu_ctg {
                     @include phone {
                         width: 100%;
@@ -63,14 +72,6 @@ img {
                     background-color: rgba(0, 0, 0, 0.5);
                     pointer-events: none;
                 }
-                // .menu_ctg:hover:after {
-                //     z-index: 10;
-                //     opacity: 1;
-                //     visibility: visible;
-                //     position: fixed;
-                // }
-                .navbar-brand {
-                }
                 .navbar-toggler {
                     @include phone {
                         color: white;
@@ -88,10 +89,7 @@ img {
                             flex-direction: column-reverse;
                             padding: 5px 15px;
                         }
-                        .login_resg {
-                            .info {
-                            }
-                        }
+                      
                         .search {
                             input {
                                 border-radius: 2px 0px 0px 2px;

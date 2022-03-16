@@ -13,11 +13,11 @@ const  Dashboard = (props) => {
     }, [dispatch])
 
     return (
-        <div className="dashboardTiki mx-2">
+        <div className="dashboardTiki">
             <h5 className='my-2'>Tổng quan</h5>
-             <div className="detail-overview d-flex">
+             <div className="detail-overview">
                 <div className="statistical col-md-8 col-xs-12 p-0">
-                    <div className="item-statistical align-items-center" style={{background:'rgb(239 169 64) '}}>
+                    <div className="item-statistical" style={{background:'rgb(239 169 64) '}}>
                         <img src="https://thumbs.dreamstime.com/b/shopping-cart-icon-trolley-icon-shopping-cart-icon-trolley-icon-vector-illustration-isolated-white-background-163727286.jpg" alt="" />
                         <div className="stat">
                             <h6 className="card-title small">ĐƠN HÀNG HÔM NAY</h6>
@@ -25,7 +25,7 @@ const  Dashboard = (props) => {
                         </div>
                     </div>
 
-                    <div className="item-statistical  align-items-center" style={{background:'rgb(25 159 47)'}}>
+                    <div className="item-statistical" style={{background:'rgb(25 159 47)'}}>
                         <img src="https://image.shutterstock.com/image-vector/dollar-icon-symbol-vector-money-260nw-1723606144.jpg"  alt="" />
                         <div className="stat">
                             <h6 className="card-title small">DOANH THU HÔM NAY</h6>
@@ -35,7 +35,7 @@ const  Dashboard = (props) => {
                         </div>
                     </div>
 
-                    <div className="item-statistical  align-items-center" style={{background:'rgb(76 117 235)'}}>
+                    <div className="item-statistical" style={{background:'rgb(76 117 235)'}}>
                         <img src="https://thumbs.dreamstime.com/b/user-icon-vector-people-profile-person-illustration-business-users-group-symbol-male-195161330.jpg" alt="" />
                         <div className="stat">
                             <h6 className="card-title small">KHÁCH HÀNG MỚI</h6>
@@ -45,7 +45,7 @@ const  Dashboard = (props) => {
                         </div>
                     </div>
 
-                    <div className="item-statistical align-items-center text-danger">
+                    <div className="item-statistical text-danger">
                         <img src="https://previews.123rf.com/images/mariiasimakova/mariiasimakova2004/mariiasimakova200400644/145706280-investment-icon-simple-illustration-from-startup-collection-creative-investment-icon-for-web-design-.jpg"  alt="" />
                         <div className="stat">
                             <h6 className="card-title small text-dark">ĐẦU TƯ</h6>
@@ -53,7 +53,7 @@ const  Dashboard = (props) => {
                         </div>
                     </div>
 
-                    <div className="item-statistical  align-items-center text-primary">
+                    <div className="item-statistical text-primary">
                         <img src="https://icon-library.com/images/revenue-icon-png/revenue-icon-png-2.jpg"  alt="" />
                         <div className="stat">
                             <h6 className="card-title small text-dark">TỔNG DOANH THU</h6>
@@ -73,7 +73,7 @@ const  Dashboard = (props) => {
                         </div>
                     </div>
 
-                    <div className="item-statistical  align-items-center text-success">
+                    <div className="item-statistical text-success">
                         <img src="https://image.shutterstock.com/image-illustration/growth-icon-business-success-conceptselement-260nw-1464772178.jpg"  alt="" />
                         <div className="stat">
                             <h6 className="card-title small text-dark">TỔNG LỢI NHUẬN</h6>

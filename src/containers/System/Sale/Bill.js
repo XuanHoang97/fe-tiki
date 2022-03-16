@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { TabContent, TabPane } from 'reactstrap';
 import TabBill from './TabBill';
+import './style.scss'
 
 const Bill = (props) => {
     const [activeTab, setActiveTab] = useState('1');
 
     return (
-        <div className='Bill p-2 bg-white'>
+        <div className='Bill'>
             <h5>Hoá đơn</h5>
             <TabBill
                 activeTab={activeTab}

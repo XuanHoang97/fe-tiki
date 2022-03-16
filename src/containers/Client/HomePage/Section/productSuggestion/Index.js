@@ -68,7 +68,7 @@ const ProductSuggestion = () => {
 
   return (
     <div className="suggest__list mt-4">
-      <div style={{ position: 'sticky', top: '0' }}>
+      <div className='tabSuggest'>
         <div className="Prod__Suggest"> <h5 className="m-0">Gợi Ý Hôm Nay</h5> </div>
         <TabCategory
           activeTab={activeTab}
@@ -83,7 +83,7 @@ const ProductSuggestion = () => {
           category.map((item, index) => {
             return (
               <TabPane tabId={item.id} key={index}>
-                <div className="list row px-3">
+                <div className="list px-3">
                   {
                     Products && Products.length > 0 ?
                     productShow.map((item, index) => {

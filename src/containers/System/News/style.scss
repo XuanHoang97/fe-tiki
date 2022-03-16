@@ -1,0 +1,17 @@
+@import '../../../assets/css/variable.scss';
+
+.newManage{
+    background: white;
+    padding: 10px;
+    .addNews{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    table{
+        @include phone{
+            overflow-x: scroll;
+            display: block;
+        }
+    }
+}

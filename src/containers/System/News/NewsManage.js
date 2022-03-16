@@ -4,6 +4,7 @@ import * as actions from '../../../store/actions';
 import ModalAddNews from './ModalAddNews';
 import ModalEditNews from './ModalEditNews';
 import Moment from 'react-moment';
+import './style.scss';
 
 const NewsManage = (props) => {
     const dispatch = useDispatch();
@@ -59,7 +60,7 @@ const NewsManage = (props) => {
     }
 
     return (
-        <div className="newManage p-2 bg-white">
+        <div className="newManage">
             <ModalAddNews
                 isOpen={modalAddNews}
                 toggleParent={handleAddNews}
@@ -73,11 +74,13 @@ const NewsManage = (props) => {
                 editNews={handleEditNews}
             />
 
-            <div className="h5 text-dark mb-4">Quản lý tin tức và sự kiện (<small>{listNews.length}</small>)</div>
-            <div className="d-flex justify-content-between mb-3">
-                <button onClick={() => handleAddNews()} type="button" className="btn btn-success col-md-2">
-                    <i className="fas fa-plus mr-2"></i> Thêm tin tức
-                </button>
+            <div className='addNews'>
+                <div className="h5 text-dark mb-4">Tin tức - sự kiện (<small>{listNews.length}</small>)</div>
+                <div className="mb-3">
+                    <button onClick={() => handleAddNews()} type="button" className="btn btn-success">
+                        <i className="fas fa-plus mr-2"></i> Thêm tin tức
+                    </button>
+                </div>
             </div>
 
             <table className="table table-striped table-bordered table-hover">

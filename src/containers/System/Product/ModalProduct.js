@@ -76,7 +76,7 @@ const ModalProduct = (props) => {
             onSubmit={handleAddNewProduct}
             encType='multipart/form-data'
         >
-            <ModalHeader toggle={()=>toggle()}>Thêm mới sản phẩm</ModalHeader>
+            <ModalHeader toggle={()=>toggle()}>Thêm sản phẩm</ModalHeader>
             <ModalBody>
             <div>
                 <div className="row">
@@ -165,8 +165,8 @@ const ModalProduct = (props) => {
             </ModalBody>
 
             <ModalFooter>
-                <Button color="primary" className="btn" type='submit'>Thêm mới</Button>
-                <Button color="secondary" className="btn">Cancel</Button>
+                <Button color="primary" className="btn" type='submit'>Thêm sản phẩm</Button>
+                <Button color="secondary" className="btn">Huỷ</Button>
             </ModalFooter>
         </form>
         </Modal>

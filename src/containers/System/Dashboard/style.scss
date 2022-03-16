@@ -1,59 +1,99 @@
-.statistical{
-    display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
-    .item-statistical{
-        display: grid;
-        grid-template-columns: 30% 70%;
-        border: 1px solid #e5e5e5;
-        padding: 15px;
-        background: white;
-        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-        width: 32%;
-        border-radius: 10px;
-        color: white;
-        img{
-            border-radius: 50%;
-            width: 65%;
-        }
-    }
-}
 
-.revenue{
-    background: white;
-    padding: 15px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-    .item-revenue{
-        color: #474747;
-        font-size: 14px;
-    }
-}
+@import '../../../assets/css/variable.scss';
 
-.overview{
-    background: white;
-    padding: 15px;
-    width: 100%;
-    margin-right: 20px;
-    margin-top: 10px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-    .reportStatus{
+.dashboardTiki{
+    margin: 0 5px;
+    @include phone{
+        margin: 0 !important;
+    }
+    .detail-overview{
         display: flex;
-        align-items: center;
-        border-bottom: 1px dotted lightgrey;
-        padding: 5px 0;
-        .status{
-            color: #7b7b7b;
+        @include phone{
+            flex-direction: column;
         }
-        .number{
-            color: #0089ce;
-            font-weight: 600;
-            margin-right: 10px;
-            font-size: 16px;
+        .statistical{
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            .item-statistical{
+                display: grid;
+                grid-template-columns: 30% 70%;
+                border: 1px solid #e5e5e5;
+                padding: 15px;
+                background: white;
+                box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+                width: 32%;
+                border-radius: 10px;
+                color: white;
+                align-items: center;
+                @include phone{
+                    display: flex;
+                    padding: 10px;
+                }
+                img{
+                    border-radius: 50%;
+                    width: 65%;
+                    @include phone{
+                        display: none;
+                    }
+                }
+                .stat{
+                    h6{
+                        @include phone{
+                            font-size: 9.5px;
+                        }
+                    }
+                    h5{
+                        @include phone{
+                            font-size: 13.5px;
+                        }
+                    }
+                }
+            }
+        
+            .overview{
+                background: white;
+                padding: 15px;
+                width: 100%;
+                margin-right: 20px;
+                margin-top: 10px;
+                box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+                @include phone{
+                    margin-right: 0;
+                    margin-bottom: 15px;
+                }
+                .reportStatus{
+                    display: flex;
+                    align-items: center;
+                    border-bottom: 1px dotted lightgrey;
+                    padding: 5px 0;
+                    .status{
+                        color: #7b7b7b;
+                    }
+                    .number{
+                        color: #0089ce;
+                        font-weight: 600;
+                        margin-right: 10px;
+                        font-size: 16px;
+                    }
+                    .illustrator{
+                        width: 6%;
+                        opacity: 0.7;
+                        margin-right: 15px;
+                    }
+                }
+            }
         }
-        .illustrator{
-            width: 6%;
-            opacity: 0.7;
-            margin-right: 15px;
+        
+        .revenue{
+            background: white;
+            padding: 15px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            .item-revenue{
+                color: #474747;
+                font-size: 14px;
+            }
         }
     }
 }
+
