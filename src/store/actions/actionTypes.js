@@ -111,6 +111,9 @@ const actionTypes = Object.freeze({
 
     // get all rating product
     FETCH_ALL_RATING: 'FETCH_ALL_RATING',
+
+    ADD_DISCOUNT: 'ADD_DISCOUNT',
+    FETCH_ALL_DISCOUNT: 'FETCH_ALL_DISCOUNT',
     
 
 })

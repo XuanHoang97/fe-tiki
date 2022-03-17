@@ -2,6 +2,7 @@
 
 .main-container{
     .module{
+        display: flex;
         .system-container{
             height: 100vh;
             overflow-y: auto;
@@ -46,27 +47,6 @@
                 @include phone{
                     padding: 10px !important;
                 }
-
-                // dashboard Tiki
-
-                // order manage
-
-                // Bill
-
-                // product manage
-
-                // userManage
-
-                // articleManage
-
-                // newManage
-
-                // multimedia{
-
-                // voteManage
-
-                // report-statistical
-                
             }
         }
     }

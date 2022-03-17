@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { numberFormat, totalMoney } from 'components/Formatting/FormatNumber';
-import * as actions from 'store/actions';
 import {createOrder} from 'services/clientService';
-import { toast } from 'react-toastify';
-import { useHistory } from 'react-router-dom';
 import LoadingOverlay from 'react-loading-overlay';
+import { useHistory } from 'react-router-dom';
 import { useForm } from "react-hook-form";
+import * as actions from 'store/actions';
+import { toast } from 'react-toastify';
 
 const ModalOrderNow = (props) => {
     const saleOff = 240000;
@@ -138,18 +138,18 @@ const ModalOrderNow = (props) => {
                             }
 
                             <div className="totalPay">
-                                <div className='col-6'>
-                                    <div className='d-flex justify-content-between'>
+                                <div className='calcOrder col-6'>
+                                    <div className='item-pay'>
                                         <span>Tổng tiền:</span>
                                         <span>{numberFormat(totalMoney(carts))}</span>
                                     </div>
 
-                                    <div className='d-flex justify-content-between'>
+                                    <div className='item-pay'>
                                         <span>Giảm:</span>
                                         <small className="text-secondary">-{numberFormat(saleOff)}</small>
                                     </div>
 
-                                    <div className='d-flex justify-content-between'>
+                                    <div className='item-pay'>
                                         <span>Cần thanh toán:</span>
                                         <span className="text-danger font-weight-bold">
                                             {numberFormat(totalMoney(carts) - saleOff)}

@@ -1,26 +1,68 @@
-.item__price{
-    background: #dddddd;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    padding: 0 5px;
-    cursor: pointer;
-    span{
-        font-size: 12px;
+@import '../../../../../assets/css/variable.scss';
+.Result__search{
+    padding: 15px;
+    .resultSearch{
+        display: flex;
+        background: white;
+
+        .filterSearch{
+            border-right: 1px solid #e6e6e6;
+            @include phone{
+                display: none;
+            }
+            .addrReceive{
+                border-bottom: 1px solid #e6e6e6;
+                padding: 15px 0;
+            }
+            .filterPrice{
+                @extend .addrReceive;
+                .item__price{
+                    background: #dddddd;
+                    margin-bottom: 10px;
+                    border-radius: 10px;
+                    padding: 0 5px;
+                    cursor: pointer;
+                    span{
+                        font-size: 12px;
+                    }
+                }
+                .item__price:hover{
+                    background: #ffc107;
+                }
+            
+            }
+        }
+
+        .list__product{
+            @include phone{
+                padding: 0 !important;
+            }
+            .suggest__list{
+                .listResult{
+                    display: flex;
+                    .loadResult{
+                        display: flex;
+                        justify-content: center;
+                        width: 100%;
+                    }
+                }
+            }
+        }
     }
-}
-.item__price:hover{
-    background: #ffc107;
 }
 
 .activePrice{
     background: #ffc107;
 }
 
-.item__address {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 13px;
+.provider{
+    @extend .addrReceive;
+    .item__address {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+    }
 }
 
 .priceBetween, .findProd{

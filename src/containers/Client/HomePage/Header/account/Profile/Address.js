@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import ChangeAddress from './ChangeAddress';
 import './style.scss'
 
 function Address(props) {
     const user = useSelector(state => state.auth.user);
-
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
+    const [modalAddress, setModalAddress] = useState(false);
 
+    // default address
     useEffect(() => {
         if(user){
             setName(user.username);
@@ -17,13 +19,21 @@ function Address(props) {
         }
     }, [user])
 
+    const addPlace = () => {
+        setModalAddress(!modalAddress);
+    }
+
     return (
         <div>
+            <ChangeAddress
+                isOpen={modalAddress}
+                toggle={addPlace}
+            />
+
             <div className='myAddress'>
                 <h5>Địa chỉ của tôi</h5>
-                <button type="button" className="btn btn-primary">
-                    <i className="fa fa-plus mr-3" aria-hidden="true"></i>
-                    Thêm địa chỉ mới
+                <button onClick={()=>addPlace()} type="button" className="btn btn-primary">
+                    <i className="fa fa-plus mr-3" aria-hidden="true"></i>Thêm địa chỉ mới
                 </button>
             </div>
             <hr/>
@@ -37,12 +47,12 @@ function Address(props) {
                                 <b className='text-uppercase'>{name}</b>
                                 <span className='badge badge-info ml-3'>Mặc định</span> 
                             </>
-                            : 'Chưa có địa chỉ...'}
+                            : 'Chưa đặt tên...'}
                         </h6>
                     </div>
                     <div className='d-flex'>
                         <span className='col-4'>Số điên thoại: </span>
-                        <span>{address ? phone : 'Chưa có địa chỉ...'}</span>
+                        <span>{address ? phone : 'Chưa có sdt...'}</span>
                     </div>
                     <div className='d-flex'>
                         <span className='col-4'>Địa chỉ:</span> 

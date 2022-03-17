@@ -56,22 +56,18 @@ const Order = (props) => {
     return (
         <div className="orderDetail col-md-6">
             <div className="info">
-                <h4 className="prodName">{order && order.name ? order.name :'loading...'}</h4>
+                <h4 className="prodName">{order?.name ? order.name :'loading...'}</h4>
                 <Rate />
                 <span className="text-muted ml-4">
-                    <small className='mr-2'>Đã bán</small>
-                    {
-                        order && order.productData && order.productData && order.productData.total ?
-                        order.productData.total  : 0
-                    }
+                    <small className='mr-2'>Đã bán 0</small>
                 </span>
             </div>
 
             <div className="price">
                 <div className="priceDetail">
-                    <h4>{numberFormat(order && order.price ? order.price :'loading')}</h4>
+                    <h4>{numberFormat(order?.price ? order.price : 'loading')}</h4>
                     <span className="badge badge-pill badge-warning mx-4"> -1 % </span>
-                    <strike className="text-danger">{numberFormat(order && order.sale ? order.sale :'loading...')}</strike>
+                    <strike className="text-danger">{numberFormat(order?.sale ? order.sale :'loading...')}</strike>
                 </div>
             </div>
 

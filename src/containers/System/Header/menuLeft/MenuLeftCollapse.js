@@ -9,7 +9,7 @@ function MenuLeftCollapse(props) {
             <div className="dashboard bg-dark menuLeftCollapse">
                 <div>TIKI</div>
                 {
-                    MenuAdmin && MenuAdmin.length > 0 &&
+                    MenuAdmin?.length > 0 &&
                     MenuAdmin.map((item, index) => {
                         return(
                             <NavLink to={item.path} activeClassName="active" className ="menu-left" exact key={index}>

@@ -1,5 +1,24 @@
 @import '../../../../../../assets/css/variable.scss';
 
+.infoAccount{
+    display: flex;
+    @include phone{
+        padding: 10px 0;
+        flex-direction: column;
+    }
+    .menuUser{
+        padding: 15px 0;
+        @include phone{
+            padding: 0 15px;
+        }
+    }
+    .contentUser{
+        background: white;
+        padding: 20px;
+        @include phone{
+        }
+    }
+}
 .myAddress{
     display: flex;
     justify-content: space-between;

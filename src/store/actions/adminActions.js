@@ -79,7 +79,7 @@ export const fetchPosition = () => {
     }
 }
 
-//create a new user
+// add user
 export const createNewUser = (data) => {
     return async(dispatch, getState) => {
         try {
@@ -97,8 +97,7 @@ export const createNewUser = (data) => {
     }
 }
 
-
-//get all users
+// get all users
 export const fetchAllUser = () => {
     return async(dispatch, getState) => {
         try {
@@ -116,7 +115,7 @@ export const fetchAllUser = () => {
     }
 }
 
-//delete user 
+// delete user 
 export const deleteUser = (userId) => {
     return async(dispatch, getState) => {
         try {
@@ -134,7 +133,7 @@ export const deleteUser = (userId) => {
     }
 }
 
-//edit user
+// edit user
 export const editUser = (data) => {
     return async(dispatch, getState) => {
         try {

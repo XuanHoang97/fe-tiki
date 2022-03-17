@@ -1,7 +1,7 @@
 import React  from 'react';
+import image from '../../../../assets/images/taoanhdep_dicungtiki.jpg';
 import {NavLink} from 'react-router-dom';
 import {MenuAdmin} from './DataMenu';
-import image from '../../../../assets/images/taoanhdep_dicungtiki.jpg';
 import './MenuLeft.scss'
 
 const MenuLeft = (props) => {
@@ -9,7 +9,7 @@ const MenuLeft = (props) => {
 
     return (
         <div className='menu-horizon' style={{width: widthMenuLeft}}>
-            <div className="module">
+            <div className="logoAdmin">
                 <img src={image} alt="" />
             </div>
 
@@ -18,7 +18,7 @@ const MenuLeft = (props) => {
                 <div className='menu-horizon-header'>
                     <div className="dashboard my-4">
                         {
-                            MenuAdmin && MenuAdmin.length > 0 &&
+                            MenuAdmin?.length > 0 &&
                             MenuAdmin.map((item, index) => {
                                 return (
                                     <div key={index}>
@@ -26,12 +26,12 @@ const MenuLeft = (props) => {
                                             className ="menu-left" 
                                             activeClassName="active" 
                                         >
-                                            <div className="d-flex align-items-center itemModule">
+                                            <div className="itemModule">
                                                 <i className={`${item.icon}`}></i>
                                                 <span>{item.name}</span>
                                             </div>
                                             {
-                                                item.subMenu && item.subMenu.length > 0 &&
+                                                item.subMenu?.length > 0 &&
                                                 <span><i className="fas fa-angle-right small"></i></span>
                                             }
                                         </NavLink>

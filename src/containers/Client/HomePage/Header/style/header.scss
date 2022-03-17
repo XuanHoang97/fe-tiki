@@ -10,7 +10,7 @@ img {
     z-index: 1000;
     @include phone {
         position: relative;
-        padding: 5px 0;
+        padding: 10px 0;
         background: #6000a9;
     }
     .container {
@@ -79,9 +79,6 @@ img {
          
                 .navbar-collapse {
                     .navbar-nav {
-                        @include phone {
-                        }
-                      
                         .search {
                             @include phone{
                                 position: sticky;
@@ -94,6 +91,7 @@ img {
                                 height: 32px;
                                 @include phone {
                                     height: 30px;
+                                    border-radius: 5px;
                                 }
                             }
                             .search-form {
@@ -253,15 +251,8 @@ img {
                             width: 150px;
                             cursor: pointer;
                             color: white;
-                            .accTitle{
-                                @include phone{
-                                    display: none;
-                                }
-                            }
                             @include phone {
-                                position: absolute;
-                                top: -2.2rem;
-                                right: 5rem;
+                                display: none;
                             }
                         }
 
@@ -304,14 +295,15 @@ img {
 
                         .cart {
                             font-size: 14px;
+                            color: white;
                             cursor: pointer;
                             @include phone {
                                 width: 35px;
                                 position: absolute;
                                 top: -2rem;
-                                right: 0rem;
+                                right: -5px;
                             }
-                            @extend .account;
+
                             .itemCart{
                                 color: white;
                                 text-align: right;
@@ -319,11 +311,8 @@ img {
                                     .numbCart{
                                         position: absolute;
                                         top: -0.9rem;
-                                        left: 4.7rem;
-                                        @include phone{
-                                            top: -0.5rem !important;
-                                            left: 1rem !important;
-                                        }
+                                        left: 01rem;
+                                        
                                     }
                                 }
                             }
@@ -406,9 +395,14 @@ img {
                     display: block !important;
                     position: absolute;
                     top: 12px;
-                    left: 80px;
-                    width: 160px;
+                    left: 70px;
+                    width: 60px;
                     z-index: 10000000;
+                    img{
+                        @include phone{
+                            width: 100% !important;
+                        }
+                    }
                 }
             }
 
@@ -425,12 +419,6 @@ img {
             }
         }
     }
-}
-
-
-.form-login:hover .dropdown-menu {
-    display: block;
-    margin-top: 0;
 }
 
 ::placeholder {

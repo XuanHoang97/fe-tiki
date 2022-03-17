@@ -75,7 +75,6 @@ function Voucher(props) {
                     </div>
                 </TabPane>
                 <TabPane tabId="2">Updating...</TabPane>
-                <TabPane tabId="3"> updating... </TabPane>
             </TabContent>
         </>
     );

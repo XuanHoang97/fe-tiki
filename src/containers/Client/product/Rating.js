@@ -14,7 +14,7 @@ const Rating = (props) => {
                     <div className='numbStar'>
                         <span className='text-primary mr-2' style={{fontSize: '27px'}}>
                             {
-                                detailProduct.ratingData && detailProduct.ratingData.length > 0 ?
+                                detailProduct.ratingData?.length > 0 ?
                                 averageStarRating(detailProduct.ratingData) : 0
                             }
                         </span>
@@ -23,14 +23,14 @@ const Rating = (props) => {
                             <ReactStars
                                 count={5}
                                 value={
-                                    detailProduct.ratingData && detailProduct.ratingData.length > 0 ?
+                                    detailProduct.ratingData?.length > 0 ?
                                     parseInt(averageStarRating(detailProduct.ratingData)) : 0
                                 }
                                 edit={false}
                                 size={24}
                                 color2={'#ffd700'}
                             />
-                            <div className='small'>{detailProduct && detailProduct.ratingData ? detailProduct.ratingData.length : 0} nhận xét</div>
+                            <div className='small'>{detailProduct?.ratingData ? detailProduct.ratingData.length : 0} nhận xét</div>
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@ const Rating = (props) => {
             </div>
 
             {
-                detailProduct && detailProduct.ratingData &&
+                detailProduct?.ratingData &&
                 detailProduct.ratingData.map((item, index) => {
                     return (
                         <div className='list-vote' key={index}>
@@ -127,7 +127,7 @@ const Rating = (props) => {
             }
 
             {
-                detailProduct && detailProduct.ratingData && detailProduct.ratingData.length === 0 &&
+                detailProduct?.ratingData?.length === 0 &&
                 <div className='text-center my-2'>Chưa có nhận xét nào</div>
             }
         </div>

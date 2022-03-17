@@ -6,6 +6,10 @@
     .imgDesc{
         display: flex;
         margin: 10px 0 0 0;
+        cursor: pointer;
+        .activeImg{
+            border: 3px solid green;
+        }
     }
 }
 .headDesc{
@@ -43,6 +47,12 @@
         display: flex;
         justify-content: end;
         border-bottom: 1px solid rgb(223, 223, 223);
+        .calcOrder{
+            .item-pay{
+                display: flex;
+                justify-content: space-between;
+            }
+        }
     }
 
 }
@@ -51,7 +61,7 @@
     background: #f8f9fa;
     margin: 15px 0 !important;
     @include phone{
-        margin: 0 !important;
+        margin-bottom: 40px !important;
     }
     .container{
         .paymentDetail{

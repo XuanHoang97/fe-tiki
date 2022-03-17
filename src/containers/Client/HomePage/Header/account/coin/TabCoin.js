@@ -8,7 +8,7 @@ function TabCoin(props) {
         <Nav tabs className='tabCoin'>
             <NavItem>
                 <NavLink className={activeTab === '1' ? 'active' : ''} onClick={() => setActiveTab('1')}>
-                    <div>TẤT CẢ LỊCH SỬ</div>
+                    <div>TẤT CẢ</div>
                 </NavLink>
             </NavItem>
 

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { path } from 'utils';
 import { useSelector } from 'react-redux';
 import Header from '../HomePage/Header/Header';
+import Footer from '../HomePage/Footer/Footer';
 
 const OrderSuccess = (props) => {
     const user = useSelector(state => state.auth.user);
@@ -13,7 +14,7 @@ const OrderSuccess = (props) => {
 
     return (
         <>
-        <Header />
+            <Header />
             <div className="order_success bg-light " >
                 <div className="py-3 container">
                     <div className="bg-white p-0 py-3 text-center"style={{backgroundImage: `url('https://ss-images.saostar.vn/2017/01/26/1067301/giphy-1.gif')`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'}} >
@@ -50,6 +51,7 @@ const OrderSuccess = (props) => {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 }

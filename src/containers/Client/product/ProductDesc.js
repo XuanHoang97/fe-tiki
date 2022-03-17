@@ -3,8 +3,8 @@ import Moment from 'react-moment';
 
 // ReadMore, readLess
 const ReadMore = ({ children }) => {
-    const [isOpen, setIsOpen] = useState(false);
     const text = children;
+    const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
 
     return (
@@ -12,7 +12,7 @@ const ReadMore = ({ children }) => {
             <div className="read-more-content">
                 {isOpen ? children :
                     <span className="character__special" 
-                        dangerouslySetInnerHTML={{ __html: text?.props?.dangerouslySetInnerHTML?.__html&& 
+                        dangerouslySetInnerHTML={{ __html: text?.props?.dangerouslySetInnerHTML?.__html && 
                         text.props.dangerouslySetInnerHTML.__html.substr(0,300)}}>
                     </span>
                 }
@@ -27,7 +27,6 @@ const ReadMore = ({ children }) => {
         </div>
     );
 };
-
 
 const ProductDesc = (props) => {
     const {detailProduct} = props;

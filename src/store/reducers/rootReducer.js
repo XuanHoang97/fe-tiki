@@ -6,6 +6,7 @@ import adminReducer from "./adminReducer";
 import clientReducer from "./clientReducer";
 import authReducer from "./authReducer";
 import ratingReducer from "./ratingReducer";
+import discountReducer from './discountReducer';
 
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import storage from 'redux-persist/lib/storage';
@@ -30,4 +31,5 @@ export default (history) => combineReducers({
     client: clientReducer,
     auth: authReducer,
     rating: ratingReducer,
+    discount: discountReducer,
 })

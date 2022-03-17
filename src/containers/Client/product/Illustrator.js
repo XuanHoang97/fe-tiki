@@ -1,21 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Style.scss';
 
 const Illustrator = ({detailProduct}) => {
+    const [imgProduct, setImgProduct] = useState('');
+    const [active, setActive] = useState('');
+    const [styleActive, setStyleActive] = useState('');
+
+    const changeImage = (img) => {
+        setImgProduct(img.images);
+        setActive(img.id);
+        setStyleActive('activeImg');
+    }
+
     return (
         <div className="descProduct col-md-3">
-            <div>
-                <img className="w-75" src={detailProduct && detailProduct.image ? detailProduct.image :'loading...'} alt="loading" />
-                <div className="content-left" style={{backgroundImage: `url(${detailProduct && detailProduct.image ? detailProduct.image : ''})` }}></div>
-            </div>
+            {
+                imgProduct ?
+                <img className="w-75" src={imgProduct} alt="loading" />
+                :
+                <img className="w-75" src={detailProduct?.image ? detailProduct.image :'loading...'} alt="loading" />
+            }
             <hr/>
             <div className="imgDesc">
                 {
-                    detailProduct && detailProduct.picturesData ?
+                    detailProduct?.picturesData ?
                     detailProduct.picturesData.map((item, index) => {
                         return (
-                            <div className="col-3 p-1" key={index}>
-                                <img className="w-100" src={item.images} alt="loading" />
+                            <div className={`col-3 p-1 ${active === item.id ? styleActive :'' }`} 
+                                key={index} onClick = {()=>changeImage(item)}>
+                                <img className="w-75" src={item.images} alt="loading" />
                             </div>
                         )
                     })

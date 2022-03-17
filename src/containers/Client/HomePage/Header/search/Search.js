@@ -38,7 +38,7 @@ export default function Search() {
     }
 
     return (
-        <div className="search input-group align-items-center">
+        <div className="search input-group">
             <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}

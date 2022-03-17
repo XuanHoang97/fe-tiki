@@ -35,7 +35,7 @@ function OrderLogin(props) {
                 <div className="itemCart">
                     <i className="fas fa-shopping-cart mr-4" style={{ fontSize: '17px' }}>
                         <span className="numbCart badge badge-pill badge-danger">
-                            { carts && carts.length>0 ? carts.length : '' }
+                            { carts && carts.length>0 ? carts.length : 0 }
                         </span>
                     </i>
                 </div>

@@ -14,6 +14,7 @@ import InfoPayment from './InfoPayment';
 import TikiXu from '../coin/TikiXu';
 import Activity from '../notification/Activity';
 import Voucher from '../voucher/Voucher';
+import Footer from 'containers/Client/HomePage/Footer/Footer';
 
 const InfoAccount = () => {
     const dispatch = useDispatch();
@@ -37,8 +38,8 @@ const InfoAccount = () => {
         <div className='bg-light'>
             <Header />
             <Router>
-                <div className='container my-3 d-flex'>
-                    <div className='col-2 py-3 p-0'>
+                <div className='infoAccount container'>
+                    <div className='menuUser col-md-2'>
                         <div className='avatar d-flex'>
                             <img src={user && user.image ? user.image : 'http://res.cloudinary.com/do7qmg6jr/image/upload/v1645518444/sbgr7wd9k1t9v8f0cwvm.jpg'} className='rounded-circle' style={{width:'60px', height:'60px'}}  alt="" />
                             <div className='info'>
@@ -91,7 +92,7 @@ const InfoAccount = () => {
                         }
                     </div>
 
-                    <div className='col-10 bg-white p-4'>
+                    <div className='contentUser col-md-10'>
                         <Switch>
                             <Route exact path={path.ACCOUNT} component={Profile} />
                             <Route path={path.CHANGE_PASSWORD} component={ChangePassword} />
@@ -107,6 +108,7 @@ const InfoAccount = () => {
                     </div>
                 </div>
             </Router>
+            <Footer />
         </div>
     );
 }

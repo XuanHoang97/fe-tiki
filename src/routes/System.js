@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import { connect } from "react-redux";
 import { Redirect, Route, Switch } from 'react-router-dom';
 import * as actions from "./../store/actions";
+import { connect } from "react-redux";
 import UserManage from '../containers/System/Admin/UserManage';
 import ProductManage from '../containers/System/Product/ProductManage';
 import Dashboard from '../containers/System/Dashboard/Dashboard';
@@ -19,13 +19,14 @@ import VoteManage from 'containers/System/Vote/VoteManage';
 import Discount from 'containers/System/discount/Discount';
 import Bill from 'containers/System/Sale/Bill';
 import { path } from 'utils';
-import './style.scss'
+import './style.scss';
 
 const System = (props) => {
     const {systemMenuPath, isLoggedIn,userInfo, processLogout} = props;
     const [menuLeft, setMenuLeft] = useState(true);
     const [widthMenuRight, setWidthMenuRight] = useState('82%');
     const [widthMenuLeft] = useState('18%');
+    const avatar = 'https://avatars.githubusercontent.com/u/38268599?v=4';
 
     const toggleMenu = () => {
         setMenuLeft(!menuLeft);
@@ -38,7 +39,7 @@ const System = (props) => {
 
     return (
         <div className='main-container'>
-            <div className='module d-flex'>
+            <div className='module'>
                 {isLoggedIn && menuLeft && <MenuLeft widthMenuLeft = {widthMenuLeft} /> }
                 {!menuLeft ? <MenuLeftCollapse /> : ''}                
             
@@ -51,8 +52,8 @@ const System = (props) => {
                         <div className="account">
                             <Notification />
                             <div className="acc">
-                                <img src="https://avatars.githubusercontent.com/u/38268599?v=4" alt="" className="rounded-circle mr-2" />
-                                <span>{userInfo && userInfo.firstName ? userInfo.firstName : 'Hoang'} 
+                                <img src={avatar} alt="" className="rounded-circle mr-2" />
+                                <span>{userInfo?.firstName ? userInfo.firstName : 'Hoang'} 
                                     <i className="fas fa-caret-down small"></i>
                                 </span>
                             </div>

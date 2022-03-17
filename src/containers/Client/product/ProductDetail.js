@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getDetailProduct } from "services/userService";
-import * as actions from "store/actions";
 import Specifications from "./Specifications";
-import Illustrator from "./Illustrator";
-import ProductDesc from "./ProductDesc";
 import ProductSimilar from "./ProductSimilar";
 import Header from "../HomePage/Header/Header";
+import Footer from "../HomePage/Footer/Footer";
+import * as actions from "store/actions";
+import Illustrator from "./Illustrator";
+import ProductDesc from "./ProductDesc";
 import Rating from "./Rating";
 import Order from "./Order";
-import Footer from "../HomePage/Footer/Footer";
 import './Style.scss'
 
 const ProductDetail = ({ match }) => {

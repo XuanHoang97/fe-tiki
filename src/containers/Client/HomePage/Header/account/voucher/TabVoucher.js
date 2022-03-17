@@ -5,7 +5,7 @@ function TabVoucher(props) {
     const { activeTab, setActiveTab } = props;
     
     return (
-        <Nav tabs>
+        <Nav tabs className='tabVoucher'>
             <NavItem>
                 <NavLink className={activeTab === '1' ? 'active' : ''} onClick={() => setActiveTab('1')}>
                     <div>Tất cả</div>
@@ -14,12 +14,6 @@ function TabVoucher(props) {
 
             <NavItem>
                 <NavLink className={activeTab === '2' ? 'active' : ''} onClick={() => setActiveTab('2')}>
-                    <div>Shop</div>
-                </NavLink>
-            </NavItem>
-
-            <NavItem>
-                <NavLink className={activeTab === '3' ? 'active' : ''} onClick={() => setActiveTab('3')}>
                     <div>Mới nhất</div>
                 </NavLink>
             </NavItem>

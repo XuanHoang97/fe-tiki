@@ -14,7 +14,6 @@ export const fetchAllNews = () => {
     return async(dispatch, getState) => {
         try {
             let res = await getAllNewsAndEvent('ALL');
-
             if (res && res.data.errCode === 0) {
                 dispatch({
                     type: actionTypes.FETCH_ALL_NEWS,

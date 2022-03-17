@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { numberFormat } from 'components/Formatting/FormatNumber';
 import { filterPrice, getTypeSort, keywordSearch, searchResult, URLSearch } from 'store/actions';
 import { Nav, NavItem, NavLink, TabContent, TabPane} from 'reactstrap';
+import {useHistory} from 'react-router-dom';
 import Rate from '../../Section/Rate';
 import Header from '../Header';
 import Filter from './Filter';
-import {useHistory} from 'react-router-dom';
+import Footer from '../../Footer/Footer';
 
 function Result(props) {
     const dispatch = useDispatch();
@@ -55,8 +56,8 @@ function Result(props) {
     return (
         <div className="bg-light">
             <Header />
-            <div className="Result__search container py-3">
-                <div className="product bg-white d-flex">
+            <div className="Result__search container">
+                <div className="resultSearch">
                     <Filter
                         keyword={keyword}
                         priceFrom={priceFrom}
@@ -66,44 +67,42 @@ function Result(props) {
                         filterProduct={filterProduct}
                     />
 
-                    <div className="list__product col-10">
+                    <div className="list__product col-md-10">
                         <div className="suggest__list">
-                            <div>
-                                <div className="result py-3">
-                                    <h5 className="m-0">Kết quả tìm kiếm cho 
-                                        <span className='text-primary'>
-                                            `{keyword ? keyword :'Undefine'}`
-                                        </span>
-                                        : {result && result.length ? result.length : 0} <small>Kết quả</small>
-                                    </h5>
-                                </div>
-                                
-                                <Nav tabs className='mb-4'>
-                                    <NavItem className='d-flex'>
-                                        {
-                                            sortType && sortType.length > 0 &&
-                                            sortType.map((item, index) => {
-                                                return (
-                                                    <NavLink
-                                                        key={index}
-                                                        className={`${activeTab === item.id ? 'active' : ''}`}
-                                                        onClick={() => sort(item) }
-                                                    >
-                                                        {item.valueVi}
-                                                    </NavLink>
-                                                )
-                                            })
-                                        }
-                                    </NavItem>
-                                </Nav>
+                            <div className="result py-3">
+                                <h5 className="m-0">Kết quả tìm kiếm cho 
+                                    <span className='text-primary'>
+                                        `{keyword ? keyword :'Undefine'}`
+                                    </span>
+                                    : {result && result.length ? result.length : 0} <small>Kết quả</small>
+                                </h5>
                             </div>
+                            
+                            <Nav tabs className='mb-4'>
+                                <NavItem className='d-flex'>
+                                    {
+                                        sortType && sortType.length > 0 &&
+                                        sortType.map((item, index) => {
+                                            return (
+                                                <NavLink
+                                                    key={index}
+                                                    className={`${activeTab === item.id ? 'active' : ''}`}
+                                                    onClick={() => sort(item) }
+                                                >
+                                                    {item.valueVi}
+                                                </NavLink>
+                                            )
+                                        })
+                                    }
+                                </NavItem>
+                            </Nav>
 
                             <TabContent activeTab={activeTab}>
                                 <TabPane tabId={activeTab}>
-                                    <div className="list d-flex">
+                                    <div className="listResult">
                                     {
                                         loading ?
-                                        <div className="d-flex justify-content-center w-100 bg-light">
+                                        <div className="loadResult">
                                             <div className="spinner-border spinner-border-sm text-primary mr-2"></div>
                                             <span className="">Loading...</span>
                                         </div>
@@ -136,6 +135,7 @@ function Result(props) {
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }

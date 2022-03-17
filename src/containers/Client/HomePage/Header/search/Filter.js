@@ -28,14 +28,14 @@ function Filter(props) {
     }
 
     return (
-        <div className="sort col-2 border-right">
-            <div className="addr border-bottom py-3">
+        <div className="filterSearch col-md-2">
+            <div className="addrReceive">
                 <h6>ĐỊA CHỈ NHẬN HÀNG</h6>
                 <div className='font-weight-bold'>Ba Đình, Hà Nội</div>
                 <div className="text-primary"> Đổi địa chỉ</div>
             </div>
 
-            <div className="price border-bottom py-3">
+            <div className="filterPrice">
                 <h6>GIÁ CẢ</h6>
                 {
                     rangePrice && rangePrice.length > 0 &&
@@ -73,7 +73,7 @@ function Filter(props) {
                 <button onClick={()=> filterProduct()} type="button" className="findProd btn btn-warning">Áp dụng</button>
             </div>
 
-            <div className="address border-bottom py-3">
+            <div className="provider">
                 <h6>NƠI BÁN</h6>
                 {
                     suppliers && suppliers.length >0 ?

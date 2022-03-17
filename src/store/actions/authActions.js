@@ -9,10 +9,8 @@ import {
     filterNotify,
     RatingProduct,
     getPointUser,
-    viewRatingProduct
 } from '../../services/authService';
 import { toast } from "react-toastify";
-// import { GetOrderByUser } from '../actions/clientAction';
 
 // Logout
 export const logoutAccount = () => {

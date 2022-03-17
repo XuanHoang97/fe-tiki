@@ -1,3 +1,4 @@
+@import '../../../../../../assets/css/variable.scss';
 .list-voucher{
     display: flex;
     gap: 10px;
@@ -43,9 +44,7 @@
     }
 
     .voucher-info{
-        .voucher-value{
-
-        }
+        
         .voucher-right{
             display: flex;
             flex-direction: column;
@@ -67,4 +66,9 @@
     justify-content: center;
     align-items: center;
     margin: 25px 0;
+}
+
+.tabVoucher{
+    @include TabItem;
+    margin-bottom: 20px;
 }

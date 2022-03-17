@@ -19,7 +19,7 @@ const ProductSimilar = ({similarProducts}) => {
             <h6 className="mt-4 mb-2 m-0">SẢN PHẨM TƯƠNG TỰ</h6>
               <Slider {...settings} className="bg-white" >
               {
-                similarProducts && similarProducts.length > 0 ?
+                similarProducts?.length > 0 ?
                 similarProducts.map((item, index) => {
                   return (
                     <div className="prod-similar bg-white p-3" key={index}>

@@ -6,6 +6,7 @@ import { useHistory } from 'react-router';
 import Header from '../HomePage/Header/Header';
 import { path } from 'utils';
 import './style.scss'
+import Footer from '../HomePage/Footer/Footer';
 
 const Cart = (props) => {
     const cartsUser = useSelector(state => state.client.cartsUser);
@@ -130,6 +131,7 @@ const Cart = (props) => {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 }

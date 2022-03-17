@@ -75,7 +75,7 @@ function Profile(props) {
     }
 
     return (
-        <div className=''>
+        <>
             <h5>Hồ Sơ Của Tôi </h5>
             <span className='text-secondary'>Quản lý thông tin hồ sơ để bảo mật tài khoản</span>
             <hr/>
@@ -190,7 +190,7 @@ function Profile(props) {
                     <span className='text-secondary'>Dụng lượng file tối đa 1 MB Định dạng:.JPEG, .PNG</span>
                 </div>
             </form>
-        </div>
+        </>
     );
 }
 export default Profile;

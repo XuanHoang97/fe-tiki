@@ -16,6 +16,9 @@
     padding: 15px;
     margin: 15px 0;
     background: white;
+    @include phone{
+        padding: 0;
+    }
     .titleMail{
         .imgMail{
             @include phone{
