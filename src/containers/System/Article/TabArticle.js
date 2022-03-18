@@ -8,7 +8,7 @@ function TabArticle(props) {
         <Nav tabs className='tabArticle'>
             <NavItem>
                 <NavLink className={activeTab === '1' ? 'active' : ''} onClick={() => setActiveTab('1')}>
-                    <div>Multiple file</div>
+                    <div>Ảnh mô tả</div>
                 </NavLink>
             </NavItem>
 

@@ -3,8 +3,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import { path } from 'utils';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import { GetAllNotify, getUser, logoutAccount } from 'store/actions';
+import { getUser, logoutAccount } from 'store/actions';
 import {GetUser} from './../../../../../services/authService';
+import { numberFormat } from 'components/Formatting/FormatNumber';
 
 const Account = () => {
     const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const Account = () => {
     const history = useHistory();
     const [hoverAccount, setHoverAccount] = useState(false);
     const user = useSelector(state => state.auth.user);
+    const TikiPoint = useSelector(state => state.auth.point);
 
     // get user
     useEffect(() => {
@@ -67,17 +69,27 @@ const Account = () => {
                         user ?
                         <div className='acc-detail'>
                             <div onClick={()=>profile(user.id)} className="item-acc">
-                                <img src="https://icones.pro/wp-content/uploads/2021/02/icone-utilisateur-vert.png" className='mr-2' style={{width: '8%'}}  alt="" />
+                                <img src="https://icones.pro/wp-content/uploads/2021/02/icone-utilisateur-vert.png" alt="" />
                                 Tài khoản của tôi
                             </div>
 
                             <div onClick={()=>history.push(path.ORDER)} className="item-acc">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNU-ZEXVPgvlrEPzhaAIFjyRUaqglcuKdkx4lgk2r-ryshxRle56ba4S4SaUoI0GTf2Iw&usqp=CAU" className='mr-2' style={{width: '8%'}}  alt="" />
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNU-ZEXVPgvlrEPzhaAIFjyRUaqglcuKdkx4lgk2r-ryshxRle56ba4S4SaUoI0GTf2Iw&usqp=CAU" alt="" />
                                 Đơn hàng của tôi
+                            </div>
+
+                            <div onClick={()=>history.push(path.TIKI_XU)} className="item-acc">
+                                <img src="https://cf.shopee.vn/file/a0ef4bd8e16e481b4253bd0eb563f784" alt="" />
+                                Tiki xu: <span className='text-warning ml-2'>{TikiPoint ? numberFormat(TikiPoint.point) : 0 }</span>
+                            </div>
+
+                            <div onClick={()=>history.push(path.VOUCHER)} className="item-acc">
+                                <img src="https://cf.shopee.vn/file/84feaa363ce325071c0a66d3c9a88748" alt="" />
+                                Kho Voucher
                             </div>
                             
                             <div onClick={Logout} className="item-acc">
-                                <img src="https://www.clipartmax.com/png/middle/147-1470587_logout-logout-icon-red-png.png" className='mr-2' style={{width: '8%'}}  alt="" />           
+                                <img src="https://www.clipartmax.com/png/middle/147-1470587_logout-logout-icon-red-png.png" alt="" />           
                                 Đăng xuất
                             </div>
                         </div>

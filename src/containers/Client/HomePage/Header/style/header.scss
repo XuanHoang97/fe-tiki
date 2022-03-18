@@ -296,6 +296,10 @@ img {
                                     border-bottom: 1px solid rgb(236, 236, 236);
                                     display: flex;
                                     align-items: center;
+                                    img{
+                                        margin-right: 10px;
+                                        width: 8%;
+                                    }
                                 }
                                 .item-acc:hover {
                                     background: orange;

@@ -77,8 +77,6 @@ const ModalOrderNow = (props) => {
         }else{
             toast.error('Đặt hàng thất bại');
         } 
-
-        // console.log('newcart', newCart, totalMoney(newCart)-saleOff, data.username, data.phone, data.address, data.email, data.note, data.delivery, data.payment);
     }
     
     return (    

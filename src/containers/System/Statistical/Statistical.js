@@ -72,9 +72,63 @@ const StatisticalManage = (props) => {
                             </table>
                         </div>
                     </div>
+                    <hr/>
+                    <div className="chartSale d-flex">
+                        <div className='col-md-6  border-right'>
+                            <h5>Số lượng đơn hàng</h5>
+                            <div>updating chart...</div>
+                        </div>
+                        <div className='col-md-6'>
+                            <h5>Doanh thu</h5>
+                            <div>Updating chart ...</div>
+                        </div>
+                    </div>
                 </TabPane>
-                <TabPane tabId="2">Updating...</TabPane>
-                <TabPane tabId="3"> updating... </TabPane>
+                <TabPane tabId="2">
+                    <h5>Thống kê sản phẩm bán ra</h5>
+                    <div className="listProductSold d-flex">
+                        <div className="col-md-6 border-right">
+                        <table className="table table-striped table-bordered table-hover">
+                                <thead className="text-white">
+                                    <tr>
+                                        <td>Tên sản phẩm</td>
+                                        <td>Số lượng bán ra</td>
+                                        <td>Giá bán</td>
+                                        <td>Thành tiền</td>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                    <tr>
+                                        <td>Vertu 2022</td>
+                                        <td>10</td>
+                                        <td>98.567.678 đ</td>
+                                        <td>98.000.000 đ</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nokia 1280</td>
+                                        <td>20</td>
+                                        <td>198.567 đ</td>
+                                        <td>108.000 đ</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div className="col-md-6">
+                            <h5>Chart product sold</h5>
+                            <div>updating...</div>
+                        </div>
+                    </div>
+                    <hr/>
+                    <h5>Sản phẩm bán chạy</h5>
+                    <div>uppadting chart...</div>
+
+                </TabPane>
+                <TabPane tabId="3">
+                    <h5>Khách hàng tiềm năng</h5>   
+                    <div>updating...</div>
+                </TabPane>
             </TabContent>
         </div>
     );

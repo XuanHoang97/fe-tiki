@@ -110,7 +110,7 @@ const UserManage = (props) => {
                             <tbody key={index}>
                                 <tr>
                                     <td>{index + 1}</td>
-                                    <td style={{width:'6%'}}><img src={item.image} className='w-100 rounded-circle' alt="" /> </td>
+                                    <td style={{width:'5%'}}><img src={item.image} alt="" /> </td>
                                     <td className='text-primary'>{item.username}</td>
                                     <td>{item.email}</td>
                                     <td>{item.phoneNumber}</td>

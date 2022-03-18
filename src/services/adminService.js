@@ -16,9 +16,14 @@ const getAllDiscount = (discountId) => {
     return axios.get(`${path.PORT}/get-discount?id=${discountId}`);
 }
 
+// Send bill
+const sendBill = (data) => {
+    return axios.post(`${path.PORT}/send-bill`, data);
+}
+
 export { 
     getAllRating,
     addDiscount,
-    getAllDiscount
-
+    getAllDiscount,
+    sendBill
 };

@@ -14,16 +14,15 @@ function TabStatistical(props) {
 
             <NavItem>
                 <NavLink className={activeTab === '2' ? 'active' : ''} onClick={() => setActiveTab('2')}>
-                    <div>Khách hàng</div>
+                    <div>Sản phẩm</div>
                 </NavLink>
             </NavItem>
 
             <NavItem>
                 <NavLink className={activeTab === '3' ? 'active' : ''} onClick={() => setActiveTab('3')}>
-                    <div>Sản phẩm</div>
+                    <div>Khách hàng</div>
                 </NavLink>
             </NavItem>
-
         </Nav>
     );
 }

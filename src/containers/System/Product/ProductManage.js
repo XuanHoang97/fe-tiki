@@ -99,7 +99,7 @@ const ProductManage = (props) => {
                             return(
                                 <tr key={index}>
                                     <td>{index + 1}</td>
-                                    <td style={{width:'6%'}}><img src={item.image} className='w-100' alt="" /> </td>
+                                    <td style={{width:'5%'}}><img src={item.image} alt="" /> </td>
                       
                                     <td className='text-primary'>{item.name}</td>
                                     <td>{numberFormat(item.price)}</td>
