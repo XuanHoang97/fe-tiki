@@ -6,8 +6,8 @@ img {
 
 .slide {
     #carousel-example-1z {
-        @include phone{
-            padding: 0;
+        @include tablet{
+            height: 170px !important;
         }
         .control {
             li{
@@ -45,6 +45,9 @@ img {
     }
     .banner{
         @include phone {
+            display: none;
+        }
+        @include tablet{
             display: none;
         }
     }

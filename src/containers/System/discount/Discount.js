@@ -5,6 +5,7 @@ import AddDiscount from './AddDiscount';
 import TabDiscount from './TabDiscount';
 import { AddGift, GetAllDiscount } from 'store/actions';
 import './style.scss';
+import { formatDateNew } from 'components/Formatting/FormatDate';
 
 const Discount = (props) => {
     const dispatch = useDispatch();
@@ -74,12 +75,13 @@ const Discount = (props) => {
                                     <tr>
                                         <td>STT</td>
                                         <td>Thông tin khuyến mãi</td>
+                                        <td>Giảm giá</td>
                                         <td>Áp dụng đơn</td>
                                         <td>Sử dụng</td>
                                         <td>Tối đa</td>
                                         <td>Bắt đầu</td>
                                         <td>Kết thúc</td>
-                                        <td>Người tạo</td>
+                                        <td>Trạng thái</td>
                                         <td>Tác vụ</td>
                                     </tr>
                                 </thead>
@@ -92,12 +94,13 @@ const Discount = (props) => {
                                                 <tr key={index}>
                                                     <td>{index + 1}</td>
                                                     <td className='text-primary'>{item.info}</td>
-                                                    <td>{item.applyTo}</td>
+                                                    <td>{item.discount}k</td>
+                                                    <td>{item.applyTo}k</td>
                                                     <td>{item.Used}</td>
                                                     <td>{item.Max}</td>
-                                                    <td>{item.discountStart}</td>
-                                                    <td>{item.discountEnd}</td>
-                                                    <td>{item.creator}</td>
+                                                    <td>{formatDateNew(item.discountStart)}</td>
+                                                    <td>{formatDateNew(item.discountEnd)}</td>
+                                                    <td>{item.status}</td>
                                                     <td className='text-primary'>
                                                         <button className='btn btn-outline-secondary'>Ngừng</button>    
                                                         <button className='btn btn-outline-danger'>Huỷ</button>    
@@ -107,7 +110,7 @@ const Discount = (props) => {
                                         })
                                         :
                                         <tr>
-                                            <td colSpan={7}>Không có khuyến mãi</td>
+                                            <td colSpan={9}>Không có khuyến mãi</td>
                                         </tr>
                                     }
                                 </tbody>

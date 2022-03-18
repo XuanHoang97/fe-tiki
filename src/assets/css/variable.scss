@@ -6,20 +6,14 @@
     transform: $transforms;
 }
 
-@mixin pcLarge {
-    @media(max-width: 1440px) {
-        @content;
-    }
-}
-
 @mixin pc {
-    @media(max-width: 1024px) {
+    @media(min-width: 1024px) and (max-width: 1440px) {
         @content;
     }
 }
 
 @mixin tablet {
-    @media(max-width: 768px) {
+    @media(min-width: 768px) and (max-width: 980px) {
         @content;
     }
 }

@@ -114,6 +114,7 @@ const actionTypes = Object.freeze({
 
     ADD_DISCOUNT: 'ADD_DISCOUNT',
     FETCH_ALL_DISCOUNT: 'FETCH_ALL_DISCOUNT',
+    SAVE_DISCOUNT: 'SAVE_DISCOUNT'
     
 
 })

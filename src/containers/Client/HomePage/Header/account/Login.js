@@ -4,10 +4,10 @@ import { useForm } from "react-hook-form";
 import { path } from 'utils';
 import {useHistory} from 'react-router-dom';
 import { loginAcc } from 'services/authService';
-import './style.scss'
 import { useDispatch } from 'react-redux';
 import { getUser } from 'store/actions';
 import instance from '../../../../../axios';
+import './style.scss'
  
 const LoginAuth = (props) => {
     const { register, formState: { errors }, handleSubmit } = useForm();

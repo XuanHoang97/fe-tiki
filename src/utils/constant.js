@@ -6,7 +6,6 @@ export const path = {
     SYSTEM: '/system',
     SEARCH: '/search',
     PORT: 'http://localhost:2022',
-    NOTFOUND: '/404',
 
     // Authentication
     REGISTER: '/account/register',
@@ -19,6 +18,7 @@ export const path = {
     NOTIFICATION: '/user/notifications/order',
     TIKI_XU: '/user/tiki-xu',
     VOUCHER: '/user/voucher',
+    DISCOUNT_DETAIL: '/discount',
     DISCOUNT: '/user/notifications/discount',
     ACTIVITY: '/user/notifications/activity',
 

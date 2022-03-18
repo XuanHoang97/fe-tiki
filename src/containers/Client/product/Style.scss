@@ -63,6 +63,9 @@
     @include phone{
         margin-bottom: 40px !important;
     }
+    @include tablet{
+        margin-bottom: 50px !important;
+    }
     .container{
         .paymentDetail{
             .paymentInfo{

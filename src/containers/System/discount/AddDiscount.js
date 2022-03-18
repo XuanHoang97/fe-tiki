@@ -4,7 +4,8 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 const AddDiscount = (props) => {
     const {isOpen, toggle, handleAddDiscount} = props;
     const [info, setInfo] = useState('');
-    const [max, setDiscountMax] = useState(50);
+    const [discount, setDiscount] = useState(10);
+    const [Max, setDiscountMax] = useState(50);
     const [applyTo, setApplyTo] = useState('');
     const [discountStart, setDiscountStart] = useState('');
     const [discountEnd, setDiscountEnd] = useState('');
@@ -18,7 +19,8 @@ const AddDiscount = (props) => {
     const addGift = () => {
         handleAddDiscount({
             info,
-            max,
+            discount,
+            Max,
             applyTo,
             discountStart: formatDiscountStart,
             discountEnd: formatDiscountEnd,
@@ -41,11 +43,20 @@ const AddDiscount = (props) => {
                     </div>
                 </div>
 
+                <div className="infoDiscount d-flex">
+                    <span className="col-md-4">Giảm giá</span>
+                    <div className="form-group col-md-8">
+                      <input type="text" className="form-control" placeholder="thong tin khuyen mai giam gia" 
+                        value={discount} onChange={(e)=>setDiscount(e.target.value)}
+                      />
+                    </div>
+                </div>
+
                 <div className="numbDiscount d-flex">
                     <span className="col-md-4">Voucher tối đa</span>
                     <div className="form-group col-md-8">
                       <input type="text" className="form-control" placeholder="50" 
-                        value={max} onChange={(e)=>setDiscountMax(e.target.value)}
+                        value={Max} onChange={(e)=>setDiscountMax(e.target.value)}
                       />
                     </div>
                 </div>
@@ -74,7 +85,7 @@ const AddDiscount = (props) => {
                     </div>
                 </div>
 
-                <div className="discount d-flex">
+                <div className="discountType d-flex">
                     <span className="col-md-4" >Loại khuyến mãi</span>
                     <div className="form-group d-flex col-md-8">
                         <div className="form-check">

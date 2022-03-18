@@ -19,7 +19,7 @@ import LoginAuth from './Client/HomePage/Header/account/Login';
 import InfoAccount from './Client/HomePage/Header/account/Profile/InfoAccount';
 import Register from './Client/HomePage/Header/account/Register';
 import HomePage from './Client/HomePage/HomePage';
-import NotFound from './Client/HomePage/NotFound/Index';
+import Discount from './Client/HomePage/Header/account/voucher/Discount';
 import './App.scss';
 
 console.warn = () => {};
@@ -52,8 +52,8 @@ function App(props) {
                 {/* client  */}
                 <Route path={path.HOMEPAGE} component={HomePage} />
                 <Route path={path.DETAIL_PRODUCT} component={ProductDetail} />
-                <Route path={path.NOTFOUND} component={NotFound} />
                 <Route path={path.SEARCH} component={SearchResult} />
+                <Route path={path.DISCOUNT_DETAIL} component={Discount} />
 
                 {/* Authentication  */}
                 <Route path={path.REGISTER} component={Register} />

@@ -18,6 +18,10 @@
             overflow-x: auto;
             flex-wrap: nowrap !important;
         }
+        @include tablet{
+            overflow-x: auto;
+            flex-wrap: nowrap !important;
+        }
         .product--item {
             padding: 15px;
             div{

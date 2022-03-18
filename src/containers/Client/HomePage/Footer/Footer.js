@@ -21,15 +21,10 @@ const Footer = () => {
                     <div>Danh mục</div>
                 </div>
 
-                <div className='menu-item'>
-                    <i className="fa fa-heart fa-2x"></i>
-                    <div>Lướt</div>
-                </div>
-
-                <div className='menu-item'>
-                    <i className="fa fa-comments fa-2x"></i>
-                    <div>Chat</div>
-                </div>
+                <NavLink to={`${path.DISCOUNT_DETAIL}`} activeClassName='activeMenuMB' className='menu-item'>
+                    <i className="fa fa-tags fa-2x"></i>
+                    <div>Voucher</div>
+                </NavLink>
 
                 <NavLink to={`${path.ACCOUNT}`} activeClassName='activeMenuMB' className='menu-item'>
                     <i className="fa fa-user fa-2x"></i>

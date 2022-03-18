@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { TabContent, TabPane } from 'reactstrap';
 import TabVoucher from './TabVoucher';
+import { NavLink } from 'react-router-dom';
+import { path } from 'utils';
 import './style.scss';
 
 function Voucher(props) {
@@ -10,9 +12,9 @@ function Voucher(props) {
         <>
             <div className='overview-voucher'>
                 <h5>Ví voucher</h5>
-                <div>
+                <NavLink to={`${path.DISCOUNT_DETAIL}`}>
                     <span className='text-danger'>Tìm thêm voucher</span>
-                </div>
+                </NavLink>
             </div>
 
             <div className='search-voucher'>

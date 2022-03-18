@@ -11,7 +11,11 @@ img {
     @include phone {
         position: relative;
         padding: 10px 0;
-        background: #6000a9;
+        background: #530192;
+    }
+    @include tablet{
+        padding: 10px 0;
+        background: #530192;
     }
     .container {
         .row {
@@ -21,9 +25,7 @@ img {
             }
             .navbar {
                 justify-content: space-between !important;
-                @include tablet {
-                    padding: 0 !important;
-                }
+                padding: 0 !important;
                 a{
                     padding-left: 15px;
                     @include phone{
@@ -39,6 +41,9 @@ img {
                 }
                 .menu_ctg {
                     @include phone {
+                        display: none;
+                    }
+                    @include tablet{
                         display: none;
                     }
                     .category {
@@ -92,6 +97,11 @@ img {
                                 @include phone {
                                     height: 30px;
                                     border-radius: 5px;
+                                }
+                            }
+                            ::placeholder {
+                                @include phone{
+                                    color: #909090 !important;
                                 }
                             }
                             .search-form {
@@ -389,12 +399,13 @@ img {
             padding-bottom: 10px;
             margin-top: -0.75rem;
             @include tablet {
+                display: none;
             }
             .freeShip{
                 @include phone{
                     display: block !important;
                     position: absolute;
-                    top: 12px;
+                    top: 20px;
                     left: 70px;
                     width: 60px;
                     z-index: 10000000;
