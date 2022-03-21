@@ -1,23 +1,29 @@
 import React, { useEffect } from 'react';
-import Footer from 'containers/Client/HomePage/Footer/Footer';
-import Header from '../../Header';
-import { useSelector, useDispatch } from 'react-redux';
-import './style.scss'; 
-import { GetAllDiscount, SaveDiscount } from 'store/actions';
 import { formatDateNew } from 'components/Formatting/FormatDate';
+import Footer from 'containers/Client/HomePage/Footer/Footer';
+import { GetAllDiscount, GetDiscountUser, SaveDiscount } from 'store/actions';
+import { useSelector, useDispatch } from 'react-redux';
+import Header from '../../Header';
+import './style.scss'; 
 
 const Discount = () => {
     const dispatch = useDispatch();
     const vouchers = useSelector(state => state.discount.vouchers);
     const user = useSelector(state => state.auth.user);
+    const discounts = useSelector(state => state.auth.discounts);
 
     useEffect(() => {
         dispatch(GetAllDiscount());
+        document.title = 'Mã giảm giá';
     }, [dispatch]);
     
     useEffect(() => {
-        document.title = 'Mã giảm giá';
-    }, []);
+        let userId = user? user.id :null;
+        dispatch(GetDiscountUser(userId));
+    }, [dispatch, user]);
+
+
+    console.log('discount:', discounts);
 
     // save coupon
     const saveCoupon = (coupon) => {
@@ -25,6 +31,8 @@ const Discount = () => {
         dispatch(SaveDiscount(
             {
                 userId: userId,
+                discountId: coupon.id,
+                discountCode: coupon.discountCode,
                 info: coupon.info,
                 code: coupon.code,
                 applyTo: coupon.applyTo,
@@ -34,8 +42,8 @@ const Discount = () => {
                 status: coupon.status,
             }
         ));
-
-        console.log('save coupon', coupon, coupon.info, coupon.applyTo, coupon.discount, coupon.discountStart, coupon.discountEnd, coupon.status, userId);
+        
+        // console.log('save coupon: ', userId, coupon.id, coupon.discountCode, coupon.info, coupon.applyTo, coupon.discount, coupon.discountStart, coupon.discountEnd, coupon.status);
     }
 
     return (
@@ -63,20 +71,12 @@ const Discount = () => {
                                             <div>Đơn tốI thiểu {item.applyTo}k</div>
                                             <span className='small text-secondary'>HSD: {formatDateNew(item.discountEnd)}</span>
                                             <div className='small text-secondary'>Đã dùng {item.Used}/{item.Max}, 
-                                            có liệu lực từ {formatDateNew(item.discountStart)}</div>
+                                            có hiệu lực từ {formatDateNew(item.discountStart)}</div>
                                         </div>
 
                                         <div className='voucher-right text-right'>
-                                            {
-                                            !item.status === 'active' ?
-                                                <button disabled className='btn btn-secondary'>
-                                                    <span>Đã lưu</span>
-                                                </button>
-                                                :
-                                                <button onClick={()=> saveCoupon(item)} className='btn btn-warning'>
-                                                    <span>Lưu</span>
-                                                </button>
-                                            }
+                                            {/* <button className='btn btn-secondary'>Đã lưu</button> */}
+                                            <button className='btn btn-warning' onClick={() => saveCoupon(item)}>Lưu</button>
                                             <span className='text-primary'>Điều kiện</span>
                                         </div>
                                     </div>

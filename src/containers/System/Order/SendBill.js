@@ -5,6 +5,7 @@ import { numberFormat } from 'components/Formatting/FormatNumber';
 
 const SendBill = (props) => { 
     const {isOpen, toggle, bill, sendBill} = props;
+
     
     // send Bill
     const Bill = () => {
@@ -19,7 +20,6 @@ const SendBill = (props) => {
             status: bill.status,
         })
         toggle();
-        // console.log('gui hoa don khach hang: ', bill.name, bill.code, bill.username, bill.name);
     }
 
     return (

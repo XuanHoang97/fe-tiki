@@ -1,14 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TabContent, TabPane } from 'reactstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import { numberFormat } from 'components/Formatting/FormatNumber';
+import { formatDateNew } from 'components/Formatting/FormatDate';
+import ReactPaginate from 'react-paginate';
+import { GetBill } from 'store/actions';
 import TabBill from './TabBill';
-import './style.scss'
+import './style.scss';
 
 const Bill = (props) => {
+    const dispatch = useDispatch();
     const [activeTab, setActiveTab] = useState('1');
+    const Bills = useSelector(state => state.order.Bills);
+    useEffect(() => {
+        dispatch(GetBill());
+    }, [dispatch]);
+
+    //pagination
+    const [pageNumber, setPageNumber] = useState(0);
+    const billPerPage = 5;
+    const pagesVisited = pageNumber * billPerPage;
+    const pageCount = Math.ceil(Bills.length / billPerPage);
+    const changePage = ({ selected }) => {
+        setPageNumber(selected);
+    };
 
     return (
         <div className='Bill'>
-            <h5>Hoá đơn</h5>
+            <div className='billHeader'>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIOVkwC2h6PD5RTotWCpIlDo4FvyCr5hadR3wR9uYb79xzACB0NbfVy5Le1eXJp0BAcLQ&usqp=CAU" style={{width:'4%'}} alt="" />
+                <div className='billTitle'>Hoá đơn</div>
+            </div>
             <TabBill
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
@@ -16,43 +38,68 @@ const Bill = (props) => {
 
             <TabContent activeTab={activeTab} className='detailBill' >
                 <TabPane tabId="1" className='allBill'>
-                <div className='list-bill'>
-                    <table className="table table-striped table-bordered table-hover">
-                        <thead className="text-white">
-                            <tr>
-                                <td>STT</td>
-                                <td>Mã hoá đơn</td>
-                                <td>Mã Đơn hàng</td>
-                                <td>Khách hàng</td>
-                                <td>Sản phẩm</td>
-                                <td>SL</td>
-                                <td>Tổng tiền</td>
-                                <td>ThờI gian thanh toán</td>
-                                <td>Thanh toán</td>
-                                <td>Trạng thái</td>
-                                <td>Tác vụ</td>
-                            </tr>
-                        </thead>
-                        
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td className='text-primary'>HD001</td>
-                                <td>DH001</td>
-                                <td>Lê Xuân Hoàng</td>
-                                <td>Sản phẩm 1</td>
-                                <td>1</td>
-                                <td>100.000 đ</td>
-                                <td>...</td>
-                                <td>Tiền mặt</td>
-                                <td><span className="badge badge-success">Đã thanh toán</span></td>
-                                <td>
-                                    <button className="btn btn-primary">Xem</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                    <div className='list-bill'>
+                        <table className="table table-striped table-bordered table-hover">
+                            <thead className="text-white">
+                                <tr>
+                                    <td>STT</td>
+                                    <td>Mã hoá đơn</td>
+                                    <td>Mã Đơn hàng</td>
+                                    <td>Khách hàng</td>
+                                    <td>Sản phẩm</td>
+                                    <td>SL</td>
+                                    <td>Tổng tiền</td>
+                                    <td>ThờI gian thanh toán</td>
+                                    <td>Thanh toán</td>
+                                    <td>Trạng thái</td>
+                                    <td>Tác vụ</td>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                {
+                                    Bills?.length > 0 ?
+                                    Bills.slice(pagesVisited, pagesVisited + billPerPage).map((item, index) => {
+                                        return (
+                                            <tr key={item.id}>
+                                                <td>{index + 1}</td>
+                                                <td>{item.billCode}</td>
+                                                <td>{item.code}</td>
+                                                <td>{item.username}</td>
+                                                <td>{item.name}</td>
+                                                <td>{item.qty}</td>
+                                                <td>{numberFormat(item.total)}</td>
+                                                <td>{formatDateNew(item.datePayment)}</td>
+                                                <td>{item.payment}</td>
+                                                <td>
+                                                    {item.status === 'S4' && <span className='badge badge-success'>Đã thanh toán</span>}
+                                                </td>
+                                                <td>
+                                                    <button className='btn btn-outline-primary'>Xem</button>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })
+                                    :
+                                    <tr>
+                                        <td colSpan={11}>Chưa có hoá đơn nào...</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <ReactPaginate
+                        previousLabel={"<"}
+                        nextLabel={">"}
+                        pageCount={pageCount}
+                        onPageChange={changePage}
+                        containerClassName={"paginationBttns"}
+                        previousLinkClassName={"previousBttn"}
+                        nextLinkClassName={"nextBttn"}
+                        disabledClassName={"paginationDisabled"}
+                        activeClassName={"paginationActive"}
+                    />
                 </TabPane>
                 <TabPane tabId="2">Updating...</TabPane>
                 <TabPane tabId="3"> updating... </TabPane>

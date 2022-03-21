@@ -3,6 +3,12 @@
 .multimedia{
     background: white;
     padding: 10px;
+    .multimedia-header{
+        @include headerAdmin;
+        .mediaTitle{
+            @include titleAdmin;
+        }
+    }
     .tabMedia{
         margin-bottom: 15px;
         @include phone{

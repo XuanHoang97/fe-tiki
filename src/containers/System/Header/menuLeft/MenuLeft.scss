@@ -28,7 +28,7 @@
 }
 
 .menuLeftCollapse{
-    div{
+    .logoCollapse{
         text-align: center;
         padding: 10px 0;
         color: rgb(204, 218, 255);
@@ -36,15 +36,16 @@
         font-weight: bold;
     }
     height: 100vh;
+    @include phone{
+        display: none;
+    }
 }
 
 .menu-horizon{
     color: white;
     padding: 0px;
     border-left: 1px solid rgb(69, 141, 141);
-    @include phone{
-        display: none;
-    }
+   
     .sideNav{
         background: #0c1e35;
         height: 100%;
@@ -81,5 +82,23 @@
     }
 }
 
+.fullMenuLeft{
+    width: 100% !important;
+}
+
+.menuLeft{
+    width: 18% !important;
+    @include phone{
+        width: 40% !important;
+        position: absolute;
+        height: 100%;
+        z-index: 100;
+        top: 3rem;
+    }
+}
+
+.rightContent{
+    width: 82% !important;
+}
 
 

@@ -106,7 +106,7 @@ const DescProduct = (props) => {
                                     :
                                     // imgDefault
                                     <div className="col-12">
-                                        <img src="https://via.placeholder.com/150" alt=""  />
+                                        <img src="https://via.placeholder.com/150" className="w-25" alt=""  />
                                     </div>
                                 }
                             </div>

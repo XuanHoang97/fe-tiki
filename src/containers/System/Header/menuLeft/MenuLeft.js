@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import image from '../../../../assets/images/taoanhdep_dicungtiki.jpg';
 import {NavLink} from 'react-router-dom';
 import {MenuAdmin} from './DataMenu';
@@ -6,9 +6,9 @@ import './MenuLeft.scss'
 
 const MenuLeft = (props) => {
     const {widthMenuLeft} = props;
-
+        
     return (
-        <div className='menu-horizon' style={{width: widthMenuLeft}}>
+        <div className={`menu-horizon ${widthMenuLeft}`}>
             <div className="logoAdmin">
                 <img src={image} alt="" />
             </div>

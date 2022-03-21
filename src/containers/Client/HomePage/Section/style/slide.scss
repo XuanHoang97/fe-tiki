@@ -1,9 +1,5 @@
 @import "./../../../../../assets/css/variable.scss";
 
-img {
-    max-width: 100%;
-}
-
 .slide {
     #carousel-example-1z {
         @include tablet{
@@ -29,6 +25,11 @@ img {
             opacity: 1 !important;
         }
         .carousel-control-prev {
+            left: 15px;
+            width: 4%;
+            top: 100px;
+            opacity: 0.2;
+            height: 40px;
             @include phone {
                 top: 55px !important;
             }
@@ -37,7 +38,11 @@ img {
             opacity: 1 !important;
         }
         .carousel-control-next {
-            @extend .carousel-control-prev;
+            right: 0;
+            width: 4%;
+            top: 100px;
+            opacity: 0.2;
+            height: 40px;
         }
         .carousel-control-next:hover {
             opacity: 1 !important;

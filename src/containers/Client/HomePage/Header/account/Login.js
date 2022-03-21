@@ -111,20 +111,6 @@ const LoginAuth = (props) => {
                         </button>
 
                         <Link to={path.REGISTER} className='text-primary small text-end'>Chưa có tài khoản ?</Link> 
-                        <div className="text-center mt-3 mb-2 small">Hoặc Tiếp tục bằng</div>
-                        <div className="login-social d-flex justify-content-center">
-                            <div className="item-social">
-                                <Link to={path.HOMEPAGE}><img src="https://salt.tikicdn.com/ts/upload/3a/22/45/0f04dc6e4ed55fa62dcb305fd337db6c.png" alt="" /></Link>
-                            </div>
-
-                            <div className="item-social">
-                                <Link to={path.HOMEPAGE}><img src="https://salt.tikicdn.com/ts/upload/1c/ac/e8/141c68302262747f5988df2aae7eb161.png" alt="" /></Link>
-                            </div>
-
-                            <div className="item-social">
-                                <Link to={path.HOMEPAGE}><img src="https://salt.tikicdn.com/ts/upload/98/37/86/517cfc05f04466b3118357a1fb4182c8.png" alt="" /></Link>
-                            </div>
-                        </div>
                         <div className="small mt-2 m-3 text-center">Bằng việc tiếp tục, bạn đã chấp nhận <Link to={path.HOMEPAGE}>điều khoản sử dụng</Link> </div>         
                     </form>
                 </div>

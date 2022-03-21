@@ -17,12 +17,10 @@ export const fetchAllSlide = () => {
     return async(dispatch, getState) => {
         try {
             let res = await getAllSlides('ALL');
-            if (res && res.data.errCode === 0) {
-                dispatch({
-                    type: actionTypes.FETCH_ALL_SLIDE,
-                    payload: res.data.slides.reverse()
-                })
-            }
+            dispatch({
+                type: actionTypes.FETCH_ALL_SLIDE,
+                payload: res.data.slides.reverse()
+            })
         } catch (e) {
             console.log('fetchAllSlideFailed error', e)
         }
@@ -83,17 +81,15 @@ export const DeleteSlide = (id) => {
     }
 }
 
-//get all special category
+//get special category
 export const SpecialCategory = () => {
     return async(dispatch, getState) => {
         try {
             let res = await getAllSpecialCategory('ALL');
-            if (res && res.data.errCode === 0) {
-                dispatch({
-                    type: actionTypes.FETCH_SPECIAL_CATEGORY,
-                    payload: res.data.specialCategories.reverse()
-                })
-            }
+            dispatch({
+                type: actionTypes.FETCH_SPECIAL_CATEGORY,
+                payload: res.data.specialCategories.reverse()
+            })
         } catch (e) {
             console.log('fetchAllSpecialCategoryFailed error', e)
         }
@@ -154,17 +150,15 @@ export const DeleteSpecialCategory = (id) => {
     }
 }
 
-//get all status slide
+//get status slide
 export const getStatusSlide = () => {
     return async(dispatch, getState) => {
         try {
             let res = await getAllCodeService('ACTIVE');
-            if (res && res.data.errCode === 0) {
-                dispatch({
-                    type: actionTypes.FETCH_ALL_STATUS_SLIDE,
-                    payload: res.data.data
-                });
-            }
+            dispatch({
+                type: actionTypes.FETCH_ALL_STATUS_SLIDE,
+                payload: res.data.data
+            });
         } catch (e) {
             console.log('getStatusSlideFailed error', e)
         }

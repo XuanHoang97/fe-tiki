@@ -3,6 +3,12 @@
 .userManage{
     background: white;
     padding: 10px;
+    .user-head{
+        @include headerAdmin;
+        .userTitle{
+            @include titleAdmin;
+        }
+    }
     .addUser{
         display: flex;
         justify-content: space-between;

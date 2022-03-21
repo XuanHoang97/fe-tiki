@@ -23,7 +23,12 @@
             flex-wrap: nowrap !important;
         }
         .product--item {
+            width: 20%;
             padding: 15px;
+            @include phone {
+                width: 50%;
+                padding: 0;
+            }
             div{
                 cursor: pointer;
             }

@@ -3,6 +3,12 @@
 .voteManage{
     background: white;
     padding: 10px;
+    .vote-header{
+        @include headerAdmin;
+        .voteTitle{
+            @include titleAdmin;
+        }
+    }
     .tabVote{
         @include phone{
             display: grid;

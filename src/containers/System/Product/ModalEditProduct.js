@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-
-import * as actions from '../../../store/actions';
+import { fetchAllCategory, fetchSupplierProduct } from '../../../store/actions';
 
 const ModalEditProduct  = (props) => {
     const [name, setName] = useState('');
@@ -28,9 +27,8 @@ const ModalEditProduct  = (props) => {
             setSupplier_id(product.supplier_id);
             setPreviewImg(product.image);
         }
-        dispatch(actions.fetchStatusProduct());
-        dispatch(actions.fetchAllCategory());
-        dispatch(actions.fetchSupplierProduct());
+        dispatch(fetchAllCategory());
+        dispatch(fetchSupplierProduct());
     }, [dispatch, props.currentProduct]);
 
 

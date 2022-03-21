@@ -114,6 +114,11 @@ const ArticleManage = (props) => {
 
     return ( 
         <div className="articleManage">
+            <div className="article-header">
+                <img src="https://cdn.iconscout.com/icon/free/png-256/article-43-267416.png" style={{width:'3%'}} alt=""/>
+                <div className='article-title'>Bài viết</div>
+            </div>
+
             <TabArticle
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}

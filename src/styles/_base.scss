@@ -1,8 +1,8 @@
- body, html {
+body, html {
     font-family: $fontmain;
     font-size: $base-size - 2px;
     height: 100vh;
-    overflow: hidden;
+    overflow-y: auto;
     background: #f8f9fa;
 }
 
@@ -15,10 +15,6 @@
   padding: 10px 15px;
 }
 
-#root{
-  height:100vh;
-  overflow-y: auto;
-}
 .badge {
   padding: 3px 5px !important;
 }

@@ -21,9 +21,15 @@ const sendBill = (data) => {
     return axios.post(`${path.PORT}/send-bill`, data);
 }
 
+// get bill
+const getBill = (billId) => {
+    return axios.get(`${path.PORT}/get-bill?id=${billId}`);
+}
+
 export { 
     getAllRating,
     addDiscount,
     getAllDiscount,
-    sendBill
+    sendBill,
+    getBill
 };

@@ -20,7 +20,7 @@ function TabMultimedia(props) {
 
             <NavItem>
                 <NavLink className={activeTab === '3' ? 'active' : ''} onClick={() => setActiveTab('3')}>
-                    <div>Hình ảnh và video</div>
+                    <div>Ảnh và video</div>
                 </NavLink>
             </NavItem>
         </Nav>

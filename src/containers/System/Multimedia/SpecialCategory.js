@@ -4,16 +4,14 @@ import { CRUD_ACTIONS } from 'utils';
 
 function SpecialCategory(props) {
     const { 
-        category, categoryId, setCategoryId, action, saveCategorySpecial,
-        categoryName, setCategoryName,
-        changeImageCategory, categoryPreviewImg,
-        removeImg, specialCategories, editSpecialCategory
+        category, categoryId, setCategoryId, action, saveCategory,categoryName, setCategoryName,
+        changeImageCategory, categoryPreviewImg, specialCategories, editSpecialCategory
     } = props;
 
     return (
         <TabPane tabId="2">
             <form className='list-category-special'
-            onSubmit={saveCategorySpecial}
+            onSubmit={saveCategory}
             encType="multipart/form-data"
             >
                 <div className='formCategory d-flex justify-content-between col-12 p-0'>
@@ -55,7 +53,6 @@ function SpecialCategory(props) {
                             {
                             categoryPreviewImg ?
                             <div 
-                                onClick={() =>removeImg()} 
                                 className="col-md-12" style={{textAlign: 'end', position: 'absolute', right: '-1.5rem', top: '-1rem'}}>
                                 <i className="far fa-times-circle text-danger"></i>
                             </div> 
@@ -78,7 +75,6 @@ function SpecialCategory(props) {
                             <td>STT</td>
                             <td>Ảnh</td>
                             <td>Tên</td>
-                            <td>Ngày đăng</td>
                             <td>Thao tác</td>
                         </tr>
                     </thead>
@@ -89,9 +85,8 @@ function SpecialCategory(props) {
                                 return(
                                     <tr key={index}>
                                         <td>{index + 1}</td>
-                                        <td style={{width:'5%'}}><img src={item.image} alt="" /> </td>
+                                        <td style={{width:'5%'}}><img src={item.image} className="w-100" alt="" /> </td>
                                         <td className='text-primary'>{item.name}</td>
-                                        <td>{Date()}</td>
                                         <td className='d-flex'>
                                             <button onClick={()=> editSpecialCategory(item)} type="button" className="btn text-primary  mr-3">
                                                 <i className="fas fa-edit"></i>

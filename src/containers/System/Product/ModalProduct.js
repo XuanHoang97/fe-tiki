@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import * as actions from '../../../store/actions';
+import { fetchAllCategory, fetchSupplierProduct } from '../../../store/actions';
 
 const ModalProduct = (props) => {
     const [name, setName] = useState('');
@@ -18,9 +18,8 @@ const ModalProduct = (props) => {
     const listSupplier = useSelector(state => state.admin.supplier);
 
     useEffect(() => {
-        dispatch(actions.fetchStatusProduct());
-        dispatch(actions.fetchAllCategory());
-        dispatch(actions.fetchSupplierProduct());
+        dispatch(fetchAllCategory());
+        dispatch(fetchSupplierProduct());
     }, [dispatch]);
 
     //reset form

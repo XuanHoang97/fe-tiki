@@ -3,6 +3,12 @@
 .newManage{
     background: white;
     padding: 10px;
+    .news-header{
+        @include headerAdmin;
+        .news-title{
+            @include titleAdmin;
+        }
+    }
     .addNews{
         display: flex;
         align-items: center;

@@ -1,11 +1,12 @@
 import React, { useState, useEffect} from 'react';
 import { TabContent, TabPane } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { AddGift, GetAllDiscount } from 'store/actions';
+import { formatDateNew } from 'components/Formatting/FormatDate';
 import AddDiscount from './AddDiscount';
 import TabDiscount from './TabDiscount';
-import { AddGift, GetAllDiscount } from 'store/actions';
+import ReactPaginate from 'react-paginate';
 import './style.scss';
-import { formatDateNew } from 'components/Formatting/FormatDate';
 
 const Discount = (props) => {
     const dispatch = useDispatch();
@@ -27,6 +28,15 @@ const Discount = (props) => {
         }));
     }
 
+    //pagination
+    const [pageNumber, setPageNumber] = useState(0);
+    const voucherPerPage = 5;
+    const pagesVisited = pageNumber * voucherPerPage;
+    const pageCount = Math.ceil(vouchers.length / voucherPerPage);
+    const changePage = ({ selected }) => {
+        setPageNumber(selected);
+    };
+
     return (
         
         <div className='Discount'>
@@ -37,10 +47,10 @@ const Discount = (props) => {
             />
 
             <div className="addDiscount">
-                <div className='d-flex align-items-center'>
+                <div className='discountHeader'>
                     <img src="https://img.freepik.com/free-vector/sales-promotion-cartoon-web-icon-marketing-strategy-rebate-advertising-discount-offer-low-price-idea-clearance-sale-customer-attraction-vector-isolated-concept-metaphor-illustration_335657-2752.jpg?size=338&ext=jpg" 
                     style={{width: '10%'}} className="mr-2"   alt=""/>
-                    <h5>Khuyến mãi</h5>
+                    <div className='discountTitle'>Khuyến mãi ({vouchers?.length ? vouchers.length : 0})</div>
                 </div>
 
                 <div className="addUser">
@@ -89,7 +99,7 @@ const Discount = (props) => {
                                 <tbody>
                                     {
                                         vouchers?.length >0 ?
-                                        vouchers.map((item, index) => {
+                                        vouchers.slice(pagesVisited, pagesVisited + voucherPerPage).map((item, index) => {
                                             return (
                                                 <tr key={index}>
                                                     <td>{index + 1}</td>
@@ -117,6 +127,18 @@ const Discount = (props) => {
                             </table>
                         </div>
                     </div>
+                    
+                    <ReactPaginate
+                        previousLabel={"<"}
+                        nextLabel={">"}
+                        pageCount={pageCount}
+                        onPageChange={changePage}
+                        containerClassName={"paginationBttns"}
+                        previousLinkClassName={"previousBttn"}
+                        nextLinkClassName={"nextBttn"}
+                        disabledClassName={"paginationDisabled"}
+                        activeClassName={"paginationActive"}
+                    />
                 </TabPane>
             </TabContent>
         </div>

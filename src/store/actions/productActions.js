@@ -21,19 +21,17 @@ export const fetchProducts = () => {
     return async(dispatch, getState) => {
         try {
             let res = await getAllProduct('ALL');
-            if (res && res.data.errCode === 0) {
-                dispatch({
-                    type: actionTypes.FETCH_PRODUCTS,
-                    payload: res.data.products.reverse()
-                })
-            }
+            dispatch({
+                type: actionTypes.FETCH_PRODUCTS,
+                payload: res.data.products.reverse()
+            })
         } catch (e) {
             toast.error('fetch all product error !')
         }
     }
 }
 
-//create a new product
+//create product
 export const CreateNewProduct = (data) => {
     return async(dispatch, getState) => {
         try {
@@ -87,34 +85,15 @@ export const DeleteProduct = (productId) => {
     }
 }
 
-//fetch status product
-export const fetchStatusProduct = () => {
-    return async(dispatch, getState) => {
-        try {
-            let res = await getAllCodeService('STATUS_PRODUCT');
-            if(res && res.data.errCode === 0){
-                dispatch({
-                    type: actionTypes.FETCH_STATUS_PRODUCT,
-                    payload: res.data.data
-                })
-            }
-        } catch (e) {
-            toast.error('fetch status product error !')
-        }
-    }
-}  
-
 //fetch supplier product
 export const fetchSupplierProduct = () => {
     return async(dispatch, getState) => {
         try {
             let res = await getAllCodeService('PROVINCE');
-            if(res && res.data.errCode === 0){
-                dispatch({
-                    type: actionTypes.FETCH_SUPPLIER_PRODUCT,
-                    payload: res.data.data
-                })
-            }
+            dispatch({
+                type: actionTypes.FETCH_SUPPLIER_PRODUCT,
+                payload: res.data.data
+            })
         } catch (e) {
             toast.error('fetch supplier product error !')
         }

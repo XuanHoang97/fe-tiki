@@ -72,7 +72,11 @@ const ProductManage = (props) => {
             />
 
             <div className='addProduct'>
-                <div className="h5 text-dark mb-4">Quản lý sản phẩm (<small>{listProducts.length}</small>)</div>
+                <div className='product-head'>
+                    <img src="https://icon-library.com/images/icon-product/icon-product-18.jpg" style={{width: '5%'}} alt=""/>
+                    <div className="productTitle">Sản phẩm (<small>{listProducts.length}</small>)</div>
+                </div>
+
                 <div className="action">
                     <button onClick={() => handleAddNewProduct()} type="button" className="btn btn-success">
                         <i className="fas fa-plus"></i> Thêm sản phẩm
@@ -99,7 +103,7 @@ const ProductManage = (props) => {
                             return(
                                 <tr key={index}>
                                     <td>{index + 1}</td>
-                                    <td style={{width:'5%'}}><img src={item.image} alt="" /> </td>
+                                    <td style={{width:'5%'}}><img src={item.image} className="w-100"  alt="" /> </td>
                       
                                     <td className='text-primary'>{item.name}</td>
                                     <td>{numberFormat(item.price)}</td>

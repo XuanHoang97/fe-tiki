@@ -92,7 +92,14 @@ const  Dashboard = (props) => {
                     <div className="overview">
                         <div className='reportStatus'>
                             <img src="https://thumbs.dreamstime.com/b/dollar-banknote-stack-icon-money-cash-symbol-simple-style-financial-banking-infographic-design-element-183107279.jpg" className='illustrator' alt="" />
-                            <span className='number'>0</span>
+                            <span className='number'>
+                                {
+                                    filterOrder?.length > 0 ?
+                                    filterOrder.filter(item => item.status === 'S4').length
+                                    :
+                                    <span className='text-primary'>0</span>
+                                }    
+                            </span>
                             <span className='status'>Đơn chưa thanh toán</span>
                         </div>
 
@@ -100,7 +107,7 @@ const  Dashboard = (props) => {
                             <img src="https://static.vecteezy.com/system/resources/thumbnails/002/206/240/small/fast-delivery-icon-free-vector.jpg" className='illustrator' alt="" />
                             <span className='number'>
                                 {
-                                    filterOrder && filterOrder.length > 0 ?
+                                    filterOrder?.length > 0 ?
                                     filterOrder.filter(item => item.status === 'S3').length
                                     :
                                     <span className='text-primary'>0</span>
@@ -113,7 +120,7 @@ const  Dashboard = (props) => {
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_P9W5aTdeA3o7lq1gOyn3afbgJXrOAJ13ZQ&usqp=CAU" className='illustrator' alt="" />
                             <span className='number'>
                                 {
-                                    filterOrder && filterOrder.length > 0 ?
+                                    filterOrder?.length > 0 ?
                                     filterOrder.filter(item => item.status === 'S2').length
                                     + filterOrder.filter(item => item.status === 'S1').length
                                     :
@@ -127,7 +134,7 @@ const  Dashboard = (props) => {
                             <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/refund-2225859-1853324.png" className='illustrator' alt="" />
                             <span className='number'>
                                 {
-                                    filterOrder && filterOrder.length > 0 ?
+                                    filterOrder?.length > 0 ?
                                     filterOrder.filter(item => item.status === 'S6').length
                                     :
                                     <span className='text-primary'>0</span>
@@ -140,7 +147,7 @@ const  Dashboard = (props) => {
                             <img src="https://image.shutterstock.com/image-vector/shopping-cart-icon-cancel-illustration-260nw-1405493777.jpg" className='illustrator' alt="" />
                             <span className='number'>
                                 {
-                                    filterOrder && filterOrder.length > 0 ?
+                                    filterOrder?.length > 0 ?
                                     filterOrder.filter(item => item.status === 'S5').length
                                     :
                                     <span className='text-primary'>0</span>

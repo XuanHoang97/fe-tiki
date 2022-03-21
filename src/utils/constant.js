@@ -50,3 +50,8 @@ export const CRUD_ACTIONS = {
     CREATE: "CREATE",
     EDIT: "EDIT",
 };
+
+export const CRUD_CATEGORY= {
+    CREATE: "CREATE",
+    EDIT: "EDIT",
+};

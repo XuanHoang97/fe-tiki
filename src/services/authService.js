@@ -116,9 +116,18 @@ const getPointUser = (userId) => {
     });
 }
 
-// save discount
+// save discount user
 const saveDiscount = (data) => {
     return instance.post(`/save-discount`, data, {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    });
+}
+
+// get discount user
+const getDiscountUser = (userId) => {
+    return instance.get(`/get-discount-user?userId=${userId}`, {
         headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -141,5 +150,6 @@ export{
     filterNotify,
     RatingProduct,
     getPointUser,
-    saveDiscount
+    saveDiscount,
+    getDiscountUser
 }

@@ -1,46 +1,30 @@
-import React, { useEffect} from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { ConnectedRouter as Router } from 'connected-react-router';
+import React from 'react';
 import { userIsAuthenticated, userIsNotAuthenticated } from '../hoc/authentication';
+import { ConnectedRouter as Router } from 'connected-react-router';
+import { Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { history } from '../redux'
 import { path } from '../utils';
 
-import Home from '../routes/Home';
-import System from '../routes/System';
 import ProductDetail from './Client/product/ProductDetail';
-import Cart from './Client/cart/Cart';
-import Payment from './Client/payment/Payment';
 import OrderSuccess from './Client/Check_order/OrderSuccess';
 import VerifyEmail from './Client/Check_order/VerifyEmail';
 import SearchResult from './Client/HomePage/Header/search/Result';
-import Login from './System/Auth/Login';
 import LoginAuth from './Client/HomePage/Header/account/Login';
 import InfoAccount from './Client/HomePage/Header/account/Profile/InfoAccount';
+import Discount from './Client/HomePage/Header/account/voucher/Discount';
 import Register from './Client/HomePage/Header/account/Register';
 import HomePage from './Client/HomePage/HomePage';
-import Discount from './Client/HomePage/Header/account/voucher/Discount';
+import Payment from './Client/payment/Payment';
+import Login from './System/Auth/Login';
+import System from '../routes/System';
+import Cart from './Client/cart/Cart';
+import Home from '../routes/Home';
 import './App.scss';
 
 console.warn = () => {};
-function App(props) {    
-    
-    useEffect(() => {
-        handlePersistorState();
-    }, []);
-    
-    // save redux state to localStorage
-    const handlePersistorState = () => {
-        const { persistor } = props;
-        let { bootstrapped } = persistor.getState();
-        if (bootstrapped) {
-            if (props.onBeforeLift) {
-                Promise.resolve(props.onBeforeLift())
-                    .then(() =>  persistor.purge() )
-                    .catch(() => {  persistor.purge(); });
-            }else { persistor.purge(); }
-        }
-    }
+function App(props) {   
+
     return (
         <Router history={history}>
             <ToastContainer autoClose={2500} />
@@ -55,7 +39,7 @@ function App(props) {
                 <Route path={path.SEARCH} component={SearchResult} />
                 <Route path={path.DISCOUNT_DETAIL} component={Discount} />
 
-                {/* Authentication  */}
+                {/* Auth*/}
                 <Route path={path.REGISTER} component={Register} />
                 <Route path={path.LOGIN_AUTH} component={LoginAuth} />
                 

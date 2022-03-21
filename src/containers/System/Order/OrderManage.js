@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {TabContent, TabPane} from 'reactstrap';
-import VerifyOrder from './VerifyOrder';
-import ReactPaginate from "react-paginate";
 import { numberFormat } from 'components/Formatting/FormatNumber';
-import SortOrder from './SortOrder';
 import {formatDateNew } from 'components/Formatting/FormatDate';
 import { filterOrderByStatus, getAllOrder, getStatusOrder, SendBillCustomer, updateOrderStatus } from 'store/actions';
+import LoadingOverlay from 'react-loading-overlay';
+import ReactPaginate from "react-paginate";
+import VerifyOrder from './VerifyOrder';
+import SortOrder from './SortOrder';
 import TabOrder from './TabOrder';
 import SendBill from './SendBill';
 import './style.scss';
@@ -19,6 +20,7 @@ const OrderManage = (props) => {
     const [loadOrder, setLoadOrder] = useState(false);
     const [modalSendBill, setModalSendBill] = useState(false);
     const [BillCustomer, setBillCustomer] = useState([]);
+    const [loadBill, setLoadBill] = useState(false);
 
     //fetch data order
     const dispatch = useDispatch();
@@ -57,9 +59,13 @@ const OrderManage = (props) => {
         setBillCustomer(order);
     }
     const Bill = (data) => {
-        dispatch(SendBillCustomer({
-            ...data
-        }))
+        setLoadBill(true);
+        setTimeout(() => {
+            dispatch(SendBillCustomer({
+                ...data
+            }))
+            setLoadBill(false);
+        }, 3000);
     }
 
     //pagination
@@ -80,143 +86,150 @@ const OrderManage = (props) => {
                 verifyOrder={UpdateOrder}
             />
 
-            <SendBill
-                isOpen={modalSendBill}
-                toggle={sendBill}
-                bill={BillCustomer}
-                sendBill={Bill}
-            />
+            <LoadingOverlay active={loadBill} spinner text='Đang xử lý, vui lòng đợi trong giây lát .....' >
+                <SendBill
+                    isOpen={modalSendBill}
+                    toggle={sendBill}
+                    bill={BillCustomer}
+                    sendBill={Bill}
+                />
 
-            <div className="h5 text-dark mb-3">Quản lý đơn hàng</div>
-            <TabOrder
-                status={status}
-                activeTab={activeTab}
-                setActiveTab={setActiveTab}
-                order={order}
-            />
+                <h5 className="orderTitle mb-3">Đơn hàng</h5>
+                <TabOrder
+                    status={status}
+                    activeTab={activeTab}
+                    setActiveTab={setActiveTab}
+                    order={order}
+                />
 
-            <TabContent activeTab={activeTab} className = 'listOrder'>
-                <TabPane tabId={activeTab} className= 'tableOrder' >
-                    {
-                        activeTab === '4' ?
-                        <SortOrder
-                            StatusOrder={StatusOrder}
-                            status={status}
-                            FilterOrder={FilterOrder}
-                        /> : ''
-                    }
+                <TabContent activeTab={activeTab} className = 'listOrder'>
+                    <TabPane tabId={activeTab} className= 'tableOrder' >
+                        {
+                            activeTab === '4' ?
+                            <SortOrder
+                                StatusOrder={StatusOrder}
+                                status={status}
+                                FilterOrder={FilterOrder}
+                            /> : ''
+                        }
 
-                    <div className='list-order mt-3'>
-                        <table className="table table-striped table-bordered table-hover">
-                            <thead className="text-white">
-                                <tr>
-                                    <td>STT</td>
-                                    <td>Mã ĐH</td>
-                                    <td>Khách hàng</td>
-                                    <td>Sản phẩm</td>
-                                    <td>SL</td>
-                                    <td>Tổng tiền</td>
-                                    <td>Ngày đặt</td>
-                                    <td>Ngày giao dự kiến</td>
-                                    <td>Trạng thái</td>
-                                    <td>Tác vụ</td>
-                                </tr>
-                            </thead>
-                            
-                            <tbody>
-                                {
-                                    loadOrder ?
+                        <div className='list-order mt-3'>
+                            <table className="table table-striped table-bordered table-hover">
+                                <thead className="text-white">
                                     <tr>
-                                        <td colSpan="10" className="text-center">
-                                            <div className="spinner-border spinner-border-sm mr-2 text-primary" role="status">
-                                            </div>
-                                            <span>Loading...</span>
-                                        </td>
-                                    </tr> :
-
-                                    filterOrder && filterOrder.length > 0 ?
-                                    filterOrder.slice(pagesVisited, pagesVisited + orderPerPage)
-                                    .map((item, index) => {
-                                        return (
-                                            <tr key={index}>
-                                                <td>{index + 1}</td>
-                                                <td>{item.code}</td>
-                                                <td className='text-primary font-weight-bold'>{item.username}</td>
-                                                <td>{item.name}</td>
-                                                <td>{item.qty}</td>
-                                                <td>{numberFormat(item.total)}</td>
-                                                <td>{item.date ? formatDateNew(item.date) : ''}</td>
-                                                <td>{item.dateDelivery ? formatDateNew(item.dateDelivery) : ''}</td>
-                                                <td className='font-weight-bold small'>
-                                                    {item.status ==='S1' && <span className='badge badge-warning'>Chờ xử lý</span>}
-                                                    {item.status ==='S2' && <span className='badge badge-success'>Đã xác nhận</span>}
-                                                    {item.status ==='S3' && <span className='badge badge-primary'>Đang giao</span>}
-                                                    {item.status ==='S4' && <span className='badge badge-success'>Đã giao</span>}
-                                                    {item.status ==='S5' && <span className='badge badge-danger'>Đã hủy</span>}
-                                                    {item.status ==='S6' && <span className='badge badge-warning'>Hoàn trả</span>}
-                                                </td>
-                                                <td style={{width: '10%'}}>
-                                                    {
-                                                        item.status ==='S1' && 
-                                                        <>
-                                                            <span onClick={() => verifyOrder(item)} className="actionOrder text-primary">Xác nhận</span>
-                                                            <div className="actionOrder text-danger">Huỷ đơn</div>
-                                                        </>
-
-                                                    }
-
-                                                    {
-                                                        item.status ==='S2' && 
-                                                        <>
-                                                            <span onClick={() => verifyOrder(item)} className="actionOrder text-primary">Giao hàng</span>
-                                                            <div className="actionOrder text-danger">Huỷ đơn</div>
-                                                        </>
-
-                                                    }
-
-                                                    {
-                                                        item.status ==='S3' && 
-                                                        <>
-                                                            <span onClick={() => verifyOrder(item)} className="actionOrder text-primary">Chốt đơn</span>
-                                                            <div className="actionOrder text-danger">Huỷ đơn</div>
-                                                        </>
-
-                                                    }
-
-                                                    {
-                                                        item.status ==='S4' && 
-                                                        <span onClick={() => sendBill(item)}  className="actionOrder text-primary">Gửi hoá đơn</span>
-                                                    }
-
-                                                    {
-                                                        item.status ==='S5' && <span className="actionOrder text-primary">Mua lại</span>
-                                                    }
-                                                    <br/>
-                                                </td>
-                                            </tr>
-                                        )
-                                    })
-                                    :
-                                    <tr>
-                                        <td colSpan="10" className="text-center text-primary">Chưa có đơn hàng nào...</td>
+                                        <td>STT</td>
+                                        <td>Mã ĐH</td>
+                                        <td>Khách hàng</td>
+                                        <td>Sản phẩm</td>
+                                        <td>SL</td>
+                                        <td>Tổng tiền</td>
+                                        <td>Ngày đặt</td>
+                                        <td>Ngày giao dự kiến</td>
+                                        <td>Trạng thái</td>
+                                        <td>Tác vụ</td>
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                    <ReactPaginate
-                        previousLabel={"<"}
-                        nextLabel={">"}
-                        pageCount={pageCount}
-                        onPageChange={changePage}
-                        containerClassName={"paginationBttns"}
-                        previousLinkClassName={"previousBttn"}
-                        nextLinkClassName={"nextBttn"}
-                        disabledClassName={"paginationDisabled"}
-                        activeClassName={"paginationActive"}
-                    />
-                </TabPane>
-            </TabContent>
+                                </thead>
+                                
+                                <tbody>
+                                    {
+                                        loadOrder ?
+                                        <tr>
+                                            <td colSpan="10" className="text-center">
+                                                <div className="spinner-border spinner-border-sm mr-2 text-primary" role="status">
+                                                </div>
+                                                <span>Loading...</span>
+                                            </td>
+                                        </tr> :
+
+                                        filterOrder && filterOrder.length > 0 ?
+                                        filterOrder.slice(pagesVisited, pagesVisited + orderPerPage)
+                                        .map((item, index) => {
+                                            return (
+                                                <tr key={index}>
+                                                    <td>{index + 1}</td>
+                                                    <td>{item.code}</td>
+                                                    <td className='text-primary font-weight-bold'>{item.username}</td>
+                                                    <td>{item.name}</td>
+                                                    <td>{item.qty}</td>
+                                                    <td>{numberFormat(item.total)}</td>
+                                                    <td>{item.date ? formatDateNew(item.date) : ''}</td>
+                                                    <td>{item.dateDelivery ? formatDateNew(item.dateDelivery) : ''}</td>
+                                                    <td className='font-weight-bold small'>
+                                                        {item.status ==='S1' && <span className='badge badge-warning'>Chờ xử lý</span>}
+                                                        {item.status ==='S2' && <span className='badge badge-success'>Đã xác nhận</span>}
+                                                        {item.status ==='S3' && <span className='badge badge-primary'>Đang giao</span>}
+                                                        {item.status ==='S4' && <span className='badge badge-success'>Đã giao</span>}
+                                                        {item.status ==='S5' && <span className='badge badge-danger'>Đã hủy</span>}
+                                                        {item.status ==='S6' && <span className='badge badge-warning'>Hoàn trả</span>}
+                                                    </td>
+                                                    <td style={{width: '10%'}}>
+                                                        {
+                                                            item.status ==='S1' && 
+                                                            <>
+                                                                <span onClick={() => verifyOrder(item)} className="actionOrder text-primary">Xác nhận</span>
+                                                                <div className="actionOrder text-danger">Huỷ đơn</div>
+                                                            </>
+
+                                                        }
+
+                                                        {
+                                                            item.status ==='S2' && 
+                                                            <>
+                                                                <span onClick={() => verifyOrder(item)} className="actionOrder text-primary">Giao hàng</span>
+                                                                <div className="actionOrder text-danger">Huỷ đơn</div>
+                                                            </>
+
+                                                        }
+
+                                                        {
+                                                            item.status ==='S3' && 
+                                                            <>
+                                                                <span onClick={() => verifyOrder(item)} className="actionOrder text-primary">Chốt đơn</span>
+                                                                <div className="actionOrder text-danger">Huỷ đơn</div>
+                                                            </>
+
+                                                        }
+
+                                                        {
+                                                            item.status ==='S4' && item.bill === '0' &&
+                                                            <span onClick={() => sendBill(item)}  className="actionOrder text-primary">Gửi hoá đơn</span>
+                                                        }
+
+    {
+                                                            item.status ==='S4' && item.bill === '1' &&
+                                                            <span className="actionOrder text-success" disabled >Xem hoá đơn</span>
+                                                        }
+
+                                                        {
+                                                            item.status ==='S5' && <span className="actionOrder text-primary">Mua lại</span>
+                                                        }
+                                                        <br/>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })
+                                        :
+                                        <tr>
+                                            <td colSpan="10" className="text-center text-primary">Chưa có đơn hàng nào...</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <ReactPaginate
+                            previousLabel={"<"}
+                            nextLabel={">"}
+                            pageCount={pageCount}
+                            onPageChange={changePage}
+                            containerClassName={"paginationBttns"}
+                            previousLinkClassName={"previousBttn"}
+                            nextLinkClassName={"nextBttn"}
+                            disabledClassName={"paginationDisabled"}
+                            activeClassName={"paginationActive"}
+                        />
+                    </TabPane>
+                </TabContent>
+            </LoadingOverlay>
         </div>
     );
 }

@@ -18,7 +18,10 @@ const VoteManage = (props) => {
 
     return (
         <div className='voteManage'>
-            <h5 className='mb-3'>Đánh giá</h5>
+            <div className="vote-header">
+                <img src="https://www.kindpng.com/picc/m/561-5619099_circle-icons-star-with-hex-feb42f-background-vector.png" style={{width: '3%'}} alt="" />
+                <div className='voteTitle'>Đánh giá</div>
+            </div>
             <TabVote
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}

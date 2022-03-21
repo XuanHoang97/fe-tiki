@@ -1,9 +1,4 @@
 @import "../../../../../assets/css/variable.scss";
-
-img {
-    max-width: 100%;
-}
-
 .header {
     background: rgb(1, 127, 255);
     position: relative;
@@ -69,19 +64,6 @@ img {
                     box-shadow: 0 2px 10px 1px grey;
                 }
 
-                .menu_ctg:after {
-                    content: "";
-                    top: 0;
-                    right: 0;
-                    bottom: 0;
-                    left: 0;
-                    transition: opacity 0.35s ease-in-out;
-                    opacity: 0;
-                    visibility: hidden;
-                    background-color: rgba(0, 0, 0, 0.5);
-                    pointer-events: none;
-                }
-         
                 .navbar-collapse {
                     .navbar-nav {
                         .search {
@@ -97,6 +79,9 @@ img {
                                 @include phone {
                                     height: 30px;
                                     border-radius: 5px;
+                                }
+                                @include tablet{
+                                    width: 365px;
                                 }
                             }
                             ::placeholder {
@@ -114,23 +99,8 @@ img {
                                     height: auto;
                                     width: 565px;
                                     box-shadow: rgb(121, 121, 121) 0px 6px 12px 0px;
-                                    .search__items:hover {
-                                        background: rgb(227, 242, 252);
-                                    }
-                                    .search__items {
-                                        cursor: pointer;
-                                        padding: 5px;
-                                    }
                                     .suggest {
                                         padding: 10px;
-                                        .coupon {
-                                            display: flex;
-                                            align-items: center;
-                                            justify-content: space-between;
-                                            h6 {
-                                                font-size: 13px;
-                                            }
-                                        }
                                         .history {
                                             display: grid;
                                             grid-template-columns: 80% 20%;
@@ -152,50 +122,6 @@ img {
                                             .close {
                                                 img {
                                                     width: 20%;
-                                                }
-                                            }
-                                        }
-                                        .viewMore {
-                                            color: rgb(32, 109, 252);
-                                            font-size: 13px;
-                                            justify-content: center;
-                                            cursor: pointer;
-                                            display: flex;
-                                            gap: 5px;
-                                            align-items: center;
-                                        }
-                                    }
-                                    .list__search {
-                                        padding: 0 10px;
-                                        border-top: 1px solid rgb(236, 236, 236);
-                                        border-bottom: 1px solid rgb(236, 236, 236);
-                                        .search__popular {
-                                            margin: 10px 0;
-                                            display: flex;
-                                            gap: 5px;
-                                            img {
-                                                max-width: 4% !important;
-                                            }
-                                            span {
-                                                font-size: 14px;
-                                                font-weight: 500;
-                                            }
-                                        }
-                                        .pop {
-                                            display: grid;
-                                            grid-template-columns: 33% 33% 33%;
-                                            .list__item {
-                                                display: flex;
-                                                gap: 5px;
-                                                margin-bottom: 15px;
-                                                img {
-                                                    width: 20%;
-                                                }
-                                                span {
-                                                    font-size: 11px;
-                                                    background: rgb(250, 250, 250);
-                                                    width: 75%;
-                                                    padding: 3px 7px;
                                                 }
                                             }
                                         }
@@ -241,19 +167,12 @@ img {
                                 @include phone {
                                     display: none;
                                 }
+                                @include tablet {
+                                    display: none;
+                                }
                                 button {
                                     background: rgb(13, 92, 182);
-                                    height: 30px !important;
-
-                                    @include phone {
-                                        display: flex;
-                                        align-items: center;
-                                    }
-                                    small {
-                                        @include phone {
-                                            display: none;
-                                        }
-                                    }
+                                    height: 32px !important;
                                 }
                             }
                         }
@@ -262,6 +181,9 @@ img {
                             cursor: pointer;
                             color: white;
                             @include phone {
+                                display: none;
+                            }
+                            @include tablet{
                                 display: none;
                             }
                         }
@@ -462,19 +384,5 @@ img {
     align-items: center;
     padding: 10px 15px; 
     cursor: pointer;
-}
-
-.menu__item {
-    background: #ebf7ff;
-}
-
-.view--more {
-    cursor: pointer;
-}
-
-.view--more:hover {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 15px !important;
-    padding: 3px 5px;
-    border-radius: 5px;
 }
 

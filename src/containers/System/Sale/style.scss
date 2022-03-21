@@ -2,6 +2,12 @@
 .Bill{
     background: white;
     padding: 10px;
+    .billHeader{
+        @include headerAdmin;
+        .billTitle{
+            @include titleAdmin
+        }
+    }
     .tabBill{
         margin-bottom: 15px;
         @include phone{

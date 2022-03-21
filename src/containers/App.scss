@@ -1,15 +1,9 @@
-a {
-    text-decoration: none;
-}
-
-.dashboard_item:hover:not(.active) {
-    background-color: rgb(76, 117, 235);
-    text-decoration: none;
-    cursor: pointer;
-}
-
 a.active {
     background-color: rgb(76, 117, 235);
+}
+
+img{
+    width: 100%;
 }
 
 ::-webkit-scrollbar {

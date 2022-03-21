@@ -79,7 +79,11 @@ const UserManage = (props) => {
             }
 
             <div className='addUser'>
-                <div className="h5 text-dark mb-4">Quản lý thành viên (<small>{listUsers.length}</small>)</div>
+                <div className='user-head'>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3wxYfRYb_Go_3bimYI19No2lBRt5H9hmBaw&usqp=CAU" className='rounded-circle' style={{width: '5%'}} alt="" />
+                    <div className="userTitle">Khách hàng (<small>{listUsers.length}</small>)</div>
+                </div>
+
                 <div className="addUser">
                     <button onClick ={() => handleAddNewUser()}  type="button" className="btn btn-success">
                         <i className="fas fa-plus mr-2"></i> Thêm thành viên
@@ -110,7 +114,7 @@ const UserManage = (props) => {
                             <tbody key={index}>
                                 <tr>
                                     <td>{index + 1}</td>
-                                    <td style={{width:'5%'}}><img src={item.image} alt="" /> </td>
+                                    <td style={{width:'5%'}}><img src={item.image} className="w-100" alt="" /> </td>
                                     <td className='text-primary'>{item.username}</td>
                                     <td>{item.email}</td>
                                     <td>{item.phoneNumber}</td>

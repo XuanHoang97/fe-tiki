@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../../store/actions';
 import ModalAddCategory from './ModalAddCategory';
 import ModalEditCategory from './ModalEditCategory';
+import './style.scss';
 
 const CategoryManage = (props) => {
     const dispatch = useDispatch();
@@ -68,8 +69,11 @@ const CategoryManage = (props) => {
                 editCategory={handleEditCategory}
             />
 
-            <div className='d-flex align-items-center justify-content-between'>
-                <div className="h5 text-dark mb-4">Danh mục sản phẩm (<small>{category.length}</small>)</div>
+            <div className='categoryManage'>
+                <div className='category-head'>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCpLky01HHuDldu3ZoBLszxsAYFtRmh7E4vpmdl3UMixEfN8VGMRgfMw9SxksuIdxOjSs&usqp=CAU" className='rounded-circle' style={{width:'7%'}} alt="" />
+                    <div className="category-title">Danh mục (<small>{category.length}</small>)</div>
+                </div>
                 <div className="d-flex mb-3 justify-content-between">
                     <button onClick={() => handleAddCategory()} type="button" className="btn btn-success">
                         <i className="fas fa-plus"></i> Thêm danh mục
@@ -93,7 +97,7 @@ const CategoryManage = (props) => {
                         return (
                             <tr key={index}>
                                 <td>{index + 1}</td>
-                                <td style={{width:'5%'}}><img src={item.image} alt="" /> </td>
+                                <td style={{width:'5%'}}><img src={item.image} className="w-100" alt="" /> </td>
                                 <td className='text-primary'>{item.name}</td>
                            
                                 <td>

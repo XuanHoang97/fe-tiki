@@ -13,7 +13,7 @@
     @include phone{
         position: absolute;
         top: -2rem;
-        right: 2.5rem;
+        right: 1.5rem;
     }
 }
 
@@ -59,10 +59,7 @@
         background: white !important;
     }
     .list-notify {
-        overflow-y: hidden;
         height: 32rem;
-    }
-    .list-notify:hover {
         overflow-y: scroll;
     }
     .markAll{

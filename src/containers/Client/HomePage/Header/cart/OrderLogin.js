@@ -1,9 +1,9 @@
 import React, {useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { path } from 'utils';
 import { DeleteItemCartByUser, GetCartByUser } from 'store/actions';
 import { numberFormat, totalMoney } from 'components/Formatting/FormatNumber';
+import { Link } from 'react-router-dom';
+import { path } from 'utils';
 
 function OrderLogin(props) {
     const dispatch = useDispatch();
@@ -33,9 +33,9 @@ function OrderLogin(props) {
         <>
             <span className="cart nav-item dropdown active" onMouseEnter={() =>setHoverCart(true) }>
                 <div className="itemCart">
-                    <i className="fas fa-shopping-cart mr-4" style={{ fontSize: '17px' }}>
+                    <i className="fas fa-shopping-cart" style={{ fontSize: '17px' }}>
                         <span className="numbCart badge badge-pill badge-danger">
-                            { carts && carts.length>0 ? carts.length : 0 }
+                            { carts && carts.length>0 ? carts.length : ''}
                         </span>
                     </i>
                 </div>

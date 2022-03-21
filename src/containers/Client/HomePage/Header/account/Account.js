@@ -3,17 +3,23 @@ import {useDispatch, useSelector} from 'react-redux';
 import { path } from 'utils';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import { getUser, logoutAccount } from 'store/actions';
+import { getPoint, getUser, logoutAccount } from 'store/actions';
 import {GetUser} from './../../../../../services/authService';
 import { numberFormat } from 'components/Formatting/FormatNumber';
 
 const Account = () => {
     const dispatch = useDispatch();
-    const token = localStorage.getItem('token');
     const history = useHistory();
+    const token = localStorage.getItem('token');
     const [hoverAccount, setHoverAccount] = useState(false);
     const user = useSelector(state => state.auth.user);
     const TikiPoint = useSelector(state => state.auth.point);
+
+    // get point
+    useEffect(() => {
+        let userId = user ? user.id : '';
+        dispatch(getPoint(userId));
+    }, [dispatch, user]);
 
     // get user
     useEffect(() => {
@@ -80,7 +86,7 @@ const Account = () => {
 
                             <div onClick={()=>history.push(path.TIKI_XU)} className="item-acc">
                                 <img src="https://cf.shopee.vn/file/a0ef4bd8e16e481b4253bd0eb563f784" alt="" />
-                                Tiki xu: <span className='text-warning ml-2'>{TikiPoint ? numberFormat(TikiPoint.point) : 0 }</span>
+                                Tiki xu: <span className='text-warning ml-2'>{user && TikiPoint ? numberFormat(TikiPoint.point) : 0 }</span>
                             </div>
 
                             <div onClick={()=>history.push(path.VOUCHER)} className="item-acc">
@@ -90,7 +96,7 @@ const Account = () => {
                             
                             <div onClick={Logout} className="item-acc">
                                 <img src="https://www.clipartmax.com/png/middle/147-1470587_logout-logout-icon-red-png.png" alt="" />           
-                                Đăng xuất
+                                Thoát
                             </div>
                         </div>
                         :

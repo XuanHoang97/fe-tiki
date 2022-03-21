@@ -1,10 +1,8 @@
 @import '../../../../../../assets/css/variable.scss';
 .list-voucher{
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
-    @include phone{
-        flex-direction: column;
-    }
 }
 .titleDiscount{
     color: grey;
@@ -26,7 +24,7 @@
 
 .voucher{
     display: flex;
-    width: 49.5%;
+    width: 49%;
     padding: 0;
     background: white;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);

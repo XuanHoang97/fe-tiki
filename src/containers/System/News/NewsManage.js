@@ -25,7 +25,6 @@ const NewsManage = (props) => {
     const CreateNews=(data)=> {
         const dataNews = new FormData();
         dataNews.append('name', data.name);
-        dataNews.append('content', data.content);
         dataNews.append('description', data.description);
         dataNews.append('date', data.date);
         dataNews.append('author_id', data.author_id);
@@ -49,7 +48,6 @@ const NewsManage = (props) => {
         const News = new FormData();
         News.append('id', newsEdit.id );
         News.append('name', data.name);
-        News.append('content', data.content);
         News.append('description', data.description);
         News.append('date', data.date);
         News.append('author_id', data.author_id);
@@ -75,7 +73,10 @@ const NewsManage = (props) => {
             />
 
             <div className='addNews'>
-                <div className="h5 text-dark mb-4">Tin tức - sự kiện (<small>{listNews.length}</small>)</div>
+                <div className='news-header'>
+                    <img src="https://icons-for-free.com/iconfiles/png/512/morning+news+newspaper+icon-1320136429130706490.png" style={{width: '5%'}} alt=""/>
+                    <div className="news-title">Tin tức - sự kiện (<small>{listNews.length}</small>)</div>
+                </div>
                 <div className="mb-3">
                     <button onClick={() => handleAddNews()} type="button" className="btn btn-success">
                         <i className="fas fa-plus mr-2"></i> Thêm tin tức
@@ -103,7 +104,7 @@ const NewsManage = (props) => {
                             return(
                                 <tr key={index}>
                                     <td>{index + 1}</td>
-                                    <td style={{width:'5%'}}><img src={item.image}alt="" /> </td>
+                                    <td style={{width:'5%'}}><img src={item.image} className="w-100" alt="" /> </td>
                                     <td className='text-primary'>{item.name}</td>
                                     <td>{item.description}</td>
                                     <td>{item.author_id}</td>

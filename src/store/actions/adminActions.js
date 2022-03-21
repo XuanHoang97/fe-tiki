@@ -33,12 +33,10 @@ export const fetchGender = () => {
     return async(dispatch, getState) => {
         try {
             let res = await getAllCodeService('GENDER');
-            if (res && res.data.errCode === 0) {
-                dispatch({
-                    type: actionTypes.FETCH_GENDER,
-                    payload: res.data.data
-                })
-            }
+            dispatch({
+                type: actionTypes.FETCH_GENDER,
+                payload: res.data.data
+            })
         } catch (e) {
             console.log('fetchGender error', e)
         }
@@ -50,12 +48,10 @@ export const fetchRole = () => {
     return async(dispatch, getState) => {
         try {
             let res = await getAllCodeService('ROLE');
-            if (res && res.data.errCode === 0) {
-                dispatch({
-                    type: actionTypes.FETCH_ROLE,
-                    payload: res.data.data
-                })
-            }
+            dispatch({
+                type: actionTypes.FETCH_ROLE,
+                payload: res.data.data
+            })
         } catch (e) {
             console.log('fetchRole error', e)
         }
@@ -67,12 +63,10 @@ export const fetchPosition = () => {
     return async(dispatch, getState) => {
         try {
             let res = await getAllCodeService('POSITION');
-            if (res && res.data.errCode === 0) {
-                dispatch({
-                    type: actionTypes.FETCH_POSITION,
-                    payload: res.data.data
-                })
-            }
+            dispatch({
+                type: actionTypes.FETCH_POSITION,
+                payload: res.data.data
+            })
         } catch (e) {
             console.log('fetchPosition error', e)
         }
@@ -102,13 +96,10 @@ export const fetchAllUser = () => {
     return async(dispatch, getState) => {
         try {
             let res = await getAllUsers('ALL');
-
-            if (res && res.data.errCode === 0) {
-                dispatch({
-                    type: actionTypes.FETCH_ALL_USERS,
-                    payload: res.data.users.reverse()
-                })
-            }
+            dispatch({
+                type: actionTypes.FETCH_ALL_USERS,
+                payload: res.data.users.reverse()
+            })
         } catch (e) {
             console.log('fetchAllUSersFailed error', e)
         }
@@ -223,12 +214,10 @@ export const getTypeSort = () => {
     return async(dispatch, getState) => {
         try {
             let res = await getAllCodeService('SORT_TYPE');
-            if (res && res.data.errCode === 0) {
-                dispatch({
-                    type: actionTypes.SORT_TYPE,
-                    payload: res.data.data
-                })
-            }
+            dispatch({
+                type: actionTypes.SORT_TYPE,
+                payload: res.data.data
+            })
         } catch (e) {
             console.log('getTypeSort error', e)
         }

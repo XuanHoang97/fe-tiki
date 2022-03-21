@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { formatDateNew } from 'components/Formatting/FormatDate';
+import { useSelector, useDispatch } from 'react-redux';
 import { TabContent, TabPane } from 'reactstrap';
+import { GetDiscountUser } from 'store/actions';
 import TabVoucher from './TabVoucher';
 import { NavLink } from 'react-router-dom';
 import { path } from 'utils';
 import './style.scss';
 
 function Voucher(props) {
+    const dispatch = useDispatch();
     const [activeTab, setActiveTab] = useState('1');
+    const user = useSelector(state => state.auth.user);
+    const discounts = useSelector(state => state.auth.discounts);
+
+    useEffect(() => {
+        let userId = user? user.id :null;
+        dispatch(GetDiscountUser(userId));
+    }, [dispatch, user]);
 
     return (
         <>
@@ -31,49 +42,40 @@ function Voucher(props) {
             <TabContent activeTab={activeTab}>
                 <TabPane tabId="1">
                     <div className="list-voucher">
-                        <div className='voucher'>
-                            <div className='voucher-provider col-3'>
-                                <div className='vc-img'>
-                                </div>
-                                <span>Thời trang</span>
-                                <span className='ribbon'></span>
+                        {
+                            discounts?.length >0 ?
+                            discounts.map((item, index) => {
+                                return (
+                                    <div className='voucher' key={index}>
+                                        <div className='voucher-provider col-3'>
+                                            <div className='vc-img'>
+                                            </div>
+                                            <span>Thời trang</span>
+                                            <span className='ribbon'></span>
+                                        </div>
+
+                                        <div className='voucher-info d-flex justify-content-between col-9 py-2'>
+                                            <div className='voucher-value'>
+                                                <b className='text-primary'>{item.info}</b>
+                                                <div>Đơn tốI thiểu {item.applyTo}k</div>
+                                                <span className='small text-secondary'>HSD: {formatDateNew(item.discountEnd)}</span>
+                                                <div className='small text-secondary'> 
+                                                có liệu lực từ {formatDateNew(item.discountStart)}</div>
+                                            </div>
+
+                                            <div className='voucher-right text-right'>
+                                                <span className='text-danger'>Dùng ngay <i className='fa fa-angle-right'></i></span>
+                                                <span className='text-primary'>Điều kiện</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                            :
+                            <div className='voucher'>
+                                Bạn chưa có voucher nào...
                             </div>
-
-                            <div className='voucher-info d-flex justify-content-between col-9 py-2'>
-                                <div className='voucher-value'>
-                                    <b className='text-primary'>Giảm 10k</b>
-                                    <div>Đơn tốI thiểu 20k</div>
-                                    <span className='small text-secondary'>HSD: 30.06.2022</span>
-                                </div>
-
-                                <div className='voucher-right text-right'>
-                                    <span className='text-danger'>Dùng ngay <i className='fa fa-angle-right'></i></span>
-                                    <span className='text-primary'>Điều kiện</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className='voucher'>
-                            <div className='voucher-provider col-3'>
-                                <div className='vc-img'>
-                                </div>
-                                <span>Thời trang</span>
-                                <span className='ribbon'></span>
-                            </div>
-
-                            <div className='voucher-info d-flex justify-content-between col-9 py-2'>
-                                <div className='voucher-value'>
-                                    <b className='text-primary'>Giảm 10k</b>
-                                    <div>Đơn tốI thiểu 20k</div>
-                                    <span className='small text-secondary'>HSD: 30.06.2022</span>
-                                </div>
-
-                                <div className='voucher-right text-right'>
-                                    <span className='text-danger'>Dùng ngay <i className='fa fa-angle-right'></i></span>
-                                    <span className='text-primary'>Điều kiện</span>
-                                </div>
-                            </div>
-                        </div>
+                        }
                     </div>
                 </TabPane>
                 <TabPane tabId="2">Updating...</TabPane>

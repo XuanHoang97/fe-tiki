@@ -9,9 +9,11 @@ import {
     filterNotify,
     RatingProduct,
     getPointUser,
-    saveDiscount
+    saveDiscount,
+    getDiscountUser
 } from '../../services/authService';
 import { toast } from "react-toastify";
+import { GetAllDiscount } from './discountActions';
 
 // Logout
 export const logoutAccount = () => {
@@ -169,7 +171,7 @@ export const getPoint = (userId) => {
     }
 }
 
-// save discount
+// save discount user
 export const SaveDiscount = (data) => {
     return async(dispatch) => {
         try{
@@ -177,12 +179,29 @@ export const SaveDiscount = (data) => {
             if(res && res.errCode === 0){
                 dispatch({
                     type: actionTypes.SAVE_DISCOUNT,
-                    // payload: res.discountUser
                 });
                 toast.success('Lưu mã giảm giá thành công !')
+                dispatch(GetAllDiscount())
             }
         }catch(e){
             toast.error('save discount error !')
+        }
+    }
+}
+
+// get discount user
+export const GetDiscountUser = (userId) => {
+    return async(dispatch) => {
+        try{
+            let res = await getDiscountUser(userId);
+            if(res && res.errCode === 0){
+                dispatch({
+                    type: actionTypes.GET_DISCOUNT_USER,
+                    payload: res.discountUser
+                });
+            }
+        }catch(e){
+            toast.error('get discount error !')
         }
     }
 }

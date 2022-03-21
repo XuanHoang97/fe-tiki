@@ -3,6 +3,12 @@
 .Discount{
     background: white;
     padding: 10px;
+    .discountHeader{
+        @include headerAdmin;
+        .discountTitle{
+            @include titleAdmin;
+        }
+    }
 
     .addDiscount{
         display: flex;

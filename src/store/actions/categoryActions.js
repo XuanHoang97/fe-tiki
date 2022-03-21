@@ -13,12 +13,10 @@ export const fetchAllCategory = () => {
     return async(dispatch, getState) => {
         try {
             let res = await getAllCategory('ALL');
-            if (res && res.data.errCode === 0) {
-                dispatch({
-                    type: actionTypes.FETCH_CATEGORIES,
-                    listCategory: res.data.category
-                })
-            }
+            dispatch({
+                type: actionTypes.FETCH_CATEGORIES,
+                listCategory: res.data.category
+            })
         } catch (e) {
             toast.error('fetch all category error !')
         }

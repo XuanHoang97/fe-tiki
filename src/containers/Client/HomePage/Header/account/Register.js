@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { path } from 'utils';
-import { Link } from 'react-router-dom';
-import {useHistory} from 'react-router-dom';
+import {useHistory, Link} from 'react-router-dom';
 import { registerAcc } from 'services/authService';
 import { toast } from 'react-toastify';
 import './style.scss'
@@ -57,7 +56,7 @@ const Register = (props) => {
 
                 <div className="formRegister col-md-4 p-4 bg-white">
                     <form className="form-group" onSubmit={handleSubmit(signUp)}>
-                        <h4 htmlFor="" className='mb-4'>Đăng ký</h4>
+                        <h4 className='mb-4'>Đăng ký</h4>
                         <input type="text" className="form-control name" placeholder="Nhập họ và tên..." 
                             {...register('username', { required: true })}
                         />
@@ -89,7 +88,7 @@ const Register = (props) => {
                             </span>
                         </div>
 
-                        <button type="submit"  className="btn btn-success mt-3 mb-1 btn-block">Đăng ký</button>
+                        <button type="submit" className="btn btn-success mt-3 mb-1 btn-block">Đăng ký</button>
                         <Link to={path.LOGIN_AUTH} className='text-primary small'>Đã có tài khoản ?</Link>
                     </form>
                 </div>

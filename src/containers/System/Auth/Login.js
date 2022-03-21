@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { push } from "connected-react-router";
-import './Login.scss';
 import { handleLoginApi } from 'services/userService';
 import { userLoginSuccess } from 'store/actions';
+import './Login.scss';
 
 const Login = (props) => {
     const [userName, setUserName] = useState('');
@@ -32,7 +32,7 @@ const Login = (props) => {
     }
 
     //show-hide password
-    const handleShowHidePassword=()=>{
+    const showPass=()=>{
         setIsShowPassword(!isShowPassword);
     }
 
@@ -47,18 +47,17 @@ const Login = (props) => {
         <div className="login-bg">
             <div className="login-container">
                 <div className="login-content row">
-                    <div className="login col-12 text-login"> Login </div>
+                    <div className="login col-12 text-login"> Đăng nhập hệ thống </div>
                     <div className="col-12 form-group login-input">
-                        <label>Username:</label>
-                        <input type="text" className="form-control" 
-                            placeholder="Enter your username..."
+                        <label>Tên đăng nhập:</label>
+                        <input type="text" className="form-control" placeholder="Enter your username..."
                             value={userName}
                             onChange={(e) => setUserName(e.target.value)}
                         />
                     </div>
                     
                     <div className="col-12 form-group login-input">
-                        <label>Password:</label>
+                        <label>Mật khẩu:</label>
                         <div className="custom-input-password">
                             <input type={isShowPassword ? 'text': 'password'}
                                 className="form-control" 
@@ -67,7 +66,7 @@ const Login = (props) => {
                                 onChange={(e) => setPassword(e.target.value)}
                                 onKeyDown={(e)=> handleKeyDown(e)}
                             /> 
-                            <span onClick={()=> handleShowHidePassword()}>
+                            <span onClick={()=> showPass()}>
                                 <i className={isShowPassword ? "far fa-eye" : "far fa-eye-slash" }></i>      
                             </span>
                         </div>
@@ -78,11 +77,7 @@ const Login = (props) => {
                     </div>
 
                     <div className="col-12">
-                        <button className="btn-login" onClick={()=> handleLogin()}>Login</button>
-                    </div>
-
-                    <div className="col-12">
-                        <span className="forgot-password small">Forgot for Password ?</span>
+                        <button className="btn-login" onClick={()=> handleLogin()}>Đăng nhập</button>
                     </div>
                 </div>
             </div>
@@ -101,5 +96,4 @@ const mapDispatchToProps = dispatch => {
         userLoginSuccess: (userInfo) => dispatch(userLoginSuccess(userInfo))
     };
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

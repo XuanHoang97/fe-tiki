@@ -20,9 +20,6 @@ const NotFound = () => {
                     <Link to={path.HOMEPAGE}>
                         <button type="button" className="btn btn-success">Tiếp tục mua hàng</button>
                     </Link>
-                    <Link to={path.HOMEPAGE}>
-                        <button type="button" className="btn btn-primary"> Xem thông tin tài khoản <i className="fa fa-angle-right ml-2"></i></button>
-                    </Link>
                 </div>
             </div>
         </>

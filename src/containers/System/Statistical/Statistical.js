@@ -8,7 +8,10 @@ const StatisticalManage = (props) => {
 
     return (
         <div className="report-statistical">
-            <h5 className="mb-3">Báo cáo lợi nhuận bán hàng</h5>
+            <div className="report-header">
+                <img src="https://cdn-icons-png.flaticon.com/512/3309/3309960.png" style={{width: '3%'}} alt="" />
+                <div className="reportTitle">Báo cáo lợi nhuận</div>
+            </div>
             <TabStatistical
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}

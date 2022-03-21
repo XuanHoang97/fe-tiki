@@ -19,8 +19,6 @@ const initialState = {
 
     categories: [],
     news: [],
-    status_news: [],
-    status: [],
     supplier: [],
     articles: [],
     optionProduct: [],
@@ -118,13 +116,6 @@ const adminReducer = (state = initialState, action) => {
                 products : action.payload
             }
 
-            //fetch status product
-        case actionTypes.FETCH_STATUS_PRODUCT:
-            return {
-                ...state,
-                status : action.payload,
-            }
-
             //fetch supplier product
         case actionTypes.FETCH_SUPPLIER_PRODUCT:
             return {
@@ -167,18 +158,11 @@ const adminReducer = (state = initialState, action) => {
                 detailCategory : action.payload,
             }
 
-            //fetch all news and event
+            // get all news
         case actionTypes.FETCH_ALL_NEWS:
             return {
                 ...state,
                news : action.payload
-            }
-
-            //fetch allCode news and event
-        case actionTypes.FETCH_CODE_NEWS:
-            return {
-                ...state,
-                status_news : action.payload
             }
 
         // get all slide

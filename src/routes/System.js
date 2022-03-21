@@ -24,26 +24,29 @@ import './style.scss';
 const System = (props) => {
     const {systemMenuPath, isLoggedIn,userInfo, processLogout} = props;
     const [menuLeft, setMenuLeft] = useState(true);
-    const [widthMenuRight, setWidthMenuRight] = useState('82%');
-    const [widthMenuLeft] = useState('18%');
+    const [rightContent, setRightContent] = useState('rightContent');
+    const [widthMenuLeft] = useState('menuLeft');
     const avatar = 'https://avatars.githubusercontent.com/u/38268599?v=4';
 
     const toggleMenu = () => {
         setMenuLeft(!menuLeft);
-        setWidthMenuRight(menuLeft ? '100%' : '82%');
+        setRightContent(menuLeft ? 'fullMenuLeft' : 'rightContent');
     }
-
+    
     useEffect(() => {
         document.title = "Hệ thống quản lý Tiki";
     }, []);
 
+
     return (
         <div className='main-container'>
             <div className='module'>
-                {isLoggedIn && menuLeft && <MenuLeft widthMenuLeft = {widthMenuLeft} /> }
+                {   isLoggedIn && menuLeft && 
+                    <MenuLeft widthMenuLeft = {widthMenuLeft} toggleMenu= {toggleMenu}/> 
+                }
                 {!menuLeft ? <MenuLeftCollapse /> : ''}                
             
-                <div className="system-container" style={{width: widthMenuRight}}>
+                <div className={`system-container ${rightContent}`}>
                     <div className="menuAdmin">
                         <div className="collapse_module">
                             <span onClick={() => toggleMenu()}><i className="fas fa-bars"></i></span>  
@@ -57,7 +60,7 @@ const System = (props) => {
                                     <i className="fas fa-caret-down small"></i>
                                 </span>
                             </div>
-                            <div className="logout btn" onClick={processLogout}>Đăng xuất</div>
+                            <div className="logout btn" onClick={processLogout}>Thoát</div>
                         </div>
                     </div>
                     

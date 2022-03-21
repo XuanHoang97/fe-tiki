@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import * as actions from '../../../store/actions';
+import { fetchAllCategory, fetchProducts } from 'store/actions';
 
 const ModalAddNews = (props) => {
     const [name, setName] = useState('');
     const [image, setImage] = useState('');
     const [previewImg, setPreviewImg] = useState('');
-    const [content, setContent] = useState('');
     const [description, setDescription] = useState('');
     const [date, setDate] = useState(new Date());
     const [author_id, setAuthor_id] = useState('');
@@ -20,9 +19,8 @@ const ModalAddNews = (props) => {
 
     //fetch data
     useEffect(() => {
-        dispatch(actions.fetchAllCategory());
-        dispatch(actions.fetchStatusNews());
-        dispatch(actions.fetchProducts());
+        dispatch(fetchAllCategory());
+        dispatch(fetchProducts());
     }, [dispatch]);
 
     const toggle =()=>{
@@ -33,7 +31,7 @@ const ModalAddNews = (props) => {
     const handleAddNews=(e)=>{
         e.preventDefault();
         const data = {
-            name, image, previewImg, content, description, date, author_id, productId, category_id,
+            name, image, previewImg, description, date, author_id, productId, category_id,
         }
         props.createNews(data);
         toggle();
@@ -102,11 +100,6 @@ const ModalAddNews = (props) => {
                     <div className="form-group col-4">
                         <label>description</label>
                         <input value={description} onChange={(e)=>setDescription(e.target.value)}  type="text" className="form-control" />
-                    </div>
-
-                    <div className="form-group col-4">
-                        <label>content</label>
-                        <input value={content} onChange={(e)=>setContent(e.target.value)}  type="text" className="form-control" />
                     </div>
                 </div>
 

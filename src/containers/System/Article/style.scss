@@ -3,6 +3,12 @@
 .articleManage{
     background: white;
     padding: 10px;
+    .article-header{
+        @include headerAdmin;
+        .article-title{
+            @include titleAdmin;
+        }
+    }
     .tabArticle{
         margin-bottom: 15px;
         @include phone{

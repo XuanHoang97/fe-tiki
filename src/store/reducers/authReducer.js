@@ -7,6 +7,7 @@ const initialState = {
     notify: [],
     notifyUnread: [],
     point: 0,
+    discounts: []
 }
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -58,6 +59,13 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 point: action.payload
+            }
+
+            //get discount user
+        case actionTypes.GET_DISCOUNT_USER:
+            return {
+                ...state,
+                discounts: action.payload
             }
 
 

@@ -29,10 +29,10 @@ const Product = (mobile) => {
 
             <div className="productDetail">
                 {
-                    products && products.length >0 ?
+                    products?.length >0 ?
                     products.map((item, index) => {
                         return (
-                            <div className="product--item col-md-2 col-6" 
+                            <div className="product--item" 
                                 key={index} 
                             >
                                 <div onClick={()=>viewDetail(item)}>

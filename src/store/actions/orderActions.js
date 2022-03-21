@@ -1,11 +1,11 @@
 import actionTypes from './actionTypes';
 import {
-    sendBill
+    sendBill,
+    getBill
 } from "../../services/adminService";
 import { toast } from "react-toastify";
 
 // Send bill
-// add discount
 export const SendBillCustomer = (data) => {
     return async(dispatch, getState) => {
         try {
@@ -18,6 +18,23 @@ export const SendBillCustomer = (data) => {
             }
         } catch (e) {
             toast.error('Send bill fail', e)
+        }
+    }
+}
+
+// get bill
+export const GetBill = () => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await getBill('ALL');
+            if (res && res.data.errCode === 0) {
+                dispatch({
+                    type: actionTypes.GET_BILL,
+                    payload: res.data.result
+                })
+            }
+        } catch (e) {
+            toast.error('Get bill fail', e)
         }
     }
 }

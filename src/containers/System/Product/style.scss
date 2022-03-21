@@ -3,6 +3,12 @@
 .productManage{
     background: white;
     padding: 10px;
+    .product-head{
+        @include headerAdmin;
+        .productTitle{
+            @include titleAdmin;
+        }
+    }
     .addProduct{
         display: flex;
         align-items: center;

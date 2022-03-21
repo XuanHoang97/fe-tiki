@@ -8,7 +8,6 @@ const ModalEditNews  = (props) => {
     const [name, setName] = useState('');
     const [image, setImage] = useState('');
     const [description, setDescription] = useState('');
-    const [content, setContent] = useState('');
     const [category_id, setCategory] = useState('');
     const [productId, setProductId] = useState('');
     const [author_id, setAuthor] = useState('');
@@ -28,7 +27,6 @@ const ModalEditNews  = (props) => {
             setPreviewImg(news.image);
             setImage(news.previewImg);
             setDescription(news.description);
-            setContent(news.content);
             setCategory(news.category_id);
             setProductId(news.productId);
             setAuthor(news.author_id);
@@ -66,7 +64,6 @@ const ModalEditNews  = (props) => {
             image: image,
             previewImg: previewImg,
             description: description,
-            content: content,
             category_id: category_id,
             productId: productId,
             author_id: author_id,
@@ -123,11 +120,6 @@ const ModalEditNews  = (props) => {
                         <div className="form-group col-4">
                             <label>description</label>
                             <input value={description} onChange={(e)=>setDescription(e.target.value)}  type="text" className="form-control" />
-                        </div>
-
-                        <div className="form-group col-4">
-                            <label>content</label>
-                            <input value={content} onChange={(e)=>setContent(e.target.value)}  type="text" className="form-control" />
                         </div>
                     </div>
 

@@ -65,7 +65,7 @@ export default function Category() {
               detailMenu === true &&
               <div className="row p-0">
                 {
-                  detailCategory && detailCategory.length > 0 ?
+                  detailCategory?.length > 0 ?
                   detailCategory.map((item, index) => {
                     return (
                       <div className="col-4 d-flex align-items-center py-2 px-3 bg-light"
