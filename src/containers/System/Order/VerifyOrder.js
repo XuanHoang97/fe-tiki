@@ -91,7 +91,7 @@ const VerifyOrder = (props) => {
                 </div>
 
                 <div className="d-flex justify-content-center bg-light p-3" style={{gap: '10px'}}>
-                    <div className="customer bg-white col-6 py-3">
+                    <div className="customer bg-white col-5 py-3">
                         <h5 className=''>Thông tin khách hàng</h5>
                         <hr/>
                         <div className='d-flex'>
@@ -115,7 +115,7 @@ const VerifyOrder = (props) => {
                         </div>
                     </div>
 
-                    <div className="order bg-white col-6 py-3">
+                    <div className="order bg-white col-7 py-3">
                         <h5 className=''>Thông tin đơn hàng</h5>
                         <hr/>
                         <div className='d-flex mb-2'>

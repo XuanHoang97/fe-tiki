@@ -91,6 +91,9 @@ const ProductManage = (props) => {
                         <td>STT</td>
                         <td>Ảnh</td>
                         <td>Tên SP</td>
+                        <td>Bán được</td>
+                        <td>Số lượng</td>
+                        <td>Trạng thái</td>
                         <td>Giá (VND)</td>
                         <td>Sale (VND)</td>
                         <td>Tác vụ</td>
@@ -98,14 +101,16 @@ const ProductManage = (props) => {
                 </thead>
                 <tbody>
                     {   
-                        listProducts && listProducts.length>0 ?
+                        listProducts?.length>0 ?
                         listProducts.map((item, index) => {
                             return(
                                 <tr key={index}>
                                     <td>{index + 1}</td>
                                     <td style={{width:'5%'}}><img src={item.image} className="w-100"  alt="" /> </td>
-                      
                                     <td className='text-primary'>{item.name}</td>
+                                    <td>0</td>
+                                    <td>50</td>
+                                    <td><span className='badge badge-success'>Còn hàng</span></td>
                                     <td>{numberFormat(item.price)}</td>
                                     <td>{numberFormat(item.sale)}</td>
                                     <td>

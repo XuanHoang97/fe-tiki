@@ -28,7 +28,6 @@
         }
     }
     .voteContent{
-        padding: 15px 0;
         .listVote{
             .filterVote{
                 display: flex;
@@ -42,7 +41,6 @@
             }
             .vote{
                 background: white;
-                padding: 15px;
                 .list-vote{
                     table{
                         @include phone{

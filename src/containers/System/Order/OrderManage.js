@@ -70,7 +70,7 @@ const OrderManage = (props) => {
 
     //pagination
     const [pageNumber, setPageNumber] = useState(0);
-    const orderPerPage = 5;
+    const orderPerPage = 8;
     const pagesVisited = pageNumber * orderPerPage;
     const pageCount = Math.ceil(filterOrder.length / orderPerPage);
     const changePage = ({ selected }) => {
@@ -155,7 +155,7 @@ const OrderManage = (props) => {
                                                     <td>{item.date ? formatDateNew(item.date) : ''}</td>
                                                     <td>{item.dateDelivery ? formatDateNew(item.dateDelivery) : ''}</td>
                                                     <td className='font-weight-bold small'>
-                                                        {item.status ==='S1' && <span className='badge badge-warning'>Chờ xử lý</span>}
+                                                        {item.status ==='S1' && <span className='badge-warning'>Chờ xử lý</span>}
                                                         {item.status ==='S2' && <span className='badge badge-success'>Đã xác nhận</span>}
                                                         {item.status ==='S3' && <span className='badge badge-primary'>Đang giao</span>}
                                                         {item.status ==='S4' && <span className='badge badge-success'>Đã giao</span>}

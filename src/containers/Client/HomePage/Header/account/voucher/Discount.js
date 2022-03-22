@@ -70,7 +70,7 @@ const Discount = () => {
                                             <b className='text-primary'>{item.info}</b>
                                             <div>Đơn tốI thiểu {item.applyTo}k</div>
                                             <span className='small text-secondary'>HSD: {formatDateNew(item.discountEnd)}</span>
-                                            <div className='small text-secondary'>Đã dùng {item.Used}/{item.Max}, 
+                                            <div className='small text-danger'>Đã dùng {item.Used}/{item.Max}, 
                                             có hiệu lực từ {formatDateNew(item.discountStart)}</div>
                                         </div>
 

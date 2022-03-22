@@ -32,3 +32,54 @@
         }
     }
 }
+
+.bill-header{
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    margin: 10px 0 5px 0;
+    font-size: 16px;
+}
+.date-bill{
+    text-align: center;
+    color: grey;
+    font-size: 13px;
+}
+
+.detail-bill{
+    margin: 10px 0 15px 0;
+    .info-bill{
+        display: grid;
+        grid-template-columns: 25% 36% 36%;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 8px;
+        .value-bill{
+            display: flex;
+            justify-content: space-between;
+        }
+        .bill-customer{
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}
+
+.totalMoney-bill{
+    display: flex;
+    justify-content: space-between;
+    .tax{
+        display: flex;
+        justify-content: space-between;
+        width: 30%;
+    }
+    .moneyBill{
+        width: 36%;
+        .item-money-bill{
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid lightgray;
+            margin-bottom: 10px;
+        }
+    }
+}

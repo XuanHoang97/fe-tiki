@@ -37,6 +37,29 @@
     }
 }
 
+.bill-status{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.bill-detail{
+    display: flex;
+    justify-content: center;
+    background: #f7f7f7;
+    padding: 15px;
+    gap: 10px;
+
+    .customer{
+        padding: 15px;
+        background: white;
+    }
+    .order-info{
+        @extend .customer;
+    }
+}
+
 
 .actionOrder{
     font-size: 12px;

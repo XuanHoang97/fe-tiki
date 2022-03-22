@@ -3,7 +3,7 @@ import { TabContent, TabPane } from 'reactstrap';
 import {useSelector, useDispatch} from 'react-redux';
 import { fetchRating } from 'store/actions';
 import TabVote from './TabVote';
-import './style.scss'
+import './style.scss';
 
 const VoteManage = (props) => {
     const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const VoteManage = (props) => {
         <div className='voteManage'>
             <div className="vote-header">
                 <img src="https://www.kindpng.com/picc/m/561-5619099_circle-icons-star-with-hex-feb42f-background-vector.png" style={{width: '3%'}} alt="" />
-                <div className='voteTitle'>Đánh giá</div>
+                <div className='voteTitle'>Đánh giá <small>({ratings && ratings.length >0 ? ratings.length : 0})</small></div>
             </div>
             <TabVote
                 activeTab={activeTab}
@@ -47,8 +47,7 @@ const VoteManage = (props) => {
                     </div>
 
                     <div className="vote">
-                        <div>Số đánh giá: <b>{ratings && ratings.length >0 ? ratings.length : 0}</b></div>
-                        <div className='list-vote mt-3'>
+                        <div className='list-voteManage'>
                             <table className="table table-striped table-bordered table-hover">
                                 <thead className="text-white">
                                     <tr>
@@ -57,7 +56,7 @@ const VoteManage = (props) => {
                                         <td>Sản phẩm</td>
                                         <td>Đánh giá</td>
                                         <td>Nội dung</td>
-                                        <td>trả lời</td>
+                                        <td>Trả lời</td>
                                         <td>Thao tác</td>
                                     </tr>
                                 </thead>
@@ -70,12 +69,12 @@ const VoteManage = (props) => {
                                                 <tr key={index}>
                                                     <td>{index + 1} </td>
                                                     <td className='text-primary'>{item.orderCode}</td>
-                                                    <td>
-                                                        <img src={item.imgProduct} style={{width: '10%'}} alt="" />
-                                                        <span>{item.nameProduct}</span>
+                                                    <td className='w-25'>
+                                                        <img src={item.imgProduct} style={{width: '8%'}} alt="" />
+                                                        <span className='ml-2'>{item.nameProduct}</span>
                                                     </td>
                                                     <td>{item.rating} sao</td>
-                                                    <td className='w-50'>{item.comment}</td>
+                                                    <td className='w-25'>{item.comment}</td>
                                                     <td>tks you</td>
                                                     <td className='text-primary'>Trả lời</td>
                                                 </tr>   

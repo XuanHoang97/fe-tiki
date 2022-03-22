@@ -62,11 +62,15 @@
                     margin-right: 0;
                     margin-bottom: 15px;
                 }
+                .reportStatus:hover{
+                    background: rgb(243, 243, 243);
+                }
                 .reportStatus{
                     display: flex;
                     align-items: center;
                     border-bottom: 1px dotted lightgrey;
                     padding: 5px 0;
+                    cursor: pointer;
                     .status{
                         color: #7b7b7b;
                     }

@@ -9,7 +9,7 @@ import * as serviceWorker from './serviceWorker';
 import axios from "axios";
 import { Provider } from 'react-redux';
 import reduxStore, { persistor } from './redux';
-axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = false;
 
 const renderApp = () => {
     ReactDOM.render(

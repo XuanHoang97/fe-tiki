@@ -5,6 +5,7 @@ import { numberFormat } from 'components/Formatting/FormatNumber';
 import { formatDateNew } from 'components/Formatting/FormatDate';
 import ReactPaginate from 'react-paginate';
 import { GetBill } from 'store/actions';
+import ViewBill from './ViewBill';
 import TabBill from './TabBill';
 import './style.scss';
 
@@ -12,13 +13,21 @@ const Bill = (props) => {
     const dispatch = useDispatch();
     const [activeTab, setActiveTab] = useState('1');
     const Bills = useSelector(state => state.order.Bills);
+    const [infoBill, setInfoBill] = useState(false);
+    const [billDetail, setBillDetail] = useState([]);
+
     useEffect(() => {
         dispatch(GetBill());
     }, [dispatch]);
+    
+    const detailBill = (bill) => {
+        setInfoBill(!infoBill);
+        setBillDetail(bill);
+    }
 
     //pagination
     const [pageNumber, setPageNumber] = useState(0);
-    const billPerPage = 5;
+    const billPerPage = 10;
     const pagesVisited = pageNumber * billPerPage;
     const pageCount = Math.ceil(Bills.length / billPerPage);
     const changePage = ({ selected }) => {
@@ -27,9 +36,15 @@ const Bill = (props) => {
 
     return (
         <div className='Bill'>
+            <ViewBill
+                isOpen={infoBill}
+                toggle={detailBill}
+                bill={billDetail}
+            />
+
             <div className='billHeader'>
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIOVkwC2h6PD5RTotWCpIlDo4FvyCr5hadR3wR9uYb79xzACB0NbfVy5Le1eXJp0BAcLQ&usqp=CAU" style={{width:'4%'}} alt="" />
-                <div className='billTitle'>Hoá đơn</div>
+                <div className='billTitle'>Hoá đơn <small>({Bills.length? Bills.length : 0})</small></div>
             </div>
             <TabBill
                 activeTab={activeTab}
@@ -75,7 +90,7 @@ const Bill = (props) => {
                                                     {item.status === 'S4' && <span className='badge badge-success'>Đã thanh toán</span>}
                                                 </td>
                                                 <td>
-                                                    <button className='btn btn-outline-primary'>Xem</button>
+                                                    <button onClick={()=> detailBill(item)} className='btn btn-outline-primary'>Xem</button>
                                                 </td>
                                             </tr>
                                         )

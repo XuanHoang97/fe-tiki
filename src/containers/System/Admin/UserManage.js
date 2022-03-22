@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import * as actions from '../../../store/actions';
+import { createNewUser, deleteUser, editUser, fetchAllUser } from '../../../store/actions';
 import { formatDateNew } from 'components/Formatting/FormatDate';
 import ModalEditUser from './ModalEditUser';
 import ModalUser from './ModalUser';
 import './style.scss'
+import { numberFormat } from 'components/Formatting/FormatNumber';
 
 const UserManage = (props) => {
     const [modalUser, setModalUser] = useState(false);
     const [modalEditUser, setModalEditUser] = useState(false);
     const [userEdit, setUserEdit] = useState('');
 
-    //fetch data
+    // Fetch user
     const dispatch = useDispatch();
     const listUsers = useSelector(state => state.admin.users);
 
     useEffect(() => {
-        dispatch(actions.fetchAllUser());
+        dispatch(fetchAllUser());
     }, [dispatch]);
     
-    // Create users
+    // Create user
     const handleAddNewUser=()=> {
         setModalUser(!modalUser);
     }
@@ -34,12 +35,12 @@ const UserManage = (props) => {
         dataUser.append('positionId', data.positionId);
         dataUser.append('phoneNumber', data.phoneNumber);
         data.image && dataUser.append('image', data.image);
-        dispatch(actions.createNewUser(dataUser));
+        dispatch(createNewUser(dataUser));
     }
 
     //delete user 
-    const deleteUser=(user)=>{
-        dispatch(actions.deleteUser(user.id));
+    const DeleteUser=(user)=>{
+        dispatch(deleteUser(user.id));
     }
 
     //edit user
@@ -47,7 +48,7 @@ const UserManage = (props) => {
         setUserEdit(user);
         setModalEditUser(!modalEditUser);
     }
-    const editUser=(data)=>{
+    const EditUser=(data)=>{
         const user = new FormData();
         user.append('id', userEdit.id);
         user.append('email', data.email);
@@ -58,7 +59,7 @@ const UserManage = (props) => {
         user.append('positionId', data.positionId);
         user.append('phoneNumber', data.phoneNumber);
         data.image && user.append('image', data.image);
-        dispatch(actions.editUser(user));
+        dispatch(editUser(user));
     }
 
     return (
@@ -74,7 +75,7 @@ const UserManage = (props) => {
                     isOpen={modalEditUser} 
                     toggleModal={handleEditUser}
                     currentUser={userEdit}
-                    editUser={editUser}
+                    editUser={EditUser}
                 />
             }
 
@@ -94,28 +95,30 @@ const UserManage = (props) => {
             <table className="table table-striped table-bordered table-hover">
                 <thead className="text-white">
                     <tr>
-                        <th scope="col">STT</th>
-                        <th scope="col">Avatar</th>
-                        <th scope="col">Họ tên</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Số ĐT</th>
-                        <th scope="col">Địa chỉ</th>
-                        <th scope="col">Giới tính</th>
-                        <th scope="col">Năm sinh</th>
-                        <th scope="col">Nghề nghiệp</th>
-                        <th scope="col">Chức danh</th>
-                        <th scope="col">Tác vụ</th>
+                        <td>STT</td>
+                        <td>Avatar</td>
+                        <td>Họ tên</td>
+                        <td>Điểm tích luỹ</td>
+                        <td>Email</td>
+                        <td>SĐT</td>
+                        <td>Địa chỉ</td>
+                        <td>Giới tính</td>
+                        <td>Năm sinh</td>
+                        <td>Nghề nghiệp</td>
+                        <td>Chức danh</td>
+                        <td>Tác vụ</td>
                     </tr>
                 </thead>
                 {
-                    listUsers && listUsers.length >0 &&
+                    listUsers?.length >0 ?
                     listUsers.map((item, index) => {
                         return (
                             <tbody key={index}>
                                 <tr>
                                     <td>{index + 1}</td>
-                                    <td style={{width:'5%'}}><img src={item.image} className="w-100" alt="" /> </td>
+                                    <td style={{width:'5%'}}><img src={item.image} className="w-100 rounded-circle" alt="" /> </td>
                                     <td className='text-primary'>{item.username}</td>
+                                    <td style={{color:'orange'}}>{ item.userData ? numberFormat(item.userData.point) : 0 }</td>
                                     <td>{item.email}</td>
                                     <td>{item.phoneNumber}</td>
                                     <td>{item.address}</td>
@@ -124,13 +127,10 @@ const UserManage = (props) => {
                                     <td>{item.roleId}</td>
                                     <td>{item.positionId}</td>
                                     <td>
-                                        <button type="button" className="btn text-success">
-                                            <i className="fas fa-info-circle"></i>
-                                        </button>
                                         <button onClick={()=> handleEditUser(item)} type="button" className="btn text-primary">
                                             <i className="fas fa-pencil-alt"></i>
                                         </button>
-                                        <button onClick={()=> deleteUser(item)} type="button" className="btn text-danger">
+                                        <button onClick={()=> DeleteUser(item)} type="button" className="btn text-danger p-0">
                                             <i className="fas fa-trash-alt"></i>
                                         </button>
                                     </td>
@@ -138,13 +138,10 @@ const UserManage = (props) => {
                             </tbody>
                         )
                     })
-                }
-
-                {   
-                    listUsers && listUsers.length ===0 &&
+                    :
                     <tbody>
-                        <tr><td className="">Không có dữ liệu</td></tr> 
-                    </tbody> 
+                        <tr><td colSpan={12}>Không có dữ liệu</td></tr> 
+                    </tbody>
                 }
             </table>
         </div>
