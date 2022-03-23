@@ -1,5 +1,5 @@
-import { formatDate } from 'components/Formatting/FormatDate';
 import React, { useEffect } from 'react';
+import { formatDate } from 'components/Formatting/FormatDate';
 import { useSelector, useDispatch } from 'react-redux';
 import { FilterNotify} from 'store/actions';
 
@@ -18,7 +18,7 @@ const Order = () => {
         <div className=''>
             <div className='text-right text-dark border markAll btn-light mb-2 p-2'>Đánh dấu đã đọc tất cả</div>
             {
-                notify && notify.length > 0 ?
+                notify?.length > 0 ?
                 notify.map((item, index) => {
                     return (
                         <div className='d-flex align-items-center justify-content-between bg-light my-3 p-3' key={index}>

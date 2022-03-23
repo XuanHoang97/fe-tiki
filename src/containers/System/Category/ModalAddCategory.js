@@ -5,9 +5,6 @@ const ModalAddCategory = (props) => {
     const [previewImg, setPreviewImg] = useState('');
     const [image, setImage] = useState('');
     const [name, setName] = useState('');
-    const [keyMap, setKeyMap] = useState('');
-    const [type, setType] = useState('CATEGORY');
-    const [value, setValue] = useState('');
 
     const toggle =()=>{
         props.toggleParent();
@@ -20,9 +17,6 @@ const ModalAddCategory = (props) => {
             name: name,
             image: image,
             previewImg: previewImg,
-            keyMap: keyMap,
-            type: type,
-            value: value,
         });
         toggle();
     }
@@ -81,30 +75,6 @@ const ModalAddCategory = (props) => {
                         </div> : <img src="https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png" className="w-100" alt="..." />
                         }
                     </div>
-                </div>
-
-                <div className="form-group col-md-6">
-                    <label>KeyMap </label>
-                    <input type="input" className="form-control" 
-                        onChange= {(e)=>setKeyMap(e.target.value)}
-                        value={keyMap}
-                    />
-                </div>
-
-                <div className="form-group col-md-6">
-                    <label>Type </label>
-                    <input type="input" className="form-control" 
-                        onChange= {(e)=>setType(e.target.value)}
-                        value={type}
-                    />
-                </div>
-
-                <div className="form-group col-md-6">
-                    <label>Value </label>
-                    <input type="input" className="form-control" 
-                        onChange= {(e)=>setValue(e.target.value)}
-                        value={value}
-                    />
                 </div>
             </div>
             </ModalBody>

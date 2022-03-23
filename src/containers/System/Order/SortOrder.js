@@ -4,17 +4,15 @@ function SortOrder(props) {
     const {status, StatusOrder, FilterOrder} = props;
 
     return (
-        <div className='filter bg-success py-2 text-white d-flex align-items-center'>
-            <div className="orderSort col-4 d-flex align-items-center">
-                <label className="labelSort p-0 col-md-3">Tìm kiếm</label>
-                <input type="text" className="col-md-9 form-control" placeholder="Mã đơn hàng..." 
-                    style={{height:'30px'}}
-                />
+        <div className='filter'>
+            <div className="orderSort">
+                <label className="labelSort">Tìm kiếm</label>
+                <input type="text" className="item-filterOrder form-control" placeholder="Mã đơn hàng..."/>
             </div>
 
-            <div className="orderSort col-4 p-0 d-flex align-items-center">
-                <label className="labelSort col-md-3 p-0">Trạng thái</label>
-                <select className="col-md-9 form-control" style={{height:'30px'}}
+            <div className="orderSort">
+                <label className="labelSort">Trạng thái</label>
+                <select className="item-filterOrder form-control"
                     value={StatusOrder}
                     onChange={(e) => FilterOrder(e)}
                 >
@@ -26,12 +24,12 @@ function SortOrder(props) {
                 </select>
             </div>
 
-            <div className="orderSort col-4 d-flex align-items-center">
-                <label className="labelSort col-md-4 p-0">Ngày đặt</label>
-                <select className="col-md-8 form-control" name="" id=""  style={{height:'30px'}}>
-                    <option>Ngày đặt</option>
-                    <option>Mới nhất</option>
-                    <option>Muộn nhất</option>
+            <div className="orderSort">
+                <label className="labelSort">Ngày đặt</label>
+                <select className="item-filterOrder form-control">
+                    <option>Hôm nay</option>
+                    <option>Tuần này</option>
+                    <option>tháng này</option>
                 </select>
             </div>
         </div>

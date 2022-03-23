@@ -25,9 +25,6 @@ const CategoryManage = (props) => {
     const CreateCategory = (data) => {
         const dataCategory = new FormData();
         dataCategory.append('name', data.name);
-        dataCategory.append('keyMap', data.keyMap);
-        dataCategory.append('type', data.type);
-        dataCategory.append('value', data.value);
         data.image && dataCategory.append('image', data.image);
         dispatch(actions.CreateCategory(dataCategory));
     }
@@ -42,9 +39,6 @@ const CategoryManage = (props) => {
         const category = new FormData();
         category.append('id', categoryEdit.id);
         category.append('name', data.name);
-        category.append('keyMap', data.keyMap);
-        category.append('type', data.type);
-        category.append('value', data.value);
         data.image && category.append('image', data.image);
         dispatch(actions.EditCategory(category));
     }
@@ -92,7 +86,7 @@ const CategoryManage = (props) => {
                 </thead>
                 <tbody>
                 {
-                    category && category.length > 0 ?
+                    category?.length > 0 ?
                     category.map((item, index) => {
                         return (
                             <tr key={index}>

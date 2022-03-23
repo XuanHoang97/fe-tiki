@@ -10,7 +10,6 @@ const ChangeAddress = (props) => {
       onCitySelect,
       onDistrictSelect,
       onWardSelect,
-      onSubmit
     } = useLocationForm(false);
   
     const {
@@ -22,50 +21,62 @@ const ChangeAddress = (props) => {
       selectedWard
     } = state;
 
+    const addAddress = () => {
+      console.log('data city:', selectedCity.label, selectedDistrict.label, selectedWard.label);
+    }
+
     return (
         <Modal isOpen={isOpen}>
-          <form onSubmit={onSubmit}>
+          <form>
             <ModalHeader toggle={()=>toggle()}>Địa chỉ mới</ModalHeader>
             <ModalBody>
-              <div className='d-flex'>
-                <div className="form-group col-6 p-0">
+              <div className='infor-user'>
+                <div className="form-group">
                   <input type="text" className="form-control" placeholder="Họ và tên" />
                 </div>
 
-                <div className="form-group col-6 p-0">
+                <div className="form-group">
                   <input type="text" className="form-control" placeholder="Số điện thoại" />
                 </div>
               </div>
 
-              <Select
-                name="cityId"
-                key={`cityId_${selectedCity?.value}`}
-                isDisabled={cityOptions.length === 0}
-                options={cityOptions}
-                onChange={(option) => onCitySelect(option)}
-                placeholder="Tỉnh/Thành"
-                defaultValue={selectedCity}
-              />
+              <div className='addr-user'>
+                <div>
+                  <Select
+                    name="cityId"
+                    key={`cityId_${selectedCity?.value}`}
+                    isDisabled={cityOptions.length === 0}
+                    options={cityOptions}
+                    onChange={(option) => onCitySelect(option)}
+                    placeholder="Tỉnh/Thành"
+                    defaultValue={selectedCity}
+                  />
+                </div>
 
-              <Select
-                name="districtId"
-                key={`districtId_${selectedDistrict?.value}`}
-                isDisabled={districtOptions.length === 0}
-                options={districtOptions}
-                onChange={(option) => onDistrictSelect(option)}
-                placeholder="Quận/Huyện"
-                defaultValue={selectedDistrict}
-              />
+                <div>
+                  <Select
+                    name="districtId"
+                    key={`districtId_${selectedDistrict?.value}`}
+                    isDisabled={districtOptions.length === 0}
+                    options={districtOptions}
+                    onChange={(option) => onDistrictSelect(option)}
+                    placeholder="Quận/Huyện"
+                    defaultValue={selectedDistrict}
+                  />
+                </div>
 
-              <Select
-                name="wardId"
-                key={`wardId_${selectedWard?.value}`}
-                isDisabled={wardOptions.length === 0}
-                options={wardOptions}
-                placeholder="Phường/Xã"
-                onChange={(option) => onWardSelect(option)}
-                defaultValue={selectedWard}
-              />
+                <div>
+                  <Select
+                    name="wardId"
+                    key={`wardId_${selectedWard?.value}`}
+                    isDisabled={wardOptions.length === 0}
+                    options={wardOptions}
+                    placeholder="Phường/Xã"
+                    onChange={(option) => onWardSelect(option)}
+                    defaultValue={selectedWard}
+                  />
+                </div>
+              </div>
 
                 <div className="form-group">
                   <input type="text" className="form-control" placeholder="Địa chỉ cụ thể" />
@@ -73,13 +84,13 @@ const ChangeAddress = (props) => {
 
                 <div className="form-check">
                   <label className="form-check-label">
-                    <input type="checkbox" className="form-check-input" value="checkedValue" checked />
+                    <input type="checkbox" className="form-check-input" readOnly value="checkedValue" checked />
                     Đặt làm địa chỉ mặc định
                   </label>
                 </div>
             </ModalBody>
             <ModalFooter>
-                <Button color="primary" className="btn" type='submit'>Hoàn thành</Button>
+                <Button onClick={()=> addAddress()} color="primary" className="btn" type='button'>Hoàn thành</Button>
                 <Button color="light" className="btn">Trở lại</Button>
             </ModalFooter>
           </form>

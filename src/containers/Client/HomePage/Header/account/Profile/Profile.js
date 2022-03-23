@@ -104,7 +104,7 @@ function Profile(props) {
                         <label className='col-3'>Giới Tính</label>
                         <div className="gender d-flex px-3">
                             {
-                                gender && gender.length > 0 ?
+                                gender?.length > 0 ?
                                 gender.map((item, index)=>{
                                     return(
                                         <div className="radio" key={index}>
@@ -125,8 +125,8 @@ function Profile(props) {
 
                     <div className='form-group d-flex'>
                         <label className='col-3'>Ngày sinh</label>
-                        <div className="form-group col-9 p-0 d-flex">
-                        <select className="form-control col-4"
+                        <div className="form-group dateBirth col-9">
+                        <select className="form-control"
                             value={date}
                             onChange={(e) => setDateBirth(e.target.value)}
                         >
@@ -139,7 +139,7 @@ function Profile(props) {
                             }
                         </select>
 
-                        <select className="form-control col-4"
+                        <select className="form-control"
                             value={month}
                             onChange={ (e) => setMonthBirth(e.target.value) }
                         >
@@ -155,7 +155,7 @@ function Profile(props) {
                             }
                         </select>
 
-                        <select className="form-control col-4"
+                        <select className="form-control"
                             value={year}
                             onChange={ (e) => setYearBirth(e.target.value) }
                         >

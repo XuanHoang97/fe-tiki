@@ -17,11 +17,25 @@
         border: 1px solid #e5e5e5;
         .tableOrder{
             .filter{
+                padding:5px 10px;
+                color: white;
+                background: rgb(82, 192, 82);
+                display: grid;
+                grid-template-columns: 40% 28% 28%;
+                gap: 15px;
+                align-items: center;
                 .orderSort{
+                    display: flex;
+                    align-items: center;
                     .labelSort{
+                        width: 28%;
                         @include phone{
                             display: none;
                         }
+                    }
+                    .item-filterOrder{
+                        width: 72%;
+                        height: 30px;
                     }
                 }
             }

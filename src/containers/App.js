@@ -45,6 +45,8 @@ function App(props) {
                 
                 <Route path={path.ACCOUNT} component={InfoAccount} />
                 <Route path={path.CHANGE_PASSWORD} component={InfoAccount} />
+                <Route path={path.CHANGE_ADDRESS} component={InfoAccount} />
+                <Route path={path.INFO_PAYMENT} component={InfoAccount} />
                 <Route path={path.ORDER} component={InfoAccount} />
                 <Route path={path.NOTIFICATION} component={InfoAccount} />
                 <Route path={path.ACTIVITY} component={InfoAccount} />

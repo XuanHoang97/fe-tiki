@@ -70,7 +70,6 @@ const Multimedia = (props) => {
         const slide = new FormData();
         slide.append('name', data.name);
         slide.append('status', data.status);
-        slide.append('categoryId', data.categoryId);
         image && slide.append('image', image);
 
         if(action===CRUD_ACTIONS.CREATE){
@@ -83,7 +82,6 @@ const Multimedia = (props) => {
             slide.append('id', slideEdit);
             slide.append('name', data.name);
             slide.append('status', data.status);
-            slide.append('categoryId', data.categoryId);
             image && slide.append('image', image);
             dispatch(actions.EditSlide(slide));
             removeImg();
@@ -96,7 +94,6 @@ const Multimedia = (props) => {
     const editSlide=(slide)=>{
         setValue('name', slide.name);
         setValue('status', slide.status);
-        setValue('categoryId', slide.categoryId);
         setPreviewImg(slide.image);
         setAction(CRUD_ACTIONS.EDIT);
         setSlideEdit(slide.id);
@@ -162,20 +159,6 @@ const Multimedia = (props) => {
                             </div>
 
                             <div className="form-group col-md-2 p-0">
-                                <label>Danh mục</label>
-                                <select className="form-control"
-                                    {...register('categoryId', { required: true })}
-                                >
-                                    {
-                                        category.map((item, index) => {
-                                            return <option key={index} value={item.id}>{item.name}</option>
-                                        })
-                                    }            
-                                </select>
-                                <div className='text-danger'>{errors.categoryId?.type === 'required' && "Vui lòng chọn danh mục"}</div>
-                            </div>
-
-                            <div className="form-group col-md-2 p-0">
                                 <label htmlFor="">Trạng thái</label>
                                 <select className="form-control"
                                     {...register('status', { required: true })}
@@ -217,12 +200,11 @@ const Multimedia = (props) => {
                                     }
                                 </div>
                             </div>
-
                         </div>
-
                         <button type='submit' className={action === CRUD_ACTIONS.EDIT ? "btn btn-warning" : "btn btn-success" }>
                             { action === CRUD_ACTIONS.EDIT ? 'Cập nhật' : "Thêm mới" } 
                         </button>
+
                         <hr/>
 
                         <div className="text-dark">Danh sách (<b>{slide.length}</b>)</div>
@@ -232,7 +214,7 @@ const Multimedia = (props) => {
                                     <td>STT</td>
                                     <td>Ảnh</td>
                                     <td>Tiêu đề</td>
-                                    <td>Thao tác</td>
+                                    <td>Tác vụ</td>
                                 </tr>
                             </thead>
                             <tbody>

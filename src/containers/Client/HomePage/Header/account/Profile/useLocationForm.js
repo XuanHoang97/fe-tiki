@@ -49,6 +49,7 @@ async function fetchInitialData() {
   };
 }
 
+// set initial data or create new state
 function useLocationForm(shouldFetchInitialLocation) {
   const [state, setState] = useState({
     cityOptions: [],
@@ -61,6 +62,7 @@ function useLocationForm(shouldFetchInitialLocation) {
 
   const { selectedCity, selectedDistrict } = state;
 
+  // load data
   useEffect(() => {
     (async function () {
       if (shouldFetchInitialLocation) {
@@ -95,6 +97,7 @@ function useLocationForm(shouldFetchInitialLocation) {
     })();
   }, [selectedDistrict]);
 
+  // select city
   function onCitySelect(option) {
     if (option !== selectedCity) {
       setState({
@@ -108,6 +111,7 @@ function useLocationForm(shouldFetchInitialLocation) {
     }
   }
 
+  // select district
   function onDistrictSelect(option) {
     if (option !== selectedDistrict) {
       setState({
@@ -119,16 +123,12 @@ function useLocationForm(shouldFetchInitialLocation) {
     }
   }
 
+  // select ward
   function onWardSelect(option) {
     setState({ ...state, selectedWard: option });
   }
 
-  function onSubmit(e) {
-    e.preventDefault();
-    window.location.reload();
-  }
-
-  return { state, onCitySelect, onDistrictSelect, onWardSelect, onSubmit };
+  return { state, onCitySelect, onDistrictSelect, onWardSelect };
 }
 
 export default useLocationForm;

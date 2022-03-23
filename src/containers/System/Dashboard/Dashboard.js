@@ -59,7 +59,7 @@ const  Dashboard = (props) => {
                             <h6 className="card-title small text-dark">TỔNG DOANH THU</h6>
                             <h5 className="card-text font-weight-bold">
                             {
-                                filterOrder && filterOrder.length > 0 
+                                filterOrder?.length > 0 
                                 && filterOrder.filter(item => item.status === 'S4').length > 0 ?
                                 <span className="font-weight-bold">
                                     {numberFormat(filterOrder.filter(item => item.status === 'S4').reduce((total, item) => {

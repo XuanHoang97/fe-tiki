@@ -36,9 +36,9 @@
         font-weight: bold;
     }
     height: 100vh;
-    @include phone{
-        display: none;
-    }
+    // @include phone{
+    //     display: none;
+    // }
 }
 
 .menu-horizon{

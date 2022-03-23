@@ -68,9 +68,9 @@ function Purchase(props) {
                 currentOrder={ratingEdit}
             />
 
-            <Nav tabs>
+            <Nav tabs className='tabMyOrder'>
                 {
-                    statusOrder && statusOrder.length >0 ?
+                    statusOrder?.length >0 ?
                     statusOrder.map((item, index) => {
                         return (
                             <NavItem key={index}>
@@ -98,7 +98,7 @@ function Purchase(props) {
             <TabContent activeTab={activeTab}>
                 <TabPane tabId={activeTab}>
                     {
-                        filterOrder && filterOrder.length > 0 ?
+                        filterOrder?.length > 0 ?
                         filterOrder.slice(pagesVisited, pagesVisited + orderPerPage).map((item, index) => {
                             return (
                                 <div className='order p-3 mb-3 bg-white border-bottom' key={index}>

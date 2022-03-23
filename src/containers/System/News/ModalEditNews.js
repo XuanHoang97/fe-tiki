@@ -136,7 +136,7 @@ const ModalEditNews  = (props) => {
                                 value={category_id}
                             >
                                 {   
-                                    listCategory && listCategory.length >0 ?
+                                    listCategory?.length >0 ?
                                     listCategory.map((item, index) => {
                                         return (
                                             <option key={index} value={item.keyMap}>{item.name}</option>
@@ -155,7 +155,7 @@ const ModalEditNews  = (props) => {
                                 value={productId}
                             >
                                 {   
-                                    listProduct && listProduct.length >0 ?
+                                    listProduct?.length >0 ?
                                     listProduct.map((item, index) => {
                                         return (
                                             <option key={index} value={item.id}>{item.name}</option>

@@ -53,7 +53,7 @@ const DetailOrder = (props) => {
                                     <small className='text-secondary'>{formatDate(order.date)}</small>
                                 </div>
                             {
-                                statusOrder && statusOrder.length >0 ?
+                                statusOrder?.length >0 ?
                                 statusOrder.slice(1,5).map((item, index) => {
                                     return (
                                         <div 

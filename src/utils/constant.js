@@ -12,7 +12,7 @@ export const path = {
     LOGIN_AUTH: '/account/login',
     ACCOUNT: '/account/profile',
     CHANGE_PASSWORD: '/account/password',
-    ADDRESS_CHANGE: '/account/address',
+    CHANGE_ADDRESS: '/account/address',
     INFO_PAYMENT: '/account/payment',
     ORDER: '/user/purchase',
     NOTIFICATION: '/user/notifications/order',

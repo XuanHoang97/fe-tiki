@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ChangeAddress from './ChangeAddress';
-import './style.scss'
+import './style.scss';
 
 function Address(props) {
     const user = useSelector(state => state.auth.user);
@@ -56,7 +56,7 @@ function Address(props) {
                     </div>
                     <div className='d-flex'>
                         <span className='col-4'>Địa chỉ:</span> 
-                        <span>{address ? address : 'Chưa có địa chỉ...'}</span>
+                        <div>{address ? address : 'Chưa có địa chỉ...'}</div>
                     </div>
                 </div>
                 <div className='col-6 text-right'>

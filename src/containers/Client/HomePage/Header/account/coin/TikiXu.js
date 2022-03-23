@@ -46,7 +46,7 @@ const TikiXu = (props) => {
             <TabContent activeTab={activeTab}>
                 <TabPane tabId="1">
                     {
-                        TikiPoint && TikiPoint.pointData ?
+                        TikiPoint?.pointData ?
                         TikiPoint.pointData.reverse().map((item, index) => {
                             return (
                                 <div className='coin-item' key={index}>

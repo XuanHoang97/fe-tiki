@@ -35,9 +35,6 @@ const RatingProduct = (props) => {
             })
         );
         toggle();
-            
-            // console.log('currentOrder', currentOrder && currentOrder.userId, currentOrder.id, currentOrder.productId);
-            // console.log('rating', point, rating, comment);
         }
 
     return (

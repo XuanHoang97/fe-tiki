@@ -5,6 +5,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    .menu-header{
+        display: flex;
+        align-items: center;
+    }
+    .loginAuth{
+        display: flex;
+        justify-content: end;
+    }
 }
 .register, .loginAuth{
     background:rgb(40,134,234);

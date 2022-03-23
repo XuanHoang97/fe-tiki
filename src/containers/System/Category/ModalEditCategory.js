@@ -6,9 +6,6 @@ const ModalEditCategory  = (props) => {
     const [image, setImage] = useState('');
     const [previewImg, setPreviewImg] = useState('');
     const [name, setName] = useState('');
-    const [keyMap, setKeyMap] = useState('');
-    const [type, setType] = useState('');
-    const [value, setValue] = useState('');
 
     //fill info category
     useEffect (() => {
@@ -17,9 +14,6 @@ const ModalEditCategory  = (props) => {
             setId(category.id);
             setPreviewImg(category.image);
             setName(category.name);
-            setKeyMap(category.keyMap);
-            setType(category.type);
-            setValue(category.value);
         }
     }, [props.currentCategory]);
 
@@ -49,9 +43,6 @@ const ModalEditCategory  = (props) => {
             id: id,
             image : image,
             name : name,
-            keyMap : keyMap,
-            type : type,
-            value : value,
             previewImg: previewImg,
         });
         toggle();
@@ -94,30 +85,6 @@ const ModalEditCategory  = (props) => {
                                 </div> : <img src="https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png" className="w-100" alt="..." />
                             }
                         </div>                  
-                    </div>
-
-                    <div className="form-group col-md-6">
-                        <label>KeyMap </label>
-                        <input type="input" className="form-control" 
-                            onChange= {(e)=>setKeyMap(e.target.value)}
-                            value={keyMap}
-                        />
-                    </div>
-
-                    <div className="form-group col-md-6">
-                        <label>Type </label>
-                        <input type="input" className="form-control" 
-                            onChange= {(e)=>setType(e.target.value)}
-                            value={type}
-                        />
-                    </div>
-
-                    <div className="form-group col-md-6">
-                        <label>Value </label>
-                        <input type="input" className="form-control" 
-                            onChange= {(e)=>setValue(e.target.value)}
-                            value={value}
-                        />
                     </div>
                 </div>
             </ModalBody>

@@ -52,7 +52,7 @@ const LoginAuth = (props) => {
     return (
         <div className=''>
             <div className='menuAuth'>
-                <div className='d-flex align-items-center'>
+                <div className='menu-header'>
                     <Link to={path.HOMEPAGE}  className='w-25'>
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOalO4LbzM8rEMLzCO2rvdXbFKHOqJRcRaZ-FuU3uFMfuCKf9Xjh5sAa58M7YKepoYXMY&usqp=CAU" alt="" />
                     </Link>
@@ -61,7 +61,7 @@ const LoginAuth = (props) => {
                 <span className='text-primary'>Cần trợ giúp ?</span>
             </div>
 
-            <div className="loginAuth d-flex justify-content-end">
+            <div className="loginAuth">
                 <div className="bgLogin col-md-8">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIFcGvp7AOiZTesQCIXyZ8Wnh9WyQKUzDDjA&usqp=CAU" alt="" 
                         className='w-100'

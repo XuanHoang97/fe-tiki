@@ -96,7 +96,7 @@ const InfoAccount = () => {
                         <Switch>
                             <Route exact path={path.ACCOUNT} component={Profile} />
                             <Route path={path.CHANGE_PASSWORD} component={ChangePassword} />
-                            <Route path={path.ADDRESS_CHANGE} component={Address} />
+                            <Route path={path.CHANGE_ADDRESS} component={Address} />
                             <Route path={path.INFO_PAYMENT} component={InfoPayment} />
 
                             <Route path={path.ORDER} component={Purchase} />

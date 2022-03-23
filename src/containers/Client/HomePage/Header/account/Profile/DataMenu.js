@@ -19,7 +19,7 @@ export const MenuUser = [
 
             {
                 name: 'Địa chỉ',
-                path: path.ADDRESS_CHANGE,
+                path: path.CHANGE_ADDRESS,
             },
 
             {

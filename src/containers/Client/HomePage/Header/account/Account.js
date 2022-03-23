@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { path } from 'utils';
-import { Link } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
 import { getPoint, getUser, logoutAccount } from 'store/actions';
 import {GetUser} from './../../../../../services/authService';
 import { numberFormat } from 'components/Formatting/FormatNumber';
+import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { path } from 'utils';
 
 const Account = () => {
     const dispatch = useDispatch();
@@ -59,7 +59,7 @@ const Account = () => {
                 {
                     user ?
                     <React.Fragment>
-                        <img src={user && user.image ? user.image : `http://res.cloudinary.com/do7qmg6jr/image/upload/v1645518444/sbgr7wd9k1t9v8f0cwvm.jpg`} className='rounded-circle' style={{width:'30px', height:'30px'}} alt="" />
+                        <img src={user?.image ? user.image : `http://res.cloudinary.com/do7qmg6jr/image/upload/v1645518444/sbgr7wd9k1t9v8f0cwvm.jpg`} className='rounded-circle' style={{width:'30px', height:'30px'}} alt="" />
                         <b className='ml-2' style={{fontSize: '12px'}}>{user?.username}</b>
                     </React.Fragment>
                     :

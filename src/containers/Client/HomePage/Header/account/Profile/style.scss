@@ -26,5 +26,25 @@
 
 .infoAddr{
     @extend .myAddress
+    
+}
 
+.dateBirth{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 10px;
+    padding: 0;
+}
+
+.infor-user{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.addr-user{
+    margin: 10px 0 15px 0;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(3,1fr);
 }
