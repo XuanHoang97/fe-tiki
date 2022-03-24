@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {TabContent, TabPane} from 'reactstrap';
+import { filterOrderByStatus, getAllOrder, getStatusOrder, SendBillCustomer, updateOrderStatus } from 'store/actions';
 import { numberFormat } from 'components/Formatting/FormatNumber';
 import {formatDateNew } from 'components/Formatting/FormatDate';
-import { filterOrderByStatus, getAllOrder, getStatusOrder, SendBillCustomer, updateOrderStatus } from 'store/actions';
+import { useSelector, useDispatch } from 'react-redux';
 import LoadingOverlay from 'react-loading-overlay';
+import {TabContent, TabPane} from 'reactstrap';
 import ReactPaginate from "react-paginate";
 import VerifyOrder from './VerifyOrder';
 import SortOrder from './SortOrder';
@@ -69,8 +69,8 @@ const OrderManage = (props) => {
     }
 
     //pagination
-    const [pageNumber, setPageNumber] = useState(0);
     const orderPerPage = 8;
+    const [pageNumber, setPageNumber] = useState(0);
     const pagesVisited = pageNumber * orderPerPage;
     const pageCount = Math.ceil(filterOrder.length / orderPerPage);
     const changePage = ({ selected }) => {
@@ -141,7 +141,7 @@ const OrderManage = (props) => {
                                             </td>
                                         </tr> :
 
-                                        filterOrder && filterOrder.length > 0 ?
+                                        filterOrder?.length > 0 ?
                                         filterOrder.slice(pagesVisited, pagesVisited + orderPerPage)
                                         .map((item, index) => {
                                             return (
@@ -169,7 +169,6 @@ const OrderManage = (props) => {
                                                                 <span onClick={() => verifyOrder(item)} className="actionOrder text-primary">Xác nhận</span>
                                                                 <div className="actionOrder text-danger">Huỷ đơn</div>
                                                             </>
-
                                                         }
 
                                                         {
@@ -178,7 +177,6 @@ const OrderManage = (props) => {
                                                                 <span onClick={() => verifyOrder(item)} className="actionOrder text-primary">Giao hàng</span>
                                                                 <div className="actionOrder text-danger">Huỷ đơn</div>
                                                             </>
-
                                                         }
 
                                                         {
@@ -187,7 +185,6 @@ const OrderManage = (props) => {
                                                                 <span onClick={() => verifyOrder(item)} className="actionOrder text-primary">Chốt đơn</span>
                                                                 <div className="actionOrder text-danger">Huỷ đơn</div>
                                                             </>
-
                                                         }
 
                                                         {
@@ -195,7 +192,7 @@ const OrderManage = (props) => {
                                                             <span onClick={() => sendBill(item)}  className="actionOrder text-primary">Gửi hoá đơn</span>
                                                         }
 
-    {
+                                                        {
                                                             item.status ==='S4' && item.bill === '1' &&
                                                             <span className="actionOrder text-success" disabled >Xem hoá đơn</span>
                                                         }
@@ -203,7 +200,6 @@ const OrderManage = (props) => {
                                                         {
                                                             item.status ==='S5' && <span className="actionOrder text-primary">Mua lại</span>
                                                         }
-                                                        <br/>
                                                     </td>
                                                 </tr>
                                             )

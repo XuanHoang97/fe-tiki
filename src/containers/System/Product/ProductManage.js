@@ -1,11 +1,12 @@
 import React,{useState, useEffect} from 'react';
+import { numberFormat } from '../../../components/Formatting/FormatNumber';
 import { useSelector, useDispatch } from 'react-redux';
+import ModalEditProduct from './ModalEditProduct';
 import * as actions from '../../../store/actions';
 import ModalProduct from './ModalProduct';
-import ModalEditProduct from './ModalEditProduct';
-import { numberFormat } from '../../../components/Formatting/FormatNumber';
 import Sort from './Sort';
 import './style.scss';
+import ReactPaginate from 'react-paginate';
 
 const ProductManage = (props) => {
     const [modalProduct, setModalProduct] = useState(false);
@@ -56,6 +57,15 @@ const ProductManage = (props) => {
         dispatch(actions.EditProduct(product));
     }
 
+    //pagination
+    const [pageNumber, setPageNumber] = useState(0);
+    const productPerPage = 8;
+    const pagesVisited = pageNumber * productPerPage;
+    const pageCount = Math.ceil(listProducts.length / productPerPage);
+    const changePage = ({ selected }) => {
+        setPageNumber(selected);
+    };
+
     return (        
         <div className="productManage">
             <ModalProduct
@@ -102,7 +112,7 @@ const ProductManage = (props) => {
                 <tbody>
                     {   
                         listProducts?.length>0 ?
-                        listProducts.map((item, index) => {
+                        listProducts.slice(pagesVisited, pagesVisited + productPerPage).map((item, index) => {
                             return(
                                 <tr key={index}>
                                     <td>{index + 1}</td>
@@ -131,6 +141,17 @@ const ProductManage = (props) => {
                     }
                 </tbody>
             </table>
+            <ReactPaginate
+                previousLabel={"<"}
+                nextLabel={">"}
+                pageCount={pageCount}
+                onPageChange={changePage}
+                containerClassName={"paginationBttns"}
+                previousLinkClassName={"previousBttn"}
+                nextLinkClassName={"nextBttn"}
+                disabledClassName={"paginationDisabled"}
+                activeClassName={"paginationActive"}
+            />
         </div>
     );
 }

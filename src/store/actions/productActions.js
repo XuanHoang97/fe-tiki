@@ -15,7 +15,6 @@ import {
 } from "../../services/userService"
 import { toast } from "react-toastify"
 
-
 //fetch all product
 export const fetchProducts = () => {
     return async(dispatch, getState) => {
@@ -105,7 +104,6 @@ export const SaveInfoProduct = (data) => {
     return async(dispatch, getState) => {
         try {
             let res = await saveInfoProduct(data);
-            console.log('saveInfoProduct', res)
             if (res && res.data.errCode === 0) {
                 dispatch({
                     type: actionTypes.SAVE_INFO_DETAIL_PRODUCT,
@@ -124,7 +122,6 @@ export const UploadMultiFile = (data) => {
     return async(dispatch, getState) => {
         try {
             let res = await uploadMultiFile(data);
-            console.log('res', res)
             if (res && res.data.errCode === 0) {
                 dispatch({
                     type: actionTypes.UPLOAD_MULTIPLE_IMAGE,
@@ -178,12 +175,10 @@ export const GetProductSimilar = (productId) => {
     return async(dispatch, getState) => {
         try {
             let res = await getProductSimilar(productId);
-            if (res && res.data.errCode === 0) {
-                dispatch({
-                    type: actionTypes.FETCH_PRODUCT_SIMILAR,
-                    payload: res.data.products
-                })
-            }
+            dispatch({
+                type: actionTypes.FETCH_PRODUCT_SIMILAR,
+                payload: res.data.products
+            })
         } catch (e) {
             console.log('GetProductSimilarFailed error', e)
         }
@@ -195,30 +190,25 @@ export const SelectOptionProduct = (data) => {
     return async(dispatch, getState) => {
         try {
             let res = await getAllCodeService('OPTION_PRODUCT');
-            if(res && res.data.errCode === 0){
-                dispatch({
-                    type: actionTypes.SELECT_OPTION_PRODUCT,
-                    payload: res.data.data
-                })
-            }
+            dispatch({
+                type: actionTypes.SELECT_OPTION_PRODUCT,
+                payload: res.data.data
+            })
         } catch (e) {
             toast.error('fetch option product error !')
         }
     }
 }
 
-
 //get all article
 export const GetAllArticle = () => {
     return async(dispatch, getState) => {
         try {
             let res = await getAllArticle('ALL')
-            if (res && res.data.errCode === 0) {
-                dispatch({
-                    type: actionTypes.FETCH_ARTICLE,
-                    payload: res.data.articles.reverse()
-                })
-            }
+            dispatch({
+                type: actionTypes.FETCH_ARTICLE,
+                payload: res.data.articles.reverse()
+            })
         } catch (e) {
             console.log('GetAllArticleFailed error', e)
         }

@@ -51,7 +51,7 @@ const DescProduct = (props) => {
                                 onChange={(e)=>changeCategory(e)}
                             >     
                                 {
-                                    category && category.length > 0 &&
+                                    category?.length > 0 &&
                                     category.map((item, index) => {
                                         return (
                                             <option key={index} value={item.id}>{item.name}</option>
@@ -63,7 +63,7 @@ const DescProduct = (props) => {
                     </div>
 
                     {
-                        category && category.length > 0 ?
+                        category?.length > 0 ?
                         <div className='col-md-3 p-0'>
                             <label className='mr-3'>Sản phẩm</label>
                             <select className="form-control" style={{height:'30px'}}
@@ -71,7 +71,7 @@ const DescProduct = (props) => {
                                 onChange={(e)=>setProductId(e.target.value)}
                             >
                                 {
-                                    DetailCategory && DetailCategory.length > 0 &&
+                                    DetailCategory?.length > 0 &&
                                     DetailCategory.map((item, index) => {
                                         return (
                                             <option key={index} value={item.id}>{item.name}</option>
@@ -104,7 +104,6 @@ const DescProduct = (props) => {
                                         )
                                     })
                                     :
-                                    // imgDefault
                                     <div className="col-12">
                                         <img src="https://via.placeholder.com/150" className="w-25" alt=""  />
                                     </div>

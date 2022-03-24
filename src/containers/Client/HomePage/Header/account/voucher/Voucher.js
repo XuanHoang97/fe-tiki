@@ -3,8 +3,8 @@ import { formatDateNew } from 'components/Formatting/FormatDate';
 import { useSelector, useDispatch } from 'react-redux';
 import { TabContent, TabPane } from 'reactstrap';
 import { GetDiscountUser } from 'store/actions';
-import TabVoucher from './TabVoucher';
 import { NavLink } from 'react-router-dom';
+import TabVoucher from './TabVoucher';
 import { path } from 'utils';
 import './style.scss';
 
@@ -12,7 +12,7 @@ function Voucher(props) {
     const dispatch = useDispatch();
     const [activeTab, setActiveTab] = useState('1');
     const user = useSelector(state => state.auth.user);
-    const discounts = useSelector(state => state.auth.discounts);
+    const myDiscount = useSelector(state => state.auth.discounts);
 
     useEffect(() => {
         let userId = user? user.id :null;
@@ -43,8 +43,8 @@ function Voucher(props) {
                 <TabPane tabId="1">
                     <div className="list-voucher">
                         {
-                            discounts?.length >0 ?
-                            discounts.map((item, index) => {
+                            myDiscount?.length >0 ?
+                            myDiscount.map((item, index) => {
                                 return (
                                     <div className='voucher' key={index}>
                                         <div className='voucher-provider col-3'>
@@ -54,7 +54,7 @@ function Voucher(props) {
                                             <span className='ribbon'></span>
                                         </div>
 
-                                        <div className='voucher-info d-flex justify-content-between col-9 py-2'>
+                                        <div className='voucher-info col-9'>
                                             <div className='voucher-value'>
                                                 <b className='text-primary'>{item.info}</b>
                                                 <div>Đơn tốI thiểu {item.applyTo}k</div>
@@ -63,7 +63,7 @@ function Voucher(props) {
                                                 có liệu lực từ {formatDateNew(item.discountStart)}</div>
                                             </div>
 
-                                            <div className='voucher-right text-right'>
+                                            <div className='voucher-right'>
                                                 <span className='text-danger'>Dùng ngay <i className='fa fa-angle-right'></i></span>
                                                 <span className='text-primary'>Điều kiện</span>
                                             </div>

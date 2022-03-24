@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DetailCategory, fetchAllCategory } from "store/actions";
-import { Link } from "react-router-dom";
-import { path } from "utils";
 
 export default function Category() {
   const [active, setActive] = useState('');
@@ -33,12 +31,11 @@ export default function Category() {
       <li className="menu_ctg nav-item dropdown mr-2 active"
         onClick={() => viewCategory()}
       >
-        <Link className="category nav-link dropdown-toggle" to={path.HOMEPAGE}>
+        <span className="category nav-link dropdown-toggle">
           <i className="fas fa-bars mr-2" />
-          <small>Danh mục</small>
-          <br />
+          <small>Danh mục</small><br/>
           <span>Sản phẩm</span>
-        </Link>
+        </span>
       </li>
 
       {
@@ -68,8 +65,7 @@ export default function Category() {
                   detailCategory?.length > 0 ?
                   detailCategory.map((item, index) => {
                     return (
-                      <div className="col-4 d-flex align-items-center py-2 px-3 bg-light"
-                        key={index}
+                      <div className="col-4 d-flex align-items-center py-2 px-3 bg-light" key={index}
                         onMouseEnter={() => setHoverSubMenu(!hoverSubMenu)}
                       >
                         <img className="w-25" src={item.image} alt="img slide" />
@@ -77,8 +73,7 @@ export default function Category() {
                       </div>
                     )
                   }) 
-                  :
-                  <div>Không có dữ liệu</div>
+                  : <div>Không có dữ liệu</div>
                 }
               </div>
             }

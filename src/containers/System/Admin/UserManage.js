@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { createNewUser, deleteUser, editUser, fetchAllUser } from '../../../store/actions';
+import { numberFormat } from 'components/Formatting/FormatNumber';
 import { formatDateNew } from 'components/Formatting/FormatDate';
+import { useSelector, useDispatch } from 'react-redux';
 import ModalEditUser from './ModalEditUser';
 import ModalUser from './ModalUser';
-import './style.scss'
-import { numberFormat } from 'components/Formatting/FormatNumber';
+import './style.scss';
 
 const UserManage = (props) => {
     const [modalUser, setModalUser] = useState(false);

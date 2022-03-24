@@ -28,12 +28,10 @@ export const GetAllDiscount = () => {
     return async(dispatch, getState) => {
         try {
             let res = await getAllDiscount('ALL');
-            if (res && res.data.errCode === 0) {
-                dispatch({
-                    type: actionTypes.FETCH_ALL_DISCOUNT,
-                    payload: res.data.discount
-                })
-            }
+            dispatch({
+                type: actionTypes.FETCH_ALL_DISCOUNT,
+                payload: res.data.discount
+            })
         } catch (e) {
             toast.error('get all discount fail', e)
         }

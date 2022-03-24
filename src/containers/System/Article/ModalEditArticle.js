@@ -73,7 +73,7 @@ const ModalEditArticle = (props) => {
                         disabled
                     >     
                         {
-                            category && category.length > 0 ?
+                            category?.length > 0 ?
                             category.map((item, index) => {
                                 return (
                                     <option key={index} value={index +3}>{item.name}</option>
@@ -85,7 +85,7 @@ const ModalEditArticle = (props) => {
                 </div>
 
                 {
-                    category && category.length > 0 ?
+                    category?.length > 0 ?
                     <div className='form-group d-flex col-3 p-0'>
                         <select className="form-control" style={{height:'30px'}}
                             value={productId}
@@ -93,7 +93,7 @@ const ModalEditArticle = (props) => {
                             disabled
                         >
                             {
-                                DetailCategory && DetailCategory.length > 0 ?
+                                DetailCategory?.length > 0 ?
                                 DetailCategory.map((item, index) => {
                                     return (
                                         <option key={index} value={item.id}>{item.name}</option>

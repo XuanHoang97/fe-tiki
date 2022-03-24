@@ -150,7 +150,7 @@ const Multimedia = (props) => {
                 <TabPane tabId="1">
                     <form className='list-slide' onSubmit={handleSubmit(handleSaveSlide)}>
                         <div className='formSlide d-flex justify-content-between col-md-12 p-0'>
-                            <div className="form-group col-md-3 p-0">
+                            <div className="form-group col-md-4 p-0">
                                 <label htmlFor="">Tiêu đề</label>
                                 <input type="text" className="form-control" 
                                     {...register('name', { required: true })}
@@ -158,7 +158,7 @@ const Multimedia = (props) => {
                                 <div className='text-danger'>{errors.name?.type === 'required' && "Vui lòng nhập tiêu đề"}</div>
                             </div>
 
-                            <div className="form-group col-md-2 p-0">
+                            <div className="form-group col-md-2">
                                 <label htmlFor="">Trạng thái</label>
                                 <select className="form-control"
                                     {...register('status', { required: true })}
@@ -175,7 +175,7 @@ const Multimedia = (props) => {
                                 <div className='text-danger'>{errors.status?.type === 'required' && "Vui lòng chọn trạng thái"}</div>
                             </div>
 
-                            <div className='upload-file d-flex col-md-3 p-0'>
+                            <div className='upload-file d-flex col-md-4'>
                                 <div className="form-group col-5 p-0">
                                     <label>Ảnh</label>
                                     <input id="previewImg" type="file" hidden 
@@ -200,11 +200,10 @@ const Multimedia = (props) => {
                                     }
                                 </div>
                             </div>
+                            <button type='submit' className={action === CRUD_ACTIONS.EDIT ? "btn btn-warning" : "btn btn-success" }>
+                                { action === CRUD_ACTIONS.EDIT ? 'Cập nhật' : "Thêm mới" } 
+                            </button>
                         </div>
-                        <button type='submit' className={action === CRUD_ACTIONS.EDIT ? "btn btn-warning" : "btn btn-success" }>
-                            { action === CRUD_ACTIONS.EDIT ? 'Cập nhật' : "Thêm mới" } 
-                        </button>
-
                         <hr/>
 
                         <div className="text-dark">Danh sách (<b>{slide.length}</b>)</div>

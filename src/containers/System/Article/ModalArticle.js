@@ -59,7 +59,7 @@ const ModalArticle = (props) => {
                         onChange={(e)=>changeCategory(e)}
                     >     
                         {
-                            category && category.length > 0 &&
+                            category?.length > 0 &&
                             category.map((item, index) => {
                                 return (
                                     <option key={index} value={item.id}>{item.name}</option>
@@ -70,14 +70,14 @@ const ModalArticle = (props) => {
                 </div>
 
                 {
-                    category && category.length > 0 ?
+                    category?.length > 0 ?
                     <div className='form-group d-flex col-3 p-0'>
                         <select className="form-control"
                             value={productId}
                             onChange={(e)=>setProductId(e.target.value)}
                         >
                             {
-                                DetailCategory && DetailCategory.length > 0 &&
+                                DetailCategory?.length > 0 &&
                                 DetailCategory.map((item, index) => {
                                     return (
                                         <option key={index} value={item.id}>{item.name}</option>

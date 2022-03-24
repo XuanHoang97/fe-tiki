@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { numberFormat } from 'components/Formatting/FormatNumber';
+import { formatDate } from 'components/Formatting/FormatDate';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../../store/actions';
-import { formatDate } from 'components/Formatting/FormatDate';
 
 const VerifyOrder = (props) => { 
     const {isOpen, toggle} = props;

@@ -4,6 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import { fetchRating } from 'store/actions';
 import TabVote from './TabVote';
 import './style.scss';
+import ReactPaginate from 'react-paginate';
 
 const VoteManage = (props) => {
     const dispatch = useDispatch();
@@ -14,13 +15,20 @@ const VoteManage = (props) => {
         dispatch(fetchRating());
     }, [dispatch]);
 
-    console.log('ratings', ratings);
+    //pagination
+    const [pageNumber, setPageNumber] = useState(0);
+    const ratingPerPage = 8;
+    const pagesVisited = pageNumber * ratingPerPage;
+    const pageCount = Math.ceil(ratings.length / ratingPerPage);
+    const changePage = ({ selected }) => {
+        setPageNumber(selected);
+    };
 
     return (
         <div className='voteManage'>
             <div className="vote-header">
                 <img src="https://www.kindpng.com/picc/m/561-5619099_circle-icons-star-with-hex-feb42f-background-vector.png" style={{width: '3%'}} alt="" />
-                <div className='voteTitle'>Đánh giá <small>({ratings && ratings.length >0 ? ratings.length : 0})</small></div>
+                <div className='voteTitle'>Đánh giá <small>({ratings?.length >0 ? ratings.length : 0})</small></div>
             </div>
             <TabVote
                 activeTab={activeTab}
@@ -63,8 +71,8 @@ const VoteManage = (props) => {
                                 
                                 <tbody>
                                     {
-                                        ratings && ratings.length > 0 ?
-                                        ratings.map((item, index) => {
+                                        ratings?.length > 0 ?
+                                        ratings.slice(pagesVisited, pagesVisited + ratingPerPage).map((item, index) => {
                                             return (
                                                 <tr key={index}>
                                                     <td>{index + 1} </td>
@@ -88,6 +96,17 @@ const VoteManage = (props) => {
                                 </tbody>
                             </table>
                         </div>
+                        <ReactPaginate
+                            previousLabel={"<"}
+                            nextLabel={">"}
+                            pageCount={pageCount}
+                            onPageChange={changePage}
+                            containerClassName={"paginationBttns"}
+                            previousLinkClassName={"previousBttn"}
+                            nextLinkClassName={"nextBttn"}
+                            disabledClassName={"paginationDisabled"}
+                            activeClassName={"paginationActive"}
+                        />
                     </div>
                 </TabPane>
             </TabContent>

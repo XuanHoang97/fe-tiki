@@ -63,38 +63,30 @@ export const getAllDelivery = () => {
     return async(dispatch, getState) => {
         try{
             let res = await getAllCodeService('DELIVERY');
-            if(res && res.data.errCode === 0){
-                dispatch(getAllDeliverySuccess(res.data.data));
-            }
+            dispatch({
+                type: actionTypes.FETCH_ALL_DELIVERY,
+                payload: res.data.data
+            })
         }catch(e){
             console.log('getAllDelivery error', e)
         }
     }
 }
 
-export const getAllDeliverySuccess = (data) => ({
-    type: actionTypes.FETCH_ALL_DELIVERY,
-    dataDelivery: data
-})
-
 //get all payment
 export const getAllPayment = () => {
     return async(dispatch, getState) => {
         try{
             let res = await getAllCodeService('PAYMENT');
-            if(res && res.data.errCode === 0){
-                dispatch(getAllPaymentSuccess(res.data.data));
-            }
+            dispatch({
+                type: actionTypes.FETCH_ALL_PAYMENT,
+                payload: res.data.data
+            })
         }catch(e){
             console.log('getAllPayment error', e)
         }
     }
 }
-
-export const getAllPaymentSuccess = (data) => ({
-    type: actionTypes.FETCH_ALL_PAYMENT,
-    dataPayment: data
-})
 
 //get all order
 export const getAllOrder = () => {
@@ -173,7 +165,6 @@ export const addToCartLogin = (data, userId) => {
                     type: actionTypes.ADD_TO_CART_LOGIN,
                     payload: res.result 
                 });
-
                 toast.success('Sản phẩm đã được thêm vào giỏ hàng !')
             }
         } catch (e) {

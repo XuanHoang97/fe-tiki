@@ -10,12 +10,10 @@ export const fetchRating = () => {
     return async(dispatch, getState) => {
         try {
             let res = await getAllRating('ALL');
-            if (res && res.data.errCode === 0) {
-                dispatch({
-                    type: actionTypes.FETCH_ALL_RATING,
-                    payload: res.data.result.reverse()
-                })
-            }
+            dispatch({
+                type: actionTypes.FETCH_ALL_RATING,
+                payload: res.data.result.reverse()
+            })
         } catch (e) {
             toast.error('fetch rating error', e)
         }

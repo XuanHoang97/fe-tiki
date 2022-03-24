@@ -9,7 +9,7 @@ const AddDiscount = (props) => {
     const [applyTo, setApplyTo] = useState('');
     const [discountStart, setDiscountStart] = useState('');
     const [discountEnd, setDiscountEnd] = useState('');
-    const [creator, setCreator] = useState('');
+    const [creator, setCreator] = useState('Hoang');
     const [type] = useState('');
 
     const formatDiscountStart = new Date(discountStart).getTime();

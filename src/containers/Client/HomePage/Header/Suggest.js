@@ -1,4 +1,5 @@
 import React from 'react';
+import './style/header.scss';
 
 const Suggest = () => {
     return (
@@ -8,16 +9,16 @@ const Suggest = () => {
             </div>
 
             <div className="col-md-8 suggest">
-                <a href='/#' className="mr-3 text-white">Đồng hồ thông minh</a>
-                <a href='/#' className="mr-3 text-white">Mũ bảo hiểm</a>
-                <a href='/#' className="mr-3 text-white">Đầm dự tiệc</a>
-                <a href='/#' className="mr-3 text-white">Bình giữ nhiệt</a>
-                <a href='/#' className="mr-3 text-white">Tai nghe Bluetooth</a>
-                <a href='/#' className="mr-3 text-white">Máy lạnh</a>
+                <span>Đồng hồ thông minh</span>
+                <span>Mũ bảo hiểm</span>
+                <span>Đầm dự tiệc</span>
+                <span>Bình giữ nhiệt</span>
+                <span>Tai nghe Bluetooth</span>
+                <span>Máy lạnh</span>
             </div>
 
-            <div className="saleTiki col-md-2 text-right pr-0">
-                <a href='/#' className="small text-white">💰Bán hàng cùng Tiki</a>
+            <div className="saleTiki col-md-2 text-right text-white pr-0">
+                <span className="small">💰Bán hàng cùng Tiki</span>
             </div>
         </div>
     );

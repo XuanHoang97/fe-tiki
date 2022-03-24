@@ -1,6 +1,7 @@
 import React from 'react';
 import { TabPane } from 'reactstrap';
 import { CRUD_ACTIONS } from 'utils';
+import './style.scss';
 
 function SpecialCategory(props) {
     const { 
@@ -11,10 +12,10 @@ function SpecialCategory(props) {
     return (
         <TabPane tabId="2">
             <form className='list-category-special'
-            onSubmit={saveCategory}
-            encType="multipart/form-data"
+                onSubmit={saveCategory}
+                encType="multipart/form-data"
             >
-                <div className='formCategory d-flex justify-content-between col-12 p-0'>
+                <div className='formCategory'>
                     <div className="form-group col-md-4 p-0">
                         <label htmlFor="">Tiêu đề</label>
                         <input type="text" className="form-control" 
@@ -23,7 +24,7 @@ function SpecialCategory(props) {
                         />
                     </div>
 
-                    <div className="form-group col-md-2 pl-0">
+                    <div className="form-group col-md-2">
                         <label>Danh mục</label>
                         <select className="form-control"
                             value={categoryId}
@@ -37,7 +38,7 @@ function SpecialCategory(props) {
                         </select>
                     </div>
 
-                    <div className='upload-file d-flex col-md-4 p-0'>
+                    <div className='upload-file d-flex col-md-4'>
                         <div className="form-group col-4 p-0">
                             <label>Ảnh</label>
                             <input id="previewImgCategory" type="file" hidden 
@@ -60,12 +61,10 @@ function SpecialCategory(props) {
                             }
                         </div>
                     </div>
-
+                    <button type='submit' className={action === CRUD_ACTIONS.EDIT ? "btn btn-warning" : "btn btn-success" }>
+                        { action === CRUD_ACTIONS.EDIT ? 'Cập nhật' : "Thêm mới" } 
+                    </button>
                 </div>
-
-                <button type='submit' className={action === CRUD_ACTIONS.EDIT ? "btn btn-warning" : "btn btn-success" }>
-                    { action === CRUD_ACTIONS.EDIT ? 'Cập nhật' : "Thêm mới" } 
-                </button>
                 <hr/>
 
                 <div className="text-dark">Danh sách (<b>{specialCategories.length}</b>)</div>
@@ -80,7 +79,7 @@ function SpecialCategory(props) {
                     </thead>
                     <tbody>
                         {
-                            specialCategories && specialCategories.length> 0 ?
+                            specialCategories?.length> 0 ?
                             specialCategories.map((item, index) => {
                                 return(
                                     <tr key={index}>

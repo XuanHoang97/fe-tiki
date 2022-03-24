@@ -92,14 +92,14 @@ const clientReducer = (state = initialState, action) => {
         case actionTypes.FETCH_ALL_DELIVERY:
             return {
                 ...state,
-                delivery: action.dataDelivery
+                delivery: action.payload
             }
 
             //get all payment
         case actionTypes.FETCH_ALL_PAYMENT:
             return {
                 ...state,
-                payment: action.dataPayment
+                payment: action.payload
             }
 
 

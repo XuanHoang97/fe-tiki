@@ -185,7 +185,7 @@ const ArticleManage = (props) => {
                         </thead>
                         <tbody>
                             {   
-                                articles && articles.length >0 ?
+                                articles?.length >0 ?
                                 articles.map((item, index) => {
                                     return (
                                         <tr key={index}>

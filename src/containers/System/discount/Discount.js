@@ -1,11 +1,11 @@
 import React, { useState, useEffect} from 'react';
-import { TabContent, TabPane } from 'reactstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { AddGift, GetAllDiscount } from 'store/actions';
 import { formatDateNew } from 'components/Formatting/FormatDate';
+import { AddGift, GetAllDiscount } from 'store/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { TabContent, TabPane } from 'reactstrap';
+import ReactPaginate from 'react-paginate';
 import AddDiscount from './AddDiscount';
 import TabDiscount from './TabDiscount';
-import ReactPaginate from 'react-paginate';
 import './style.scss';
 
 const Discount = (props) => {
@@ -49,7 +49,7 @@ const Discount = (props) => {
             <div className="addDiscount">
                 <div className='discountHeader'>
                     <img src="https://img.freepik.com/free-vector/sales-promotion-cartoon-web-icon-marketing-strategy-rebate-advertising-discount-offer-low-price-idea-clearance-sale-customer-attraction-vector-isolated-concept-metaphor-illustration_335657-2752.jpg?size=338&ext=jpg" 
-                    style={{width: '10%'}} className="mr-2"   alt=""/>
+                    style={{width: '8%'}} alt=""/>
                     <div className='discountTitle'>Khuyến mãi ({vouchers?.length ? vouchers.length : 0})</div>
                 </div>
 
@@ -65,9 +65,9 @@ const Discount = (props) => {
                 setActiveTab={setActiveTab}
             />
 
-            <TabContent activeTab={activeTab} className='py-3 discountContent'>
+            <TabContent activeTab={activeTab} className='discountContent'>
                 <TabPane tabId="1" className='listDiscount'>
-                    <div className='filterDiscount d-flex' style={{gap: '10px'}}>
+                    <div className='filterDiscount'>
                         <div className='col-4'>
                           <input type="text" className="form-control" placeholder="Tìm sản phẩm ...." />
                         </div>
@@ -78,7 +78,7 @@ const Discount = (props) => {
                         </select>
                     </div>
 
-                    <div className="discountTable bg-white p-3">
+                    <div className="discountTable">
                         <div className='list-discount'>
                             <table className="table table-striped table-bordered table-hover">
                                 <thead className="text-white">
@@ -92,6 +92,7 @@ const Discount = (props) => {
                                         <td>Bắt đầu</td>
                                         <td>Kết thúc</td>
                                         <td>Trạng thái</td>
+                                        <td>Người tạo</td>
                                         <td>Tác vụ</td>
                                     </tr>
                                 </thead>
@@ -111,9 +112,10 @@ const Discount = (props) => {
                                                     <td>{formatDateNew(item.discountStart)}</td>
                                                     <td>{formatDateNew(item.discountEnd)}</td>
                                                     <td>{item.status}</td>
+                                                    <td>{item.creator}</td>
                                                     <td className='text-primary'>
-                                                        <button className='btn btn-outline-secondary'>Ngừng</button>    
-                                                        <button className='btn btn-outline-danger'>Huỷ</button>    
+                                                        <button className='btn btn-outline-secondary btn-sm'>Ngừng</button>    
+                                                        <button className='btn btn-outline-danger ml-2 btn-sm'>Huỷ</button>    
                                                     </td>
                                                 </tr>
                                             )

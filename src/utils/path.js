@@ -1,3 +1,4 @@
+// get city/district/ward
 export const PATHS = {
     CITIES:
       "https://raw.githubusercontent.com/nhidh99/codergamo/master/004-location-selects/locations/cities.json",

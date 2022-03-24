@@ -126,7 +126,7 @@ const ModalEditProduct  = (props) => {
                             defaultValue={category_id}
                         >
                             {   
-                                listCategory && listCategory.length >0 ?
+                                listCategory?.length >0 ?
                                 listCategory.map((item, index) => {
                                     return (
                                         <option key={index} value={item.id}>{item.name}</option>
@@ -145,7 +145,7 @@ const ModalEditProduct  = (props) => {
                             defaultValue={supplier_id}
                         >
                             {
-                                listSupplier && listSupplier.length >0 ?
+                                listSupplier?.length >0 ?
                                 listSupplier.map((item, index)=>{
                                     return(
                                         <option key={index} value={item.keyMap}>{item.valueVi}</option>

@@ -65,7 +65,7 @@ const CategoryManage = (props) => {
 
             <div className='categoryManage'>
                 <div className='category-head'>
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCpLky01HHuDldu3ZoBLszxsAYFtRmh7E4vpmdl3UMixEfN8VGMRgfMw9SxksuIdxOjSs&usqp=CAU" className='rounded-circle' style={{width:'7%'}} alt="" />
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCpLky01HHuDldu3ZoBLszxsAYFtRmh7E4vpmdl3UMixEfN8VGMRgfMw9SxksuIdxOjSs&usqp=CAU" className='rounded-circle' style={{width:'5%'}} alt="" />
                     <div className="category-title">Danh mục (<small>{category.length}</small>)</div>
                 </div>
                 <div className="d-flex mb-3 justify-content-between">

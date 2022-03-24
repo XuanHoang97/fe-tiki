@@ -19,6 +19,20 @@
         }
     }
 
+    .discountContent{
+        padding: 15px 0;
+        .listDiscount{
+            .filterDiscount{
+                display: flex;
+                gap: 10px;
+            }
+            .discountTable{
+                background: white;
+                padding: 15px 0;
+            }
+        }
+    }
+
     .nav{
         @include TabItem ;
     }

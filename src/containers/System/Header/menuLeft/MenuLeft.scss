@@ -22,6 +22,9 @@
             }
         }
     }
+    .menu-left:last-child{
+        border-bottom: none;
+    }
     .menu-left:hover{
         background: #4c75eb;
     }

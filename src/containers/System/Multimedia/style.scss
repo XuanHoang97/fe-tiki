@@ -33,6 +33,9 @@
             }
             .list-category-special{
                 .formCategory{
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 0;
                     @include phone{
                         display: flex;
                         flex-direction: column;

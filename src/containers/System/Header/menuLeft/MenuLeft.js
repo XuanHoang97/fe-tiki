@@ -2,7 +2,7 @@ import React from 'react';
 import image from '../../../../assets/images/taoanhdep_dicungtiki.jpg';
 import {NavLink} from 'react-router-dom';
 import {MenuAdmin} from './DataMenu';
-import './MenuLeft.scss'
+import './MenuLeft.scss';
 
 const MenuLeft = (props) => {
     const {widthMenuLeft} = props;
@@ -21,21 +21,19 @@ const MenuLeft = (props) => {
                             MenuAdmin?.length > 0 &&
                             MenuAdmin.map((item, index) => {
                                 return (
-                                    <div key={index}>
-                                        <NavLink to={`${item.path}`}  
-                                            className ="menu-left" 
-                                            activeClassName="active" 
-                                        >
-                                            <div className="itemModule">
-                                                <i className={`${item.icon}`}></i>
-                                                <span>{item.name}</span>
-                                            </div>
-                                            {
-                                                item.subMenu?.length > 0 &&
-                                                <span><i className="fas fa-angle-right small"></i></span>
-                                            }
-                                        </NavLink>
-                                    </div>
+                                    <NavLink to={`${item.path}`} key={index}
+                                        className ="menu-left" 
+                                        activeClassName="active" 
+                                    >
+                                        <div className="itemModule">
+                                            <i className={`${item.icon}`}></i>
+                                            <span>{item.name}</span>
+                                        </div>
+                                        {
+                                            item.subMenu?.length > 0 &&
+                                            <span><i className="fas fa-angle-right small"></i></span>
+                                        }
+                                    </NavLink>
                                 )
                             })
                         }

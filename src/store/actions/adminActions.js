@@ -163,12 +163,10 @@ export const searchResult = (keyword) => {
     return async(dispatch, getState) => {
         try {
             let res = await search(keyword);
-            if (res && res.data.errCode === 0) {
-                dispatch({
-                    type: actionTypes.SEARCH,
-                    payload: res.data.info
-                })
-            }
+            dispatch({
+                type: actionTypes.SEARCH,
+                payload: res.data.info
+            })
         } catch (e) {
             console.log('searchFailed error', e)
         }
@@ -180,12 +178,10 @@ export const filterPrice = (keyword, priceFrom, priceTo) => {
     return async(dispatch, getState) => {
         try {
             let res = await FilterProductByPrice(keyword, priceFrom, priceTo);
-            if (res && res.data.errCode === 0) {
-                dispatch({
-                    type: actionTypes.FILTER_PRODUCT,
-                    payload: res.data.info
-                })
-            }
+            dispatch({
+                type: actionTypes.FILTER_PRODUCT,
+                payload: res.data.info
+            })
         } catch (e) {
             console.log('filterFailed error', e)
         }
@@ -197,12 +193,10 @@ export const getAllRangePrice = () => {
     return async(dispatch, getState) => {
         try {
             let res = await getAllCodeService('PRICE_RANGE');
-            if (res && res.data.errCode === 0) {
-                dispatch({
-                    type: actionTypes.ALL_RANGE_PRICE,
-                    payload: res.data.data
-                })
-            }
+            dispatch({
+                type: actionTypes.ALL_RANGE_PRICE,
+                payload: res.data.data
+            })
         } catch (e) {
             console.log('getAllRangePrice error', e)
         }

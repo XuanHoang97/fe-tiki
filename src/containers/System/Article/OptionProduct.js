@@ -21,7 +21,7 @@ function OptionProduct(props) {
                                 onChange={(e)=>changeCategory(e)}
                             >     
                                 {
-                                    category && category.length > 0 ?
+                                    category?.length > 0 ?
                                     category.map((item, index) => {
                                         return (
                                             <option key={index} value={index +3 }>{item.name}</option>
@@ -34,7 +34,7 @@ function OptionProduct(props) {
                     </div>
                     
                     {
-                        category && category.length > 0 ?
+                        category?.length > 0 ?
                         <div className='col-md-6 p-0'>
                             <label className='mr-3'>Sản phẩm</label>
                             <div className="form-group d-flex p-0">
@@ -43,7 +43,7 @@ function OptionProduct(props) {
                                     onChange={(e)=>setProductId(e.target.value)}
                                 >
                                     {
-                                        DetailCategory && DetailCategory.length > 0 ?
+                                        DetailCategory?.length > 0 ?
                                         DetailCategory.map((item, index) => {
                                             return (
                                                 <option key={index} value={item.id}>{item.name}</option>
@@ -63,7 +63,7 @@ function OptionProduct(props) {
                         <label className='px-2'>Mẫu mã</label>
                         <div className="d-flex">
                         {
-                            option && option.length >0 &&
+                            option?.length >0 &&
                             option.map((item, index) => {
                                 return(
                                     <button 
@@ -84,5 +84,4 @@ function OptionProduct(props) {
         </form>
     );
 }
-
 export default OptionProduct;

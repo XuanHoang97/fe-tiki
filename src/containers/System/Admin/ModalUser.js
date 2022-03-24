@@ -126,7 +126,7 @@ const ModalUser = (props) => {
                                 value={gender}
                             >
                                 {
-                                    genders && genders.length >0 &&
+                                    genders?.length >0 &&
                                     genders.map((item, index) => {
                                         return (
                                             <option key={index} value={item.ValueVi}>{item.valueVi}</option>
@@ -143,7 +143,7 @@ const ModalUser = (props) => {
                                 value={roleId}
                             >
                                 {
-                                    roles && roles.length >0 &&
+                                    roles?.length >0 &&
                                     roles.map((item, index) => {
                                         return (
                                             <option key={index} value={item.valueVi}>{item.valueVi}</option>
@@ -160,7 +160,7 @@ const ModalUser = (props) => {
                                 value={positionId}
                             >
                                 {
-                                    positions && positions.length >0 &&
+                                    positions?.length >0 &&
                                     positions.map((item, index) => {
                                         return (
                                             <option key={index} value={item.valueVi}>{item.valueVi}</option>

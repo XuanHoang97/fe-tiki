@@ -267,6 +267,10 @@
                                 left: 0rem;
                                 width: 24rem;
                             }
+                            @include tablet{
+                                left: 11rem;
+                                width: 24rem;
+                            }
                           
                             .text-left {
                                 .info {
@@ -346,6 +350,9 @@
 
             .suggest{
                 font-size: 11px;
+                color: white;
+                display: flex;
+                gap: 15px;
                 @include phone {
                     display: none;
                 }

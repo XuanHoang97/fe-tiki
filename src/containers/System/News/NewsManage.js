@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../../store/actions';
-import ModalAddNews from './ModalAddNews';
 import ModalEditNews from './ModalEditNews';
+import ModalAddNews from './ModalAddNews';
 import Moment from 'react-moment';
 import './style.scss';
 
@@ -74,8 +74,8 @@ const NewsManage = (props) => {
 
             <div className='addNews'>
                 <div className='news-header'>
-                    <img src="https://icons-for-free.com/iconfiles/png/512/morning+news+newspaper+icon-1320136429130706490.png" style={{width: '5%'}} alt=""/>
-                    <div className="news-title">Tin tức - sự kiện (<small>{listNews.length}</small>)</div>
+                    <img src="https://image.shutterstock.com/image-vector/news-vector-icon-260nw-682278412.jpg" style={{width: '8%'}} alt=""/>
+                    <div className="news-title">Tin tức (<small>{listNews.length}</small>)</div>
                 </div>
                 <div className="mb-3">
                     <button onClick={() => handleAddNews()} type="button" className="btn btn-success">
@@ -99,7 +99,7 @@ const NewsManage = (props) => {
                 </thead>
                 <tbody>
                     {   
-                        listNews && listNews.length>0 ?
+                        listNews?.length>0 ?
                         listNews.map((item, index) => {
                             return(
                                 <tr key={index}>
