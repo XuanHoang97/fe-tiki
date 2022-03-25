@@ -79,13 +79,13 @@ const ProductSuggestion = () => {
 
       <TabContent activeTab={activeTab} className="bg-white" >
         {
-          category && category.length > 0 ?
+          category?.length > 0 ?
           category.map((item, index) => {
             return (
               <TabPane tabId={item.id} key={index}>
                 <div className="list px-3">
                   {
-                    Products && Products.length > 0 ?
+                    Products?.length > 0 ?
                     productShow.map((item, index) => {
                       return (
                         <div className="list__prod mb-3" key={index}>

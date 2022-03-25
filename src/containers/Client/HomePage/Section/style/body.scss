@@ -32,6 +32,7 @@
     background: white;
     @include phone{
         padding: 0;
+        flex-direction: column;
     }
     .titleMail{
         .imgMail{
@@ -40,6 +41,9 @@
             }
         }
         .info--mail {
+            @include phone{
+                padding: 0;
+            }
             p{
                 @include phone{
                     display: none;

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { getPoint, getUser, logoutAccount } from 'store/actions';
+import { GetDiscountUser, getPoint, getUser, logoutAccount } from 'store/actions';
 import {GetUser} from './../../../../../services/authService';
 import { numberFormat } from 'components/Formatting/FormatNumber';
 import { useHistory } from 'react-router-dom';
@@ -14,6 +14,13 @@ const Account = () => {
     const [hoverAccount, setHoverAccount] = useState(false);
     const user = useSelector(state => state.auth.user);
     const TikiPoint = useSelector(state => state.auth.point);
+    const myDiscount = useSelector(state => state.auth.discounts);
+
+    // Discount user
+    useEffect(() => {
+        let userId = user? user.id :null;
+        dispatch(GetDiscountUser(userId));
+    }, [dispatch, user]);
 
     // get point
     useEffect(() => {
@@ -86,12 +93,23 @@ const Account = () => {
 
                             <div onClick={()=>history.push(path.TIKI_XU)} className="item-acc">
                                 <img src="https://cf.shopee.vn/file/a0ef4bd8e16e481b4253bd0eb563f784" alt="" />
-                                Tiki xu: <span className='text-warning ml-2'>{user && TikiPoint ? numberFormat(TikiPoint.point) : 0 }</span>
+                                <div>
+                                    Tiki xu
+                                    <div className='small text-secondary'>Bạn đang có 
+                                        <span className='text-warning ml-2'>{user && TikiPoint ? numberFormat(TikiPoint.point) : 0 } </span> 
+                                        Tiki xu
+                                    </div>
+                                </div>
                             </div>
 
                             <div onClick={()=>history.push(path.VOUCHER)} className="item-acc">
                                 <img src="https://cf.shopee.vn/file/84feaa363ce325071c0a66d3c9a88748" alt="" />
-                                Kho Voucher
+                                <div>
+                                    Mã giảm giá
+                                    <div className='small text-secondary'>Bạn đang có 
+                                        <b> {myDiscount?.length > 0 ? myDiscount.length : 0 }</b> mã giảm giá
+                                    </div>
+                                </div>
                             </div>
                             
                             <div onClick={Logout} className="item-acc">

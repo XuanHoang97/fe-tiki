@@ -7,7 +7,7 @@ function TabCategory(props) {
     return (
         <Nav tabs className='tab_product'>
           {
-            category && category.length > 0 ?
+            category?.length > 0 ?
             category.map((item, index) => {
                 return (
                     <NavItem key={index} className='item-category'>

@@ -16,6 +16,92 @@
     }
 }
 
+.category-mobile {
+    display: none;
+    @include phone{
+        display: block;
+    }
+    text-align: center;
+    border-bottom: #91a4d8;
+    background: white;
+    z-index: 1000;
+    width: 100%;
+    height: 42rem;
+    position: absolute;
+    bottom: 60px;
+    padding: 10px 15px;
+    box-shadow: 0 -10px 20px -10px #c8e2ff;
+
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    .catg-header{
+        position: relative;
+        padding: 10px 15px;
+        border-bottom: 1px solid grey;
+        .close-category{
+            position: absolute;
+            width: 30px;
+            top: 5px;
+            left: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .title-catgory{
+            padding: 0px calc(30px);
+        }
+    }
+
+    .category-content{
+        display: grid;
+        grid-template-columns: 22% 78%;
+        background: rgb(230, 230, 230);
+        padding: 10px 0;
+        gap: 10px;
+        .catg-left{
+            background: rgb(219, 238, 255);
+            height: 500px;
+            overflow: hidden scroll;
+            padding: 10px 0;
+            
+            .item-catg{
+                border-bottom: 1px solid lightgrey;
+                display: flex;
+                flex-direction: column;
+                padding: 10px 5px;
+                align-items: center;
+                .img-catg{
+                    width: 45%;
+                    border-radius: 50%;
+                    margin-bottom: 5px;
+                }
+                span{
+                    font-size: 11.5px;
+                }
+            }
+            .active-item-catg{
+                border-left: 4px solid rgb(119, 119, 255);
+                background: white;
+            }
+        }
+        .catg-right{
+            background: white;
+            .catg-right-header{
+                border-bottom: 1px solid lightgray;
+            }
+            .catg-right-content{
+                padding: 10px 0;
+                display: grid;
+                height: 480px;
+                overflow-y: scroll;
+                grid-template-columns: repeat(3,1fr)
+            }
+        }
+    }
+}
+
+
+
 .menuMB{
     display: none !important;
     text-align: center;
@@ -55,6 +141,11 @@
             }
         }
     }
+
+    .activeCategoryMB{
+        color: #530192;
+    }
+
     .activeMenuMB{
         color: #530192;
     }

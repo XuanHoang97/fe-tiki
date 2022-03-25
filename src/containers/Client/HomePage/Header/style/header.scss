@@ -177,7 +177,7 @@
                             }
                         }
                         .account {
-                            width: 150px;
+                            width: 250px;
                             cursor: pointer;
                             color: white;
                             @include phone {
@@ -205,15 +205,16 @@
                             top: 5rem;
                             right: 6rem;
                             background: white;
-                            padding: 15px 0;
-                            width: 300px;
+                            padding: 10px 0;
+                            width: 250px;
                             box-shadow: 0 2px 10px 1px grey;
 
                             .acc-detail{
                                 .item-acc{
+                                    font-family: system-ui;
                                     font-weight: 600;
-                                    color: rgb(88, 88, 88);
-                                    padding: 7px 15px;
+                                    color: rgb(94, 94, 94);
+                                    padding: 5px 15px;
                                     cursor: pointer;
                                     border-bottom: 1px solid rgb(236, 236, 236);
                                     display: flex;
@@ -224,7 +225,7 @@
                                     }
                                 }
                                 .item-acc:hover {
-                                    background: orange;
+                                    background: rgb(243, 243, 243);
                                 }
                             }
                         }

@@ -97,8 +97,9 @@ const UserManage = (props) => {
                     <tr>
                         <td>STT</td>
                         <td>Avatar</td>
-                        <td>Họ tên</td>
-                        <td>Điểm tích luỹ</td>
+                        <td>Tên</td>
+                        <td>Điểm TL</td>
+                        <td>Tham gia</td>
                         <td>Email</td>
                         <td>SĐT</td>
                         <td>Địa chỉ</td>
@@ -119,6 +120,7 @@ const UserManage = (props) => {
                                     <td style={{width:'5%'}}><img src={item.image} className="w-100 rounded-circle" alt="" /> </td>
                                     <td className='text-primary'>{item.username}</td>
                                     <td style={{color:'orange'}}>{ item.userData ? numberFormat(item.userData.point) : 0 }</td>
+                                    <td>{formatDateNew(item.joinDate)}</td>
                                     <td>{item.email}</td>
                                     <td>{item.phoneNumber}</td>
                                     <td>{item.address}</td>

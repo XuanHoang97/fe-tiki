@@ -14,6 +14,7 @@ function Voucher(props) {
     const user = useSelector(state => state.auth.user);
     const myDiscount = useSelector(state => state.auth.discounts);
 
+    // Discount user
     useEffect(() => {
         let userId = user? user.id :null;
         dispatch(GetDiscountUser(userId));

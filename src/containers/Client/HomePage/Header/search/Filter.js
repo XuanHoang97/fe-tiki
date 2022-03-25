@@ -1,7 +1,7 @@
 import { numberFormat } from 'components/Formatting/FormatNumber';
 import { fetchSupplierProduct, getAllRangePrice, filterPrice } from 'store/actions';
-import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import './style.scss';
 
 function Filter(props) {
@@ -38,7 +38,7 @@ function Filter(props) {
             <div className="filterPrice">
                 <h6>GIÁ CẢ</h6>
                 {
-                    rangePrice && rangePrice.length > 0 &&
+                    rangePrice?.length > 0 &&
                     rangePrice.map((item, index) => {
                         let priceFrom = (item.valueFrom);
                         let priceTo = (item.valueTo);
@@ -76,7 +76,7 @@ function Filter(props) {
             <div className="provider">
                 <h6>NƠI BÁN</h6>
                 {
-                    suppliers && suppliers.length >0 ?
+                    suppliers?.length >0 ?
                     suppliers.map((item, index) => {
                         return (
                             <div className="item__address" key={index}>

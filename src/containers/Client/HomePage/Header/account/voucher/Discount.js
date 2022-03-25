@@ -8,11 +8,10 @@ import './style.scss';
 
 const Discount = () => {
     const dispatch = useDispatch();
-    const vouchers = useSelector(state => state.discount.vouchers);
     const user = useSelector(state => state.auth.user);
+    const vouchers = useSelector(state => state.discount.vouchers);
     const myDiscount = useSelector(state => state.auth.discounts);
-    
-    const [save, setSave] = useState('da luu');
+    const [save, setSave] = useState([]);
 
     useEffect(() => {
         let userId = user? user.id :null;
@@ -21,14 +20,11 @@ const Discount = () => {
 
     // compare status discount
     const compareDiscount = (discount) => {
-        // return myDiscount.some(item => item.discountId === discount.id);
-        let a = myDiscount.some(item => item.discountId === discount.id);
-
-        return a;
+        return myDiscount.some(item => item.discountId === discount.id);
     }
 
     // save coupon
-    const saveCoupon = (coupon) => {
+    const saveCoupon = (coupon,i) => {
         let userId = user? user.id :null;
         dispatch(SaveDiscount({
             userId: userId,
@@ -42,8 +38,7 @@ const Discount = () => {
             discountEnd: coupon.discountEnd,
             status: coupon.status,
         }));
-
-        setSave('da luu');
+        setSave([...save, i]);
     }
 
     useEffect(() => {
@@ -73,19 +68,19 @@ const Discount = () => {
                                     <div className='voucher-value'>
                                         <b className='text-primary'>{item.info}</b>
                                         <div>Đơn tốI thiểu {item.applyTo}k</div>
-                                        <span className='small text-secondary'>HSD: {formatDateNew(item.discountEnd)}</span>
-                                        <div className='small text-danger'>Đã dùng {item.Used}/{item.Max}, 
-                                        có hiệu lực từ {formatDateNew(item.discountStart)}</div>
+                                        <span className='small text-secondary'>HSD: {formatDateNew(item.discountEnd)}, Đã dùng {item.Used}/{item.Max}</span>
+                                        <div className='small text-danger'>Hiệu lực từ {formatDateNew(item.discountStart)}</div>
                                     </div>
 
                                     <div className='voucher-right'>
                                         <button 
-                                            disabled={compareDiscount(item)} 
-                                            className={`${compareDiscount(item) ? 'btn btn-secondary' : 'btn btn-warning'}`}
-                                            onClick={() => saveCoupon(item)}>
+                                            disabled={compareDiscount(item) ||save.includes(index)} 
+                                            className={`${compareDiscount(item) ||save.includes(index) ? 'btn btn-secondary' : 'btn btn-warning'}`}
+                                            
+                                            onClick={() => saveCoupon(item,index)}>
                                             {
-                                                compareDiscount(item) ? 
-                                                save : 'Lưu mã'
+                                                (compareDiscount(item)||save.includes(index)) ? 
+                                                'Đã lưu' : 'Lưu mã'
                                             }
                                         </button>
                                         <span className='text-primary'>Điều kiện</span>
