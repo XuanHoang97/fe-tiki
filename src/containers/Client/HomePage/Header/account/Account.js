@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
 import { GetDiscountUser, getPoint, getUser, logoutAccount } from 'store/actions';
-import {GetUser} from './../../../../../services/authService';
 import { numberFormat } from 'components/Formatting/FormatNumber';
+import {GetUser} from './../../../../../services/authService';
+import {useDispatch, useSelector} from 'react-redux';
+import React, {useEffect, useState} from 'react';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { path } from 'utils';
@@ -11,8 +11,8 @@ const Account = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const token = localStorage.getItem('token');
-    const [hoverAccount, setHoverAccount] = useState(false);
     const user = useSelector(state => state.auth.user);
+    const [hoverAccount, setHoverAccount] = useState(false);
     const TikiPoint = useSelector(state => state.auth.point);
     const myDiscount = useSelector(state => state.auth.discounts);
 
@@ -61,23 +61,21 @@ const Account = () => {
     }
 
     return (
-        <React.Fragment>
+        <>
             <span className='account' onMouseEnter={() => setHoverAccount(true)} >    
                 {
                     user ?
-                    <React.Fragment>
+                    <>
                         <img src={user?.image ? user.image : `http://res.cloudinary.com/do7qmg6jr/image/upload/v1645518444/sbgr7wd9k1t9v8f0cwvm.jpg`} className='rounded-circle' style={{width:'30px', height:'30px'}} alt="" />
                         <b className='ml-2' style={{fontSize: '12px'}}>{user?.username}</b>
-                    </React.Fragment>
+                    </>
                     :
                     <span className='accTitle'>Tài khoản <i className="fas fa-sort-down"></i></span>
                 }
             </span>
 
             {hoverAccount && (
-                <div className="user-account" 
-                    onMouseLeave={() => setHoverAccount(false)}
-                >
+                <div className="user-account" onMouseLeave={() => setHoverAccount(false)}>
                     {
                         user ?
                         <div className='acc-detail'>
@@ -130,7 +128,7 @@ const Account = () => {
                     }
                 </div>
             )}
-        </React.Fragment>
+        </>
     );
 }
 export default Account;

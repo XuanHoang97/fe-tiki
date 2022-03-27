@@ -1,7 +1,7 @@
-import { formatDate } from 'components/Formatting/FormatDate';
 import { numberFormat } from 'components/Formatting/FormatNumber';
-import React from 'react';
+import { formatDate } from 'components/Formatting/FormatDate';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
+import React from 'react';
 import './Order.scss'
 
 const DetailOrder = (props) => { 

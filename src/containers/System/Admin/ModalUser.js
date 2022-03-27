@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
 import * as actions from '../../../store/actions';
 
 const ModalUser = (props) => {

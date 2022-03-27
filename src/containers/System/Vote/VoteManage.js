@@ -1,10 +1,10 @@
+import {useSelector, useDispatch} from 'react-redux';
 import React, { useState, useEffect} from 'react';
 import { TabContent, TabPane } from 'reactstrap';
-import {useSelector, useDispatch} from 'react-redux';
 import { fetchRating } from 'store/actions';
+import ReactPaginate from 'react-paginate';
 import TabVote from './TabVote';
 import './style.scss';
-import ReactPaginate from 'react-paginate';
 
 const VoteManage = (props) => {
     const dispatch = useDispatch();
@@ -16,8 +16,8 @@ const VoteManage = (props) => {
     }, [dispatch]);
 
     //pagination
-    const [pageNumber, setPageNumber] = useState(0);
     const ratingPerPage = 8;
+    const [pageNumber, setPageNumber] = useState(0);
     const pagesVisited = pageNumber * ratingPerPage;
     const pageCount = Math.ceil(ratings.length / ratingPerPage);
     const changePage = ({ selected }) => {
@@ -38,16 +38,11 @@ const VoteManage = (props) => {
             <TabContent activeTab={activeTab} className=' voteContent'>
                 <TabPane tabId="0" className='listVote'>
                     <div className='filterVote'>
-                        <div>
-                          <input type="text" className="form-control" placeholder="Tìm sản phẩm ...." />
-                        </div>
-
-                        <div>
-                          <select className="form-control">
+                        <input type="text" className="form-control col-4" placeholder="Tìm sản phẩm ...." />
+                        <select className="form-control col-2">
                             <option>Danh mục</option>
                             <option>abc</option>
-                          </select>
-                        </div>
+                        </select>
 
                         <div className='bg-light px-3 py-2'>Có nội dung</div>
                         <div className='bg-light px-3 py-2'>Có hình ảnh</div>

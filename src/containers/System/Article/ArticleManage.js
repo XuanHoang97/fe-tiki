@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
-import * as actions from '../../../store/actions';
-import ModalArticle from './ModalArticle';
-import ModalEditArticle from './ModalEditArticle';
 import {saveOptionProduct} from '../../../services/userService';
+import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import * as actions from '../../../store/actions';
+import ModalEditArticle from './ModalEditArticle';
 import { TabContent, TabPane } from 'reactstrap';
-import TabArticle from './TabArticle';
 import OptionProduct from './OptionProduct';
+import ModalArticle from './ModalArticle';
 import DescProduct from './DescProduct';
+import { toast } from 'react-toastify';
+import TabArticle from './TabArticle';
 import './style.scss';
 
 const ArticleManage = (props) => {
@@ -35,16 +35,16 @@ const ArticleManage = (props) => {
         dispatch(actions.SelectOptionProduct());
     }, [dispatch]);
 
-    //modify data product
+    // modify data product
     useEffect (() => {
         let data = optionProduct;
-            if(data && data.length > 0){
+            if(data?.length > 0){
                 data = data.map(item => ({...item, isSelected : false}))
             }
             setOption(data);
     }, [optionProduct])
 
-    //select option product
+    // select option product
     const handleOptionProduct = (product) => {
         let data = option;
         if(data.length > 0){
@@ -63,10 +63,10 @@ const ArticleManage = (props) => {
         e.preventDefault();
         let result = [];
 
-        if(option && option.length > 0){
+        if(option?.length > 0){
             let selectedProduct = option.filter(item => item.isSelected === true);
 
-            if(selectedProduct && selectedProduct.length > 0){
+            if(selectedProduct?.length > 0){
                 selectedProduct.map(item => {
                     let object = {};
                     object.categoryId = categoryId;
@@ -84,9 +84,6 @@ const ArticleManage = (props) => {
             categoryId: categoryId,
             productId: productId,
         });
-        
-        console.log('check res : ',  res);
-        console.log('check result : ',  result);
     }
 
     // get product by category

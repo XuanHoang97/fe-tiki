@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useForm } from "react-hook-form";
-import { path } from 'utils';
 import {useHistory, Link} from 'react-router-dom';
 import { registerAcc } from 'services/authService';
+import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
-import './style.scss'
+import { path } from 'utils';
+import './style.scss';
 
 const Register = (props) => {
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const history = useHistory();
     const [err, setErr] = useState('');
     const [showPass, setShowPass] = useState(false);
-    const history = useHistory();
 
     //register
     const signUp = async(data) => {

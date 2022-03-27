@@ -11,6 +11,9 @@
         @include phone{
             flex-direction: column;
         }
+        @include tablet{
+            flex-direction: column;
+        }
         .statistical{
             display: flex;
             gap: 5px;

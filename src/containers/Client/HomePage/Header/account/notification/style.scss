@@ -1,0 +1,22 @@
+@import '../../../../../../assets/css/variable.scss';
+
+.notify-head{
+    text-align: right;
+    cursor: pointer;
+
+}
+.notify-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgb(245, 245, 245);
+    margin: 15px 0;
+    padding: 15px;
+    .item-left{
+        display: flex;
+        img{
+            width: 50px;
+            height: 50px;
+        }
+    }
+}

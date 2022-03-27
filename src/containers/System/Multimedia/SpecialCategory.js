@@ -1,6 +1,6 @@
-import React from 'react';
 import { TabPane } from 'reactstrap';
 import { CRUD_ACTIONS } from 'utils';
+import React from 'react';
 import './style.scss';
 
 function SpecialCategory(props) {
@@ -52,12 +52,12 @@ function SpecialCategory(props) {
                             style={{backgroundImage: `url(${categoryPreviewImg})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat'}}
                         >
                             {
-                            categoryPreviewImg ?
-                            <div 
-                                className="col-md-12" style={{textAlign: 'end', position: 'absolute', right: '-1.5rem', top: '-1rem'}}>
-                                <i className="far fa-times-circle text-danger"></i>
-                            </div> 
-                            : <img src="https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png" className="w-50" alt="..." />
+                                categoryPreviewImg ?
+                                <div 
+                                    className="col-md-12" style={{textAlign: 'end', position: 'absolute', right: '-1.5rem', top: '-1rem'}}>
+                                    <i className="far fa-times-circle text-danger"></i>
+                                </div> 
+                                : <img src="https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png" className="w-50" alt="..." />
                             }
                         </div>
                     </div>

@@ -11,6 +11,9 @@
         display: flex;
         align-items: center;
         text-align: left;
+        img{
+            width: 25px;
+        }
     }
 }
 
@@ -32,6 +35,8 @@
             border: 1px solid rgb(230,230,230);
             margin-right: 15px;
             .info{
+                margin: 10px 0;
+                padding: 10px 15px;
                 .card-text{
                     font-size: 12px;
                     font-weight: bold;

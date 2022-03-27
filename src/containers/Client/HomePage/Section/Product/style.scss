@@ -9,6 +9,10 @@
         align-items: center;
         text-align: center;
         color: rgb(212, 0, 0);
+        img{
+            width: 2%;
+            margin-right: 10px;
+        }
     }
     .productDetail {
         display: flex;
@@ -48,5 +52,8 @@
         .product--item:hover {
             box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 20px !important;
         }
+    }
+    .productDetail::-webkit-scrollbar { 
+        display: none;  
     }
 }

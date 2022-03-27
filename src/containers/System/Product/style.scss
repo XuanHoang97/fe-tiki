@@ -24,4 +24,7 @@
             display: block;
         }
     }
+    table::-webkit-scrollbar { 
+        display: none;  
+    }
 }

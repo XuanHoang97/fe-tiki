@@ -35,6 +35,9 @@
         .product_image{
            display: flex; 
            align-items: center;
+           img{
+               width: 10%;
+           }
         }
         .product_price{
             display: flex;
@@ -60,6 +63,7 @@
 .main{
     background: #f8f9fa;
     margin: 15px 0 !important;
+    padding: 0 0 15px 0;
     @include phone{
         margin-bottom: 40px !important;
     }
@@ -226,6 +230,9 @@
     font-size: 20px !important;
 }
 
+.prod-similar{
+    margin: 20px 0 10px 0;
+}
 .slick-slider{
     .slick-list{
         .slick-track{
@@ -237,10 +244,19 @@
                 div{
 
                     .prod-similar{
+                        background: white;
+                        padding: 15px;
                         cursor: pointer;
                         display: grid;
                         @include phone{
                             padding: 0;
+                        }
+                        .price__prod{
+                            .price-similar{
+                                color: red;
+                                font-size: 14px;
+                                font-weight: 600;
+                            }
                         }
                     }
                 }

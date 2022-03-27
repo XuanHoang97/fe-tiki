@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
+import Footer from './Footer/Footer';
 import Header from './Header/Header';
 import Body from './Section/Body';
-import Footer from './Footer/Footer';
 
 const HomePage = () => {
     useEffect(() => {

@@ -1,8 +1,8 @@
+import { keywordSearch, searchResult, URLSearch } from 'store/actions';
 import React, { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import SearchSuggest from './SearchSuggest';
-import { keywordSearch, searchResult, URLSearch } from 'store/actions';
+import { useDispatch } from 'react-redux';
 import { path } from 'utils';
 
 export default function Search() {

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
 import { GetAllDiscount, GetDiscountUser, SaveDiscount } from 'store/actions';
 import { formatDateNew } from 'components/Formatting/FormatDate';
 import Footer from 'containers/Client/HomePage/Footer/Footer';
 import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import Header from '../../Header';
 import './style.scss'; 
 

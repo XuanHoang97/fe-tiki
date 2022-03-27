@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
 import { filterOrderByStatus, getAllOrder, getStatusOrder, SendBillCustomer, updateOrderStatus } from 'store/actions';
 import { numberFormat } from 'components/Formatting/FormatNumber';
 import {formatDateNew } from 'components/Formatting/FormatDate';
 import { useSelector, useDispatch } from 'react-redux';
 import LoadingOverlay from 'react-loading-overlay';
+import React, { useState, useEffect } from 'react';
 import {TabContent, TabPane} from 'reactstrap';
 import ReactPaginate from "react-paginate";
 import VerifyOrder from './VerifyOrder';

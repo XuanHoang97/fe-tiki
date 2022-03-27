@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { getDetailProduct } from "services/userService";
-import Specifications from "./Specifications";
-import ProductSimilar from "./ProductSimilar";
+import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
 import Header from "../HomePage/Header/Header";
 import Footer from "../HomePage/Footer/Footer";
+import Specifications from "./Specifications";
+import ProductSimilar from "./ProductSimilar";
 import * as actions from "store/actions";
 import Illustrator from "./Illustrator";
 import ProductDesc from "./ProductDesc";
 import Rating from "./Rating";
 import Order from "./Order";
-import './Style.scss'
+import './Style.scss';
 
 const ProductDetail = ({ match }) => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const ProductDetail = ({ match }) => {
   const similarProducts = useSelector(state => state.admin.productSimilar);
   const qty = useSelector(state => state.client.qty);
   
-  // view detail product
+  // detail product
   let idParams = match.params.id;
   useEffect(() => {
     getDetailProduct(idParams)
@@ -35,7 +35,7 @@ const ProductDetail = ({ match }) => {
     dispatch(actions.GetProductSimilar(idParams));
   }, [dispatch, idParams ]);
   
-  // choose quantity order
+  // qty order
   const incrementQty = () => {
     dispatch(actions.increment());
   };

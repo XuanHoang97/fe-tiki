@@ -1,7 +1,7 @@
-import React from 'react';
 import { formatDate , formatDateNew} from 'components/Formatting/FormatDate';
-import ReactStars from 'react-stars';
 import {averageStarRating} from 'components/Formatting/FormatNumber';
+import ReactStars from 'react-stars';
+import React from 'react';
 
 const Rating = (props) => {
     const {detailProduct} = props;
@@ -19,7 +19,7 @@ const Rating = (props) => {
                             }
                         </span>
                         
-                        <div>
+                        <>
                             <ReactStars
                                 count={5}
                                 value={
@@ -31,7 +31,7 @@ const Rating = (props) => {
                                 color2={'#ffd700'}
                             />
                             <div className='small'>{detailProduct?.ratingData ? detailProduct.ratingData.length : 0} nhận xét</div>
-                        </div>
+                        </>
                     </div>
                 </div>
 

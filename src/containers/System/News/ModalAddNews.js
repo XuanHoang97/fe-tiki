@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { fetchAllCategory, fetchProducts } from 'store/actions';
+import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
 
 const ModalAddNews = (props) => {
     const [name, setName] = useState('');
@@ -83,10 +83,10 @@ const ModalAddNews = (props) => {
                         style={{backgroundImage: `url(${previewImg})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat'}}
                     >
                         {
-                        previewImg ?
-                        <div onClick={() =>removeImg()} className="col-md-12" style={{textAlign: 'end', position: 'absolute', right: '-1.5rem', top: '-1rem'}}>
-                            <i className="far fa-times-circle text-danger"></i>
-                        </div> : <img src="https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png" className="w-100" alt="..." />
+                            previewImg ?
+                            <div onClick={() =>removeImg()} className="col-md-12" style={{textAlign: 'end', position: 'absolute', right: '-1.5rem', top: '-1rem'}}>
+                                <i className="far fa-times-circle text-danger"></i>
+                            </div> : <img src="https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png" className="w-100" alt="..." />
                         }
                     </div>
                 </div>

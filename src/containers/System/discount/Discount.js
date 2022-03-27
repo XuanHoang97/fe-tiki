@@ -1,7 +1,7 @@
-import React, { useState, useEffect} from 'react';
 import { formatDateNew } from 'components/Formatting/FormatDate';
 import { AddGift, GetAllDiscount } from 'store/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect} from 'react';
 import { TabContent, TabPane } from 'reactstrap';
 import ReactPaginate from 'react-paginate';
 import AddDiscount from './AddDiscount';
@@ -38,7 +38,6 @@ const Discount = (props) => {
     };
 
     return (
-        
         <div className='Discount'>
             <AddDiscount
                 isOpen={modalDiscount}
@@ -53,11 +52,9 @@ const Discount = (props) => {
                     <div className='discountTitle'>Khuyến mãi ({vouchers?.length ? vouchers.length : 0})</div>
                 </div>
 
-                <div className="addUser">
-                    <button type="button" className="btn btn-success" onClick={() => addDiscount()}>
-                        <i className="fas fa-plus mr-2"></i> Thêm khuyến mãi
-                    </button>
-                </div>
+                <button type="button" className="btn btn-success" onClick={() => addDiscount()}>
+                    <i className="fas fa-plus mr-2"></i> Thêm khuyến mãi
+                </button>
             </div>
 
             <TabDiscount

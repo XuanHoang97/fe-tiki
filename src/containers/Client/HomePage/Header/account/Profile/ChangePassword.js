@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { ChangePass } from 'services/authService';
 import { useForm } from "react-hook-form";
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { ChangePass } from 'services/authService';
 
 const ChangePassword = () => {
     const { register, formState: { errors }, reset,  handleSubmit } = useForm();

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import { TabContent, TabPane } from 'reactstrap';
 import TabStatistical from './TabStatistical';
+import React, { useState } from 'react';
 import './style.scss';
 
 const StatisticalManage = (props) => {
@@ -19,7 +19,6 @@ const StatisticalManage = (props) => {
 
             <TabContent activeTab={activeTab} className ="content-statistical">
                 <TabPane tabId="1" className='report-revenue'>
-                    {/* filter  */}
                     <div className="filter-report">
                         <div className="row">
                             <div className="col-4">

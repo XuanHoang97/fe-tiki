@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import { fetchAllSlide } from 'store/actions';
 import './style/slide.scss';
 
@@ -30,7 +30,7 @@ function Slide() {
 
                 <div className="list_slide carousel-inner">
                     {   
-                        slides && slides.length > 0 ?
+                        slides?.length > 0 ?
                         slides.map((item, index) =>{
                             return (  
                                 <div className={`carousel-item ${item.status}`} key={index}>   

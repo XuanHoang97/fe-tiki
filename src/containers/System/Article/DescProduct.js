@@ -1,6 +1,6 @@
+import {UploadMultiFile} from '../../../store/actions/productActions'
 import React, { useState } from 'react';
 import {useDispatch} from 'react-redux';
-import {UploadMultiFile} from '../../../store/actions/productActions'
 
 const DescProduct = (props) => {
     const {categoryId, setProductId, DetailCategory, category, changeCategory, productId} = props;
@@ -29,7 +29,7 @@ const DescProduct = (props) => {
         const dataImage = new FormData();
         dataImage.append('categoryId', categoryId);
         dataImage.append('productId', productId);
-        if(pictures && pictures.length > 0){
+        if(pictures?.length > 0){
             for(let i = 0; i < pictures.length; i++){
                 dataImage.append('pictures', pictures[i]);
             }

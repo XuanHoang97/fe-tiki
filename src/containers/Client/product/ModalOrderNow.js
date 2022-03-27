@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { numberFormat, totalMoney } from 'components/Formatting/FormatNumber';
+import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
 import {createOrder} from 'services/clientService';
 import LoadingOverlay from 'react-loading-overlay';
 import { useHistory } from 'react-router-dom';
@@ -42,8 +42,6 @@ const ModalOrderNow = (props) => {
     // create order
     const order=async(data)=>{         
         setLoadingOrder(true);
-
-        //away duplicate data
         let newCart = carts.map(cart => {
             return {
                 productId: cart.id,
@@ -80,11 +78,7 @@ const ModalOrderNow = (props) => {
     }
     
     return (    
-        <Modal 
-            isOpen={props.show} 
-            toggle={()=>toggle()} 
-            size="lg"
-        >
+        <Modal isOpen={props.show}  toggle={()=>toggle()}  size="lg" >
             <form onSubmit={handleSubmit(order)}>
             <ModalHeader toggle={()=>toggle()}>Bạn có {carts.length} sản phẩm trong giỏ hàng</ModalHeader>
                 <LoadingOverlay active={loadingOrder} spinner text='Đang xử lý, vui lòng đợi trong giây lát .....' >
@@ -92,12 +86,12 @@ const ModalOrderNow = (props) => {
                     <div>
                         <div className="OrderNow">
                             {
-                                carts && carts.length > 0 &&
+                                carts?.length > 0 &&
                                 carts.map((item, index) => {
                                     return (
                                         <div className="product_info" key={index}>
                                             <div className="product_image col-6">
-                                                <img src={item.image} style={{width: '10%'}} alt="" />
+                                                <img src={item.image} alt="" />
                                                 <h6 className='font-weight-bold ml-3'>{item.name}</h6>
                                             </div>
 
@@ -206,7 +200,7 @@ const ModalOrderNow = (props) => {
                                     <label className='font-weight-bold'>Hình thức nhận hàng</label>
                                     <div className="delivery d-flex mb-3">
                                         {
-                                            delivery && delivery.length >0 &&
+                                            delivery?.length >0 &&
                                             delivery.map((item, index) => {
                                                 return (
                                                     <div className="radio mr-4" key={index}>
@@ -230,7 +224,7 @@ const ModalOrderNow = (props) => {
                                     <label className='font-weight-bold'>Hình thức thanh toán</label>
                                     <div className="payment d-flex">
                                         {
-                                            payment && payment.length >0 &&
+                                            payment?.length >0 &&
                                             payment.map((item, index) => {
                                                 return (
                                                     <div className="radio mr-4" key={index}>

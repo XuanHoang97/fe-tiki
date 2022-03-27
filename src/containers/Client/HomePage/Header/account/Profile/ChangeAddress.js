@@ -1,7 +1,7 @@
-import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import useLocationForm from './useLocationForm';
 import Select from 'react-select';
+import React from 'react';
 
 const ChangeAddress = (props) => {
     const {isOpen, toggle} = props;

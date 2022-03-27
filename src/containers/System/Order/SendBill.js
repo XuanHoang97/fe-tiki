@@ -1,7 +1,7 @@
-import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { formatDateNew } from 'components/Formatting/FormatDate';
 import { numberFormat } from 'components/Formatting/FormatNumber';
+import React from 'react';
 import './style.scss';
 
 const SendBill = (props) => { 
@@ -33,10 +33,10 @@ const SendBill = (props) => {
                         <b className='text-success'>
                             {bill && bill.code} - 
                             <small>
-                                {bill && bill.status ==='S1' ? ' Chờ xác nhận' : ''}
-                                {bill && bill.status ==='S2' ? ' Đã xác nhận' : ''}
-                                {bill && bill.status ==='S3' ? ' Đang giao hàng' : ''}
-                                {bill && bill.status ==='S4' ? ' Đã giao hàng' : ''}
+                                {bill?.status ==='S1' ? ' Chờ xác nhận' : ''}
+                                {bill?.status ==='S2' ? ' Đã xác nhận' : ''}
+                                {bill?.status ==='S3' ? ' Đang giao hàng' : ''}
+                                {bill?.status ==='S4' ? ' Đã giao hàng' : ''}
                             </small>
                         </b>
                     </h4>

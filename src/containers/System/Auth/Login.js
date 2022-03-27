@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import { connect } from 'react-redux';
-import { push } from "connected-react-router";
 import { handleLoginApi } from 'services/userService';
 import { userLoginSuccess } from 'store/actions';
+import { push } from "connected-react-router";
+import React, {useState} from 'react';
+import { connect } from 'react-redux';
 import './Login.scss';
 
 const Login = (props) => {
@@ -16,10 +16,10 @@ const Login = (props) => {
         setErrMessage('');
         try{
             let data= await handleLoginApi(userName, password);
-            if(data && data.data.errCode !==0){
+            if(data?.data.errCode !==0){
                 setErrMessage(data.data.errMessage);
             }
-            if(data && data.data.errCode ===0){
+            if(data?.data.errCode ===0){
                 props.userLoginSuccess(data.user)
             }
         }catch(error){
@@ -30,18 +30,17 @@ const Login = (props) => {
             }   
         }
     }
+    const handleKeyDown=(e)=>{
+        if(e.key=== 'Enter' || e.keyCode=== 13){
+            handleLogin();
+        }
+    }
 
     //show-hide password
     const showPass=()=>{
         setIsShowPassword(!isShowPassword);
     }
 
-    //press enter
-    const handleKeyDown=(e)=>{
-        if(e.key=== 'Enter' || e.keyCode=== 13){
-            handleLogin();
-        }
-    }
 
     return (
         <div className="login-bg">
@@ -71,10 +70,7 @@ const Login = (props) => {
                             </span>
                         </div>
                     </div>
-
-                    <div className="col-12 text-danger">
-                        {errMessage}
-                    </div>
+                    <div className="col-12 text-danger"> {errMessage}</div>
 
                     <div className="col-12">
                         <button className="btn-login" onClick={()=> handleLogin()}>Đăng nhập</button>

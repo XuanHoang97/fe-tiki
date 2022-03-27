@@ -90,6 +90,10 @@
     }
 }
 
+.list::-webkit-scrollbar { 
+    display: none;  
+}
+
 .view__more, .reset{
     display: flex;
     justify-content: center;

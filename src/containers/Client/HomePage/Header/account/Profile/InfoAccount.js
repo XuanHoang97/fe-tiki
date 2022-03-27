@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from 'react';
 import {BrowserRouter as Router, Route, Switch, NavLink,Redirect } from 'react-router-dom';
+import Footer from 'containers/Client/HomePage/Footer/Footer';
+import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import Activity from '../notification/Activity';
 import ChangePassword from './ChangePassword';
-import Profile from './Profile';
 import Purchase from '../MyOrder/Purchase';
 import Order from '../notification/Order';
-import Header from '../../Header';
-import { path } from 'utils';
-import { useSelector, useDispatch } from 'react-redux';
+import Voucher from '../voucher/Voucher';
+import InfoPayment from './InfoPayment';
 import { getUser } from 'store/actions';
 import {MenuUser} from './DataMenu';
-import Address from './Address';
-import InfoPayment from './InfoPayment';
 import TikiXu from '../coin/TikiXu';
-import Activity from '../notification/Activity';
-import Voucher from '../voucher/Voucher';
-import Footer from 'containers/Client/HomePage/Footer/Footer';
+import Header from '../../Header';
+import Address from './Address';
+import Profile from './Profile';
+import { path } from 'utils';
 
 const InfoAccount = () => {
     const dispatch = useDispatch();
-    const user = useSelector(state => state.auth.user);
     const token = localStorage.getItem('token');
+    const user = useSelector(state => state.auth.user);
     const [subMenu, setSubMenu] = useState(`${path.ACCOUNT}`);
 
     useEffect(() => {
@@ -41,7 +41,7 @@ const InfoAccount = () => {
                 <div className='infoAccount container'>
                     <div className='menuUser col-md-2'>
                         <div className='avatar d-flex'>
-                            <img src={user && user.image ? user.image : 'http://res.cloudinary.com/do7qmg6jr/image/upload/v1645518444/sbgr7wd9k1t9v8f0cwvm.jpg'} className='rounded-circle' style={{width:'60px', height:'60px'}}  alt="" />
+                            <img src={user?.image ? user.image : 'http://res.cloudinary.com/do7qmg6jr/image/upload/v1645518444/sbgr7wd9k1t9v8f0cwvm.jpg'} className='rounded-circle' style={{width:'60px', height:'60px'}}  alt="" />
                             <div className='info'>
                                 <div className='name'>{ user ? user.username : '' }</div>
                                 <div className='editProfile small mt-1'>
@@ -52,7 +52,7 @@ const InfoAccount = () => {
                         </div>
 
                         {
-                            MenuUser && MenuUser.length > 0 &&
+                            MenuUser?.length > 0 &&
                             MenuUser.map((item, index) => {
                                 return (
                                     <div key={index} className='menu-user'>
@@ -72,7 +72,7 @@ const InfoAccount = () => {
                                             <div className="subMenu"
                                             >
                                                 {
-                                                    item.sub && item.sub.length > 0 &&
+                                                    item.sub?.length > 0 &&
                                                     item.sub.map((sub, index) => {
                                                         return (
                                                             <NavLink to={sub.path} key={index}

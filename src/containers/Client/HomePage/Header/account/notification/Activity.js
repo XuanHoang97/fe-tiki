@@ -1,7 +1,8 @@
 import { formatDate } from 'components/Formatting/FormatDate';
-import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FilterNotify} from 'store/actions';
+import React, { useEffect } from 'react';
+import './style.scss';
 
 const Activity = () => {
     const dispatch = useDispatch();
@@ -16,14 +17,14 @@ const Activity = () => {
 
     return (
         <div className=''>
-            <div className='text-right text-dark border markAll btn-light mb-2 p-2'>Đánh dấu đã đọc tất cả</div>
+            <div className='notify-head'>Đánh dấu đã đọc tất cả</div>
             {
                 notify?.length > 0 ?
                 notify.map((item, index) => {
                     return (
-                        <div className='d-flex align-items-center justify-content-between bg-light my-3 p-3' key={index}>
-                            <div className='d-flex'>
-                                <img src={item.image} style ={{width: '50px', height:'50px'}} alt="" />
+                        <div className='notify-item' key={index}>
+                            <div className='item-left'>
+                                <img src={item.image} alt="" />
                                 <div className='item-list ml-3'>
                                     <div className='font-weight-bold text-primary'>{item.title}</div>
                                     <span className='content'>{item.content}</span>

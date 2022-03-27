@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import _ from 'lodash';
-import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
+import React, { useState, useEffect } from 'react';
+import MarkdownIt from 'markdown-it';
+import _ from 'lodash';
 const mdParser = new MarkdownIt();
 
 const ModalEditArticle = (props) => {
@@ -62,7 +62,7 @@ const ModalEditArticle = (props) => {
     return (
         <Modal isOpen={props.isOpen} toggle={()=>toggle()} size="lg">
             <ModalHeader toggle={()=>toggle()}>Cập nhật bài viết - chi tiết sản phẩm</ModalHeader>
-            <ModalBody style={{height: '80vh', overflowY: 'scroll'}}>
+            <ModalBody className='body-article'>
             
             <div className='d-flex col-12 p-0'>
                 <label className='mr-3'>Chọn sản phẩm</label>

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import './Style.scss';
 
 const Illustrator = ({detailProduct}) => {
-    const [imgProduct, setImgProduct] = useState('');
     const [active, setActive] = useState('');
+    const [imgProduct, setImgProduct] = useState('');
     const [styleActive, setStyleActive] = useState('');
 
     const changeImage = (img) => {

@@ -1,7 +1,7 @@
-import React from 'react';
 import { formatDateNew } from 'components/Formatting/FormatDate';
 import { numberFormat } from 'components/Formatting/FormatNumber';
 import { Button, Modal, ModalBody, ModalFooter } from 'reactstrap';
+import React from 'react';
 import './style.scss';
 
 const ViewBill = (props) => {

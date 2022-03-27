@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch} from 'react-redux';
 import { numberFormat, totalMoney } from 'components/Formatting/FormatNumber';
+import { useSelector, useDispatch} from 'react-redux';
+import LoadingOverlay from 'react-loading-overlay';
+import React, { useEffect, useState } from 'react';
+import Header from '../HomePage/Header/Header';
 import { CheckoutOrder } from 'store/actions';
 import { useHistory } from 'react-router';
-import LoadingOverlay from 'react-loading-overlay';
-import Header from '../HomePage/Header/Header';
 import { v4 as uuidv4 } from 'uuid';
-import moment from "moment";
 import { path } from 'utils';
-import './style.scss'
+import moment from "moment";
+import './style.scss';
 
 const Payment = (props) => {
     const dispatch = useDispatch();
@@ -27,7 +27,7 @@ const Payment = (props) => {
     const dateDelivery=date.setDate(date.getDate() + 1)
     const dateDeliveryFormat = moment(dateDelivery).locale('vi').format('dddd, DD/MM/YYYY');
     
-    // show value of delivery method
+    // Fee delivery
     const handleDelivery = (e) => {
         setDeliveryMethod(e.target.value)
         if(e.target.value === 'GIAO HÀNG TẬN NƠI') {
@@ -38,16 +38,10 @@ const Payment = (props) => {
         }
     }
 
-    useEffect(() => {
-    console.log('cart user:', cartsUser);
-    }, [cartsUser]);
-
     // payment -checkout order
     const handlePayment = () => {
-        //away duplicate data
         let newCart = cartsUser.map(cart => {
             return {
-                // assign new id with uuid
                 id: uuidv4(),
                 productId: cart.productId,
                 image: cart.image,
@@ -56,7 +50,6 @@ const Payment = (props) => {
                 qty: cart.qty,
                 sale: cart.sale,
                 userId: cart.userId
-
             }
         })
 
@@ -90,13 +83,13 @@ const Payment = (props) => {
                 <LoadingOverlay active={loadingOrder} spinner text='Đang xử lý đơn hàng...' >
                     <div className="container">
                         <div className="paymentDetail row">
-                            <div className="delivery col-md-9 p-0 ">
-                                <div className="bg-white p-3">
+                            <div className="delivery col-md-9">
+                                <div className="deliveryMethod">
                                 <div>
                                     <h6 className="text-dark">1. Chọn hình thức giao hàng</h6>
                                     <div className="option_delivery row">
                                         {
-                                            delivery && delivery.length > 0 &&
+                                            delivery?.length > 0 &&
                                             delivery.map((item, index) => {
                                                 return (
                                                     <div className="standard col-md-6" key={index}>
@@ -113,10 +106,10 @@ const Payment = (props) => {
                                         }
                                     </div>
 
-                                    <div className="info_prod border border-light mt-2 m-0 col-12 d-flex justify-content-between">
+                                    <div className="info_prod">
                                         <div className="col-md-6 p-0 row">
                                             {
-                                                cartsUser && cartsUser.length >0 ?
+                                                cartsUser?.length >0 ?
                                                 cartsUser.map((item, index) => {
                                                     return(
                                                         <div className='d-flex border-bottom align-items-center' key={index}>
@@ -160,7 +153,7 @@ const Payment = (props) => {
                                     <h6 className="text-dark mt-3 mb-3">2. Chọn hình thức thanh toán</h6>
                                     <div className="option_payment border mt-3 p-3">
                                         {
-                                            payment && payment.length > 0 ?
+                                            payment?.length > 0 ?
                                             payment.map((item, index) => {
                                                 return(
                                                     <div className="form-check mb-3" key={index}>
@@ -194,7 +187,7 @@ const Payment = (props) => {
                                     <div className="changeOrder">
                                         <div>
                                             <div>Đơn hàng</div>
-                                            <small className='text-success'>{cartsUser && cartsUser.length > 0 ? cartsUser.length : 0} Sản phẩm</small>
+                                            <small className='text-success'>{cartsUser?.length > 0 ? cartsUser.length : 0} Sản phẩm</small>
                                         </div>
                                         <button type="button" className="btn btn-success btn-sm">Thay đổi</button>
                                     </div>
@@ -202,7 +195,7 @@ const Payment = (props) => {
                                     <div className="valueOrder">
                                         <div><span>Tạm tính</span></div>
                                         <h6>{
-                                            cartsUser && cartsUser.length > 0 ?
+                                            cartsUser?.length > 0 ?
                                             numberFormat(totalMoney(cartsUser))
                                             : 0
                                         }
@@ -224,7 +217,7 @@ const Payment = (props) => {
                                         <div><span>Thành tiền</span></div>
                                         <h5 className="text-danger">
                                             {
-                                                cartsUser && cartsUser.length > 0 ?
+                                                cartsUser?.length > 0 ?
                                                 numberFormat(totalMoney(cartsUser) - coupon + deliveryFee)
                                                 : 0
                                             }

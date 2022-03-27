@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Nav, NavItem, NavLink, TabContent, TabPane} from 'reactstrap';
-import {useDispatch, useSelector} from 'react-redux';
 import { FilterMyOrder, GetOrderByUser, getStatusOrder } from 'store/actions';
 import { numberFormat } from 'components/Formatting/FormatNumber';
-import DetailOrder from './DetailOrder';
+import {useDispatch, useSelector} from 'react-redux';
 import ReactPaginate from "react-paginate";
+import DetailOrder from './DetailOrder';
 import RatingProduct from './Rating';
 
 function Purchase(props) {

@@ -21,9 +21,17 @@
 
         @include TabItem ;
     }
+    .tabArticle::-webkit-scrollbar { 
+        display: none;  
+    }
     .tab-content{
         @include phone{
             padding: 15px 10px;
         }
     }
+}
+
+.body-article{
+    height: 80vh;
+    overflow-y: scroll;
 }

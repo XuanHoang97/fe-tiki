@@ -16,21 +16,14 @@ const Footer = () => {
 
     useEffect(() => {
         dispatch(fetchAllCategory());
-    }, [dispatch]);
-    
-    useEffect(() => {
         dispatch(DetailCategory(3));
     }, [dispatch]);
-
+    
     // detail category
     const detailCategory = (category) => {
         setActiveItemCategory(category);
         dispatch(DetailCategory(category));
-
-
-        console.log(activeItemCategory);
     }
-    
 
     // hide-show category
     const viewCategory = () => {

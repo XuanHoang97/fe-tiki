@@ -17,18 +17,11 @@ export const MenuAdmin = [
                 name: 'Chi tiết đơn hàng',
                 path: path.ORDER_MANAGE,
             },
-
-            {
-                name: 'Đơn hàng chưa xử lý',
-                path: path.ORDER_MANAGE,
-
-            }
         ]
     },
 
     {
         name: 'Hoá đơn',
-        //icon money
         icon: 'fas fa-money-bill-wave',
         path: path.SALE_MANAGE,
         subMenu: [
@@ -55,12 +48,6 @@ export const MenuAdmin = [
         name: 'Khách hàng',
         icon: 'fas fa-users-cog',
         path: path.USER_MANAGE,
-        subMenu: [
-            {
-                name: 'Danh sách khách hàng',
-                path: path.USER_MANAGE,
-            },
-        ]
     },
 
     

@@ -1,10 +1,10 @@
-import React, {useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { numberFormat, totalMoney } from 'components/Formatting/FormatNumber';
 import ModalOrderNow from 'containers/Client/product/ModalOrderNow';
-import { Link } from 'react-router-dom';
-import { path } from 'utils';
+import { useSelector, useDispatch } from 'react-redux';
 import { deleteItemCart } from 'store/actions';
+import { Link } from 'react-router-dom';
+import React, {useState } from 'react';
+import { path } from 'utils';
 
 function OrderWithoutLogin(props) {
     const [hoverCart, setHoverCart] = useState(false);
@@ -43,7 +43,7 @@ function OrderWithoutLogin(props) {
                         <h6 className='text-muted'>Sản phẩm đã thêm</h6>
                         <hr />
                         {
-                            carts && carts.length > 0 &&
+                            carts?.length > 0 &&
                             carts.map((item,index) => {
                                 return (
                                     <div className='' key={index} >
@@ -83,8 +83,7 @@ function OrderWithoutLogin(props) {
             }
 
             {
-                carts.length === 0 && 
-                hoverCart &&
+                carts.length === 0 && hoverCart &&
                 <div className="dropdown-menu cart__info" onMouseLeave={()=>setHoverCart(false)}>          
                     <div>
                         <img className="w-25 mb-3" src="https://salt.tikicdn.com/desktop/img/mascot@2x.png" alt="" />

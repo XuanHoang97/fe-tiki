@@ -7,6 +7,20 @@
         .paymentDetail{
             margin: 5px;
             justify-content: space-between;
+            .delivery{
+                padding: 0;
+                .deliveryMethod{
+                    background: white;
+                    padding: 15px;
+                    div{
+                        .info_prod{
+                            display: flex;
+                            justify-content: space-between;
+                            margin: 10px 15px;
+                        }
+                    }
+                }
+            }
             .payment-info{
                 .addrOrder{
                     background: white;

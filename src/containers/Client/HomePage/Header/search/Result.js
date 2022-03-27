@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { numberFormat } from 'components/Formatting/FormatNumber';
 import { filterPrice, getTypeSort, keywordSearch, searchResult, URLSearch } from 'store/actions';
 import { Nav, NavItem, NavLink, TabContent, TabPane} from 'reactstrap';
+import { numberFormat } from 'components/Formatting/FormatNumber';
+import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import {useHistory} from 'react-router-dom';
+import Footer from '../../Footer/Footer';
 import Rate from '../../Section/Rate';
 import Header from '../Header';
 import Filter from './Filter';
-import Footer from '../../Footer/Footer';
 
 function Result(props) {
     const dispatch = useDispatch();
@@ -74,14 +74,14 @@ function Result(props) {
                                     <span className='text-primary'>
                                         `{keyword ? keyword :'Undefine'}`
                                     </span>
-                                    : {result && result.length ? result.length : 0} <small>Kết quả</small>
+                                    : {result?.length ? result.length : 0} <small>Kết quả</small>
                                 </h5>
                             </div>
                             
                             <Nav tabs className='mb-4'>
                                 <NavItem className='d-flex'>
                                     {
-                                        sortType && sortType.length > 0 &&
+                                        sortType?.length > 0 &&
                                         sortType.map((item, index) => {
                                             return (
                                                 <NavLink
@@ -107,7 +107,7 @@ function Result(props) {
                                             <span className="">Loading...</span>
                                         </div>
                                         :
-                                        result && result.length >0 ?
+                                        result?.length >0 ?
                                         result.map((item, index) => {
                                             return (
                                                 <div onClick={()=> viewDetail(item)} className="list__prod" key={index}>

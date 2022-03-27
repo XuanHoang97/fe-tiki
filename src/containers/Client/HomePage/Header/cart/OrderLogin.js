@@ -1,7 +1,7 @@
-import React, {useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { DeleteItemCartByUser, GetCartByUser } from 'store/actions';
 import { numberFormat, totalMoney } from 'components/Formatting/FormatNumber';
+import { DeleteItemCartByUser, GetCartByUser } from 'store/actions';
+import { useSelector, useDispatch } from 'react-redux';
+import React, {useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { path } from 'utils';
 
@@ -35,7 +35,7 @@ function OrderLogin(props) {
                 <div className="itemCart">
                     <i className="fas fa-shopping-cart" style={{ fontSize: '17px' }}>
                         <span className="numbCart badge badge-pill badge-danger">
-                            { carts && carts.length>0 ? carts.length : ''}
+                            { carts?.length>0 ? carts.length : ''}
                         </span>
                     </i>
                 </div>
@@ -48,7 +48,7 @@ function OrderLogin(props) {
                         <h6 className='text-muted'>Sản phẩm đã thêm</h6>
                         <hr />
                         {
-                            carts && carts.length > 0 &&
+                            carts?.length > 0 &&
                             carts.map((item,index) => {
                                 return (
                                     <div className='' key={index}>
@@ -81,7 +81,7 @@ function OrderLogin(props) {
                         <h6>Tổng tiền :
                             <span className='ml-3 font-weight-bold text-danger'>
                             {
-                                carts && carts.length > 0 ?
+                                carts?.length > 0 ?
                                 numberFormat(totalMoney(carts))
                                 : 0
                             }
@@ -93,8 +93,7 @@ function OrderLogin(props) {
             }
 
             {
-                carts.length === 0 && 
-                hoverCart &&
+                carts.length === 0 && hoverCart &&
                 <div className="dropdown-menu cart__info" onMouseLeave={()=>setHoverCart(false)}>          
                     <div>
                         <img className="w-25 mb-3" src="https://salt.tikicdn.com/desktop/img/mascot@2x.png" alt="" />

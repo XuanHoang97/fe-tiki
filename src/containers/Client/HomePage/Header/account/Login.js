@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
-import { useForm } from "react-hook-form";
-import { path } from 'utils';
-import {useHistory} from 'react-router-dom';
 import { loginAcc } from 'services/authService';
-import { useDispatch } from 'react-redux';
-import { getUser } from 'store/actions';
 import instance from '../../../../../axios';
+import {useHistory} from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useForm } from "react-hook-form";
+import { Link } from 'react-router-dom';
+import { getUser } from 'store/actions';
+import { path } from 'utils';
 import './style.scss'
  
 const LoginAuth = (props) => {
@@ -50,7 +50,7 @@ const LoginAuth = (props) => {
     }, [])
  
     return (
-        <div className=''>
+        <>
             <div className='menuAuth'>
                 <div className='menu-header'>
                     <Link to={path.HOMEPAGE}  className='w-25'>
@@ -115,7 +115,7 @@ const LoginAuth = (props) => {
                     </form>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 export default LoginAuth

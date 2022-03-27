@@ -1,8 +1,8 @@
-import React,{useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import ModalEditCategory from './ModalEditCategory';
 import * as actions from '../../../store/actions';
 import ModalAddCategory from './ModalAddCategory';
-import ModalEditCategory from './ModalEditCategory';
+import React,{useState, useEffect} from 'react';
 import './style.scss';
 
 const CategoryManage = (props) => {
@@ -21,7 +21,6 @@ const CategoryManage = (props) => {
     const handleAddCategory = () => {
         setModalCategory(!modalCategory);
     }
-
     const CreateCategory = (data) => {
         const dataCategory = new FormData();
         dataCategory.append('name', data.name);
@@ -34,7 +33,6 @@ const CategoryManage = (props) => {
         setModalEditCategory(!modalEditCategory);
         setCategoryEdit(category);
     }
-
     const handleEditCategory = (data) => {
         const category = new FormData();
         category.append('id', categoryEdit.id);
@@ -68,11 +66,9 @@ const CategoryManage = (props) => {
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCpLky01HHuDldu3ZoBLszxsAYFtRmh7E4vpmdl3UMixEfN8VGMRgfMw9SxksuIdxOjSs&usqp=CAU" className='rounded-circle' style={{width:'5%'}} alt="" />
                     <div className="category-title">Danh mục (<small>{category.length}</small>)</div>
                 </div>
-                <div className="d-flex mb-3 justify-content-between">
-                    <button onClick={() => handleAddCategory()} type="button" className="btn btn-success">
-                        <i className="fas fa-plus"></i> Thêm danh mục
-                    </button>
-                </div>
+                <button onClick={() => handleAddCategory()} type="button" className="btn btn-success">
+                    <i className="fas fa-plus"></i> Thêm danh mục
+                </button>
             </div>
 
             <table className="table table-striped table-bordered table-hover">

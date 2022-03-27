@@ -2,11 +2,12 @@ import React from 'react';
 import './style/body.scss';
 
 const Mail = () => {
+    const iconMail = 'https://frontend.tikicdn.com/_desktop-next/static/img/footer/newsletter.png';
     return (
         <div className="mail">
-            <div className="titleMail col-6 d-flex">
+            <div className="titleMail col-6">
                 <div className="imgMail col-md-3">
-                    <img className="w-100" src="https://frontend.tikicdn.com/_desktop-next/static/img/footer/newsletter.png" alt="" />
+                    <img className="w-100" src={iconMail} alt="" />
                 </div>
                 <div className="info--mail col-md-9">
                     <h6>Đăng ký nhận bản tin Tiki</h6>

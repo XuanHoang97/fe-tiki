@@ -7,16 +7,6 @@ const Sort = (props) => {
                 <label className="p-0">Tìm kiếm</label>
                 <input type="text" className="form-control ml-2" placeholder="Search..." style={{height:'30px'}}/>
             </div>
-
-            <div className="col-md-2 p-0">
-                <select className="form-control"
-                    style={{height: '30px'}}
-                >
-                    <option value="">Giá cả</option>
-                    <option value="lowest">Từ thấp lên cao</option>
-                    <option value="highest">Từ cao xuống thấp</option>
-                </select>
-            </div>
         </div>
     );
 }

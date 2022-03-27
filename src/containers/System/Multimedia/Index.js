@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { TabContent, TabPane } from 'reactstrap';
-import { CRUD_ACTIONS } from '../../../utils';
-import SpecialCategory from './SpecialCategory';
-import TabMultimedia from './TabMultimedia';
 import * as actions from './../../../store/actions';
+import React, { useState, useEffect } from 'react';
+import { TabContent, TabPane } from 'reactstrap';
+import SpecialCategory from './SpecialCategory';
+import { CRUD_ACTIONS } from '../../../utils';
+import TabMultimedia from './TabMultimedia';
 import { useForm } from "react-hook-form";
 import './style.scss';
 
@@ -149,7 +149,7 @@ const Multimedia = (props) => {
             <TabContent activeTab={activeTab}>
                 <TabPane tabId="1">
                     <form className='list-slide' onSubmit={handleSubmit(handleSaveSlide)}>
-                        <div className='formSlide d-flex justify-content-between col-md-12 p-0'>
+                        <div className='formSlide col-md-12'>
                             <div className="form-group col-md-4 p-0">
                                 <label htmlFor="">Tiêu đề</label>
                                 <input type="text" className="form-control" 
@@ -190,13 +190,13 @@ const Multimedia = (props) => {
                                     style={{backgroundImage: `url(${previewImg})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat'}}
                                 >
                                     {
-                                    previewImg ?
-                                    <div 
-                                        onClick={() =>removeImg()} 
-                                        className="col-md-12" style={{textAlign: 'end', position: 'absolute', right: '-1.5rem', top: '-1rem'}}>
-                                        <i className="far fa-times-circle text-danger"></i>
-                                    </div> 
-                                    : <img src="https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png" className="w-50" alt="..." />
+                                        previewImg ?
+                                        <div 
+                                            onClick={() =>removeImg()} 
+                                            className="col-md-12" style={{textAlign: 'end', position: 'absolute', right: '-1.5rem', top: '-1rem'}}>
+                                            <i className="far fa-times-circle text-danger"></i>
+                                        </div> 
+                                        : <img src="https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png" className="w-50" alt="..." />
                                     }
                                 </div>
                             </div>

@@ -56,36 +56,34 @@ const ModalEditCategory  = (props) => {
         >
             <ModalHeader toggle={()=>toggle()}>Cập nhật danh mục</ModalHeader>
             <ModalBody>
-                <div>
-                    <div className="row">
-                        <div className="form-group col-md-6">
-                            <label>Tên </label>
-                            <input type="input" className="form-control" 
-                                onChange= {(e)=>setName(e.target.value)}
-                                value={name}
-                            />
-                        </div>
-
-                        <div className="form-group col-md-3">
-                            <label>Ảnh</label>
-                            <input id="previewImg" type="file" hidden 
-                                onChange={(e)=>changeImage(e)}
-                                name='image'
-                            />
-                            <label htmlFor="previewImg" className="btn btn-success w-100"><i className="fas fa-upload"></i> Tải ảnh</label>  
-                        </div>
-
-                        <div className="preview-image col-md-2 border" 
-                            style={{backgroundImage: `url(${previewImg})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat'}}
-                        >
-                            {
-                            previewImg ?
-                                <div onClick={() =>removeImg()} className="col-md-12" style={{textAlign: 'end', position: 'absolute', right: '-1.5rem', top: '-1rem'}}>
-                                    <i className="far fa-times-circle text-danger"></i>
-                                </div> : <img src="https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png" className="w-100" alt="..." />
-                            }
-                        </div>                  
+                <div className="row">
+                    <div className="form-group col-md-6">
+                        <label>Tên </label>
+                        <input type="input" className="form-control" 
+                            onChange= {(e)=>setName(e.target.value)}
+                            value={name}
+                        />
                     </div>
+
+                    <div className="form-group col-md-3">
+                        <label>Ảnh</label>
+                        <input id="previewImg" type="file" hidden 
+                            onChange={(e)=>changeImage(e)}
+                            name='image'
+                        />
+                        <label htmlFor="previewImg" className="btn btn-success w-100"><i className="fas fa-upload"></i> Tải ảnh</label>  
+                    </div>
+
+                    <div className="preview-image col-md-2 border" 
+                        style={{backgroundImage: `url(${previewImg})`, backgroundPosition: 'center', backgroundSize: 'cover',backgroundRepeat: 'no-repeat'}}
+                    >
+                        {
+                        previewImg ?
+                            <div onClick={() =>removeImg()} className="col-md-12" style={{textAlign: 'end', position: 'absolute', right: '-1.5rem', top: '-1rem'}}>
+                                <i className="far fa-times-circle text-danger"></i>
+                            </div> : <img src="https://giaoducthuydien.vn/wp-content/themes/consultix/images/no-image-found-360x250.png" className="w-100" alt="..." />
+                        }
+                    </div>                  
                 </div>
             </ModalBody>
 

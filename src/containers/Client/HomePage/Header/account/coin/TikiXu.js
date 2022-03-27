@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { TabContent, TabPane } from 'reactstrap';
-import {useSelector, useDispatch} from 'react-redux';
-import TabCoin from './TabCoin';
-import { getPoint } from 'store/actions';
-import './style.scss'
 import { formatDate } from 'components/Formatting/FormatDate';
 import {numberFormat} from 'components/Formatting/FormatNumber';
+import {useSelector, useDispatch} from 'react-redux';
+import { TabContent, TabPane } from 'reactstrap';
+import { getPoint } from 'store/actions';
+import TabCoin from './TabCoin';
+import './style.scss';
 
 const TikiXu = (props) => {
     const user = useSelector(state => state.auth.user);
@@ -32,8 +32,7 @@ const TikiXu = (props) => {
                 </div>
 
                 <div className='getMoreCoin'>
-                    Nhận thêm xu 
-                    <i className="fas fa-angle-right ml-2"></i>
+                    Nhận thêm xu <i className="fas fa-angle-right ml-2"></i>
                 </div>
             </div>
             <hr/>
@@ -64,8 +63,6 @@ const TikiXu = (props) => {
                         : 'Chưa có dữ liệu'
                     }
                 </TabPane>
-                <TabPane tabId="2">Updating...</TabPane>
-                <TabPane tabId="3"> updating... </TabPane>
             </TabContent>
         </div>
     );

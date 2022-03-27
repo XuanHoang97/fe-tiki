@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
 import { investmentCost, numberFormat } from 'components/Formatting/FormatNumber';
 import {filterOrderByStatus} from '../../../store/actions';
-import './style.scss'
+import {useDispatch, useSelector} from 'react-redux';
+import React, {useEffect} from 'react';
+import './style.scss';
 
 const  Dashboard = (props) => {
     const dispatch = useDispatch();
@@ -16,8 +16,8 @@ const  Dashboard = (props) => {
         <div className="dashboardTiki">
             <h5 className='my-2'>Tổng quan</h5>
              <div className="detail-overview">
-                <div className="statistical col-md-8 col-xs-12 p-0">
-                    <div className="item-statistical" style={{background:'rgb(239 169 64) '}}>
+                <div className="statistical col-12 col-sm-12 col-md-8 p-0">
+                    <div className="item-statistical" style={{background:'rgb(243 152 16)'}}>
                         <img src="https://thumbs.dreamstime.com/b/shopping-cart-icon-trolley-icon-shopping-cart-icon-trolley-icon-vector-illustration-isolated-white-background-163727286.jpg" alt="" />
                         <div className="stat">
                             <h6 className="card-title small">ĐƠN HÀNG HÔM NAY</h6>
@@ -158,7 +158,7 @@ const  Dashboard = (props) => {
                 </div>
                 </div>
 
-                <div className="col-md-4 col-xs-12 revenue">
+                <div className="col-12 col-md-4 revenue">
                     <div className='d-flex justify-content-between'>
                         <div className='item-revenue'>DOANH THU</div>
                         <div className="form-group">

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { DetailCategory, fetchAllCategory } from "store/actions";
+import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
 
 export default function Category() {
   const [active, setActive] = useState('');
@@ -27,7 +27,7 @@ export default function Category() {
   };
 
   return (
-    <React.Fragment>
+    <>
       <li className="menu_ctg nav-item dropdown mr-2 active"
         onClick={() => viewCategory()}
       >
@@ -40,7 +40,7 @@ export default function Category() {
 
       {
         hoverMenu === true  &&
-        <div className="dropdown-menu list__product col-12 d-flex"
+        <div className="dropdown-menu list__product col-12"
           onMouseLeave={() => setHoverMenu(false)}
         >
           <div className="col-3 p-0 border-right">
@@ -80,6 +80,6 @@ export default function Category() {
           </div>
         </div>
       }
-    </React.Fragment>
+    </>
   )
 }

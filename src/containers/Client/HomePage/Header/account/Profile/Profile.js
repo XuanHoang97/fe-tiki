@@ -1,7 +1,7 @@
 import { formatDateNew } from 'components/Formatting/FormatDate';
-import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { EditUSer, fetchGender } from 'store/actions';
+import React, { useEffect, useState } from 'react';
 
 function Profile(props) {
     const dispatch = useDispatch();

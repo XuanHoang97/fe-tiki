@@ -1,15 +1,15 @@
-import React from "react";
-import Category from "./Category";
-import Mail from "./Mail";
-import Product from "./Product/Index";
 import ProductSuggestion from "./productSuggestion/Index";
 import SearchSpecial from "./searchSpecial/Index";
+import Product from "./Product/Index";
+import Category from "./Category";
 import Slide from "./Slide";
-import './style/body.scss'
+import './style/body.scss';
+import Mail from "./Mail";
+import React from "react";
 
 export default function Body() {
   return (
-    <div className="main bg-light pt-3 pb-3">
+    <div className="main">
       <div className="container">
         <Slide />
         <Category />

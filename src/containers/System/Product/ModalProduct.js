@@ -77,7 +77,6 @@ const ModalProduct = (props) => {
         >
             <ModalHeader toggle={()=>toggle()}>Thêm sản phẩm</ModalHeader>
             <ModalBody>
-            <div>
                 <div className="row">
                     <div className="form-group col-md-6">
                         <label>Tên </label>
@@ -160,7 +159,6 @@ const ModalProduct = (props) => {
                     </div>
 
                 </div>
-            </div>
             </ModalBody>
 
             <ModalFooter>

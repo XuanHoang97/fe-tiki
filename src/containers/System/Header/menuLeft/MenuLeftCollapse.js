@@ -1,6 +1,6 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {MenuAdmin} from './DataMenu';
+import React from 'react';
 import './MenuLeft.scss';
 
 function MenuLeftCollapse(props) {

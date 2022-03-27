@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import ReactStars from 'react-stars'
 import { rate } from 'store/actions';
@@ -13,7 +13,6 @@ const RatingProduct = (props) => {
     const [nameProduct, setNameProduct] = useState('');
     const dispatch = useDispatch();
 
-    
     // fil info order
     useEffect (() => {
         let order = currentOrder;
@@ -35,7 +34,7 @@ const RatingProduct = (props) => {
             })
         );
         toggle();
-        }
+    }
 
     return (
         <Modal  isOpen={isOpen} toggle={toggle} size="md">   

@@ -1,12 +1,12 @@
-import React,{useState, useEffect} from 'react';
 import { numberFormat } from '../../../components/Formatting/FormatNumber';
 import { useSelector, useDispatch } from 'react-redux';
 import ModalEditProduct from './ModalEditProduct';
 import * as actions from '../../../store/actions';
+import React,{useState, useEffect} from 'react';
+import ReactPaginate from 'react-paginate';
 import ModalProduct from './ModalProduct';
 import Sort from './Sort';
 import './style.scss';
-import ReactPaginate from 'react-paginate';
 
 const ProductManage = (props) => {
     const [modalProduct, setModalProduct] = useState(false);
@@ -93,7 +93,7 @@ const ProductManage = (props) => {
                     </button>
                 </div>
             </div>
-                    <Sort />
+            <Sort />
 
             <table className="table table-striped table-bordered table-hover">
                 <thead className="text-white">

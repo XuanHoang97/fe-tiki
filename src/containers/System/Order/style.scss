@@ -9,6 +9,10 @@
             overflow-y: hidden;
         }
         @include TabItem ;
+        @include hiddenScrollbar;
+    }
+    .nav::-webkit-scrollbar { 
+        display: none;  
     }
 
     .listOrder{
@@ -41,6 +45,7 @@
             }
             .list-order{
                 table{
+                    @extend .nav;
                     @include phone{
                         overflow-x: scroll;
                         display: block;

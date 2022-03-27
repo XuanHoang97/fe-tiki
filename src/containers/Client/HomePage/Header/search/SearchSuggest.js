@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import { SpecialCategory } from 'store/actions';
 
 function SearchSuggest(props) {

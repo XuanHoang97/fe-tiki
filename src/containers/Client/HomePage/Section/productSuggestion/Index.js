@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {TabContent, TabPane } from 'reactstrap';
 import { numberFormat } from 'components/Formatting/FormatNumber';
 import { DetailCategory, fetchAllCategory } from 'store/actions';
+import { useSelector, useDispatch } from 'react-redux';
+import React, {useState, useEffect} from 'react';
+import {TabContent, TabPane } from 'reactstrap';
 import TabCategory from './TabCategory';
-import Rate from '../Rate';
 import './style/style.scss';
+import Rate from '../Rate';
 
 const ProductSuggestion = () => {
   const [activeTab, setActiveTab] = useState(3);
@@ -29,7 +29,7 @@ const ProductSuggestion = () => {
     dispatch(DetailCategory(id));
   }
 
-  // Initial show product
+  // Initial product
   useEffect(() => {
     initialProduct();
   }, [Products]);

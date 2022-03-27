@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
 import * as actions from '../../../store/actions';
 import ModalEditNews from './ModalEditNews';
 import ModalAddNews from './ModalAddNews';
@@ -77,11 +77,9 @@ const NewsManage = (props) => {
                     <img src="https://image.shutterstock.com/image-vector/news-vector-icon-260nw-682278412.jpg" style={{width: '8%'}} alt=""/>
                     <div className="news-title">Tin tức (<small>{listNews.length}</small>)</div>
                 </div>
-                <div className="mb-3">
-                    <button onClick={() => handleAddNews()} type="button" className="btn btn-success">
-                        <i className="fas fa-plus mr-2"></i> Thêm tin tức
-                    </button>
-                </div>
+                <button onClick={() => handleAddNews()} type="button" className="btn btn-success">
+                    <i className="fas fa-plus mr-2"></i> Thêm tin tức
+                </button>
             </div>
 
             <table className="table table-striped table-bordered table-hover">

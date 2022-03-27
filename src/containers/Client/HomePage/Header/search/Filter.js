@@ -1,5 +1,5 @@
-import { numberFormat } from 'components/Formatting/FormatNumber';
 import { fetchSupplierProduct, getAllRangePrice, filterPrice } from 'store/actions';
+import { numberFormat } from 'components/Formatting/FormatNumber';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import './style.scss';

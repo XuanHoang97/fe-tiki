@@ -13,10 +13,6 @@
     .addDiscount{
         display: flex;
         justify-content: space-between;
-        .addUser{
-            display: flex;
-            justify-content: space-between;
-        }
     }
 
     .discountContent{
@@ -42,5 +38,8 @@
             overflow-x: scroll;
             display: block;
         }
+    }
+    table::-webkit-scrollbar { 
+        display: none;  
     }
 }

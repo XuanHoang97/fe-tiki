@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import * as actions from "store/actions";
 import { numberFormat } from 'components/Formatting/FormatNumber';
-import {GetCartByUser, getUser } from 'store/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import {GetCartByUser } from 'store/actions';
 import Rate from '../HomePage/Section/Rate';
-import instance from './../../../axios';
+import * as actions from "store/actions";
+import { Link } from 'react-router-dom';
 import { path } from 'utils';
+import React from 'react';
 import './Style.scss';
 
 const Order = (props) => {
@@ -35,24 +34,6 @@ const Order = (props) => {
         }, 1000)
     }
 
-    // Refresh token
-    useEffect(() => {
-        if(token){
-            instance.get(`/user`,{
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-            .then(res => {
-                dispatch(getUser(res))
-            })
-            .catch(err => {
-                localStorage.removeItem('token');
-                console.log(err);
-            })
-        }
-    }, [dispatch, token]);
-
     return (
         <div className="orderDetail col-md-6">
             <div className="info">
@@ -72,10 +53,6 @@ const Order = (props) => {
             </div>
 
             <>
-                <div className="text-danger">
-                    <img className="w-25" src="http://techshop-ecommerce.surge.sh/static/media/policy-image.62c1167a.png" alt="" />
-                </div>
-
                 <div className="option">
                     <small>Số lượng:</small>
                     <div className="input-group col-md-3 pt-2 col-6 p-0">

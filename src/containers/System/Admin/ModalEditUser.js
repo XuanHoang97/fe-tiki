@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import * as actions from '../../../store/actions';
 import _ from 'lodash';
 
@@ -17,11 +17,11 @@ const ModalEditUser = (props) => {
     const [previewImg, setPreviewImg] = useState('');
 
     const dispatch = useDispatch();
-    const genders = useSelector(state => state.admin.genders);
     const roles = useSelector(state => state.admin.roles);
+    const genders = useSelector(state => state.admin.genders);
     const positions = useSelector(state => state.admin.positions); 
 
-    // fill info user to edit
+    // fill info user
     useEffect(() => {
         let user =props.currentUser;
         if(user && !_.isEmpty(user)){
@@ -35,8 +35,8 @@ const ModalEditUser = (props) => {
             setPositionId(user.positionId);
             setPreviewImg(user.image);
         }
-        dispatch(actions.fetchGender());
         dispatch(actions.fetchRole());
+        dispatch(actions.fetchGender());
         dispatch(actions.fetchPosition());
     }, [dispatch, props.currentUser]);
 
@@ -44,7 +44,7 @@ const ModalEditUser = (props) => {
         props.toggleModal();
     }
 
-    //upload file
+    // upload file
     const changeImage=(e)=>{
         let file=e.target.files[0];
         if(file){

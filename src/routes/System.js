@@ -1,23 +1,23 @@
-import React, {useState, useEffect} from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
-import * as actions from "./../store/actions";
-import { connect } from "react-redux";
-import UserManage from '../containers/System/Admin/UserManage';
+import MenuLeftCollapse from 'containers/System/Header/menuLeft/MenuLeftCollapse';
 import ProductManage from '../containers/System/Product/ProductManage';
 import Dashboard from '../containers/System/Dashboard/Dashboard';
 import OrderManage from '../containers/System/Order/OrderManage';
+import UserManage from '../containers/System/Admin/UserManage';
 import NewsManage from '../containers/System/News/NewsManage';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import ArticleManage from '../containers/System/Article/ArticleManage';
 import CategoryManage from '../containers/System/Category/CategoryManage';
 import StatisticalManage from '../containers/System/Statistical/Statistical';
-import Setting from '../containers/System/Setting/Index';
-import Multimedia from '../containers/System/Multimedia/Index';
-import MenuLeft from 'containers/System/Header/menuLeft/MenuLeft';
-import MenuLeftCollapse from 'containers/System/Header/menuLeft/MenuLeftCollapse';
 import Notification from 'containers/System/Header/notification/Notification';
+import MenuLeft from 'containers/System/Header/menuLeft/MenuLeft';
+import Multimedia from '../containers/System/Multimedia/Index';
 import VoteManage from 'containers/System/Vote/VoteManage';
 import Discount from 'containers/System/discount/Discount';
+import Setting from '../containers/System/Setting/Index';
+import React, {useState, useEffect} from 'react';
 import Bill from 'containers/System/Sale/Bill';
+import * as actions from "./../store/actions";
+import { connect } from "react-redux";
 import { path } from 'utils';
 import './style.scss';
 
@@ -41,10 +41,11 @@ const System = (props) => {
     return (
         <div className='main-container'>
             <div className='module'>
-                {   isLoggedIn && menuLeft && 
+                {   
+                    isLoggedIn && menuLeft && 
                     <MenuLeft widthMenuLeft = {widthMenuLeft} toggleMenu= {toggleMenu}/> 
                 }
-                {!menuLeft ? <MenuLeftCollapse /> : ''}                
+                { !menuLeft ? <MenuLeftCollapse /> : '' }                
             
                 <div className={`system-container ${rightContent}`}>
                     <div className="menuAdmin">

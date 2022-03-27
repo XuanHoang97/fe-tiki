@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
 import { createNewUser, deleteUser, editUser, fetchAllUser } from '../../../store/actions';
 import { numberFormat } from 'components/Formatting/FormatNumber';
 import { formatDateNew } from 'components/Formatting/FormatDate';
 import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
 import ModalEditUser from './ModalEditUser';
 import ModalUser from './ModalUser';
 import './style.scss';
@@ -15,7 +15,6 @@ const UserManage = (props) => {
     // Fetch user
     const dispatch = useDispatch();
     const listUsers = useSelector(state => state.admin.users);
-
     useEffect(() => {
         dispatch(fetchAllUser());
     }, [dispatch]);
@@ -24,7 +23,6 @@ const UserManage = (props) => {
     const handleAddNewUser=()=> {
         setModalUser(!modalUser);
     }
-
     const AddNewUser=(data)=> {
         const dataUser = new FormData();
         dataUser.append('email', data.email);

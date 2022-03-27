@@ -1,17 +1,17 @@
+import { GetAllNotify, GetNotify, MarkAllNotify, UpdateStatusNotify } from 'store/actions';
+import { formatDate } from 'components/Formatting/FormatDate';
 import React, {useState, useEffect, useRef} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { formatDate } from 'components/Formatting/FormatDate';
-import { GetAllNotify, GetNotify, MarkAllNotify, UpdateStatusNotify } from 'store/actions';
 import useOutsideClick from '../../OutSideClick';
 import './style.scss';
 
 const Notify = () => {
     const dispatch = useDispatch();
     const ref = useRef();
-    const [showNotify, setShowNotify] = useState(false);
-    const [styleUnread, setStyleUnread] = useState('listNotify my-2');
     const user = useSelector(state => state.auth.user);
     const notify = useSelector(state => state.auth.notify);
+    const [showNotify, setShowNotify] = useState(false);
+    const [styleUnread, setStyleUnread] = useState('listNotify my-2');
     const notifyUnread = useSelector(state => state.auth.notifyUnread);
 
     // fetch notify
