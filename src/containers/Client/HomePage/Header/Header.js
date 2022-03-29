@@ -17,7 +17,7 @@ const Header = () => {
 
     return (
         <div className="header">
-            <div className="container">
+            <div className="container header-tiki">
                 <div className="row">
                     <nav className="navbar navbar-expand-sm navbar-dark col-12">
                         <Link to={path.HOMEPAGE}>

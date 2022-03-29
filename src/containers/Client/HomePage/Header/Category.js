@@ -32,9 +32,7 @@ export default function Category() {
         onClick={() => viewCategory()}
       >
         <span className="category nav-link dropdown-toggle">
-          <i className="fas fa-bars mr-2" />
-          <small>Danh mục</small><br/>
-          <span>Sản phẩm</span>
+          <small>Danh mục</small>
         </span>
       </li>
 

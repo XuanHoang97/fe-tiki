@@ -10,7 +10,7 @@ import * as actions from 'store/actions';
 import { toast } from 'react-toastify';
 
 const ModalOrderNow = (props) => {
-    const saleOff = 240000;
+    const saleOff = 25000;
     const [qty, setQty] = useState(1);
     const [loadingOrder, setLoadingOrder] = useState(false);
     const history = useHistory();
@@ -152,17 +152,9 @@ const ModalOrderNow = (props) => {
                         </div>
 
                         <div className="order_info mt-3">
-                            <div className="gender d-flex px-3">
-                                <div className="radio mr-4">
-                                    <label><input type="radio" name="gender" readOnly checked />Anh</label>
-                                </div>
-                                <div className="radio">
-                                    <label><input type="radio" name="gender" readOnly />Chị</label>
-                                </div>
-                            </div>
-
+                            HOÀN TẤT THÔNG TIN
                             <div className='infoOrder d-flex'>
-                                <form className="form-group col-md-6">
+                                <form className="form-group col-md-6 p-0">
                                     <input type="text" className="form-control" placeholder="Nhập họ tên..." 
                                         {...register('username', { 
                                             required: true,

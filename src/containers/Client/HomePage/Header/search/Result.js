@@ -78,7 +78,7 @@ function Result(props) {
                                 </h5>
                             </div>
                             
-                            <Nav tabs className='mb-4'>
+                            <Nav tabs className='tabSearch'>
                                 <NavItem className='d-flex'>
                                     {
                                         sortType?.length > 0 &&
@@ -110,7 +110,7 @@ function Result(props) {
                                         result?.length >0 ?
                                         result.map((item, index) => {
                                             return (
-                                                <div onClick={()=> viewDetail(item)} className="list__prod" key={index}>
+                                                <div onClick={()=> viewDetail(item)} className="result" key={index}>
                                                     <div>
                                                         <img src={item.image} className="w-75" alt="" style={{height: '100px'}} />
                                                         <p className="text-secondary mt-3 mb-1">{item.name}</p>
@@ -124,9 +124,7 @@ function Result(props) {
                                             )
                                         })
                                         :
-                                        <div className="">
-                                            Không có sản phẩm nào, gợi ý: iphone, samsung, nokia, vivo ...
-                                        </div>
+                                            `Không có sản phẩm nào, gợi ý: iphone, samsung, nokia, vivo ...`
                                     }
                                     </div>
                                 </TabPane>

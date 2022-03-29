@@ -17,10 +17,10 @@
             .filterPrice{
                 @extend .addrReceive;
                 .item__price{
-                    background: #dddddd;
+                    background: #f8f9fa;
                     margin-bottom: 10px;
                     border-radius: 10px;
-                    padding: 0 5px;
+                    padding: 0 10px;
                     cursor: pointer;
                     span{
                         font-size: 12px;
@@ -29,7 +29,10 @@
                 .item__price:hover{
                     background: #ffc107;
                 }
-            
+
+                .activePrice{
+                    background: #ffc107;
+                }
             }
         }
 
@@ -40,6 +43,14 @@
             .suggest__list{
                 .listResult{
                     display: flex;
+                    cursor: pointer;
+                    .result{
+                        width: 16.67%;
+                        padding: 10px;
+                    }
+                    .result:hover{
+                        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+                    }
                     .loadResult{
                         display: flex;
                         justify-content: center;
@@ -50,10 +61,11 @@
         }
     }
 }
-
-.activePrice{
-    background: #ffc107;
+.tabSearch{
+    @include TabItem;
+    margin-bottom: 20px;
 }
+
 
 .provider{
     @extend .addrReceive;

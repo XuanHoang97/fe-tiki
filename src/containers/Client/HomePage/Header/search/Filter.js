@@ -1,4 +1,4 @@
-import { fetchSupplierProduct, getAllRangePrice, filterPrice } from 'store/actions';
+import { getAllRangePrice, filterPrice } from 'store/actions';
 import { numberFormat } from 'components/Formatting/FormatNumber';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
@@ -10,13 +10,10 @@ function Filter(props) {
 
     // fetch data
     const [activePrice, setActivePrice] = useState();
-    const suppliers = useSelector(state => state.admin.supplier);
     const rangePrice = useSelector(state => state.admin.rangePrice);
     useEffect(() => {
-        dispatch(fetchSupplierProduct());
         dispatch(getAllRangePrice());
         dispatch(filterPrice(keyword));
-        setActivePrice()
     }, [dispatch, keyword]);
 
     // filter by price
@@ -71,23 +68,6 @@ function Filter(props) {
                     />
                 </div>
                 <button onClick={()=> filterProduct()} type="button" className="findProd btn btn-warning">Áp dụng</button>
-            </div>
-
-            <div className="provider">
-                <h6>NƠI BÁN</h6>
-                {
-                    suppliers?.length >0 ?
-                    suppliers.map((item, index) => {
-                        return (
-                            <div className="item__address" key={index}>
-                                <input type="checkbox"
-                                />
-                                <span>{item.valueVi}</span>
-                            </div>
-                        )
-                    })
-                    : <div>Không có nhà cung cấp</div>
-                }
             </div>
         </div>
     );
