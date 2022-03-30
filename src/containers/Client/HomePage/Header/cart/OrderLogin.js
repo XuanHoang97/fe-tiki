@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import React, {useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { path } from 'utils';
+import './style.scss';
 
 function OrderLogin(props) {
     const dispatch = useDispatch();
@@ -35,7 +36,7 @@ function OrderLogin(props) {
                 <div className="itemCart">
                     <i className="fas fa-shopping-cart" style={{ fontSize: '17px' }}>
                         <span className="numbCart badge badge-pill badge-danger">
-                            { carts?.length>0 ? carts.length : ''}
+                            { carts?.length>0 && carts.length}
                         </span>
                     </i>
                 </div>
@@ -87,7 +88,7 @@ function OrderLogin(props) {
                             }
                             </span>
                         </h6>
-                        <Link to={`${path.CART}`} className='btn btn-success btn-sm w-100 mt-2 font-weight-bold'>Xem giỏ hàng</Link>
+                        <Link to={`${path.CART}`} className='btn btn-success viewCart btn-sm'>Xem giỏ hàng</Link>
                     </div>
                 </div>  
             }

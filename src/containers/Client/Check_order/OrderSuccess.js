@@ -10,7 +10,7 @@ const OrderSuccess = (props) => {
 
     useEffect(() => {
         document.title = 'Đặt hàng thành công';
-    }, [])
+    }, [user])
 
     return (
         <>
@@ -23,11 +23,15 @@ const OrderSuccess = (props) => {
                         <div className="">
                             <h5 className="text-success font-weight-bold">ĐẶT HÀNG THÀNH CÔNG!</h5>
                             <div className='my-2'>
-                                <p>Thông tin đơn hàng đã được gửi đến email của bạn:
-                                    <a href='https://mail.google.com/mail/u/1/#inbox' target='_blank' className="text-primary" rel="noreferrer">
-                                        <b className="text-success ml-3" style={{fontSize: '15px'}}>Xem ngay</b>.
-                                    </a>
-                                </p>
+                                {
+                                    !user ?
+                                    <p>Thông tin đơn hàng đã được gửi đến email của bạn:
+                                        <a href='https://mail.google.com/mail/u/1/#inbox' target='_blank' className="text-primary" rel="noreferrer">
+                                            <b className="text-success ml-3" style={{fontSize: '15px'}}>Xem ngay</b>.
+                                        </a>
+                                    </p>
+                                    : ''
+                                }
                             </div>
 
                             {

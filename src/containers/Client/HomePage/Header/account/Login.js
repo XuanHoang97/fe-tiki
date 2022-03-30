@@ -34,7 +34,7 @@ const LoginAuth = (props) => {
                     history.push(`${path.HOMEPAGE}`);
                 }
                 setLoading(false);
-            }, 2000);
+            }, 1500);
             localStorage.setItem('token', res.data.accessToken);
         }catch(error){
             if (error?.response?.status === 400) {
@@ -100,10 +100,8 @@ const LoginAuth = (props) => {
                         <button type="submit" className="btn btn-success mt-3 mb-1 btn-block">
                             {
                                 loading ?
-                                <div className='d-flex align-items-center justify-content-center bg-info'>
-                                    <div className="spinner-border spinner-border-sm text-light">
-                                    </div>
-                                    <span className="ml-3">Đang đăng nhập...</span>
+                                <div className='d-flex justify-content-center'>
+                                    <div className="spinner-border spinner-border-sm text-light"></div>
                                 </div>
                                 :
                                 <span>Đăng nhập</span>

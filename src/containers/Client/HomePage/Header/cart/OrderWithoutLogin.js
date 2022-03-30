@@ -5,6 +5,7 @@ import { deleteItemCart } from 'store/actions';
 import { Link } from 'react-router-dom';
 import React, {useState } from 'react';
 import { path } from 'utils';
+import './style.scss';
 
 function OrderWithoutLogin(props) {
     const [hoverCart, setHoverCart] = useState(false);
@@ -29,9 +30,12 @@ function OrderWithoutLogin(props) {
             <span className="cart nav-item dropdown active" onMouseEnter={() =>setHoverCart(true) }>
                 <div className="itemCart">
                     <i className="fas fa-shopping-cart" style={{ fontSize: '17px' }}>
-                        <span className="numbCart badge badge-pill badge-danger">
-                            {carts?.length? carts.length: ''}
-                        </span>
+                        {
+                            carts?.length>0 &&
+                            <span className="numbCart badge badge-pill badge-danger">
+                                { carts.length}
+                            </span>
+                        }
                     </i>
                 </div>
             </span>
@@ -77,7 +81,7 @@ function OrderWithoutLogin(props) {
                                 {numberFormat(totalMoney(carts))}
                             </span>
                         </h6>
-                        <button onClick={viewCart} className='btn btn-success btn-sm w-100 mt-2 font-weight-bold'>Xem giỏ hàng</button>
+                        <button onClick={viewCart} className='viewCart btn btn-success btn-sm'>Xem giỏ hàng</button>
                     </div>
                 </div>  
             }

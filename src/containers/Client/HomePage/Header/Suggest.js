@@ -9,7 +9,7 @@ const Suggest = () => {
                 <img className="w-50" src={freeShip} alt="" />
             </div>
 
-            <div className="col-md-8 suggest">
+            <div className="col-md-8 suggest p-0">
                 <span>Đồng hồ thông minh</span>
                 <span>Mũ bảo hiểm</span>
                 <span>Đầm dự tiệc</span>

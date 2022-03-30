@@ -146,9 +146,10 @@
                             }
                         }
                         .account {
-                            width: 250px;
+                            width: 200px;
                             cursor: pointer;
                             color: white;
+                            text-align: center;
                             @include phone {
                                 display: none;
                             }

@@ -86,8 +86,8 @@ const SendBill = (props) => {
                         </div>
 
                         <div className='d-flex mb-2'>
-                            <span className='col-6 p-0'>Ngày giao hàng dự kiến: </span>
-                            <span>{formatDateNew(bill && bill.dateDelivery)}</span>
+                            <span className='col-6 p-0'>Đã giao ngày: </span>
+                            <span>{formatDateNew(bill && bill.timeTrack)}</span>
                         </div>
 
                         <div className='d-flex mb-2'>

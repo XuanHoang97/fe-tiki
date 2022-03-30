@@ -51,13 +51,14 @@ const Notify = () => {
     
     return (
         <>
-            <div className='px-4 notify' onClick={() => viewNotify()}>
+            <div className='pl-4 notify' onClick={() => viewNotify()}>
                 <i className="far fa-bell text-white position-relative">
-                    <span className="badge badge-pill badge-danger">
-                        {
-                            user && notifyUnread?.length > 0 ? notifyUnread.length : ''
-                        }
-                    </span>
+                    {
+                        user && notifyUnread?.length > 0 &&
+                        <span className="badge badge-pill badge-danger">
+                                { notifyUnread.length}
+                        </span>
+                    }
                 </i>
             </div>
 

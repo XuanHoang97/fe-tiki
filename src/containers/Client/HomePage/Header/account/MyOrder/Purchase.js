@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
 import { Nav, NavItem, NavLink, TabContent, TabPane} from 'reactstrap';
 import { FilterMyOrder, GetOrderByUser, getStatusOrder } from 'store/actions';
 import { numberFormat } from 'components/Formatting/FormatNumber';
 import {useDispatch, useSelector} from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import ReactPaginate from "react-paginate";
 import DetailOrder from './DetailOrder';
 import RatingProduct from './Rating';
@@ -101,11 +101,11 @@ function Purchase(props) {
                         filterOrder?.length > 0 ?
                         filterOrder.slice(pagesVisited, pagesVisited + orderPerPage).map((item, index) => {
                             return (
-                                <div className='order p-3 mb-3 bg-white border-bottom' key={index}>
-                                    <div className='statusOrder'>
+                                <div className='order p-3 border-bottom' key={index}>
+                                    <div className='statusOrder mb-4'>
                                         <div className='text-dark'>{index + 1}. Đơn hàng <b>{item.code}</b></div>
                                         <span>
-                                            {item.status ==='S1' && <span className='text-warning'><i className="fas fa-clock"></i>  ĐANG CHỜ XỬ LÝ</span>}
+                                            {item.status ==='S1' && <span className='text-warning'><i className="fas fa-clock"></i>  CHỜ XỬ LÝ</span>}
                                             {item.status ==='S2' && <span className='text-success'><i className="fa fa-check"></i> ĐÃ XÁC NHẬN</span>}
                                             {item.status ==='S3' && <span className='text-primary'><i className="fa fa-truck"></i>  ĐANG GIAO HÀNG</span>}
 
@@ -117,7 +117,6 @@ function Purchase(props) {
                                             {item.status ==='S7' && <span className='text-danger'><i className="fa fa-star"></i> ĐÃ ĐÁNH GIÁ</span>}
                                         </span>
                                     </div>
-                                    <hr/>
 
                                     <div className='infoProduct'>
                                         <div className='imgProduct'>
@@ -142,7 +141,7 @@ function Purchase(props) {
 
                                             {
                                                 item.status ==='S4' && item.action ==='Đã đánh giá' &&
-                                                <button type="button" className="btn btn-success btn-sm">Xem đánh giá</button>
+                                                <button type="button" className="btn btn-warning btn-sm">Xem đánh giá</button>
                                             }
                                         </div>
                                     </div>

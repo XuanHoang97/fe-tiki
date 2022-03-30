@@ -7,6 +7,7 @@ import * as actions from '../../../store/actions';
 
 const VerifyOrder = (props) => { 
     const {isOpen, toggle} = props;
+    const dispatch = useDispatch();
     const [id, setId] = useState('');
     const [code, setOrderCode] = useState('');
     const [username, setUsername] = useState('');
@@ -22,7 +23,7 @@ const VerifyOrder = (props) => {
     const [payment, setPayment] = useState('');
     const [status, setStatus] = useState('');
     const [email, setEmail] = useState('');
-    const dispatch = useDispatch();
+    const [timeTrack, setTimeTrack] = useState(new Date().valueOf() + 7 * 60 * 60);
     const statusOrder = useSelector(state => state.client.statusOrder);
 
     // fill data order
@@ -50,7 +51,7 @@ const VerifyOrder = (props) => {
 
     // update order
     const handleUpdateOrder = (data) => {
-        props.UpdateOrder({
+        props.verifyOrder({
             id: id,
             code: code,
             username: username,
@@ -65,9 +66,12 @@ const VerifyOrder = (props) => {
             delivery: delivery,
             payment: payment,
             email: email,
-            status: status
+            status: status,
+            timeTrack: timeTrack
         });
         toggle();
+
+        console.log('data', timeTrack)
     }
     
     return (

@@ -5,6 +5,7 @@ import React from 'react';
 
 const Rating = (props) => {
     const {detailProduct} = props;
+    const avatar = 'http://res.cloudinary.com/do7qmg6jr/image/upload/v1645518444/sbgr7wd9k1t9v8f0cwvm.jpg';
 
     return (
         <div className='vote'>
@@ -55,7 +56,7 @@ const Rating = (props) => {
                     return (
                         <div className='list-vote' key={index}>
                             <div className='customer col-md-3'>
-                                <img src={item.avatar} alt="" />
+                                <img src={item.avatar? item.avatar : avatar} alt="" />
                                 <div>
                                     <div className='font-weight-bold'>{item.username}</div>
                                     <span className='text-secondary small mr-1'>Tham gia từ</span>

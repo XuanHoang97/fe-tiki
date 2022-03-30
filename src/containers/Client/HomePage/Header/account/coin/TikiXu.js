@@ -9,12 +9,13 @@ import './style.scss';
 
 const TikiXu = (props) => {
     const user = useSelector(state => state.auth.user);
-    const [activeTab, setActiveTab] = useState('1');
     const TikiPoint = useSelector(state => state.auth.point);
+    const [activeTab, setActiveTab] = useState('1');
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getPoint(user ? user.id : 2));
+        let userId = user ? user.id : null;
+        dispatch(getPoint(userId));
     }, [dispatch, user]);
 
     return (
