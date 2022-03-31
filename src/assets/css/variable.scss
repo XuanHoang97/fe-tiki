@@ -38,8 +38,9 @@
         }
         .active.nav-link{
             color: rgb(83, 138, 255) !important;
-            border-bottom: 3px solid rgb(83, 138, 255);
+            border-bottom: 3px solid rgb(83, 138, 255) !important;
             font-weight: 600;
+            border: none;
         }
         .nav-link{
             color: #535353;

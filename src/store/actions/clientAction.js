@@ -145,7 +145,7 @@ export const updateOrderStatus = (id, status) => {
                 payload: res.data.result
             });
             dispatch(getAllOrder());
-            dispatch(filterOrderByStatus('S0'))
+            // dispatch(filterOrderByStatus(status));
             toast.success('Xác nhận đơn hàng thành công');
         } catch (error) {
             console.log(error);

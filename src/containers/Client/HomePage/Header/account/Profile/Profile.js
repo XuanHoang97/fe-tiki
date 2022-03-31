@@ -102,7 +102,7 @@ function Profile(props) {
 
                     <div className='form-group d-flex'>
                         <label className='col-3'>Giới Tính</label>
-                        <div className="gender d-flex px-3">
+                        <div className="gender">
                             {
                                 gender?.length > 0 ?
                                 gender.map((item, index)=>{

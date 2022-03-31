@@ -14,7 +14,7 @@
     }
     .contentUser{
         background: white;
-        padding: 20px;
+        padding: 20px 10px;
         @include phone{
         }
     }
@@ -36,6 +36,10 @@
     padding: 0;
 }
 
+.gender{
+    display: flex;
+    gap: 15px;
+}
 .infor-user{
     display: grid;
     grid-template-columns: 1fr 1fr;

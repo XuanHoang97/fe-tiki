@@ -1,5 +1,5 @@
-import { Nav, NavItem, NavLink, TabContent, TabPane} from 'reactstrap';
 import { FilterMyOrder, GetOrderByUser, getStatusOrder } from 'store/actions';
+import { Nav, NavItem, NavLink, TabContent, TabPane} from 'reactstrap';
 import { numberFormat } from 'components/Formatting/FormatNumber';
 import {useDispatch, useSelector} from 'react-redux';
 import React, { useEffect, useState } from 'react';
@@ -21,14 +21,10 @@ function Purchase(props) {
 
     // get order
     useEffect(() => {
-        try{
-            let userId = user ? user.id : null;
-            dispatch(getStatusOrder());
-            dispatch(FilterMyOrder(userId, 'S0'));
-            dispatch(GetOrderByUser(userId));
-        }catch(e){
-            console.log('get order fail', e)
-        }
+        let userId = user ? user.id : null;
+        dispatch(getStatusOrder());
+        dispatch(FilterMyOrder(userId, 'S0'));
+        dispatch(GetOrderByUser(userId));
     }, [dispatch, user]);
 
     // detail order
@@ -36,7 +32,13 @@ function Purchase(props) {
         setModalDetail(!modalDetail);
         setOrderDetail(order);
     }
-
+    
+    // rating
+    const handleRated = (order) => {
+        setRating(!rating);
+        setRatingEdit(order);
+    }
+    
     //pagination
     const [pageNumber, setPageNumber] = useState(0);
     const orderPerPage = 5;
@@ -45,13 +47,6 @@ function Purchase(props) {
     const changePage = ({ selected }) => {
         setPageNumber(selected);
     };
-
-    // rating
-    const handleRated = (order) => {
-        setRating(!rating);
-        setRatingEdit(order);
-        console.log('order', order);
-    }
 
     return (
         <div>
@@ -84,9 +79,9 @@ function Purchase(props) {
                                     <span className='mr-2'>{item.valueVi}</span>
                                     {
                                         item.keyMap === 'S0' ?
-                                        <span>({listOrder.length})</span> 
+                                        <small>({listOrder.length})</small> 
                                         :
-                                        <span>({listOrder.filter(x => x.status === `${item.keyMap}`).length})</span>
+                                        <small>({listOrder.filter(x => x.status === `${item.keyMap}`).length})</small>
                                     }
                                 </NavLink>
                             </NavItem>
@@ -105,16 +100,15 @@ function Purchase(props) {
                                     <div className='statusOrder mb-4'>
                                         <div className='text-dark'>{index + 1}. Đơn hàng <b>{item.code}</b></div>
                                         <span>
-                                            {item.status ==='S1' && <span className='text-warning'><i className="fas fa-clock"></i>  CHỜ XỬ LÝ</span>}
-                                            {item.status ==='S2' && <span className='text-success'><i className="fa fa-check"></i> ĐÃ XÁC NHẬN</span>}
-                                            {item.status ==='S3' && <span className='text-primary'><i className="fa fa-truck"></i>  ĐANG GIAO HÀNG</span>}
+                                            {item.status ==='S1' && <span className='text-warning'> CHỜ XỬ LÝ</span>}
+                                            {item.status ==='S2' && <span className='text-success'> ĐÃ XÁC NHẬN</span>}
+                                            {item.status ==='S3' && <span className='text-primary'> ĐANG GIAO</span>}
 
-                                            {item.status ==='S4' && item.action ==='Chưa đánh giá' && <span className='text-success'><i className="fa fa-check"></i> ĐÃ GIAO</span>}
-                                            {item.status ==='S4' && item.action ==='Đã đánh giá' && <span className='text-success'><i className="fa fa-check"></i> ĐÃ ĐÁNH GIÁ</span>}
+                                            {item.status ==='S4' && item.action ==='Chưa đánh giá' && <span className='text-success'> ĐÃ GIAO</span>}
+                                            {item.status ==='S4' && item.action ==='Đã đánh giá' && <span className='text-success'> ĐÃ ĐÁNH GIÁ</span>}
                                             
-                                            {item.status ==='S5' && <span className='text-danger'><i className="fa fa-times"></i> ĐÃ HUỶ</span>}
-                                            {item.status ==='S6' && <span className='text-secondary'><i className="fa fa-undo"></i> HOÀN TRẢ</span>}
-                                            {item.status ==='S7' && <span className='text-danger'><i className="fa fa-star"></i> ĐÃ ĐÁNH GIÁ</span>}
+                                            {item.status ==='S5' && <span className='text-danger'> ĐÃ HUỶ</span>}
+                                            {item.status ==='S6' && <span className='text-secondary'> HOÀN TRẢ</span>}
                                         </span>
                                     </div>
 
@@ -149,19 +143,23 @@ function Purchase(props) {
                             )
                         })
                         :
-                        <div className='text-center'>Không có đơn hàng nào...</div>
+                        <div className='text-center my-3'>Chưa có đơn hàng nào...</div>
                     }
-                    <ReactPaginate
-                        previousLabel={"<"}
-                        nextLabel={">"}
-                        pageCount={pageCount}
-                        onPageChange={changePage}
-                        containerClassName={"paginationBttns"}
-                        previousLinkClassName={"previousBttn"}
-                        nextLinkClassName={"nextBttn"}
-                        disabledClassName={"paginationDisabled"}
-                        activeClassName={"paginationActive"}
-                    />
+
+                    {
+                        filterOrder?.length > 0 &&
+                        <ReactPaginate
+                            previousLabel={"<"}
+                            nextLabel={">"}
+                            pageCount={pageCount}
+                            onPageChange={changePage}
+                            containerClassName={"paginationBttns"}
+                            previousLinkClassName={"previousBttn"}
+                            nextLinkClassName={"nextBttn"}
+                            disabledClassName={"paginationDisabled"}
+                            activeClassName={"paginationActive"}
+                        />
+                    }
                 </TabPane>
             </TabContent>
         </div>

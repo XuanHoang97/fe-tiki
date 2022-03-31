@@ -1,10 +1,16 @@
-import React from 'react';
+import {useHistory} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
 import { path } from 'utils';
+import React from 'react';
 import './NotFound.scss';
 
 const NotFound = () => {
+    const history = useHistory();
+    const backPage = () => {
+        history.goBack();
+    }
+
     return (
         <>
             <Header/>
@@ -14,9 +20,9 @@ const NotFound = () => {
                 </div>
 
                 <div className='btn-quit'>
-                    <Link to={path.HOMEPAGE}>
+                    <div onClick={() => backPage()}>
                         <button type="button" className="btn btn-primary"><i className="fa fa-angle-left mr-2"></i> Quay lại trang trước</button>
-                    </Link>
+                    </div>
                     <Link to={path.HOMEPAGE}>
                         <button type="button" className="btn btn-success">Tiếp tục mua hàng</button>
                     </Link>

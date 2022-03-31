@@ -1,10 +1,10 @@
-import React from 'react';
 import { userIsAuthenticated, userIsNotAuthenticated } from '../hoc/authentication';
 import { ConnectedRouter as Router } from 'connected-react-router';
 import { Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { history } from '../redux'
 import { path } from '../utils';
+import React from 'react';
 
 import ProductDetail from './Client/product/ProductDetail';
 import OrderSuccess from './Client/Check_order/OrderSuccess';
@@ -14,6 +14,7 @@ import LoginAuth from './Client/HomePage/Header/account/Login';
 import InfoAccount from './Client/HomePage/Header/account/Profile/InfoAccount';
 import Discount from './Client/HomePage/Header/account/voucher/Discount';
 import Register from './Client/HomePage/Header/account/Register';
+import NotFound from './Client/HomePage/NotFound/Index';
 import HomePage from './Client/HomePage/HomePage';
 import Payment from './Client/payment/Payment';
 import Login from './System/Auth/Login';
@@ -34,10 +35,10 @@ function App(props) {
                 <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
 
                 {/* client  */}
-                <Route path={path.HOMEPAGE} component={HomePage} />
-                <Route path={path.DETAIL_PRODUCT} component={ProductDetail} />
-                <Route path={path.SEARCH} component={SearchResult} />
-                <Route path={path.DISCOUNT_DETAIL} component={Discount} />
+                <Route exact path={path.HOMEPAGE} component={HomePage} />
+                <Route exact path={path.DETAIL_PRODUCT} component={ProductDetail} />
+                <Route exact path={path.SEARCH} component={SearchResult} />
+                <Route exact path={path.DISCOUNT_DETAIL} component={Discount} />
 
                 {/* Auth*/}
                 <Route path={path.REGISTER} component={Register} />
@@ -58,6 +59,8 @@ function App(props) {
                 <Route path={path.PAYMENT} component={Payment} />
                 <Route path={path.MY_ORDER} component={OrderSuccess} />
                 <Route path={path.VERIFY_EMAIL} component={VerifyEmail} />
+
+                <Route exact path="*"><NotFound /></Route>
             </Switch>
         </Router>
     )

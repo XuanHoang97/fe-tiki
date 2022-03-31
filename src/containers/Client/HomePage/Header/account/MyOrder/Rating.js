@@ -1,19 +1,23 @@
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import ReactStars from 'react-stars'
 import { rate } from 'store/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import ReactStars from 'react-stars';
+import {FilterMyOrder, GetOrderByUser} from 'store/actions/clientAction';
 
 const RatingProduct = (props) => {
+    const dispatch = useDispatch();
+    const point = 5000;
     const {isOpen, toggle, currentOrder} = props;
-    const [point, setPoint] = useState(5000);
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('good');
     const [imgProduct, setImgProduct] = useState('');
     const [nameProduct, setNameProduct] = useState('');
-    const dispatch = useDispatch();
+    const date = new Date();
+    const timeTrack = date.valueOf() + 7 * 60 * 60;
+    const user = useSelector(state => state.auth.user);
 
-    // fil info order
+    // fill info order
     useEffect (() => {
         let order = currentOrder;
         if(order) {
@@ -24,16 +28,21 @@ const RatingProduct = (props) => {
     
     // Rating product -update order - add notify -add point
     const ratingProduct = () => {
+        const userId = user ? user.id : null;
         dispatch(rate({
-            userId: currentOrder.userId,
+            userId: userId,
             orderId: currentOrder.id,
             productId: currentOrder.productId,
             point: point,
             rating: rating,
-            comment: comment
-            })
-        );
+            comment: comment,
+            date: timeTrack
+        }));
         toggle();
+        setTimeout(() => {
+            dispatch(GetOrderByUser(userId));
+            dispatch(FilterMyOrder(userId, 'S4'));
+        }, 1000);
     }
 
     return (
@@ -65,7 +74,6 @@ const RatingProduct = (props) => {
                             value={comment}
                             onChange={(e) => setComment(e.target.value)}
                         >
-                            Sản phẩm rất chất lượng...
                         </textarea>
                     </div>
                 </div>

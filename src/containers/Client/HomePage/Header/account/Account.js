@@ -93,7 +93,7 @@ const Account = () => {
                                 <img src="https://cf.shopee.vn/file/a0ef4bd8e16e481b4253bd0eb563f784" alt="" />
                                 <div>
                                     Tiki xu
-                                    <div className='small text-secondary'>Bạn đang có 
+                                    <div className='small text-secondary'>Bạn có 
                                         <span className='text-warning ml-2'>{user && TikiPoint ? numberFormat(TikiPoint.point) : 0 } </span> 
                                         Tiki xu
                                     </div>
@@ -104,7 +104,7 @@ const Account = () => {
                                 <img src="https://cf.shopee.vn/file/84feaa363ce325071c0a66d3c9a88748" alt="" />
                                 <div>
                                     Mã giảm giá
-                                    <div className='small text-secondary'>Bạn đang có 
+                                    <div className='small text-secondary'>Bạn có 
                                         <b> {myDiscount?.length > 0 ? myDiscount.length : 0 }</b> mã giảm giá
                                     </div>
                                 </div>

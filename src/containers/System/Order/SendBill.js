@@ -6,6 +6,9 @@ import './style.scss';
 
 const SendBill = (props) => { 
     const {isOpen, toggle, bill, sendBill} = props;
+    const date = new Date();
+    const timePayment = date.valueOf() + 7 * 60 * 60;
+
     // send Bill
     const Bill = () => {
         sendBill({
@@ -19,6 +22,7 @@ const SendBill = (props) => {
             total: bill.total,
             payment: bill.payment,
             status: bill.status,
+            datePayment: timePayment,
         })
         toggle();
     }

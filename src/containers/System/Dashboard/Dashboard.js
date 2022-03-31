@@ -96,11 +96,25 @@ const  Dashboard = (props) => {
                                 {
                                     filterOrder?.length > 0 ?
                                     filterOrder.filter(item => item.status === 'S4').length
+                                    - filterOrder.filter(item => item.status === 'S4' && item.bill === '1').length
                                     :
                                     <span className='text-primary'>0</span>
                                 }    
                             </span>
                             <span className='status'>Đơn chưa thanh toán</span>
+                        </div>
+
+                        <div className='reportStatus'>
+                            <img src="https://thumbs.dreamstime.com/b/dollar-banknote-stack-icon-money-cash-symbol-simple-style-financial-banking-infographic-design-element-183107279.jpg" className='illustrator' alt="" />
+                            <span className='number'>
+                                {
+                                    filterOrder?.length > 0 ?
+                                    filterOrder.filter(item => item.status === 'S4' && item.bill === '1').length
+                                    :
+                                    <span className='text-primary'>0</span>
+                                }    
+                            </span>
+                            <span className='status'>Đơn đã thanh toán</span>
                         </div>
 
                         <div className='reportStatus'>
@@ -113,7 +127,7 @@ const  Dashboard = (props) => {
                                     <span className='text-primary'>0</span>
                                 }
                             </span>
-                            <span className='status'>Đơn hàng chưa giao</span>
+                            <span className='status'>Đơn chưa giao</span>
                         </div>
 
                         <div className='reportStatus'>
@@ -127,7 +141,7 @@ const  Dashboard = (props) => {
                                     <span className='text-primary'>0</span>
                                 }
                             </span>
-                            <span className='status'>Đơn hàng chưa hoàn tất</span>
+                            <span className='status'>Đơn chưa hoàn tất</span>
                         </div>
 
                         <div className='reportStatus'>
@@ -153,7 +167,7 @@ const  Dashboard = (props) => {
                                     <span className='text-primary'>0</span>
                                 }
                             </span>
-                            <span className='status'>Đơn hàng huỷ</span>
+                            <span className='status'>Đơn huỷ</span>
                         </div>
                 </div>
                 </div>

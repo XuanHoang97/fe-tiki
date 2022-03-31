@@ -70,8 +70,6 @@ const VerifyOrder = (props) => {
             timeTrack: timeTrack
         });
         toggle();
-
-        console.log('data', timeTrack)
     }
     
     return (
