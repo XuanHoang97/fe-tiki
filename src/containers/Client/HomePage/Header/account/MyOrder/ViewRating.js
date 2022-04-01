@@ -4,11 +4,10 @@ import ReactStars from 'react-stars';
 import React from 'react';
 
 const ViewRating = (props) => {
-    const { isOpen, toggle, ratingOrder, listOrder} = props;
+    const { isOpen, toggle, visitRating} = props;
     const user = useSelector(state => state.auth.user);
-
-    console.log('rating order:', ratingOrder?.ratingOrder > 0 ? ratingOrder.ratingOrder.rating : 'null');
-    console.log('rating:', listOrder);
+    const rating = visitRating?.ratingOrder? visitRating.ratingOrder.rating : 0;
+    const comment = visitRating?.ratingOrder? visitRating.ratingOrder.comment : 'Good';
 
     return (
         <Modal isOpen={isOpen} toggle={toggle} size="md">   
@@ -16,11 +15,11 @@ const ViewRating = (props) => {
             <ModalBody>
                 <div className='rating'>
                     <div className='rating-item'
-                        onClick={() => window.open(`/products/${ratingOrder.productId}`, "_blank")}
+                        onClick={() => window.open(`/products/${visitRating.productId}`, "_blank")}
                     >
                         <div className='rating-product col-10'>
-                            <img src={ratingOrder.image} alt="" />
-                            <b className='ml-3'>{ratingOrder.name}</b>
+                            <img src={visitRating.image} alt="" />
+                            <b className='ml-3'>{visitRating.name}</b>
                         </div>
                     </div><hr/>
 
@@ -30,11 +29,11 @@ const ViewRating = (props) => {
                             <span>{user ? user.username : ''}</span>
                             <ReactStars
                             count={5}
-                            value= {parseInt(5)}
+                            value= {rating}
                             edit={false}
                             size={20}
                             color2={'#ffd700'} />
-                            <span>Good</span>
+                            <span>{comment}</span>
                         </div>
                     </div>
                 </div>

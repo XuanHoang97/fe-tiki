@@ -70,6 +70,18 @@
     }
 }
 
+.btnViewBill{
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 13px;
+    color: #4c75eb;
+    font-weight: 600;
+}
+.btnViewBill:hover{
+    background: #009c2f;
+    color: white;
+}
+
 .totalMoney-bill{
     display: flex;
     justify-content: space-between;

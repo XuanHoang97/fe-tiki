@@ -16,7 +16,7 @@ const ViewBill = (props) => {
 
     // total money of bill
     const Tax = 2;
-    let totalAmount = bill ? bill.total : 0;
+    let totalAmount = bill ? bill.price * bill.qty : 0;
     let TaxFee = + (totalAmount * Tax/100).toFixed();
     let totalPayment = +(totalAmount + TaxFee).toFixed();
 
@@ -107,8 +107,8 @@ const ViewBill = (props) => {
                                 <td>{bill ? bill.billCode : ''}</td>
                                 <td>{bill ? bill.name : ''}</td>
                                 <td>{bill ? bill.qty : ''}</td>
-                                <td>{bill ? numberFormat(bill.total) : ''}</td>
-                                <td>{bill ? numberFormat(bill.total) : ''}</td>
+                                <td>{bill ? numberFormat(bill.price) : ''}</td>
+                                <td>{bill ? numberFormat(bill.price * bill.qty) : ''}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -135,7 +135,7 @@ const ViewBill = (props) => {
 
                         <div className='item-money-bill'>
                             <b>Tổng tiền thanh toán</b>
-                            <b>
+                            <b className='text-danger'>
                                 {numberFormat(totalPayment)}
                             </b>
                         </div>

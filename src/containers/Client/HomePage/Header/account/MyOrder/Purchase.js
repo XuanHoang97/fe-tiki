@@ -48,7 +48,7 @@ function Purchase(props) {
         setShowRating(!showRating);
         setVisitRating(order);
     }
-    
+
     //pagination
     const [pageNumber, setPageNumber] = useState(0);
     const orderPerPage = 5;
@@ -76,8 +76,7 @@ function Purchase(props) {
             <ViewRating
                 isOpen={showRating}
                 toggle={viewRating}
-                ratingOrder={visitRating}
-                listOrder = {listOrder}
+                visitRating={visitRating}
             />
 
             <Nav tabs className='tabMyOrder'>
@@ -137,7 +136,7 @@ function Purchase(props) {
                                                 <span>x{item.qty}</span>
                                             </div>
                                         </div>
-                                        <span>Tổng tiền: <span className='text-danger'>{numberFormat(item.price*item.qty)}</span></span>
+                                        <span>Tổng tiền: <span className='text-danger ml-1' style={{fontSize: '18px'}}>{numberFormat(item.price*item.qty)}</span></span>
                                     </div>
                                     <div className='detail'>
                                         <button onClick={()=>detailOrder(item)} type="button" className="btn btn-outline-secondary btn-sm">Chi tiết</button>

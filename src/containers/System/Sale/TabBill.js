@@ -2,13 +2,13 @@ import React from 'react';
 import { Nav, NavItem, NavLink} from 'reactstrap';
 
 function TabBill(props) {
-    const { activeTab, setActiveTab } = props;
+    const { activeTab, setActiveTab, Bills } = props;
     
     return (
         <Nav tabs className='tabBill'>
             <NavItem>
                 <NavLink className={activeTab === '1' ? 'active' : ''} onClick={() => setActiveTab('1')}>
-                    <div>Tất cả (0)</div>
+                    <div>Tất cả ({Bills.length? Bills.length : 0})</div>
                 </NavLink>
             </NavItem>
 

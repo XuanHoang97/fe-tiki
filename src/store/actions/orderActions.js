@@ -33,7 +33,7 @@ export const GetBill = () => {
             if (res && res.data.errCode === 0) {
                 dispatch({
                     type: actionTypes.GET_BILL,
-                    payload: res.data.result
+                    payload: res.data.result.reverse()
                 })
             }
         } catch (e) {

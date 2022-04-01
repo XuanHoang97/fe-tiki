@@ -53,10 +53,9 @@ const OrderManage = (props) => {
     }
     const Bill = (data) => {
         setLoadBill(true);
+        dispatch(SendBillCustomer(data))
         setTimeout(() => {
-            dispatch(SendBillCustomer({
-                ...data
-            }))
+            dispatch(filterOrderByStatus(data && data.status));
             setLoadBill(false);
         }, 2000);
     }
@@ -172,7 +171,7 @@ const OrderManage = (props) => {
 
                                                         {
                                                             item.status ==='S4' && item.bill === '1' &&
-                                                            <span className="actionOrder text-success" disabled >Xem hoá đơn</span>
+                                                            <span className="actionOrder text-success" disabled >Đã gửi HĐ</span>
                                                         }
 
                                                         {

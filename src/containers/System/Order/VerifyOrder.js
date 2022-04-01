@@ -25,8 +25,6 @@ const VerifyOrder = (props) => {
     const timeTrack = new Date().valueOf() + 7 * 60 * 60;
     const statusOrder = useSelector(state => state.client.statusOrder);
 
-    console.log(updateOrder);
-
     // fill data order
     useEffect (() => {
         let order = props.updateOrder;

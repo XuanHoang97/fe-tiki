@@ -43,12 +43,13 @@ const Bill = (props) => {
             />
 
             <div className='billHeader'>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIOVkwC2h6PD5RTotWCpIlDo4FvyCr5hadR3wR9uYb79xzACB0NbfVy5Le1eXJp0BAcLQ&usqp=CAU" style={{width:'4%'}} alt="" />
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIOVkwC2h6PD5RTotWCpIlDo4FvyCr5hadR3wR9uYb79xzACB0NbfVy5Le1eXJp0BAcLQ&usqp=CAU" style={{width:'3.5%'}} alt="" />
                 <div className='billTitle'>Hoá đơn <small>({Bills.length? Bills.length : 0})</small></div>
             </div>
             <TabBill
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
+                Bills = {Bills} 
             />
 
             <TabContent activeTab={activeTab} className='detailBill' >
@@ -83,14 +84,14 @@ const Bill = (props) => {
                                                 <td>{item.username}</td>
                                                 <td>{item.name}</td>
                                                 <td>{item.qty}</td>
-                                                <td>{numberFormat(item.total)}</td>
+                                                <td>{numberFormat(item.price * item.qty)}</td>
                                                 <td>{formatDateNew(item.datePayment)}</td>
                                                 <td>{item.payment}</td>
                                                 <td>
                                                     {item.status === 'S4' && <span className='badge badge-success'>Đã thanh toán</span>}
                                                 </td>
                                                 <td>
-                                                    <button onClick={()=> detailBill(item)} className='btn btn-outline-primary'>Xem</button>
+                                                    <span onClick={()=> detailBill(item)} className = 'btnViewBill' >Xem</span>
                                                 </td>
                                             </tr>
                                         )

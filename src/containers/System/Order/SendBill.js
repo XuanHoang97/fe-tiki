@@ -19,6 +19,7 @@ const SendBill = (props) => {
             username: bill.username,
             name: bill.name,
             qty: bill.qty,
+            price: bill.price,
             payment: bill.payment,
             status: bill.status,
             datePayment: timePayment,

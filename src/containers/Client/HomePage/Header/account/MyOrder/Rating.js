@@ -36,7 +36,7 @@ const RatingProduct = (props) => {
             point: point,
             rating: rating,
             comment: comment,
-            date: timeTrack
+            timeTrack: timeTrack
         }));
         toggle();
         setTimeout(() => {

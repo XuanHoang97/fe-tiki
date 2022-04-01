@@ -127,7 +127,7 @@ export const filterOrderByStatus = (status) => {
             const res = await filterOrder(status);
             dispatch({
                 type: actionTypes.FILTER_ORDER_BY_STATUS,
-                payload: res.data.result
+                payload: res.data.result.reverse()
             });
         } catch (error) {
             console.log(error);
