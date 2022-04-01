@@ -15,6 +15,7 @@ function Purchase(props) {
     const listOrder = useSelector(state => state.client.listOrder);
     const statusOrder = useSelector(state => state.client.statusOrder);
     const filterOrder = useSelector(state => state.client.filterMyOrder);
+
     const [modalDetail, setModalDetail] = useState(false);
     const [orderDetail, setOrderDetail] = useState({});
     const [rating, setRating] = useState(false);
@@ -70,12 +71,13 @@ function Purchase(props) {
                 isOpen={rating}
                 toggle={handleRated}
                 currentOrder={ratingEdit}
-            />
+                />
 
             <ViewRating
                 isOpen={showRating}
                 toggle={viewRating}
                 ratingOrder={visitRating}
+                listOrder = {listOrder}
             />
 
             <Nav tabs className='tabMyOrder'>

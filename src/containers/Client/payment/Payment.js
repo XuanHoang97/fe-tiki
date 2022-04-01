@@ -28,8 +28,6 @@ const Payment = (props) => {
     const dateDelivery=date.setDate(date.getDate() + 3);
     const dateDeliveryFormat = moment(dateDelivery).locale('vi').format('dddd, DD/MM/YYYY');
 
-    console.log('cartUser:', cartsUser);
-    
     // Fee delivery
     const handleDelivery = (e) => {
         setDeliveryMethod(e.target.value)

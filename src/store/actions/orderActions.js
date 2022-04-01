@@ -3,7 +3,8 @@ import {
     sendBill,
     getBill,
     getOrderToday,
-    revenueToday
+    revenueToday,
+    newCustomerMonth
 } from "../../services/adminService";
 import { toast } from "react-toastify";
 
@@ -70,4 +71,20 @@ export const RevenueToday = () => {
         }
     }
 }
+
+// new customer month
+export const NewCustomerMonth = () => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await newCustomerMonth();
+            dispatch({
+                type: actionTypes.NEW_CUSTOMER,
+                payload: res.data.result
+            })
+        } catch (e) {
+            toast.error('Get new customer month fail', e)
+        }
+    }
+}
+
 

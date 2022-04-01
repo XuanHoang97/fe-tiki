@@ -36,6 +36,11 @@ const revenueToday = () => {
     return axios.get(`${path.PORT}/get-revenue-today`);
 }
 
+// new customer month
+const newCustomerMonth = () => {
+    return axios.get(`${path.PORT}/new-customer-month`);
+}
+
 export { 
     getAllRating,
     addDiscount,
@@ -43,5 +48,6 @@ export {
     sendBill,
     getBill,
     getOrderToday,
-    revenueToday
+    revenueToday,
+    newCustomerMonth
 };

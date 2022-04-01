@@ -16,8 +16,7 @@ const OrderManage = (props) => {
     const [activeTab, setActiveTab] = useState('4');
     const [modalVerifyOrder, setModalVerifyOrder] = useState(false);
     const [updateOrder, setUpdateOrder] = useState([]);
-    const [StatusOrder, setStatusOrder] = useState('');
-    const [loadOrder, setLoadOrder] = useState(false);
+    
     const [modalSendBill, setModalSendBill] = useState(false);
     const [BillCustomer, setBillCustomer] = useState([]);
     const [loadBill, setLoadBill] = useState(false);
@@ -43,17 +42,7 @@ const OrderManage = (props) => {
         dispatch(updateOrderStatus(data));
         setTimeout(() => {
             dispatch(getAllOrder());
-            // dispatch(filterOrderByStatus(data.status));
-        }, 1000);
-    }
-
-    // Filter order
-    const FilterOrder = (e) => {
-        setStatusOrder(e.target.value);
-        setLoadOrder(true);
-        setTimeout(() => {
-            dispatch(filterOrderByStatus(e.target.value));
-            setLoadOrder(false);
+            dispatch(filterOrderByStatus(updateOrder && updateOrder.status));
         }, 1000);
     }
 
@@ -108,15 +97,7 @@ const OrderManage = (props) => {
 
                 <TabContent activeTab={activeTab} className = 'listOrder'>
                     <TabPane tabId={activeTab} className= 'tableOrder' >
-                        {
-                            activeTab === '4' ?
-                            <SortOrder
-                                StatusOrder={StatusOrder}
-                                status={status}
-                                FilterOrder={FilterOrder}
-                            /> : ''
-                        }
-
+                        <SortOrder/>
                         <div className='list-order mt-3'>
                             <table className="table table-striped table-bordered table-hover">
                                 <thead className="text-white">
@@ -137,15 +118,6 @@ const OrderManage = (props) => {
                                 
                                 <tbody>
                                     {
-                                        loadOrder ?
-                                        <tr>
-                                            <td colSpan="10" className="text-center">
-                                                <div className="spinner-border spinner-border-sm mr-2 text-primary" role="status">
-                                                </div>
-                                                <span>Loading...</span>
-                                            </td>
-                                        </tr> :
-
                                         filterOrder?.length > 0 ?
                                         filterOrder.slice(pagesVisited, pagesVisited + orderPerPage)
                                         .map((item, index) => {
@@ -212,13 +184,12 @@ const OrderManage = (props) => {
                                         })
                                         :
                                         <tr>
-                                            <td colSpan="10" className="text-center text-primary">Chưa có đơn hàng nào...</td>
+                                            <td colSpan="10" className="text-center">Chưa có đơn hàng nào...</td>
                                         </tr>
                                     }
                                 </tbody>
                             </table>
                         </div>
-
                         {
                             filterOrder?.length > 0 &&
                             <ReactPaginate

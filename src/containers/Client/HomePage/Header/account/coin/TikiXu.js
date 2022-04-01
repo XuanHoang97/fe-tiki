@@ -18,12 +18,14 @@ const TikiXu = (props) => {
         dispatch(getPoint(userId));
     }, [dispatch, user]);
 
+    console.log(TikiPoint,TikiPoint && TikiPoint.userData.point);
+
     return (
         <div>
             <div className='coin-overview '>
                 <div className='myCoin '>
                     <img src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/paymentfe/75efaf1b556a8e2fac6ab9383e95d4e3.png" alt='' />
-                    <div className='numbCoin'>{numberFormat(TikiPoint ? TikiPoint.point : 0 )}</div>
+                    <div className='numbCoin'>{numberFormat(TikiPoint ? TikiPoint.userData.point : 0 )}</div>
                     <div className='coin-current'>
                         <span>Xu đang có</span>
                         <div>100 Tiki xu sẽ hết hạn vào 30/06/2022 
@@ -46,8 +48,8 @@ const TikiXu = (props) => {
             <TabContent activeTab={activeTab}>
                 <TabPane tabId="1">
                     {
-                        TikiPoint?.pointData ?
-                        TikiPoint.pointData.reverse().map((item, index) => {
+                        TikiPoint?.historyData ?
+                        TikiPoint.historyData.reverse().map((item, index) => {
                             return (
                                 <div className='coin-item' key={index}>
                                     <div className='d-flex align-items-center'>
@@ -61,7 +63,7 @@ const TikiXu = (props) => {
                                 </div>
                             )
                         })
-                        : 'Chưa có dữ liệu'
+                        : <span className='coin-item'>Chưa có dữ liệu</span>
                     }
                 </TabPane>
             </TabContent>

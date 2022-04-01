@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import { TabContent, TabPane } from 'reactstrap';
 import { GetDiscountUser } from 'store/actions';
-import { NavLink } from 'react-router-dom';
 import TabVoucher from './TabVoucher';
 import { path } from 'utils';
 import './style.scss';
@@ -24,9 +23,11 @@ function Voucher(props) {
         <>
             <div className='overview-voucher'>
                 <h5>Ví voucher</h5>
-                <NavLink to={`${path.DISCOUNT_DETAIL}`}>
+                <div style={{cursor: 'pointer'}}
+                    onClick={() => window.open(`${path.DISCOUNT_DETAIL}`, "_blank")}
+                >
                     <span className='text-danger'>Tìm thêm voucher</span>
-                </NavLink>
+                </div>
             </div>
 
             <div className='search-voucher'>

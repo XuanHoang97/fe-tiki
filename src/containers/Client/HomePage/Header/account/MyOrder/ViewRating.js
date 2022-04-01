@@ -4,8 +4,11 @@ import ReactStars from 'react-stars';
 import React from 'react';
 
 const ViewRating = (props) => {
-    const { isOpen, toggle, ratingOrder } = props;
+    const { isOpen, toggle, ratingOrder, listOrder} = props;
     const user = useSelector(state => state.auth.user);
+
+    console.log('rating order:', ratingOrder?.ratingOrder > 0 ? ratingOrder.ratingOrder.rating : 'null');
+    console.log('rating:', listOrder);
 
     return (
         <Modal isOpen={isOpen} toggle={toggle} size="md">   

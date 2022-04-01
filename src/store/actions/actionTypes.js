@@ -122,6 +122,9 @@ const actionTypes = Object.freeze({
     // get order today 
     GET_ORDER_TODAY: 'GET_ORDER_TODAY',
     REVENUE_TODAY: 'REVENUE_TODAY',
+
+    // new customer
+    NEW_CUSTOMER: 'NEW_CUSTOMER',
     
 
 })

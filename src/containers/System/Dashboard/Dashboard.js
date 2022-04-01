@@ -1,5 +1,5 @@
 import { investmentCost, numberFormat } from 'components/Formatting/FormatNumber';
-import {GetOrderToday, RevenueToday} from '../../../store/actions/orderActions';
+import {GetOrderToday, RevenueToday, NewCustomerMonth} from '../../../store/actions/orderActions';
 import {filterOrderByStatus} from '../../../store/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import React, {useEffect} from 'react';
@@ -10,13 +10,13 @@ const  Dashboard = (props) => {
     const filterOrder = useSelector(state => state.client.filterOrder);
     const orderToday = useSelector(state => state.order.orderToday);
     const revenueToday = useSelector(state => state.order.revenueToday);
-
-    console.log(orderToday, revenueToday);
+    const newCustomer = useSelector(state => state.order.newCustomerMonth);
 
     useEffect(() => {
         dispatch(filterOrderByStatus('S0'));
         dispatch(GetOrderToday());
         dispatch(RevenueToday());
+        dispatch(NewCustomerMonth());
     }, [dispatch])
 
     return (
@@ -47,7 +47,7 @@ const  Dashboard = (props) => {
                         <div className="stat">
                             <h6 className="card-title small">KHÁCH HÀNG MỚI</h6>
                             <h5 className="card-text font-weight-bold">
-                            0
+                                {newCustomer ? newCustomer : 0}
                             </h5>
                         </div>
                     </div>
@@ -70,7 +70,7 @@ const  Dashboard = (props) => {
                                 && filterOrder.filter(item => item.status === 'S4').length > 0 ?
                                 <span className="font-weight-bold">
                                     {numberFormat(filterOrder.filter(item => item.status === 'S4').reduce((total, item) => {
-                                    return total + item.total
+                                    return total + item.price * item.qty
                                     }, 0))}
                                 </span>
                                 : 
@@ -88,7 +88,7 @@ const  Dashboard = (props) => {
                             {
                                 <span className="font-weight-bold">
                                     {numberFormat(filterOrder.filter(item => item.status === 'S4').reduce((total, item) => {
-                                    return total + item.total
+                                    return total + item.price * item.qty
                                     }, 0) - investmentCost())}
                                 </span>
                             }

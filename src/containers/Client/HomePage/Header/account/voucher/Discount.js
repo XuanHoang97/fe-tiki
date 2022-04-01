@@ -89,8 +89,7 @@ const Discount = () => {
                             </div>
                         )
                     })
-                    : 
-                    <h5>Không có mã giảm giá</h5>
+                    :  <h5>Không có mã giảm giá</h5>
                 }
             </div>
         </div>

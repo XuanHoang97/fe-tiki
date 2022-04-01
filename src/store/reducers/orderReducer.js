@@ -3,7 +3,8 @@ import actionTypes from '../actions/actionTypes';
 const initialState = {
     Bills: [],
     orderToday: 0,
-    revenueToday: 0
+    revenueToday: 0,
+    newCustomerMonth: 0
 }
 
 const orderReducer = (state = initialState, action) => {
@@ -30,6 +31,13 @@ const orderReducer = (state = initialState, action) => {
             return {
                 ...state,
                 revenueToday: action.payload
+            }
+
+        // new customer month
+        case actionTypes.NEW_CUSTOMER:
+            return {
+                ...state,
+                newCustomerMonth: action.payload
             }
             
     }

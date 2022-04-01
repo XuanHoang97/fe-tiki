@@ -94,7 +94,7 @@ const Account = () => {
                                 <div>
                                     Tiki xu
                                     <div className='small text-secondary'>Bạn có 
-                                        <span className='text-warning ml-2'>{user && TikiPoint ? numberFormat(TikiPoint.point) : 0 } </span> 
+                                        <span className='text-warning ml-2'>{user && TikiPoint ? numberFormat(TikiPoint.userData.point) : 0 } </span> 
                                         Tiki xu
                                     </div>
                                 </div>

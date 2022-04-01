@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 import * as actions from '../../../store/actions';
 
 const VerifyOrder = (props) => { 
-    const {isOpen, toggle} = props;
+    const {isOpen, toggle, updateOrder} = props;
     const dispatch = useDispatch();
     const [id, setId] = useState('');
     const [code, setOrderCode] = useState('');
@@ -14,7 +14,6 @@ const VerifyOrder = (props) => {
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
     const [note, setNote] = useState('');
-    const [total, setTotal] = useState('');
     const [name, setName] = useState('');
     const [qty, setQty] = useState('');
     const [date, setDate] = useState('');
@@ -26,6 +25,8 @@ const VerifyOrder = (props) => {
     const timeTrack = new Date().valueOf() + 7 * 60 * 60;
     const statusOrder = useSelector(state => state.client.statusOrder);
 
+    console.log(updateOrder);
+
     // fill data order
     useEffect (() => {
         let order = props.updateOrder;
@@ -36,7 +37,6 @@ const VerifyOrder = (props) => {
             setPhone(order.phone);
             setAddress(order.address);
             setNote(order.note);
-            setTotal(order.total);
             setName(order.name);
             setQty(order.qty);
             setDate(order.date);
@@ -58,7 +58,6 @@ const VerifyOrder = (props) => {
             phone: phone,
             address: address,
             note: note,
-            total: total,
             name: name,
             qty: qty,
             date: date,
@@ -97,7 +96,7 @@ const VerifyOrder = (props) => {
                         <h5 className=''>Thông tin khách hàng</h5>
                         <hr/>
                         <div className='d-flex'>
-                            <span className='col-5 p-0'>Tên khách hàng:</span> 
+                            <span className='col-5 p-0'>Khách hàng:</span> 
                             <h6 className='text-primary  font-weight-bold'>{username}</h6>
                         </div>
 
@@ -157,7 +156,7 @@ const VerifyOrder = (props) => {
 
                         <div className='d-flex mb-2'>
                             <span className='col-6 p-0'>Tổng tiền:</span> 
-                            <b className='text-danger'>{numberFormat(total)}</b>
+                            <b className='text-danger'>{updateOrder ? numberFormat(updateOrder.price * updateOrder.qty) : 0}</b>
                         </div>
                     </div>
                 </div>
