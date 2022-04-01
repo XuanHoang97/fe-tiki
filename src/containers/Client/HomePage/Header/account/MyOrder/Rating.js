@@ -50,15 +50,15 @@ const RatingProduct = (props) => {
             <ModalHeader toggle={toggle}>Đánh giá sản phẩm</ModalHeader>
             <ModalBody>
                 <div className='rating'>
-                    <div className='rating-item d-flex align-items-center justify-content-between'>
-                        <div className='col-10'>
-                            <img src={imgProduct} style={{width: '15%'}} alt="" />
+                    <div className='rating-item'>
+                        <div className='rating-product col-10'>
+                            <img src={imgProduct} alt="" />
                             <b className='ml-3'>{nameProduct}</b>
                         </div>
                         <span className='text-warning'>+ {point} xu</span>
                     </div><hr/>
 
-                    <div className='rating d-flex'>
+                    <div className='ratingUser'>
                         <span className='col-3'>Đánh giá</span>
                         <ReactStars
                         count={5}
@@ -77,10 +77,9 @@ const RatingProduct = (props) => {
                         </textarea>
                     </div>
                 </div>
-                <div className='d-flex justify-content-end'>
+                <div className='btnRating'>
                     <button onClick={() => ratingProduct() }
-                        type="button" className="btn btn-success">
-                        OK
+                        type="button" className="btn btn-success">OK 
                     </button>
                 </div>
             </ModalBody>

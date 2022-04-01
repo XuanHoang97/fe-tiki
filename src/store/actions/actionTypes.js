@@ -118,6 +118,10 @@ const actionTypes = Object.freeze({
 
     // get discount user
     GET_DISCOUNT_USER: 'GET_DISCOUNT_USER',
+
+    // get order today 
+    GET_ORDER_TODAY: 'GET_ORDER_TODAY',
+    REVENUE_TODAY: 'REVENUE_TODAY',
     
 
 })

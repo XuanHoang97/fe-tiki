@@ -27,6 +27,8 @@ const Payment = (props) => {
     const [deliveryFee, setDeliveryFee] = useState(50000);
     const dateDelivery=date.setDate(date.getDate() + 3);
     const dateDeliveryFormat = moment(dateDelivery).locale('vi').format('dddd, DD/MM/YYYY');
+
+    console.log('cartUser:', cartsUser);
     
     // Fee delivery
     const handleDelivery = (e) => {
@@ -57,7 +59,7 @@ const Payment = (props) => {
         setTimeout(() => {
             dispatch(CheckoutOrder({
                 arrOrder: newCart,
-                total: totalMoney(cartsUser) - coupon + deliveryFee,
+                // total: totalMoney(cartsUser) - coupon + deliveryFee,
                 username: user.username,
                 phone: user.phoneNumber,
                 address: user.address,

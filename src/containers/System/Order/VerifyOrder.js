@@ -23,7 +23,7 @@ const VerifyOrder = (props) => {
     const [payment, setPayment] = useState('');
     const [status, setStatus] = useState('');
     const [email, setEmail] = useState('');
-    const [timeTrack, setTimeTrack] = useState(new Date().valueOf() + 7 * 60 * 60);
+    const timeTrack = new Date().valueOf() + 7 * 60 * 60;
     const statusOrder = useSelector(state => state.client.statusOrder);
 
     // fill data order

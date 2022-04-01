@@ -1,4 +1,5 @@
 import { investmentCost, numberFormat } from 'components/Formatting/FormatNumber';
+import {GetOrderToday, RevenueToday} from '../../../store/actions/orderActions';
 import {filterOrderByStatus} from '../../../store/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import React, {useEffect} from 'react';
@@ -7,9 +8,15 @@ import './style.scss';
 const  Dashboard = (props) => {
     const dispatch = useDispatch();
     const filterOrder = useSelector(state => state.client.filterOrder);
+    const orderToday = useSelector(state => state.order.orderToday);
+    const revenueToday = useSelector(state => state.order.revenueToday);
+
+    console.log(orderToday, revenueToday);
 
     useEffect(() => {
         dispatch(filterOrderByStatus('S0'));
+        dispatch(GetOrderToday());
+        dispatch(RevenueToday());
     }, [dispatch])
 
     return (
@@ -21,7 +28,7 @@ const  Dashboard = (props) => {
                         <img src="https://thumbs.dreamstime.com/b/shopping-cart-icon-trolley-icon-shopping-cart-icon-trolley-icon-vector-illustration-isolated-white-background-163727286.jpg" alt="" />
                         <div className="stat">
                             <h6 className="card-title small">ĐƠN HÀNG HÔM NAY</h6>
-                            <h5 className="card-text font-weight-bold">0</h5>
+                            <h5 className="card-text font-weight-bold">{orderToday ? orderToday : 0 }</h5>
                         </div>
                     </div>
 
@@ -30,7 +37,7 @@ const  Dashboard = (props) => {
                         <div className="stat">
                             <h6 className="card-title small">DOANH THU HÔM NAY</h6>
                             <h5 className="card-text font-weight-bold">
-                            0 đ
+                                {revenueToday ? numberFormat(revenueToday) : 0}
                             </h5>
                         </div>
                     </div>

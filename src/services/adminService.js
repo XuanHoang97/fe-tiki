@@ -26,10 +26,22 @@ const getBill = (billId) => {
     return axios.get(`${path.PORT}/get-bill?id=${billId}`);
 }
 
+// get order today
+const getOrderToday = () => {
+    return axios.get(`${path.PORT}/get-order-today`);
+}
+
+// revenue today
+const revenueToday = () => {
+    return axios.get(`${path.PORT}/get-revenue-today`);
+}
+
 export { 
     getAllRating,
     addDiscount,
     getAllDiscount,
     sendBill,
-    getBill
+    getBill,
+    getOrderToday,
+    revenueToday
 };

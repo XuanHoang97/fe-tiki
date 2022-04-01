@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import ReactPaginate from "react-paginate";
 import DetailOrder from './DetailOrder';
 import RatingProduct from './Rating';
+import ViewRating from './ViewRating';
 
 function Purchase(props) {
     const dispatch = useDispatch();
@@ -18,6 +19,8 @@ function Purchase(props) {
     const [orderDetail, setOrderDetail] = useState({});
     const [rating, setRating] = useState(false);
     const [ratingEdit, setRatingEdit] = useState('');
+    const [showRating, setShowRating] = useState(false);
+    const [visitRating, setVisitRating] = useState('');
 
     // get order
     useEffect(() => {
@@ -37,6 +40,12 @@ function Purchase(props) {
     const handleRated = (order) => {
         setRating(!rating);
         setRatingEdit(order);
+    }
+
+    // view rating
+    const viewRating = (order) => {
+        setShowRating(!showRating);
+        setVisitRating(order);
     }
     
     //pagination
@@ -61,6 +70,12 @@ function Purchase(props) {
                 isOpen={rating}
                 toggle={handleRated}
                 currentOrder={ratingEdit}
+            />
+
+            <ViewRating
+                isOpen={showRating}
+                toggle={viewRating}
+                ratingOrder={visitRating}
             />
 
             <Nav tabs className='tabMyOrder'>
@@ -114,30 +129,30 @@ function Purchase(props) {
 
                                     <div className='infoProduct'>
                                         <div className='imgProduct'>
-                                            <img src={item.image} style={{width: '60px'}} alt='img' />
+                                            <img src={item.image} alt='img' />
                                             <div className='text-secondary'>
                                                 <h6>{item.name}</h6>
                                                 <span>x{item.qty}</span>
                                             </div>
                                         </div>
-                                        <div className='detail'>
-                                            <span className='text-danger'>{numberFormat(item.price*item.qty)}</span>
-                                            <button onClick={()=>detailOrder(item)} type="button" className="btn btn-outline-secondary btn-sm">Chi tiết</button>
-                                            {
-                                                item.status ==='S1' || item.status ==='S2' || item.status ==='S3' &&
-                                                <button type="button" className="btn btn-danger btn-sm">Huỷ đơn</button>
-                                            }
+                                        <span>Tổng tiền: <span className='text-danger'>{numberFormat(item.price*item.qty)}</span></span>
+                                    </div>
+                                    <div className='detail'>
+                                        <button onClick={()=>detailOrder(item)} type="button" className="btn btn-outline-secondary btn-sm">Chi tiết</button>
+                                        {
+                                            item.status ==='S1' || item.status ==='S2' || item.status ==='S3' &&
+                                            <button type="button" className="btn btn-danger btn-sm">Huỷ đơn</button>
+                                        }
 
-                                            {
-                                                item.status ==='S4' && item.action ==='Chưa đánh giá' &&
-                                                <button onClick={() => handleRated(item)} type="button" className="btn btn-success btn-sm">Đánh giá</button>
-                                            }
+                                        {
+                                            item.status ==='S4' && item.action ==='Chưa đánh giá' &&
+                                            <button onClick={() => handleRated(item)} type="button" className="btn btn-success btn-sm">Đánh giá</button>
+                                        }
 
-                                            {
-                                                item.status ==='S4' && item.action ==='Đã đánh giá' &&
-                                                <button type="button" className="btn btn-warning btn-sm">Xem đánh giá</button>
-                                            }
-                                        </div>
+                                        {
+                                            item.status ==='S4' && item.action ==='Đã đánh giá' &&
+                                            <button onClick={()=> viewRating(item)} type="button" className="btn btn-warning btn-sm">Xem đánh giá</button>
+                                        }
                                     </div>
                                 </div>
                             )

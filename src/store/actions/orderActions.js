@@ -1,7 +1,9 @@
 import actionTypes from './actionTypes';
 import {
     sendBill,
-    getBill
+    getBill,
+    getOrderToday,
+    revenueToday
 } from "../../services/adminService";
 import { toast } from "react-toastify";
 
@@ -38,3 +40,34 @@ export const GetBill = () => {
         }
     }
 }
+
+// get order today
+export const GetOrderToday = () => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await getOrderToday();
+            dispatch({
+                type: actionTypes.GET_ORDER_TODAY,
+                payload: res.data.length
+            })
+        } catch (e) {
+            toast.error('Get order today fail', e)
+        }
+    }
+}
+
+// revenue today
+export const RevenueToday = () => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await revenueToday();
+            dispatch({
+                type: actionTypes.REVENUE_TODAY,
+                payload: res.data.result
+            })
+        } catch (e) {
+            toast.error('Get revenue today fail', e)
+        }
+    }
+}
+

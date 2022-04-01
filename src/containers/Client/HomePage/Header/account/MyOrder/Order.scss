@@ -75,3 +75,45 @@
 .tabMyOrder{
     @include TabItem ;
 }
+.detail{
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+}
+
+.imgProduct{
+    img{
+        width: 60px;
+    }
+}
+
+.rating{
+    .rating-item{
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        justify-content: space-between;
+        .rating-product{
+            img{
+                width: 18%;
+            }
+        }
+    }
+    .rating-item:hover{
+        background: lightblue;
+    }
+    .ratingUser{
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        img{
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+        }
+    }
+}
+.btnRating{
+    display: flex;
+    justify-content: end;
+}

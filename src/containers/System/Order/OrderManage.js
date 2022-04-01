@@ -34,13 +34,17 @@ const OrderManage = (props) => {
         dispatch(filterOrderByStatus('S0'));
     }, [dispatch])
 
-    //update order
+    // verify order
     const verifyOrder = (order) => {
         setUpdateOrder(order);
         setModalVerifyOrder(!modalVerifyOrder);
     }
     const UpdateOrder = (data) => {
         dispatch(updateOrderStatus(data));
+        setTimeout(() => {
+            dispatch(getAllOrder());
+            // dispatch(filterOrderByStatus(data.status));
+        }, 1000);
     }
 
     // Filter order
@@ -65,7 +69,7 @@ const OrderManage = (props) => {
                 ...data
             }))
             setLoadBill(false);
-        }, 3000);
+        }, 2000);
     }
 
     //pagination
@@ -121,10 +125,11 @@ const OrderManage = (props) => {
                                         <td>Mã ĐH</td>
                                         <td>Khách hàng</td>
                                         <td>Sản phẩm</td>
+                                        <td>Giá trị đơn </td>
                                         <td>SL</td>
                                         <td>Tổng tiền</td>
                                         <td>Ngày đặt</td>
-                                        <td>Ngày giao dự kiến</td>
+                                        <td>Ngày giao</td>
                                         <td>Trạng thái</td>
                                         <td>Tác vụ</td>
                                     </tr>
@@ -150,8 +155,9 @@ const OrderManage = (props) => {
                                                     <td>{item.code}</td>
                                                     <td className='text-primary font-weight-bold'>{item.username}</td>
                                                     <td>{item.name}</td>
+                                                    <td>{numberFormat(item.price)}</td>
                                                     <td>{item.qty}</td>
-                                                    <td>{numberFormat(item.total)}</td>
+                                                    <td>{numberFormat(item.price * item.qty)}</td>
                                                     <td>{item.date ? formatDateNew(item.date) : ''}</td>
                                                     <td>{item.dateDelivery ? formatDateNew(item.dateDelivery) : ''}</td>
                                                     <td className='font-weight-bold small'>
@@ -212,17 +218,21 @@ const OrderManage = (props) => {
                                 </tbody>
                             </table>
                         </div>
-                        <ReactPaginate
-                            previousLabel={"<"}
-                            nextLabel={">"}
-                            pageCount={pageCount}
-                            onPageChange={changePage}
-                            containerClassName={"paginationBttns"}
-                            previousLinkClassName={"previousBttn"}
-                            nextLinkClassName={"nextBttn"}
-                            disabledClassName={"paginationDisabled"}
-                            activeClassName={"paginationActive"}
-                        />
+
+                        {
+                            filterOrder?.length > 0 &&
+                            <ReactPaginate
+                                previousLabel={"<"}
+                                nextLabel={">"}
+                                pageCount={pageCount}
+                                onPageChange={changePage}
+                                containerClassName={"paginationBttns"}
+                                previousLinkClassName={"previousBttn"}
+                                nextLinkClassName={"nextBttn"}
+                                disabledClassName={"paginationDisabled"}
+                                activeClassName={"paginationActive"}
+                            />
+                        }
                     </TabPane>
                 </TabContent>
             </LoadingOverlay>
