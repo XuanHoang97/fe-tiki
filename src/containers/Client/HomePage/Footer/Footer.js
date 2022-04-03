@@ -37,10 +37,7 @@ const Footer = () => {
 
     return (
         <>
-            <div className="footer bg-white">
-                @CopyRight Hoang97
-            </div>
-
+            <div className="footer"> @CopyRight Hoang97 </div>
             {
                 categoryMB &&
                 <div className="category-mobile">

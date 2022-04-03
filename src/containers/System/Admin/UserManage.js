@@ -126,8 +126,8 @@ const UserManage = (props) => {
                                     <td>{formatDateNew(item.age)}</td>
                                     <td>{item.roleId}</td>
                                     <td>{item.positionId}</td>
-                                    <td>
-                                        <button onClick={()=> handleEditUser(item)} type="button" className="btn text-primary">
+                                    <td className='d-flex'>
+                                        <button onClick={()=> handleEditUser(item)} type="button" className="btn text-primary pl-0">
                                             <i className="fas fa-pencil-alt"></i>
                                         </button>
                                         <button onClick={()=> DeleteUser(item)} type="button" className="btn text-danger p-0">

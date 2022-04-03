@@ -1,4 +1,4 @@
-import { numberFormat } from '../../../components/Formatting/FormatNumber';
+import { numberFormat, totalProductSold } from '../../../components/Formatting/FormatNumber';
 import { useSelector, useDispatch } from 'react-redux';
 import ModalEditProduct from './ModalEditProduct';
 import * as actions from '../../../store/actions';
@@ -20,6 +20,8 @@ const ProductManage = (props) => {
         dispatch(actions.fetchProducts());
     }, [dispatch]);
 
+    // console.log('product sold:', listProducts && listProducts.productSold.length);
+
     //create product
     const handleAddNewProduct = () => {
         setModalProduct(!modalProduct);
@@ -29,6 +31,7 @@ const ProductManage = (props) => {
         dataProduct.append('name', data.name);
         dataProduct.append('price', data.price);
         dataProduct.append('sale', data.sale);
+        dataProduct.append('qty', data.qty);
         dataProduct.append('category_id', data.category_id);
         dataProduct.append('supplier_id', data.supplier_id);
         data.image && dataProduct.append('image', data.image);
@@ -51,6 +54,7 @@ const ProductManage = (props) => {
         product.append('name', data.name);
         product.append('price', data.price);
         product.append('sale', data.sale);
+        product.append('qty', data.qty);
         product.append('category_id', data.category_id);
         product.append('supplier_id', data.supplier_id);
         data.image && product.append('image', data.image);
@@ -100,12 +104,12 @@ const ProductManage = (props) => {
                     <tr>
                         <td>STT</td>
                         <td>Ảnh</td>
-                        <td>Tên SP</td>
-                        <td>Bán được</td>
+                        <td>Tên sản phẩm</td>
                         <td>Số lượng</td>
+                        <td>Bán được</td>
                         <td>Trạng thái</td>
-                        <td>Giá (VND)</td>
-                        <td>Sale (VND)</td>
+                        <td>Giá nhập (VND)</td>
+                        <td>Giá bán (VND)</td>
                         <td>Tác vụ</td>
                     </tr>
                 </thead>
@@ -116,18 +120,30 @@ const ProductManage = (props) => {
                             return(
                                 <tr key={index}>
                                     <td>{index + 1}</td>
-                                    <td style={{width:'5%'}}><img src={item.image} className="w-100"  alt="" /> </td>
+                                    <td style={{width:'4%'}}><img src={item.image} className="w-100"  alt="" /> </td>
                                     <td className='text-primary'>{item.name}</td>
-                                    <td>0</td>
-                                    <td>50</td>
-                                    <td><span className='badge badge-success'>Còn hàng</span></td>
+                                    <td>{item.qty}</td>
+                                    <td>
+                                        {
+                                            item.productSold?.length>0?
+                                            <span> { totalProductSold(item.productSold) } </span> : 0
+                                        }
+                                    </td>
+                                    <td>
+                                        {
+                                            item.qty < totalProductSold(item.productSold) ?
+                                            <span className="badge badge-secondary">Hết hàng</span> :
+                                            <span className='badge badge-success'>Còn hàng</span>
+                                        }
+                                    </td>
+
                                     <td>{numberFormat(item.price)}</td>
                                     <td>{numberFormat(item.sale)}</td>
                                     <td>
-                                        <button onClick={()=> editProduct(item)} type="button" className="btn text-primary">
+                                        <button onClick={()=> editProduct(item)} type="button" className="btn text-primary pl-0">
                                             <i className="fas fa-edit"></i>
                                         </button>
-                                        <button onClick={()=> deleteProduct(item)} type="button" className="btn text-danger">
+                                        <button onClick={()=> deleteProduct(item)} type="button" className="btn text-danger p-0">
                                             <i className="fas fa-trash-alt"></i>
                                         </button>
                                     </td>
@@ -141,17 +157,21 @@ const ProductManage = (props) => {
                     }
                 </tbody>
             </table>
-            <ReactPaginate
-                previousLabel={"<"}
-                nextLabel={">"}
-                pageCount={pageCount}
-                onPageChange={changePage}
-                containerClassName={"paginationBttns"}
-                previousLinkClassName={"previousBttn"}
-                nextLinkClassName={"nextBttn"}
-                disabledClassName={"paginationDisabled"}
-                activeClassName={"paginationActive"}
-            />
+
+            {
+                listProducts.length >0 &&
+                <ReactPaginate
+                    previousLabel={"<"}
+                    nextLabel={">"}
+                    pageCount={pageCount}
+                    onPageChange={changePage}
+                    containerClassName={"paginationBttns"}
+                    previousLinkClassName={"previousBttn"}
+                    nextLinkClassName={"nextBttn"}
+                    disabledClassName={"paginationDisabled"}
+                    activeClassName={"paginationActive"}
+                />
+            }
         </div>
     );
 }

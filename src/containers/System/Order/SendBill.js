@@ -19,7 +19,7 @@ const SendBill = (props) => {
             username: bill.username,
             name: bill.name,
             qty: bill.qty,
-            price: bill.price,
+            sale: bill.sale,
             payment: bill.payment,
             status: bill.status,
             datePayment: timePayment,
@@ -111,7 +111,7 @@ const SendBill = (props) => {
 
                         <div className='d-flex mb-2'>
                             <span className='col-6 p-0'>Tổng tiền:</span> 
-                            <b className='text-danger'>{numberFormat(bill && bill.price * bill.qty)}</b>
+                            <b className='text-danger'>{numberFormat(bill && bill.sale * bill.qty)}</b>
                         </div>
                     </div>
                 </div>

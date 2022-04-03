@@ -4,7 +4,7 @@ import LoadingOverlay from 'react-loading-overlay';
 import Header from '../HomePage/Header/Header';
 import { CheckoutOrder } from 'store/actions';
 import { useHistory } from 'react-router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { path } from 'utils';
 import moment from "moment";
@@ -48,30 +48,33 @@ const Payment = (props) => {
                 image: cart.image,
                 name: cart.name,
                 price: cart.price,
-                qty: cart.qty,
                 sale: cart.sale,
+                qty: cart.qty,
                 userId: cart.userId
             }
         })
         setLoadingOrder(true)
+        dispatch(CheckoutOrder({
+            arrOrder: newCart,
+            username: user.username,
+            phone: user.phoneNumber,
+            address: user.address,
+            email: user.email,
+            delivery: deliveryMethod,
+            payment: paymentMethod,
+            date: dateOrder,
+            timeTrack: dateOrder,
+            dateDelivery: dateDelivery,
+        }))
         setTimeout(() => {
-            dispatch(CheckoutOrder({
-                arrOrder: newCart,
-                // total: totalMoney(cartsUser) - coupon + deliveryFee,
-                username: user.username,
-                phone: user.phoneNumber,
-                address: user.address,
-                email: user.email,
-                delivery: deliveryMethod,
-                payment: paymentMethod,
-                date: dateOrder,
-                timeTrack: dateOrder,
-                dateDelivery: dateDelivery,
-            }))
             setLoadingOrder(false)
             history.push(path.MY_ORDER);
-        }, 1500);
+        }, 2500);
     }
+
+    useEffect(() => {
+        document.title = 'Thanh toán đơn hàng';
+    }, [])
     
     return (
         <>
@@ -120,7 +123,7 @@ const Payment = (props) => {
                                                         </div>
 
                                                         <div className="col-md-4 p-0 text-right">
-                                                            <span>{numberFormat(item.price)}</span>
+                                                            <span>{numberFormat(item.sale)}</span>
                                                         </div>
                                                     </div>
                                                 )

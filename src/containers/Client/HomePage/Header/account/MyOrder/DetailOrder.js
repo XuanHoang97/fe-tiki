@@ -123,7 +123,7 @@ const DetailOrder = (props) => {
 
                     <div className='d-flex mb-2'>
                         <span className='col-3'>Tổng tiền:</span> 
-                        <h5 className='text-danger col-6'>{numberFormat(order.total)}</h5>
+                        <h5 className='text-danger col-6'>{numberFormat(order.sale * order.qty)}</h5>
                     </div>
                 </div>
             </div>

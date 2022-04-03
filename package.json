@@ -39,6 +39,7 @@
     "react-number-format": "^4.9.0",
     "react-paginate": "^8.1.1",
     "react-redux": "^7.2.4",
+    "react-rewards": "^2.0.3",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-router-scroll-top": "^0.3.1",

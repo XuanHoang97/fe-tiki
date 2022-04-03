@@ -21,9 +21,9 @@
     font-size: 14px;
     position: absolute;
     top: 4rem;
-    right: 9rem;
+    right: 10rem;
     width: 27rem;
-    height: 38rem;
+    height: 36.5rem;
     background: #fff;
     border-radius: 5px;
     padding: 10px;
@@ -62,7 +62,7 @@
         background: white !important;
     }
     .list-notify {
-        height: 32rem;
+        height: 31rem;
         overflow-y: scroll;
     }
     .markAll{
@@ -71,9 +71,11 @@
         width: 96%;
         text-align: center !important;
         padding: 3px 0;
+        margin: 5px 0;
         cursor: pointer;
+        text-align: right;
+        color: rgb(66, 66, 66);
     }
-
 }
 
 .detailNotify::before{

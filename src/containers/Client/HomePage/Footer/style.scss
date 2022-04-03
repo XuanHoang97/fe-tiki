@@ -8,6 +8,8 @@
     text-align: center;
     padding: 5px 0;
     border-top: 1px solid rgb(223, 223, 223);
+    background: white;
+    color: gray;
     @include phone{
         display: none;
     }

@@ -92,21 +92,21 @@ const Account = () => {
                             <div onClick={()=>history.push(path.TIKI_XU)} className="item-acc">
                                 <img src="https://cf.shopee.vn/file/a0ef4bd8e16e481b4253bd0eb563f784" alt="" />
                                 <div>
-                                    Tiki xu
-                                    <div className='small text-secondary'>Bạn có 
-                                        <span className='text-warning ml-2'>{user && TikiPoint ? numberFormat(TikiPoint.userData.point) : 0 } </span> 
+                                    <div>Tiki xu</div>
+                                    <small>Bạn có 
+                                        <span style={{color: '#fd8d3d'}}> {user && TikiPoint ? numberFormat(TikiPoint.userData.point) : 0 } </span> 
                                         Tiki xu
-                                    </div>
+                                    </small>
                                 </div>
                             </div>
 
                             <div onClick={()=>history.push(path.VOUCHER)} className="item-acc">
                                 <img src="https://cf.shopee.vn/file/84feaa363ce325071c0a66d3c9a88748" alt="" />
                                 <div>
-                                    Mã giảm giá
-                                    <div className='small text-secondary'>Bạn có 
+                                    <div>Mã giảm giá</div>
+                                    <small>Bạn có 
                                         <b> {myDiscount?.length > 0 ? myDiscount.length : 0 }</b> mã giảm giá
-                                    </div>
+                                    </small>
                                 </div>
                             </div>
                             

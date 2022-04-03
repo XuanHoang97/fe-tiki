@@ -42,7 +42,7 @@ const Product = (mobile) => {
 
                                 <div className="price__prod">
                                     <span className="price">
-                                        {numberFormat(item.price)}
+                                        {numberFormat(item.sale)}
                                     </span>
                                     <span className="badge badge-pill badge-danger p-1 mx-2">-1%</span>
                                 </div>

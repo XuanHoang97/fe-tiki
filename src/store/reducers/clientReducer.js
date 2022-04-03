@@ -14,7 +14,6 @@ const initialState = {
 
     // Option 2: Order with login
     cartsUser: 0,
-    listOrder: [],
     filterMyOrder: [],
 }
 
@@ -132,14 +131,7 @@ const clientReducer = (state = initialState, action) => {
                 cartsUser: action.payload
             }
 
-        // Get all order by user
-        case actionTypes.GET_ORDER_BY_USER:
-            return {
-                ...state,
-                listOrder: action.payload
-            }
-
-        // filter my order
+        // Get order by user
         case actionTypes.FILTER_MY_ORDER:
             return {
                 ...state,

@@ -66,7 +66,7 @@ function OrderLogin(props) {
 
                                                 <div className="col-md-4 p-0 price">
                                                     <div className="p-0 price__num">
-                                                        <h6 className='small text-danger m-0'>{numberFormat(item.price)}</h6>
+                                                        <h6 className='small text-danger m-0'>{numberFormat(item.sale)}</h6>
                                                         <span className='small m-0'> x {item.qty}</span>
                                                     </div>
                                                     <div onClick={()=> deleteItemCart(item.id)} className="btnDelProd text-danger small mt-2">Xóa</div>

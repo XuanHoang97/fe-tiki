@@ -116,7 +116,7 @@ function Result(props) {
                                                         <p className="text-secondary mt-3 mb-1">{item.name}</p>
                                                         <Rate />
                                                         <div className="price">
-                                                            <span className="price_prod">{numberFormat(item.price)}</span>
+                                                            <span className="price_prod">{numberFormat(item.sale)}</span>
                                                             <span className="badge badge-danger">-5%</span>
                                                         </div>
                                                     </div>

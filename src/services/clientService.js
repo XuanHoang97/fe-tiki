@@ -98,15 +98,6 @@ const checkOutOrder = (data) => {
 }
 
 // get order by user
-const getOrderByUser = (userId) => {
-    return instance.get(`/get-order-by-user?userId=${userId}`,{
-        headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-    })
-}
-
-// filter my order
 const filterMyOrder = (userId, status) => {
     return instance.get(`/filterMyOrder?userId=${userId}&status=${status}`,{
         headers: {
@@ -133,7 +124,6 @@ export{
     deleteItemCartWithLogin,
     updateItemCartWithLogin,
     checkOutOrder,
-    getOrderByUser,
     filterMyOrder
 
 }

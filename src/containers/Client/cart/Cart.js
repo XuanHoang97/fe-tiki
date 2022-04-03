@@ -1,7 +1,7 @@
 import { numberFormat, totalMoney } from 'components/Formatting/FormatNumber';
 import {useSelector, useDispatch} from 'react-redux';
 import { UpdateItemCartByUser } from 'store/actions';
-import React, {useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import Footer from '../HomePage/Footer/Footer';
 import Header from '../HomePage/Header/Header';
 import { useHistory } from 'react-router';
@@ -35,6 +35,10 @@ const Cart = (props) => {
             history.push(path.PAYMENT);
         }, 1000);
     }
+
+    useEffect(() => {
+        document.title = 'Giỏ hàng';
+    }, [])
 
     return (
         <>
@@ -81,11 +85,8 @@ const Cart = (props) => {
 
                                             <div className="price col-md-3 text-right">
                                                 <h6 className="text-danger">
-                                                    {numberFormat(item.price)}
-                                                </h6>
-                                                <strike className="small mr-2">
                                                     {numberFormat(item.sale)}
-                                                </strike>
+                                                </h6>
                                                 <span className="text-danger small">-1%</span>
                                             </div>
                                         </div>

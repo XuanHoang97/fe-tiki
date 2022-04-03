@@ -84,7 +84,7 @@ const Bill = (props) => {
                                                 <td>{item.username}</td>
                                                 <td>{item.name}</td>
                                                 <td>{item.qty}</td>
-                                                <td>{numberFormat(item.price * item.qty)}</td>
+                                                <td>{numberFormat(item.sale * item.qty)}</td>
                                                 <td>{formatDateNew(item.datePayment)}</td>
                                                 <td>{item.payment}</td>
                                                 <td>

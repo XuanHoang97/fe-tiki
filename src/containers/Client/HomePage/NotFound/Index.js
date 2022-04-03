@@ -7,10 +7,6 @@ import './NotFound.scss';
 
 const NotFound = () => {
     const history = useHistory();
-    const backPage = () => {
-        history.goBack();
-    }
-
     return (
         <>
             <Header/>
@@ -20,11 +16,15 @@ const NotFound = () => {
                 </div>
 
                 <div className='btn-quit'>
-                    <div onClick={() => backPage()}>
+                    <div onClick={() => history.goBack()}>
                         <button type="button" className="btn btn-primary"><i className="fa fa-angle-left mr-2"></i> Quay lại trang trước</button>
                     </div>
                     <Link to={path.HOMEPAGE}>
-                        <button type="button" className="btn btn-success">Tiếp tục mua hàng</button>
+                        <button type="button" className="btn btn-success">Trang chủ</button>
+                    </Link>
+
+                    <Link to={path.HOMEPAGE}>
+                        <button type="button" className="btn btn-warning">Mua hàng</button>
                     </Link>
                 </div>
             </div>

@@ -6,6 +6,7 @@ export const path = {
     SYSTEM: '/system',
     SEARCH: '/search',
     PORT: 'http://localhost:2000',
+    PORT_LOCAL: 'http://localhost:3000',
 
     // Authentication
     REGISTER: '/account/register',

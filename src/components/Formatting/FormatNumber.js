@@ -11,18 +11,18 @@ export const numberFormat = (money) => {
 export const totalMoney = (arr) => {
     let total = 0
     for (let item of arr) {
-        total += item.price * item.qty
+        total += item.sale * item.qty
     }
     return total
 }
 
 // investment cost
 export const investmentCost = (arr) => {
-    let investment = 125000000
-    // for (let item of arr) {
-    //     investment += item.investment
-    // }
-    return investment
+    let total = 0
+    for (let investment of arr) {
+        total += investment.price * investment.qty
+    }
+    return total
 }
 
 // calculator average star rating
@@ -32,4 +32,13 @@ export const averageStarRating = (arr) => {
         total += item.rating
     }
     return (total / arr.length).toFixed(1)
+}
+
+// total product sold
+export const totalProductSold = (arr) => {
+    let total = 0
+    // for (let item of arr) {
+    //     total += item.qty
+    // }
+    return total
 }

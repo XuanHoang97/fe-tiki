@@ -1,6 +1,6 @@
 import { investmentCost, numberFormat } from 'components/Formatting/FormatNumber';
 import {GetOrderToday, RevenueToday, NewCustomerMonth} from '../../../store/actions/orderActions';
-import {filterOrderByStatus} from '../../../store/actions';
+import {fetchProducts, filterOrderByStatus} from '../../../store/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import React, {useEffect} from 'react';
 import './style.scss';
@@ -11,12 +11,14 @@ const  Dashboard = (props) => {
     const orderToday = useSelector(state => state.order.orderToday);
     const revenueToday = useSelector(state => state.order.revenueToday);
     const newCustomer = useSelector(state => state.order.newCustomerMonth);
+    const listProducts = useSelector(state => state.admin.products);
 
     useEffect(() => {
         dispatch(filterOrderByStatus('S0'));
         dispatch(GetOrderToday());
         dispatch(RevenueToday());
         dispatch(NewCustomerMonth());
+        dispatch(fetchProducts());
     }, [dispatch])
 
     return (
@@ -56,21 +58,25 @@ const  Dashboard = (props) => {
                         <img src="https://previews.123rf.com/images/mariiasimakova/mariiasimakova2004/mariiasimakova200400644/145706280-investment-icon-simple-illustration-from-startup-collection-creative-investment-icon-for-web-design-.jpg"  alt="" />
                         <div className="stat">
                             <h6 className="card-title small text-dark">ĐẦU TƯ</h6>
-                            <h5 className="card-text font-weight-bold">{numberFormat(investmentCost())}</h5>
+                            <h5 className="card-text font-weight-bold">
+                                {
+                                    listProducts?.length>0 ? numberFormat(investmentCost(listProducts)) : 0
+                                }
+                            </h5>
                         </div>
                     </div>
 
                     <div className="item-statistical text-primary">
                         <img src="https://icon-library.com/images/revenue-icon-png/revenue-icon-png-2.jpg"  alt="" />
                         <div className="stat">
-                            <h6 className="card-title small text-dark">TỔNG DOANH THU</h6>
+                            <h6 className="card-title small text-dark">DOANH THU</h6>
                             <h5 className="card-text font-weight-bold">
                             {
                                 filterOrder?.length > 0 
                                 && filterOrder.filter(item => item.status === 'S4').length > 0 ?
                                 <span className="font-weight-bold">
                                     {numberFormat(filterOrder.filter(item => item.status === 'S4').reduce((total, item) => {
-                                    return total + item.price * item.qty
+                                    return total + item.sale * item.qty
                                     }, 0))}
                                 </span>
                                 : 
@@ -83,13 +89,13 @@ const  Dashboard = (props) => {
                     <div className="item-statistical text-success">
                         <img src="https://image.shutterstock.com/image-illustration/growth-icon-business-success-conceptselement-260nw-1464772178.jpg"  alt="" />
                         <div className="stat">
-                            <h6 className="card-title small text-dark">TỔNG LỢI NHUẬN</h6>
+                            <h6 className="card-title small text-dark">LỢI NHUẬN</h6>
                             <h5 className="card-text font-weight-bold">
                             {
                                 <span className="font-weight-bold">
                                     {numberFormat(filterOrder.filter(item => item.status === 'S4').reduce((total, item) => {
-                                    return total + item.price * item.qty
-                                    }, 0) - investmentCost())}
+                                    return total + item.sale * item.qty
+                                    }, 0) - investmentCost(listProducts))}
                                 </span>
                             }
                             </h5>
@@ -99,82 +105,90 @@ const  Dashboard = (props) => {
                     <div className="overview">
                         <div className='reportStatus'>
                             <img src="https://thumbs.dreamstime.com/b/dollar-banknote-stack-icon-money-cash-symbol-simple-style-financial-banking-infographic-design-element-183107279.jpg" className='illustrator' alt="" />
-                            <span className='number'>
-                                {
-                                    filterOrder?.length > 0 ?
-                                    filterOrder.filter(item => item.status === 'S4').length
-                                    - filterOrder.filter(item => item.status === 'S4' && item.bill === '1').length
-                                    :
-                                    <span className='text-primary'>0</span>
-                                }    
-                            </span>
-                            <span className='status'>Đơn chưa thanh toán</span>
+                            <div className='item-stat-order'>
+                                <span className='number'>
+                                    {
+                                        filterOrder?.length > 0 ?
+                                        filterOrder.filter(item => item.status === 'S4').length
+                                        - filterOrder.filter(item => item.status === 'S4' && item.bill === '1').length
+                                        :
+                                        <span className='text-primary'>0</span>
+                                    }    
+                                </span>
+                                <span className='status'>Đơn chưa thanh toán</span>
+                            </div>
                         </div>
 
                         <div className='reportStatus'>
                             <img src="https://thumbs.dreamstime.com/b/dollar-banknote-stack-icon-money-cash-symbol-simple-style-financial-banking-infographic-design-element-183107279.jpg" className='illustrator' alt="" />
-                            <span className='number'>
-                                {
-                                    filterOrder?.length > 0 ?
-                                    filterOrder.filter(item => item.status === 'S4' && item.bill === '1').length
-                                    :
-                                    <span className='text-primary'>0</span>
-                                }    
-                            </span>
-                            <span className='status'>Đơn đã thanh toán</span>
+                            <div className='item-stat-order'>
+                                <span className='number'>
+                                    {
+                                        filterOrder?.length > 0 ?
+                                        filterOrder.filter(item => item.status === 'S4' && item.bill === '1').length
+                                        :
+                                        <span className='text-primary'>0</span>
+                                    }    
+                                </span>
+                                <span className='status'>Đơn đã thanh toán</span>
+                            </div>
                         </div>
 
                         <div className='reportStatus'>
                             <img src="https://static.vecteezy.com/system/resources/thumbnails/002/206/240/small/fast-delivery-icon-free-vector.jpg" className='illustrator' alt="" />
-                            <span className='number'>
-                                {
-                                    filterOrder?.length > 0 ?
-                                    filterOrder.filter(item => item.status === 'S3').length
-                                    :
-                                    <span className='text-primary'>0</span>
-                                }
-                            </span>
-                            <span className='status'>Đơn chưa giao</span>
+                            <div className='item-stat-order'>
+                                <span className='number'>
+                                    {
+                                        filterOrder?.length > 0 ?
+                                        filterOrder.filter(item => item.status === 'S3').length
+                                        : 0
+                                    }
+                                </span>
+                                <span className='status'>Đơn chưa giao</span>
+                            </div>
                         </div>
 
                         <div className='reportStatus'>
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_P9W5aTdeA3o7lq1gOyn3afbgJXrOAJ13ZQ&usqp=CAU" className='illustrator' alt="" />
-                            <span className='number'>
-                                {
-                                    filterOrder?.length > 0 ?
-                                    filterOrder.filter(item => item.status === 'S2').length
-                                    + filterOrder.filter(item => item.status === 'S1').length
-                                    :
-                                    <span className='text-primary'>0</span>
-                                }
-                            </span>
-                            <span className='status'>Đơn chưa hoàn tất</span>
+                            <div className='item-stat-order'>
+                                <span className='number'>
+                                    {
+                                        filterOrder?.length > 0 ?
+                                        filterOrder.filter(item => item.status === 'S2').length
+                                        + filterOrder.filter(item => item.status === 'S1').length
+                                        : 0 
+                                    }
+                                </span>
+                                <span className='status'>Đơn chưa hoàn tất</span>
+                            </div>
                         </div>
 
                         <div className='reportStatus'>
                             <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/refund-2225859-1853324.png" className='illustrator' alt="" />
-                            <span className='number'>
-                                {
-                                    filterOrder?.length > 0 ?
-                                    filterOrder.filter(item => item.status === 'S6').length
-                                    :
-                                    <span className='text-primary'>0</span>
-                                }
-                            </span>
-                            <span className='status'>Đơn hoàn trả</span>
+                            <div className='item-stat-order'>
+                                <span className='number'>
+                                    {
+                                        filterOrder?.length > 0 ?
+                                        filterOrder.filter(item => item.status === 'S6').length
+                                        : 0
+                                    }
+                                </span>
+                                <span className='status'>Đơn hoàn trả</span>
+                            </div>
                         </div>
 
                         <div className='reportStatus'>
                             <img src="https://image.shutterstock.com/image-vector/shopping-cart-icon-cancel-illustration-260nw-1405493777.jpg" className='illustrator' alt="" />
-                            <span className='number'>
-                                {
-                                    filterOrder?.length > 0 ?
-                                    filterOrder.filter(item => item.status === 'S5').length
-                                    :
-                                    <span className='text-primary'>0</span>
-                                }
-                            </span>
-                            <span className='status'>Đơn huỷ</span>
+                            <div className='item-stat-order'>
+                                <span className='number'>
+                                    {
+                                        filterOrder?.length > 0 ?
+                                        filterOrder.filter(item => item.status === 'S5').length
+                                        : 0 
+                                    }
+                                </span>
+                                <span className='status'>Đơn huỷ</span>
+                            </div>
                         </div>
                 </div>
                 </div>

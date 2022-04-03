@@ -73,6 +73,8 @@
 }
 
 .tabMyOrder{
+    display: flex;
+    gap: 20px;
     @include TabItem ;
 }
 .detail{
@@ -113,6 +115,13 @@
         }
     }
 }
+
+.viewRating{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .btnRating{
     display: flex;
     justify-content: end;

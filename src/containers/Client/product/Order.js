@@ -46,9 +46,8 @@ const Order = (props) => {
 
             <div className="price">
                 <div className="priceDetail">
-                    <h4>{numberFormat(order?.price ? order.price : 'loading')}</h4>
+                    <h4>{numberFormat(order?.sale ? order.sale : 'loading')}</h4>
                     <span className="badge badge-pill badge-warning mx-4"> -1 % </span>
-                    <strike className="text-danger">{numberFormat(order?.sale ? order.sale :'loading...')}</strike>
                 </div>
             </div>
 

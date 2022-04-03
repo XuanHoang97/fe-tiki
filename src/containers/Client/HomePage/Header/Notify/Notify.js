@@ -3,19 +3,23 @@ import { formatDate } from 'components/Formatting/FormatDate';
 import React, {useState, useEffect, useRef} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import useOutsideClick from '../../OutSideClick';
+import { useHistory } from 'react-router';
+import { path } from 'utils';
 import './style.scss';
 
 const Notify = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const ref = useRef();
     const user = useSelector(state => state.auth.user);
     const notify = useSelector(state => state.auth.notify);
+
     const [showNotify, setShowNotify] = useState(false);
     const [styleUnread, setStyleUnread] = useState('listNotify my-2');
     const notifyUnread = useSelector(state => state.auth.notifyUnread);
 
     // fetch notify
-    let userId = user ? user.id : '';
+    const userId = user ? user.id : '';
     useEffect(() => {
         dispatch(GetNotify(userId, 'N1'));
         dispatch(GetAllNotify(userId));
@@ -24,15 +28,22 @@ const Notify = () => {
     // detail notify
     const viewDetail = (notify) => {
         dispatch(UpdateStatusNotify({
-            id: notify,
+            id: notify.id,
             status: 'N2',
         }));
         setStyleUnread('notify-read');
         dispatch(GetNotify(userId, 'N1'));
-        setShowNotify(false);
+
+        if(notify.link === '') {
+            return
+        }else if(notify.link === `${path.ORDER}`) {
+            window.location.href = `${path.ORDER}`;
+        }else if(notify.link === `${path.TIKI_XU}`) {
+            window.location.href = `${path.TIKI_XU}`;
+        }
     }
 
-    // mark all notify as read
+    // mark all notify
     const markAll = () => {
         dispatch(MarkAllNotify({
             userId: userId,
@@ -79,8 +90,8 @@ const Notify = () => {
                             notify.map((item, index) => {
                                 return (
                                     <div className={`${ item.status === 'N1' ? styleUnread : 'notify-read' }`} 
-                                    key={index}
-                                    onClick={() => viewDetail(item.id)}
+                                        key={index}
+                                        onClick={() => viewDetail(item)}
                                     >
                                         <img src={item.image} alt="" />
                                         <div className='item-list'>
@@ -93,11 +104,10 @@ const Notify = () => {
                                     </div>
                                 )
                             })
-                            :
-                            <div className='text-center'>Không có thông báo nào</div>
+                            : <div className='text-center'>Chưa có thông báo nào</div>
                         }
                     </div>
-                    <div onClick={()=> markAll()} className='text-right text-dark border markAll btn-outline-light my-2'>Đánh dấu đã đọc tất cả</div>
+                    <div onClick={()=> markAll()} className='markAll'>Đánh dấu đã đọc tất cả</div>
                 </div>
             }
         </>

@@ -154,7 +154,7 @@ const VerifyOrder = (props) => {
 
                         <div className='d-flex mb-2'>
                             <span className='col-6 p-0'>Tổng tiền:</span> 
-                            <b className='text-danger'>{updateOrder ? numberFormat(updateOrder.price * updateOrder.qty) : 0}</b>
+                            <b className='text-danger'>{updateOrder ? numberFormat(updateOrder.sale * updateOrder.qty) : 0}</b>
                         </div>
                     </div>
                 </div>

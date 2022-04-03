@@ -1,16 +1,17 @@
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
-import { rate } from 'store/actions';
+import {FilterMyOrder} from 'store/actions/clientAction';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
+import { rate } from 'store/actions';
 import ReactStars from 'react-stars';
-import {FilterMyOrder, GetOrderByUser} from 'store/actions/clientAction';
 
 const RatingProduct = (props) => {
     const dispatch = useDispatch();
     const point = 5000;
     const {isOpen, toggle, currentOrder} = props;
     const [rating, setRating] = useState(0);
-    const [comment, setComment] = useState('good');
+    const [satisfactionLevel, setSatisfactionLevel] = useState('');
+    const [comment, setComment] = useState('');
     const [imgProduct, setImgProduct] = useState('');
     const [nameProduct, setNameProduct] = useState('');
     const date = new Date();
@@ -25,6 +26,30 @@ const RatingProduct = (props) => {
             setNameProduct(order.name);
         }
     }, [dispatch, currentOrder]);
+
+    // level useful
+    useEffect (() => {
+        switch (true) {
+            case rating > 4 && rating <= 5:
+                setSatisfactionLevel('Cực kỳ hài lòng');
+                break;
+            case rating > 3 && rating <= 4:
+                setSatisfactionLevel('Hài lòng');
+                break;
+            case rating >= 2 && rating <= 3:
+                setSatisfactionLevel('Bình thường');
+                break;
+            case rating > 1 && rating <= 2:
+                setSatisfactionLevel('Không hài lòng');
+                break;
+            case rating >= 0 && rating <= 1:
+                setSatisfactionLevel('Rất tệ');
+                break;
+            default:
+                setSatisfactionLevel('');
+                break;
+        }
+    }, [rating]);
     
     // Rating product -update order - add notify -add point
     const ratingProduct = () => {
@@ -35,18 +60,18 @@ const RatingProduct = (props) => {
             productId: currentOrder.productId,
             point: point,
             rating: rating,
+            satisfactionLevel: satisfactionLevel,
             comment: comment,
             timeTrack: timeTrack
         }));
         toggle();
         setTimeout(() => {
-            dispatch(GetOrderByUser(userId));
             dispatch(FilterMyOrder(userId, 'S4'));
         }, 1000);
     }
 
     return (
-        <Modal  isOpen={isOpen} toggle={toggle} size="md">   
+        <Modal isOpen={isOpen} toggle={toggle} size="md">   
             <ModalHeader toggle={toggle}>Đánh giá sản phẩm</ModalHeader>
             <ModalBody>
                 <div className='rating'>
@@ -66,6 +91,7 @@ const RatingProduct = (props) => {
                         onChange= {(newRating) => setRating(newRating)}
                         size={24}
                         color2={'#ffd700'} />
+                        <span>{satisfactionLevel}</span>
                     </div>
 
                     <div className='cmt d-flex my-3'>

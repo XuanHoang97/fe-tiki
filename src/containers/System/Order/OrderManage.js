@@ -61,7 +61,7 @@ const OrderManage = (props) => {
     }
 
     //pagination
-    const orderPerPage = 8;
+    const orderPerPage = 9;
     const [pageNumber, setPageNumber] = useState(0);
     const pagesVisited = pageNumber * orderPerPage;
     const pageCount = Math.ceil(filterOrder.length / orderPerPage);
@@ -86,7 +86,7 @@ const OrderManage = (props) => {
                     sendBill={Bill}
                 />
 
-                <h5 className="orderTitle mb-3">Đơn hàng</h5>
+                <h5 className="orderTitle mb-2">Đơn hàng</h5>
                 <TabOrder
                     status={status}
                     activeTab={activeTab}
@@ -126,9 +126,9 @@ const OrderManage = (props) => {
                                                     <td>{item.code}</td>
                                                     <td className='text-primary font-weight-bold'>{item.username}</td>
                                                     <td>{item.name}</td>
-                                                    <td>{numberFormat(item.price)}</td>
+                                                    <td>{numberFormat(item.sale)}</td>
                                                     <td>{item.qty}</td>
-                                                    <td>{numberFormat(item.price * item.qty)}</td>
+                                                    <td>{numberFormat(item.sale * item.qty)}</td>
                                                     <td>{item.date ? formatDateNew(item.date) : ''}</td>
                                                     <td>{item.dateDelivery ? formatDateNew(item.dateDelivery) : ''}</td>
                                                     <td className='font-weight-bold small'>

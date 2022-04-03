@@ -94,7 +94,7 @@ const ProductSuggestion = () => {
                             <Rate />
 
                             <div className="price">
-                                <span className="price_prod">{numberFormat(item.price)}</span>
+                                <span className="price_prod">{numberFormat(item.sale)}</span>
                                 <span className="badge badge-danger">-6%</span>
                             </div>
                         </div>

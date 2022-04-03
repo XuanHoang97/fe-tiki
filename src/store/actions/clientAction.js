@@ -8,7 +8,6 @@ import {
     deleteItemCartWithLogin,
     updateItemCartWithLogin,
     checkOutOrder,
-    getOrderByUser,
     filterMyOrder
 } from "../../services/clientService";
 import { getAllCodeService } from 'services/userService';
@@ -233,29 +232,12 @@ export const CheckoutOrder = (data) => {
                 toast.success('Đặt hàng thành công !')
             }
         } catch (e) {
-            console.log('checkout order fail', e)
+            toast.error('Đặt hàng thất bại !', e)
         }
     }
 }
 
-// get order by user
-export const GetOrderByUser = (userId) => {
-    return async(dispatch, getState) => {
-        try {
-            let res = await getOrderByUser(userId);
-            if (res && res.errCode === 0) {
-                dispatch({ 
-                    type: actionTypes.GET_ORDER_BY_USER,
-                    payload: res.result
-                });
-            }
-        } catch (e) {
-            console.log('get order by user fail', e)
-        }
-    }
-}
-
-// filter myOrder
+// Order by user
 export const FilterMyOrder = (userId, status) => {
     return async(dispatch, getState) => {
         try {

@@ -1,6 +1,6 @@
-import { FilterMyOrder, GetOrderByUser, getStatusOrder } from 'store/actions';
 import { Nav, NavItem, NavLink, TabContent, TabPane} from 'reactstrap';
 import { numberFormat } from 'components/Formatting/FormatNumber';
+import { FilterMyOrder, getStatusOrder } from 'store/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import ReactPaginate from "react-paginate";
@@ -12,7 +12,6 @@ function Purchase(props) {
     const dispatch = useDispatch();
     const [activeTab, setActiveTab] = useState(4);
     const user = useSelector(state => state.auth.user);
-    const listOrder = useSelector(state => state.client.listOrder);
     const statusOrder = useSelector(state => state.client.statusOrder);
     const filterOrder = useSelector(state => state.client.filterMyOrder);
 
@@ -28,7 +27,6 @@ function Purchase(props) {
         let userId = user ? user.id : null;
         dispatch(getStatusOrder());
         dispatch(FilterMyOrder(userId, 'S0'));
-        dispatch(GetOrderByUser(userId));
     }, [dispatch, user]);
 
     // detail order
@@ -93,12 +91,6 @@ function Purchase(props) {
                                     }}
                                 >
                                     <span className='mr-2'>{item.valueVi}</span>
-                                    {
-                                        item.keyMap === 'S0' ?
-                                        <small>({listOrder.length})</small> 
-                                        :
-                                        <small>({listOrder.filter(x => x.status === `${item.keyMap}`).length})</small>
-                                    }
                                 </NavLink>
                             </NavItem>
                         )
@@ -136,13 +128,14 @@ function Purchase(props) {
                                                 <span>x{item.qty}</span>
                                             </div>
                                         </div>
-                                        <span>Tổng tiền: <span className='text-danger ml-1' style={{fontSize: '18px'}}>{numberFormat(item.price*item.qty)}</span></span>
+                                        <span>Tổng tiền: <span className='text-danger ml-1' style={{fontSize: '18px'}}>{numberFormat(item.sale*item.qty)}</span></span>
                                     </div>
                                     <div className='detail'>
-                                        <button onClick={()=>detailOrder(item)} type="button" className="btn btn-outline-secondary btn-sm">Chi tiết</button>
+                                        <button onClick={()=>detailOrder(item)} type="button" className="btn btn-outline-primary btn-sm">Chi tiết</button>
                                         {
-                                            item.status ==='S1' || item.status ==='S2' || item.status ==='S3' &&
+                                            item.status ==='S1' || item.status ==='S2' || item.status ==='S3' ?
                                             <button type="button" className="btn btn-danger btn-sm">Huỷ đơn</button>
+                                            : null
                                         }
 
                                         {
@@ -158,8 +151,7 @@ function Purchase(props) {
                                 </div>
                             )
                         })
-                        :
-                        <div className='text-center my-3'>Chưa có đơn hàng nào...</div>
+                        : <div className='text-center my-3'>Chưa có đơn hàng nào...</div>
                     }
 
                     {

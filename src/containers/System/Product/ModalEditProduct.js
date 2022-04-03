@@ -7,6 +7,7 @@ const ModalEditProduct  = (props) => {
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [sale, setSale] = useState('');
+    const [qty, setQty] = useState('');
     const [category_id, setCategory_id] = useState('');
     const [supplier_id, setSupplier_id] = useState('');
     const [image, setImage] = useState('');
@@ -23,6 +24,7 @@ const ModalEditProduct  = (props) => {
             setName(product.name);
             setPrice(product.price);
             setSale(product.sale);
+            setQty(product.qty);
             setCategory_id(product.category_id);
             setSupplier_id(product.supplier_id);
             setPreviewImg(product.image);
@@ -59,6 +61,7 @@ const ModalEditProduct  = (props) => {
             name: name,
             price: price,
             sale: sale,
+            qty: qty,
             category_id: category_id,
             supplier_id: supplier_id,
             image: image,
@@ -118,6 +121,11 @@ const ModalEditProduct  = (props) => {
                 </div>
 
                 <div className="row">
+                    <div className="form-group col-4">
+                        <label>Số lượng</label>
+                        <input value={qty} onChange={(e)=>setQty(e.target.value)}  type="text" className="form-control" />
+                    </div>
+
                     <div className="form-group col-md-4">
                         <label>Danh mục</label>
                         <select className="form-control"

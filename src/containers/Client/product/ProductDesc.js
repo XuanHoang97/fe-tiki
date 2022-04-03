@@ -40,7 +40,7 @@ const ProductDesc = (props) => {
                         {
                             detailProduct?.Markdown?.descriptionHTML ?
                             <span className="character__special" dangerouslySetInnerHTML={{ __html: detailProduct.Markdown.descriptionHTML}}></span>
-                            : 'loading...'
+                            : <span dangerouslySetInnerHTML={{ __html: 'Đang cập nhật...'}}></span>
                         }
                     </ReadMore>
                 </div>
@@ -60,7 +60,6 @@ const ProductDesc = (props) => {
                                     <i className="text-secondary">                                 
                                         <span className ={item.status ==='Mới' ? "text-success" : "text-danger"}>{item.status}</span><Moment fromNow className ="small">{item.date}</Moment>
                                     </i>  
-
                                     <small className="text-secondary ml-2">by <b>{item.author_id}</b></small>     
                                     </div>
                                 </div>

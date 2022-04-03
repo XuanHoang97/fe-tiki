@@ -128,7 +128,7 @@ export const FilterNotify = (userId, type) => {
             if (res && res.errCode === 0) {
                 dispatch({
                     type: actionTypes.FILTER_NOTIFY,
-                    payload: res.notify
+                    payload: res.notify.reverse()
                 });
             }
         } catch (e) {

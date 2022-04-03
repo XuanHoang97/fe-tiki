@@ -1,11 +1,11 @@
 import { formatDate , formatDateNew} from 'components/Formatting/FormatDate';
 import {averageStarRating} from 'components/Formatting/FormatNumber';
 import ReactStars from 'react-stars';
-import React from 'react';
 
 const Rating = (props) => {
     const {detailProduct} = props;
     const avatar = 'http://res.cloudinary.com/do7qmg6jr/image/upload/v1645518444/sbgr7wd9k1t9v8f0cwvm.jpg';
+    const ratingProduct = detailProduct?.ratingData ? detailProduct.ratingData : 0;
 
     return (
         <div className='vote'>
@@ -13,26 +13,20 @@ const Rating = (props) => {
             <div className='star-overview'>
                 <div className='star col-md-3'>
                     <div className='numbStar'>
-                        <span className='text-primary mr-2' style={{fontSize: '27px'}}>
-                            {
-                                detailProduct.ratingData?.length > 0 ?
-                                averageStarRating(detailProduct.ratingData) : 0
-                            }
+                        <span className='starAVG'>
+                            { ratingProduct && averageStarRating(ratingProduct) }
                         </span>
                         
-                        <>
+                        <div>
                             <ReactStars
                                 count={5}
-                                value={
-                                    detailProduct.ratingData?.length > 0 ?
-                                    parseInt(averageStarRating(detailProduct.ratingData)) : 0
-                                }
+                                value={ ratingProduct && parseInt(averageStarRating(ratingProduct)) }
                                 edit={false}
                                 size={24}
                                 color2={'#ffd700'}
                             />
-                            <div className='small'>{detailProduct?.ratingData ? detailProduct.ratingData.length : 0} nhận xét</div>
-                        </>
+                            <div className='small'>{ratingProduct.length} nhận xét</div>
+                        </div>
                     </div>
                 </div>
 
@@ -51,8 +45,8 @@ const Rating = (props) => {
             </div>
 
             {
-                detailProduct?.ratingData &&
-                detailProduct.ratingData.map((item, index) => {
+                ratingProduct?.length >0 ?
+                ratingProduct.slice().reverse().map((item, index) => {
                     return (
                         <div className='list-vote' key={index}>
                             <div className='customer col-md-3'>
@@ -66,44 +60,12 @@ const Rating = (props) => {
 
                             <div className='list-vote-customer col-md-9'>
                                 <div className='title d-flex'>
-                                    {item.rating === 5 &&
+                                    {item.rating &&
                                     <div className='star'>
                                         <ReactStars
-                                            count={5} value={5} edit={false} size={20} color2={'#ffd700'}
+                                            count={5} value={item.rating} edit={false} size={18} color2={'#ffd700'}
                                         />
-                                        <b>Cực kỳ hài lòng</b>
-                                    </div>}
-
-                                    {item.rating === 4 &&
-                                    <div className='star'>
-                                        <ReactStars
-                                            count={5} value={4} edit={false} size={20} color2={'#ffd700'}
-                                        />
-                                        <b>Hài lòng</b>
-                                    </div>}
-
-                                    {item.rating === 3 &&
-                                    <div className='star'>
-                                        <ReactStars
-                                            count={5} value={3} edit={false} size={20} color2={'#ffd700'}
-                                        />
-                                        <b>Bình thường</b>
-                                    </div>}
-
-                                    {item.rating === 2 &&
-                                    <div className='star'>
-                                        <ReactStars
-                                            count={5} value={2} edit={false} size={20} color2={'#ffd700'}
-                                        />
-                                        <b>Không hài lòng</b>
-                                    </div>}
-
-                                    {item.rating === 1 &&
-                                    <div className='star'>
-                                        <ReactStars
-                                            count={5} value={1} edit={false} size={20} color2={'#ffd700'}
-                                        />
-                                        <b>Rất tệ</b>
+                                        <b>{item.satisfactionLevel}</b>
                                     </div>}
                                 </div>
                                 <span className='small text-success'>
@@ -118,18 +80,16 @@ const Rating = (props) => {
                                 </div>
 
                                 <div className='reply'>
-                                    <button type="button" className="btn btn-outline-primary font-weight-normal">Hữu ích</button>
-                                    <span>Bình luận</span>
+                                    <button type="button" className="btn btn-outline-primary font-weight-normal">
+                                        Hữu ích
+                                    </button>
+                                    <span className='text-primary'>Bình luận</span>
                                 </div>
                             </div>
                         </div>
                     )
                 })
-            }
-
-            {
-                detailProduct?.ratingData?.length === 0 &&
-                <div className='text-center my-2'>Chưa có nhận xét nào</div>
+                : <div className='text-center my-2'>Chưa có nhận xét nào</div>
             }
         </div>
     );

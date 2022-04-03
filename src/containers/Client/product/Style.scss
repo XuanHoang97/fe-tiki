@@ -285,6 +285,11 @@
             .numbStar{
                 display: flex;
                 align-items: center;
+                .starAVG{
+                    margin-right: 10px;
+                    color: #0021c5;
+                    font-size: 27px;
+                }
             }
         }
     }

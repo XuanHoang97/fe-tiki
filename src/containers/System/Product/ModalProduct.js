@@ -9,6 +9,7 @@ const ModalProduct = (props) => {
     const [previewImg, setPreviewImg] = useState('');
     const [price, setPrice] = useState('');
     const [sale, setSale] = useState('');
+    const [qty, setQty] = useState(30);
     const [category_id, setCategory_id] = useState('');
     const [supplier_id, setSupplier_id] = useState('');
     
@@ -29,6 +30,7 @@ const ModalProduct = (props) => {
         setPreviewImg('');
         setPrice('');
         setSale('');
+        setQty(0);
         setCategory_id('');
         setSupplier_id('');
     }, []);
@@ -46,6 +48,7 @@ const ModalProduct = (props) => {
             previewImg: previewImg,
             price: price,
             sale: sale,
+            qty: qty,
             category_id: category_id,
             supplier_id: supplier_id    
         };
@@ -120,6 +123,11 @@ const ModalProduct = (props) => {
                 </div>
                 
                 <div className="row">
+                    <div className="form-group col-4">
+                        <label>Số lượng</label>
+                        <input value={qty} onChange={(e)=>setQty(e.target.value)}  type="text" className="form-control" />
+                    </div>
+
                     <div className="form-group col-md-4">
                         <label>Danh mục</label>
                         <select className="form-control"

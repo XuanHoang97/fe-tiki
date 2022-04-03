@@ -74,20 +74,28 @@
                     border-bottom: 1px dotted lightgrey;
                     padding: 5px 0;
                     cursor: pointer;
-                    .status{
-                        color: #7b7b7b;
-                    }
-                    .number{
-                        color: #0089ce;
-                        font-weight: 600;
-                        margin-right: 10px;
-                        font-size: 16px;
+                    gap: 10px;
+                    .item-stat-order{
+                        display: flex;
+                        align-items: center;
+                        gap: 5px;
+                        width: 100%;
+                        .status{
+                            color: #7b7b7b;
+                            width: 96%;
+                        }
+                        .number{
+                            width: 4%;
+                            color: #0089ce;
+                            font-weight: 600;
+                            font-size: 16px;
+                        }
                     }
                     .illustrator{
-                        width: 6%;
+                        width: 40px;
+
                         height: 28px;
                         opacity: 0.7;
-                        margin-right: 15px;
                     }
                 }
             }
