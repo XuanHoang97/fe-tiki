@@ -57,7 +57,7 @@ const OrderManage = (props) => {
         setTimeout(() => {
             dispatch(filterOrderByStatus(data && data.status));
             setLoadBill(false);
-        }, 2000);
+        }, 3000);
     }
 
     //pagination

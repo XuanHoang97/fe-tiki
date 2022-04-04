@@ -15,14 +15,14 @@ const ViewBill = (props) => {
     const year = dateBillSplit[2];
 
     // total money of bill
-    const Tax = 2;
+    const Tax = 0;
     let totalAmount = bill ? bill.sale * bill.qty : 0;
     let TaxFee = + (totalAmount * Tax/100).toFixed();
     let totalPayment = +(totalAmount + TaxFee).toFixed();
 
     return (
         <Modal isOpen={isOpen} toggle={()=>toggle()} size="lg">
-            <div className='bill-header'>HOÁ ĐƠN GIÁ TRỊ GIA TĂNG</div>
+            <div className='bill-header'>HOÁ ĐƠN MUA HÀNG</div>
             <span className='date-bill'>Ngày {day} tháng {month} năm {year}</span>
             <ModalBody className='px-4'>
                 <div className='detail-bill'>

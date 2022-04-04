@@ -84,8 +84,8 @@ const Discount = (props) => {
                                         <td>Thông tin khuyến mãi</td>
                                         <td>Giảm giá</td>
                                         <td>Áp dụng đơn</td>
+                                        <td>Số lượng</td>
                                         <td>Sử dụng</td>
-                                        <td>Tối đa</td>
                                         <td>Bắt đầu</td>
                                         <td>Kết thúc</td>
                                         <td>Trạng thái</td>
@@ -104,15 +104,21 @@ const Discount = (props) => {
                                                     <td className='text-primary'>{item.info}</td>
                                                     <td>{item.discount}k</td>
                                                     <td>{item.applyTo}k</td>
-                                                    <td>{item.Used}</td>
                                                     <td>{item.Max}</td>
+                                                    <td>{item.Used}</td>
                                                     <td>{formatDateNew(item.discountStart)}</td>
                                                     <td>{formatDateNew(item.discountEnd)}</td>
-                                                    <td>{item.status}</td>
+                                                    <td>
+                                                        <span className='badge badge-success'>{item.status}</span>
+                                                    </td>
                                                     <td>{item.creator}</td>
-                                                    <td className='text-primary'>
-                                                        <button className='btn btn-outline-secondary btn-sm'>Ngừng</button>    
-                                                        <button className='btn btn-outline-danger ml-2 btn-sm'>Huỷ</button>    
+                                                    <td className='d-flex'>
+                                                        <div className='text-primary'>
+                                                            <i className="fas fa-pencil-alt"></i>
+                                                        </div>    
+                                                        <div className='text-danger ml-3'>
+                                                            <i className="fas fa-times"></i>
+                                                        </div>    
                                                     </td>
                                                 </tr>
                                             )

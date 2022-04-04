@@ -3,13 +3,11 @@ import { formatDate } from 'components/Formatting/FormatDate';
 import React, {useState, useEffect, useRef} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import useOutsideClick from '../../OutSideClick';
-import { useHistory } from 'react-router';
 import { path } from 'utils';
 import './style.scss';
 
 const Notify = () => {
     const dispatch = useDispatch();
-    const history = useHistory();
     const ref = useRef();
     const user = useSelector(state => state.auth.user);
     const notify = useSelector(state => state.auth.notify);
@@ -34,12 +32,17 @@ const Notify = () => {
         setStyleUnread('notify-read');
         dispatch(GetNotify(userId, 'N1'));
 
-        if(notify.link === '') {
-            return
-        }else if(notify.link === `${path.ORDER}`) {
-            window.location.href = `${path.ORDER}`;
-        }else if(notify.link === `${path.TIKI_XU}`) {
-            window.location.href = `${path.TIKI_XU}`;
+        // check link notify
+        switch(true) {
+            case notify.link.includes(path.ORDER):
+                window.location.href = `${path.ORDER}`;
+                break;
+            case notify.link.includes(path.TIKI_XU):
+                window.location.href = `${path.TIKI_XU}`;
+                break;
+            default:
+                window.location.href = notify.link;
+                break;
         }
     }
 

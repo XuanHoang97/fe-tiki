@@ -141,7 +141,7 @@ export const updateOrderStatus = (id, status) => {
             const res = await updateOrder(id, status);
             dispatch({
                 type: actionTypes.UPDATE_ORDER,
-                payload: res.data.result
+                payload: res.data.result.reverse()
             });
             toast.success('Xác nhận đơn hàng thành công');
         } catch (error) {
@@ -245,7 +245,7 @@ export const FilterMyOrder = (userId, status) => {
             if (res && res.errCode === 0) {
                 dispatch({
                     type: actionTypes.FILTER_MY_ORDER,
-                    payload: res.result
+                    payload: res.result.reverse()
                 });
             }
         } catch (e) {

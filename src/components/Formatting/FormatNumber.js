@@ -37,8 +37,8 @@ export const averageStarRating = (arr) => {
 // total product sold
 export const totalProductSold = (arr) => {
     let total = 0
-    // for (let item of arr) {
-    //     total += item.qty
-    // }
+    for (let item of arr) {
+        total += item.qty
+    }
     return total
 }

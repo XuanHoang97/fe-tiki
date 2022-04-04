@@ -63,7 +63,7 @@ const ProductManage = (props) => {
 
     //pagination
     const [pageNumber, setPageNumber] = useState(0);
-    const productPerPage = 8;
+    const productPerPage = 9;
     const pagesVisited = pageNumber * productPerPage;
     const pageCount = Math.ceil(listProducts.length / productPerPage);
     const changePage = ({ selected }) => {

@@ -65,7 +65,7 @@ const Bill = (props) => {
                                     <td>Sản phẩm</td>
                                     <td>SL</td>
                                     <td>Tổng tiền</td>
-                                    <td>ThờI gian thanh toán</td>
+                                    <td>Ngày thanh toán</td>
                                     <td>Thanh toán</td>
                                     <td>Trạng thái</td>
                                     <td>Tác vụ</td>
