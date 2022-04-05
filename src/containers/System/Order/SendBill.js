@@ -135,13 +135,6 @@ const SendBill = (props) => {
             </ModalBody>
 
             <ModalFooter>
-                <div className="d-flex form-group col-md-4">
-                    <label>Hoá đơn</label>
-                    <input id="previewImg" type="file" hidden />
-
-                    <label htmlFor="previewImg" className="btn btn-warning ml-2"><i className="fas fa-upload"></i> Tải hoá đơn</label>      
-                </div>
-
                 <Button color="primary" className="btn" onClick={() => Bill()}> Gửi hoá đơn</Button>
                 <Button color="secondary" className="btn" onClick={toggle}>Huỷ</Button>
             </ModalFooter>

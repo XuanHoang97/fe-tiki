@@ -171,7 +171,10 @@ function Profile(props) {
                     </div>
                     <button type="submit" className="btn btn-primary mx-3">
                         {
-                            loading ? 'Đang cập nhật...' : 'Cập nhật'
+                            loading ? 
+                            // spinner 
+                            <div className="spinner-border spinner-border-sm text-white" role="status"></div>
+                            : 'Cập nhật'
                         }
                     </button>
                 </div>

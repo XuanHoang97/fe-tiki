@@ -32,13 +32,16 @@ const Notify = () => {
         setStyleUnread('notify-read');
         dispatch(GetNotify(userId, 'N1'));
 
-        // check link notify
+        // redirect notify
         switch(true) {
             case notify.link.includes(path.ORDER):
                 window.location.href = `${path.ORDER}`;
                 break;
             case notify.link.includes(path.TIKI_XU):
                 window.location.href = `${path.TIKI_XU}`;
+                break;
+            case notify.link.includes(path.CHECK_MAIL):
+                window.open(`${path.CHECK_MAIL}`, '_blank');
                 break;
             default:
                 window.location.href = notify.link;

@@ -18,6 +18,7 @@ export const path = {
     ORDER: '/user/purchase',
     NOTIFICATION: '/user/notifications/order',
     TIKI_XU: '/user/tiki-xu',
+    CHECK_MAIL: 'https://mail.google.com/mail/u/0/#inbox',
     VOUCHER: '/user/voucher',
     DISCOUNT_DETAIL: '/discount',
     DISCOUNT: '/user/notifications/discount',

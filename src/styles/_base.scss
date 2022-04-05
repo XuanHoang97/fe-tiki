@@ -27,3 +27,10 @@ thead {
 .table td {
   padding: 0.5rem !important;
 }
+
+div._loading_overlay_wrapper{
+  position: unset;
+  ._loading_overlay_overlay{
+    z-index: 1000000;
+  }
+}

@@ -4,6 +4,7 @@ import { formatDateNew } from 'components/Formatting/FormatDate';
 import { useSelector, useDispatch } from 'react-redux';
 import React, { useState, useEffect } from 'react';
 import ModalEditUser from './ModalEditUser';
+import DetailUser from './DetailUser';
 import ModalUser from './ModalUser';
 import './style.scss';
 
@@ -11,6 +12,8 @@ const UserManage = (props) => {
     const [modalUser, setModalUser] = useState(false);
     const [modalEditUser, setModalEditUser] = useState(false);
     const [userEdit, setUserEdit] = useState('');
+    const [detailUser, setDetailUser] = useState(false);
+    const [userInfo, setUserInfo] = useState('');
 
     // Fetch user
     const dispatch = useDispatch();
@@ -18,6 +21,11 @@ const UserManage = (props) => {
     useEffect(() => {
         dispatch(fetchAllUser());
     }, [dispatch]);
+
+    const infoUser = (user) => {
+        setDetailUser(!detailUser);
+        setUserInfo(user);
+    }
     
     // Create user
     const handleAddNewUser=()=> {
@@ -68,14 +76,18 @@ const UserManage = (props) => {
                 AddNewUser={AddNewUser}
             />
 
-            {
-                <ModalEditUser
-                    isOpen={modalEditUser} 
-                    toggleModal={handleEditUser}
-                    currentUser={userEdit}
-                    editUser={EditUser}
-                />
-            }
+            <ModalEditUser
+                isOpen={modalEditUser} 
+                toggleModal={handleEditUser}
+                currentUser={userEdit}
+                editUser={EditUser}
+            />
+
+            <DetailUser
+                isOpen={detailUser}
+                toggle={infoUser}
+                userInfo={userInfo}
+            />
 
             <div className='addUser'>
                 <div className='user-head'>
@@ -96,15 +108,15 @@ const UserManage = (props) => {
                         <td>STT</td>
                         <td>Avatar</td>
                         <td>Tên</td>
-                        <td>Điểm TL</td>
+                        <td>Điểm tích luỹ</td>
                         <td>Tham gia</td>
                         <td>Email</td>
                         <td>SĐT</td>
-                        <td>Địa chỉ</td>
                         <td>Giới tính</td>
                         <td>Năm sinh</td>
-                        <td>Nghề nghiệp</td>
-                        <td>Chức danh</td>
+                        <td>Địa chỉ</td>
+                        <td>Role</td>
+                        <td>Position</td>
                         <td>Tác vụ</td>
                     </tr>
                 </thead>
@@ -115,19 +127,23 @@ const UserManage = (props) => {
                             <tbody key={index}>
                                 <tr>
                                     <td>{index + 1}</td>
-                                    <td style={{width:'5%'}}><img src={item.image} className="w-100 rounded-circle" alt="" /> </td>
+                                    <td style={{width:'5%'}}><img src={item.image} className="w-100 rounded-circle" style={{height:'40px'}} alt="" /> </td>
                                     <td className='text-primary'>{item.username}</td>
                                     <td style={{color:'orange'}}>{ item.userData ? numberFormat(item.userData.point) : 0 }</td>
                                     <td>{formatDateNew(item.joinDate)}</td>
                                     <td>{item.email}</td>
                                     <td>{item.phoneNumber}</td>
-                                    <td>{item.address}</td>
                                     <td>{item.gender}</td>
                                     <td>{formatDateNew(item.age)}</td>
+                                    <td>{item.address}</td>
                                     <td>{item.roleId}</td>
                                     <td>{item.positionId}</td>
                                     <td className='d-flex'>
-                                        <button onClick={()=> handleEditUser(item)} type="button" className="btn text-primary pl-0">
+                                        <button onClick={()=> infoUser(item)} type="button" className="btn text-success p-0">
+                                            <i className="fas fa-info-circle mr-2"></i>
+                                        </button>
+
+                                        <button onClick={()=> handleEditUser(item)} type="button" className="btn text-primary p-0 pr-1">
                                             <i className="fas fa-pencil-alt"></i>
                                         </button>
                                         <button onClick={()=> DeleteUser(item)} type="button" className="btn text-danger p-0">

@@ -23,3 +23,53 @@
         display: none;  
     }
 }
+
+.wall-user{
+    background-image: url('https://www.xmple.com/wallpaper/linear-pink-blue-gradient-1920x1080-c2-6495ed-ff69b4-a-165-f-14.svg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 10px 0;
+    .avatar-user{
+        text-align: center;
+        img{
+            width: 20%;
+            border-radius: 50%;
+            height: 95px;
+            border: 1px solid rgb(0, 255, 0);
+        }
+        .nameCustomer{
+            font-weight: 600;
+            font-size: 20px;
+        }
+        .joinDate-user{
+            font-style: italic;
+            color: rgb(238, 238, 238);
+            font-size: 12px;
+        }
+    }
+    .overview-user{
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        color: white;
+        font-size: 13px;
+    }
+}
+
+.contact-user{
+    margin: 15px 30px 0 30px;
+    .item-contact{
+        display: grid;
+        grid-template-columns: 17% 83%;
+        gap: 10px;
+        margin: 5px 0;
+        .label-contact{
+            font-weight: 600;
+            color: rgb(80, 80, 80);
+            font-size: 13px;
+        }
+    }
+}   

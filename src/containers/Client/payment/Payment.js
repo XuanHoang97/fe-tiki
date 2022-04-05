@@ -205,15 +205,14 @@ const Payment = (props) => {
                                 </div>
 
                                 <div className="valueOrder">
-                                    <div><span>Giảm giá</span></div>
-                                    <h6>-{numberFormat(coupon)}</h6>
-                                </div>
-
-                                <div className="valueOrder">
                                     <div><span>Phí vận chuyển</span></div>
                                     <h6>{numberFormat(deliveryFee)}</h6>
                                 </div>
-                                <hr />
+
+                                <div className="valueOrder">
+                                    <div><span>Giảm giá</span></div>
+                                    <h6>-{numberFormat(coupon)}</h6>
+                                </div> <hr />
 
                                 <div className="totalMoney">
                                     <div><span>Thành tiền</span></div>
