@@ -100,8 +100,7 @@ const ProductSuggestion = () => {
                         </div>
                       )
                     })
-                    :
-                    <span className='text-success'> Đang cập nhật sản phẩm... </span>
+                    : <span className='text-success'> Đang cập nhật sản phẩm... </span>
                   }
                 </div>
                   {
@@ -114,23 +113,22 @@ const ProductSuggestion = () => {
                             <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             <span className="ml-3">Đang tải...</span>
                           </div>
-                          :
-                          <span>Xem thêm</span>
+                          : <span>Xem thêm</span>
                         }
                       </button>
                     </div>
                   }
 
-                {resetButton && (
-                  <div className="reset">
-                    <button onClick={resetList} type="button" className="btn btn-outline-primary border border-primary">Tải lại</button>
-                  </div>
-                )}
+                  {
+                    resetButton && (
+                    <div className="reset">
+                      <button onClick={resetList} type="button" className="btn btn-outline-primary border border-primary">Tải lại</button>
+                    </div>
+                  )}
               </TabPane>
             )
           })
-          :
-          <span> Loading... </span>
+          : <span> Loading... </span>
         }
       </TabContent>
     </div>

@@ -69,6 +69,18 @@ const OrderManage = (props) => {
         setPageNumber(selected);
     };
 
+    // search 
+    const [search, setSearch] = useState('');
+    const bySearch = (order, search) => {
+        if (search) {
+            return order.code.toUpperCase().includes(search.toUpperCase());
+        } else 
+            return order;
+        };
+    const filteredList = (filterOrder, search) => {
+        return filterOrder.filter((order) => bySearch(order, search));
+    };
+
     return (
         <div className="orderManage p-2 bg-white">
             <VerifyOrder
@@ -96,7 +108,9 @@ const OrderManage = (props) => {
 
                 <TabContent activeTab={activeTab} className = 'listOrder'>
                     <TabPane tabId={activeTab} className= 'tableOrder' >
-                        <SortOrder/>
+                        <SortOrder 
+                            setSearch={setSearch}
+                        />
                         <div className='list-order mt-3'>
                             <table className="table table-striped table-bordered table-hover">
                                 <thead className="text-white">
@@ -118,7 +132,8 @@ const OrderManage = (props) => {
                                 <tbody>
                                     {
                                         filterOrder?.length > 0 ?
-                                        filterOrder.slice(pagesVisited, pagesVisited + orderPerPage)
+                                        filteredList(filterOrder, search)
+                                        .slice(pagesVisited, pagesVisited + orderPerPage)
                                         .map((item, index) => {
                                             return (
                                                 <tr key={index}>
@@ -190,7 +205,7 @@ const OrderManage = (props) => {
                             </table>
                         </div>
                         {
-                            filterOrder?.length > 0 &&
+                            filterOrder?.length > 0 && filteredList(filterOrder, search).length > orderPerPage &&
                             <ReactPaginate
                                 previousLabel={"<"}
                                 nextLabel={">"}

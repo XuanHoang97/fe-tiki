@@ -104,7 +104,7 @@ const  Dashboard = (props) => {
 
                     <div className="overview">
                         <div className='reportStatus'>
-                            <img src="https://thumbs.dreamstime.com/b/dollar-banknote-stack-icon-money-cash-symbol-simple-style-financial-banking-infographic-design-element-183107279.jpg" className='illustrator' alt="" />
+                            <img src="https://previews.123rf.com/images/lifeking/lifeking1709/lifeking170900103/85172265-icona-della-linea-di-denaro-semplice-progettazione-dell-illustrazione-di-vettore-del-segno-e-di-simb.jpg" className='illustrator' alt="" />
                             <div className='item-stat-order'>
                                 <span className='number'>
                                     {
@@ -120,7 +120,7 @@ const  Dashboard = (props) => {
                         </div>
 
                         <div className='reportStatus'>
-                            <img src="https://thumbs.dreamstime.com/b/dollar-banknote-stack-icon-money-cash-symbol-simple-style-financial-banking-infographic-design-element-183107279.jpg" className='illustrator' alt="" />
+                            <img src="https://previews.123rf.com/images/lifeking/lifeking1709/lifeking170900103/85172265-icona-della-linea-di-denaro-semplice-progettazione-dell-illustrazione-di-vettore-del-segno-e-di-simb.jpg" className='illustrator' alt="" />
                             <div className='item-stat-order'>
                                 <span className='number'>
                                     {

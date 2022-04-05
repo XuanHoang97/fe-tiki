@@ -1,11 +1,15 @@
 import React from 'react';
 
 function SortOrder(props) {
+    const {setSearch} = props;
+
     return (
         <div className='filter'>
             <div className="orderSort">
                 <label className="labelSort">Tìm kiếm</label>
-                <input type="text" className="item-filterOrder form-control" placeholder="Mã đơn hàng..."/>
+                <input type="search" className="item-filterOrder form-control" placeholder="Mã đơn hàng..."
+                    onChange={(e) => setSearch(e.target.value)}
+                />
             </div>
 
             <div className="orderSort">

@@ -1,5 +1,5 @@
-import { Button, Modal, ModalBody, ModalFooter } from 'reactstrap';
 import { formatDate, formatDateNew } from 'components/Formatting/FormatDate';
+import { Button, Modal, ModalBody, ModalFooter } from 'reactstrap';
 import { numberFormat } from 'components/Formatting/FormatNumber';
 import React from 'react';
 import './style.scss';
@@ -109,6 +109,11 @@ const SendBill = (props) => {
                         <div className='d-flex mb-2'>
                             <span className='col-6 p-0'>Hình thức giao hàng: </span> 
                             <span>{bill && bill.delivery}</span>
+                        </div>
+
+                        <div className='d-flex mb-2'>
+                            <span className='col-6 p-0'>Phí giao hàng: </span> 
+                            <span>0 đ</span>
                         </div>
 
                         <div className='d-flex mb-2'>

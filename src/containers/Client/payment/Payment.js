@@ -1,10 +1,10 @@
 import { numberFormat, totalMoney } from 'components/Formatting/FormatNumber';
 import { useSelector, useDispatch} from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import LoadingOverlay from 'react-loading-overlay';
 import Header from '../HomePage/Header/Header';
 import { CheckoutOrder } from 'store/actions';
 import { useHistory } from 'react-router';
-import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { path } from 'utils';
 import moment from "moment";
@@ -19,11 +19,11 @@ const Payment = (props) => {
     const user = useSelector(state => state.auth.user);
     const [loadingOrder, setLoadingOrder] = useState(false);
     
-    const coupon = 30000;
     const date = new Date();
     const dateOrder = date.valueOf() + 7 * 60 * 60;
     const [deliveryMethod, setDeliveryMethod] = useState('GIAO HÀNG TẬN NƠI');
     const [paymentMethod, setPaymentMethod] = useState('Tiền mặt');
+    const [coupon, setCoupon] = useState(50000);
     const [deliveryFee, setDeliveryFee] = useState(50000);
     const dateDelivery=date.setDate(date.getDate() + 3);
     const dateDeliveryFormat = moment(dateDelivery).locale('vi').format('dddd, DD/MM/YYYY');
@@ -33,9 +33,11 @@ const Payment = (props) => {
         setDeliveryMethod(e.target.value)
         if(e.target.value === 'GIAO HÀNG TẬN NƠI') {
             setDeliveryFee(50000)
+            setCoupon(50000)
         }
         else {
             setDeliveryFee(30000)
+            setCoupon(30000)
         }
     }
 
@@ -97,6 +99,7 @@ const Payment = (props) => {
                                                         <input type="radio" className="form-check-input" name="delivery" 
                                                             id={item.valueVi} value={item.valueVi} 
                                                             onChange={handleDelivery}
+                                                            defaultChecked={index === 0}
                                                         />
                                                         <label>{item.valueVi}</label>
                                                     </div>
@@ -137,8 +140,7 @@ const Payment = (props) => {
 
                                     <div className="col-md-6 p-0 my-3 row">
                                         <div className="col-md-8 ">
-                                            <span className="text-success">
-                                                Giao vào {dateDeliveryFormat}</span>
+                                            <span className="text-success">Giao vào {dateDeliveryFormat}</span>
                                             <p>Được giao bởi Hoangle</p>
                                             <span className="text-danger">{deliveryMethod ? deliveryMethod : ''}</span>
                                         </div>

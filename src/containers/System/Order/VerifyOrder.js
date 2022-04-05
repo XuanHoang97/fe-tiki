@@ -143,6 +143,11 @@ const VerifyOrder = (props) => {
                         </div>
 
                         <div className='d-flex mb-2'>
+                            <span className='col-6 p-0'>Phí giao hàng: </span> 
+                            <span>0 đ</span>
+                        </div>
+
+                        <div className='d-flex mb-2'>
                             <span className='col-6 p-0'>Hình thức thanh toán:</span> 
                             <span>{payment}</span>
                         </div>

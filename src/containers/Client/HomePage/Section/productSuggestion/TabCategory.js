@@ -12,7 +12,7 @@ function TabCategory(props) {
                 return (
                     <NavItem key={index} className='item-category'>
                         <NavLink
-                            className={`${activeTab === item.id ? 'active' : ''}`}
+                            className={`${activeTab === item.id ? 'activeCatg' : ''}`}
                             onClick={() => detailCategory(item.id)}
                         >   
                           <img src={item.image}  alt="" />

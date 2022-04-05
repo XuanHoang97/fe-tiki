@@ -25,7 +25,7 @@ function TabOrder(props) {
                                     ({
                                         item.keyMap === 'S0' ?
                                         order.length :
-                                        order.filter(x => x.status === `${item.keyMap}`).length
+                                        order.filter(x => x.status === item.keyMap).length
                                     })
                                 </span>
                             </NavLink>

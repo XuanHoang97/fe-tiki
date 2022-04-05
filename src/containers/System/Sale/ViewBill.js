@@ -44,22 +44,12 @@ const ViewBill = (props) => {
                     </div>
 
                     <div className='info-bill'>
-                        <span className='label-bill'>Mã số thuế</span>
-                        <div className='value-bill'>ABC123456</div>
-                    </div>
-
-                    <div className='info-bill'>
-                        <span className='label-bill'>Mã số thuế người mua</span>
-                        <div className='value-bill'>0101243150</div>
-                    </div>
-
-                    <div className='info-bill'>
                         <span className='label-bill'>Địa chỉ</span>
                         <div className='value-bill'>{bill? bill.address : ''}</div>
                     </div>
 
                     <div className='info-bill'>
-                        <span className='label-bill'>Người mua hàng</span>
+                        <span className='label-bill'>Khách hàng</span>
                         <div className='value-bill border-bottom text-primary'>{bill ? bill.username : ''}</div>
 
                         <div className='bill-customer'>
@@ -72,11 +62,10 @@ const ViewBill = (props) => {
                         <span className='label-bill'>Số điện thoại</span>
                         <div className='value-bill border-bottom'>{bill ? bill.phone : ''}</div>
                         <div className='bill-customer'>
-                            <span className='label-bill'>Hình thức thanh toán</span>
+                            <span className='label-bill'>Thanh toán</span>
                             <div className='value-bill'>{bill ? bill.payment : ''}</div>
                         </div>
                     </div>
-
 
                     <div className='info-bill'>
                         <span className='label-bill'>TK Ngân hàng</span>
@@ -89,13 +78,13 @@ const ViewBill = (props) => {
                 </div>
 
                 <div className='commodity'>
-                    <b>Hàng hoá / Dịch vụ</b>
+                    <b>Sản phẩm</b>
                     <table className="table table-bordered table-striped">
                         <thead>
                             <tr className='text-white'>
                                 <td>STT</td>
-                                <td>Mã hàng hoá</td>
-                                <td>Tên hàng hoá/Dịch vụ</td>
+                                <td>Mã hoá đơn</td>
+                                <td>Sản phẩm</td>
                                 <td>Số lượng</td>
                                 <td>Đơn giá</td>
                                 <td>Thành tiền</td>
@@ -127,17 +116,18 @@ const ViewBill = (props) => {
                         </div>
 
                         <div className='item-money-bill'>
-                            <span>Tiền thuế GTGT</span>
-                            <span>
-                                {numberFormat(TaxFee)}
-                            </span>
+                            <span>Phí giao hàng</span>
+                            <span> 0 đ </span>
                         </div>
 
                         <div className='item-money-bill'>
-                            <b>Tổng tiền thanh toán</b>
-                            <b className='text-danger'>
-                                {numberFormat(totalPayment)}
-                            </b>
+                            <span>Thuế GTGT</span>
+                            <span> {numberFormat(TaxFee)} </span>
+                        </div>
+
+                        <div className='item-money-bill'>
+                            <b>Tổng tiền</b>
+                            <b className='text-danger'> {numberFormat(totalPayment)} </b>
                         </div>
                     </div>
                 </div>
