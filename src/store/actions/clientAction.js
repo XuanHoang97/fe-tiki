@@ -192,12 +192,10 @@ export const DeleteItemCartByUser = (productId) => {
     return async(dispatch, getState) => {
         try {
             let res = await deleteItemCartWithLogin(productId);
-            if (res && res.data.errCode === 0) {
                 dispatch({
                     type: actionTypes.DELETE_ITEM_CART_LOGIN,
                 });
                 toast.success('Đã xoá sản phẩm khỏi giỏ hàng !')
-            }
         } catch (e) {
             console.log('delete item cart fail', e)
         }
@@ -232,7 +230,7 @@ export const CheckoutOrder = (data) => {
                 toast.success('Đặt hàng thành công !')
             }
         } catch (e) {
-            toast.error('Đặt hàng thất bại !', e)
+            toast.error('Đặt hàng thất bại !')
         }
     }
 }

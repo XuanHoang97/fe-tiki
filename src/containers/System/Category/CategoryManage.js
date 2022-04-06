@@ -92,7 +92,7 @@ const CategoryManage = (props) => {
                            
                                 <td>
                                     <button onClick={()=> editCategory(item)} type="button" className="btn text-primary">
-                                        <i className="fas fa-edit"></i>
+                                        <i className="fas fa-pencil-alt"></i>
                                     </button>
                                     <button onClick={()=> DeleteCategory(item)} type="button" className="btn text-danger">
                                         <i className="fas fa-trash-alt"></i>

@@ -88,7 +88,7 @@ function SpecialCategory(props) {
                                         <td className='text-primary'>{item.name}</td>
                                         <td className='d-flex'>
                                             <button onClick={()=> editSpecialCategory(item)} type="button" className="btn text-primary  mr-3">
-                                                <i className="fas fa-edit"></i>
+                                                <i className="fas fa-pencil-alt"></i>
                                             </button>
 
                                             <button type="button" className="btn text-danger">

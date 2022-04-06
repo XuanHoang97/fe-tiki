@@ -74,6 +74,7 @@ const Cart = (props) => {
                                                 <input type="text" className="form-control text-center" 
                                                     readOnly value={item.qty} 
                                                     onChange={(e) => setQty(e.target.value)}
+                                                    style={{ height: '28px' }}
                                                 />
 
                                                 <div className="input-group-append">
@@ -87,7 +88,6 @@ const Cart = (props) => {
                                                 <h6 className="text-danger">
                                                     {numberFormat(item.sale)}
                                                 </h6>
-                                                <span className="text-danger small">-1%</span>
                                             </div>
                                         </div>
                                     )

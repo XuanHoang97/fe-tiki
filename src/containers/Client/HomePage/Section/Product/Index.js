@@ -15,7 +15,7 @@ const Product = (mobile) => {
     useEffect(() => {
         dispatch(fetchProducts())
     }, [dispatch])
-
+    
     //view detail product
     const viewDetail = (product) => {
         return history.push(`/products/${product.id}`)

@@ -141,7 +141,7 @@ const ProductManage = (props) => {
                                     <td>{numberFormat(item.sale)}</td>
                                     <td>
                                         <button onClick={()=> editProduct(item)} type="button" className="btn text-primary pl-0">
-                                            <i className="fas fa-edit"></i>
+                                            <i className="fas fa-pencil-alt"></i>
                                         </button>
                                         <button onClick={()=> deleteProduct(item)} type="button" className="btn text-danger p-0">
                                             <i className="fas fa-trash-alt"></i>

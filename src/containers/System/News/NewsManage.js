@@ -115,7 +115,7 @@ const NewsManage = (props) => {
                                     </td>
                                     <td>
                                         <button onClick={() => editNews(item) } type="button" className="btn text-primary pr-2">
-                                            <i className="fas fa-edit"></i>
+                                            <i className="fas fa-pencil-alt"></i>
                                         </button>
                                         <button onClick={()=> deleteNews(item)} type="button" className="btn text-danger">
                                             <i className="fas fa-trash-alt"></i>

@@ -6,14 +6,14 @@ import { history } from '../redux'
 import { path } from '../utils';
 import React from 'react';
 
-import ProductDetail from './Client/product/ProductDetail';
-import OrderSuccess from './Client/Check_order/OrderSuccess';
-import VerifyEmail from './Client/Check_order/VerifyEmail';
-import SearchResult from './Client/HomePage/Header/search/Result';
-import LoginAuth from './Client/HomePage/Header/account/Login';
 import InfoAccount from './Client/HomePage/Header/account/Profile/InfoAccount';
 import Discount from './Client/HomePage/Header/account/voucher/Discount';
+import SearchResult from './Client/HomePage/Header/search/Result';
 import Register from './Client/HomePage/Header/account/Register';
+import LoginAuth from './Client/HomePage/Header/account/Login';
+import OrderSuccess from './Client/Check_order/OrderSuccess';
+import ProductDetail from './Client/product/ProductDetail';
+import VerifyEmail from './Client/Check_order/VerifyEmail';
 import NotFound from './Client/HomePage/NotFound/Index';
 import HomePage from './Client/HomePage/HomePage';
 import Payment from './Client/payment/Payment';
@@ -22,11 +22,13 @@ import System from '../routes/System';
 import Cart from './Client/cart/Cart';
 import Home from '../routes/Home';
 import './App.scss';
+import ScrollToTop from './Client/HomePage/ScrollToTop';
 
 console.warn = () => {};
 function App(props) {   
     return (
         <Router history={history}>
+            <ScrollToTop />
             <ToastContainer autoClose={3000} />
             <Switch>
                 <Route path={path.HOME} exact component={(Home)} />

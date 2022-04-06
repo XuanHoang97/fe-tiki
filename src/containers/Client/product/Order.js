@@ -59,7 +59,7 @@ const Order = (props) => {
                             <button disabled={qty < 2 ? true : false} className="btn btn-success btn-sm"><i className="fas fa-minus small" /></button>
                         </div>
 
-                        <input type="text" readOnly className="form-control text-center" style={{ height: '31px' }}
+                        <input type="text" readOnly className="form-control text-center" style={{ height: '28px' }}
                             value={qty}
                         />
 

@@ -227,7 +227,7 @@ const Multimedia = (props) => {
                                                 <td>{item.name}</td>
                                                 <td className=''>
                                                     <button onClick={() => editSlide(item)} type="button" className="btn text-primary mr-3">
-                                                        <i className="fas fa-edit"></i>
+                                                        <i className="fas fa-pencil-alt"></i>
                                                     </button>
 
                                                     <button onClick={() => deleteSlide(item)} type="button" className="btn text-danger">

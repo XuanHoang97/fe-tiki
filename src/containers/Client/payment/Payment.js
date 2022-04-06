@@ -5,7 +5,6 @@ import LoadingOverlay from 'react-loading-overlay';
 import Header from '../HomePage/Header/Header';
 import { CheckoutOrder } from 'store/actions';
 import { useHistory } from 'react-router';
-import { v4 as uuidv4 } from 'uuid';
 import { path } from 'utils';
 import moment from "moment";
 import './style.scss';
@@ -23,8 +22,8 @@ const Payment = (props) => {
     const dateOrder = date.valueOf() + 7 * 60 * 60;
     const [deliveryMethod, setDeliveryMethod] = useState('GIAO HÀNG TẬN NƠI');
     const [paymentMethod, setPaymentMethod] = useState('Tiền mặt');
-    const [coupon, setCoupon] = useState(50000);
-    const [deliveryFee, setDeliveryFee] = useState(50000);
+    const [coupon, setCoupon] = useState(0);
+    const [deliveryFee, setDeliveryFee] = useState(0);
     const dateDelivery=date.setDate(date.getDate() + 3);
     const dateDeliveryFormat = moment(dateDelivery).locale('vi').format('dddd, DD/MM/YYYY');
 
@@ -32,12 +31,12 @@ const Payment = (props) => {
     const handleDelivery = (e) => {
         setDeliveryMethod(e.target.value)
         if(e.target.value === 'GIAO HÀNG TẬN NƠI') {
-            setDeliveryFee(50000)
-            setCoupon(50000)
+            setDeliveryFee(0)
+            setCoupon(0)
         }
         else {
-            setDeliveryFee(30000)
-            setCoupon(30000)
+            setDeliveryFee(0)
+            setCoupon(0)
         }
     }
 
@@ -45,7 +44,7 @@ const Payment = (props) => {
     const handlePayment = () => {
         let newCart = cartsUser.map(cart => {
             return {
-                id: uuidv4(),
+                id: Math.floor(Math.random() * 1000000),
                 productId: cart.productId,
                 image: cart.image,
                 name: cart.name,
@@ -68,10 +67,11 @@ const Payment = (props) => {
             timeTrack: dateOrder,
             dateDelivery: dateDelivery,
         }))
+
         setTimeout(() => {
             setLoadingOrder(false)
             history.push(path.MY_ORDER);
-        }, 2500);
+        }, 2000);
     }
 
     useEffect(() => {
@@ -115,7 +115,7 @@ const Payment = (props) => {
                                             cartsUser?.length >0 ?
                                             cartsUser.map((item, index) => {
                                                 return(
-                                                    <div className='d-flex border-bottom align-items-center' key={index}>
+                                                    <div className='d-flex border-bottom align-items-center py-2' key={index}>
                                                         <div className="col-md-3 p-0">
                                                             <img className="w-75" src={item.image} alt="" />
                                                         </div>

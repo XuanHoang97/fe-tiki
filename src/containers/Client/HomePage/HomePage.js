@@ -7,7 +7,6 @@ const HomePage = () => {
     useEffect(() => {
         document.title = 'Mua hàng online giá tốt, hàng chuẩn ship nhanh';
     }, []);
-
     return (
         <div>
             <Header />

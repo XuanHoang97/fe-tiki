@@ -45,7 +45,7 @@ const InfoAccount = () => {
                             <div className='info'>
                                 <div className='name'>{ user ? user.username : '' }</div>
                                 <div className='editProfile small mt-1'>
-                                    <i className="fas fa-edit"></i>
+                                    <i className="fas fa-pencil-alt"></i>
                                     <span>Sửa hồ sơ</span>
                                 </div>
                             </div>

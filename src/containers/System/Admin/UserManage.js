@@ -132,12 +132,12 @@ const UserManage = (props) => {
                                     <td style={{color:'orange'}}>{ item.userData ? numberFormat(item.userData.point) : 0 }</td>
                                     <td>{formatDateNew(item.joinDate)}</td>
                                     <td>{item.email}</td>
-                                    <td>{item.phoneNumber}</td>
+                                    <td>{item.phoneNumber?item.phoneNumber : <small>updating..</small>}</td>
                                     <td>{item.gender}</td>
                                     <td>{formatDateNew(item.age)}</td>
-                                    <td>{item.address}</td>
-                                    <td>{item.roleId}</td>
-                                    <td>{item.positionId}</td>
+                                    <td>{item.address?item.address : <small>updating..</small>}</td>
+                                    <td>{item.roleId?item.roleId: <small>updating..</small>}</td>
+                                    <td>{item.positionId?item.positionId: <small>updating..</small>}</td>
                                     <td className='d-flex'>
                                         <button onClick={()=> infoUser(item)} type="button" className="btn text-success p-0">
                                             <i className="fas fa-info-circle mr-2"></i>
