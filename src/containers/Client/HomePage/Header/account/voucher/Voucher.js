@@ -74,7 +74,7 @@ function Voucher(props) {
                                 )
                             })
                             :
-                            <div className='voucher'>
+                            <div className='voucher p-3 w-100'>
                                 Bạn chưa có voucher nào...
                             </div>
                         }

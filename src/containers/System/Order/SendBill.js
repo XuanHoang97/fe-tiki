@@ -49,7 +49,7 @@ const SendBill = (props) => {
                     <img src="https://vcdn.tikicdn.com/ts/seller/ee/fa/a0/98f3f134f85cff2c6972c31777629aa0.png" alt=""/>
                     <b>TikiShop</b>
                 </div>
-                <div className='bill-status'> HOÁ ĐƠN MUA HÀNG </div>
+                <div className='bill-status'>GỬI HOÁ ĐƠN MUA HÀNG </div>
                 <div className='datePayment'>
                     Ngày {day} Tháng {month} Năm {year}
                 </div>

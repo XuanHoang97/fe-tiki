@@ -48,11 +48,7 @@ const Register = (props) => {
             </div>
 
             <div className="register">
-                <div className="bgRegister col-md-8">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIFcGvp7AOiZTesQCIXyZ8Wnh9WyQKUzDDjA&usqp=CAU" alt="" 
-                        className='w-100'
-                    />
-                </div>
+                <div className="bgRegister col-md-8"></div>
 
                 <div className="formRegister col-md-4 p-4 bg-white">
                     <form className="form-group" onSubmit={handleSubmit(signUp)}>

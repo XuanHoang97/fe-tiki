@@ -18,8 +18,11 @@
     background:rgb(40,134,234);
     padding: 15px 30px;
     display: flex;
+    height: calc(100vh - 85px) !important;
     .bgRegister, .bgLogin{
         padding: 0;
+        background-image: url(../../../../../assets/images/bgTiki.jpg);
+        background-repeat: no-repeat;
         @include phone{
             display: none;
         }

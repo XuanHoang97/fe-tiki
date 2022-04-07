@@ -62,11 +62,7 @@ const LoginAuth = (props) => {
             </div>
 
             <div className="loginAuth">
-                <div className="bgLogin col-md-8">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIFcGvp7AOiZTesQCIXyZ8Wnh9WyQKUzDDjA&usqp=CAU" alt="" 
-                        className='w-100'
-                    />
-                </div>
+                <div className="bgLogin col-md-8"></div>
 
                 <div className="formLogin col-md-4 bg-white p-4">
                     <form className="form-group" onSubmit={handleSubmit(login)}>

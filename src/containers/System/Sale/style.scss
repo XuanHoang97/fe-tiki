@@ -3,9 +3,22 @@
     background: white;
     padding: 10px;
     .billHeader{
-        @include headerAdmin;
-        .billTitle{
-            @include titleAdmin
+        display: grid;
+        grid-template-columns: 60% 40%;
+        justify-content: space-between;
+        .container-bill{
+            @include headerAdmin;
+            .billTitle{
+                @include titleAdmin
+            }
+        }
+        .search-bill {
+            display: grid;
+            align-items: center;
+            grid-template-columns: 18% 82%;
+            input{
+                height: 30px;
+            }
         }
     }
     .tabBill{
@@ -55,8 +68,8 @@
     margin: 10px 0 15px 0;
     .info-bill{
         display: grid;
-        grid-template-columns: 25% 36% 36%;
-        gap: 12px;
+        grid-template-columns: 15% 40% 40%;
+        gap: 20px;
         align-items: center;
         margin-bottom: 8px;
         .value-bill{

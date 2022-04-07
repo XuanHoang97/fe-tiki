@@ -45,7 +45,7 @@ const ViewBill = (props) => {
 
                     <div className='info-bill'>
                         <span className='label-bill'>Địa chỉ</span>
-                        <div className='value-bill'>{bill? bill.address : ''}</div>
+                        <div className='value-bill'>{bill? bill.address : 'updating...'}</div>
                     </div>
 
                     <div className='info-bill'>
@@ -69,10 +69,10 @@ const ViewBill = (props) => {
 
                     <div className='info-bill'>
                         <span className='label-bill'>TK Ngân hàng</span>
-                        <div className='value-bill border-bottom'>...</div>
+                        <div className='value-bill border-bottom'>loading...</div>
                         <div className='bill-customer'>
                             <span className='label-bill'>Tên ngân hàng </span>
-                            <div className='value-bill'>...</div>
+                            <div className='value-bill'>loading...</div>
                         </div>
                     </div>
                 </div>
@@ -85,8 +85,8 @@ const ViewBill = (props) => {
                                 <td>STT</td>
                                 <td>Mã hoá đơn</td>
                                 <td>Sản phẩm</td>
-                                <td>Số lượng</td>
                                 <td>Đơn giá</td>
+                                <td>Số lượng</td>
                                 <td>Thành tiền</td>
                             </tr>
                         </thead>
@@ -95,8 +95,8 @@ const ViewBill = (props) => {
                                 <td>1</td>
                                 <td>{bill ? bill.billCode : ''}</td>
                                 <td>{bill ? bill.name : ''}</td>
-                                <td>{bill ? bill.qty : ''}</td>
                                 <td>{bill ? numberFormat(bill.sale) : ''}</td>
+                                <td>x{bill ? bill.qty : ''}</td>
                                 <td>{bill ? numberFormat(bill.sale * bill.qty) : ''}</td>
                             </tr>
                         </tbody>

@@ -127,11 +127,11 @@ const UserManage = (props) => {
                             <tbody key={index}>
                                 <tr>
                                     <td>{index + 1}</td>
-                                    <td style={{width:'5%'}}><img src={item.image} className="w-100 rounded-circle" style={{height:'40px'}} alt="" /> </td>
+                                    <td style={{width:'4%'}}><img src={item.image} className="w-100 rounded-circle" style={{height:'40px'}} alt="" /> </td>
                                     <td className='text-primary'>{item.username}</td>
                                     <td style={{color:'orange'}}>{ item.userData ? numberFormat(item.userData.point) : 0 }</td>
                                     <td>{formatDateNew(item.joinDate)}</td>
-                                    <td>{item.email}</td>
+                                    <td><span className='user-mail'>{item.email}</span></td>
                                     <td>{item.phoneNumber?item.phoneNumber : <small>updating..</small>}</td>
                                     <td>{item.gender}</td>
                                     <td>{formatDateNew(item.age)}</td>

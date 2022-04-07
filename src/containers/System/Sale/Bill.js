@@ -25,6 +25,18 @@ const Bill = (props) => {
         setBillDetail(bill);
     }
 
+    // search 
+    const [search, setSearch] = useState('');
+    const bySearch = (bill, search) => {
+        if (search) {
+            return bill.billCode.toUpperCase().includes(search.toUpperCase());
+        } else 
+            return bill;
+        };
+    const filteredList = (Bills, search) => {
+        return Bills.filter((bill) => bySearch(bill, search));
+    };
+
     //pagination
     const [pageNumber, setPageNumber] = useState(0);
     const billPerPage = 10;
@@ -43,8 +55,18 @@ const Bill = (props) => {
             />
 
             <div className='billHeader'>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIOVkwC2h6PD5RTotWCpIlDo4FvyCr5hadR3wR9uYb79xzACB0NbfVy5Le1eXJp0BAcLQ&usqp=CAU" style={{width:'3.5%'}} alt="" />
-                <div className='billTitle'>Hoá đơn <small>({Bills.length? Bills.length : 0})</small></div>
+                <div className='container-bill'>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIOVkwC2h6PD5RTotWCpIlDo4FvyCr5hadR3wR9uYb79xzACB0NbfVy5Le1eXJp0BAcLQ&usqp=CAU" style={{width:'3.5%'}} alt="" />
+                    <div className='billTitle'>Hoá đơn <small>({Bills.length? Bills.length : 0})</small></div>
+                </div>
+
+                <div className="search-bill form-group">
+                  <label>Tìm kiếm</label>
+                  <input type="search" className="form-control" placeholder="Nhập hoá đơn cần tìm..." 
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                  />
+                </div>
             </div>
             <TabBill
                 activeTab={activeTab}
@@ -75,7 +97,8 @@ const Bill = (props) => {
                             <tbody>
                                 {
                                     Bills?.length > 0 ?
-                                    Bills.slice(pagesVisited, pagesVisited + billPerPage).map((item, index) => {
+                                    filteredList(Bills, search)
+                                    .slice(pagesVisited, pagesVisited + billPerPage).map((item, index) => {
                                         return (
                                             <tr key={item.id}>
                                                 <td>{index + 1}</td>
@@ -104,18 +127,21 @@ const Bill = (props) => {
                             </tbody>
                         </table>
                     </div>
-
-                    <ReactPaginate
-                        previousLabel={"<"}
-                        nextLabel={">"}
-                        pageCount={pageCount}
-                        onPageChange={changePage}
-                        containerClassName={"paginationBttns"}
-                        previousLinkClassName={"previousBttn"}
-                        nextLinkClassName={"nextBttn"}
-                        disabledClassName={"paginationDisabled"}
-                        activeClassName={"paginationActive"}
-                    />
+                    
+                    {
+                        Bills?.length > 0 &&
+                        <ReactPaginate
+                            previousLabel={"<"}
+                            nextLabel={">"}
+                            pageCount={pageCount}
+                            onPageChange={changePage}
+                            containerClassName={"paginationBttns"}
+                            previousLinkClassName={"previousBttn"}
+                            nextLinkClassName={"nextBttn"}
+                            disabledClassName={"paginationDisabled"}
+                            activeClassName={"paginationActive"}
+                        />
+                    }
                 </TabPane>
                 <TabPane tabId="2">Updating...</TabPane>
                 <TabPane tabId="3"> updating... </TabPane>

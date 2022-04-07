@@ -94,7 +94,7 @@ const Account = () => {
                                 <div>
                                     <div>Tiki xu</div>
                                     <small>Bạn có 
-                                        <span style={{color: '#fd8d3d'}}> {user && TikiPoint ? numberFormat(TikiPoint.userData.point) : 0 } </span> 
+                                        <span style={{color: '#fd8d3d'}}> {user && TikiPoint?.userData?.point ? numberFormat(TikiPoint.userData.point) : 0 } </span> 
                                         Tiki xu
                                     </small>
                                 </div>

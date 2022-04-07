@@ -90,7 +90,7 @@ const OrderManage = (props) => {
                 verifyOrder={UpdateOrder}
             />
 
-            <LoadingOverlay active={loadBill} spinner text='Đang xử lý, vui lòng đợi trong giây lát .....' >
+            <LoadingOverlay active={loadBill} spinner text='Đang gửi hoá đơn, vui lòng đợi trong giây lát...' >
                 <SendBill
                     isOpen={modalSendBill}
                     toggle={sendBill}
@@ -119,11 +119,11 @@ const OrderManage = (props) => {
                                         <td>Mã ĐH</td>
                                         <td>Khách hàng</td>
                                         <td>Sản phẩm</td>
-                                        <td>Giá trị đơn </td>
+                                        <td>Đơn giá </td>
                                         <td>SL</td>
                                         <td>Tổng tiền</td>
                                         <td>Ngày đặt</td>
-                                        <td>Ngày giao</td>
+                                        <td>Ngày giao (DK)</td>
                                         <td>Trạng thái</td>
                                         <td>Tác vụ</td>
                                     </tr>
